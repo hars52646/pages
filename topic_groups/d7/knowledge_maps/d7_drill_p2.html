@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CISSP D7 &middot; Question Drill part 2 &mdash; 81 scenario questions</title>
+<style>
+  :root{
+    --g1:#b91c1c; --g1f:#dc2626;
+    --g2:#b45309; --g2f:#d97706;
+    --g3:#6d28d9; --g3f:#7c3aed;
+    --g4:#1d4ed8; --g4f:#2563eb;
+    --g5:#047857; --g5f:#059669;
+    --g6:#be185d; --g6f:#db2777;
+    --g7:#0e7490; --g7f:#0891b2;
+    --ink:#1e293b; --muted:#64748b; --bg:#f6f7fb; --line:#e2e8f0;
+    --ok:#047857; --bad:#b91c1c;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+  header.hero{padding:44px 0 10px}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  h1{font-size:clamp(26px,4vw,40px);line-height:1.15;margin:8px 0 10px}
+  .sub{font-size:17px;color:#334155}
+  .sub b{font-weight:800}
+  .sub a{color:#0f172a}
+
+  nav.jump{position:sticky;top:0;z-index:50;background:rgba(246,247,251,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin-top:18px}
+  nav.jump .wrap{display:flex;gap:4px;flex-wrap:wrap;padding:8px 20px;align-items:center}
+  nav.jump a{font-size:13.5px;font-weight:600;color:#334155;text-decoration:none;padding:5px 12px;border-radius:999px}
+  nav.jump a:hover{background:#e8ecf5}
+  nav.jump a.kp{border:1.5px solid #cbd5e1;background:#fff}
+
+  section{padding:34px 0 6px;scroll-margin-top:64px}
+  h2{font-size:24px;margin:0 0 4px}
+  .lede{color:var(--muted);margin:0 0 18px;font-size:15px}
+
+  .gt{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap;vertical-align:1px}
+  .t-g1{background:var(--g1f)} .t-g2{background:var(--g2f)} .t-g3{background:var(--g3f)}
+  .t-g4{background:var(--g4f)} .t-g5{background:var(--g5f)} .t-g6{background:var(--g6f)}
+  .t-g7{background:var(--g7f)}
+
+  .map-panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 8px 4px;box-shadow:0 8px 24px rgba(15,23,42,.06)}
+  svg#fammap{width:100%;height:auto;display:block}
+  .maphint{text-align:center;color:var(--muted);font-size:13px;padding:8px 0 10px}
+  .node{cursor:pointer}
+  .node:hover rect{filter:brightness(.94)}
+
+  .ladders{display:grid;grid-template-columns:repeat(auto-fit,minmax(430px,1fr));gap:14px;margin-top:14px}
+  .ladder{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 18px 13px;border-top:5px solid var(--mc,#94a3b8);box-shadow:0 8px 24px rgba(15,23,42,.05);scroll-margin-top:64px}
+  .ladder .head{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+  .ladder h3{margin:0;font-size:17px;color:var(--mc)}
+  .ladder .cnt{font-size:12px;font-weight:700;color:var(--muted)}
+  .ladder .links{margin-left:auto;font-size:12px;font-weight:700}
+  .ladder .links a{color:var(--mc);text-decoration:none;margin-left:10px}
+  .ladder .links a:hover{text-decoration:underline}
+  .ladder ol{margin:8px 0 0;padding:0;list-style:none;counter-reset:fac}
+  .ladder ol li{counter-increment:fac;position:relative;padding:4px 0 4px 34px;font-size:13.6px;color:#334155;border-bottom:1px dashed #eef1f6}
+  .ladder ol li:last-child{border-bottom:none}
+  .ladder ol li::before{content:counter(fac);position:absolute;left:2px;top:5px;width:22px;height:22px;border-radius:50%;background:var(--mc);color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center}
+  .ladder ol li b{color:#0f172a}
+  .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
+  .ladder .rule b{color:var(--mc);font-style:normal}
+
+  .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
+  .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
+  .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
+  .rad .ex{margin-top:6px;font-size:12px;color:var(--muted);font-weight:600}
+
+  .scorebar{position:sticky;top:49px;z-index:40;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:12px;padding:10px 16px;box-shadow:0 6px 18px rgba(15,23,42,.06);display:flex;gap:16px;align-items:center;flex-wrap:wrap;font-size:14px}
+  .scorebar b{font-size:16px}
+  .scorebar .meter{flex:1;min-width:160px;height:9px;background:#e8ecf5;border-radius:999px;overflow:hidden}
+  .scorebar .meter i{display:block;height:100%;background:linear-gradient(90deg,var(--g4f),var(--g5f));width:0;transition:width .25s}
+  .scorebar button{font:inherit;font-size:13px;font-weight:700;background:#fff;color:#334155;border:1.5px solid #cbd5e1;border-radius:999px;padding:5px 14px;cursor:pointer}
+  .scorebar button:hover{border-color:#334155}
+  .fchips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+  .fchip{font:inherit;font-size:12.5px;font-weight:700;color:#fff;border:none;border-radius:999px;padding:6px 14px;cursor:pointer;background:var(--c,#334155);opacity:.5;transition:opacity .12s}
+  .fchip:hover{opacity:.8}
+  .fchip.on{opacity:1;box-shadow:0 0 0 2px rgba(15,23,42,.28)}
+  .fchip.all{background:#0f172a}
+
+  .famhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:26px 0 8px;padding-bottom:6px;border-bottom:2.5px solid var(--fc,#94a3b8)}
+  .famhead h3{margin:0;font-size:19px;color:var(--fc,#334155)}
+  .famhead .cnt{font-size:12.5px;color:var(--muted);font-weight:700}
+  .famhead a{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--fc,#334155);text-decoration:none}
+  .famhead a:hover{text-decoration:underline}
+
+  .q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px 14px;margin:12px 0;box-shadow:0 6px 18px rgba(15,23,42,.04);scroll-margin-top:120px}
+  .q.done{border-color:#c7d2e4}
+  .qhead{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:7px}
+  .qn{font-weight:800;font-size:13px;color:#fff;background:#0f172a;border-radius:7px;padding:2px 9px}
+  .qrule{margin-left:auto;font-size:11.5px;font-weight:700;color:var(--muted);background:#f1f5f9;border-radius:999px;padding:2px 10px}
+  .stem{margin:0 0 12px;font-size:14.8px;color:#0f172a}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  @media (max-width:760px){.opts{grid-template-columns:1fr}}
+  .opt{font:inherit;font-size:13.6px;text-align:left;color:#334155;background:#fbfcfe;border:1.5px solid #d8dfea;border-radius:10px;padding:9px 12px 9px 38px;cursor:pointer;position:relative;transition:all .12s;line-height:1.4}
+  .opt::before{content:attr(data-l);position:absolute;left:11px;top:9px;font-weight:800;color:#64748b}
+  .opt:hover:not(:disabled){border-color:#64748b;background:#f1f5f9}
+  .opt:disabled{cursor:default;opacity:.88}
+  .opt.right{border-color:var(--ok);background:#ecfdf5;opacity:1}
+  .opt.right::before{color:var(--ok)}
+  .opt.wrong{border-color:var(--bad);background:#fef2f2;opacity:1}
+  .opt.wrong::before{color:var(--bad)}
+  .qverdict{display:none;margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+  .qverdict.show{display:block}
+  .qverdict .mark{font-size:15px;font-weight:800;margin-bottom:4px}
+  .qverdict .mark.good{color:var(--ok)}
+  .qverdict .mark.bad{color:var(--bad)}
+  .qverdict .why{margin:4px 0 8px;font-size:14px;color:#0f172a}
+  .qverdict ul{margin:0;padding:0;list-style:none;font-size:13.2px;color:#334155}
+  .qverdict li{padding:2px 0 2px 20px;position:relative}
+  .qverdict li::before{content:"\2716";position:absolute;left:2px;color:#c2410c;font-weight:700;font-size:11px;top:4px}
+  .qverdict .klink{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;color:var(--fc,#334155);text-decoration:none;border:1.5px solid var(--fc,#94a3b8);border-radius:999px;padding:2px 11px}
+  .qverdict .klink:hover{background:#f1f5f9}
+
+  footer{padding:30px 0 44px;color:var(--muted);font-size:13px}
+  footer code{background:#eef1f6;border-radius:5px;padding:1px 6px;font-size:12px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 2 of 2</div>
+    <h1>D7 Question Drill 2 &mdash; Continuity &amp; Recovery (topics 13&ndash;18)</h1>
+    <p class="sub"><b>81 scenario questions</b> (topics 13&ndash;18) &middot; <b>6 decision families</b> &middot; <b>2 knowledge groups</b> &mdash; business continuity and BIA, disaster recovery and resilience. Continues from <a href="d7_drill_p1.html">part 1: investigations and monitoring (91 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+  </div>
+</header>
+
+<nav class="jump">
+  <div class="wrap">
+    <a href="#fmap">Family map</a><a href="#ladders">Factor ladders</a><a href="#radar">Distractor radar</a><a href="#drill">Question drill</a><a class="kp" href="d7_mindmap_cheatsheet.html">&#9733; knowledge page</a><a class="kp" href="d7_index.html">D7 hub</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="fmap">
+    <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
+    <p class="lede">The 6 families of this page, colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <div class="map-panel">
+      <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D7 drill part 2"></svg>
+      <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
+    </div>
+  </section>
+
+  <section id="ladders">
+    <h2>2 &middot; Factor ladders &mdash; what beats what, under which circumstances</h2>
+    <p class="lede">For each family: the ranked decision factors distilled from the official explanations. When a scenario highlights factor 1, that answer wins over factor 2 &mdash; and over every distractor archetype below.</p>
+    <div class="ladders" id="ladderbox"></div>
+  </section>
+
+  <section id="radar">
+    <h2>3 &middot; Distractor radar &mdash; the 9 recurring wrong answers</h2>
+    <p class="lede">Wrong options in this bank recycle nine archetypes. Spot the archetype, eliminate instantly, and the choice usually collapses to one answer.</p>
+    <div class="radar" id="radarbox"></div>
+  </section>
+
+  <section id="drill">
+    <h2>4 &middot; Question drill &mdash; all 81, options and all</h2>
+    <p class="lede">Real stems, real A&ndash;D options. Click your pick: it locks, the verdict opens with the why, per-option eliminations, the rule exercised, and a link into the matching knowledge card. Filter by group; the score bar follows you.</p>
+
+    <div class="scorebar">
+      <span>Answered <b id="sc-a">0</b>/81</span>
+      <span>Correct <b id="sc-c">0</b> <span id="sc-p" style="color:var(--muted);font-weight:600">(0%)</span></span>
+      <span class="meter"><i id="sc-m"></i></span>
+      <button id="sc-reset" type="button">reset answers</button>
+    </div>
+    <div class="fchips" id="drillchips"></div>
+    <div id="drillbox"></div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Built from <code>domain7_logic_questions.txt</code> (172 logic questions, 18 topics; this part: 81). Stems, options and answers are the source text; verdicts compress the official explanations.
+  </div>
+</footer>
+
+<script>
+var GROUPS={g1:{name:"Forensics & Evidence",color:"#b91c1c",fill:"#dc2626"},g2:{name:"Monitoring & Threat Intel",color:"#b45309",fill:"#d97706"},g3:{name:"Malware Defense",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"Change, Configuration & Patching",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Resources & Operational Environment",color:"#047857",fill:"#059669"},g6:{name:"Business Continuity & BIA",color:"#be185d",fill:"#db2777"},g7:{name:"Disaster Recovery & Resilience",color:"#0e7490",fill:"#0891b2"}};
+var FAMILIES=[
+{id:"f13",g:"g6",name:"13. Business Continuity",topic:"13. Business Continuity Management (BCM)  (23 questions: Q7\u2013Q244 and others)",q:23,leaves:["Impact drives priority","What drives criticality?","BIA\u2019s critical time limit?","Keep BIA current","Degrade, don\u2019t stop"],
+    factors:["<b>Impact drives priority</b> &mdash; Business impact and data sensitivity, not technical novelty, determine asset criticality, control strength, recovery priority, and resource allocation. <span class=\"qrefs\">[Q7]</span>","<b>What drives criticality?</b> &mdash; Rank tangible and intangible assets by business-operational impact and data sensitivity when resources are constrained. <span class=\"qrefs\">[Q7]</span>","<b>BIA\u2019s critical time limit?</b> &mdash; The bank treats determining MTD for mission-critical processes as the most critical BIA outcome for resilience. <span class=\"qrefs\">[Q22]</span>","<b>Keep BIA current</b> &mdash; Use regular iterative BIA updates in rapidly evolving environments. <span class=\"qrefs\">[Q38]</span>","<b>Degrade, don\u2019t stop</b> &mdash; Choose fail-soft for continuous reduced operation during partial failure. <span class=\"qrefs\">[Q62]</span>","<b>Emerging tech changes what?</b> &mdash; Assess how AI and IoT alter critical functions and recovery priorities. <span class=\"qrefs\">[Q64]</span>"],
+    rule:"People safety first - BIA before strategy, testing after plans"},
+{id:"f14",g:"g6",name:"14. BC/DR Recovery",topic:"14. BC/DR Recovery Metrics: RPO/RTO/WRT/MTD  (9 questions: Q22\u2013Q242 and others)",q:9,leaves:["Impact drives priority","What drives criticality?","BIA\u2019s critical time limit?","Keep BIA current","Degrade, don\u2019t stop"],
+    factors:["<b>Impact drives priority</b> &mdash; Business impact and data sensitivity, not technical novelty, determine asset criticality, control strength, recovery priority, and resource allocation. <span class=\"qrefs\">[Q7]</span>","<b>What drives criticality?</b> &mdash; Rank tangible and intangible assets by business-operational impact and data sensitivity when resources are constrained. <span class=\"qrefs\">[Q7]</span>","<b>BIA\u2019s critical time limit?</b> &mdash; The bank treats determining MTD for mission-critical processes as the most critical BIA outcome for resilience. <span class=\"qrefs\">[Q22]</span>","<b>Keep BIA current</b> &mdash; Use regular iterative BIA updates in rapidly evolving environments. <span class=\"qrefs\">[Q38]</span>","<b>Degrade, don\u2019t stop</b> &mdash; Choose fail-soft for continuous reduced operation during partial failure. <span class=\"qrefs\">[Q62]</span>","<b>Emerging tech changes what?</b> &mdash; Assess how AI and IoT alter critical functions and recovery priorities. <span class=\"qrefs\">[Q64]</span>"],
+    rule:"RTO + WRT <= MTD - the arithmetic decides"},
+{id:"f15",g:"g7",name:"15. Disaster Recovery",topic:"15. Disaster Recovery & DR Plan Testing  (20 questions: Q4\u2013Q222 and others)",q:20,leaves:["Governance before tool","23-hour exposure","RPO violation test","Six plus four","Four plus two"],
+    factors:["<b>Governance before tool</b> &mdash; When choices compete, prefer safety, policy, business viability, and risk governance over an isolated technical control, when supported by the scenario. <span class=\"qrefs\">[]</span>","<b>23-hour exposure</b> &mdash; With daily midnight backups and failure at 11 PM, maximum exposure is 23 hours since the last completed backup, not one hour until the next backup. <span class=\"qrefs\">[Q130]</span>","<b>RPO violation test</b> &mdash; A 30-minute-old backup violates a five-minute RPO even when restoration and integrity-check times meet RTO and WRT. <span class=\"qrefs\">[Q115]</span>","<b>Six plus four</b> &mdash; An RTO of six hours plus WRT of four hours consumes ten hours and breaches an eight-hour MTD. <span class=\"qrefs\">[Q132]</span>","<b>Four plus two</b> &mdash; Four hours of restoration plus two hours of validation consumes six hours of MTD under the bank formula. <span class=\"qrefs\">[Q136]</span>","<b>Online, not ready</b> &mdash; Bringing a system online satisfies RTO, but normal operations must wait until WRT integrity checks finish. <span class=\"qrefs\">[Q137]</span>"],
+    rule:"Declaration is pre-authorized - the test ladder climbs risk"},
+{id:"f16",g:"g7",name:"16. DR Site",topic:"16. DR Site Strategy, Restoration Sequencing & Failback  (18 questions: Q6\u2013Q235 and others)",q:18,leaves:["Governance before tool","23-hour exposure","RPO violation test","Six plus four","Four plus two"],
+    factors:["<b>Governance before tool</b> &mdash; When choices compete, prefer safety, policy, business viability, and risk governance over an isolated technical control, when supported by the scenario. <span class=\"qrefs\">[]</span>","<b>23-hour exposure</b> &mdash; With daily midnight backups and failure at 11 PM, maximum exposure is 23 hours since the last completed backup, not one hour until the next backup. <span class=\"qrefs\">[Q130]</span>","<b>RPO violation test</b> &mdash; A 30-minute-old backup violates a five-minute RPO even when restoration and integrity-check times meet RTO and WRT. <span class=\"qrefs\">[Q115]</span>","<b>Six plus four</b> &mdash; An RTO of six hours plus WRT of four hours consumes ten hours and breaches an eight-hour MTD. <span class=\"qrefs\">[Q132]</span>","<b>Four plus two</b> &mdash; Four hours of restoration plus two hours of validation consumes six hours of MTD under the bank formula. <span class=\"qrefs\">[Q136]</span>","<b>Online, not ready</b> &mdash; Bringing a system online satisfies RTO, but normal operations must wait until WRT integrity checks finish. <span class=\"qrefs\">[Q137]</span>"],
+    rule:"Criticality, not user count - dependencies first, never simultaneous"},
+{id:"f17",g:"g7",name:"17. RAID",topic:"17. RAID, High Availability & Backup Strategy  (6 questions: Q90\u2013Q241 and others)",q:6,leaves:["Governance before tool","23-hour exposure","RPO violation test","Six plus four","Four plus two"],
+    factors:["<b>Governance before tool</b> &mdash; When choices compete, prefer safety, policy, business viability, and risk governance over an isolated technical control, when supported by the scenario. <span class=\"qrefs\">[]</span>","<b>23-hour exposure</b> &mdash; With daily midnight backups and failure at 11 PM, maximum exposure is 23 hours since the last completed backup, not one hour until the next backup. <span class=\"qrefs\">[Q130]</span>","<b>RPO violation test</b> &mdash; A 30-minute-old backup violates a five-minute RPO even when restoration and integrity-check times meet RTO and WRT. <span class=\"qrefs\">[Q115]</span>","<b>Six plus four</b> &mdash; An RTO of six hours plus WRT of four hours consumes ten hours and breaches an eight-hour MTD. <span class=\"qrefs\">[Q132]</span>","<b>Four plus two</b> &mdash; Four hours of restoration plus two hours of validation consumes six hours of MTD under the bank formula. <span class=\"qrefs\">[Q136]</span>","<b>Online, not ready</b> &mdash; Bringing a system online satisfies RTO, but normal operations must wait until WRT integrity checks finish. <span class=\"qrefs\">[Q137]</span>"],
+    rule:"RAID is availability, not backup - only a restore test proves a backup"},
+{id:"f18",g:"g7",name:"18. Supply Chain",topic:"18. Supply Chain & Third-Party Risk in Operations  (4 questions: Q24\u2013Q200 and others)",q:5,leaves:["Governance before tool","23-hour exposure","RPO violation test","Six plus four","Four plus two"],
+    factors:["<b>Governance before tool</b> &mdash; When choices compete, prefer safety, policy, business viability, and risk governance over an isolated technical control, when supported by the scenario. <span class=\"qrefs\">[]</span>","<b>23-hour exposure</b> &mdash; With daily midnight backups and failure at 11 PM, maximum exposure is 23 hours since the last completed backup, not one hour until the next backup. <span class=\"qrefs\">[Q130]</span>","<b>RPO violation test</b> &mdash; A 30-minute-old backup violates a five-minute RPO even when restoration and integrity-check times meet RTO and WRT. <span class=\"qrefs\">[Q115]</span>","<b>Six plus four</b> &mdash; An RTO of six hours plus WRT of four hours consumes ten hours and breaches an eight-hour MTD. <span class=\"qrefs\">[Q132]</span>","<b>Four plus two</b> &mdash; Four hours of restoration plus two hours of validation consumes six hours of MTD under the bank formula. <span class=\"qrefs\">[Q136]</span>","<b>Online, not ready</b> &mdash; Bringing a system online satisfies RTO, but normal operations must wait until WRT integrity checks finish. <span class=\"qrefs\">[Q137]</span>"],
+    rule:"Supplier risk is tiered, contractual and continuously monitored"}
+];
+
+var RADAR=[
+{t:"Reimage first",d:"Restoring service before imaging destroys the evidence."},
+{t:"Analyze the original",d:"Working copies only; originals stay sealed and hashed."},
+{t:"Custody auto-excludes",d:"A custody gap challenges integrity - not automatic inadmissibility."},
+{t:"Volatile order swapped",d:"Registers and RAM before disk and logs, always."},
+{t:"Signature for unknowns",d:"Novel malware needs heuristic, behavioral or ML answers."},
+{t:"Patch by age",d:"Severity times impact ranks patches - never release date."},
+{t:"MTD arithmetic skipped",d:"Compute RTO + WRT against MTD before answering."},
+{t:"Backup equals DR",d:"Backups need tested restoration plus a site strategy."},
+{t:"Delete during hold",d:"Legal hold suspends destruction - deletes are spoliation."}
+];
+
+var QS = [
+{n:'Q183',f:'f13',s:'A multinational corporation is establishing a new data center in an area prone to natural disasters and political instability. Which of the following physical security measures would be MOST effective in securing the scene and protecting critical assets, while adhering to NIST SP 800-53 Rev 5 guidelines and budget constraints?',o:['Establishing a multi-layered perimeter with armed security and CCTV surveillance','Implementing a redundant power supply system with on-site generators','Deploying biometric access control for all entry points','Installing an advanced fire suppression system with 24/7 monitoring'],a:0,w:'While all options contribute to security, establishing a multi-layered perimeter with armed security and CCTV surveillance provides the most comprehensive protection against both natural disasters and potential human threats in an unstable area.',e:['','','',''],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q7',f:'f13',s:'In a resource-constrained organization, which approach to incorporating asset criticality into an asset inventory system would BEST support risk management and resource allocation for both tangible and intangible assets?',o:['Categorizing assets based on their technological complexity','Assigning monetary values to all assets based on replacement cost','Ranking assets by their physical location within the organization','Prioritizing assets based on their impact on business operations and data sensitivity'],a:3,w:'Prioritizing assets based on their impact on business operations and data sensitivity is the best approach for incorporating asset criticality into an asset inventory system, especially in a resource-constrained environment.',e:['','','',''],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q38',f:'f13',s:'In a rapidly evolving business environment, which approach BEST ensures the Business Impact Analysis (BIA) remains relevant and timely?',o:['Conducting comprehensive annual Business Impact Analyses','Regular BIA updates','Relying primarily on historical Business Impact Analysis data','Focusing solely on high-impact business processes for analysis'],a:1,w:'An iterative BIA process with frequent updates is the most effective approach in a rapidly evolving business environment. This method allows organizations to continuously adapt their BIA to changing conditions, technologies, and risks.',e:['','','',''],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q53',f:'f13',s:'Which of the following BEST represents a strategic goal of Business Continuity Management (BCM) that enhances organizational resilience and aligns with long-term business objectives?',o:['Maximizing operational redundancy in critical systems','Enhancing crisis communication protocols for stakeholders','Optimizing disaster recovery processes across departments','Integrating risk appetite considerations into business strategy'],a:3,w:'While all options are important aspects of BCM, integrating risk appetite considerations into business strategy represents a strategic goal that enhances organizational resilience and aligns BCM with long-term business objectives.',e:['','','',''],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q64',f:'f13',s:'When updating a Business Impact Assessment (BIA) to account for emerging technologies like artificial intelligence and Internet of Things (IoT), which of the following approaches is MOST effective?',o:['Focusing primarily on the financial costs of implementing new technologies','Assessing only the potential cybersecurity risks associated with emerging technologies','Evaluating the impact on employee productivity and training requirements','Analyzing how emerging technologies affect critical business functions and recovery priorities'],a:3,w:'When updating a BIA for emerging technologies, the most effective approach is to analyze how these technologies affect critical business functions and recovery priorities.',e:['','','',''],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q72',f:'f13',s:'What is the PRIMARY objective of an effective Business Continuity Management (BCM) program during a crisis?',o:['Minimizing disruption to essential business operations','Guaranteeing zero downtime for critical systems','Ensuring complete recovery of all business functions','Eliminating all potential financial losses'],a:0,w:'The primary objective of an effective BCM program during a crisis is to minimize disruption to essential business operations. While BCM aims to support recovery, reduce financial losses, and minimize downtime, it\'s unrealistic to completely eliminate these impacts.',e:['','','',''],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q110',f:'f13',s:'After a cyberattack, a recovery team restores email and ERP systems but ignores payroll processing. What BCM principle did they violate?',o:['Minimizing damage to facilities and reducing the scope of the incident','Maintaining safety protocols for personnel during the recovery process','Focusing recovery on the most critical and essential business functions','Conducting business impact analysis before beginning any restoration work'],a:2,w:'BCM requires focusing on the most critical and essential functions for organizational survival, and payroll is essential for workforce continuity. (A) Minimizing damage addresses limiting incident scope, not recovery prioritization; (B) Safety protocols protect people, not guide function...',e:['Minimizing damage addresses limiting incident scope, not recovery prioritization','Safety protocols protect people, not guide function restoration order; and','','Business impact analysis occurs during planning, not during active recovery'],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q112',f:'f13',s:'A global corporation is reviewing its disaster recovery policies. When establishing the organization\'s definition of a disaster, which factor is MOST aligned with the Business Continuity Institute\'s perspective?',o:['Duration of system downtime','Financial impact on quarterly earnings','Number of affected business units','Disruption to critical business functions'],a:3,w:'The Business Continuity Institute emphasizes the impact on critical business functions when defining a disaster. According to the BCI, a disaster is "a sudden unplanned event that causes great damage or serious loss to an organization.',e:['','','',''],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q119',f:'f13',s:'A CISO discovers BCM plans focus exclusively on IT system recovery. What critical BCM goal is being neglected?',o:['Ensuring the safety of people during a disruptive incident','Documenting recovery time objectives for each business unit','Establishing alternate communication channels for remote staff','Creating vendor notification procedures for supply chain partners'],a:0,w:'BCM\'s primary objective is protecting human life and health, which an IT-only recovery plan completely overlooks as its first and most critical goal. (B) Recovery time objectives support IT planning, not the missing safety; (C) Alternate communications support operations, not the neglected primary...',e:['','Recovery time objectives support IT planning, not the missing safety','Alternate communications support operations, not the neglected primary goal; and','Vendor notification is a coordination task, not a core BCM'],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q125',f:'f13',s:'Why does Business Continuity Management prioritize human safety above system restoration and data recovery during a disruptive event?',o:['Regulatory agencies impose the largest fines for safety violations compared to data loss penalties','Restoring personnel morale after an incident requires more budget than replacing damaged infrastructure','Insurance policies cover property and data losses but exclude coverage for personnel-related incidents','Systems and data can be restored or rebuilt, but loss of human life is irreversible and overrides all other objectives'],a:3,w:'BCM places protecting life as the top priority because human safety is irreplaceable, whereas facilities, systems, and data can be recovered afterward.',e:['Regulatory fines are not the reason BCM prioritizes safety over','Budget considerations for morale are unrelated to BCM goal hierarchy; and','Insurance coverage scope does not determine BCM goal priority order',''],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q126',f:'f13',s:'A financial services firm activates its BCM plan after a prolonged power outage affecting its primary data center. The recovery team restores trading platforms and client portals but neglects internal accounting and compliance reporting systems. The CFO later discovers that regulatory filing deadlines were missed. Which BCM principle was violated, and what should the team have done differently?',o:['Directed resources toward functions whose loss most threatens organizational viability','Prioritized personnel safety over system restoration during the outage','Minimized damage to facilities by isolating affected infrastructure segments','Activated the disaster recovery site before assessing the full impact scope'],a:0,w:'Effective BCM directs resources toward the most critical and essential functions, including compliance reporting whose failure threatens organizational viability through regulatory penalties.',e:['','Personnel safety was not the issue; the failure was in','Facility damage minimization addresses physical infrastructure, not function recovery; and','Activating DR sites is a tactical step, not the violated'],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q128',f:'f13',s:'An operations director wants to know which business functions BCM resources should target. What guides this allocation?',o:['Functions with the highest annual revenue contribution to the organization','Functions that employ the largest number of staff across all departments','Functions that have the most complex technology dependencies and integrations','Functions whose loss would most threaten the organization\'s overall viability'],a:3,w:'Effective BCM directs resources toward the most critical and essential functions whose loss would most threaten the organization\'s viability. (A) Revenue contribution alone does not determine which functions threaten viability; (B) Headcount size is not the criterion BCM uses to prioritize; and (C)...',e:['Revenue contribution alone does not determine which functions threaten viability','Headcount size is not the criterion BCM uses to prioritize; and','Technology complexity does not equate to criticality for organizational survival',''],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q141',f:'f13',s:'After a warehouse fire, a facility manager asks the CISO what BCM goal to address FIRST. What is the correct response?',o:['Restore critical business functions to maintain revenue continuity','Assess and contain damage to facilities and key infrastructure','Ensure all personnel are accounted for and safely evacuated','Activate the disaster recovery site to resume essential operations'],a:2,w:'BCM\'s primary objective is the safety of people, meaning personnel accountability and evacuation must precede any damage assessment or system restoration.',e:['Restoring business functions is the third BCM goal, not the','Minimizing damage is the second BCM goal, after personnel safety; and','','Activating recovery sites addresses business survival, not immediate safety'],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q144',f:'f13',s:'During a regional flood, a security team has confirmed all employees are safe. What BCM goal should they pursue next?',o:['Conduct a full post-incident lessons-learned review with stakeholders','Begin restoring the most critical and essential business functions','Minimize damage to facilities, systems, and data from the ongoing flood','Notify regulatory agencies about the disruption and expected recovery timeline'],a:2,w:'After confirming personnel safety, BCM\'s second goal is minimizing damage by reducing harm to facilities, systems, and data during the disruption. (A) Lessons-learned reviews occur after recovery, not during an active incident; (B) Restoring critical functions is the third BCM goal, after...',e:['Lessons-learned reviews occur after recovery, not during an active incident','Restoring critical functions is the third BCM goal, after minimizing; and','','Regulatory notification is an administrative task, not a core BCM'],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q150',f:'f13',s:'A chemical spill threatens a manufacturing facility and 200 employees in an adjacent office building. The plant manager wants to contain the spill immediately; the safety officer demands full evacuation first. What should the CISO recommend to the CEO?',o:['Evacuate all personnel before any containment efforts begin','Split teams to simultaneously evacuate personnel and contain the spill','Contain the spill first to prevent cascading facility damage','Assess the chemical hazard level before deciding on evacuation'],a:0,w:'BCM\'s primary objective is safety of people—evacuation of all 200 employees must precede any effort to protect equipment or contain facility damage. (B) Splitting teams creates false equivalence between safety and equipment protection; (C) Containing the spill first prioritizes equipment over human...',e:['','Splitting teams creates false equivalence between safety and equipment protection','Containing the spill first prioritizes equipment over human life; and','Delaying evacuation for assessment violates BCM\'s safety-first principle'],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q153',f:'f13',s:'A retail chain\'s CISO reviews the BCM plan and finds it allocates equal recovery resources to all 47 departments regardless of criticality. The CEO asks why this is problematic during a limited-resource disaster scenario. The board expects a recommendation aligned with BCM principles. What should the CISO advise?',o:['Allocate resources based on department headcount to ensure workforce continuity','Distribute resources based on each department\'s annual operating budget','Assign resources equally to demonstrate fair treatment across all business units','Direct resources toward functions whose loss would most threaten the organization\'s viability'],a:3,w:'Effective BCM directs limited resources toward the most critical and essential functions whose loss would most threaten organizational viability, not equally across all units.',e:['Headcount-based allocation ignores functional criticality to organizational survival','Budget size does not correlate with a function\'s criticality during; and','Equal distribution wastes resources on non-essential functions during crises',''],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q162',f:'f13',s:'A healthcare organization\'s BCM plan was tested during a hurricane simulation. The exercise revealed that facility damage containment procedures were executed before patient evacuation was complete, and essential clinical systems were restored before verifying that non-essential administrative functions were deprioritized. The compliance officer asks the CISO to identify the sequencing error. Which BCM goal ordering was violated?',o:['Business survival was addressed before damage minimization efforts','Damage minimization was executed before ensuring the safety of people','Essential function restoration occurred before activating alternate facilities','Personnel accountability was completed before critical system restoration'],a:1,w:'BCM requires safety of people first, then minimizing damage, then business survival—executing damage containment before completing patient evacuation violates this sequence.',e:['Business survival before damage minimization reverses goals two and three','','Alternate facility activation timing is not one of the three; and','Completing accountability before restoration follows correct BCM sequencing, not a'],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q193',f:'f13',s:'An organization is initiating its Business Continuity Planning process. Which of the following is the MOST critical first step in developing an effective Business Continuity Plan (BCP)?',o:['Establishing a dedicated disaster recovery site','Implementing automated backup systems','Defining recovery time objectives (RTOs)','Performing a comprehensive Business Impact Analysis (BIA)'],a:3,w:'While all steps are important in business continuity planning, performing a comprehensive Business Impact Analysis (BIA) is the most critical first step.',e:['','','',''],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q196',f:'f13',s:'Which of the following is the MOST critical factor in ensuring a Business Continuity Plan (BCP) remains effective and adaptable in a rapidly changing regulatory environment?',o:['Frequent updates to the BCP documentation to reflect new regulations','Comprehensive documentation of all business processes','Well-trained personnel capable of adapting the BCP to regulatory changes','Advanced technological infrastructure for remote operations'],a:2,w:'While all factors contribute to BCP effectiveness, well-trained personnel capable of adapting the BCP to regulatory changes are the most critical. Even with comprehensive documentation, advanced technology, or frequent updates, the plan\'s success ultimately depends on the people executing and...',e:['','','',''],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q197',f:'f13',s:'A global manufacturing company is initiating its Business Continuity Plan (BCP) development process. Which of the following steps should be prioritized FIRST to ensure the most effective and targeted BCP?',o:['Performing a detailed Business Impact Analysis (BIA)','Defining the BCP team structure and roles','Conducting a comprehensive risk assessment','Establishing recovery time objectives for critical systems'],a:0,w:'While all steps are important in developing a BCP, performing a detailed Business Impact Analysis (BIA) should be prioritized first. The BIA helps identify and prioritize critical business functions, determines potential impacts of disruptions, and establishes recovery time objectives.',e:['','','',''],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q198',f:'f13',s:'Which approach is MOST effective in shaping organizational culture to support a successful Business Impact Assessment (BIA)?',o:['Implementing strict penalties for non-compliance with BIA procedures','Conducting quarterly BIA training sessions for all employees','Outsourcing the entire BIA process to external consultants','Fostering a culture of continuous risk awareness and shared responsibility through daily practices'],a:3,w:'Fostering a culture of continuous risk awareness and shared responsibility through daily practices is the most effective approach to shape organizational culture for a successful BIA.',e:['','','',''],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q223',f:'f13',s:'In the context of Business Continuity Management (BCM), which of the following BEST describes the primary advantage of integrating artificial intelligence for risk assessment and response planning?',o:['Improved real-time monitoring of business processes','Enhanced predictive capabilities for identifying and prioritizing potential risks','Guaranteed prevention of all potential business disruptions','Automated implementation of recovery procedures without human oversight'],a:1,w:'The primary advantage of integrating AI into BCM is its enhanced predictive capabilities for identifying and prioritizing potential risks. This allows organizations to proactively address threats and optimize response strategies.',e:['','','',''],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q225',f:'f13',s:'A global e-commerce company is conducting a Business Impact Assessment (BIA) to determine Recovery Time Objectives (RTOs) and Recovery Point Objectives (RPOs) for its critical systems. Which approach would BEST help the company prioritize its business functions and set appropriate RTOs within a 24-hour timeframe?',o:['Evaluating the impact on customer satisfaction for each function','Assessing the financial impact of each function\'s downtime per hour','Analyzing the technological dependencies of each system','Prioritizing functions based on the number of employees affected'],a:1,w:'In a Business Impact Assessment (BIA), the most effective way to prioritize critical business functions and set appropriate RTOs within a specific timeframe (in this case, 24 hours) is by assessing the financial impact of each function\'s downtime per hour.',e:['','','',''],r:'People safety first - BIA before strategy, testing after plans'},
+{n:'Q244',f:'f14',s:'A CISO is presenting to the board about the strategic value of Business Continuity Management (BCM). Which of the following BEST represents BCM\'s contribution to the organization\'s long-term competitive advantage?',o:['Improving the efficiency of IT resource allocation','Minimizing downtime for critical business operations','Enhancing operational resilience and stakeholder confidence','Streamlining disaster recovery processes'],a:2,w:'Enhancing operational resilience and stakeholder confidence best represents BCM\'s contribution to an organization\'s long-term competitive advantage. By demonstrating the ability to maintain critical functions and recover quickly from disruptions, BCM strengthens the organization\'s reputation,...',e:['','','',''],r:'RTO + WRT <= MTD - the arithmetic decides'},
+{n:'Q22',f:'f14',s:'Which of the following outcomes is MOST critical when conducting a Business Impact Analysis (BIA) to enhance organizational resilience?',o:['Establishing recovery time objectives for all business functions','Identifying critical business processes and their dependencies','Determining the Maximum Tolerable Downtime (MTD) for mission-critical processes','Quantifying the financial impact of potential disruptions'],a:2,w:'While all options are important aspects of a BIA, determining the Maximum Tolerable Downtime (MTD) for mission-critical processes is the MOST critical outcome.',e:['','','',''],r:'RTO + WRT <= MTD - the arithmetic decides'},
+{n:'Q52',f:'f14',s:'A global financial firm is updating its disaster recovery plan. During a simulation, they realize that a critical factor has been overlooked, causing them to consistently miss their Recovery Time Objective (RTO). Which of the following is MOST likely the overlooked factor?',o:['Underestimated application recovery times','Outdated system configuration records','Insufficient data backup storage','Inadequate network bandwidth for recovery'],a:0,w:'While all factors can impact recovery, underestimating Work Recovery Time (WRT) is most likely to result in consistently missing the RTO. RTO includes both the time to restore systems and data, and the time needed to verify data integrity, restart applications, and resume normal business operations...',e:['','','',''],r:'RTO + WRT <= MTD - the arithmetic decides'},
+{n:'Q114',f:'f14',s:'An organization relaxes both its RPO and RTO targets for a non-critical system. What is the expected operational trade-off?',o:['Lower recovery costs but prolonged recovery time after disruptions','Faster recovery but higher data loss exposure during disruptions','Higher recovery costs but shorter total downtime windows','Reduced backup frequency but increased integrity verification time'],a:0,w:'Relaxing RPO and RTO reduces costs by requiring less frequent backups and less aggressive recovery targets, but prolongs the overall recovery duration.',e:['','Relaxing RTO means slower recovery, not faster restoration','Relaxing both metrics reduces costs, not increases them; and','WRT is independent of relaxing RPO and RTO targets'],r:'RTO + WRT <= MTD - the arithmetic decides'},
+{n:'Q115',f:'f14',s:'A fintech startup processes real-time stock trades and has set an RPO of 5 minutes, an RTO of 15 minutes, and a WRT of 10 minutes. After a storage failure, the team restores from a backup taken 30 minutes prior and brings systems online in 12 minutes. Integrity checks complete in 8 minutes. Which recovery metric was violated?',o:['Recovery Time Objective (RTO)','Work Recovery Time (WRT)','Maximum Tolerable Downtime (MTD)','Recovery Point Objective (RPO)'],a:3,w:'The RPO of 5 minutes was violated because the backup was 30 minutes old, resulting in 30 minutes of potential data loss far exceeding the 5-minute tolerance.',e:['RTO of 15 minutes was met since restoration completed in','WRT of 10 minutes was met since integrity checks took; and','MTD of 25 minutes was met since total downtime was',''],r:'RTO + WRT <= MTD - the arithmetic decides'},
+{n:'Q132',f:'f14',s:'A manufacturing company\'s ERP system has an MTD of 8 hours. The DR team estimates an RTO of 6 hours and a WRT of 4 hours based on their last test. The operations director insists current recovery plans are adequate. During a planning review, the CISO identifies the gap. What is the PRIMARY risk the CISO should communicate?',o:['The backup frequency is insufficient to meet the current RPO target','The combined RTO and WRT of 10 hours exceeds the 8-hour MTD threshold','The WRT estimate is too conservative and should be reduced to 2 hours','The RTO should be shortened by investing in faster recovery infrastructure'],a:1,w:'Since MTD equals RTO plus WRT, the combined 10 hours exceeds the 8-hour MTD, meaning the business faces unacceptable consequences before recovery completes.',e:['RPO and backup frequency are not the issue identified in','','Arbitrarily reducing WRT without evidence creates integrity verification risk; and','Shortening RTO alone may help but misses the core MTD'],r:'RTO + WRT <= MTD - the arithmetic decides'},
+{n:'Q133',f:'f14',s:'A SOC manager discovers that a critical billing system\'s RTO is 1 hour but the current DR infrastructure requires 4 hours to restore. The CFO refuses additional budget. Senior leadership asks the CISO to resolve the conflict. What approach BEST addresses this situation while using only source-supported recovery concepts?',o:['Accept the 4-hour restoration time and formally adjust the RTO to match current capability','Reduce the WRT to zero to compensate for the longer restoration time','Increase backup frequency to reduce RPO and offset the extended RTO','Escalate that the MTD may be exceeded and request a formal risk acceptance decision'],a:3,w:'When RTO exceeds planned targets and budget is unavailable, the CISO must escalate that MTD may be breached, requiring leadership to formally accept the business viability risk.',e:['Adjusting RTO without assessing MTD impact ignores business viability thresholds','Eliminating WRT skips integrity verification, risking corrupted data in production; and','Reducing RPO addresses data loss, not the system restoration time',''],r:'RTO + WRT <= MTD - the arithmetic decides'},
+{n:'Q158',f:'f14',s:'A healthcare organization\'s EHR system has an RTO of 2 hours and a WRT of 1 hour. During a ransomware attack, the DR team restores the system in 90 minutes but discovers that patient medication records show inconsistencies requiring 3 hours of validation. The compliance officer demands the system go live immediately to meet the RTO. What should the DR lead prioritize?',o:['Bring the system online immediately since the RTO was met within 90 minutes','Complete the full 3-hour integrity verification before resuming operations','Negotiate an extended MTD with the compliance officer to allow verification','Restore from an older backup that may have fewer inconsistencies to verify'],a:1,w:'Resuming operations without completing data integrity verification violates the WRT phase, risking patient safety from corrupted medication records despite meeting the RTO.',e:['Meeting RTO alone is insufficient without completing WRT integrity checks','','MTD is a pre-established metric, not negotiable during an active; and','Older backups increase data loss beyond RPO without guaranteeing fewer'],r:'RTO + WRT <= MTD - the arithmetic decides'},
+{n:'Q228',f:'f14',s:'In a healthcare organization facing a ransomware attack on patient records, which aspect of the Business Impact Analysis (BIA) is MOST critical for determining whether to declare a disaster and ensure minimal disruption to patient care?',o:['Regulatory compliance requirements for data breach reporting','Financial impact of extended system unavailability','Maximum Tolerable Downtime (MTD) for non-critical systems','Recovery Time Objective (RTO) for critical patient data systems'],a:3,w:'In a healthcare scenario with a ransomware attack on patient records, the Recovery Time Objective (RTO) for critical patient data systems is the most critical aspect of the BIA for determining whether to declare a disaster.',e:['','','',''],r:'RTO + WRT <= MTD - the arithmetic decides'},
+{n:'Q242',f:'f15',s:'In a global just-in-time manufacturing supply chain, what is the MOST critical consequence of having a Recovery Time Objective (RTO) of 4 hours and a Recovery Point Objective (RPO) of 24 hours for the order fulfillment system?',o:['Increased inventory holding costs due to overcompensation','Loss of up to 20 hours of order data, potentially disrupting production schedules','Temporary shift to manual order processing procedures','Delayed shipments causing penalties from service level agreements'],a:1,w:'In this scenario, the RTO (4 hours) is significantly shorter than the RPO (24 hours). This misalignment means the system can be recovered quickly (within 4 hours), but the most recent data backup could be up to 24 hours old.',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q4',f:'f15',s:'A multinational corporation has experienced a major cyber attack affecting its global operations. When comparing the process of declaring an internal disaster versus seeking external government assistance, which of the following is typically NOT required for the internal disaster declaration?',o:['Detailed public disclosure of affected systems','Activation of the incident response team','Assessment of impact on critical business functions','Notification of key stakeholders'],a:0,w:'Internal disaster declarations generally do not require detailed public disclosure of affected systems, while seeking external government assistance often necessitates more transparency about the nature and extent of the disaster.',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q5',f:'f15',s:'In a large multinational organization with geographically dispersed data centers, which strategy is MOST effective for ensuring clear decision-making authority during the disaster declaration process?',o:['Establishing a clear chain of command with pre-defined roles and escalation procedures','Delegating all disaster-related decisions to the global IT operations team','Rotating decision-making authority among regional managers on a quarterly basis','Implementing a consensus-based approach involving all department heads'],a:0,w:'Establishing a clear chain of command with pre-defined roles and escalation procedures is the most effective strategy for ensuring clear decision-making authority during the disaster declaration process in a complex multinational organization.',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q12',f:'f15',s:'What is the MOST significant challenge in accurately measuring and validating Recovery Point Objective (RPO) and Recovery Time Objective (RTO) during disaster recovery testing?',o:['Inability to fully replicate real-world disaster conditions','Insufficient cross-departmental coordination','Lack of automated measurement tools','Inconsistent data backup schedules'],a:0,w:'While all factors can affect RPO and RTO measurements, the inability to fully replicate real-world disaster conditions is the most significant challenge.',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q25',f:'f15',s:'Which factor MOST significantly enhances the long-term effectiveness of BCP/DRP testing in an organization?',o:['Increasing the frequency of full-scale simulations','Aligning test frequency with the rate of change in critical business processes','Expanding the scope of tabletop exercises','Rotating personnel involved in testing procedures'],a:1,w:'Aligning test frequency with the rate of change in critical business processes is the most significant factor in enhancing the long-term effectiveness of BCP/DRP testing.',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q37',f:'f15',s:'A global financial institution is planning to establish a new recovery site for its primary data center. Which factor is MOST critical when determining the optimal geographic distance between the primary and recovery sites?',o:['Risk of simultaneous disaster impact','Recovery Time Objective (RTO)','Cost of data replication and transfer','Regulatory compliance requirements'],a:0,w:'While all factors are important in recovery site strategy, the risk of a disaster affecting both primary and recovery sites simultaneously is the most critical consideration when determining geographic distance.',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q39',f:'f15',s:'During a potential ransomware attack that is slowly encrypting critical data, which of the following is the MOST critical role in the disaster declaration process?',o:['Chief Information Security Officer (CISO)','Chief Operations Officer (COO)','Chief Executive Officer (CEO)','Chief Risk Officer (CRO)'],a:2,w:'While all roles are important in disaster management, the CEO is typically the MOST critical in the disaster declaration process, especially in a time-sensitive scenario like a ransomware attack.',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q40',f:'f15',s:'Which approach is MOST effective for evaluating communication between internal teams and external providers during a BCP/DRP test?',o:['Executing a comprehensive joint exercise','Conducting separate simulations for each group','Performing unannounced tabletop exercises','Reviewing documented communication procedures'],a:0,w:'Executing a comprehensive joint exercise is the most effective approach for evaluating communication between internal teams and external providers during a BCP/DRP test.',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q41',f:'f15',s:'When transitioning from tabletop exercises to more comprehensive BCP/DRP testing methods, which factor is MOST critical for ensuring effective outcomes?',o:['Potential impact on business operations','Number of participants involved','Availability of external consultants','Duration of the testing process'],a:0,w:'When moving from tabletop exercises to more comprehensive testing methods like simulation or full interruption, the potential impact on business operations is the most critical factor for ensuring effective outcomes.',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q46',f:'f15',s:'In a global enterprise environment, which disaster type typically requires the MOST immediate declaration and response process to minimize the Mean Time To Repair (MTTR)?',o:['Sudden widespread tech disaster (e.g., ransomware)','Human-caused physical disaster (e.g., facility sabotage)','Gradual technological issue (e.g., data corruption)','Natural disaster with warning (e.g., hurricane)'],a:0,w:'In a global enterprise environment, sudden technological disasters with widespread impact, such as ransomware attacks, typically require the most immediate declaration and response process to minimize the Mean Time To Repair (MTTR).',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q55',f:'f15',s:'Which of the following BEST describes a key difference in Restoration Order considerations between on-premises systems and cloud-based services during disaster recovery?',o:['Cloud-based services eliminate the need for hardware configuration in the DR package','Cloud-based services typically have longer Recovery Time Objectives (RTOs) than on-premises systems','On-premises systems generally require less detailed data restoration procedures','On-premises systems often require more extensive hardware configuration instructions in the DR package'],a:3,w:'On-premises systems typically require more detailed hardware configuration instructions in the Disaster Recovery (DR) package compared to cloud-based services.',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q57',f:'f15',s:'Which approach best balances rapid disaster declaration with thorough assessment in a large enterprise\'s disaster recovery process?',o:['Immediately declaring a disaster based on a single system alert without further assessment','Relying solely on predefined automated thresholds to declare disasters without human oversight','Conducting an extensive 24-hour assessment process before any disaster declaration can be made','Using a tiered response system with escalation criteria'],a:3,w:'A tiered response system with predefined escalation criteria provides the best balance between speed and accuracy in disaster declaration. It allows for quick initial response while ensuring a structured approach for thorough assessment.',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q63',f:'f15',s:'A global organization is updating its disaster recovery strategy to address emerging threats. Considering NIST SP 800-34 guidelines for contingency planning, what is the MOST critical consideration when evolving disaster recovery strategies to address quantum computing attacks and AI-driven cyber threats?',o:['Developing AI-powered threat detection systems as a priority','Implementing quantum-resistant encryption algorithms immediately','Conducting frequent simulations of advanced attack scenarios','Balancing new protective measures with existing DR frameworks'],a:3,w:'While all options are important considerations, balancing new protective measures with existing DR frameworks is the most critical. This approach aligns with NIST SP 800-34 guidelines, which emphasize the importance of maintaining a comprehensive and integrated approach to contingency planning.',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q71',f:'f15',s:'A global organization with offices in New York, London, and Tokyo is planning a comprehensive Business Continuity Plan (BCP) test. Which of the following is the MOST critical factor for ensuring effective coordination and communication across these multiple geographic locations and time zones?',o:['Implementing real-time data replication across all sites','Conducting simultaneous exercises at each location','Creating a central team with a clear test plan','Establishing a 24/7 global communication hotline'],a:2,w:'A central coordination team with a detailed test schedule and clear roles is crucial for managing the complexities of multi-location BCP testing. It ensures proper timing, effective communication, and consistent execution across all sites, addressing the challenges of different time zones and...',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q111',f:'f15',s:'Which factor contributes MOST to enhancing the decision-making process for declaring a disaster through improved risk assessment accuracy in a rapidly evolving technological environment?',o:['Expanded size and expertise of the disaster recovery team','Increased frequency of disaster simulation exercises','Detailed analysis of historical incident data','Continuous updates to risk assessment methodologies'],a:3,w:'Continuous updates to risk assessment methodologies are crucial for improving accuracy in disaster declaration decisions, especially in a rapidly evolving technological environment.',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q169',f:'f15',s:'When evaluating the timing of a disaster declaration, which factor is MOST critical in balancing the risks of premature versus delayed action?',o:['The potential impact on critical business functions','The organization\'s insurance coverage limits','The current state of data backups','The availability of alternate work sites'],a:0,w:'The most critical factor in deciding when to declare a disaster is the potential impact on critical business functions. Premature declaration can lead to unnecessary resource allocation and costs, while delayed declaration can result in extended downtime and greater business impact.',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q171',f:'f15',s:'When determining whether to declare a disaster during a major IT outage affecting multiple systems, which factor is MOST critical?',o:['Time of day the outage occurred','Duration of the system downtime','Number of affected servers and workstations','Impact on critical business functions'],a:3,w:'The most critical factor in determining when to declare a disaster is the impact on critical business functions. This focuses on the actual effect on the organization\'s ability to operate, which directly relates to the business continuity objectives.',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q203',f:'f15',s:'An organization is planning to conduct a full interruption test of their Business Continuity Plan (BCP). Which of the following represents the MOST critical risk-mitigation pair for this type of test?',o:['Unintended business disruption; create a detailed test plan with clear rollback procedures','Potential data loss; perform incremental backups before and after the test','Extended system downtime; conduct the test during off-peak business hours','Unexpected hardware failures; have spare components readily available'],a:0,w:'A full interruption test is the most comprehensive and risky type of BCP test. The most critical risk is unintended business disruption, as it involves actually shutting down primary systems.',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q220',f:'f15',s:'A security architect is designing a testing strategy for critical security systems\' failure mode procedures. Which approach would BEST validate these procedures while minimizing risk to the production environment and ensuring comprehensive testing?',o:['Simulating failures in an isolated test environment with production data','Conducting quarterly tabletop exercises with stakeholders','Performing gradual rollouts with automated rollback capabilities','Implementing redundant systems with real-time failover testing'],a:0,w:'Simulating failures in an isolated test environment with production data is the best approach for validating failure mode procedures while minimizing risk to the production environment and ensuring comprehensive testing.',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q221',f:'f15',s:'Which approach BEST integrates cyber threat intelligence into an organization\'s recovery site strategy to mitigate the impact of sophisticated attacks?',o:['Conducting regular penetration testing of the recovery site','Storing encrypted backups at the recovery site','Implementing the latest security patches at the recovery site','Continuously adapting recovery procedures based on current threat intelligence'],a:3,w:'Integrating cyber threat intelligence into recovery site strategies involves continuously updating and adapting recovery procedures based on the current threat landscape.',e:['','','',''],r:'Declaration is pre-authorized - the test ladder climbs risk'},
+{n:'Q222',f:'f16',s:'Which approach BEST balances comprehensive disaster recovery testing with minimal disruption to normal business operations?',o:['Implementing continuous real-time testing of all critical systems','Performing unannounced disaster simulations across all departments','Conducting full-scale failover tests during peak business hours','Using tabletop exercises and targeted simulations during off-peak hours'],a:3,w:'Tabletop exercises and targeted simulations during off-peak hours provide a comprehensive testing approach while minimizing disruption to normal business operations.',e:['','','',''],r:'Criticality, not user count - dependencies first, never simultaneous'},
+{n:'Q6',f:'f16',s:'Which approach is most effective in addressing potential cascading failures during the restoration process of a Disaster Recovery Plan (DRP)?',o:['Simultaneously activating all backup systems to minimize downtime','Implementing redundant systems for mission-critical components only','Restoring systems based on their individual criticality ratings','Prioritizing restoration based on system dependencies and impact analysis'],a:3,w:'Prioritizing restoration based on system dependencies and impact analysis is the most effective approach to address potential cascading failures. This method ensures that interdependent systems are restored in a logical order, minimizing the risk of further disruptions and allowing for a more...',e:['','','',''],r:'Criticality, not user count - dependencies first, never simultaneous'},
+{n:'Q15',f:'f16',s:'Which of the following components is MOST crucial for ensuring rapid recovery of essential business functions in a Restoration Order?',o:['Detailed network topology diagrams','Prioritized list of critical systems and data','Comprehensive IT asset inventory','Prioritized list of key personnel and responsibilities'],a:1,w:'A prioritized list of critical systems and data is the most crucial component in a Restoration Order as it enables the organization to focus on recovering the most essential business functions first.',e:['','','',''],r:'Criticality, not user count - dependencies first, never simultaneous'},
+{n:'Q21',f:'f16',s:'In developing a long-term backup storage strategy, which factor is MOST critical to address the potential impact of emerging technologies like quantum computing?',o:['Implementing faster data retrieval mechanisms','Ensuring encryption methods are quantum-resistant','Increasing storage capacity for larger data volumes','Adopting cloud-based backup solutions'],a:1,w:'The most critical factor in long-term backup storage strategies, considering emerging technologies like quantum computing, is ensuring encryption methods are quantum-resistant.',e:['','','',''],r:'Criticality, not user count - dependencies first, never simultaneous'},
+{n:'Q30',f:'f16',s:'A large enterprise is implementing a backup strategy for their Kubernetes-based microservices architecture. Which approach BEST addresses the challenges of data consistency and state preservation across distributed components?',o:['Relying on cloud provider\'s automatic snapshot feature','Utilizing application-aware, distributed snapshot technologies','Using traditional database backup tools for each microservice','Implementing daily full backups of all container images'],a:1,w:'In a Kubernetes-based microservices architecture, the most critical challenge for backup strategies is preserving data consistency and state across distributed components.',e:['','','',''],r:'Criticality, not user count - dependencies first, never simultaneous'},
+{n:'Q54',f:'f16',s:'During a large-scale disaster affecting multiple critical systems, a financial services company discovers that their shared recovery site lacks adequate data restoration capabilities for simultaneous plan execution. Which factor should be given the highest priority when re-evaluating the Restoration Order?',o:['Recovery Time Objectives (RTOs) of individual systems','Geographical distribution of backup resources','Business impact and revenue loss potential','System interdependencies and complexity'],a:2,w:'When re-evaluating the Restoration Order in a scenario where restoration capabilities are limited, the business impact and revenue loss potential should be given the highest priority.',e:['','','',''],r:'Criticality, not user count - dependencies first, never simultaneous'},
+{n:'Q95',f:'f16',s:'An organization has declared a disaster and is beginning recovery operations at their alternate site. According to business continuity best practices, which systems should be restored FIRST?',o:['Systems identified as most critical in the Business Impact Assessment (BIA)','Systems with the shortest Recovery Time Objective (RTO)','Systems with the least complex technical dependencies','Systems that support the largest number of end users'],a:0,w:'The Business Impact Assessment determines restoration order during disaster recovery, prioritizing the most critical systems first to support essential business processes and minimize organizational impact.',e:['','RTO measures recovery speed, not restoration priority','Dependency complexity affects sequencing, not criticality determination; and','User count does not determine business criticality'],r:'Criticality, not user count - dependencies first, never simultaneous'},
+{n:'Q96',f:'f16',s:'An organization\'s web application requires its database, load balancer, and web servers. How should these components be sequenced during recovery?',o:['Load balancer, web servers, then database server','Web servers, database server, then load balancer','Database server, web servers, then load balancer','All components simultaneously to minimize downtime'],a:2,w:'Dependency mapping shows that components must be restored in sequence based on their relationships, with foundational systems like databases operational before dependent systems.',e:['Load balancer needs web servers already operational','Web servers require the database to function; and','','Simultaneous recovery ignores dependency requirements'],r:'Criticality, not user count - dependencies first, never simultaneous'},
+{n:'Q97',f:'f16',s:'Why does the restoration strategy differ between recovering at an alternate site versus returning to the repaired primary site?',o:['Alternate sites require modified procedures due to different hardware configurations','Primary site restoration prioritizes testing environment stability before committing critical systems','Recovery sites utilize pre-staged systems that eliminate system dependency considerations','Regulatory compliance requirements mandate different restoration sequences for each scenario'],a:1,w:'At alternate sites, critical systems restore first for business continuity. Returning to primary sites reverses this: least critical systems validate environment stability before moving critical systems back.',e:['Hardware differences exist but do not drive priority reversal','','Dependencies remain critical regardless of recovery site location; and','Business impact drives restoration order, not regulatory mandates'],r:'Criticality, not user count - dependencies first, never simultaneous'},
+{n:'Q98',f:'f16',s:'A disaster recovery team needs to understand which systems must be operational before a web application can function. Which tool would BEST help them determine the required restoration sequence?',o:['Risk assessment matrix','Business Impact Assessment (BIA) report','Dependency chart','Asset inventory database'],a:2,w:'Dependency charts map component relationships, showing which systems require other systems to function and determining the proper sequence for restoration activities.',e:['Evaluates threats and vulnerabilities, not system relationships','Identifies system criticality and priorities, not technical dependencies; and','','Catalogs organizational resources without documenting system interdependencies'],r:'Criticality, not user count - dependencies first, never simultaneous'},
+{n:'Q99',f:'f16',s:'A dependency chart shows that a customer portal requires a load balancer, web cluster, and database server. During recovery, what does this information help determine?',o:['The maximum tolerable downtime for each component','The sequence in which systems must be brought online','The total cost of recovery for the application','The staffing requirements for the recovery team'],a:1,w:'Dependency charts map component relationships, enabling recovery teams to understand the required sequence for bringing systems online based on their interdependencies.',e:['BIA analysis determines downtime tolerance, not dependency charts','','Recovery costs derive from resource planning, not dependencies; and','Staffing needs are separate operational planning considerations'],r:'Criticality, not user count - dependencies first, never simultaneous'},
+{n:'Q101',f:'f16',s:'After repairing the primary data center following a disaster, the organization is ready to relocate operations from the recovery site. Which systems should be moved back FIRST?',o:['Mission-critical financial processing systems','Core database servers supporting all applications','Systems with the highest availability requirements','Non-critical systems to validate the environment'],a:3,w:'When returning to the primary site, least critical systems are restored first to validate the environment is stable before moving critical systems back.',e:['Critical systems move last after site validation','Core databases are restored after environment testing; and','High-availability systems wait for proven stability',''],r:'Criticality, not user count - dependencies first, never simultaneous'},
+{n:'Q102',f:'f16',s:'When balancing speed of recovery against risk during site restoration, what approach minimizes potential problems?',o:['Restoring all systems simultaneously to reduce total recovery time','Prioritizing systems based solely on their technical complexity','Using criticality-based sequencing with environment validation before moving critical systems','Delegating restoration order decisions to individual system administrators'],a:2,w:'Restoring least critical systems first validates the environment, and only after the site is proven stable are critical systems moved, minimizing risk and ensuring efficient resource use.',e:['Simultaneous restoration ignores dependencies and validation','Technical complexity does not determine business priority; and','','Decentralized decisions lack coordinated prioritization'],r:'Criticality, not user count - dependencies first, never simultaneous'},
+{n:'Q166',f:'f16',s:'A global organization is implementing a backup strategy for its hybrid environment, which includes on-premises data centers, multi-cloud resources, and edge computing devices in remote locations. Which of the following is the MOST critical consideration for this backup strategy?',o:['Optimizing cost-efficiency in backup processes','Centralizing all backups in cloud storage','Implementing a unified backup solution across all platforms','Ensuring cross-platform data consistency and recovery'],a:3,w:'In a complex hybrid environment spanning on-premises, cloud, and edge resources, ensuring cross-platform data consistency and recovery is the most critical consideration.',e:['','','',''],r:'Criticality, not user count - dependencies first, never simultaneous'},
+{n:'Q167',f:'f16',s:'In the context of backup storage strategies, which application of machine learning provides the MOST significant improvement to data protection and recovery processes?',o:['Real-time monitoring of backup job status','Automated scheduling of backup operations','Predictive analysis of storage capacity needs','Intelligent classification and prioritization of sensitive data'],a:3,w:'While all options offer benefits, intelligent classification and prioritization of sensitive data provides the MOST significant improvement to data protection and recovery processes in backup storage strategies.',e:['','','',''],r:'Criticality, not user count - dependencies first, never simultaneous'},
+{n:'Q181',f:'f16',s:'In a rapidly evolving IT environment with increasing cloud service adoption, which approach is MOST crucial for maintaining the effectiveness of a Restoration Order plan?',o:['Conducting quarterly penetration testing of cloud services','Regular inventory reviews and Restoration Order plan updates','Focusing solely on documenting on-premises infrastructure changes','Implementing real-time monitoring of all cloud-based assets'],a:1,w:'Regular inventory reviews and Restoration Order plan updates are crucial for maintaining plan effectiveness in rapidly changing IT environments, especially with cloud services.',e:['','','',''],r:'Criticality, not user count - dependencies first, never simultaneous'},
+{n:'Q215',f:'f16',s:'Which aspect of a Business Impact Analysis (BIA) is MOST crucial for determining the restoration order in a Disaster Recovery Plan?',o:['Estimated financial losses per hour of downtime for each system','Prioritized list of critical business functions with their Recovery Time Objectives (RTOs) and Maximum Tolerable Downtimes (MTDs)','Comprehensive inventory of IT assets and their dependencies','Detailed list of all business processes and their interdependencies'],a:1,w:'The prioritized list of critical business functions with their RTOs and MTDs from a BIA is the most crucial aspect for determining the restoration order.',e:['','','',''],r:'Criticality, not user count - dependencies first, never simultaneous'},
+{n:'Q232',f:'f16',s:'In a Restoration Order plan for a critical financial system with a Recovery Time Objective (RTO) of 4 hours, which of the following actions should be prioritized FIRST after a disaster has been declared?',o:['Assess the extent of damage to all IT infrastructure','Restore core financial application servers at the hot site','Initiate full data recovery from the most recent backup','Activate the organization\'s cold site for all systems'],a:1,w:'In a Restoration Order plan, especially for critical systems with tight RTOs, the first priority after declaring a disaster should be to restore the core components of the critical system at the designated recovery site.',e:['','','',''],r:'Criticality, not user count - dependencies first, never simultaneous'},
+{n:'Q235',f:'f17',s:'A global financial institution is reviewing its backup storage strategy for sensitive customer data. Which of the following is the MOST critical step in ensuring the effectiveness of this strategy?',o:['Increasing backup frequency for high-volume transaction data','Regularly testing and validating the data restoration process','Implementing automated backup scheduling across all branches','Storing encrypted backups in multiple geographic locations'],a:1,w:'While all options are important aspects of a comprehensive backup storage strategy, regularly testing and validating the data restoration process is the most critical step in ensuring its effectiveness.',e:['','','',''],r:'RAID is availability, not backup - only a restore test proves a backup'},
+{n:'Q90',f:'f17',s:'An organization needs to maximize read/write performance for a temporary data processing task where data loss is acceptable. Which RAID level is MOST appropriate?',o:['RAID 1, which mirrors data across two drives','RAID 5, which distributes parity across multiple drives','RAID 0, which stripes data across multiple drives','RAID 6, which provides double parity protection'],a:2,w:'RAID 0 striping distributes data across drives simultaneously without redundancy overhead, delivering maximum read/write performance ideal when data loss is acceptable.',e:['Prioritizes redundancy over performance through mirroring','Balances performance and redundancy, not maximum speed; and','','Prioritizes fault tolerance over performance with double parity'],r:'RAID is availability, not backup - only a restore test proves a backup'},
+{n:'Q92',f:'f17',s:'An organization must choose between RAID 5 and RAID 10 for a new storage system. What is the PRIMARY trade-off when selecting RAID 10 over RAID 5?',o:['RAID 10 requires more drives but provides better performance with redundancy','RAID 10 offers double parity but requires complex XOR calculations','RAID 10 provides faster writes but cannot survive any drive failures','RAID 10 uses less storage capacity but has slower read operations'],a:0,w:'RAID 10 requires a minimum of four drives compared to RAID 5\'s three, combining striping for performance with mirroring for redundancy, making it typically more.',e:['','Double parity is RAID 6, not RAID 10','RAID 10 provides redundancy through mirroring; and','RAID 10 has higher storage overhead, not less'],r:'RAID is availability, not backup - only a restore test proves a backup'},
+{n:'Q93',f:'f17',s:'A security architect is designing storage for a system where availability is critical but budget constraints limit the number of drives. Which RAID level provides redundancy with the FEWEST drives?',o:['RAID 0 requiring two drives for data striping','RAID 1 requiring two drives for data mirroring','RAID 5 requiring three drives for parity protection','RAID 10 requiring four drives for combined protection'],a:1,w:'RAID 1 duplicates all data across two drives, providing complete redundancy with the minimum drive configuration for fault tolerance. (A) Provides no redundancy despite using two drives; (C) Requires three drives, exceeding RAID 1\'s minimum; and (D) Requires four drives, the highest of all options.',e:['Provides no redundancy despite using two drives','','Requires three drives, exceeding RAID 1\'s minimum; and','Requires four drives, the highest of all options'],r:'RAID is availability, not backup - only a restore test proves a backup'},
+{n:'Q94',f:'f17',s:'When evaluating RAID options for a critical system requiring both high performance and tolerance for two simultaneous drive failures, which configuration provides the BEST solution?',o:['RAID 5 with three drives using single parity distribution','RAID 10 with four drives combining striping and mirroring','RAID 1 with two drives providing complete data duplication','RAID 6 with four drives implementing double parity protection'],a:3,w:'RAID 6 implements double parity protection, enabling tolerance for two simultaneous drive failures while maintaining high performance through data striping.',e:['Single parity enables only one drive failure tolerance','Cannot survive two failures in same mirror pair; and','Two-drive configuration cannot survive two simultaneous failures',''],r:'RAID is availability, not backup - only a restore test proves a backup'},
+{n:'Q195',f:'f17',s:'Which approach BEST aligns with the NIST Cybersecurity Framework and ISO/IEC 27002 when managing spare parts for legacy systems in a modern IT environment?',o:['Develop a risk-based spare parts management strategy, considering both operational needs and security implications','Outsource all legacy system maintenance to specialized third-party vendors','Apply uniform security controls to all spare parts regardless of system criticality','Implement a just-in-time inventory system for all legacy components'],a:0,w:'The correct answer aligns with the NIST Cybersecurity Framework\'s emphasis on risk management and ISO/IEC 27002\'s focus on information security continuity.',e:['','','',''],r:'RAID is availability, not backup - only a restore test proves a backup'},
+{n:'Q241',f:'f18',s:'A financial services company is upgrading its database infrastructure and requires a RAID configuration that offers a 20% performance improvement in read operations while maintaining data redundancy. Which RAID level BEST meets these requirements, including the ability to tolerate a single drive failure without data loss?',o:['RAID-5','RAID-10','RAID-1','RAID-0'],a:0,w:'RAID-5 provides the best balance between performance improvement and data redundancy for the given scenario. It offers improved read performance through data striping and can survive a single drive failure due to distributed parity.',e:['','','',''],r:'Supplier risk is tiered, contractual and continuously monitored'},
+{n:'Q24',f:'f18',s:'When conducting a comprehensive security assessment of a potential cloud service provider for a strategic partnership, which aspect of their external dependencies should be given the HIGHEST priority?',o:['Disaster recovery and business continuity plan testing frequency','Employee background check and insider threat mitigation procedures','Data center physical access controls and monitoring','Third-party software supply chain vulnerability management process'],a:3,w:'While all aspects are important for a comprehensive security assessment, the third-party software supply chain vulnerability management process is crucial as it directly impacts the overall security posture of the cloud service provider.',e:['','','',''],r:'Supplier risk is tiered, contractual and continuously monitored'},
+{n:'Q34',f:'f18',s:'A global organization plans to involve key suppliers in their annual BCP/DRP testing. What is the MOST effective way to mitigate the primary risk of this approach?',o:['Increase the frequency of internal-only BCP/DRP tests','Implement strict non-disclosure agreements and information access controls','Limit supplier participation to non-critical systems only','Conduct separate testing sessions for each supplier'],a:1,w:'The primary risk of involving external stakeholders, such as key suppliers, in BCP/DRP testing is the potential exposure of sensitive business information.',e:['','','',''],r:'Supplier risk is tiered, contractual and continuously monitored'},
+{n:'Q172',f:'f18',s:'In a rapidly evolving technological landscape, which approach is MOST effective for managing security risks associated with multiple third-party IoT device vendors integrated into an organization\'s infrastructure?',o:['Implement strict data access controls for all third-party IoT devices','Develop a comprehensive third-party risk management program with continuous monitoring and adaptive risk indicators','Rely on real-time monitoring of IoT devices\' network traffic','Conduct quarterly security audits of all IoT device vendors'],a:1,w:'A comprehensive third-party risk management program with continuous monitoring and adaptive risk indicators is the MOST effective approach for managing security risks associated with multiple third-party IoT device vendors in a rapidly evolving technological landscape.',e:['','','',''],r:'Supplier risk is tiered, contractual and continuously monitored'},
+{n:'Q200',f:'f18',s:'A global manufacturing company is developing a business continuity plan to address potential disruptions in its complex supply chain. Which approach is MOST effective in prioritizing the restoration of critical systems while minimizing overall business impact?',o:['Conducting quarterly risk assessments of tier-1 suppliers','Implementing redundant systems for all critical suppliers','Outsourcing all supply chain risk management to third-party providers','Developing a multi-tiered, geographically diverse supplier network with real-time monitoring capabilities'],a:3,w:'Developing a multi-tiered, geographically diverse supplier network with real-time monitoring capabilities is the most effective approach for prioritizing the restoration of critical systems while minimizing overall business impact in a complex global supply chain.',e:['','','',''],r:'Supplier risk is tiered, contractual and continuously monitored'},
+];
+
+
+/* ================= family mindmap (two vertical rails) ================= */
+(function buildFamMap(){
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var svg = document.getElementById('fammap');
+  var CX = 1050, CY = 780;
+  var RX_R = 1310, RX_L = 790;
+  var PH = 28, GAP = 7;
+  var mctx = document.createElement('canvas').getContext('2d');
+  function tw(t, size, weight){ mctx.font = (weight||'600') + ' ' + size + 'px system-ui, sans-serif'; return mctx.measureText(t).width; }
+  function el(name, attrs, parent){
+    var e = document.createElementNS(SVGNS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    (parent || svg).appendChild(e); return e;
+  }
+  var gE = el('g',{}), gL = el('g',{}), gB = el('g',{}), gC = el('g',{});
+  function edge(x1,y1,x2,y2,color,width,bend){
+    var dx=x2-x1, dy=y2-y1, len=Math.sqrt(dx*dx+dy*dy)||1;
+    var nx=-dy/len*bend, ny=dx/len*bend;
+    el('path',{class:'edge', d:'M'+x1+' '+y1+' Q'+(x1+(x2-x1)*0.5+nx)+' '+(y1+(y2-y1)*0.5+ny)+' '+x2+' '+y2,
+               fill:'none', stroke:color, 'stroke-width':width, 'stroke-opacity':0.5}, gE);
+  }
+  function goToLadder(id){
+    var card = document.getElementById('lad-' + id);
+    if (!card) return;
+    card.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  var n = FAMILIES.length;
+  var rows = Math.ceil(n/2);
+  var spacing = rows > 1 ? 1250/(rows-1) : 0;
+  FAMILIES.forEach(function(m, idx){
+    var g = GROUPS[m.g];
+    var row = idx % rows;
+    var right = idx < rows;
+    var mp = [right ? RX_R : RX_L, 155 + row*spacing];
+    var mw = Math.ceil(tw(m.name, 15, '800')) + 40;
+    var mh = 48;
+    edge(CX, CY, mp[0], mp[1], g.color, 3, 24);
+    var ln = m.leaves.length;
+    var total = ln*PH + (ln-1)*GAP;
+    var stackY = mp[1];
+    m.leaves.forEach(function(txt, i){
+      var w = Math.ceil(tw(txt, 12.5, '600')) + 22;
+      var y = stackY - total/2 + i*(PH+GAP) + PH/2;
+      var x = right ? 1680 - w : 420;
+      var sx = right ? mp[0] + mw/2 : mp[0] - mw/2;
+      edge(sx, mp[1], right ? x : x + w, y, g.color, 1.6, 12);
+      var lg = el('g', {class:'node leaf', role:'button', tabindex:'0'}, gL);
+      el('title', {}, lg).textContent = m.name + ' - ' + txt;
+      el('rect',{x:x, y:y-PH/2, width:w, height:PH, rx:13, fill:'#ffffff', stroke:g.color, 'stroke-width':1.5}, lg);
+      var t = el('text',{x:x+w/2, y:y, 'text-anchor':'middle', 'dominant-baseline':'central',
+                         'font-size':12.5, 'font-weight':600, fill:'#28303d'}, lg);
+      t.textContent = txt;
+      lg.addEventListener('click', function(){ goToLadder(m.id); });
+    });
+    var bg = el('g', {class:'node branch', role:'button', tabindex:'0'}, gB);
+    el('title', {}, bg).textContent = m.name + ' - ' + m.q + ' questions';
+    el('rect',{x:mp[0]-mw/2, y:mp[1]-mh/2, width:mw, height:mh, rx:13, fill:g.fill}, bg);
+    var t1 = el('text',{x:mp[0], y:mp[1]-7, 'text-anchor':'middle', 'dominant-baseline':'central',
+                        'font-size':15, 'font-weight':800, fill:'#ffffff'}, bg);
+    t1.textContent = m.name;
+    var t2 = el('text',{x:mp[0], y:mp[1]+11, 'text-anchor':'middle', 'dominant-baseline':'central',
+                        'font-size':10, 'font-weight':600, fill:'#ffffff', 'fill-opacity':0.85}, bg);
+    t2.textContent = m.g + ' · ' + m.q + 'Q';
+    bg.addEventListener('click', function(){ goToLadder(m.id); });
+  });
+  var cw = 260, ch = 78;
+  var gc = el('g', {class:'node center'}, gC);
+  el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
+  var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
+                      'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
+  c0.textContent = 'DOMAIN 7 · PART';
+  var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
+                      'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
+  c1.textContent = 'DECISION';
+  var c2 = el('text',{x:CX, y:CY+19, 'text-anchor':'middle', 'dominant-baseline':'central',
+                      'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
+  c2.textContent = 'FAMILIES';
+})();
+
+/* ================= ladders + radar ================= */
+(function buildLadders(){
+  var box = document.getElementById('ladderbox');
+  FAMILIES.forEach(function(m){
+    var g = GROUPS[m.g];
+    var card = document.createElement('article');
+    card.className = 'ladder';
+    card.id = 'lad-' + m.id;
+    card.style.setProperty('--mc', g.color);
+    var head = document.createElement('div'); head.className = 'head';
+    head.innerHTML = '<h3>' + m.name + '</h3><span class="gt t-' + m.g + '">' + m.g + '</span><span class="cnt">' + m.q + ' questions · ' + m.topic + '</span><span class="links"><a href="#drill" data-drill="' + m.g + '">drill these &darr;</a><a href="d4_mindmap_cheatsheet.html#card-' + m.g + '">knowledge &nearr;</a></span>';
+    card.appendChild(head);
+    var ol = document.createElement('ol');
+    m.factors.forEach(function(f){ var li = document.createElement('li'); li.innerHTML = f; ol.appendChild(li); });
+    card.appendChild(ol);
+    var rule = document.createElement('div'); rule.className = 'rule';
+    rule.innerHTML = '<b>Rule &middot; </b>' + m.rule;
+    card.appendChild(rule);
+    box.appendChild(card);
+  });
+  var rbox = document.getElementById('radarbox');
+  RADAR.forEach(function(r){
+    var d = document.createElement('article'); d.className = 'rad';
+    d.innerHTML = '<h3>' + r.t + '</h3>' + r.d + '<div class="ex">seen in: ' + r.ex + '</div>';
+    rbox.appendChild(d);
+  });
+})();
+
+/* ================= drill ================= */
+var drillState = {};
+(function buildDrill(){
+  var box = document.getElementById('drillbox');
+  var scA = document.getElementById('sc-a'), scC = document.getElementById('sc-c'),
+      scP = document.getElementById('sc-p'), scM = document.getElementById('sc-m');
+  var TOTAL = QS.length;
+  function updateScore(){
+    var ans = 0, cor = 0;
+    for (var k in drillState){ ans++; if (drillState[k].correct) cor++; }
+    scA.textContent = ans; scC.textContent = cor;
+    scP.textContent = ans ? '(' + Math.round(cor/ans*100) + '% of answered)' : '(0%)';
+    scM.style.width = (ans/TOTAL*100) + '%';
+  }
+  var letters = ['A','B','C','D'];
+
+  var currentFam = null;
+  QS.forEach(function(q){
+    var fam = null;
+    for (var i=0;i<FAMILIES.length;i++) if (FAMILIES[i].id === q.f) fam = FAMILIES[i];
+    var g = GROUPS[fam.g];
+    if (currentFam !== q.f){
+      currentFam = q.f;
+      var fh = document.createElement('div');
+      fh.className = 'famhead';
+      fh.setAttribute('data-g', fam.g);
+      fh.style.setProperty('--fc', g.color);
+      fh.innerHTML = '<h3>' + fam.name + '</h3><span class="gt t-' + fam.g + '">' + fam.g + '</span><span class="cnt">' + fam.q + ' questions</span><a href="d4_mindmap_cheatsheet.html#card-' + fam.g + '">knowledge card &nearr;</a>';
+      box.appendChild(fh);
+    }
+    var div = document.createElement('article');
+    div.className = 'q';
+    div.setAttribute('data-g', fam.g);
+    div.id = 'q-' + q.n;
+    var qh = document.createElement('div'); qh.className = 'qhead';
+    qh.innerHTML = '<span class="qn">' + q.n + '</span><span class="gt t-' + fam.g + '">' + fam.g + ' · ' + fam.name + '</span><span class="qrule">rule: ' + q.r + '</span>';
+    div.appendChild(qh);
+    var st = document.createElement('p'); st.className = 'stem'; st.textContent = q.s;
+    div.appendChild(st);
+    var opts = document.createElement('div'); opts.className = 'opts';
+    q.o.forEach(function(txt, i){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'opt'; b.setAttribute('data-l', letters[i]);
+      b.textContent = txt;
+      b.addEventListener('click', function(){ answer(div, q, i, fam); });
+      opts.appendChild(b);
+    });
+    div.appendChild(opts);
+    var vd = document.createElement('div'); vd.className = 'qverdict';
+    vd.id = 'v-' + q.n;
+    div.appendChild(vd);
+    box.appendChild(div);
+  });
+
+  function answer(div, q, i, fam){
+    if (drillState[q.n]) return;                      // locked after first pick
+    var correct = i === q.a;
+    drillState[q.n] = {pick:i, correct:correct};
+    div.classList.add('done');
+    var btns = div.querySelectorAll('.opt');
+    btns[q.a].classList.add('right');
+    if (!correct) btns[i].classList.add('wrong');
+    for (var j=0;j<btns.length;j++) btns[j].disabled = true;
+    var vd = document.getElementById('v-' + q.n);
+    vd.style.setProperty('--fc', GROUPS[fam.g].color);
+    var html = '<div class="mark ' + (correct ? 'good' : 'bad') + '">' + (correct ? 'Correct' : 'Not quite') + ' — answer ' + letters[q.a] + '</div>';
+    html += '<p class="why"><b>Why &middot; </b>' + q.w + '</p>';
+    if (q.e && q.e.length){
+      html += '<ul>';
+      q.e.forEach(function(e, k){
+        if (e && k !== q.a) html += '<li><b>' + letters[k] + '</b> — ' + e + '</li>';
+      });
+      html += '</ul>';
+    }
+    html += '<a class="klink" href="d4_mindmap_cheatsheet.html#card-' + fam.g + '">knowledge: ' + GROUPS[fam.g].name + ' &nearr;</a>';
+    vd.innerHTML = html;
+    vd.classList.add('show');
+    updateScore();
+  }
+
+  // group filter chips
+  var chips = document.getElementById('drillchips');
+  var filter = 'all';
+  function applyFilter(){
+    var heads = box.querySelectorAll('.famhead');
+    heads.forEach(function(h){ h.style.display = (filter==='all' || h.getAttribute('data-g')===filter) ? '' : 'none'; });
+    box.querySelectorAll('.q').forEach(function(qq){
+      qq.style.display = (filter==='all' || qq.getAttribute('data-g')===filter) ? '' : 'none';
+    });
+  }
+  var all = document.createElement('button');
+  all.type='button'; all.className='fchip all on'; all.setAttribute('data-g','all');
+  all.textContent = 'All (' + TOTAL + ')';
+  all.addEventListener('click', function(){ setFilter('all'); });
+  chips.appendChild(all);
+  Object.keys(GROUPS).forEach(function(gid){
+    var g = GROUPS[gid];
+    var b = document.createElement('button');
+    b.type='button'; b.className='fchip'; b.setAttribute('data-g', gid);
+    b.style.setProperty('--c', g.fill);
+    var c = QS.reduce(function(a,q){ var f=null; for(var i=0;i<FAMILIES.length;i++) if(FAMILIES[i].id===q.f) f=FAMILIES[i]; return a + (f.g===gid?1:0); }, 0);
+    b.textContent = gid + ' · ' + g.name + ' (' + c + ')';
+    b.addEventListener('click', function(){ setFilter(gid); });
+    chips.appendChild(b);
+  });
+  function setFilter(g){
+    filter = g;
+    Array.prototype.forEach.call(chips.children, function(b){ b.classList.toggle('on', b.getAttribute('data-g')===g); });
+    applyFilter();
+  }
+  applyFilter();
+
+  // ladder "drill these" links
+  document.querySelectorAll('a[data-drill]').forEach(function(a){
+    a.addEventListener('click', function(){ setFilter(a.getAttribute('data-drill')); });
+  });
+
+  document.getElementById('sc-reset').addEventListener('click', function(){
+    drillState = {};
+    box.querySelectorAll('.q').forEach(function(qq){
+      qq.classList.remove('done');
+      qq.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('right','wrong'); b.disabled = false; });
+      var v = qq.querySelector('.qverdict');
+      v.classList.remove('show'); v.innerHTML = '';
+    });
+    updateScore();
+  });
+  updateScore();
+})();
+
+</script>
+</body>
+</html>

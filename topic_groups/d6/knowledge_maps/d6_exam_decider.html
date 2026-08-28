@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CISSP D6 &middot; Exam Decision Atlas &amp; Question Drill &mdash; 113 scenario questions</title>
+<style>
+  :root{
+    --g1:#b91c1c; --g1f:#dc2626;
+    --g2:#b45309; --g2f:#d97706;
+    --g3:#6d28d9; --g3f:#7c3aed;
+    --g4:#1d4ed8; --g4f:#2563eb;
+    --g5:#047857; --g5f:#059669;
+    --g6:#be185d; --g6f:#db2777;
+    --g7:#0e7490; --g7f:#0891b2;
+    --ink:#1e293b; --muted:#64748b; --bg:#f6f7fb; --line:#e2e8f0;
+    --ok:#047857; --bad:#b91c1c;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+  header.hero{padding:44px 0 10px}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  h1{font-size:clamp(26px,4vw,40px);line-height:1.15;margin:8px 0 10px}
+  .sub{font-size:17px;color:#334155}
+  .sub b{font-weight:800}
+  .sub a{color:#0f172a}
+  .c-g1{color:var(--g1)} .c-g2{color:var(--g2)} .c-g3{color:var(--g3)}
+  .c-g4{color:var(--g4)} .c-g5{color:var(--g5)} .c-g6{color:var(--g6)}
+  .c-g7{color:var(--g7)}
+
+  nav.jump{position:sticky;top:0;z-index:50;background:rgba(246,247,251,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin-top:18px}
+  nav.jump .wrap{display:flex;gap:4px;flex-wrap:wrap;padding:8px 20px;align-items:center}
+  nav.jump a{font-size:13.5px;font-weight:600;color:#334155;text-decoration:none;padding:5px 12px;border-radius:999px}
+  nav.jump a:hover{background:#e8ecf5}
+  nav.jump a.kp{border:1.5px solid #cbd5e1;background:#fff}
+
+  section{padding:34px 0 6px;scroll-margin-top:64px}
+  h2{font-size:24px;margin:0 0 4px}
+  .lede{color:var(--muted);margin:0 0 18px;font-size:15px}
+
+  .gt{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap;vertical-align:1px}
+  .t-g1{background:var(--g1f)} .t-g2{background:var(--g2f)} .t-g3{background:var(--g3f)}
+  .t-g4{background:var(--g4f)} .t-g5{background:var(--g5f)} .t-g6{background:var(--g6f)}
+  .t-g7{background:var(--g7f)}
+
+  /* ---------- family mindmap ---------- */
+  .map-panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 8px 4px;box-shadow:0 8px 24px rgba(15,23,42,.06)}
+  svg#fammap{width:100%;height:auto;display:block}
+  .maphint{text-align:center;color:var(--muted);font-size:13px;padding:8px 0 10px}
+  .node{cursor:pointer}
+  .node:hover rect{filter:brightness(.94)}
+  .leaf rect{transition:fill .15s}
+  .leaf:hover rect{fill:#eef2fb}
+
+  /* ---------- ladders ---------- */
+  .ladders{display:grid;grid-template-columns:repeat(auto-fit,minmax(430px,1fr));gap:14px;margin-top:14px}
+  .ladder{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 18px 13px;border-top:5px solid var(--mc,#94a3b8);box-shadow:0 8px 24px rgba(15,23,42,.05);scroll-margin-top:64px}
+  .ladder .head{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+  .ladder h3{margin:0;font-size:17px;color:var(--mc)}
+  .ladder .cnt{font-size:12px;font-weight:700;color:var(--muted)}
+  .ladder .links{margin-left:auto;font-size:12px;font-weight:700}
+  .ladder .links a{color:var(--mc);text-decoration:none;margin-left:10px}
+  .ladder .links a:hover{text-decoration:underline}
+  .ladder ol{margin:8px 0 0;padding:0;list-style:none;counter-reset:fac}
+  .ladder ol li{counter-increment:fac;position:relative;padding:4px 0 4px 34px;font-size:13.6px;color:#334155;border-bottom:1px dashed #eef1f6}
+  .ladder ol li:last-child{border-bottom:none}
+  .ladder ol li::before{content:counter(fac);position:absolute;left:2px;top:5px;width:22px;height:22px;border-radius:50%;background:var(--mc);color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center}
+  .ladder ol li b{color:#0f172a}
+  .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
+  .ladder .rule b{color:var(--mc);font-style:normal}
+
+  /* ---------- radar ---------- */
+  .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
+  .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
+  .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
+  .rad .ex{margin-top:6px;font-size:12px;color:var(--muted);font-weight:600}
+
+  /* ---------- drill ---------- */
+  .scorebar{position:sticky;top:49px;z-index:40;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:12px;padding:10px 16px;box-shadow:0 6px 18px rgba(15,23,42,.06);display:flex;gap:16px;align-items:center;flex-wrap:wrap;font-size:14px}
+  .scorebar b{font-size:16px}
+  .scorebar .meter{flex:1;min-width:160px;height:9px;background:#e8ecf5;border-radius:999px;overflow:hidden}
+  .scorebar .meter i{display:block;height:100%;background:linear-gradient(90deg,var(--g4f),var(--g5f));width:0;transition:width .25s}
+  .scorebar button{font:inherit;font-size:13px;font-weight:700;background:#fff;color:#334155;border:1.5px solid #cbd5e1;border-radius:999px;padding:5px 14px;cursor:pointer}
+  .scorebar button:hover{border-color:#334155}
+  .fchips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+  .fchip{font:inherit;font-size:12.5px;font-weight:700;color:#fff;border:none;border-radius:999px;padding:6px 14px;cursor:pointer;background:var(--c,#334155);opacity:.5;transition:opacity .12s}
+  .fchip:hover{opacity:.8}
+  .fchip.on{opacity:1;box-shadow:0 0 0 2px rgba(15,23,42,.28)}
+  .fchip.all{background:#0f172a}
+
+  .famhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:26px 0 8px;padding-bottom:6px;border-bottom:2.5px solid var(--fc,#94a3b8)}
+  .famhead h3{margin:0;font-size:19px;color:var(--fc,#334155)}
+  .famhead .cnt{font-size:12.5px;color:var(--muted);font-weight:700}
+  .famhead a{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--fc,#334155);text-decoration:none}
+  .famhead a:hover{text-decoration:underline}
+
+  .q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px 14px;margin:12px 0;box-shadow:0 6px 18px rgba(15,23,42,.04);scroll-margin-top:120px}
+  .q.done{border-color:#c7d2e4}
+  .qhead{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:7px}
+  .qn{font-weight:800;font-size:13px;color:#fff;background:#0f172a;border-radius:7px;padding:2px 9px}
+  .qrule{margin-left:auto;font-size:11.5px;font-weight:700;color:var(--muted);background:#f1f5f9;border-radius:999px;padding:2px 10px}
+  .stem{margin:0 0 12px;font-size:14.8px;color:#0f172a}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  @media (max-width:760px){.opts{grid-template-columns:1fr}}
+  .opt{font:inherit;font-size:13.6px;text-align:left;color:#334155;background:#fbfcfe;border:1.5px solid #d8dfea;border-radius:10px;padding:9px 12px 9px 38px;cursor:pointer;position:relative;transition:all .12s;line-height:1.4}
+  .opt::before{content:attr(data-l);position:absolute;left:11px;top:9px;font-weight:800;color:#64748b}
+  .opt:hover:not(:disabled){border-color:#64748b;background:#f1f5f9}
+  .opt:disabled{cursor:default;opacity:.88}
+  .opt.right{border-color:var(--ok);background:#ecfdf5;opacity:1}
+  .opt.right::before{color:var(--ok)}
+  .opt.wrong{border-color:var(--bad);background:#fef2f2;opacity:1}
+  .opt.wrong::before{color:var(--bad)}
+  .qverdict{display:none;margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+  .qverdict.show{display:block}
+  .qverdict .mark{font-size:15px;font-weight:800;margin-bottom:4px}
+  .qverdict .mark.good{color:var(--ok)}
+  .qverdict .mark.bad{color:var(--bad)}
+  .qverdict .why{margin:4px 0 8px;font-size:14px;color:#0f172a}
+  .qverdict ul{margin:0;padding:0;list-style:none;font-size:13.2px;color:#334155}
+  .qverdict li{padding:2px 0 2px 20px;position:relative}
+  .qverdict li::before{content:"\2716";position:absolute;left:2px;color:#c2410c;font-weight:700;font-size:11px;top:4px}
+  .qverdict .klink{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;color:var(--fc,#334155);text-decoration:none;border:1.5px solid var(--fc,#94a3b8);border-radius:999px;padding:2px 11px}
+  .qverdict .klink:hover{background:#f1f5f9}
+
+  footer{padding:30px 0 44px;color:var(--muted);font-size:13px}
+  footer code{background:#eef1f6;border-radius:5px;padding:1px 6px;font-size:12px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">CISSP &middot; Domain 6 &middot; Exam preparation &middot; logic-based scenarios</div>
+    <h1>D6 Decision Atlas &amp; Question Drill</h1>
+    <p class="sub"><b>113 scenario questions</b> &middot; <b>16 decision families</b> &middot; <b>7 knowledge groups</b> &mdash; every question with its context, its real A&ndash;D options, the factor ladder that ranks them, and why each distractor fails. Companion to the <a href="d6_mindmap_cheatsheet.html">knowledge mindmap &amp; flashcards</a>.</p>
+  </div>
+</header>
+
+<nav class="jump">
+  <div class="wrap">
+    <a href="#fmap">Family map</a><a href="#ladders">Factor ladders</a><a href="#radar">Distractor radar</a><a href="#drill">Question drill</a><a class="kp" href="d6_mindmap_cheatsheet.html">&#9733; knowledge page</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- ================= 1. FAMILY MINDMAP ================= -->
+  <section id="fmap">
+    <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
+    <p class="lede">The 16 recurring question families, colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with the questions that exercise it. Click a branch to open its factor ladder.</p>
+    <div class="map-panel">
+      <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Radial mindmap of the 16 Domain 6 question families"></svg>
+      <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
+    </div>
+  </section>
+
+  <!-- ================= 2. FACTOR LADDERS ================= -->
+  <section id="ladders">
+    <h2>2 &middot; Factor ladders &mdash; what beats what, under which circumstances</h2>
+    <p class="lede">For each family: the ranked decision factors distilled from the official explanations. When a scenario highlights factor 1, that answer wins over factor 2 &mdash; and over every distractor archetype below.</p>
+    <div class="ladders" id="ladderbox"></div>
+  </section>
+
+  <!-- ================= 3. DISTRACTOR RADAR ================= -->
+  <section id="radar">
+    <h2>3 &middot; Distractor radar &mdash; the 9 recurring wrong answers</h2>
+    <p class="lede">Wrong options in this bank are not random: they recycle nine archetypes. Spot the archetype, eliminate instantly, and the choice usually collapses to one answer.</p>
+    <div class="radar" id="radarbox"></div>
+  </section>
+
+  <!-- ================= 4. QUESTION DRILL ================= -->
+  <section id="drill">
+    <h2>4 &middot; Question drill &mdash; all 113, options and all</h2>
+    <p class="lede">Real stems, real A&ndash;D options. Click your pick: it locks, the verdict opens with the why, per-option eliminations, the rule exercised, and a link into the matching knowledge card. Filter by group; the score bar follows you.</p>
+
+    <div class="scorebar">
+      <span>Answered <b id="sc-a">0</b>/113</span>
+      <span>Correct <b id="sc-c">0</b> <span id="sc-p" style="color:var(--muted);font-weight:600">(0%)</span></span>
+      <span class="meter"><i id="sc-m"></i></span>
+      <button id="sc-reset" type="button">reset answers</button>
+    </div>
+    <div class="fchips" id="drillchips"></div>
+    <div id="drillbox"></div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Built from <code>domain6_logic_questions.txt</code> (113 logic-based questions, 16 topics) &mdash; stems, options,
+    answers and eliminations compressed from the official explanations, question numbers unchanged.
+    Knowledge links point to <code>d6_mindmap_cheatsheet.html</code> (built from the 6.1&ndash;6.3 knowledge maps + destcert D6 mindmaps).
+    Built 2026-08-24. Offline single-file page; no external dependencies.
+  </div>
+</footer>
+
+<script>
+/* ================= knowledge groups (same palette as the knowledge page) ================= */
+var GROUPS = {
+  g1:{name:'Strategy & Parties', color:'#b91c1c', fill:'#dc2626'},
+  g2:{name:'Privacy & PIA',      color:'#b45309', fill:'#d97706'},
+  g3:{name:'Vuln & SCAP',        color:'#6d28d9', fill:'#7c3aed'},
+  g4:{name:'Pen Test & Teams',   color:'#1d4ed8', fill:'#2563eb'},
+  g5:{name:'Software Testing',   color:'#047857', fill:'#059669'},
+  g6:{name:'Logs & Metrics',     color:'#be185d', fill:'#db2777'},
+  g7:{name:'Assurance & DR',     color:'#0e7490', fill:'#0891b2'}
+};
+
+/* ================= 16 question families ================= */
+var FAMILIES = [
+  { id:'f01', g:'g1', name:'Strategy & Planning', topic:'Assessment, Test & Audit Strategy & Planning', q:21,
+    angle:-78.75, stack:{x:1640, cy:120, anchor:'left'},
+    leaves:['Scope & objectives come FIRST (Q6 Q61)','Risk-based beats uniform (Q3 Q93 Q94)','Change rate sets cadence (Q53)','Capability beats headcount (Q76)','Hybrid tiered by location risk (Q80 Q134)'],
+    factors:[
+      '<b>Scope &amp; objectives first</b> — before teams, interviews, timelines, tools (Q6, Q61)',
+      '<b>Risk-based beats uniform</b> — prioritize critical + compliance-sensitive assets; never equal treatment (Q3, Q93, Q94)',
+      '<b>Change rate sets cadence</b> — continuous vs periodic is decided by environment velocity, not complexity (Q53)',
+      '<b>Capability beats headcount</b> — skill diversity determines depth; budget, time, geography frame it (Q76)',
+      '<b>Hybrid delivery, tiered by risk</b> — onsite for physical/high-risk, remote for scale; adjust frequency per location (Q80, Q134)',
+      '<b>Global = central core + local modules</b> — rotating team shares knowledge; uniform-strictest and isolation both fail (Q62, Q66)',
+      '<b>Follow the boundary</b> — hybrid cloud audits inspect flows, connectivity and IAM integration, not one side (Q9, Q10, Q108)',
+      '<b>Platform, not point tools</b> — distributed teams need one collaboration platform; scanners and VPNs do not create consistency (Q77)',
+      '<b>Jurisdictions dominate multi-cloud</b> — varying regional compliance is the planning challenge (Q78)',
+      '<b>On-site owns physical</b> — the unique onsite value is direct access to physical controls (Q129)',
+      '<b>Safety phases healthcare work</b> — start non-critical, expand gradually (Q52); enduring yield = public trust (Q54)',
+      '<b>Automate breadth + human depth</b> — integrated scanning with targeted manual testing (Q106)'],
+    rule:'Pick the <b>managerial, risk-based, scope-first</b> answer — never uniform treatment, never outsourcing as strategy.' },
+  { id:'f02', g:'g2', name:'Privacy & Cross-Border', topic:'Privacy, Legal & Cross-Border Compliance in Testing', q:3,
+    angle:-56.25, stack:{x:1640, cy:305, anchor:'left'},
+    leaves:['Localize PIAs per jurisdiction (Q2)','Decisive factor: map flows & gaps (Q119)','Compliance beats realism in test data (Q128)'],
+    factors:[
+      '<b>Localize when jurisdictions differ</b> — distinct national law/culture defeats one HQ assessment (Q2)',
+      '<b>Map flows before choosing mode</b> — the on-site/remote decision rides on mapping cross-border flows and gaps, not cost (Q119)',
+      '<b>Compliance before realism</b> — legal exposure of production-like data outweighs fidelity; anonymize/mask (Q128)'],
+    rule:'Privacy questions resolve to <b>the most protective compliant path</b> — mapping, local law and data minimization.' },
+  { id:'f03', g:'g3', name:'Vuln Scanning', topic:'Vulnerability Assessment & Scanning', q:6,
+    angle:-33.75, stack:{x:1640, cy:490, anchor:'left'},
+    leaves:['Credentialed = depth, fewer misses (Q38 Q39)','Breadth at scale = automated scan (Q46)','AI speeds discovery, not judgment (Q57)','Business logic needs humans (Q81)','Least disruption = internal scan (Q113)'],
+    factors:[
+      '<b>Credential for depth</b> — unauthenticated scans miss local flaws (false negatives); keep cadence, add credentials (Q38, Q39)',
+      '<b>Breadth = automated scanning</b> — thousands of endpoints, misconfigs, unpatched systems (Q46)',
+      '<b>AI speeds discovery only</b> — coverage and speed of initial scanning; judgment stays human (Q57)',
+      '<b>Business logic needs humans</b> — algorithm/trading logic evades pattern tools (Q81)',
+      '<b>Least disruptive adequate test</b> — internal scanning for internal breadth without disruption (Q113)'],
+    rule:'Match method to need: <b>breadth &rarr; scan, depth &rarr; credentials, logic &rarr; humans</b>.' },
+  { id:'f04', g:'g4', name:'Pen Test Governance', topic:'Penetration Testing', q:7,
+    angle:-11.25, stack:{x:1640, cy:675, anchor:'left'},
+    leaves:['Consent & scope before testing (Q5 Q133)','Assumed breach: no perimeter view (Q69)','RoE define disruption limits (Q73)','Critical infra: simulate + limited live (Q86 Q100)','Bad scope misses criticals (Q102)'],
+    factors:[
+      '<b>Consent &amp; scope first</b> — signed authorization is the legal/ethical gate; certs, tools and timing are not (Q5, Q133)',
+      '<b>Assumed breach skips perimeter</b> — inside-out start yields no first-line-of-defense evidence (Q69)',
+      '<b>RoE define the limits</b> — permissible actions and protected systems balance testing vs stability (Q73)',
+      '<b>Simulate, then limit live</b> — critical infrastructure: simulated env + tightly limited production validation (Q86)',
+      '<b>Essential services first</b> — public safety outranks realism, coverage and scope discipline (Q100)',
+      '<b>Bad scope misses criticals</b> — unscoped key systems is the direct failure (Q102)'],
+    rule:'Ethics/legal gate &rarr; <b>written consent, RoE, safety over realism</b> — every time.' },
+  { id:'f05', g:'g4', name:'Red / Blue / Purple', topic:'Red / Blue / Purple Team Exercises', q:6,
+    angle:11.25, stack:{x:1640, cy:860, anchor:'left'},
+    leaves:['Purple = controls + IR together (Q4)','SDLC: collaborate, not eliminate (Q51)','Threat intel makes it real (Q65)','Knowledge transfer = differentiator (Q75)','AI attacks &rarr; adaptive posture (Q95 Q109)'],
+    factors:[
+      '<b>Purple = controls + IR</b> — one exercise tests control effectiveness and human response (Q4)',
+      '<b>Collaborate, do not eliminate</b> — SDLC purple keeps Red and Blue, adds the loop (Q51)',
+      '<b>Threat intel makes it real</b> — plausible adversary behavior across all teams (Q65)',
+      '<b>Continuous knowledge transfer</b> — the purple differentiator; playbooks and exercises are artifacts (Q75)',
+      '<b>Adaptive posture vs AI attacks</b> — strategy with continuous learning; tools are tactics (Q95)',
+      '<b>Detection + IR readiness</b> — purple yield for logic-bomb style threats (Q109)'],
+    rule:'Purple answers pair <b>offense with defense learning</b> — reject eliminations, static artifacts, tool-only fixes.' },
+  { id:'f06', g:'g3', name:'SCAP & BAS', topic:'SCAP, CVSS, CVE & Breach and Attack Simulation', q:8,
+    angle:33.75, stack:{x:1640, cy:1045, anchor:'left'},
+    leaves:['BAS = continuous emulation (Q21 Q43)','SCAP = interoperability language (Q24)','SCAP+BAS: exploitability priority (Q34 Q70)','Config data sharpens simulation (Q89 Q124)','BAS covers the zero-day gap (Q63)'],
+    factors:[
+      '<b>Continuous emulation = BAS</b> — ongoing automated assurance replaces nothing but periodicity (Q21, Q43)',
+      '<b>SCAP = the language</b> — NIST-standardized formats for cross-tool exchange; not a scanner, not severity (Q24)',
+      '<b>Identify, then prove</b> — SCAP finds, BAS demonstrates: prioritization by real exploitability and impact (Q34, Q70)',
+      '<b>Config sharpens simulation</b> — current SCAP data makes BAS vectors match the real environment (Q89, Q124)',
+      '<b>BAS covers zero-days</b> — behavioral emulation where signatures are blind (Q63)'],
+    rule:'Attribute functions exactly: <b>identify &rarr; SCAP · score &rarr; CVSS · name &rarr; CVE · emulate &rarr; BAS</b>.' },
+  { id:'f07', g:'g5', name:'Regression', topic:'Regression Testing', q:9,
+    angle:56.25, stack:{x:1640, cy:1230, anchor:'left'},
+    leaves:['No reruns &rarr; silent breakage (Q22)','Baseline comparison = proof (Q26)','Keep patch, retest rules (Q29)','Automate — never cut coverage (Q36 Q44)','Downstream modules break too (Q40)'],
+    factors:[
+      '<b>No reruns &rarr; silent breakage</b> — previously functional software fails undetected (Q22, Q35)',
+      '<b>Baseline = the proof</b> — versioned baseline vs repeatable reruns; records and reviews show process (Q26)',
+      '<b>Patches touch core paths</b> — higher risk than config changes, but both need regression (Q27)',
+      '<b>Keep patch, retest rules</b> — never blind rollback of a severe fix (Q29)',
+      '<b>Automate, never cut</b> — CI/CD suites preserve coverage; headcount and deferral do not scale (Q36, Q44)',
+      '<b>Downstream breaks too</b> — scope includes dependent stable modules (Q40)',
+      '<b>CFO case = release risk</b> — frame automation as revenue/release protection (Q31)'],
+    rule:'Regression questions: <b>rerun vs baseline, automate the repetition, never sacrifice coverage</b>.' },
+  { id:'f08', g:'g5', name:'SAST / DAST', topic:'Software Testing Techniques', q:2,
+    angle:78.75, stack:{x:1640, cy:1415, anchor:'left'},
+    leaves:['Shift-left = per-commit scans (Q88)','No app yet &rarr; SAST (Q111)'],
+    factors:[
+      '<b>Earliest point wins</b> — shift-left = automated scans on each commit with immediate feedback; pre-release review is late (Q88)',
+      '<b>No running app &rarr; SAST</b> — static analysis works pre-build on limited resources (Q111)'],
+    rule:'Timeline decides the tool: <b>pre-build &rarr; SAST &middot; running app &rarr; DAST &middot; commit-time &rarr; shift-left</b>.' },
+  { id:'f09', g:'g6', name:'Logging & Retention', topic:'Logging, Log Review & Clipping Levels', q:7,
+    angle:258.75, stack:{x:460, cy:120, anchor:'right'},
+    leaves:['Logs + IR = timeline & scope (Q12)','Preserve history? decides overwrite (Q15)','Circular = evidence loss (Q16 Q18)','Clip noise at the source (Q17)','Centralize + tier retention (Q55 Q56)'],
+    factors:[
+      '<b>Logs + IR = timeline &amp; scope</b> — forensic reconstruction, not real-time alerting (Q12)',
+      '<b>Preservation decides overwrite</b> — must history survive? then no circular overwrite (Q15)',
+      '<b>Circular = evidence loss</b> — oldest entries gone in delayed discovery; remaining are intact (Q16, Q18)',
+      '<b>Clip at the source</b> — threshold filters routine noise; forwarding moves the problem (Q17)',
+      '<b>Centralize to correlate</b> — one multi-cloud platform, not per-environment tools (Q55)',
+      '<b>Tier the retention</b> — hot/warm/cold with clipping balances forensics, compliance, cost (Q56)'],
+    rule:'Logs are <b>evidence</b>: preservation and integrity outrank storage economics; noise is clipped, never forwarded.' },
+  { id:'f10', g:'g6', name:'KPI / KRI Metrics', topic:'KPI / KRI / Security Metrics', q:7,
+    angle:236.25, stack:{x:460, cy:305, anchor:'right'},
+    leaves:['Map one metric set to frameworks (Q8)','Trend beats snapshot (Q23)','Risk-adjusted impact compares (Q98)','KRI-aligned risk-based testing (Q97)','Dynamic = threat-intel fed (Q103)'],
+    factors:[
+      '<b>One set, mapped</b> — shared indicators mapped to NIST/ISO/GDPR; separate sets create silos (Q8)',
+      '<b>Trend beats snapshot</b> — multi-year time-to-patch shows effectiveness; test counts are activity (Q23)',
+      '<b>Consistent KPIs across vendors</b> — comparability over years drives allocation (Q58)',
+      '<b>KRI-aligned testing</b> — focus scarce testing where KRIs point; do not broaden blindly (Q97)',
+      '<b>Risk-adjusted impact</b> — severity &times; business impact compares programs fairly; counts reward noise (Q98)',
+      '<b>Dynamic = intel-fed</b> — continuous adjustment from threat intel and incidents; annual is too slow (Q103)',
+      '<b>Quant + qual balanced</b> — global programs need both, aligned to strategy (Q127)'],
+    rule:'Metrics answers prefer <b>outcomes over activity, trends over snapshots, risk-adjustment over counts</b>.' },
+  { id:'f11', g:'g6', name:'Reporting', topic:'Reporting & Communicating Test Output', q:7,
+    angle:213.75, stack:{x:460, cy:490, anchor:'right'},
+    leaves:['Audience-relevant metrics (Q32 Q85)','Method context before severity (Q47)','Board: visuals + financial impact (Q90 Q135)','Execs: business-impact summary (Q91)','Prioritized, actionable, owned (Q125)'],
+    factors:[
+      '<b>Audience-relevant metrics</b> — translate results into what the reader can act on (Q32)',
+      '<b>Method before severity</b> — interpret context, limits and FP/FN tendencies first (Q47)',
+      '<b>Tailor per level</b> — role-based detail incl. middle management; two-tier splits are insufficient (Q85)',
+      '<b>Board = visuals + financial impact</b> — business/financial framing wins support (Q90, Q135)',
+      '<b>Execs = impact summary</b> — high-level, prioritized, risk-tolerance aligned (Q91)',
+      '<b>Actionable priorities</b> — owner + action + date beats exhaustive specs (Q125)'],
+    rule:'Match the message to the reader: <b>impact for boards, evidence for engineers, traceability for auditors</b>.' },
+  { id:'f12', g:'g7', name:'SOC & Third-Party', topic:'SOC Reports & Third-Party Assurance', q:8,
+    angle:191.25, stack:{x:460, cy:675, anchor:'right'},
+    leaves:['Discrepancy &rarr; gap analysis + comms (Q49)','Monitor high-risk vendors continuously (Q50)','Tests-of-controls = actionable (Q71 Q83)','Continuous assurance evolves (Q115 Q139)','AI &rarr; predictive analysis (Q122)'],
+    factors:[
+      '<b>Gap analysis + communication</b> — discrepancies: fix critical gaps, communicate the plan (Q49)',
+      '<b>Monitor the risky</b> — tiered continuous monitoring of high-risk vendors beats universal audits (Q50)',
+      '<b>Results beat objectives</b> — tests-of-controls are the actionable evidence (Q71); granular tests find SIEM gaps (Q83)',
+      '<b>Culture compounds</b> — sustained Type II yields lasting practice improvement (Q99)',
+      '<b>Continuous assurance evolves</b> — dynamic cloud demands continuous monitoring + automated control testing (Q115, Q139)',
+      '<b>AI &rarr; predictive analysis</b> — pattern-based vulnerability prediction, not report generation (Q122)'],
+    rule:'SOC answers match <b>evidence to purpose</b> — and never treat a favorable report as a guarantee.' },
+  { id:'f13', g:'g7', name:'Audit Practice', topic:'Audits, Auditors & Audit Frameworks', q:5,
+    angle:168.75, stack:{x:460, cy:860, anchor:'right'},
+    leaves:['Predictive = risk-focused resources (Q74)','Emerging tech &rarr; risk strategy first (Q92)','External = independence + benchmarks (Q104)','Skills challenge: keeping pace (Q131)','Cross-functional meetings (Q137)'],
+    factors:[
+      '<b>Proactive prioritization</b> — predictive analytics aims resources at risk hotspots; speed is secondary (Q74)',
+      '<b>Risk strategy first</b> — emerging-tech audits assess strategy alignment before implementation detail (Q92)',
+      '<b>Independence + benchmarks</b> — the external auditor advantage (Q104)',
+      '<b>Keep pace</b> — the fundamental skills challenge is technology velocity (Q131)',
+      '<b>Meet, not broadcast</b> — recurring cross-functional meetings integrate findings (Q137)'],
+    rule:'Auditor questions: <b>independence separates, management owns, strategy precedes detail</b>.' },
+  { id:'f14', g:'g7', name:'Emerging Tech', topic:'Emerging Tech & Specialized Environment Testing', q:10,
+    angle:146.25, stack:{x:460, cy:1045, anchor:'right'},
+    leaves:['Edge: test the flows dynamically (Q1 Q132)','ZT: inter-segment traffic (Q7 Q123)','Containers: escape + runtime (Q121 Q136)','Blockchain immutable · AR sensors (Q101 Q59)','IoT diversity · ICS safety (Q114 Q126)'],
+    factors:[
+      '<b>Test the flows</b> — edge risk lives in edge-to-cloud communication, not isolated firmware (Q1, Q132)',
+      '<b>Verify enforcement</b> — ZT micro-segmentation proven by inter-segment traffic analysis (Q7); coverage before persistence (Q123)',
+      '<b>Runtime for ephemeral</b> — containers need real-time automated assessment (Q121); escape = top blast radius (Q136)',
+      '<b>Immutability rules</b> — blockchain flaws must be caught pre-deployment (Q101)',
+      '<b>Unique surfaces first</b> — AR/VR spatial + sensor manipulation (Q59)',
+      '<b>Heterogeneity wins</b> — IoT device/protocol diversity defeats uniform tooling (Q114)',
+      '<b>Safety + continuity</b> — power-plant focus: control impact on safe operation (Q126)'],
+    rule:'Match the test to <b>what is new and dynamic</b> in the environment — flows, ephemerality, immutability, sensors.' },
+  { id:'f15', g:'g5', name:'Threat Modeling', topic:'Threat Modeling & Proactive SDLC Security', q:4,
+    angle:123.75, stack:{x:460, cy:1230, anchor:'right'},
+    leaves:['Iterative STRIDE across SDLC (Q67)','Continuous program beats periodic (Q116)','Context prioritizes (Q117)','Supply chain &rarr; model early (Q138)'],
+    factors:[
+      '<b>Iterative STRIDE</b> — throughout design and development; one-shot lists go stale (Q67)',
+      '<b>Model continuously</b> — a living program adapts to emerging threats; periodic testing reacts (Q116)',
+      '<b>Context prioritizes</b> — risk-based assessment + threat modeling for scarce resources (Q117)',
+      '<b>Earliest + suppliers</b> — systematic modeling catches third-party trust-boundary risk pre-code (Q138)'],
+    rule:'Earliest sustainable technique: <b>a living threat model</b>, updated with architecture and threats.' },
+  { id:'f16', g:'g7', name:'BCP/DR & ISCM', topic:'Security Process Data, BCP/DR & Continuous Monitoring', q:3,
+    angle:101.25, stack:{x:460, cy:1415, anchor:'right'},
+    leaves:['Testing sets recovery priority (Q45)','Awareness = incident trends (Q107)','ISCM = daily automated assessment (Q140)'],
+    factors:[
+      '<b>Criticality from testing</b> — test results identify critical systems and recovery order for the BCP (Q45)',
+      '<b>Measure behavior</b> — awareness impact shows in incident reporting/resolution trends, not surveys (Q107)',
+      '<b>Daily = ISCM</b> — near-real-time awareness needs automated high-frequency assessment (Q140)'],
+    rule:'Resilience answers are <b>behavioral and continuous</b> — proof of recovery, trends of behavior, daily automation.' }
+];
+
+/* ================= distractor radar ================= */
+var RADAR = [
+  {t:'Uniform everything', d:'Equal treatment of unequal risk: weekly scans of all systems regardless of criticality, one schedule everywhere, annual everything.', ex:'Q3 A · Q94 A · Q134 C · Q66 B'},
+  {t:'Outsource it', d:'Vendors proposed as the strategy. Outsourcing changes the executor — never the prioritization — and can raise cost.', ex:'Q66 A/D · Q80 C · Q94 B · Q106 C'},
+  {t:'Tool-only fixes', d:'A single tool, algorithm or product presented as the answer to what is really a strategy or process question.', ex:'Q24 A · Q95 D · Q116 A/D'},
+  {t:'Periodic when continuous is asked', d:'Annual, quarterly or monthly options whenever the stem says continuous, real-time, ongoing or rapidly evolving.', ex:'Q21 · Q43 · Q139 B/C/D · Q140 A/C/D'},
+  {t:'Realism over safety', d:'Full-scale, maximally realistic testing proposed against patient, public or essential-service constraints.', ex:'Q52 C · Q86 D · Q100 B/C · Q73 D'},
+  {t:'Cut coverage or add headcount', d:'Reducing test cases, deferring testing, skipping regression — or hiring people — instead of automating the repeatable.', ex:'Q36 A/C/D · Q44 A/C/D'},
+  {t:'Secondary as primary', d:'A real but subordinate benefit (speed, cost, reporting, detection) posed as the main strategic objective.', ex:'Q54 B/C/D · Q57 B/C/D · Q74 B/C'},
+  {t:'Technical for managerial', d:'Raw data, exploit detail, methodology or logs offered to boards, executives and other non-technical audiences.', ex:'Q32 A/B/D · Q90 A/B/D · Q91 B/C'},
+  {t:'Extremes & absolutes', d:'Eliminate the teams, eliminate human auditors, rewrite modules, maximize scope regardless of consequences.', ex:'Q51 B/D · Q122 D · Q40 C · Q73 D'}
+];
+
+/* ================= 113 questions ================= */
+var QS = [
+/* --- f01 Strategy & Planning (21) --- */
+{n:'Q3',f:'f01',s:'Resource-constrained financial firm wants the strategy that maximizes testing value AND shows tangible results to stakeholders.',o:['Weekly automated vulnerability scans across all systems','Compliance-focused testing to meet regulatory requirements','Outsource quarterly penetration testing to a third party','Risk-based testing with continuous monitoring and reporting'],a:3,w:'Risk-based focus on critical assets plus continuous risk-reduction metrics balances scarce resources with visible, strategic results.',e:['Uniform coverage wastes effort on low-risk assets','Meets regulation, not value optimization','Outsourcing changes the executor, not prioritization',''],r:'risk-based beats uniform'},
+{n:'Q6',f:'f01',s:'Multinational corporation preparing its FIRST comprehensive information security audit: the MOST critical planning step?',o:['Defining audit objectives and scope','Scheduling stakeholder interviews','Reviewing audit history','Preparing audit documentation'],a:0,w:'Objectives and scope direct the entire audit, focus resources and prioritize — every other step follows from them.',e:['','Interviews come after objectives are set','History may not apply to a first-time audit','Documentation is guided by the defined scope'],r:'scope & objectives first'},
+{n:'Q9',f:'f01',s:'Organization runs physical data centers AND cloud services. Which audit BEST evaluates security of data transfers between the environments?',o:['On-premise audit of physical infrastructure controls','Cloud audit of provider security measures','Compliance audit of regulatory requirements','Hybrid audit examining connectivity and data-flow security'],a:3,w:'Hybrid audits assess inter-environment connectivity, data-flow controls and access-management integration.',e:['Physical facilities only','Cloud resources only — misses the boundary','Regulatory focus, not data transfers',''],r:'follow the boundary'},
+{n:'Q10',f:'f01',s:'Access management spans internal systems and cloud platforms: the MOST critical audit consideration?',o:['Physical security at primary data centers','Cloud provider compliance certifications','Access-management integration between environments','Network bandwidth for data transfers'],a:2,w:'Hybrid environments require integrated, consistent access management across on-premises and cloud.',e:['On-premises only','Certifications do not prove cross-environment integration','','Bandwidth is performance, not security'],r:'integration over certificates'},
+{n:'Q52',f:'f01',s:'Healthcare vulnerability assessment with limited downtime windows: minimize patient-care disruption while ensuring comprehensive coverage?',o:['Prioritize testing critical systems without prior notification','Concurrent tests on all systems for faster results','Full-scale simulated attacks during off-peak hours','Phased approach starting with non-critical systems, gradually expanding'],a:3,w:'Phasing from non-critical lets impact be monitored and adjusted while coverage completes — patient safety first.',e:['Critical-first without notice risks care','Concurrent load can overwhelm critical services','Even off-peak, full-scale attacks endanger care',''],r:'safety phases the work'},
+{n:'Q53',f:'f01',s:'Large enterprise choosing between continuous automated and periodic manual testing: the MOST crucial deciding factor?',o:['Frequency of security-policy changes','Level of security expertise in the IT team','Rate of change in the technology environment','Complexity of the technology infrastructure'],a:2,w:'Deployment velocity drives cadence: fast-changing environments need continuous testing; stable ones can go periodic.',e:['Policy change rate is secondary','Expertise affects quality, not cadence choice','','Complexity mainly shapes scope'],r:'change rate sets cadence'},
+{n:'Q54',f:'f01',s:'Utility company weighing long-term security-testing investment for critical infrastructure: the MOST significant ENDURING benefit?',o:['Sustained public trust and stakeholder confidence','Enhanced ability to detect sophisticated attacks','Reduced emergency response and recovery costs','Improved compliance with evolving regulations'],a:0,w:'The enduring strategic yield is trust and confidence; detection, cost and compliance are shorter-term benefits that flow from it.',e:['','Operational, shorter-term','Cost benefit, shorter-term','Ongoing but not the enduring strategic yield'],r:'strategic beats operational'},
+{n:'Q61',f:'f01',s:'Global testing strategy, limited resources, tight deadline: the MOST critical component of the Testing Overview phase?',o:['Selecting specific testing tools','Establishing a high-level timeline','Determining budget allocation per activity','Defining the scope and objectives of the overall process'],a:3,w:'Scope and objectives align all downstream activity with goals and prioritize effort; the timeline is partially correct but secondary.',e:['Tooling is secondary','Partially correct, less comprehensive','Budget follows scope',''],r:'scope & objectives first'},
+{n:'Q62',f:'f01',s:'Multinational financial institution, new global assessment program: BEST for varying data-protection regulations, consistent standards, and resource optimization across locations?',o:['Fully centralized model: uniform global policies, single team','Hybrid: centralized framework, localized implementation, rotating global team','Completely decentralized: each region assesses independently','Outsource to local third-party providers per country, centrally coordinated'],a:1,w:'Central framework keeps standards; local implementation handles each jurisdiction; rotation shares knowledge and optimizes resources.',e:['Uniform global policies miss local law','','No consistency or shared methodology','Coordination without consistency or knowledge sharing'],r:'central core, local modules'},
+{n:'Q64',f:'f01',s:'Globally distributed infrastructure: the factor that MOST impacts the effectiveness of remote versus on-site assessments in finding vulnerabilities?',o:['Compliance with region-specific regulations','Comprehensiveness in evaluating physical AND logical security measures','Efficiency within time constraints','Scalability of assessment methodologies'],a:1,w:'On-site uniquely reaches physical controls and the physical-logical interplay — comprehensiveness decides effectiveness.',e:['Regulatory compliance matters but does not decide the method','','Efficiency is about breadth','Scalability gives breadth, not physical depth'],r:'depth decides location'},
+{n:'Q66',f:'f01',s:'Assessment across countries with varying data privacy laws: MOST effective for regulatory compliance, assessment consistency, and cross-jurisdiction risk management?',o:['Outsource the entire process to local vendors per country','Apply the strictest global privacy standards uniformly','Modular framework adaptable to each country while keeping core consistency','Separate isolated assessments per country without data sharing'],a:2,w:'Modular core-plus-local adapts to each regime while preserving one methodology and a holistic risk view.',e:['Inconsistent methodologies across vendors','Rigid uniformity ignores local operating reality','','Isolation destroys the holistic view'],r:'modular beats rigid'},
+{n:'Q76',f:'f01',s:'Comprehensive assessment across diverse IT environments for a global corporation: MOST critical factor for effectiveness and depth?',o:['The financial budget allocated','The expertise and skill-set diversity of the testing team','The timeframe allowed','The geographical scope of systems'],a:1,w:'Diverse expertise finds complex vulnerabilities and interprets results across environments; budget, time and scope merely frame the work.',e:['Budget constrains but does not create depth','','Duration is a constraint','Geography is breadth, not depth'],r:'capability beats headcount'},
+{n:'Q77',f:'f01',s:'Globally dispersed remote teams and assets: MOST effective way to maintain integrity and consistency of assessments?',o:['Deploy cloud-based vulnerability scanners','Secure assessment platforms with real-time collaboration features','VPNs for secure connections','Remote desktop software for direct access'],a:1,w:'A structured platform enforces one methodology, real-time collection and secure sharing across time zones.',e:['Scanning without collaboration or methodology features','','Secure connections are not assessment consistency','Access is not a structured environment'],r:'platform, not point tools'},
+{n:'Q78',f:'f01',s:'Multi-cloud strategy across geographic regions: the MOST significant challenge for planning comprehensive assessments?',o:['Limited visibility into underlying cloud infrastructure','Consistent vulnerability scanning across all clouds','Varying compliance requirements across regions','Implementing uniform controls across providers'],a:2,w:'Jurisdictional and data-sovereignty regimes dominate: they constrain scope, standards and legality across every provider.',e:['Visibility is a per-provider technical issue','Scanning is a narrower technical task','','Controls legitimately vary under shared responsibility'],r:'jurisdictions dominate'},
+{n:'Q80',f:'f01',s:'Global organization, varying regulatory requirements plus resource constraints across countries: BEST assessment approach?',o:['Risk-based hybrid of onsite and remote assessments','Exclusively onsite assessments at all locations','Outsource all assessments to local providers','Fully remote assessments for all sites'],a:0,w:'Tier by risk: onsite for high-risk or critical locations, remote for the rest — flexible, compliant, resource-efficient.',e:['','Impractical cost and logistics','Inconsistent methodologies','Misses physical controls and local law'],r:'hybrid tiered by risk'},
+{n:'Q93',f:'f01',s:'Budget-constrained organization with diverse systems: BEST way to maximize limited testing resources?',o:['Automated continuous testing of all systems regardless of criticality','Outsource all security testing','Focus exclusively on systems processing sensitive customer data','Risk-based approach prioritizing critical systems and known vulnerabilities'],a:3,w:'Risk-based focus puts effort where impact is greatest — criticality plus known vulnerabilities first.',e:['Uniform coverage is not affordable','Outsourcing does not prioritize and may add cost','Exclusivity misses other critical systems',''],r:'risk-based beats uniform'},
+{n:'Q94',f:'f01',s:'Multinational financial firm under regulatory pressure with limited resources: comprehensive testing + compliance adherence + optimal allocation?',o:['Uniform testing schedule across all systems','Outsource to a financial-sector compliance specialist','Penetration testing of customer-facing applications only','Risk-based: critical and compliance-sensitive assets tested more frequently and in depth'],a:3,w:'Risk-based depth and frequency on critical and compliance-sensitive assets satisfies all three constraints together.',e:['Uniform under-tests the critical','Outsourcing shifts the executor, not prioritization','Scope far too narrow',''],r:'risk-based beats uniform'},
+{n:'Q106',f:'f01',s:'Complex multi-tiered web application at a financial institution: BEST way to optimize testing effort while ensuring comprehensive coverage?',o:['Automated tools for external components, manual for internal systems','Rotating monthly schedule of automated and manual testing','Outsource to a financial-application specialist','Integrate automated scanning with targeted manual testing of critical components'],a:3,w:'Automation delivers breadth; skilled manual work covers business logic and context on the components that matter.',e:['Splitting by network zone is arbitrary','Rotation without targeting misses flaws','Loses in-house knowledge',''],r:'automate breadth + human depth'},
+{n:'Q108',f:'f01',s:'Transitioning to hybrid cloud: BEST approach for comprehensive security visibility and assessment across on-premises and cloud resources?',o:['Focus on perimeter security and network segmentation','Rely exclusively on provider built-in security controls','Separate assessment tools per environment','Deploy a unified, cloud-aware security assessment platform'],a:3,w:'One platform gives consistent methodology and holistic visibility across both sides of the boundary.',e:['Perimeter-first ignores cross-boundary flows','Provider controls cover only their responsibility share','Separate tools create silos and gaps',''],r:'one view, not silos'},
+{n:'Q129',f:'f01',s:'Comparing onsite and offsite assessments: the MOST significant advantage of ONSITE?',o:['Faster completion through direct access','Improved network topology mapping via physical inspection','Face-to-face interviews with key personnel','Direct access to physical security controls and infrastructure'],a:3,w:'Hands-on evaluation of physical security implementation is the irreplaceable onsite value.',e:['Speed is not the differentiator','A side benefit','Useful but not unique',''],r:'on-site owns physical'},
+{n:'Q134',f:'f01',s:'Risk-based global assessments aligned with the NIST Privacy Framework: BEST strategy balancing comprehensive evaluation, cost-effectiveness and logistics?',o:['Delegate to regional teams by local regulation and risk','Quarterly remote assessments for all offices','Annual onsite assessments at all global locations','Tiered onsite and remote assessments by location risk, with adjusted frequency'],a:3,w:'Risk-tiered method and frequency matches the risk-based framework while controlling cost and logistics.',e:['Regional delegation fragments consistency','One mode for all ignores risk differences','Uniform annual onsite wastes resources',''],r:'hybrid tiered by risk'},
+/* --- f02 Privacy (3) --- */
+{n:'Q2',f:'f02',s:'Cloud HR system with cross-border transfers: PIA approach that BEST handles flow mapping, regulatory compliance and cultural privacy expectations across jurisdictions?',o:['Perform local assessments in each country','Focus on technical security measures for cloud data','Rely on provider compliance certifications per jurisdiction','Centralized assessment at headquarters applied globally'],a:0,w:'Localized PIAs capture each jurisdiction law, culture and data flows — the exact complexity the scenario names.',e:['','Technical security is not privacy compliance','Certifications do not answer local privacy law','HQ view misses local obligations'],r:'localize when jurisdictions differ'},
+{n:'Q119',f:'f02',s:'New cloud analytics platform processing multi-continent customer data: the MOST critical factor in deciding on-site vs remote privacy assessment?',o:['Cost-effectiveness considering international travel','Ability to accurately map cross-border data flows and identify compliance gaps','Availability of local privacy experts','Time constraints before global launch'],a:1,w:'The decisive compliance factor is whether the mode can accurately map flows and surface gaps — cost, experts and schedule are secondary.',e:['Cost is not the compliance driver','','Experts support the work, not the mode choice','Launch pressure does not decide mode'],r:'map flows before mode'},
+{n:'Q128',f:'f02',s:'Testing program for a new global customer database: the MOST critical consideration for managing test data?',o:['Complying with data protection regulations','Test data accurately simulating real-world scenarios across regions','Cost-effective generation and storage of test data','Easy refresh of test data across jurisdictions'],a:0,w:'Legal penalties and rights violations outweigh fidelity gains — anonymize and mask first, then test.',e:['','Realism is subordinate to legality','Cost is secondary','Refresh is operational'],r:'compliance before realism'},
+/* --- f03 Vuln Scanning (6) --- */
+{n:'Q38',f:'f03',s:'Unauthenticated scans report zero findings on a server later compromised via a KNOWN CVE. Most likely explanation and corrective action?',o:['False negative — implement credentialed scanning for deeper visibility','False positive — increase scanning frequency','The CVE was not yet published — subscribe to threat feeds','The server was offline — implement continuous BAS'],a:0,w:'A real flaw that goes unreported is a false negative; unauthenticated scans lack local depth — credentials fix it.',e:['','A false positive is reported-but-absent — the opposite','The CVE was known and exploited','Wrong failure mode entirely'],r:'credential for depth'},
+{n:'Q39',f:'f03',s:'Weekly unauthenticated scans keep missing critical application-layer flaws. Improve accuracy while KEEPING the weekly schedule?',o:['Switch to credentialed scans that authenticate to targets','Replace vulnerability scanning with BAS entirely','Increase frequency to daily with the same method','Deploy banner grabbing before scanning'],a:0,w:'Credentialed scans authenticate into targets and see the application-layer depth unauthenticated scans cannot.',e:['','BAS complements — does not replace — identification','Same method, same blind spot','Version hints do not restore depth'],r:'credential for depth'},
+{n:'Q46',f:'f03',s:'Thousands of endpoints across multiple locations: MOST efficient and comprehensive technique for misconfigurations and unpatched systems?',o:['Penetration testing','Automated vulnerability scanning','Network traffic analysis','Manual configuration review'],a:1,w:'Automated scanning systematically covers scale — known vulnerabilities, outdated software, misconfigurations.',e:['Valuable but not breadth-at-scale','','Traffic analysis finds anomalies, not config state','Impractical at this scale'],r:'breadth = automated scan'},
+{n:'Q57',f:'f03',s:'Near-term operational impact of AI-powered automated vulnerability discovery on penetration testing?',o:['Increases speed and coverage of initial vulnerability scanning','Enhances reporting capabilities','Accelerates the exploitation process','Improves prioritization accuracy'],a:0,w:'AI accelerates discovery breadth and speed; humans keep exploitation, validation and nuanced prioritization.',e:['','Not the short-term effect','Exploitation stays human','Judgment remains human'],r:'AI speeds discovery only'},
+{n:'Q81',f:'f03',s:'Custom-built trading platform: the MOST critical vulnerability automated tools are LEAST likely to detect?',o:['SQL injection flaws in database queries','Complex logic errors in the trading algorithm risk calculations','Weak encryption algorithms for transmission','Unpatched operating-system vulnerabilities'],a:1,w:'Business-logic errors require human reasoning about intended functionality — no signature matches them.',e:['Known pattern — tool-detectable','','Known weakness — tool-detectable','Tool-detectable'],r:'business logic needs humans'},
+{n:'Q113',f:'f03',s:'Assess internal network security WITHOUT disrupting operations, with comprehensive vulnerability identification?',o:['External vulnerability scanning','Red team exercise','Internal vulnerability scanning','Compliance audit'],a:2,w:'Internal scanning covers the internal infrastructure comprehensively with the least disruption.',e:['External view only','More disruptive and broader in objective','','Standards adherence, not vulnerability discovery'],r:'least disruptive adequate test'},
+/* --- f04 Pen Test Governance (7) --- */
+{n:'Q5',f:'f04',s:'MOST critical step for GDPR compliance and ethical standards when conducting a penetration test?',o:['Obtaining written consent and scope definition','Using only open-source tools','Hiring certified ethical hackers','Conducting tests during non-business hours only'],a:0,w:'Signed authorization with defined scope is the legal and ethical gate; tools, certifications and timing are hygiene.',e:['','Tool licensing is not authorization','Certification is not consent','Timing is not authority'],r:'consent & scope first'},
+{n:'Q69',f:'f04',s:'Critical-infrastructure organization evaluating an assumed-breach approach for its annual pen test: the MOST significant consideration?',o:['Higher cost than traditional pen testing','Limited assessment of perimeter defense effectiveness','Reduced ability to test incident response','Increased difficulty simulating sophisticated attackers'],a:1,w:'Starting inside skips the perimeter entirely — no evidence about the first line of defense, which prevention-critical environments need.',e:['Cost is secondary','','Assumed breach DOES exercise internal IR','Realism is not the gap'],r:'assumed breach skips perimeter'},
+{n:'Q73',f:'f04',s:'Red team exercise on a critical business system: BEST balance of comprehensive testing with minimal operational disruption?',o:['Keep details confidential from all except senior management','Establish clear rules of engagement limiting potential disruptions','Conduct the exercise during non-business hours','Maximize scope to test everything regardless of consequences'],a:1,w:'RoE define permissible actions and protected systems — the actual balance mechanism; timing only reduces exposure windows.',e:['Secrecy hinders preparation and coordination','','Off-hours reduces timing impact, not actions','Unbounded scope invites outages'],r:'RoE define the limits'},
+{n:'Q86',f:'f04',s:'Test power-grid control systems without risking service disruption: MOST effective approach?',o:['Simulated environments for all tests, no live interaction','Only passive monitoring and log analysis at peak hours','Simulated environment testing combined with limited live validation','Full-scale penetration testing during off-peak hours'],a:2,w:'Simulation provides depth safely; tightly limited live validation confirms findings in production with minimal risk.',e:['No production confirmation at all','Passive-only under-tests the controls','','Even off-peak, full-scale risks essential services'],r:'simulate, then limit live'},
+{n:'Q100',f:'f04',s:'Penetration test of a city water treatment facility: the MOST critical ethical consideration?',o:['Maintaining confidentiality of all findings','Ensuring comprehensive coverage of all systems','Adhering strictly to the agreed scope','Minimizing disruption to essential services'],a:3,w:'Public safety and continuity of essential services outrank confidentiality, coverage and scope discipline.',e:['Important but secondary','Coverage is not the ethical peak','Necessary but secondary',''],r:'essential services first'},
+{n:'Q102',f:'f04',s:'The scenario MOST likely to result from inadequate scoping during a penetration test?',o:['Increased cost from extended testing duration','Failure to identify critical vulnerabilities in key systems','Overestimation of the security posture','Excessive use of advanced testing tools'],a:1,w:'Unscoped gaps mean key systems go untested — the direct defeat of the test purpose.',e:['Cost is incidental','','Posture overstatement is a downstream effect','Tooling volume is incidental'],r:'bad scope misses criticals'},
+{n:'Q133',f:'f04',s:'Breach attack simulations planned on production systems: the MOST critical ethical consideration?',o:['Maximizing realism of scenarios without actual damage','Obtaining explicit consent from all affected stakeholders','Running simulations during off-peak hours','Signed NDAs from the simulation team'],a:1,w:'Informed consent is the ethical and legal gate before execution; realism and timing are operational goals.',e:['An operational goal, not the gate','','An operational consideration','Confidentiality, not consent'],r:'consent gates production'},
+/* --- f05 Red/Blue/Purple (6) --- */
+{n:'Q4',f:'f05',s:'Global enterprise wanting to evaluate BOTH security control effectiveness AND incident-response team readiness across data centers?',o:['Annual penetration tests on critical systems','Continuous security monitoring system','Coordinated Purple Team exercise','Quarterly vulnerability scans across networks'],a:2,w:'Purple joins offense and defense in one exercise: controls and the human response function tested together in real time.',e:['Technical weaknesses only','Observes, but never exercises the response','','Lists weaknesses, not response'],r:'purple = controls + IR'},
+{n:'Q51',f:'f05',s:'PRIMARY objective of integrating Purple Team exercises into the SDLC?',o:['Reducing overall cost of testing and controls','Eliminating the need for separate Red and Blue teams','Fostering offensive-defensive collaboration that continuously improves controls across SDLC phases','Automating all security testing and IR throughout the SDLC'],a:2,w:'The objective is the collaboration loop improving controls through every phase — the teams remain.',e:['Cost is not the objective','Teams remain — they collaborate','','Automation is not the point'],r:'collaborate, not eliminate'},
+{n:'Q65',f:'f05',s:'Financial institution improving IR: BEST leverage of Red, Blue and Purple strengths?',o:['Joint Red and Blue exercises without Purple involvement','Continuous Red Team simulations with Blue feedback','Purple reviews of separate Red and Blue exercises','Integrating threat intelligence into collaborative exercises involving all teams'],a:3,w:'Threat intel makes scenarios plausible and current; all-team collaboration converts offensive observations into defensive improvement.',e:['Omits the integration role','Feedback without intel realism','Review after the fact is passive',''],r:'threat intel makes it real'},
+{n:'Q75',f:'f05',s:'The MOST crucial aspect of Purple Team operations for improving security effectiveness?',o:['Conducting joint Red and Blue exercises','Developing shared attack and defense playbooks','Implementing automated Purple Team tools','Facilitating continuous knowledge transfer between Red and Blue'],a:3,w:'Continuous transfer means insights are immediately incorporated — exercises and playbooks are periodic artifacts.',e:['Periodic events','Static artifacts','Tools do not transfer knowledge',''],r:'knowledge transfer wins'},
+{n:'Q95',f:'f05',s:'BEST strategy against AI-enhanced Red Team simulations in a large enterprise?',o:['Focusing solely on improving threat detection algorithms','Increasing penetration testing frequency','Developing an adaptive security posture with continuous learning','Implementing AI-powered defensive tools to match'],a:2,w:'An adaptive, continuously learning posture subsumes tools and tactics — a tool alone is a tactic, not a strategy.',e:['A narrow tactic','Frequency is not adaptation','','A tactic, not the strategy'],r:'adaptive posture, not tools'},
+{n:'Q109',f:'f05',s:'Critical infrastructure facing logic-bomb threats: the aspect MOST enhanced by a Purple Team approach?',o:['Operational cost reduction','Automated patch deployment processes','Proactive threat detection and incident-response capabilities','System uptime and availability management'],a:2,w:'Purple couples realistic offensive behavior with defensive learning — detection and response readiness rise.',e:['Not the security value','Not purple-specific','','Operations management, not detection'],r:'detection + IR readiness'},
+/* --- f06 SCAP & BAS (8) --- */
+{n:'Q21',f:'f06',s:'CISO wants to replace periodic pen tests with continuous security validation that automatically emulates attacks?',o:['Credentialed vulnerability scanning','Compliance checking against control requirements','Breach and attack simulation (BAS) tools','Banner grabbing for exposed services'],a:2,w:'BAS continuously and automatically emulates attacks — ongoing assurance instead of point-in-time testing.',e:['Identifies vulnerabilities, does not emulate','Verifies implementation, not attack resilience','','A recon technique, not validation'],r:'continuous emulation = BAS'},
+{n:'Q24',f:'f06',s:'Six scanning tools, proprietary formats, analysts spending 40% of time correlating; NIST compliance required. BEST strategy?',o:['Consolidate to a single vendor platform','Implement CVSS scoring across all tools','Hire additional analysts','Adopt SCAP-compliant tools using standardized data formats'],a:3,w:'SCAP is the NIST common language enabling cross-tool data exchange — solving interoperability and compliance together.',e:['Vendor lock-in without standardization','Severity standardization is not data exchange','People do not fix formats',''],r:'SCAP = interoperability'},
+{n:'Q34',f:'f06',s:'Integrating SCAP with BAS: the capability MOST enhanced for vulnerability management?',o:['Real-time updating of vulnerability databases','Prioritization based on exploitability and impact','Automated correlation of vulnerabilities to threats','Improved risk scoring of individual vulnerabilities'],a:1,w:'SCAP identifies; BAS demonstrates — together they prioritize by proven, real-world exploitability and impact.',e:['Not the integration effect','','Generic correlation — not demonstrated exploitability','Scoring alone stays theoretical'],r:'exploitability priority'},
+{n:'Q43',f:'f06',s:'The advantage that MOST distinguishes BAS from periodic penetration testing?',o:['Assigning standardized vulnerability identification numbers','Continuous and automatic attack emulation providing ongoing assurance','Credentialed scanning for deeper application-layer flaws','Generating numerical severity scores for prioritization'],a:1,w:'Ongoing automated emulation versus scoped human point-in-time testing is the differentiator.',e:['That is CVE functionality','','That is vulnerability scanning','That is CVSS'],r:'continuous vs point-in-time'},
+{n:'Q63',f:'f06',s:'The MOST effective complement to SCAP for detecting zero-day vulnerabilities?',o:['Breach and Attack Simulation (BAS) tools','A robust patch management system','Regular penetration testing','An intrusion detection system (IDS)'],a:0,w:'Behavioral, continuous BAS emulation exercises attack paths that signature-based SCAP content cannot see.',e:['','Patching addresses known flaws','','Periodic and signature-biased','Reactive detection, not validation'],r:'BAS covers the zero-day gap'},
+{n:'Q70',f:'f06',s:'The MOST significant advantage of integrating SCAP with BAS?',o:['Standardizing vulnerability identification processes','Validating the real-world exploitability of identified vulnerabilities','Streamlining compliance reporting procedures','Automating patch management workflows'],a:1,w:'Identification plus simulated attack validates which vulnerabilities actually work in this environment.',e:['A SCAP standalone benefit','','Reporting is secondary','Not the pairing effect'],r:'identify, then prove'},
+{n:'Q89',f:'f06',s:'Primary benefit of integrating SCAP data with a BAS system for threat detection?',o:['A comprehensive inventory of all network assets','Automated creation of SCAP-compliant policies','Improved simulation accuracy from current system configuration data','SCAP-compliant reports on simulated outcomes'],a:2,w:'Current configuration data makes simulations match the real environment — accurate vectors, precise results.',e:['Inventory is not simulation fidelity','','Not the integration effect','Reports are output, not fidelity'],r:'config sharpens simulation'},
+{n:'Q124',f:'f06',s:'MOST effective way to leverage SCAP information to improve breach attack simulations?',o:['Generating comprehensive vulnerability reports','Prioritizing attack vectors based on identified vulnerabilities','Creating realistic system configurations for simulation','Correlating SCAP data with network traffic patterns'],a:1,w:'SCAP tells BAS which weaknesses actually exist, so emulation targets the vectors that match them.',e:['Passive reporting output','','Configurations are input data, not targeting','Traffic correlation is not SCAP'],r:'target actual vectors'},
+/* --- f07 Regression (9) --- */
+{n:'Q22',f:'f07',s:'Team only tests new features and never reruns previous test cases after updates. What risk does this create?',o:['New features may not meet the original requirements','Deployment timelines may extend','Duplicate functionality across modules','Previously functional software may break without detection'],a:3,w:'Without regression reruns there is no mechanism to detect breakage in existing functionality.',e:['Requirements validation is separate','A project-management effect','A design concern',''],r:'no reruns → silent breakage'},
+{n:'Q26',f:'f07',s:'Compliance officer asks the team to PROVE a recent patch did not break existing controls. What evidence?',o:['Change-management approval records and deployment logs','A penetration test report','Source code review of modified lines','Regression testing results comparing post-patch behavior against established baselines'],a:3,w:'Baseline comparison demonstrates preserved functionality; records and reviews show process, not behavior.',e:['Approval is not functional proof','Pen tests find security flaws, not patch breakage','Shows what changed, not that it works',''],r:'baseline = the proof'},
+{n:'Q27',f:'f07',s:'Why does regression testing matter MORE after a critical security patch than after a minor configuration change?',o:['Security patches modify core code paths that may break existing functionality','Configuration changes require more extensive baselines','Minor changes bypass the SDLC','Security patches are exempt from change management'],a:0,w:'Code-path modification carries functional risk — config changes still need regression, just usually less.',e:['','Config needs less, not more','Minor changes still follow the SDLC','No such exemption exists'],r:'patches touch core paths'},
+{n:'Q29',f:'f07',s:'Severe SIEM patch breaks correlation rules; operations demands restoration, developers insist the patch stays. BEST resolution?',o:['Roll back and accept the vulnerability until a fixed version','Escalate to the vendor and halt all patching','Compensating network controls indefinitely','Regression-test against baseline detection outcomes to identify affected rules'],a:3,w:'Keep the fix; regression identifies exactly which rules broke so detection is restored without re-exposure.',e:['Reintroduces the severe vulnerability','Unacceptable exposure window','A workaround that fixes nothing',''],r:'keep patch, retest rules'},
+{n:'Q31',f:'f07',s:'Checkout outage after an untested holiday deployment; the CISO must justify automated regression testing to the CFO. BEST argument?',o:['Automated suites satisfy regulatory compliance','Automation reduces manual retest effort','Automation eliminates developer QA involvement','Automation reduces release risk for revenue-critical functions'],a:3,w:'The CFO case is revenue and release-risk reduction; effort savings are true but strategically weaker.',e:['Compliance was not the scenario issue','Efficiency framing is weaker','QA involvement remains',''],r:'frame as release risk'},
+{n:'Q35',f:'f07',s:'A vulnerability patch deployment breaks the login page. What testing gap caused this?',o:['No penetration testing before deployment','No regression testing of existing functionality after the patch','User acceptance testing skipped at rollout','No load testing after deployment'],a:1,w:'Regression verifies existing features survive changes — exactly the gap here.',e:['Pen testing evaluates security posture, not function','','UAT validates initial requirements','Load measures capacity, not correctness'],r:'breakage = regression gap'},
+{n:'Q36',f:'f07',s:'Weekly releases trigger hundreds of manual reruns, delaying security patches. Reduce deployment time WITHOUT sacrificing verification?',o:['Reduce release frequency to biweekly','Implement automated regression test suites','Hire additional QA analysts','Skip regression for security patches'],a:1,w:'Automation removes the repeatable bottleneck while preserving verification of existing functionality.',e:['Slows delivery without fixing testing','','Headcount does not scale the repetition','Skipping risks breaking the platform'],r:'automate the reruns'},
+{n:'Q40',f:'f07',s:'A new feature works perfectly, but a previously stable reporting module now produces incorrect data. What does this indicate?',o:['A database connection was interrupted during deployment','Unexpected behavior not caught by regression testing','The reporting module must be rewritten','Dev and production environments differ'],a:1,w:'New code changed existing behavior — regression scope should have covered the stable module.',e:['Connection issues cause errors, not wrong data','','Rewriting assumes unproven conflict','Env mismatches break deployments, not single modules'],r:'downstream breaks too'},
+{n:'Q44',f:'f07',s:'Regression testing consumes excessive analyst hours each sprint. What operational improvement?',o:['Reduce test cases to new functionality only','Implement automated test suites for the repetition','Outsource regression testing','Defer testing to the end of the release cycle'],a:1,w:'Repetition is what automation is for; the alternatives accept risk or delay detection.',e:['Accepts undetected breakage','','Shifts cost, keeps inefficiency','Delays defect detection'],r:'automate the reruns'},
+/* --- f08 SAST/DAST (2) --- */
+{n:'Q88',f:'f08',s:'BEST implementation of shift-left security testing in a DevOps CI/CD pipeline, minimizing business impact?',o:['Automated penetration tests on staging daily','A bug bounty program on production','Automated security scans on each code commit with immediate developer feedback','Manual code review before each release'],a:2,w:'Per-commit scanning with instant feedback is the earliest, cheapest point; the others sit later in the lifecycle.',e:['Staging is post-build','Production is the last phase','','Late and bottleneck-prone'],r:'earliest point wins'},
+{n:'Q111',f:'f08',s:'New project, limited resources, security best practice from the beginning: MOST efficient early testing technique?',o:['Automated penetration testing','Dynamic analysis tools','Static code analysis','Manual code inspection'],a:2,w:'Static analysis runs pre-build without a functional application and automates early detection cheaply.',e:['Needs a running target','Needs a running application','','Does not scale on limited resources'],r:'no app yet → SAST'},
+/* --- f09 Logging (7) --- */
+{n:'Q12',f:'f09',s:'PRIMARY contribution of integrating log review and analysis with incident response?',o:['Real-time alerts for ongoing attacks','Root cause of all security incidents','Reconstruction of incident timelines and scope determination','Automated containment of breaches'],a:2,w:'Logs reconstruct what happened and how far — forensic use, distinct from SIEM real-time alerting.',e:['That is SIEM alerting','Not always determinable from logs','','Containment is a separate IR function'],r:'timeline + scope'},
+{n:'Q15',f:'f09',s:'Balancing forensics against storage: MOST critical consideration when selecting between circular overwrite and clipping levels?',o:['Bandwidth available for log transmission','Whether historical event data must be preserved','The number of systems generating logs','Compliance requirements for real-time alerting'],a:1,w:'Preservation is the differentiator: overwrite discards history; clipping reduces volume but keeps events.',e:['Unrelated to local retention choice','','Source count affects volume, not the method','Alerting is independent of retention'],r:'preserve history?'},
+{n:'Q16',f:'f09',s:'PRIMARY risk of circular logging for security event management?',o:['Increased storage costs from duplicates','Loss of important forensic evidence during incidents','Excessive bandwidth from log transfers','Inability to correlate across systems'],a:1,w:'Overwriting the oldest entries destroys exactly the evidence investigations need.',e:['It reduces storage costs','','A local mechanism, not a transfer issue','Correlation is unaffected'],r:'evidence loss'},
+{n:'Q17',f:'f09',s:'Logs flooded with single failed login attempts: BEST technique to cut noise while capturing significant events?',o:['Real-time log streaming to SIEM','Enabling circular overwrite mode','Establishing clipping level thresholds','Deploying centralized syslog servers'],a:2,w:'Clipping suppresses below-threshold routine noise and surfaces threshold-exceeding anomalies.',e:['Transmits the noise unfiltered','Size management, not event filtering','','Aggregation without reduction'],r:'clip at the source'},
+{n:'Q18',f:'f09',s:'Breach discovered three weeks after the fact with circular logging enabled: MOST likely investigation impact?',o:['Breach-period entries overwritten by newer events','All entries corrupted by buffer errors','Excessive noise from normal activity','Inaccurate timestamps on remaining entries'],a:0,w:'The oldest entries were replaced — what remains is intact but incomplete.',e:['','Remaining logs keep their integrity','Noise is a clipping matter','Timestamps stay accurate'],r:'overwritten, not corrupt'},
+{n:'Q55',f:'f09',s:'Hybrid cloud, logs across diverse services and on-premises: BEST for centralization and correlation?',o:['Separate log tools for cloud and on-premises','A centralized log management platform with multi-cloud integration','Provider-native logging exclusively','Manual collection and review per system'],a:1,w:'One platform normalizes and correlates across environments — the unified view.',e:['Fragmented analysis','','No on-premises coverage','Impractical at scale'],r:'centralize to correlate'},
+{n:'Q56',f:'f09',s:'Global institution limiting log size under regulation while optimizing cost: BEST balance of efficiency, forensics, compliance?',o:['Tiered storage with varying retention periods and clipping levels','All logs hot for one year, then delete','Rolling 90-day retention with auto-deletion','Aggressive clipping across all systems'],a:0,w:'Tiers match retention to need: recent and fast, older and cheap, legal-hold archived.',e:['','Deletes what obligations require','Blanket deletion violates longer duties','Clipping alone sacrifices compliance depth'],r:'tier the retention'},
+/* --- f10 Metrics (7) --- */
+{n:'Q8',f:'f10',s:'Aligning KRIs and KPIs with NIST, ISO 27001 and GDPR: MOST effective approach?',o:['Map KRIs/KPIs to specific framework requirements and compliance objectives','Develop a custom framework combining all three','Implement all controls from all three frameworks','Create separate indicator sets per framework'],a:0,w:'One mapped indicator set serves every framework — e.g. a patch KRI mapped to SI-2, A.12.6.1 and Article 32.',e:['','Custom frameworks defeat comparability','Redundant and costly','Duplicate silos obscure the risk picture'],r:'one set, mapped'},
+{n:'Q23',f:'f10',s:'The KPI trend analysis MOST effective for long-term testing strategy and resource allocation?',o:['Growth of staff with testing certifications','Number of security tests conducted annually','Time to patch critical vulnerabilities over multiple years','Year-over-year budget change'],a:2,w:'Multi-year time-to-patch measures remediation effectiveness; test counts only measure activity.',e:['Headcount is not effectiveness','Activity, not effectiveness','','Funding level is not outcome'],r:'trend beats snapshot'},
+{n:'Q58',f:'f10',s:'Multi-vendor, multi-year assessment program: MOST significant long-term benefit of standardized test output?',o:['Uniform visual presentation of heat maps','Standardized file formats for report integration','Consistent industry threat intelligence','Consistent metrics and KPIs for trend analysis'],a:3,w:'Consistent indicators make results comparable across vendors and years — the basis of allocation decisions.',e:['Presentation, not comparability','Formats ease integration, not insight','Intel is an input, not comparability',''],r:'consistent KPIs'},
+{n:'Q97',f:'f10',s:'Struggling to allocate limited testing resources: the KRI approach MOST likely to optimize investment?',o:['Expanding assessment scope using KRI data','Comprehensive annual security audits','A risk-based testing strategy aligned with KRIs','Analyzing historical attack trends to inform KRIs'],a:2,w:'KRIs point testing at the highest-risk areas — alignment and focus, not expansion.',e:['Indiscriminate expansion wastes capacity','A point-in-time snapshot','','Backward-looking input, not allocation'],r:'KRI-aligned focus'},
+{n:'Q98',f:'f10',s:'Comparing a bug bounty program against traditional vulnerability assessments: MOST comprehensive metric?',o:['Mean time to remediation','Total unique vulnerabilities discovered','Risk-adjusted impact of identified vulnerabilities','Return on investment'],a:2,w:'Severity weighted by business impact compares methods fairly; raw counts reward noise.',e:['Remediation speed, not discovery quality','Ignores severity and impact','','ROI is not security improvement'],r:'risk-adjusted impact'},
+{n:'Q103',f:'f10',s:'Keeping KPIs relevant against emerging threats at a global institution: BEST approach?',o:['Annual updates from industry benchmarks','Continuously adjust using threat intelligence and incident data','Quantitative-only metrics','A fixed set with quarterly reviews'],a:1,w:'Dynamic means fed by current intel and incidents; annual or fixed sets lag the landscape.',e:['Too slow for rapid change','','Misses qualitative aspects','Fixed sets miss emergence'],r:'dynamic = intel-fed'},
+{n:'Q127',f:'f10',s:'Global risk program: KRI approach that BEST supports proactive identification of emerging threats across diverse environments?',o:['Exclusively qualitative KRIs','Industry-standard KRIs without customization','A fixed quantitative set for all regional offices','A balanced mix of quantitative and qualitative KRIs aligned with strategy'],a:3,w:'The mix captures measurable exposure and contextual nuance; strategic alignment keeps indicators actionable.',e:['Misses measurable exposure','No contextual fit','Uniform sets miss regional reality',''],r:'quant + qual'},
+/* --- f11 Reporting (7) --- */
+{n:'Q32',f:'f11',s:'EHR dosage miscalculation after an untested patch; the CISO must present regression results to the BOARD. MOST effective reporting approach?',o:['Raw pass/fail data of all executed scenarios','Baseline comparison spreadsheets with code references','Metrics specific and relevant to the audience reading them','Automated suite execution logs with timestamps'],a:2,w:'Translate results into what the reading audience can act on — the board needs impact, not output.',e:['No business context','Developer material','','An audit trail, not meaning'],r:'audience-relevant metrics'},
+{n:'Q47',f:'f11',s:'Large-scale assessment of a multi-tier cloud application: MOST critical factor for accurate test-output interpretation and prioritization?',o:['Comparison with industry benchmarks','Severity ratings of detected vulnerabilities','Comprehensiveness of assessment coverage','Understanding the context and limitations of the test methodology'],a:3,w:'Methodology context governs how findings, blind spots and FP/FN tendencies should be read.',e:['Benchmarks inform, they do not interpret','Output — not its interpretation lens','Scope, not interpretation',''],r:'method before severity'},
+{n:'Q85',f:'f11',s:'Communicating SOC 2 Type 2 findings across organizational levels: MOST effective approach?',o:['High-level summaries to leadership, detail to technical teams','Tailor the message and action items to each level by role','Detailed reports to management, summaries elsewhere','Findings only to IT and compliance, brief updates to others'],a:1,w:'Role-based tailoring gives each level decision-relevant detail — including middle management.',e:['A two-tier split is insufficient','','Inverted audience fit','Withholds findings from decision makers'],r:'tailor per level'},
+{n:'Q90',f:'f11',s:'Presenting critical cloud findings to the board: MOST effective way to convey significance and win support?',o:['Detailed technical analysis of each vulnerability','A complete list of weaknesses ranked by severity','Visual representations and risk metrics on business and financial impact','Explanations of testing methodology and certifications'],a:2,w:'Boards decide on business impact — visuals plus risk framing carry the decision.',e:['Exploit detail is not board language','A list is not a case','','Methodology does not convey risk'],r:'board = impact + visuals'},
+{n:'Q91',f:'f11',s:'Pen-test results to executive stakeholders, aligned with risk tolerance: MOST effective approach?',o:['Separate meetings with each department','Distribute raw data for self-interpretation','A comprehensive technical report','A high-level summary on business impact and risk prioritization'],a:3,w:'Executives need prioritized business impact to decide within their risk tolerance.',e:['Fragmented delivery','Raw data is not decision material','Wrong depth for the audience',''],r:'execs = impact summary'},
+{n:'Q125',f:'f11',s:'MOST critical component of assessment output for effective risk management?',o:['Inventory of systems and applications assessed','Prioritized, actionable recommendations','Historical comparison with prior assessments','Detailed technical specifications of all vulnerabilities'],a:1,w:'Actionable priorities drive remediation — the purpose of the assessment.',e:['Context, not action','','Useful but secondary','Specification is not prioritization'],r:'actionable priorities'},
+{n:'Q135',f:'f11',s:'Demonstrating the value of testing efforts to the board: MOST effective approach?',o:['Translate outcomes into financial risk and business impact','Highlight reduced mean time to detect','Compare results with industry benchmarks','A detailed fixed-versus-found breakdown'],a:0,w:'Financial exposure framing aligns with executive decisions and shows the return on testing.',e:['','An operational metric for another audience','Benchmarks lack business context','Too technical for the board'],r:'financial framing'},
+/* --- f12 SOC & Third-Party (8) --- */
+{n:'Q49',f:'f12',s:'Significant discrepancies between the SOC 2 Type 2 report and actual practice, just before a major client review. BEST response?',o:['Gap analysis, implement critical fixes, communicate the plan','Expedite an internal audit shared only with management','Publish a corrective action plan on the website','Postpone the client review until a new audit'],a:0,w:'Assess the gaps, fix the critical ones, communicate transparently — action plus integrity.',e:['','Opaque internal handling','Public panic without action','Avoidance that erodes trust'],r:'gap analysis + comms'},
+{n:'Q50',f:'f12',s:'Third-party risk program across suppliers in 40 countries: what should internal audit PRIMARILY focus on?',o:['A standardized security questionnaire for all suppliers','Annual on-site audits of all facilities','Reviewing the incident response plan','A continuous monitoring system for high-risk vendors'],a:3,w:'Tiered continuous monitoring gives ongoing visibility where risk concentrates; universal audits are impractical snapshots.',e:['Point-in-time self-report','Impractical at this scale','An internal-plan review, not vendor risk',''],r:'monitor the risky'},
+{n:'Q71',f:'f12',s:'The SOC 2 Type 2 element MOST valuable for incident response and continuity planning?',o:['Management assertion','Auditor testing procedures','Description of control objectives','Tests of controls and results'],a:3,w:'Actual tested performance shows what really happens — the actionable evidence.',e:['An overview only','How controls were tested, not results','What should exist — not what did',''],r:'results beat objectives'},
+{n:'Q83',f:'f12',s:'Using a SOC 2 Type II report to find SIEM-implementation gaps: MOST valuable component?',o:['Detailed test results of log monitoring and alerting controls','The auditor overall opinion','The trust services criteria list','The system boundary description'],a:0,w:'Granular control-level test results reveal exactly where monitoring and alerting failed.',e:['','The opinion lacks granularity','A scope definition, not performance','Boundaries, not effectiveness'],r:'granular test results'},
+{n:'Q99',f:'f12',s:'Likely long-term cultural impact of maintaining SOC 2 Type II reporting?',o:['Documentation focus without behavioral change','A temporary awareness boost that fades','Reduced need for further assessments','Sustained improvement in practices and awareness'],a:3,w:'Continuous control maintenance builds lasting security consciousness; the alternatives describe checkbox decay.',e:['That is checkbox compliance','The effect is durable, not temporary','Assurance is continuous, not one-off',''],r:'culture compounds'},
+{n:'Q115',f:'f12',s:'With cloud adoption and remote work: the SOC 2 Type II aspect MOST likely to require significant evolution?',o:['Continuous monitoring and real-time assurance capabilities','Cloud data classification procedures','Virtual access control mechanisms','Distributed incident response processes'],a:0,w:'Dynamic, distributed environments strain period-based attestation — continuous real-time assurance is the evolution.',e:['','A narrower control point','A narrower control point','A process, not the reporting model'],r:'continuous assurance'},
+{n:'Q122',f:'f12',s:'The AI/ML enhancement to SOC 2 Type II auditing MOST likely within five years?',o:['Real-time policy-violation alerting','Automated generation of complete reports','Predictive analysis of vulnerabilities from historical patterns','Complete elimination of human auditors'],a:2,w:'Pattern-based vulnerability prediction is the highest-value feasible augmentation of audit judgment.',e:['Detection, not audit value','','Feasible and highest-value','Augmentation, never replacement'],r:'predictive analysis'},
+{n:'Q139',f:'f12',s:'Keeping a provider SOC 2 Type 2 report accurate in a fast-changing cloud: MOST effective strategy?',o:['Continuous monitoring with automated control testing','Quarterly manual control assessments','Bi-annual reviews with vulnerability scanning','Annual comprehensive audits with gap analysis'],a:0,w:'Automated continuous testing keeps evidence current with infrastructure velocity.',e:['','Quarterly cadence lags change','Bi-annual lags more','Annual snapshots miss the change'],r:'continuous control testing'},
+/* --- f13 Audit (5) --- */
+{n:'Q74',f:'f13',s:'Primary benefit of predictive analytics in modern audit approaches?',o:['Enhanced risk assessment with resources focused on high-risk areas','Reduced audit cycle time','Improved sampling accuracy','Full automation without human involvement'],a:0,w:'Proactive risk identification and prioritization is the strategic value; speed and sampling are secondary.',e:['','A secondary efficiency','A secondary accuracy','Augments — never replaces — auditors'],r:'proactive prioritization'},
+{n:'Q92',f:'f13',s:'Auditing emerging technologies like AI and blockchain: MOST crucial auditor responsibility?',o:['Validating the technical implementation','Evaluating adoption cost-effectiveness','Assessing the risk-management strategy for the technology','Ensuring compliance with existing regulations'],a:2,w:'Strategy and risk-appetite alignment governs everything else for novel technology.',e:['Implementation follows strategy','A financial question, not security assurance','','Compliance is downstream of strategy'],r:'risk strategy first'},
+{n:'Q104',f:'f13',s:'PRIMARY advantage of an external over an internal auditor when assessing incident response?',o:['Independent perspective and industry benchmarks','In-depth knowledge of internal processes','Faster implementation of procedures','Unrestricted access to incident reports'],a:0,w:'Independence plus peer benchmarks expose blind spots insiders cannot see.',e:['That is the INTERNAL advantage','Not an audit deliverable','Access is not the advantage',''],r:'independence + benchmarks'},
+{n:'Q131',f:'f13',s:'Auditors acquiring skills for blockchain and cloud analytics: MOST critical challenge?',o:['Adapting traditional methodologies','Balancing training cost with budget','Overcoming organizational resistance','Keeping pace with rapid evolution and complexity'],a:3,w:'Technology velocity and complexity outpace skill acquisition — the root challenge the others follow from.',e:['Follows understanding the technology','Budget is secondary','Change management, not skills',''],r:'keep pace'},
+{n:'Q137',f:'f13',s:'MOST effective collaborative practice for integrated risk management across departments?',o:['Joint development of audit checklists','Ad-hoc cross-functional consultations','Regular cross-functional security meetings','Periodic sharing of departmental reports'],a:2,w:'Recurring structured meetings enable real-time alignment and escalation.',e:['Artifacts, not interaction','Miss critical stakeholders','','One-way and passive'],r:'meet, not broadcast'},
+/* --- f14 Emerging Tech (10) --- */
+{n:'Q1',f:'f14',s:'Smart-city edge computing: testing technique MOST critical for vulnerabilities unique to the distributed infrastructure?',o:['Vulnerability scanning of centralized cloud components','Compliance auditing of data processing','Dynamic testing of edge-to-cloud communication flows','Static analysis of edge node firmware'],a:2,w:'The distinctive risk lives in cross-component flows; dynamic testing exercises them end to end.',e:['Central components only','Procedure review, not technical risk','','Firmware in isolation misses interactions'],r:'test the flows'},
+{n:'Q7',f:'f14',s:'Auditing zero-trust micro-segmentation implementation: MOST effective approach?',o:['Assess data classification policies','Review network architecture diagrams','Analyze traffic flow between segments','Review user authentication logs'],a:2,w:'Traffic analysis verifies segments are actually isolated — diagrams show design intent only.',e:['Data governance, not isolation','Design, not enforcement','','Identity, not segmentation'],r:'verify enforcement'},
+{n:'Q59',f:'f14',s:'AR/VR application assessments: the MOST unique challenge versus traditional web/mobile testing?',o:['Spatial mapping and sensor data manipulation','Encryption in transit and at rest','Cross-site scripting vulnerabilities','Authentication and access control'],a:0,w:'Spatial computing and sensor inputs create attack surfaces traditional applications lack.',e:['','Common to all applications','','Common to all applications'],r:'unique surfaces first'},
+{n:'Q101',f:'f14',s:'Vulnerability assessment of blockchain systems and smart contracts: MOST significant challenge?',o:['Lack of centralized control','Immutability of deployed smart contracts','Need for specialized scanning tools','Difficulty accessing the network'],a:1,w:'Immutable deployment makes pre-deployment verification the only remediation path.',e:['A governance characteristic, not assessment-blocking','','Tools are a means, not the barrier','','Operational, not fundamental'],r:'immutability rules'},
+{n:'Q114',f:'f14',s:'Custom vulnerability scanner for a large smart-city IoT network: MOST significant challenge UNIQUE to this environment?',o:['Diverse ecosystem of devices and protocols','Inconsistent firmware update mechanisms','Heterogeneous device power constraints','Varied physical deployment locations'],a:0,w:'Heterogeneity defeats one-size tooling — every device and protocol class needs its own checks.',e:['A subset of the diversity problem','A constraint, not a scanner-scope issue','A constraint, not a scanner-scope issue','Physical context, not tooling reach'],r:'heterogeneity wins'},
+{n:'Q121',f:'f14',s:'Penetration testing a newly migrated containerized cloud environment: BEST approach to ephemerality?',o:['Traditional network vulnerability scanning','Static analysis of container images only','Testing during predetermined maintenance windows','Real-time automated scanning with dynamic assessment'],a:3,w:'Short-lived workloads demand continuous runtime assessment; snapshots miss what dies between them.',e:['Misses runtime churn','','Windows miss ephemeral instances',''],r:'runtime for ephemeral'},
+{n:'Q123',f:'f14',s:'Comprehensive penetration test in a newly implemented zero-trust architecture: MOST significant challenge?',o:['Vulnerabilities in the centralized policy engine','Discovering and accessing all micro-segmented areas','Maintaining persistence across segments','Bypassing MFA at each segment'],a:1,w:'Coverage is foundational: finding and reaching every segment precedes every other objective.',e:['The engine is one component','','Pointless before access is achieved','Secondary to reaching segments'],r:'coverage before persistence'},
+{n:'Q126',f:'f14',s:'Auditor evaluating a power plant control system: PRIMARY assessment focus?',o:['Resilience against physical threats','Impact of controls on operational efficiency','Implementation of industry-standard controls','Impact of controls on operational safety and efficiency'],a:3,w:'Safety and continuity dominate: controls must protect without impairing safe operation.',e:['One facet, not the primary','Half the answer — safety is missing','Compliance is subordinate',''],r:'safety + continuity'},
+{n:'Q132',f:'f14',s:'Adapting pen testing for edge computing: the MOST critical NEW attack surfaces? (the source marks one best pair)',o:['Legacy mainframes and databases','Edge devices and protocols','Cloud data centers and infrastructure','Traditional perimeters and firewalls'],a:1,w:'Edge devices and their protocols are the new surface; clouds and perimeters already existed.',e:['Not new','','Not new','Not new'],r:'new = edge + protocols'},
+{n:'Q136',f:'f14',s:'Vulnerability assessment of a containerized microservices architecture: MOST critical focus area?',o:['Container escape vulnerabilities','Container network policies','Service-to-service communication','API authentication mechanisms'],a:0,w:'Escape compromises the host and every neighboring container — the widest blast radius.',e:['Narrower impact','Narrower impact','Narrower impact',''],r:'escape = blast radius'},
+/* --- f15 Threat Modeling (4) --- */
+{n:'Q67',f:'f15',s:'BEST way to leverage STRIDE across the web application lifecycle?',o:['STRIDE analysis during testing for missed vulnerabilities','STRIDE after deployment to guide updates','STRIDE-based threat modeling iteratively through design and development','A comprehensive STRIDE threat list before coding begins'],a:2,w:'Iterative modeling adapts as architecture and threats evolve; one-shot lists go stale immediately.',e:['Too late in the lifecycle','Too late','','Goes stale as soon as design changes'],r:'iterative STRIDE'},
+{n:'Q116',f:'f15',s:'Keeping validation and verification continuously adapted to emerging threats: MOST effective approach?',o:['An automated vulnerability scanning program','A continuous threat modeling program','Monthly penetration testing cycles','An AI-powered threat detection system'],a:1,w:'Continuous modeling proactively anticipates threats; scanning and testing cycles react.',e:['Reactive scanning','','Periodic and reactive','A tool, not a program'],r:'model continuously'},
+{n:'Q117',f:'f15',s:'Prioritizing vulnerabilities with limited resources and a complex network: MOST effective technique?',o:['Risk-based vulnerability assessment with threat modeling','Continuous penetration testing on all segments','Automated scanning without context','Manual code review of all systems'],a:0,w:'Context from threat modeling plus scanning prioritizes by impact and exploitability.',e:['Resource-exhaustive','','No context means no priority','Infeasible at enterprise scale'],r:'context prioritizes'},
+{n:'Q138',f:'f15',s:'Cloud application with third-party components: early vulnerability discovery PLUS supply-chain risk management?',o:['User acceptance testing','Continuous integration testing','Automated vulnerability scanning','Systematic threat modeling'],a:3,w:'Threat modeling maps vendor trust boundaries earliest — before code exists.',e:['Late validation','Later in the lifecycle','Finds code flaws, later','','Earliest, and includes suppliers'],r:'earliest = modeling'},
+/* --- f16 BCP/DR & ISCM (3) --- */
+{n:'Q45',f:'f16',s:'Using comprehensive security testing results to enhance the business continuity plan?',o:['Determining firewall effectiveness','Evaluating awareness levels','Identifying critical systems and prioritizing recovery efforts','Estimating full recovery time'],a:2,w:'Testing reveals criticality and dependencies — the inputs that order recovery.',e:['A control test, not BCP input','A program evaluation','','Time estimation is not prioritization'],r:'criticality from testing'},
+{n:'Q107',f:'f16',s:'Auditor assessing the impact of a new security awareness program on culture: MOST effective approach?',o:['Annual awareness surveys','Employee certification levels','Trends in incident reporting and resolution times','Policy comprehensiveness review'],a:2,w:'Behavioral trends show applied awareness; surveys and certifications are self-reported activity.',e:['Self-reported snapshots','Credentials are not behavior','','Documentation, not behavior'],r:'measure behavior'},
+{n:'Q140',f:'f16',s:'Real-time detection and response improvement at a financial institution: BEST continuous security testing approach?',o:['Monthly security audits with Nessus','Daily automated assessments','Annual third-party penetration testing','Quarterly vulnerability scans'],a:1,w:'Daily automated assessment embodies ISCM near-real-time awareness.',e:['Monthly is not continuous','','Point-in-time','Quarterly snapshots'],r:'daily = ISCM'}
+];
+
+/* ================= family mindmap ================= */
+(function buildFamMap(){
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var svg = document.getElementById('fammap');
+  var CX = 1050, CY = 780;
+  var RX_R = 1310, RX_L = 790;                 // family-node rails: right / left of the hub
+  var PH = 28, GAP = 7;
+  var mctx = document.createElement('canvas').getContext('2d');
+  function tw(t, size, weight){ mctx.font = (weight||'600') + ' ' + size + 'px system-ui, sans-serif'; return mctx.measureText(t).width; }
+  function el(name, attrs, parent){
+    var e = document.createElementNS(SVGNS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    (parent || svg).appendChild(e); return e;
+  }
+  var gE = el('g',{}), gL = el('g',{}), gB = el('g',{}), gC = el('g',{});
+  function edge(x1,y1,x2,y2,color,width,bend){
+    var dx=x2-x1, dy=y2-y1, len=Math.sqrt(dx*dx+dy*dy)||1;
+    var nx=-dy/len*bend, ny=dx/len*bend;
+    el('path',{class:'edge', d:'M'+x1+' '+y1+' Q'+(x1+(x2-x1)*0.5+nx)+' '+(y1+(y2-y1)*0.5+ny)+' '+x2+' '+y2,
+               fill:'none', stroke:color, 'stroke-width':width, 'stroke-opacity':0.5}, gE);
+  }
+  function goToLadder(id){
+    var card = document.getElementById('lad-' + id);
+    if (!card) return;
+    card.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  FAMILIES.forEach(function(m, idx){
+    var g = GROUPS[m.g];
+    var row = idx % 8;                          // rows 0..7 down each rail
+    var right = idx < 8;                        // families 1-8 on the right rail, 9-16 on the left
+    var mp = [right ? RX_R : RX_L, 120 + row*185];
+    var mw = Math.ceil(tw(m.name, 15, '800')) + 40;
+    var mh = 48;
+    edge(CX, CY, mp[0], mp[1], g.color, 3, 24);
+    var n = m.leaves.length;
+    var total = n*PH + (n-1)*GAP;
+    m.leaves.forEach(function(txt, i){
+      var w = Math.ceil(tw(txt, 12.5, '600')) + 22;
+      var y = m.stack.cy - total/2 + i*(PH+GAP) + PH/2;
+      var x;
+      if (m.stack.anchor === 'left') x = m.stack.x;
+      else x = m.stack.x - w;
+      var sx = m.stack.anchor === 'left' ? mp[0] + mw/2 : mp[0] - mw/2;
+      edge(sx, mp[1], m.stack.anchor === 'left' ? x : x + w, y, g.color, 1.6, 12);
+      var lg = el('g', {class:'node leaf', role:'button', tabindex:'0'}, gL);
+      el('title', {}, lg).textContent = m.name + ' - ' + txt;
+      el('rect',{x:x, y:y-PH/2, width:w, height:PH, rx:13, fill:'#ffffff', stroke:g.color, 'stroke-width':1.5}, lg);
+      var t = el('text',{x:x+w/2, y:y, 'text-anchor':'middle', 'dominant-baseline':'central',
+                         'font-size':12.5, 'font-weight':600, fill:'#28303d'}, lg);
+      t.textContent = txt;
+      lg.addEventListener('click', function(){ goToLadder(m.id); });
+    });
+    var bg = el('g', {class:'node branch', role:'button', tabindex:'0'}, gB);
+    el('title', {}, bg).textContent = m.name + ' - ' + m.q + ' questions';
+    el('rect',{x:mp[0]-mw/2, y:mp[1]-mh/2, width:mw, height:mh, rx:13, fill:g.fill}, bg);
+    var t1 = el('text',{x:mp[0], y:mp[1]-7, 'text-anchor':'middle', 'dominant-baseline':'central',
+                        'font-size':15, 'font-weight':800, fill:'#ffffff'}, bg);
+    t1.textContent = m.name;
+    var t2 = el('text',{x:mp[0], y:mp[1]+11, 'text-anchor':'middle', 'dominant-baseline':'central',
+                        'font-size':10, 'font-weight':600, fill:'#ffffff', 'fill-opacity':0.85}, bg);
+    t2.textContent = m.g + ' · ' + m.q + 'Q';
+    bg.addEventListener('click', function(){ goToLadder(m.id); });
+  });
+  var cw = 260, ch = 78;
+  var gc = el('g', {class:'node center'}, gC);
+  el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
+  var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
+                      'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
+  c0.textContent = 'DOMAIN 6';
+  var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
+                      'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
+  c1.textContent = 'DECISION';
+  var c2 = el('text',{x:CX, y:CY+19, 'text-anchor':'middle', 'dominant-baseline':'central',
+                      'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
+  c2.textContent = 'FAMILIES';
+})();
+
+/* ================= ladders + radar ================= */
+(function buildLadders(){
+  var box = document.getElementById('ladderbox');
+  FAMILIES.forEach(function(m){
+    var g = GROUPS[m.g];
+    var card = document.createElement('article');
+    card.className = 'ladder';
+    card.id = 'lad-' + m.id;
+    card.style.setProperty('--mc', g.color);
+    var head = document.createElement('div'); head.className = 'head';
+    head.innerHTML = '<h3>' + m.name + '</h3><span class="gt t-' + m.g + '">' + m.g + '</span><span class="cnt">' + m.q + ' questions · ' + m.topic + '</span><span class="links"><a href="#drill" data-drill="' + m.g + '">drill these &darr;</a><a href="d6_mindmap_cheatsheet.html#card-' + m.g + '">knowledge &nearr;</a></span>';
+    card.appendChild(head);
+    var ol = document.createElement('ol');
+    m.factors.forEach(function(f){ var li = document.createElement('li'); li.innerHTML = f; ol.appendChild(li); });
+    card.appendChild(ol);
+    var rule = document.createElement('div'); rule.className = 'rule';
+    rule.innerHTML = '<b>Rule &middot; </b>' + m.rule;
+    card.appendChild(rule);
+    box.appendChild(card);
+  });
+  var rbox = document.getElementById('radarbox');
+  RADAR.forEach(function(r){
+    var d = document.createElement('article'); d.className = 'rad';
+    d.innerHTML = '<h3>' + r.t + '</h3>' + r.d + '<div class="ex">seen in: ' + r.ex + '</div>';
+    rbox.appendChild(d);
+  });
+})();
+
+/* ================= drill ================= */
+var drillState = {};
+(function buildDrill(){
+  var box = document.getElementById('drillbox');
+  var scA = document.getElementById('sc-a'), scC = document.getElementById('sc-c'),
+      scP = document.getElementById('sc-p'), scM = document.getElementById('sc-m');
+  function updateScore(){
+    var ans = 0, cor = 0;
+    for (var k in drillState){ ans++; if (drillState[k].correct) cor++; }
+    scA.textContent = ans; scC.textContent = cor;
+    scP.textContent = ans ? '(' + Math.round(cor/ans*100) + '% of answered)' : '(0%)';
+    scM.style.width = (ans/113*100) + '%';
+  }
+  var letters = ['A','B','C','D'];
+
+  var currentFam = null;
+  QS.forEach(function(q){
+    var fam = null;
+    for (var i=0;i<FAMILIES.length;i++) if (FAMILIES[i].id === q.f) fam = FAMILIES[i];
+    var g = GROUPS[fam.g];
+    if (currentFam !== q.f){
+      currentFam = q.f;
+      var fh = document.createElement('div');
+      fh.className = 'famhead';
+      fh.setAttribute('data-g', fam.g);
+      fh.style.setProperty('--fc', g.color);
+      fh.innerHTML = '<h3>' + fam.name + '</h3><span class="gt t-' + fam.g + '">' + fam.g + '</span><span class="cnt">' + fam.q + ' questions</span><a href="d6_mindmap_cheatsheet.html#card-' + fam.g + '">knowledge card &nearr;</a>';
+      box.appendChild(fh);
+    }
+    var div = document.createElement('article');
+    div.className = 'q';
+    div.setAttribute('data-g', fam.g);
+    div.id = 'q-' + q.n;
+    var qh = document.createElement('div'); qh.className = 'qhead';
+    qh.innerHTML = '<span class="qn">' + q.n + '</span><span class="gt t-' + fam.g + '">' + fam.g + ' · ' + fam.name + '</span><span class="qrule">rule: ' + q.r + '</span>';
+    div.appendChild(qh);
+    var st = document.createElement('p'); st.className = 'stem'; st.textContent = q.s;
+    div.appendChild(st);
+    var opts = document.createElement('div'); opts.className = 'opts';
+    q.o.forEach(function(txt, i){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'opt'; b.setAttribute('data-l', letters[i]);
+      b.textContent = txt;
+      b.addEventListener('click', function(){ answer(div, q, i, fam); });
+      opts.appendChild(b);
+    });
+    div.appendChild(opts);
+    var vd = document.createElement('div'); vd.className = 'qverdict';
+    vd.id = 'v-' + q.n;
+    div.appendChild(vd);
+    box.appendChild(div);
+  });
+
+  function answer(div, q, i, fam){
+    if (drillState[q.n]) return;                      // locked after first pick
+    var correct = i === q.a;
+    drillState[q.n] = {pick:i, correct:correct};
+    div.classList.add('done');
+    var btns = div.querySelectorAll('.opt');
+    btns[q.a].classList.add('right');
+    if (!correct) btns[i].classList.add('wrong');
+    for (var j=0;j<btns.length;j++) btns[j].disabled = true;
+    var vd = document.getElementById('v-' + q.n);
+    vd.style.setProperty('--fc', GROUPS[fam.g].color);
+    var html = '<div class="mark ' + (correct ? 'good' : 'bad') + '">' + (correct ? 'Correct' : 'Not quite') + ' — answer ' + letters[q.a] + '</div>';
+    html += '<p class="why"><b>Why &middot; </b>' + q.w + '</p>';
+    if (q.e && q.e.length){
+      html += '<ul>';
+      q.e.forEach(function(e, k){
+        if (e && k !== q.a) html += '<li><b>' + letters[k] + '</b> — ' + e + '</li>';
+      });
+      html += '</ul>';
+    }
+    html += '<a class="klink" href="d6_mindmap_cheatsheet.html#card-' + fam.g + '">knowledge: ' + GROUPS[fam.g].name + ' &nearr;</a>';
+    vd.innerHTML = html;
+    vd.classList.add('show');
+    updateScore();
+  }
+
+  // group filter chips
+  var chips = document.getElementById('drillchips');
+  var filter = 'all';
+  function applyFilter(){
+    var heads = box.querySelectorAll('.famhead');
+    heads.forEach(function(h){ h.style.display = (filter==='all' || h.getAttribute('data-g')===filter) ? '' : 'none'; });
+    box.querySelectorAll('.q').forEach(function(qq){
+      qq.style.display = (filter==='all' || qq.getAttribute('data-g')===filter) ? '' : 'none';
+    });
+  }
+  var all = document.createElement('button');
+  all.type='button'; all.className='fchip all on'; all.setAttribute('data-g','all');
+  all.textContent = 'All (113)';
+  all.addEventListener('click', function(){ setFilter('all'); });
+  chips.appendChild(all);
+  Object.keys(GROUPS).forEach(function(gid){
+    var g = GROUPS[gid];
+    var b = document.createElement('button');
+    b.type='button'; b.className='fchip'; b.setAttribute('data-g', gid);
+    b.style.setProperty('--c', g.fill);
+    var c = QS.reduce(function(a,q){ var f=null; for(var i=0;i<FAMILIES.length;i++) if(FAMILIES[i].id===q.f) f=FAMILIES[i]; return a + (f.g===gid?1:0); }, 0);
+    b.textContent = gid + ' · ' + g.name + ' (' + c + ')';
+    b.addEventListener('click', function(){ setFilter(gid); });
+    chips.appendChild(b);
+  });
+  function setFilter(g){
+    filter = g;
+    Array.prototype.forEach.call(chips.children, function(b){ b.classList.toggle('on', b.getAttribute('data-g')===g); });
+    applyFilter();
+  }
+  applyFilter();
+
+  // ladder "drill these" links
+  document.querySelectorAll('a[data-drill]').forEach(function(a){
+    a.addEventListener('click', function(){ setFilter(a.getAttribute('data-drill')); });
+  });
+
+  document.getElementById('sc-reset').addEventListener('click', function(){
+    drillState = {};
+    box.querySelectorAll('.q').forEach(function(qq){
+      qq.classList.remove('done');
+      qq.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('right','wrong'); b.disabled = false; });
+      var v = qq.querySelector('.qverdict');
+      v.classList.remove('show'); v.innerHTML = '';
+    });
+    updateScore();
+  });
+  updateScore();
+})();
+</script>
+</body>
+</html>

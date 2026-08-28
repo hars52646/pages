@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CISSP D5 &middot; Access Control Models &mdash; MAC vs DAC vs RuBAC vs RBAC vs ABAC</title>
+<style>
+  :root{
+    --mac:#be123c; --macf:#e11d48;
+    --dac:#b45309; --dacf:#d97706;
+    --rubac:#6d28d9; --rubacf:#7c3aed;
+    --rbac:#1d4ed8; --rbacf:#2563eb;
+    --abac:#047857; --abacf:#059669;
+    --ink:#1e293b; --muted:#64748b; --bg:#f6f7fb; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+  header.hero{padding:44px 0 10px}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  h1{font-size:clamp(26px,4vw,40px);line-height:1.15;margin:8px 0 10px}
+  .sub{font-size:17px;color:#334155}
+  .sub b{font-weight:800}
+  .c-mac{color:var(--mac)} .c-dac{color:var(--dac)} .c-rubac{color:var(--rubac)}
+  .c-rbac{color:var(--rbac)} .c-abac{color:var(--abac)}
+
+  nav.jump{position:sticky;top:0;z-index:50;background:rgba(246,247,251,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin-top:18px}
+  nav.jump .wrap{display:flex;gap:4px;flex-wrap:wrap;padding:8px 20px}
+  nav.jump a{font-size:13.5px;font-weight:600;color:#334155;text-decoration:none;padding:5px 12px;border-radius:999px}
+  nav.jump a:hover{background:#e8ecf5}
+
+  section{padding:34px 0 6px}
+  h2{font-size:24px;margin:0 0 4px}
+  .lede{color:var(--muted);margin:0 0 18px;font-size:15px}
+
+  /* ---------- mindmap ---------- */
+  .map-panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 8px 4px;box-shadow:0 8px 24px rgba(15,23,42,.06)}
+  svg#mindmap{width:100%;height:auto;display:block}
+  .maphint{text-align:center;color:var(--muted);font-size:13px;padding:8px 0 10px}
+  .node{cursor:pointer}
+  .node:hover rect{filter:brightness(.94)}
+  .subnode rect{transition:fill .15s}
+  .subnode:hover rect{fill:#eef2fb}
+
+  /* ---------- family banner ---------- */
+  .family{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-top:14px}
+  .fam{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .fam h3{margin:0 0 6px;font-size:15px}
+  .fam p{margin:0;font-size:14px;color:#334155}
+  .fam .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 9px;border-radius:999px;color:#fff;margin-right:6px;vertical-align:1px}
+  .pill-d{background:var(--dacf)} .pill-nd{background:#334155}
+
+  /* ---------- matrix ---------- */
+  .matrixwrap{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 24px rgba(15,23,42,.05)}
+  table.matrix{border-collapse:collapse;width:100%;min-width:980px;font-size:13.2px}
+  .matrix th,.matrix td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid #eef1f6}
+  .matrix thead th{font-size:14px;border-top:none;border-bottom:2.5px solid}
+  .matrix thead th.h-mac{color:var(--mac);border-color:var(--mac)}
+  .matrix thead th.h-dac{color:var(--dac);border-color:var(--dac)}
+  .matrix thead th.h-rubac{color:var(--rubac);border-color:var(--rubac)}
+  .matrix thead th.h-rbac{color:var(--rbac);border-color:var(--rbac)}
+  .matrix thead th.h-abac{color:var(--abac);border-color:var(--abac)}
+  .matrix tbody th{font-weight:700;white-space:nowrap;color:#0f172a;background:#fafbfe;position:sticky;left:0}
+  .matrix tbody tr:last-child th,.matrix tbody tr:last-child td{border-bottom:none}
+  .matrix tbody tr:nth-child(even) td{background:#fbfcfe}
+  .cue{font-weight:600}
+
+  /* ---------- cards ---------- */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px;margin-top:16px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px 14px;border-top:5px solid var(--mc,#94a3b8);box-shadow:0 8px 24px rgba(15,23,42,.05);scroll-margin-top:64px}
+  @keyframes cardflash{0%{box-shadow:0 0 0 5px var(--mf,#94a3b8),0 8px 24px rgba(15,23,42,.15)}100%{box-shadow:0 0 0 0 rgba(0,0,0,0),0 8px 24px rgba(15,23,42,.05)}}
+  .card.flash{animation:cardflash 1.8s ease-out}
+  .card .head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .card h3{margin:0;font-size:21px;color:var(--mc)}
+  .card .family{display:inline-grid !important;grid-template-columns:none !important;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 9px;border-radius:999px;border:1.5px solid var(--mc);color:var(--mc)}
+  .card .up{margin-left:auto;font-size:12px;color:var(--muted);text-decoration:none}
+  .card .up:hover{color:var(--mc)}
+  .card .oneliner{font-size:14.5px;color:#0f172a;font-style:italic;margin:6px 0 10px}
+  .card h4{margin:12px 0 6px;font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+  .card ul{margin:0;padding:0;list-style:none;font-size:14px}
+  .card li{padding:3px 0 3px 22px;position:relative}
+  .card li.fact::before{content:"\25B8";position:absolute;left:6px;color:var(--mc)}
+  .card li.pick::before{content:"\2713";position:absolute;left:6px;font-weight:800;color:var(--abac)}
+  .card li.trapx::before{content:"\26A0";position:absolute;left:5px;color:var(--dacf)}
+  .card li b{color:#0f172a}
+
+  /* ---------- decider ---------- */
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0}
+  .chip{font:inherit;font-size:13.5px;font-weight:600;color:#334155;background:#fff;border:1.5px solid #cbd5e1;border-radius:999px;padding:7px 15px;cursor:pointer;transition:all .12s}
+  .chip:hover{border-color:#64748b;background:#f1f5f9}
+  .chip.on{background:#0f172a;border-color:#0f172a;color:#fff}
+  .verdict{display:none;background:#fff;border:1px solid var(--line);border-left:6px solid var(--vc,#334155);border-radius:12px;padding:16px 20px;box-shadow:0 8px 24px rgba(15,23,42,.05)}
+  .verdict.show{display:block}
+  .verdict .ans{font-size:19px;font-weight:800;color:var(--vc,#334155);margin-bottom:6px}
+  .verdict p{margin:5px 0;font-size:14.5px}
+  .verdict .why b,.verdict .not b{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .verdict .ref{font-size:12px;color:var(--muted)}
+
+  /* ---------- traps ---------- */
+  ol.traps{counter-reset:trp;list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:10px}
+  ol.traps li{counter-increment:trp;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px 12px 56px;position:relative;font-size:14px}
+  ol.traps li::before{content:counter(trp);position:absolute;left:12px;top:11px;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center}
+  ol.traps li b{color:#0f172a}
+
+  footer{padding:30px 0 44px;color:var(--muted);font-size:13px}
+  footer code{background:#eef1f6;border-radius:5px;padding:1px 6px;font-size:12px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">CISSP &middot; Domain 5 &middot; Identity &amp; Access Management</div>
+    <h1>Access Control Models &mdash; Mindmap &amp; Cheatsheet</h1>
+    <p class="sub"><b class="c-mac">MAC</b> vs <b class="c-dac">DAC</b> vs <b class="c-rubac">RuBAC</b> vs <b class="c-rbac">RBAC</b> vs <b class="c-abac">ABAC</b> &mdash; every discriminator, selection rule and exam trap on one page.</p>
+  </div>
+</header>
+
+<nav class="jump">
+  <div class="wrap">
+    <a href="#map">Mindmap</a><a href="#family">Family</a><a href="#matrix">Comparison matrix</a><a href="#cards">Model cards</a><a href="#decider">Exam decider</a><a href="#traps">Traps</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- ================= MINDMAP ================= -->
+  <section id="map">
+    <h2>1 &middot; The mindmap</h2>
+    <p class="lede">Five models, one center. Click any node to jump to its cheat card.</p>
+    <div class="map-panel">
+      <svg id="mindmap" viewBox="0 0 1240 950" role="img" aria-label="Radial mindmap of the five access control models"></svg>
+      <div class="maphint">&#9757; Click a node &middot; each branch is a model, each leaf a recall key</div>
+    </div>
+  </section>
+
+  <!-- ================= FAMILY ================= -->
+  <section id="family">
+    <h2>2 &middot; The family tree (first split on the exam)</h2>
+    <p class="lede">The discretionary / non-discretionary split decides half the answers before you read the options.</p>
+    <div class="family">
+      <div class="fam">
+        <h3><span class="tag pill-d">Discretionary</span> someone with discretion decides</h3>
+        <p><b class="c-dac">DAC</b> &mdash; the <b>data owner</b> decides (grants/revokes via ACLs).<br>
+        <b class="c-rubac">RuBAC</b> &mdash; a <b>variant of DAC</b>: centrally administered rule-sets/ACLs, not labels.</p>
+      </div>
+      <div class="fam">
+        <h3><span class="tag pill-nd">Non-discretionary</span> system policy decides</h3>
+        <p><b class="c-mac">MAC</b> &mdash; <b>labels</b> decide (clearance vs classification).<br>
+        <b class="c-rbac">RBAC</b> &mdash; <b>roles</b> decide. &nbsp;<b class="c-abac">ABAC</b> &mdash; <b>attributes + policies</b> decide.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MATRIX ================= -->
+  <section id="matrix">
+    <h2>3 &middot; Five-way comparison matrix</h2>
+    <p class="lede">One row per discriminator. If a scenario highlights a row, scan across for the model that owns it.</p>
+    <div class="matrixwrap">
+      <table class="matrix">
+        <thead><tr>
+          <th></th>
+          <th class="h-mac">MAC</th>
+          <th class="h-dac">DAC</th>
+          <th class="h-rubac">RuBAC</th>
+          <th class="h-rbac">RBAC</th>
+          <th class="h-abac">ABAC</th>
+        </tr></thead>
+        <tbody>
+          <tr><th scope="row">Decision authority</th>
+            <td>System-enforced central policy; users cannot change labels</td>
+            <td>The data owner (creator)</td>
+            <td>Central administrator defines the rules</td>
+            <td>Central role administration</td>
+            <td>Policy engine (PDP) at request time</td></tr>
+          <tr><th scope="row">Mechanism</th>
+            <td>Security labels: subject clearance vs object classification (w/ compartments)</td>
+            <td>ACLs, permission bits, owner grants &amp; revokes</td>
+            <td>Centrally managed ACLs + if/then conditions (time, protocol, source IP, dept, location, action)</td>
+            <td>Two mappings: user&#8202;&rarr;&#8202;role, role&#8202;&rarr;&#8202;permission</td>
+            <td>Subject + object + environment attributes vs Boolean policies</td></tr>
+          <tr><th scope="row">Family</th>
+            <td>Non-discretionary</td>
+            <td>Discretionary</td>
+            <td>Discretionary &mdash; a <b>DAC variant</b></td>
+            <td>Non-discretionary</td>
+            <td>Non-discretionary</td></tr>
+          <tr><th scope="row">Granularity</th>
+            <td>Label / classification level</td>
+            <td>Per object &amp; user, owner-managed</td>
+            <td>Per-user / per-group via mapped ACL entries</td>
+            <td>Role level &mdash; no per-user rights</td>
+            <td>Finest: per-request, per-context</td></tr>
+          <tr><th scope="row">Typical habitat</th>
+            <td>Military, intelligence, government classified; PCI DSS cardholder data</td>
+            <td>Commercial: Windows, Unix, most enterprises</td>
+            <td>Perimeter: firewalls, routers, gateways, VPN concentrators</td>
+            <td>Large enterprises organizing by job function</td>
+            <td>Dynamic &amp; hybrid cloud, Zero Trust, IoT, multi-regulation</td></tr>
+          <tr><th scope="row">Strengths</th>
+            <td>Strict information-flow control, confidentiality, compliance rigor</td>
+            <td>Business-driven flexibility; owner tailoring</td>
+            <td>Consistent, tamper-resistant enforcement; streamlined admin at scale</td>
+            <td>Administrative scalability; SoD (constrained); inheritance (hierarchical)</td>
+            <td>Most expressive; real-time context; data minimization</td></tr>
+          <tr><th scope="row">Weaknesses</th>
+            <td>Rigid; heavy label management</td>
+            <td>Over-granting, privilege creep, inconsistent across owners</td>
+            <td>Every rule hand-created &amp; maintained; staleness in multi-tenant cloud</td>
+            <td>Static, identity-only; role drift; blind to behavioral anomalies</td>
+            <td>Rule complexity; attribute sync; manageability (performance is secondary)</td></tr>
+          <tr><th scope="row">Scale fit</th>
+            <td>Small, high-assurance enclaves</td>
+            <td>Weak at enterprise scale (inconsistency)</td>
+            <td>Consistent at branch/perimeter scale; global scale needs automated conflict detection</td>
+            <td>Wins at massive scale (50k users, frequent change)</td>
+            <td>Wins in dynamic contexts; maintenance cost grows with rules</td></tr>
+          <tr><th scope="row">Exam cue</th>
+            <td class="cue">&ldquo;classification labels&rdquo;, &ldquo;clearance&rdquo;, &ldquo;classified / government&rdquo;</td>
+            <td class="cue">&ldquo;owner grants/revokes&rdquo;, &ldquo;ACL&rdquo;, &ldquo;rwx&rdquo;</td>
+            <td class="cue">&ldquo;time-of-day&rdquo;, &ldquo;protocol/port&rdquo;, &ldquo;firewall rule&rdquo;, &ldquo;VPN business hours&rdquo;</td>
+            <td class="cue">&ldquo;job function&rdquo;, &ldquo;role&rdquo;, &ldquo;50,000 employees&rdquo;, &ldquo;mutually exclusive roles&rdquo;</td>
+            <td class="cue">&ldquo;time + location + device + threat&rdquo;, &ldquo;dynamic&rdquo;, &ldquo;Zero Trust&rdquo;, &ldquo;minimization&rdquo;</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= CARDS ================= -->
+  <section id="cards">
+    <h2>4 &middot; Model cards</h2>
+    <p class="lede">Facts to know, when to choose it, and what the exam writers will try to slip past you.</p>
+    <div class="cards">
+
+      <article class="card" id="card-mac" style="--mc:var(--mac);--mf:var(--macf)">
+        <div class="head"><h3>MAC</h3><span class="family">Non-discretionary</span><a class="up" href="#map">&uarr; map</a></div>
+        <p class="oneliner">&ldquo;System-enforced labels decide &mdash; users cannot touch them.&rdquo;</p>
+        <h4>Key facts</h4>
+        <ul>
+          <li class="fact">Access decided by <b>system-enforced central policy</b>; users cannot change labels.</li>
+          <li class="fact">Subjects carry <b>clearance</b>, objects carry <b>classification</b>; access only when <b>clearance dominates</b> classification (including categories/compartments).</li>
+          <li class="fact">Hierarchy: <b>Unclassified &rarr; Confidential &rarr; Secret &rarr; Top Secret</b>.</li>
+          <li class="fact"><b>Accurate labeling is the non-negotiable foundation</b> &mdash; enforcement is meaningless if labels are wrong.</li>
+          <li class="fact">Non-discretionary label enforcement = least privilege with <b>strict information-flow control</b>.</li>
+        </ul>
+        <h4>Choose it when</h4>
+        <ul>
+          <li class="pick">Government / intelligence agency enforcing <b>strict classification levels</b> and regulatory compliance.</li>
+          <li class="pick"><b>PCI DSS</b> cardholder-data protection via sensitivity labels and predefined clearance levels.</li>
+          <li class="pick">The scenario prizes <b>confidentiality and flow control</b> over flexibility.</li>
+        </ul>
+        <h4>Watch out</h4>
+        <ul>
+          <li class="trapx">&ldquo;Labels &amp; clearance&rdquo; in the stem &rarr; MAC, <b>not RuBAC</b> (RuBAC is DAC-family).</li>
+          <li class="trapx">Hierarchical classification is only a <b>component</b> &mdash; the mechanism is non-discretionary labels.</li>
+          <li class="trapx">MAC is label-driven, <b>not</b> &ldquo;stricter RBAC&rdquo;.</li>
+        </ul>
+      </article>
+
+      <article class="card" id="card-dac" style="--mc:var(--dac);--mf:var(--dacf)">
+        <div class="head"><h3>DAC</h3><span class="family">Discretionary</span><a class="up" href="#map">&uarr; map</a></div>
+        <p class="oneliner">&ldquo;The data owner decides &mdash; via ACLs they grant and revoke.&rdquo;</p>
+        <h4>Key facts</h4>
+        <ul>
+          <li class="fact">The <b>data owner</b> decides who gets access, via ACLs, permission bits, grants/revokes.</li>
+          <li class="fact"><b>Windows</b>: security descriptors hold a <b>DACL of SIDs</b> (fine-grained per user/group). <b>Unix</b>: <b>rwx</b> owner/group/other bits (coarser &mdash; three buckets).</li>
+          <li class="fact">Strength: <b>business-driven flexibility</b> for classification and lifecycle needs.</li>
+          <li class="fact">Core vulnerability: owners can <b>over-grant</b> &rarr; excessive permissions, privilege creep, inconsistent enforcement.</li>
+          <li class="fact">Enterprise failure mode: different owners apply different standards &rarr; gaps, over-permissioning, audit pain (why RBAC wins at scale).</li>
+        </ul>
+        <h4>Choose it when</h4>
+        <ul>
+          <li class="pick">Managers must <b>directly control their team&rsquo;s documents</b> with granular grant/revoke over their own files.</li>
+          <li class="pick">The business demands <b>owner-tailored flexibility</b>.</li>
+        </ul>
+        <h4>Watch out</h4>
+        <ul>
+          <li class="trapx">#1 DAC-vs-RBAC limitation: <b>inconsistent policies across departments</b> (least-privilege difficulty is secondary).</li>
+          <li class="trapx">#1 DAC vulnerability: <b>owners over-grant</b> excessive or inappropriate permissions.</li>
+          <li class="trapx">HIPAA threat pattern: doctors granting <b>temporary access without oversight</b> or documentation.</li>
+          <li class="trapx">IT/sysadmins granting <b>without owner consultation</b> = non-discretionary anti-pattern; it breaks accountability &amp; least privilege &mdash; that is the problem, not the fix.</li>
+          <li class="trapx">Governance fixes: <b>central policy guides owner discretion</b>; automated auditing; clear ownership in cloud DAC.</li>
+        </ul>
+      </article>
+
+      <article class="card" id="card-rubac" style="--mc:var(--rubac);--mf:var(--rubacf)">
+        <div class="head"><h3>RuBAC</h3><span class="family">Discretionary (DAC variant)</span><a class="up" href="#map">&uarr; map</a></div>
+        <p class="oneliner">&ldquo;Centrally-managed if/then rules decide &mdash; a variant of DAC.&rdquo;</p>
+        <h4>Key facts</h4>
+        <ul>
+          <li class="fact"><b>A form of DAC</b> that uses centrally managed ACLs &mdash; not a MAC label model.</li>
+          <li class="fact">Decisions are <b>if/then conditional rules evaluated at access-request time</b>: time-of-day, protocol/port, source IP, department, location, action type.</li>
+          <li class="fact">Rules live centrally &rarr; <b>end users cannot alter or circumvent</b> them (tamper-resistant).</li>
+          <li class="fact">Lives on the perimeter: <b>firewalls, routers, gateways</b> &mdash; e.g. a VPN gateway blocking outside business hours.</li>
+          <li class="fact">Fine-grained <b>per-user / per-group</b> granularity via individually mapped ACL entries (RBAC lacks per-user rights).</li>
+        </ul>
+        <h4>Choose it when</h4>
+        <ul>
+          <li class="pick">Access is gated by <b>conditions</b> (time, protocol, department) rather than identity or role alone.</li>
+          <li class="pick">EHR-style: restrict by <b>protocol + time + department</b> and users must not modify their own permissions &rarr; centrally defined ACLs (MAC fails &mdash; labels).</li>
+          <li class="pick">Consistent branch-office perimeter enforcement (retail routers with protocol/time rules).</li>
+        </ul>
+        <h4>Watch out</h4>
+        <ul>
+          <li class="trapx"><b>#1 trap: RuBAC is a form of DAC.</b></li>
+          <li class="trapx">Labels &amp; clearance &rarr; MAC. Conditions &rarr; RuBAC.</li>
+          <li class="trapx">Time-gated VPN &rarr; RuBAC, <b>not RBAC</b> (roles grant by job, not by the clock).</li>
+          <li class="trapx">Inherent limitation: <b>every rule individually created and maintained</b> &rarr; admin burden &rarr; misconfiguration risk.</li>
+          <li class="trapx">Global scale: <b>scalability + admin overhead</b> dominate; fix = automated rule-conflict detection &amp; policy optimization &mdash; never delegation to departments.</li>
+          <li class="trapx">Compliance demands <b>audit trails of rule changes AND access decisions</b>.</li>
+          <li class="trapx">Enterprise advantage = <b>streamlined administration &amp; scalability</b> (not &ldquo;automated unauthorized-access detection&rdquo; &mdash; that is monitoring).</li>
+        </ul>
+      </article>
+
+      <article class="card" id="card-rbac" style="--mc:var(--rbac);--mf:var(--rbacf)">
+        <div class="head"><h3>RBAC</h3><span class="family">Non-discretionary</span><a class="up" href="#map">&uarr; map</a></div>
+        <p class="oneliner">&ldquo;Roles decide &mdash; users inherit permissions only through roles.&rdquo;</p>
+        <h4>Key facts</h4>
+        <ul>
+          <li class="fact">Two mappings: <b>user &rarr; role</b>, <b>role &rarr; permission</b>; users <b>never</b> receive permissions directly.</li>
+          <li class="fact">Change the role once, <b>every member updates</b> &mdash; administratively scalable.</li>
+          <li class="fact">NIST variants: <b>Core/flat</b>; <b>Hierarchical</b> (inheritance &mdash; regional rolls into global); <b>Constrained</b> (SoD via mutually-exclusive roles); <b>Symmetric</b> (+ permission review); <b>Limited</b> (cardinality/nesting caps, time windows preserving roles).</li>
+          <li class="fact"><b>Static and identity-only</b>: cannot detect behavioral anomalies (insider misuse, credential theft, session hijacking) &rarr; complement with SIEM, UEBA, PAM.</li>
+          <li class="fact">Metrics: role-burst count, permission-to-role ratio, role-reassignment latency, recertification compliance, orphaned accounts.</li>
+        </ul>
+        <h4>Choose it when</h4>
+        <ul>
+          <li class="pick"><b>50,000 employees / 20 countries / frequent reorgs</b> &rarr; RBAC (ABAC complexity impractical at this scale).</li>
+          <li class="pick">Rapid cloud scaling, multi-jurisdiction &rarr; <b>hierarchical</b> RBAC.</li>
+          <li class="pick">Least privilege + SoD &rarr; <b>granular job-function roles</b>; mutually-exclusive roles against fraud (Payment-Initiator &ne; Payment-Approver).</li>
+          <li class="pick">Time-zone restrictions while preserving trader roles &rarr; <b>Limited RBAC</b> (ABAC = unnecessary complexity).</li>
+          <li class="pick">GLBA/GDPR &rarr; roles limiting access by <b>job function + location</b>.</li>
+          <li class="pick">DevOps CI/CD &rarr; <b>dynamic RBAC</b> with automated role assignment.</li>
+        </ul>
+        <h4>Watch out</h4>
+        <ul>
+          <li class="trapx">Role drift in fast-changing orgs &rarr; <b>automated recertification</b>, role mining, manager attestation.</li>
+          <li class="trapx">No <b>per-user</b> granularity &mdash; that belongs to RuBAC&rsquo;s mapped ACL entries.</li>
+          <li class="trapx">Layering: RBAC = structural base, <b>ABAC adds per-request conditions</b> (time, location, device, risk).</li>
+          <li class="trapx">ST&amp;E of an RBAC system &rarr; <b>targeted penetration testing</b>, not just configuration compliance checks.</li>
+        </ul>
+      </article>
+
+      <article class="card" id="card-abac" style="--mc:var(--abac);--mf:var(--abacf)">
+        <div class="head"><h3>ABAC</h3><span class="family">Non-discretionary</span><a class="up" href="#map">&uarr; map</a></div>
+        <p class="oneliner">&ldquo;Attributes decide &mdash; subject + object + environment, evaluated in real time.&rdquo;</p>
+        <h4>Key facts</h4>
+        <ul>
+          <li class="fact">Evaluates <b>subject</b> attrs (role, clearance, dept, citizenship, training), <b>object</b> attrs (classification, data type, owner, sensitivity tags), <b>environment</b> attrs (time, location, device posture, threat level, network) against <b>Boolean policies in real time</b>.</li>
+          <li class="fact"><b>Most expressive</b> of the core models; no predefined role constraints.</li>
+          <li class="fact">Pipeline: attributes synced from authoritative sources (HR, IdP, asset DB) &rarr; <b>PDP</b> evaluates &rarr; <b>PEPs</b> (API gateways, proxies, middleware) enforce. <b>Stale attributes = wrong decisions.</b></li>
+          <li class="fact">IAM integration key: <b>attribute synchronization + policy rule management</b> &mdash; before evaluation accuracy matters.</li>
+        </ul>
+        <h4>Choose it when</h4>
+        <ul>
+          <li class="pick">Dynamic gating on <b>time + location + threat level + data sensitivity</b> (multinational financial).</li>
+          <li class="pick"><b>Zero Trust</b>: continuous authentication + real-time policy evaluation.</li>
+          <li class="pick">Hybrid cloud, diverse infrastructure &amp; compliance (GDPR/CCPA multi-region); <b>GDPR data minimization</b>.</li>
+          <li class="pick">IoT / smart city: <b>real-time device attributes</b> at scale.</li>
+          <li class="pick">DevOps CI/CD least privilege + SoD where static RBAC cannot keep pace.</li>
+        </ul>
+        <h4>Watch out</h4>
+        <ul>
+          <li class="trapx">Primary obstacle = <b>complexity of defining &amp; managing context rules</b> &mdash; NOT performance (secondary).</li>
+          <li class="trapx">Finer granularity &rarr; harder-to-manage rule sets; <b>misconfiguration risk</b> is the governance concern.</li>
+          <li class="trapx">AI integration is <b>dual-use</b>: dynamic adaptation <b>and</b> biased decision-making &mdash; correct answers name both.</li>
+          <li class="trapx">At massive stable-org scale, <b>RBAC wins</b> &mdash; ABAC maintenance overhead is the reason.</li>
+        </ul>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ================= DECIDER ================= -->
+  <section id="decider">
+    <h2>5 &middot; Exam decider</h2>
+    <p class="lede">Read the stem, spot the cue, click it &mdash; get the model, the reasoning, and why the runner-up is wrong.</p>
+    <div class="chips" id="chips"></div>
+    <div class="verdict" id="verdict">
+      <div class="ans" id="v-ans"></div>
+      <p class="why" id="v-why"></p>
+      <p class="not" id="v-not"></p>
+      <p class="ref" id="v-ref"></p>
+    </div>
+  </section>
+
+  <!-- ================= TRAPS ================= -->
+  <section id="traps">
+    <h2>6 &middot; Trap strip</h2>
+    <p class="lede">The eleven discriminating facts that flip the most answers.</p>
+    <ol class="traps">
+      <li><b>RuBAC is a form of DAC.</b> Centrally-administered rule variant &mdash; never a MAC sibling.</li>
+      <li><b>Labels &amp; clearance &rarr; MAC; conditions (time/protocol/dept) &rarr; RuBAC.</b></li>
+      <li><b>Time-gated VPN &rarr; RuBAC, not RBAC.</b> Role shift-assignment grants by role, not by the clock.</li>
+      <li><b>DAC vs RBAC #1 flaw:</b> inconsistent policies across departments (least-privilege difficulty is secondary).</li>
+      <li><b>DAC #1 vulnerability:</b> owners over-grant &rarr; excessive permissions &amp; privilege creep.</li>
+      <li><b>RBAC is static &amp; identity-only</b> &rarr; pair with SIEM/UEBA/PAM; layer ABAC for per-request conditions.</li>
+      <li><b>Scale &rarr; RBAC; dynamic context &rarr; ABAC.</b> 50k users + ABAC = impractical complexity.</li>
+      <li><b>ABAC&rsquo;s obstacle = rule complexity &amp; manageability</b> &mdash; performance is only secondary.</li>
+      <li><b>ABAC + AI is dual-use:</b> dynamic adaptation AND biased decisions &mdash; right answers name both.</li>
+      <li><b>Windows = DACL + SIDs (fine-grained); Unix = rwx bits (coarse, three buckets).</b></li>
+      <li><b>Sysadmin grants without owner consultation = non-discretionary anti-pattern</b> &rarr; broken accountability &amp; least privilege.</li>
+    </ol>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Distilled from <code>d5_g03_federated-identity-sso-protocols-3-more.map.csv</code> and
+    <code>d5_g04_access-control-models-rule-based-rubac-2-more.map.csv</code>
+    (knowledge maps &middot; destcert guide &sect;5.4 / Sec 5.3 &middot; Q references inline where cited). Built 2026-08-22.
+  </div>
+</footer>
+
+<script>
+/* ================= data ================= */
+var MODELS = [
+  { id:'mac', name:'MAC', tag:'labels', color:'#be123c', fill:'#e11d48',
+    line:'System-enforced labels decide - users cannot touch them.',
+    angle:-90, stack:{type:'col', x:620, cy:128, anchor:'center'},
+    subs:['Labels: clearance vs classification','Clearance must dominate','U > C > S > TS hierarchy','Military - gov - PCI DSS','Users cannot change labels','Accurate labels = foundation'] },
+  { id:'dac', name:'DAC', tag:'owner', color:'#b45309', fill:'#d97706',
+    line:'The data owner decides - via ACLs they grant and revoke.',
+    angle:-18, stack:{type:'col', x:872, cy:358, anchor:'left'},
+    subs:['Data owner decides','ACLs - DACL/SIDs - rwx bits','Business-driven flexibility','Over-granting - privilege creep','Inconsistent across owners','Windows fine - Unix coarse'] },
+  { id:'rubac', name:'RuBAC', tag:'if/then rules', color:'#6d28d9', fill:'#7c3aed',
+    line:'Centrally-managed if/then rules decide - a variant of DAC.',
+    angle:54, stack:{type:'col', x:872, cy:768, anchor:'left'},
+    subs:['! A form of DAC - not MAC','Central if/then rules','Time - protocol - location - dept','Firewalls - routers - VPN gateways','Tamper-proof: users cannot edit','Per-rule admin burden'] },
+  { id:'rbac', name:'RBAC', tag:'roles', color:'#1d4ed8', fill:'#2563eb',
+    line:'Roles decide - users inherit permissions only through roles.',
+    angle:126, stack:{type:'col', x:368, cy:768, anchor:'right'},
+    subs:['User -> Role -> Permission','No direct user permissions','NIST: flat - hier - constr - sym','Limited RBAC: + time windows','SoD: mutually exclusive roles','Static - misses anomalies','Wins at 50k-user scale'] },
+  { id:'abac', name:'ABAC', tag:'attributes', color:'#047857', fill:'#059669',
+    line:'Attributes decide - subject + object + environment, in real time.',
+    angle:198, stack:{type:'col', x:368, cy:358, anchor:'right'},
+    subs:['Subject + object + env attributes','Real-time Boolean policies','PDP decides - PEP enforces','Most expressive model','Stale attributes = wrong calls','Complexity = obstacle #1'] }
+];
+
+var SCENARIOS = [
+  { c:'Gov agency - strict classification - compliance', a:'mac',
+    why:'Labels on subjects and objects; clearance must dominate classification; enforced by central policy - the rigid, non-discretionary model the scenario demands.',
+    not:'ABAC is flexible but lacks rigid label-based enforcement.', ref:'Q233' },
+  { c:'PCI DSS cardholder data - sensitivity labels', a:'mac',
+    why:'MAC classifies data with security labels and enforces access via predefined clearance levels.',
+    not:'RBAC organizes by job function, not by label enforcement.', ref:'Q75' },
+  { c:'Manager grants & revokes team document access', a:'dac',
+    why:'The data owner sets ACLs on their own objects - granular grant/revoke is the defining DAC trait.',
+    not:'RBAC centralizes assignment and never gives individual owners per-file grant/revoke.', ref:'Q261' },
+  { c:'Doctors grant temp patient-file access, unsupervised (HIPAA)', a:'dac',
+    why:'The classic DAC compliance threat: owner grants with no oversight or documentation.',
+    not:'Not a MAC/RBAC question - the risk comes from owner discretion itself.', ref:'Q6' },
+  { c:'Firewall: allow 443 from branch subnets only', a:'rubac',
+    why:'Centrally defined if/then rules on protocol, port and source, evaluated at request time - tamper-proof perimeter enforcement.',
+    not:'Not MAC (no labels) - and despite central management it is a DAC-family variant.', ref:'destcert 5.4' },
+  { c:'VPN gateway blocks access outside business hours', a:'rubac',
+    why:'Time-of-day is a rule condition evaluated at access time.',
+    not:'RBAC shift roles grant by role, not by time-based gateway rules.', ref:'Q188' },
+  { c:'EHR: protocol + time + dept rules; clinicians cannot edit own perms', a:'rubac',
+    why:'Centrally administered ACLs satisfy every constraint, and central rules prevent self-modification.',
+    not:'MAC fails: it uses sensitivity labels, not protocol/time/department conditions.', ref:'Q208' },
+  { c:'50,000 employees - 20 countries - frequent reorgs', a:'rbac',
+    why:'Role indirection scales: change the role once, every member updates. Structurally simplest at massive scale.',
+    not:'ABAC policy complexity and maintenance are impractical at this scale.', ref:'Q79' },
+  { c:'Payment-Initiator can never hold Payment-Approver', a:'rbac',
+    why:'Constrained RBAC adds separation of duties via mutually exclusive roles.',
+    not:'ABAC could evaluate attributes, but SoD-by-role-pair is the textbook constrained-RBAC mechanism.', ref:'Q81' },
+  { c:'Regional roles roll up into global functions', a:'rbac',
+    why:'Hierarchical RBAC: senior roles inherit junior permissions while geographic/regulatory boundaries stay enforced.',
+    not:'Not DAC (no owner discretion) and not ABAC (no attribute evaluation).', ref:'Q45' },
+  { c:'Gating on time + location + device + threat level', a:'abac',
+    why:'Multiple dynamic environmental attributes evaluated in real time against Boolean policies - the most expressive model.',
+    not:'RBAC is static and identity-based; it cannot fold context into decisions.', ref:'Q276' },
+  { c:'Zero Trust - continuous evaluation - hybrid cloud', a:'abac',
+    why:'Continuous authentication with real-time policy evaluation is the Zero Trust engine.',
+    not:'RBAC with quarterly reviews lacks the real-time responsiveness Zero Trust demands.', ref:'Q232' },
+  { c:'GDPR: minimum necessary personal data, per context', a:'abac',
+    why:'Fine-grained, context-aware minimization: release only what the attributes permit for that request.',
+    not:'RBAC roles are coarse and cannot restrict dynamically by context such as location or sensitivity.', ref:'Q41' },
+  { c:'Sysadmins assign permissions without consulting owners', a:'trap',
+    why:'That is non-discretionary control by non-owners: it undermines accountability and violates least privilege. Fix: policy-defined decision criteria guiding delegation.',
+    not:'It is not a role-based misconfiguration - the issue is WHO decides, not how.', ref:'Q147-Q149' }
+];
+
+var ANSWER_META = {
+  mac:{label:'MAC', color:'#be123c'}, dac:{label:'DAC', color:'#b45309'},
+  rubac:{label:'RuBAC', color:'#6d28d9'}, rbac:{label:'RBAC', color:'#1d4ed8'},
+  abac:{label:'ABAC', color:'#047857'},
+  trap:{label:'No model - anti-pattern', color:'#334155'}
+};
+
+/* ================= svg mindmap ================= */
+(function buildMap(){
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var svg = document.getElementById('mindmap');
+  var CX = 620, CY = 515, R1 = 175;
+  var PH = 30, GAP = 8;                     // sub pill height / vertical gap
+
+  var mctx = document.createElement('canvas').getContext('2d');
+  function tw(t, size, weight){ mctx.font = (weight||'600') + ' ' + size + 'px system-ui, sans-serif'; return mctx.measureText(t).width; }
+
+  function el(name, attrs, parent){
+    var e = document.createElementNS(SVGNS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    (parent || svg).appendChild(e); return e;
+  }
+  function polar(r, deg){ var a = deg*Math.PI/180; return [CX + r*Math.cos(a), CY + r*Math.sin(a)]; }
+
+  // groups: edges under pills under models under center
+  var gEdges = el('g', {}), gSubs = el('g', {}), gModels = el('g', {}), gCenter = el('g', {});
+
+  function edge(x1,y1,x2,y2,color,width,bend){
+    var dx=x2-x1, dy=y2-y1, len=Math.sqrt(dx*dx+dy*dy)||1;
+    var nx=-dy/len*bend, ny=dx/len*bend;
+    el('path',{d:'M'+x1+' '+y1+' Q'+(x1+(x2-x1)*0.5+nx)+' '+(y1+(y2-y1)*0.5+ny)+' '+x2+' '+y2,
+               fill:'none', stroke:color, 'stroke-width':width, 'stroke-opacity':0.5}, gEdges);
+  }
+
+  function goToCard(id){
+    var card = document.getElementById('card-' + id);
+    if (!card) return;
+    card.scrollIntoView({behavior:'smooth', block:'start'});
+    card.classList.remove('flash');
+    void card.offsetWidth;                 // restart animation
+    card.classList.add('flash');
+  }
+
+  MODELS.forEach(function(m){
+    var mp = polar(R1, m.angle);
+    // center -> model edge
+    edge(CX, CY, mp[0], mp[1], m.color, 3, 26);
+
+    // sub pills
+    var n = m.subs.length;
+    var total = n*PH + (n-1)*GAP;
+    m.subs.forEach(function(txt, i){
+      var w = Math.ceil(tw(txt, 12.5, '600')) + 22;
+      var y = m.stack.cy - total/2 + i*(PH+GAP) + PH/2;
+      var x;
+      if (m.stack.anchor === 'left')       x = m.stack.x;              // pill extends right
+      else if (m.stack.anchor === 'right') x = m.stack.x - w;          // pill extends left
+      else                                  x = m.stack.x - w/2;        // centered column
+      // model -> pill edge
+      edge(mp[0], mp[1], x + (m.stack.anchor==='right' ? w : 0), y, m.color, 1.6, 12);
+
+      var g = el('g', {class:'node subnode', role:'button', tabindex:'0'}, gSubs);
+      el('title', {}, g).textContent = m.name + ' - ' + txt;
+      el('rect',{x:x, y:y-PH/2, width:w, height:PH, rx:14, fill:'#ffffff', stroke:m.color, 'stroke-width':1.5}, g);
+      var t = el('text',{x:x+w/2, y:y, 'text-anchor':'middle', 'dominant-baseline':'central',
+                         'font-size':12.5, 'font-weight':600, fill:'#28303d'}, g);
+      t.textContent = txt;
+      g.addEventListener('click', function(){ goToCard(m.id); });
+    });
+
+    // model node (name + tag, two lines)
+    var mw = Math.ceil(tw(m.name, 20, '800')) + 42;
+    var mh = 56;
+    var g2 = el('g', {class:'node', role:'button', tabindex:'0'}, gModels);
+    el('title', {}, g2).textContent = m.name + ' - ' + m.line;
+    el('rect',{x:mp[0]-mw/2, y:mp[1]-mh/2, width:mw, height:mh, rx:15, fill:m.fill}, g2);
+    var t1 = el('text',{x:mp[0], y:mp[1]-8, 'text-anchor':'middle', 'dominant-baseline':'central',
+                        'font-size':20, 'font-weight':800, fill:'#ffffff'}, g2);
+    t1.textContent = m.name;
+    var t2 = el('text',{x:mp[0], y:mp[1]+13, 'text-anchor':'middle', 'dominant-baseline':'central',
+                        'font-size':10.5, 'font-weight':600, fill:'#ffffff', 'fill-opacity':0.85}, g2);
+    t2.textContent = m.tag;
+    g2.addEventListener('click', function(){ goToCard(m.id); });
+  });
+
+  // center node
+  var cw = 250, ch = 74;
+  var gc = el('g', {}, gCenter);
+  el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
+  var c1 = el('text',{x:CX, y:CY-10, 'text-anchor':'middle', 'dominant-baseline':'central',
+                      'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
+  c1.textContent = 'ACCESS CONTROL';
+  var c2 = el('text',{x:CX, y:CY+14, 'text-anchor':'middle', 'dominant-baseline':'central',
+                      'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
+  c2.textContent = 'MODELS';
+})();
+
+/* ================= exam decider ================= */
+(function buildDecider(){
+  var chipsBox = document.getElementById('chips');
+  var verdict = document.getElementById('verdict');
+  var vAns = document.getElementById('v-ans'), vWhy = document.getElementById('v-why');
+  var vNot = document.getElementById('v-not'), vRef = document.getElementById('v-ref');
+  var current = null;
+
+  SCENARIOS.forEach(function(s, i){
+    var b = document.createElement('button');
+    b.className = 'chip'; b.type = 'button'; b.textContent = s.c;
+    b.addEventListener('click', function(){
+      var meta = ANSWER_META[s.a];
+      if (current === b){ b.classList.remove('on'); verdict.classList.remove('show'); current = null; return; }
+      if (current) current.classList.remove('on');
+      b.classList.add('on'); current = b;
+      verdict.style.setProperty('--vc', meta.color);
+      vAns.textContent = 'Answer: ' + meta.label;
+      vWhy.innerHTML = '<b>Why &middot; </b>' + s.why;
+      vNot.innerHTML = '<b>Why not the runner-up &middot; </b>' + s.not;
+      vRef.textContent = 'source: ' + s.ref;
+      verdict.classList.remove('show'); void verdict.offsetWidth; verdict.classList.add('show');
+    });
+    chipsBox.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>

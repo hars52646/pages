@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CISSP D1 &middot; Question Drill part 6 &mdash; 84 scenario questions</title>
+<style>
+  :root{
+    --g1:#b91c1c; --g1f:#dc2626;
+    --g2:#b45309; --g2f:#d97706;
+    --g3:#6d28d9; --g3f:#7c3aed;
+    --g4:#1d4ed8; --g4f:#2563eb;
+    --g5:#047857; --g5f:#059669;
+    --g6:#be185d; --g6f:#db2777;
+    --g7:#0e7490; --g7f:#0891b2;
+    --ink:#1e293b; --muted:#64748b; --bg:#f6f7fb; --line:#e2e8f0;
+    --ok:#047857; --bad:#b91c1c;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+  header.hero{padding:44px 0 10px}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  h1{font-size:clamp(26px,4vw,40px);line-height:1.15;margin:8px 0 10px}
+  .sub{font-size:17px;color:#334155}
+  .sub b{font-weight:800}
+  .sub a{color:#0f172a}
+
+  nav.jump{position:sticky;top:0;z-index:50;background:rgba(246,247,251,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin-top:18px}
+  nav.jump .wrap{display:flex;gap:4px;flex-wrap:wrap;padding:8px 20px;align-items:center}
+  nav.jump a{font-size:13.5px;font-weight:600;color:#334155;text-decoration:none;padding:5px 12px;border-radius:999px}
+  nav.jump a:hover{background:#e8ecf5}
+  nav.jump a.kp{border:1.5px solid #cbd5e1;background:#fff}
+
+  section{padding:34px 0 6px;scroll-margin-top:64px}
+  h2{font-size:24px;margin:0 0 4px}
+  .lede{color:var(--muted);margin:0 0 18px;font-size:15px}
+
+  .gt{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap;vertical-align:1px}
+  .t-g1{background:var(--g1f)} .t-g2{background:var(--g2f)} .t-g3{background:var(--g3f)}
+  .t-g4{background:var(--g4f)} .t-g5{background:var(--g5f)} .t-g6{background:var(--g6f)}
+  .t-g7{background:var(--g7f)}
+
+  .map-panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 8px 4px;box-shadow:0 8px 24px rgba(15,23,42,.06)}
+  svg#fammap{width:100%;height:auto;display:block}
+  .maphint{text-align:center;color:var(--muted);font-size:13px;padding:8px 0 10px}
+  .node{cursor:pointer}
+  .node:hover rect{filter:brightness(.94)}
+
+  .ladders{display:grid;grid-template-columns:repeat(auto-fit,minmax(430px,1fr));gap:14px;margin-top:14px}
+  .ladder{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 18px 13px;border-top:5px solid var(--mc,#94a3b8);box-shadow:0 8px 24px rgba(15,23,42,.05);scroll-margin-top:64px}
+  .ladder .head{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+  .ladder h3{margin:0;font-size:17px;color:var(--mc)}
+  .ladder .cnt{font-size:12px;font-weight:700;color:var(--muted)}
+  .ladder .links{margin-left:auto;font-size:12px;font-weight:700}
+  .ladder .links a{color:var(--mc);text-decoration:none;margin-left:10px}
+  .ladder .links a:hover{text-decoration:underline}
+  .ladder ol{margin:8px 0 0;padding:0;list-style:none;counter-reset:fac}
+  .ladder ol li{counter-increment:fac;position:relative;padding:4px 0 4px 34px;font-size:13.6px;color:#334155;border-bottom:1px dashed #eef1f6}
+  .ladder ol li:last-child{border-bottom:none}
+  .ladder ol li::before{content:counter(fac);position:absolute;left:2px;top:5px;width:22px;height:22px;border-radius:50%;background:var(--mc);color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center}
+  .ladder ol li b{color:#0f172a}
+  .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
+  .ladder .rule b{color:var(--mc);font-style:normal}
+
+  .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
+  .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
+  .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
+  .rad .ex{margin-top:6px;font-size:12px;color:var(--muted);font-weight:600}
+
+  .scorebar{position:sticky;top:49px;z-index:40;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:12px;padding:10px 16px;box-shadow:0 6px 18px rgba(15,23,42,.06);display:flex;gap:16px;align-items:center;flex-wrap:wrap;font-size:14px}
+  .scorebar b{font-size:16px}
+  .scorebar .meter{flex:1;min-width:160px;height:9px;background:#e8ecf5;border-radius:999px;overflow:hidden}
+  .scorebar .meter i{display:block;height:100%;background:linear-gradient(90deg,var(--g4f),var(--g5f));width:0;transition:width .25s}
+  .scorebar button{font:inherit;font-size:13px;font-weight:700;background:#fff;color:#334155;border:1.5px solid #cbd5e1;border-radius:999px;padding:5px 14px;cursor:pointer}
+  .scorebar button:hover{border-color:#334155}
+  .fchips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+  .fchip{font:inherit;font-size:12.5px;font-weight:700;color:#fff;border:none;border-radius:999px;padding:6px 14px;cursor:pointer;background:var(--c,#334155);opacity:.5;transition:opacity .12s}
+  .fchip:hover{opacity:.8}
+  .fchip.on{opacity:1;box-shadow:0 0 0 2px rgba(15,23,42,.28)}
+  .fchip.all{background:#0f172a}
+
+  .famhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:26px 0 8px;padding-bottom:6px;border-bottom:2.5px solid var(--fc,#94a3b8)}
+  .famhead h3{margin:0;font-size:19px;color:var(--fc,#334155)}
+  .famhead .cnt{font-size:12.5px;color:var(--muted);font-weight:700}
+  .famhead a{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--fc,#334155);text-decoration:none}
+  .famhead a:hover{text-decoration:underline}
+
+  .q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px 14px;margin:12px 0;box-shadow:0 6px 18px rgba(15,23,42,.04);scroll-margin-top:120px}
+  .q.done{border-color:#c7d2e4}
+  .qhead{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:7px}
+  .qn{font-weight:800;font-size:13px;color:#fff;background:#0f172a;border-radius:7px;padding:2px 9px}
+  .qrule{margin-left:auto;font-size:11.5px;font-weight:700;color:var(--muted);background:#f1f5f9;border-radius:999px;padding:2px 10px}
+  .stem{margin:0 0 12px;font-size:14.8px;color:#0f172a}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  @media (max-width:760px){.opts{grid-template-columns:1fr}}
+  .opt{font:inherit;font-size:13.6px;text-align:left;color:#334155;background:#fbfcfe;border:1.5px solid #d8dfea;border-radius:10px;padding:9px 12px 9px 38px;cursor:pointer;position:relative;transition:all .12s;line-height:1.4}
+  .opt::before{content:attr(data-l);position:absolute;left:11px;top:9px;font-weight:800;color:#64748b}
+  .opt:hover:not(:disabled){border-color:#64748b;background:#f1f5f9}
+  .opt:disabled{cursor:default;opacity:.88}
+  .opt.right{border-color:var(--ok);background:#ecfdf5;opacity:1}
+  .opt.right::before{color:var(--ok)}
+  .opt.wrong{border-color:var(--bad);background:#fef2f2;opacity:1}
+  .opt.wrong::before{color:var(--bad)}
+  .qverdict{display:none;margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+  .qverdict.show{display:block}
+  .qverdict .mark{font-size:15px;font-weight:800;margin-bottom:4px}
+  .qverdict .mark.good{color:var(--ok)}
+  .qverdict .mark.bad{color:var(--bad)}
+  .qverdict .why{margin:4px 0 8px;font-size:14px;color:#0f172a}
+  .qverdict ul{margin:0;padding:0;list-style:none;font-size:13.2px;color:#334155}
+  .qverdict li{padding:2px 0 2px 20px;position:relative}
+  .qverdict li::before{content:"\2716";position:absolute;left:2px;color:#c2410c;font-weight:700;font-size:11px;top:4px}
+  .qverdict .klink{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;color:var(--fc,#334155);text-decoration:none;border:1.5px solid var(--fc,#94a3b8);border-radius:999px;padding:2px 11px}
+  .qverdict .klink:hover{background:#f1f5f9}
+
+  footer{padding:30px 0 44px;color:var(--muted);font-size:13px}
+  footer code{background:#eef1f6;border-radius:5px;padding:1px 6px;font-size:12px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 6 of 6</div>
+    <h1>D1 Question Drill 6 &mdash; Cryptography (topics 22-27)</h1>
+    <p class="sub"><b>92 scenario questions</b> (topics 1&ndash;12) &middot; <b>12 decision families</b> &middot; <b>5 knowledge groups</b> &mdash; forensics and evidence, monitoring and intel, malware defense, change and patch, resources and environment. Continues in <a href="d7_drill_p2.html">part 2: continuity and recovery (80 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+  </div>
+</header>
+
+<nav class="jump">
+  <div class="wrap">
+    <a href="#fmap">Family map</a><a href="#ladders">Factor ladders</a><a href="#radar">Distractor radar</a><a href="#drill">Question drill</a><a class="kp" href="d1_index.html">D1 hub</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="fmap">
+    <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
+    <p class="lede">The 12 part-1 families (of D7&rsquo;s 18 total), colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <div class="map-panel">
+      <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D1 drill part 6"></svg>
+      <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
+    </div>
+  </section>
+
+  <section id="ladders">
+    <h2>2 &middot; Factor ladders &mdash; what beats what, under which circumstances</h2>
+    <p class="lede">For each family: the ranked decision factors distilled from the official explanations. When a scenario highlights factor 1, that answer wins over factor 2 &mdash; and over every distractor archetype below.</p>
+    <div class="ladders" id="ladderbox"></div>
+  </section>
+
+  <section id="radar">
+    <h2>3 &middot; Distractor radar &mdash; the 9 recurring wrong answers</h2>
+    <p class="lede">Wrong options in this bank recycle nine archetypes. Spot the archetype, eliminate instantly, and the choice usually collapses to one answer.</p>
+    <div class="radar" id="radarbox"></div>
+  </section>
+
+  <section id="drill">
+    <h2>4 &middot; Question drill &mdash; all 84, options and all</h2>
+    <p class="lede">Real stems, real A&ndash;D options. Click your pick: it locks, the verdict opens with the why, per-option eliminations, the rule exercised, and a link into the matching knowledge card. Filter by group; the score bar follows you.</p>
+
+    <div class="scorebar">
+      <span>Answered <b id="sc-a">0</b>/84</span>
+      <span>Correct <b id="sc-c">0</b> <span id="sc-p" style="color:var(--muted);font-weight:600">(0%)</span></span>
+      <span class="meter"><i id="sc-m"></i></span>
+      <button id="sc-reset" type="button">reset answers</button>
+    </div>
+    <div class="fchips" id="drillchips"></div>
+    <div id="drillbox"></div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Built from <code>domain1_logic_questions.txt</code> (674 logic questions, 27 topics; this part: 84). Stems, options and answers are the source text; verdicts compress the official explanations.
+  </div>
+</footer>
+
+<script>
+var GROUPS={g1:{name:"Cloud & Virtualization A",color:"#b91c1c",fill:"#dc2626"},g2:{name:"Cloud & Virtualization B",color:"#b45309",fill:"#d97706"},g3:{name:"System Architecture",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"OS & Security Models",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Investigations & IR",color:"#047857",fill:"#059669"},g6:{name:"Hashing, MAC & Signatures",color:"#be185d",fill:"#db2777"},g7:{name:"Cryptanalysis & PQC",color:"#0e7490",fill:"#0891b2"}};
+var FAMILIES = [
+{ id:'f22', g:'g6', name:"Symmetric Crypto", topic:"Symmetric & Stream Ciphers", q:17, leaves:["Choosing a hash \u2014 which...","MD5 migration \u2014 top...","Integrity only \u2014 hash or...","Q407 \u2014 signed code proves?","Q592 \u2014 blockchain..."],
+    factors:[
+     "<b>Choosing a hash \u2014 which pass?</b> &mdash; When choosing a hash for security-sensitive integrity, select SHA-2 or SHA-3; reject MD5 or SHA-1 due to proven collisions. Never accept broken algorithms for...",
+     "<b>MD5 migration \u2014 top priority?</b> &mdash; When migrating from deprecated MD5 to SHA-3, the priority is ensuring data integrity. Trap: prioritizing backward compatibility could perpetuate use of the vulnerable... <span class=\"qrefs\">[Q1207]</span>",
+     "<b>Integrity only \u2014 hash or HMAC?</b> &mdash; When verifying data integrity only (no authentication needed), a simple hash suffices; add a key (HMAC) when the source also needs verification. Choose the simplest tool...",
+     "<b>Q407 \u2014 signed code proves?</b> &mdash; Q407: Validating digital signatures on third-party code establishes authenticity \u2014 proof of legitimate vendor origin and detection of tampering. <span class=\"qrefs\">[Q407]</span>",
+     "<b>Q592 \u2014 blockchain properties?</b> &mdash; Q592 (blockchain cross-border financial transactions): answer \u2014 authentication, integrity verification, and non-repudiation. Closest distractor (encryption and... <span class=\"qrefs\">[Q592]</span>",
+     "<b>Q802 \u2014 legacy bridge?</b> &mdash; Q802 (highly regulated healthcare org undergoing digital transformation): answer \u2014 integrate a middleware solution bridging legacy with modern signature technology. Full... <span class=\"qrefs\">[Q802]</span>"],
+    rule:"AES default; mode and IV discipline decide safety" },
+{ id:'f23', g:'g6', name:"Asymmetric Crypto", topic:"Asymmetric Cryptography & Key Exchange", q:17, leaves:["Choosing a hash \u2014 which...","MD5 migration \u2014 top...","Integrity only \u2014 hash or...","Q407 \u2014 signed code proves?","Q592 \u2014 blockchain..."],
+    factors:[
+     "<b>Choosing a hash \u2014 which pass?</b> &mdash; When choosing a hash for security-sensitive integrity, select SHA-2 or SHA-3; reject MD5 or SHA-1 due to proven collisions. Never accept broken algorithms for...",
+     "<b>MD5 migration \u2014 top priority?</b> &mdash; When migrating from deprecated MD5 to SHA-3, the priority is ensuring data integrity. Trap: prioritizing backward compatibility could perpetuate use of the vulnerable... <span class=\"qrefs\">[Q1207]</span>",
+     "<b>Integrity only \u2014 hash or HMAC?</b> &mdash; When verifying data integrity only (no authentication needed), a simple hash suffices; add a key (HMAC) when the source also needs verification. Choose the simplest tool...",
+     "<b>Q407 \u2014 signed code proves?</b> &mdash; Q407: Validating digital signatures on third-party code establishes authenticity \u2014 proof of legitimate vendor origin and detection of tampering. <span class=\"qrefs\">[Q407]</span>",
+     "<b>Q592 \u2014 blockchain properties?</b> &mdash; Q592 (blockchain cross-border financial transactions): answer \u2014 authentication, integrity verification, and non-repudiation. Closest distractor (encryption and... <span class=\"qrefs\">[Q592]</span>",
+     "<b>Q802 \u2014 legacy bridge?</b> &mdash; Q802 (highly regulated healthcare org undergoing digital transformation): answer \u2014 integrate a middleware solution bridging legacy with modern signature technology. Full... <span class=\"qrefs\">[Q802]</span>"],
+    rule:"RSA compatibility, ECC efficiency, DH exchange, hybrid volume" },
+{ id:'f24', g:'g6', name:"Hash & Signatures", topic:"Hashing, MAC & Digital Signatures", q:4, leaves:["Choosing a hash \u2014 which...","MD5 migration \u2014 top...","Integrity only \u2014 hash or...","Q407 \u2014 signed code proves?","Q592 \u2014 blockchain..."],
+    factors:[
+     "<b>Choosing a hash \u2014 which pass?</b> &mdash; When choosing a hash for security-sensitive integrity, select SHA-2 or SHA-3; reject MD5 or SHA-1 due to proven collisions. Never accept broken algorithms for...",
+     "<b>MD5 migration \u2014 top priority?</b> &mdash; When migrating from deprecated MD5 to SHA-3, the priority is ensuring data integrity. Trap: prioritizing backward compatibility could perpetuate use of the vulnerable... <span class=\"qrefs\">[Q1207]</span>",
+     "<b>Integrity only \u2014 hash or HMAC?</b> &mdash; When verifying data integrity only (no authentication needed), a simple hash suffices; add a key (HMAC) when the source also needs verification. Choose the simplest tool...",
+     "<b>Q407 \u2014 signed code proves?</b> &mdash; Q407: Validating digital signatures on third-party code establishes authenticity \u2014 proof of legitimate vendor origin and detection of tampering. <span class=\"qrefs\">[Q407]</span>",
+     "<b>Q592 \u2014 blockchain properties?</b> &mdash; Q592 (blockchain cross-border financial transactions): answer \u2014 authentication, integrity verification, and non-repudiation. Closest distractor (encryption and... <span class=\"qrefs\">[Q592]</span>",
+     "<b>Q802 \u2014 legacy bridge?</b> &mdash; Q802 (highly regulated healthcare org undergoing digital transformation): answer \u2014 integrate a middleware solution bridging legacy with modern signature technology. Full... <span class=\"qrefs\">[Q802]</span>"],
+    rule:"Integrity then authentication then non-repudiation" },
+{ id:'f25', g:'g6', name:"PKI", topic:"PKI, Certificates & Key Management", q:22, leaves:["Choosing a hash \u2014 which...","MD5 migration \u2014 top...","Integrity only \u2014 hash or...","Q407 \u2014 signed code proves?","Q592 \u2014 blockchain..."],
+    factors:[
+     "<b>Choosing a hash \u2014 which pass?</b> &mdash; When choosing a hash for security-sensitive integrity, select SHA-2 or SHA-3; reject MD5 or SHA-1 due to proven collisions. Never accept broken algorithms for...",
+     "<b>MD5 migration \u2014 top priority?</b> &mdash; When migrating from deprecated MD5 to SHA-3, the priority is ensuring data integrity. Trap: prioritizing backward compatibility could perpetuate use of the vulnerable... <span class=\"qrefs\">[Q1207]</span>",
+     "<b>Integrity only \u2014 hash or HMAC?</b> &mdash; When verifying data integrity only (no authentication needed), a simple hash suffices; add a key (HMAC) when the source also needs verification. Choose the simplest tool...",
+     "<b>Q407 \u2014 signed code proves?</b> &mdash; Q407: Validating digital signatures on third-party code establishes authenticity \u2014 proof of legitimate vendor origin and detection of tampering. <span class=\"qrefs\">[Q407]</span>",
+     "<b>Q592 \u2014 blockchain properties?</b> &mdash; Q592 (blockchain cross-border financial transactions): answer \u2014 authentication, integrity verification, and non-repudiation. Closest distractor (encryption and... <span class=\"qrefs\">[Q592]</span>",
+     "<b>Q802 \u2014 legacy bridge?</b> &mdash; Q802 (highly regulated healthcare org undergoing digital transformation): answer \u2014 integrate a middleware solution bridging legacy with modern signature technology. Full... <span class=\"qrefs\">[Q802]</span>"],
+    rule:"Trust lives in the CA hierarchy and certificate lifecycle" },
+{ id:'f26', g:'g7', name:"Cryptanalysis & PQC", topic:"Cryptanalytic Attacks & Post-Quantum", q:13, leaves:["Society vs employer: who...","Refuse and escalate?","Profession vs any other...","Framework or ethics...","Do ethics vary by..."],
+    factors:[
+     "<b>Society vs employer: who wins?</b> &mdash; When two canons conflict, choose the action that satisfies the lower-numbered canon \u2014 even if it means going against the employer's directive. Society outranks employer;...",
+     "<b>Refuse and escalate?</b> &mdash; When an employer asks you to do something unethical or illegal, refuse and escalate through proper channels (management, legal, HR). Complying makes you ethically...",
+     "<b>Profession vs any other canon?</b> &mdash; When 'advance the profession' (Canon 4) conflicts with any other canon, the other canon wins \u2014 Canon 4 is last in priority. Threat-intel sharing or peer collaboration... <span class=\"qrefs\">[Q559]</span>",
+     "<b>Framework or ethics foundational?</b> &mdash; Frameworks (ISO 27001, NIST CSF) and ethics serve different purposes: frameworks structure controls; ethics governs conduct and decisions \u2014 ethics is the foundational... <span class=\"qrefs\">[Q315]</span>",
+     "<b>Do ethics vary by geography?</b> &mdash; When operating across regions with differing laws or norms, apply ISC2 ethics consistently and globally \u2014 ethics are universal and do not vary by geography or local...",
+     "<b>Contract or harm prevention?</b> &mdash; Healthcare vendor risk with CEO preference for a supplier: the governing principle is doing nothing harmful to others. Contractual obligations are legally bounded but... <span class=\"qrefs\">[Q362]</span>"],
+    rule:"Name the attack by what it exploits; PQC for harvest-now" },
+{ id:'f27', g:'g6', name:"Crypto Fundamentals", topic:"Cryptography Fundamentals", q:10, leaves:["Choosing a hash \u2014 which...","MD5 migration \u2014 top...","Integrity only \u2014 hash or...","Q407 \u2014 signed code proves?","Q592 \u2014 blockchain..."],
+    factors:[
+     "<b>Choosing a hash \u2014 which pass?</b> &mdash; When choosing a hash for security-sensitive integrity, select SHA-2 or SHA-3; reject MD5 or SHA-1 due to proven collisions. Never accept broken algorithms for...",
+     "<b>MD5 migration \u2014 top priority?</b> &mdash; When migrating from deprecated MD5 to SHA-3, the priority is ensuring data integrity. Trap: prioritizing backward compatibility could perpetuate use of the vulnerable... <span class=\"qrefs\">[Q1207]</span>",
+     "<b>Integrity only \u2014 hash or HMAC?</b> &mdash; When verifying data integrity only (no authentication needed), a simple hash suffices; add a key (HMAC) when the source also needs verification. Choose the simplest tool...",
+     "<b>Q407 \u2014 signed code proves?</b> &mdash; Q407: Validating digital signatures on third-party code establishes authenticity \u2014 proof of legitimate vendor origin and detection of tampering. <span class=\"qrefs\">[Q407]</span>",
+     "<b>Q592 \u2014 blockchain properties?</b> &mdash; Q592 (blockchain cross-border financial transactions): answer \u2014 authentication, integrity verification, and non-repudiation. Closest distractor (encryption and... <span class=\"qrefs\">[Q592]</span>",
+     "<b>Q802 \u2014 legacy bridge?</b> &mdash; Q802 (highly regulated healthcare org undergoing digital transformation): answer \u2014 integrate a middleware solution bridging legacy with modern signature technology. Full... <span class=\"qrefs\">[Q802]</span>"],
+    rule:"Goals first, then primitive, then strength" }
+];
+
+var RADAR=[
+{t:'Property confusion', d:'Confidentiality, integrity, availability traded as if interchangeable - read which property the stem sacrifices.', ex:'see factor ladders'},
+{t:'Owner misplaced', d:'Risk acceptance or governance duties assigned to the wrong role.', ex:'see factor ladders'},
+{t:'Verb skipped', d:'Controls chosen before the treatment verb (avoid, transfer, mitigate, accept) is named.', ex:'see factor ladders'},
+{t:'ALE arithmetic ignored', d:'Qualitative answers where the stem gives numbers - compute SLE and ALE first.', ex:'see factor ladders'},
+{t:'Framework step swapped', d:'RMF steps out of order, authorization before assessment.', ex:'see factor ladders'},
+{t:'Compliance absolutes', d:'Certification treated as compliance; audits treated as guarantees.', ex:'see factor ladders'},
+{t:'Cloud duty transfer', d:'Provider answers where customer data accountability remains.', ex:'see factor ladders'},
+{t:'Layer skipped', d:'Technology-first answers where the question names policy or governance.', ex:'see factor ladders'},
+{t:'Once-and-done', d:'Point-in-time fixes where continuous monitoring or review is asked.', ex:'see factor ladders'}
+];
+
+var QS = [
+{n:'Q1247',f:'f22',s:'A security team notices their initiatives are frequently deprioritized and viewed as obstacles. What is the MOST likely cause of this situation?',o:['Insufficient security budget allocation from the finance department','Lack of senior management support and conviction for security','Inadequate technical skills and expertise among security staff','Absence of formal security certifications for the team'],a:1,w:'Without senior leadership support, security becomes reactive and is viewed as a nuisance rather than a proactive business enabler. (A) Budget constraints matter, but lack of conviction is a leadership issue, not purely a funding issue; (C) technical skills help execution but do not replace...',e:['Budget constraints matter, but lack of conviction is a leadership issue, not purely a funding issue','','technical skills help execution but do not replace executive support; and',''],r:'AES default; mode and IV discipline decide safety'},
+{n:'Q121',f:'f22',s:'An organization must balance CCTV effectiveness with budget constraints. Which design consideration has the GREATEST impact on surveillance capability?',o:['Selecting appropriate lens based on monitored area size','Choosing between coaxial cable and fiber optic media','Determining the brand of monitoring equipment','Establishing the schedule for security staff rotation'],a:0,w:'Lens selection based on the size of the monitored area directly determines whether cameras can effectively capture usable images of the surveillance zone.',e:['','Media choice affects signal quality, not coverage scope','Brand selection is operational, not capability-defining; and','Staff scheduling affects monitoring, not camera capability'],r:'AES default; mode and IV discipline decide safety'},
+{n:'Q166',f:'f22',s:'When designing a backup power system for a data center supporting multiple types of critical infrastructure, which factor is MOST crucial for ensuring continuous operations across diverse scenarios?',o:['Analysis of various power outage scenarios on different infrastructure types','Power distribution unit (PDU) capacity and scalability','Initial cost and long-term maintenance expenses of the system','Redundancy level of the Uninterruptible Power Supply (UPS) system'],a:0,w:'The most crucial factor in designing a backup power system for a data center supporting multiple types of critical infrastructure is the analysis of various power outage scenarios (e.g., short-term, long-term, partial) on different infrastructure types.',e:['','','',''],r:'AES default; mode and IV discipline decide safety'},
+{n:'Q201',f:'f22',s:'In a large, multi-national enterprise environment with numerous departments and remote offices, what is the MOST critical challenge when implementing symmetric encryption for secure inter-departmental communication?',o:['Mitigating the risk of quantum computing attacks on symmetric algorithms','Securely distributing and managing encryption keys across multiple locations','Ensuring consistent computational performance across diverse network environments','Maintaining compliance with varying data protection regulations in different jurisdictions'],a:1,w:'While symmetric encryption is efficient for secure communication, its biggest challenge in a large, multi-national enterprise environment is securely distributing and managing encryption keys across multiple locations.',e:['','','',''],r:'AES default; mode and IV discipline decide safety'},
+{n:'Q222',f:'f22',s:'In a high-performance computing environment processing terabytes of sensitive data daily, which characteristic of symmetric cryptography is MOST crucial for maintaining efficient operations while ensuring data security?',o:['Resistance to side-channel attacks','Key length flexibility for varying security levels','High-speed encryption and decryption capabilities','Built-in integrity checking mechanisms'],a:2,w:'In high-performance computing environments dealing with large volumes of sensitive data, the most crucial characteristic of symmetric cryptography is its high-speed encryption and decryption capabilities.',e:['','','',''],r:'AES default; mode and IV discipline decide safety'},
+{n:'Q420',f:'f22',s:'A multinational corporation is designing a new state-of-the-art data center. At which stage of the project should fire protection measures be PRIMARILY addressed to ensure optimal integration, cost-effectiveness, and compliance with international standards?',o:['After the initial architectural design is approved','When finalizing the construction budget','During the equipment procurement phase','During the initial planning and site selection phase'],a:3,w:'Addressing fire protection measures during the initial planning and site selection phase is crucial for optimal integration, cost-effectiveness, and compliance with international standards.',e:['','','',''],r:'AES default; mode and IV discipline decide safety'},
+{n:'Q462',f:'f22',s:'A multinational corporation is upgrading its data protection strategy to safeguard against potential ransomware attacks. The CISO wants to implement a symmetric encryption solution that provides both high-speed data encryption for large volumes of data and robust key management across multiple data centers. Which of the following approaches would BEST meet these requirements while ensuring efficient disaster recovery and business continuity?',o:['Use 3DES with hardware security modules (HSMs) for key storage in each data center','Implement AES-256 in GCM mode with a hierarchical key management system utilizing HSMs','Deploy ChaCha20-Poly1305 with a distributed key management system using blockchain technology','Implement AES-256 in CBC mode with a centralized key server for all data centers'],a:1,w:'AES-256 in GCM (Galois/Counter Mode) provides both strong encryption and authentication, making it suitable for high-speed data protection across large volumes of data.',e:['','','',''],r:'AES default; mode and IV discipline decide safety'},
+{n:'Q569',f:'f22',s:'A large multinational corporation is planning to implement a global distributed system architecture. Which of the following security considerations should be given the HIGHEST priority during the design phase?',o:['Implementing data replication mechanisms for consistency across nodes','Deploying advanced intrusion detection systems at each network segment','Designing a robust, scalable authentication and access control framework','Establishing redundant communication channels for high availability'],a:2,w:'While all options are important security considerations in distributed systems, designing a robust, scalable authentication and access control framework should be given the highest priority during the design phase.',e:['','','',''],r:'AES default; mode and IV discipline decide safety'},
+{n:'Q581',f:'f22',s:'A security architect is designing a smart city infrastructure using the V-Model. Which approach BEST addresses the security challenges of this complex, interconnected system while ensuring adaptive security measures?',o:['Conducting regular penetration testing of deployed systems','Implementing end-to-end encryption for all data transmissions','Establishing a centralized security operations center with AI-powered threat detection','Integrating continuous threat modeling and risk assessment throughout the development lifecycle'],a:3,w:'The V-Model emphasizes testing and validation at each stage of the development process. In the context of secure design for smart city infrastructure, integrating continuous threat modeling and risk assessment throughout the development lifecycle is the BEST approach because it allows for the...',e:['','','',''],r:'AES default; mode and IV discipline decide safety'},
+{n:'Q599',f:'f22',s:'In a financial institution implementing symmetric cryptography for PCI DSS compliance, which aspect of key management is MOST critical for maintaining long-term data security and regulatory adherence?',o:['Implementing the longest possible key length for all encrypted data','Establishing a comprehensive key rotation and lifecycle management process','Using hardware security modules (HSMs) for all key storage operations','Employing different encryption algorithms for various types of financial transactions'],a:1,w:'While strong encryption, secure key storage, and diverse algorithms are important, the most critical aspect for maintaining long-term data security and regulatory compliance in financial institutions using symmetric cryptography is a comprehensive key rotation and lifecycle management process.',e:['','','',''],r:'AES default; mode and IV discipline decide safety'},
+{n:'Q896',f:'f22',s:'A financial services firm is migrating from legacy encryption to a stronger algorithm. The current system uses DES with a 56-bit key for transaction records. Compliance requires encryption that can withstand modern computational attacks for at least 10 years. The security team must minimize integration changes while meeting the requirement. Which algorithm provides the BEST balance of security strength and migration simplicity?',o:['Triple DES (3DES) with 168-bit key configuration','RC5 with 2040-bit keys','Blowfish with 448-bit keys','Advanced Encryption Standard (AES) with 256-bit keys'],a:3,w:'AES-256 is standardized as very strong encryption, offering 256-bit key strength with broad compatibility and industry-accepted longevity for cryptographic protection.',e:['3DES provides only 112-bit effective strength due to meet-in-the-middle attacks','RC5 lacks standardization and widespread validation for compliance; and','Blowfish uses 64-bit blocks, limiting its suitability for large data',''],r:'AES default; mode and IV discipline decide safety'},
+{n:'Q922',f:'f22',s:'A financial services firm transmits encrypted transaction data to partner banks. The security team must ensure both fast encryption of large transaction batches and secure key distribution without pre-shared secrets. What cryptographic design satisfies both requirements?',o:['Pure symmetric encryption with keys exchanged via secure physical courier','Pure asymmetric encryption using RSA-4096 for all transaction data','Hybrid cryptography using symmetric bulk encryption with asymmetric key exchange','Hash-based message authentication with periodic key rotation'],a:2,w:'Hybrid cryptography combines symmetric speed for bulk data with asymmetric key exchange, solving both the performance and key distribution requirements simultaneously.',e:['Physical courier doesn\'t meet the requirement of no pre-shared secrets','RSA-4096 for bulk data would be prohibitively slow for large; and','','HMAC provides integrity verification, not encryption or key distribution'],r:'AES default; mode and IV discipline decide safety'},
+{n:'Q937',f:'f22',s:'A multinational corporation is implementing PKI across multiple geographic regions. The security architect proposes using intermediate CAs in each region while maintaining a single root CA. What is the PRIMARY security benefit of this hierarchical design compared to a flat structure with only a root CA?',o:['Reduces the need for identity proofing at regional offices','Eliminates the requirement for certificate revocation lists','Limits exposure of the root CA private key during certificate operations','Removes the dependency on registration authorities entirely'],a:2,w:'Intermediate CAs issue certificates under root CA authority, allowing the root CA private key to remain offline and protected while enabling scalable certificate issuance.',e:['Identity proofing requirements remain regardless of hierarchy','Revocation lists are still required in hierarchical PKI; and','','Registration authorities serve identity proofing functions independently'],r:'AES default; mode and IV discipline decide safety'},
+{n:'Q981',f:'f22',s:'A security architect reviewing a complex enterprise application discovers numerous interconnected modules with extensive dependencies. Which secure design principle should PRIMARILY guide the recommended remediation?',o:['Zero trust with continuous authentication','Keep it simple and small (KISS)','Privacy by design with data transparency','Fail securely with graceful degradation'],a:1,w:'The KISS principle directly addresses complexity by recognizing that vulnerabilities increase with system intricacy, advocating simpler architectures with fewer interdependencies that are easier to secure and test.',e:['Addresses access control, not architectural complexity reduction','','Focuses on embedding privacy protections, not simplifying architecture; and','Addresses system failure behavior, not design complexity issues'],r:'AES default; mode and IV discipline decide safety'},
+{n:'Q1065',f:'f22',s:'A multinational corporation is implementing a new secure communication system using symmetric cryptography for its global offices. Which aspect of symmetric cryptography presents the MOST significant challenge to the scalability and performance of this enterprise-wide solution?',o:['Algorithm complexity and processing overhead','Key size and storage requirements','Key distribution and management across multiple sites','Encryption and decryption speed'],a:2,w:'While all factors impact the implementation of symmetric cryptography in enterprise environments, key distribution and management across multiple sites present the most significant challenge to scalability and performance.',e:['','','',''],r:'AES default; mode and IV discipline decide safety'},
+{n:'Q1126',f:'f22',s:'A pharmaceutical company is building a new data center to host clinical trial databases subject to regulatory retention requirements. The security architect discovers that the proposed design places transformer rooms adjacent to public corridors without access controls, and the HVAC shares ductwork with the office building. The compliance officer asks what design changes are needed FIRST. Which recommendation addresses the MOST critical facility design gaps?',o:['Install diesel generators with automatic transfer switches for uninterrupted power supply','Implement Tier 4 data center standards to maximize uptime across all infrastructure','Secure critical power rooms and separate data center HVAC from the building\'s system','Deploy UPS units on all server racks to handle momentary faults and voltage sags'],a:2,w:'The two identified gaps—unsecured transformer rooms and shared HVAC—directly violate facility design principles requiring secured critical rooms and independent data center air conditioning.',e:['Generators address power outages but not the identified gaps of','Tier 4 is a broad uptime standard, not a targeted; and','','UPS units address power quality, not physical security of rooms'],r:'AES default; mode and IV discipline decide safety'},
+{n:'Q1164',f:'f22',s:'A retail company\'s security architect proposes embedding privacy protections, layered controls, and continuous authentication into a new e-commerce platform from initial design. The CFO questions the cost. Which secure design principle justifies integrating these controls during architecture rather than retrofitting them later?',o:['Fail securely ensures systems default to a protected state during unexpected conditions','Threat modeling identifies adversaries and attack paths to prioritize control placement','The risk management process identifies valuable assets and determines cost-effective controls during design','Shared responsibility clarifies which controls the organization versus third parties must implement'],a:2,w:'The risk management process identifies the most valuable assets and risks, then determines appropriate cost-effective controls, providing the business justification for integrating security during design.',e:['Fail securely addresses system behavior during malfunctions, not the justification','Threat modeling is one technique within the design process but; and','','Shared responsibility delineates third-party obligations but does not justify the'],r:'AES default; mode and IV discipline decide safety'},
+{n:'Q1204',f:'f23',s:'A multinational corporation is implementing a symmetric key hierarchy across its geographically distributed data centers to enhance security and compliance. Which of the following approaches would be MOST effective in achieving this objective while ensuring adherence to industry best practices?',o:['Establishing a multi-tiered key hierarchy with HSM-protected root keys and standardized key rotation policies','Allowing each regional office to implement its own key management practices','Implementing a single master key for all data centers with annual rotation','Using public key infrastructure (PKI) for all data encryption operations'],a:0,w:'A multi-tiered key hierarchy with HSM-protected root keys and standardized key rotation policies is the most effective approach for a multinational corporation.',e:['','','',''],r:'RSA compatibility, ECC efficiency, DH exchange, hybrid volume'},
+{n:'Q33',f:'f23',s:'A government agency is developing a 25-year data protection strategy to safeguard classified information against both current and future cryptographic threats. Which approach involving hybrid key exchange would MOST EFFECTIVELY ensure long-term data confidentiality and resilience?',o:['Utilizing post-quantum cryptographic algorithms with increased key sizes','Combining traditional public key and post-quantum algorithms in a hybrid scheme','Implementing quantum key distribution (QKD) with traditional public key algorithms','Alternating between classical and quantum-resistant algorithms based on data sensitivity'],a:1,w:'Hybrid key exchange, which combines traditional public key algorithms with post-quantum algorithms, provides the most effective long-term protection against both classical and quantum threats.',e:['','','',''],r:'RSA compatibility, ECC efficiency, DH exchange, hybrid volume'},
+{n:'Q73',f:'f23',s:'When evaluating hybrid cryptography against pure asymmetric encryption for enterprise file sharing, which trade-off is MOST significant?',o:['Hybrid systems add implementation complexity but dramatically improve encryption performance for large data','Hybrid systems sacrifice non-repudiation capabilities for improved key management efficiency','Hybrid systems reduce overall security strength but eliminate the need for public key infrastructure','Hybrid systems require longer asymmetric key lengths but simplify certificate management processes'],a:0,w:'Hybrid cryptography combines symmetric encryption\'s speed for bulk data with asymmetric key distribution, adding architectural complexity but enabling practical encryption of large files that pure asymmetric systems cannot efficiently process.',e:['','Hybrid systems retain non-repudiation through asymmetric components','Hybrid systems maintain security strength and still require PKI; and','Hybrid systems use standard key lengths, not longer ones'],r:'RSA compatibility, ECC efficiency, DH exchange, hybrid volume'},
+{n:'Q93',f:'f23',s:'A multinational corporation is implementing asymmetric cryptography in its big data analytics platform to mitigate inference and aggregation attacks. Which of the following represents the MOST significant challenge in this implementation?',o:['Compatibility issues with existing analytics tools','Scalable key management across distributed systems','Increased computational overhead for data processing','Difficulty in maintaining data utility for analysis'],a:1,w:'While integrating asymmetric cryptography into big data analytics platforms can enhance security against inference and aggregation attacks, it presents several challenges.',e:['','','',''],r:'RSA compatibility, ECC efficiency, DH exchange, hybrid volume'},
+{n:'Q144',f:'f23',s:'In a global corporation with offices in multiple countries, which benefit of asymmetric cryptography would Executive Management most likely emphasize when promoting its adoption for secure communication across the organization?',o:['Faster encryption and decryption processes for bulk data','Simplified management of public key distribution','Reduced computational overhead for large-scale deployments','Elimination of the need for secure key exchange channels'],a:1,w:'Executive Management would likely emphasize the simplified management of public key distribution when promoting asymmetric cryptography adoption. In a global corporation, this benefit is crucial as it allows for easier scalability and secure communication across multiple offices without the need...',e:['','','',''],r:'RSA compatibility, ECC efficiency, DH exchange, hybrid volume'},
+{n:'Q204',f:'f23',s:'A multinational corporation is implementing a data mining project involving sensitive customer data from multiple countries. Which of the following BEST describes the advantage of using asymmetric cryptography over symmetric cryptography for privacy controls in this scenario?',o:['Asymmetric cryptography provides faster processing speeds for large datasets across international borders','Asymmetric cryptography offers better compression ratios for field-level encryption in distributed databases','Asymmetric cryptography enables secure data sharing between multiple parties without revealing private keys','Asymmetric cryptography allows for more granular access control in data preprocessing but requires less complex key management'],a:2,w:'In this multinational data mining scenario, asymmetric cryptography is the best choice because it allows multiple parties (different country offices) to securely share and process data without exchanging private keys.',e:['','','',''],r:'RSA compatibility, ECC efficiency, DH exchange, hybrid volume'},
+{n:'Q309',f:'f23',s:'In implementing a hybrid key exchange system for a global organization with multiple cloud providers and varying network conditions, which of the following is the MOST effective optimization technique to balance performance, security, and scalability?',o:['Load balancing of key exchange operations across nodes','Dynamic key size adjustment based on data sensitivity','Automatic algorithm rotation on a fixed schedule','Adaptive algorithm selection based on real-time network conditions'],a:3,w:'In a large-scale, multi-cloud distributed system with varying network conditions, the most effective optimization technique for Hybrid Key Exchange is adaptive algorithm selection based on real-time network conditions.',e:['','','',''],r:'RSA compatibility, ECC efficiency, DH exchange, hybrid volume'},
+{n:'Q516',f:'f23',s:'A global enterprise is implementing a new asymmetric cryptography system for secure communication across its distributed offices. Which of the following is the MOST critical consideration for the CISO when establishing the key management strategy for this system?',o:['Choosing between RSA and ECC algorithms','Selecting the optimal key size for performance','Implementing a centralized key distribution system','Ensuring robust private key protection measures'],a:3,w:'While all aspects are important in asymmetric cryptography, the protection of private keys is paramount, especially in a distributed global enterprise.',e:['','','',''],r:'RSA compatibility, ECC efficiency, DH exchange, hybrid volume'},
+{n:'Q589',f:'f23',s:'A global corporation is implementing field-level encryption for sensitive data in its data warehouse, which is accessed by various departments and external partners. Which of the following BEST describes the primary advantage of using asymmetric cryptography over symmetric cryptography in this scenario?',o:['Ensures perfect forward secrecy for all encrypted fields without additional protocols','Enables secure data sharing without exposing decryption keys to all parties','Provides faster encryption and decryption speeds for large datasets','Eliminates the need for key rotation in the data warehouse environment'],a:1,w:'In this scenario, asymmetric cryptography offers a significant advantage over symmetric cryptography for field-level encryption in a data warehouse accessed by multiple parties.',e:['','','',''],r:'RSA compatibility, ECC efficiency, DH exchange, hybrid volume'},
+{n:'Q779',f:'f23',s:'A global financial institution is implementing a hybrid key exchange system to enhance its cybersecurity posture and comply with new regulatory requirements. Which of the following represents the MOST significant technical challenge in deploying this system across the organization\'s diverse IT infrastructure?',o:['Implementing quantum-resistant algorithms alongside traditional key exchange methods','Balancing performance requirements with increased cryptographic complexity','Maintaining interoperability between new hybrid protocols and legacy systems','Ensuring consistent key lifecycle management across heterogeneous systems'],a:2,w:'Implementing a hybrid key exchange system in a global financial institution with diverse IT infrastructure presents several technical challenges. Maintaining interoperability between new hybrid protocols and legacy systems is often the most significant challenge due to the complexity of integrating...',e:['','','',''],r:'RSA compatibility, ECC efficiency, DH exchange, hybrid volume'},
+{n:'Q914',f:'f23',s:'A security architect must secure bulk data transmission while minimizing computational overhead. What cryptographic approach BEST addresses both requirements?',o:['Using asymmetric encryption for all data to ensure strong key management','Implementing symmetric encryption with pre-shared keys distributed manually','Applying hybrid cryptography with asymmetric key exchange and symmetric bulk encryption','Deploying elliptic curve cryptography exclusively for faster asymmetric operations'],a:2,w:'Hybrid cryptography combines asymmetric encryption for secure key exchange with fast symmetric encryption for bulk data, addressing both security and performance requirements efficiently.',e:['Asymmetric encryption alone is computationally intensive and too slow for','Manual key distribution creates scalability problems and operational overhead; and','','ECC improves asymmetric speed but remains slower than symmetric algorithms'],r:'RSA compatibility, ECC efficiency, DH exchange, hybrid volume'},
+{n:'Q916',f:'f23',s:'A development team hardcoded a symmetric session key into both client and server applications. An auditor flags this as a critical vulnerability. What cryptographic approach would BEST remediate this issue?',o:['Replacing the symmetric algorithm with AES-256 or another stronger cipher','Using digital certificates to authenticate both client and server endpoints','Storing the hardcoded key in an encrypted configuration file instead','Implementing hybrid key exchange to dynamically establish session keys'],a:3,w:'Hybrid key exchange eliminates hardcoded keys by dynamically generating and securely exchanging unique session keys for each communication session. (A) Stronger ciphers don\'t address key management flaws; (B) Certificates authenticate identity, not session key distribution; and (C) Encrypted...',e:['Stronger ciphers don\'t address key management flaws','Certificates authenticate identity, not session key distribution; and','Encrypted storage still leaves static keys vulnerable',''],r:'RSA compatibility, ECC efficiency, DH exchange, hybrid volume'},
+{n:'Q927',f:'f23',s:'A threat intelligence team identifies that adversaries are targeting an organization\'s RSA-based authentication system. The attackers appear to be attempting mathematical approaches against the cryptographic foundation. What specific attack vector should the security team prioritize defending against?',o:['Linear cryptanalysis targeting block cipher weaknesses','Differential cryptanalysis exploiting input variations','Chosen-plaintext attacks against encryption oracles','Factoring attacks against the RSA algorithm'],a:3,w:'Factoring attacks specifically target RSA by attempting to factor the large prime numbers underlying the private key, exploiting RSA\'s mathematical foundation.',e:['Linear cryptanalysis targets symmetric block ciphers, not RSA','Differential cryptanalysis applies to symmetric algorithms, not RSA; and','Chosen-plaintext attacks target encryption processes, not RSA\'s mathematical basis',''],r:'RSA compatibility, ECC efficiency, DH exchange, hybrid volume'},
+{n:'Q1033',f:'f23',s:'A government contractor is implementing a new encryption system for classified communications. The security team must ensure that any interception attempt during key exchange would be immediately detectable, regardless of the adversary\'s computational capabilities. The contractor operates in an environment where future quantum computing advances could compromise traditional methods. Which key exchange approach provides the protection level required?',o:['Key-encrypting-keys with AES-256','Quantum key exchange','Out-of-band key distribution','Hardware security module distribution'],a:1,w:'Quantum key exchange uses quantum mechanics principles to generate and share encryption keys, providing unconditional security where any eavesdropping attempt is detectable and security is.',e:['KEKs rely on computational assumptions vulnerable to quantum attacks','','Out-of-band methods lack eavesdropping detection capabilities; and','HSMs provide storage security, not interception detection'],r:'RSA compatibility, ECC efficiency, DH exchange, hybrid volume'},
+{n:'Q1041',f:'f23',s:'A healthcare organization is implementing encrypted communications between hospitals that have never exchanged cryptographic material. The security team must establish secure channels without physical key courier services while meeting strict performance requirements for large medical imaging files. Which cryptographic strategy BEST addresses both the key distribution challenge and performance needs?',o:['Asymmetric encryption using RSA for all medical imaging data','Symmetric encryption with keys distributed via encrypted email','Hybrid approach using Diffie-Hellman for key agreement and symmetric encryption for data','Public key infrastructure with certificate-based authentication only'],a:2,w:'Combining Diffie-Hellman key exchange to establish shared secrets without prior key distribution with symmetric encryption for fast bulk data processing addresses both the initial key.',e:['RSA for bulk imaging data creates unacceptable latency due to','Email key distribution introduces additional security risks and complexity; and','','PKI provides authentication infrastructure but does not optimize bulk encryption'],r:'RSA compatibility, ECC efficiency, DH exchange, hybrid volume'},
+{n:'Q1072',f:'f23',s:'A security analyst discovers a web server\'s private key was posted to a public repository. What should be done FIRST?',o:['Generate a new key pair and request a replacement certificate from the CA','Schedule an expedited certificate renewal through the normal lifecycle process','Update the server\'s TLS configuration to enforce stronger cipher suites','Request the issuing certificate authority revoke the compromised certificate'],a:3,w:'Revoking the certificate immediately prevents attackers from using the compromised private key to impersonate the server before any replacement occurs.',e:['Generating a new key pair is necessary but occurs after','Normal renewal cycles are too slow to address active key; and','Cipher suite changes do not invalidate the compromised key pair',''],r:'RSA compatibility, ECC efficiency, DH exchange, hybrid volume'},
+{n:'Q1075',f:'f23',s:'A defense contractor discovers that during encrypted communications between two partner organizations, an adversary established separate encryption sessions with each party by intercepting the initial key exchange. Both organizations believed they had a direct secure channel while the attacker decrypted, read, and re-encrypted all messages in transit. What countermeasure failure allowed this compromise?',o:['Failure to implement sufficient encryption key length','Failure to encrypt the communication channel itself','Failure to rotate encryption keys at regular intervals','Failure to hash and digitally sign the exchanged key'],a:3,w:'Preventing man-in-the-middle attacks requires both parties to hash the agreed key, sign it, and verify signatures to authenticate the exchange and detect interception.',e:['Key length prevents brute force attacks, but this man-in-the-middle attack','The channel was encrypted; the failure was that neither party; and','Key rotation limits exposure duration but cannot prevent an attacker',''],r:'RSA compatibility, ECC efficiency, DH exchange, hybrid volume'},
+{n:'Q1269',f:'f24',s:'In a large-scale, distributed system implementing asymmetric cryptography for secure communication, which challenge is MOST critical to address?',o:['Preventing man-in-the-middle attacks in the network','Efficiently managing and distributing public keys','Ensuring data integrity across all nodes','Mitigating the slower encryption and decryption speeds'],a:1,w:'While asymmetric cryptography offers robust security benefits, its implementation in large-scale, distributed systems presents unique challenges. The most critical among these is the efficient management and distribution of public keys.',e:['','','',''],r:'Integrity then authentication then non-repudiation'},
+{n:'Q592',f:'f24',s:'In implementing a blockchain-based system for cross-border financial transactions, which combination of features provided by digital signatures is MOST crucial for ensuring the security and reliability of these transactions?',o:['Key exchange and transaction speed','Encryption and time-stamping','Authentication, integrity verification, and non-repudiation','Access control and data confidentiality'],a:2,w:'In a blockchain-based system for cross-border financial transactions, digital signatures play a critical role in ensuring security and reliability. While all options contribute to security, the combination of authentication, integrity verification, and non-repudiation is the most crucial.',e:['','','',''],r:'Integrity then authentication then non-repudiation'},
+{n:'Q802',f:'f24',s:'In a highly regulated healthcare organization undergoing digital transformation, which approach BEST addresses the challenges of implementing digital signatures in legacy systems while minimizing security risks?',o:['Implementing a parallel digital signature system alongside legacy systems','Replacing all legacy systems with signature-compatible platforms','Outsourcing digital signature processes to a third-party service provider','Integrating a middleware solution to bridge legacy systems with modern signature technology'],a:3,w:'When implementing digital signatures in legacy systems during digital transformation, especially in highly regulated industries like healthcare, integrating middleware is often the most effective approach.',e:['','','',''],r:'Integrity then authentication then non-repudiation'},
+{n:'Q823',f:'f24',s:'Which of the following BEST demonstrates how digital signatures enhance security in mobile application API communication?',o:['Verifying the integrity and origin of API requests and responses','Implementing multi-factor authentication for API access','Encrypting all API requests and responses','Using a virtual private network (VPN) for API connections'],a:0,w:'Digital signatures in mobile application API communication primarily enhance security by verifying the integrity and origin of API requests and responses.',e:['','','',''],r:'Integrity then authentication then non-repudiation'},
+{n:'Q1207',f:'f25',s:'During the transition from MD5 to SHA-3 for cryptographic hashing, which factor should an organization prioritize to ensure a secure and effective migration?',o:['Ensuring data integrity','Maintaining backward compatibility','Minimizing system downtime','Optimizing processing speed'],a:0,w:'When transitioning from MD5 (a deprecated and vulnerable algorithm) to SHA-3 (a more secure algorithm), ensuring data integrity is the most critical consideration.',e:['','','',''],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q42',f:'f25',s:'A global organization is strengthening its cryptographic defenses against potential attacks. Which of the following is the MOST critical component of key lifecycle management in preventing long-term cryptographic compromises?',o:['Implementing multi-factor authentication for key access','Enforcing timely key rotation and replacement','Utilizing hardware security modules for key storage','Establishing regular key backup procedures'],a:1,w:'While all options contribute to robust key management, enforcing timely key rotation and replacement is the most critical for preventing long-term cryptographic compromises.',e:['','','',''],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q99',f:'f25',s:'In a large enterprise environment with diverse cryptographic needs, including symmetric, asymmetric, and session keys, which of the following is the MOST comprehensive approach for managing the entire key lifecycle while ensuring optimal security and operational efficiency?',o:['Employing a hybrid approach with automated tools for symmetric keys and manual processes for asymmetric keys','Implementing a centralized key management system with automated rotation for all key types','Utilizing separate key management systems for each type of cryptographic key with manual oversight','Implementing a unified key management platform with role-based access control, automated key rotation, and policy-driven workflows for different key types'],a:3,w:'The most comprehensive approach for managing the entire key lifecycle in a large enterprise with diverse cryptographic needs involves implementing a unified key management platform with role-based access control, automated key rotation, and policy-driven workflows for different key types.',e:['','','',''],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q210',f:'f25',s:'A large multinational corporation is implementing a Public Key Infrastructure (PKI) system to secure communications with its global partners and suppliers. Which of the following approaches BEST addresses the challenge of credential interoperability across multiple organizations while minimizing business disruptions and preventing delays in cross-border transactions?',o:['Require all partners and suppliers to use the same PKI software and protocols','Implement a bridge CA model with cross-certification between participating organizations','Establish separate PKI systems for each partner and supplier','Implement a centralized Certificate Authority (CA) managed solely by the corporation'],a:1,w:'The bridge CA model with cross-certification is the most effective approach for ensuring credential interoperability across multiple organizations while minimizing business disruptions.',e:['','','',''],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q286',f:'f25',s:'A healthcare organization is deploying a new electronic health records system across multiple facilities. The CISO requires that encryption keys be protected from extraction even if an endpoint device is physically stolen, while also ensuring keys remain available for legitimate system operations. Budget constraints prevent purchasing network-attached key management appliances for each location. Which solution BEST meets these requirements?',o:['Trusted Platform Module (TPM) integration','Centralized Hardware Security Module (HSM)','Key escrow with the cloud provider','Split knowledge key recovery procedures'],a:0,w:'TPMs are embedded cryptoprocessor chips that provide hardware-based key protection at endpoints without requiring network appliances, directly satisfying both the physical theft protection and budget requirements.',e:['','HSMs are network appliances that conflict with budget constraints','Key escrow addresses recovery scenarios, not physical theft protection; and','Split knowledge controls human access, not device theft scenarios'],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q307',f:'f25',s:'A healthcare organization\'s CISO learns that a subordinate CA\'s private key was compromised three days ago, but the CRL was last updated eight days prior and won\'t refresh for another six days. Hundreds of certificates issued by this CA protect patient portal sessions. The security team must act before the next CRL update. Which approach BEST mitigates the exposure window?',o:['Implement OCSP to query the CA for real-time revocation status of specific certificates','Reissue all affected certificates from the root CA with extended validity periods','Force an immediate CRL download to all client systems across the organization','Enable certificate pinning on client browsers to lock in currently trusted certificates'],a:0,w:'OCSP queries the CA for real-time revocation status of individual certificate serial numbers, closing the multi-day gap that CRL update intervals create.',e:['','Reissuing from root CA does not address clients still trusting','Forcing a download of the stale CRL still contains outdated; and','Pinning locks in potentially compromised certificates, worsening the exposure'],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q339',f:'f25',s:'In a large-scale PKI deployment facing frequent network outages and performance concerns, which approach BEST addresses the challenges of timely certificate status verification?',o:['Implementing a centralized key management system with offline capabilities','Deploying a hybrid system combining local CRLs with OCSP responders for real-time status checks','Enforcing strict access controls on certificate authorities and revocation lists','Using hardware security modules (HSMs) for secure key storage and revocation'],a:1,w:'In a large-scale PKI deployment with network outages and performance concerns, deploying a hybrid system combining local CRLs with OCSP responders for real-time status checks is the best approach.',e:['','','',''],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q342',f:'f25',s:'A financial institution with high employee turnover and frequent third-party collaborations is reviewing its symmetric key management practices. Which of the following approaches would BEST address the security concerns in this environment?',o:['Using hardware security modules (HSMs) for key storage without automated processes','Deploying a centralized key management system with automated key rotation and comprehensive access logging','Employing a combination of symmetric and asymmetric cryptography for all data encryption','Implementing a decentralized key management system with manual key rotation'],a:1,w:'A centralized key management system with automated key rotation and comprehensive access logging is the best approach for this scenario. It provides a single point of control, ensures regular and consistent key updates, and maintains detailed records of key access.',e:['','','',''],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q411',f:'f25',s:'An e-commerce company is replacing digital certificates for its payment gateway. Which approach BEST minimizes the vulnerability window and prevents unauthorized access during the transition?',o:['Revoking the old certificate after a fixed time period, regardless of new certificate readiness','Overlapping the validity periods of the old and new certificates while implementing strict access controls','Immediately revoking the old certificate and installing the new one','Waiting for the old certificate to expire before installing the new one'],a:1,w:'Overlapping the validity periods of the old and new certificates while implementing strict access controls is the best approach to minimize the vulnerability window and prevent unauthorized access during the transition.',e:['','','',''],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q414',f:'f25',s:'In designing a PKI architecture for a global financial institution, which approach BEST addresses security concerns, operational efficiency, and compliance with diverse regulatory requirements?',o:['Outsourcing the entire PKI infrastructure to a managed security service provider with global presence','Deploying a three-tier hierarchy with offline root CA, policy CAs for each region, and issuing CAs for day-to-day operations','Using a flat PKI structure with multiple peer CAs for load balancing and redundancy','Implementing a two-tier hierarchy with an offline root CA and online issuing CAs for each country'],a:1,w:'A three-tier hierarchy provides the best balance of security, operational efficiency, and regulatory compliance for a global financial institution. The offline root CA ensures maximum security, regional policy CAs allow for flexible management of different security policies and regulatory...',e:['','','',''],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q418',f:'f25',s:'A retail company\'s web servers use certificates expiring in 30 days. The security team discovers the private keys were generated three years ago with now-outdated key lengths. During renewal, what should the team prioritize alongside obtaining new certificates?',o:['Generating new key pairs that meet current cryptographic strength requirements','Revoking all existing certificates before the expiration date arrives','Implementing certificate pinning to lock in the renewed certificates','Configuring OCSP stapling to reduce latency during certificate validation'],a:0,w:'Certificate renewal provides the opportunity to generate new, stronger key pairs, which is critical when existing keys use outdated lengths that may be cryptographically vulnerable.',e:['','Revocation is for compromised keys, not certificates approaching normal expiration','Certificate pinning is deprecated and creates operational brittleness; and','OCSP stapling improves performance but does not address weak key'],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q458',f:'f25',s:'A multinational corporation with diverse systems and applications is experiencing frequent service disruptions due to expired digital certificates. Which approach would MOST effectively mitigate the associated business and security risks while ensuring consistent management across the enterprise?',o:['Outsource certificate management to multiple third-party vendors specializing in different systems','Deploy an enterprise-wide automated certificate lifecycle management system with centralized monitoring and alerts','Extend all certificate validity periods to 5 years to reduce the frequency of renewals','Implement a decentralized certificate management process with each department handling its own renewals'],a:1,w:'An enterprise-wide automated certificate lifecycle management system with centralized monitoring and alerts is the most effective approach for mitigating risks associated with certificate expirations in a large, diverse corporate environment.',e:['','','',''],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q493',f:'f25',s:'When implementing a Public Key Infrastructure (PKI) for a global organization, which approach to managing digital certificate trust stores offers the best balance between security and operational efficiency?',o:['Relying solely on remote trust stores for centralized management','Implementing a hybrid approach with local stores for critical systems and remote stores for others','Utilizing remote trust stores with periodic local caching and frequent updates','Using only local trust stores on each device for maximum control'],a:2,w:'Remote trust stores with periodic local caching and frequent updates provide the best balance between security and operational efficiency for a global organization.',e:['','','',''],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q495',f:'f25',s:'When implementing certificate pinning in an organization\'s mobile applications, what is the primary security trade-off against operational flexibility?',o:['Increased network latency due to additional certificate checks','Reduced compatibility with older mobile operating systems','Limited ability to quickly change or update trusted certificates','Higher computational requirements for certificate validation'],a:2,w:'Certificate pinning is a security technique where an application is configured to only accept specific digital certificates, enhancing protection against man-in-the-middle attacks and rogue certificate authorities.',e:['','','',''],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q812',f:'f25',s:'When determining key rotation frequency, what factor should PRIMARILY guide the decision?',o:['Industry-standard time intervals recommended by regulatory bodies','The computational complexity of the encryption algorithm used','The value of the assets the keys protect','The storage capacity of the key management infrastructure'],a:2,w:'Key rotation frequency should align with protected asset value, ensuring proportional security investment rather than following arbitrary time-based schedules.',e:['Regulatory time intervals lack risk-based asset consideration','Algorithm complexity doesn\'t determine rotation frequency needs; and','','Storage capacity addresses infrastructure, not security risk'],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q826',f:'f25',s:'A Chief Information Security Officer (CISO) is developing a key management policy for a multinational financial institution. Which factor should be considered MOST critical in determining the frequency of cryptographic key rotation?',o:['The sensitivity and classification levels of the protected data','The type of encryption algorithms used across different systems','The number of employees with access to encrypted data','The geographical distribution of the organization\'s data centers'],a:0,w:'While all factors can influence key rotation frequency, the sensitivity and classification levels of the protected data are the most critical factors.',e:['','','',''],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q912',f:'f25',s:'A security team must distribute symmetric encryption keys to remote offices without transmitting them over the corporate network. What key distribution method addresses this requirement?',o:['Key signing through a certificate authority','Key compression for constrained transmission','Session key generation per connection','Out-of-band key distribution'],a:3,w:'Out-of-band distribution transmits keys through a separate channel such as physical courier or fax, preventing interception on the primary network. (A) Key signing validates identity, not secure key transport; (B) Key compression reduces size but still requires transmission; and (C) Session keys...',e:['Key signing validates identity, not secure key transport','Key compression reduces size but still requires transmission; and','Session keys solve per-connection needs, not initial distribution',''],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q920',f:'f25',s:'A defense contractor\'s security team discovers their development team focused extensively on selecting the strongest available algorithms while treating key storage as a secondary concern. The team lead argues that modern algorithms are computationally unbreakable. What critical flaw exists in this security approach?',o:['Modern algorithms require specific hardware acceleration to provide adequate security','Computational unbreakability does not account for emerging quantum computing threats','Classified systems require government-approved algorithms regardless of their strength','Algorithm strength becomes irrelevant when keys are improperly managed'],a:3,w:'Key management determines cryptographic security; the strongest algorithm provides no protection if keys are compromised through poor storage practices.',e:['Hardware acceleration affects performance, not security fundamentals','Quantum threats are future concerns unrelated to key management; and','Algorithm approval is a compliance requirement, not the security flaw',''],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q984',f:'f25',s:'A software development team discovers their application hard-codes symmetric encryption keys in both client and server components. A security audit flags this as a critical vulnerability. The CISO requires a solution that eliminates static keys while maintaining encryption performance for high-volume transaction processing. What remediation approach MOST effectively addresses both the vulnerability and performance requirement?',o:['Implement key rotation by updating hard-coded keys during each software release','Deploy hybrid key exchange to dynamically establish session keys without static storage','Replace symmetric encryption entirely with asymmetric algorithms for all transactions','Store encryption keys in environment variables instead of application code'],a:1,w:'Hybrid key exchange eliminates hard-coded keys by dynamically establishing session keys through asymmetric protocols while preserving symmetric encryption speed for bulk transaction processing.',e:['Release-based rotation still uses static keys vulnerable between updates','','Asymmetric-only encryption creates severe performance degradation for high-volume transactions; and','Environment variables remain static and accessible, not fundamentally solving the'],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q1052',f:'f25',s:'An organization is implementing an automated certificate management system for its large enterprise environment. Which of the following represents the MOST critical consideration to maximize operational benefits while ensuring proper security oversight?',o:['Reducing the total number of digital certificates in use','Implementing a centralized certificate lifecycle management platform','Establishing granular role-based access controls for certificate management functions','Automating certificate renewal and revocation processes'],a:2,w:'While all options are important aspects of certificate management, establishing granular role-based access controls for certificate management functions is the most critical consideration to maximize operational benefits while ensuring proper security oversight.',e:['','','',''],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q1080',f:'f25',s:'A SOC analyst receives a browser warning that a website\'s certificate has been revoked. What is the correct action?',o:['Proceed to the website after verifying the domain name matches expectations','Clear the browser cache and attempt to reload the certificate from the server','Accept the certificate and pin it locally to bypass future revocation warnings','Do not proceed and report the revoked certificate to the security team'],a:3,w:'Users should decline revoked certificates because revocation indicates the associated private key may be compromised, making the connection untrustworthy.',e:['Domain name verification does not resolve the underlying key compromise','Cache clearing does not change the certificate\'s revoked status at; and','Pinning a revoked certificate bypasses critical security controls entirely',''],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q1179',f:'f25',s:'A fintech startup\'s security engineer discovers that their partner API gateway presents a certificate signed by an unknown CA. The engineer\'s client system cannot download the CRL due to a network firewall restriction, and the system defaults to trusting the certificate. The partner claims their previous CA was compromised and they switched providers. Which action BEST addresses the immediate risk?',o:['Pin the new partner certificate locally to bypass future CRL checks','Configure the firewall to allow CRL downloads and verify the certificate\'s revocation status','Accept the certificate since the partner confirmed they switched certificate authorities','Disable certificate validation temporarily until the partner provides documentation'],a:1,w:'Enabling CRL downloads eliminates the default-trust vulnerability by allowing the system to verify whether the certificate has been revoked before establishing trust.',e:['Pinning bypasses revocation checks entirely, increasing risk from compromised certificates','','Verbal confirmation does not cryptographically validate a certificate\'s legitimacy; and','Disabling validation removes all certificate trust protections during the gap'],r:'Trust lives in the CA hierarchy and certificate lifecycle'},
+{n:'Q1222',f:'f26',s:'A global financial institution is reviewing its Public Key Infrastructure (PKI) implementation. Which of the following BEST describes the primary purpose of a Certificate Revocation List (CRL) in maintaining the security of their digital transactions?',o:['To publish a list of certificates that are no longer trusted across the organization','To store and manage private keys for certificate holders across multiple branches','To validate the authenticity of Certificate Authorities in various jurisdictions','To generate new digital certificates for users and devices in different time zones'],a:0,w:'A Certificate Revocation List (CRL) is a critical component of PKI that serves to publish a list of digital certificates that have been revoked before their scheduled expiration date.',e:['','','',''],r:'Name the attack by what it exploits; PQC for harvest-now'},
+{n:'Q24',f:'f26',s:'A financial institution is enhancing its cryptographic implementations to protect against advanced cryptanalytic attacks. Which factor should they prioritize as MOST critical in their real-world implementation to determine their algorithms\' resistance to such attacks?',o:['The implementation of perfect forward secrecy','The length and entropy of the encryption keys','The use of quantum-resistant algorithms','The algorithm\'s resistance to side-channel attacks'],a:1,w:'While all factors contribute to cryptographic security, the length and entropy of encryption keys are the most critical in determining resistance to cryptanalytic attacks in real-world implementations.',e:['','','',''],r:'Name the attack by what it exploits; PQC for harvest-now'},
+{n:'Q133',f:'f26',s:'A multinational financial institution is developing a multi-layered approach to protect highly sensitive communications. Which of the following best describes the primary advantage of integrating steganography with traditional encryption methods in this context?',o:['Enhancing data confidentiality by concealing the existence of encrypted communications','Eliminating the need for complex key management processes','Increasing the speed of secure data transmission across global networks','Reducing the computational overhead of encryption algorithms on endpoint devices'],a:0,w:'The primary advantage of integrating steganography with traditional encryption in this context is the enhanced data confidentiality achieved by concealing the very existence of encrypted communications.',e:['','','',''],r:'Name the attack by what it exploits; PQC for harvest-now'},
+{n:'Q147',f:'f26',s:'A financial institution is planning to migrate sensitive data to a hybrid cloud environment. Which of the following is the MOST effective long-term approach to mitigate the risk of advanced cryptanalytic attacks in this scenario?',o:['Increasing the frequency of encryption key rotation to daily cycles','Employing quantum-resistant cryptographic algorithms','Implementing homomorphic encryption for all data transfers','Using blockchain technology for distributed key management'],a:1,w:'In a hybrid cloud environment for a financial institution, the risk of advanced cryptanalytic attacks is significantly heightened due to the sensitive nature of the data and the complex data transmission between on-premises and cloud infrastructures.',e:['','','',''],r:'Name the attack by what it exploits; PQC for harvest-now'},
+{n:'Q150',f:'f26',s:'Which approach would BEST address the potential impact of quantum computing-based cryptanalytic attacks on a global financial institution\'s current cryptographic systems?',o:['Investing equally in quantum computer development and post-quantum cryptography research','Developing a hybrid approach using both classical and post-quantum cryptography with a phased implementation plan','Implementing quantum-resistant algorithms for all new data transmissions while maintaining legacy systems for older data','Increasing the key length and complexity of existing symmetric and asymmetric encryption algorithms'],a:1,w:'While all options have merit, developing a hybrid approach using both classical and post-quantum cryptography with a phased implementation plan is currently the most effective strategy.',e:['','','',''],r:'Name the attack by what it exploits; PQC for harvest-now'},
+{n:'Q181',f:'f26',s:'A forensic team recovers both encrypted files and their original unencrypted versions from a seized laptop. The CISO wants to determine the encryption key used. Which cryptanalytic approach is MOST appropriate given the available evidence?',o:['Known-plaintext attack using recovered pairs','Ciphertext-only attack using frequency analysis','Chosen-ciphertext attack using decryption oracle','Differential cryptanalysis using statistical methods'],a:0,w:'Known-plaintext attacks exploit plaintext-ciphertext pairs to mathematically derive the encryption key, maximizing the forensic value of recovered original files.',e:['','Frequency analysis wastes available plaintext-ciphertext evidence','Chosen-ciphertext requires decryption device access not mentioned in scenario; and','Differential cryptanalysis requires controlled plaintext input capability'],r:'Name the attack by what it exploits; PQC for harvest-now'},
+{n:'Q219',f:'f26',s:'A financial institution is upgrading its cryptographic infrastructure to comply with new regulations. Which approach would BEST address both current security needs and future quantum computing threats?',o:['Increasing key sizes for existing algorithms to enhance security','Implementing quantum-resistant algorithms across all systems immediately','Maintaining current systems and planning for a complete overhaul in five years','Adopting a hybrid approach using both classical and post-quantum algorithms'],a:3,w:'A hybrid approach allows the financial institution to maintain current security standards while gradually introducing post-quantum algorithms. This strategy provides immediate regulatory compliance and prepares for future threats without disrupting existing systems.',e:['','','',''],r:'Name the attack by what it exploits; PQC for harvest-now'},
+{n:'Q355',f:'f26',s:'A financial services firm\'s SOC team identifies that a terminated employee had been sending high-resolution photographs to a personal email account for months before departure. The images contain no visible anomalies and pass malware scanning. A forensic examiner suspects intellectual property theft but finds no encrypted files on the employee\'s workstation. The compliance officer needs to understand the potential exfiltration method. What technique would BEST explain undetected data theft through ordinary photographs?',o:['Steganography hiding proprietary data within image files','Asymmetric encryption of data appended to image headers','Data masking applied to sensitive fields within documents','Tokenization replacing sensitive data with reference values'],a:0,w:'Steganography hides secret data within ordinary non-secret files like photographs to avoid detection, explaining how proprietary data could leave undetected within normal-looking images.',e:['','Encrypted headers would be detectable by forensic tools examining file','Data masking protects displayed data but does not hide data; and','Tokenization replaces data with tokens for storage, not for hiding'],r:'Name the attack by what it exploits; PQC for harvest-now'},
+{n:'Q466',f:'f26',s:'A security analyst is investigating a suspected case of covert communication within an organization. The analyst discovers a series of seemingly innocent emails containing oddly structured paragraphs. Which of the following steganographic techniques is MOST likely being employed in this scenario?',o:['Using specific word patterns to represent letters','Null cipher technique using text arrangement','Embedding data in audio file metadata','Digital watermarking in image attachments'],a:1,w:'The scenario describes a situation where the covert communication is hidden within the structure of seemingly innocent text, which is a key characteristic of null ciphers.',e:['','','',''],r:'Name the attack by what it exploits; PQC for harvest-now'},
+{n:'Q919',f:'f26',s:'Which cryptanalytic attack method is MOST likely to be effective against a modern symmetric encryption algorithm with a 256-bit key size, strong diffusion properties, and implemented on a smart card?',o:['Linear cryptanalysis','Power analysis attack','Differential cryptanalysis','Meet-in-the-middle attack'],a:1,w:'Modern symmetric encryption algorithms with large key sizes (256-bit) and strong diffusion properties are highly resistant to traditional cryptanalytic methods like differential and linear cryptanalysis.',e:['','','',''],r:'Name the attack by what it exploits; PQC for harvest-now'},
+{n:'Q929',f:'f26',s:'During a penetration test, the team gains temporary access to an encryption appliance and can submit arbitrary messages for encryption. What attack technique should they employ?',o:['Ciphertext-only attack','Known-plaintext attack','Chosen-plaintext attack','Factoring attack'],a:2,w:'Chosen-plaintext attacks leverage device access to feed arbitrary plaintext and observe resulting ciphertext, enabling systematic key deduction without destroying the device.',e:['Ciphertext-only applies when only ciphertext is available, not device access','Known-plaintext uses existing pairs, not controlled input selection; and','','Factoring attacks target RSA\'s mathematical foundation, not encryption devices'],r:'Name the attack by what it exploits; PQC for harvest-now'},
+{n:'Q956',f:'f26',s:'An organization is enhancing its cryptographic defenses against modern attacks. Which of the following approaches is considered the MOST effective in preventing cryptanalytic attacks?',o:['Adopting a multi-layered defense strategy combining algorithms, key management, and threat intelligence','Implementing quantum-resistant algorithms with regular updates','Using the longest possible encryption keys with automated rotation','Integrating real-time threat intelligence into existing cryptographic systems'],a:0,w:'While all options contribute to cryptographic security, adopting a multi-layered defense strategy is the most effective approach. This comprehensive strategy combines various techniques, including diverse algorithm selection (potentially including quantum-resistant ones), robust key management...',e:['','','',''],r:'Name the attack by what it exploits; PQC for harvest-now'},
+{n:'Q970',f:'f26',s:'A multinational pharmaceutical company is establishing secure research collaboration with overseas partners. Their security team has proposed implementing Quantum Key Distribution to protect intellectual property exchanges. However, the partners are located across three continents with varying telecommunications infrastructure. The CISO must present a realistic implementation assessment to the board. Current QKD technology faces practical deployment challenges that the security team must consider. What is the PRIMARY limitation affecting the proposed global QKD deployment?',o:['QKD protocols cannot integrate with existing network encryption standards','Specialized hardware requirements limit practical implementation scope','Quantum keys cannot be stored for later use in communications','QKD provides weaker security than traditional public key infrastructure'],a:1,w:'Current QKD implementations require specialized hardware for photon generation, transmission, and detection, creating practical limitations for widespread deployment despite providing unconditional security guarantees.',e:['QKD can complement existing encryption by providing secure key exchange','','Derived keys can be stored and used like any symmetric; and','QKD provides stronger theoretical security than computational-based PKI'],r:'Name the attack by what it exploits; PQC for harvest-now'},
+{n:'Q1120',f:'f27',s:'A security analyst suspects that sensitive data is being exfiltrated using a combination of steganography and null ciphers. Which of the following detection methods would be MOST effective in identifying this sophisticated technique?',o:['Performing AI-enhanced frequency analysis on outgoing email content','Implementing AI-powered deep packet inspection on all network traffic','Utilizing AI-powered content analysis across multiple data types','Conducting AI-assisted file integrity checks on all stored data'],a:2,w:'Utilizing AI-powered content analysis across multiple data types is the most effective method for detecting the combined use of steganography and null ciphers.',e:['','','',''],r:'Goals first, then primitive, then strength'},
+{n:'Q66',f:'f27',s:'A global financial institution is concerned about the increasing sophistication of cryptanalytic attacks and wants to ensure long-term security for its digital assets. Which of the following actions is MOST critical for maintaining cryptographic agility and defending against evolving threats?',o:['Implementing the strongest encryption algorithms currently available','Conducting quarterly cryptographic audits','Establishing a process for rapid migration to new cryptographic standards','Outsourcing all cryptographic operations to a specialized security firm'],a:2,w:'Cryptographic agility is the ability to quickly transition between different cryptographic primitives, algorithms, and key sizes in response to advances in cryptanalysis or quantum computing.',e:['','','',''],r:'Goals first, then primitive, then strength'},
+{n:'Q117',f:'f27',s:'A financial services company is implementing a new middleware system for processing high-volume transactions. Which encryption technique is MOST appropriate for protecting data in transit within this system, considering the requirements for real-time processing, low latency, and scalability?',o:['Homomorphic encryption with partial homomorphism','Symmetric encryption using AES-256 in GCM mode','Stream cipher encryption using RC4','Asymmetric encryption with 2048-bit keys'],a:1,w:'While all options provide some level of security, symmetric encryption using AES-256 in GCM mode is the MOST appropriate for protecting data in transit within middleware systems requiring real-time processing, low latency, and scalability, especially in high-volume transaction environments.',e:['','','',''],r:'Goals first, then primitive, then strength'},
+{n:'Q247',f:'f27',s:'A financial services firm transmitting large encrypted files to partners experiences significant latency. The security team determines that asymmetric encryption of entire files causes the delay. Which modification maintains security while improving performance?',o:['Encrypt bulk data symmetrically and protect the symmetric key asymmetrically','Reduce asymmetric key sizes to decrease computational overhead','Switch entirely to symmetric encryption with pre-shared keys in applications','Implement parallel asymmetric encryption processing across multiple processors'],a:0,w:'Hybrid encryption leverages fast symmetric algorithms for bulk data while asymmetric encryption secures only the small symmetric key, combining performance with secure distribution.',e:['','Smaller keys weaken cryptographic strength and violate security standards','Embedded pre-shared keys create key management vulnerabilities and distribution challenges; and','Parallelization increases complexity without resolving asymmetric encryption\'s inherent inefficiency'],r:'Goals first, then primitive, then strength'},
+{n:'Q388',f:'f27',s:'A government agency\'s encryption system processes requests in real-time queues. The operations team reports that during peak hours, encryption latency causes transaction timeouts, and the CISO is considering switching to batch-based processing. Compliance requires all transactions to be encrypted before storage. Which processing change would address the latency while maintaining encryption compliance?',o:['Switching from synchronous to asynchronous encryption processing','Increasing the key space by upgrading to longer encryption keys','Implementing stronger initialization vectors for each transaction','Enhancing the confusion property of the encryption algorithm'],a:0,w:'Asynchronous encryption processes requests in batches rather than immediately, reducing peak-hour latency while still ensuring all transactions are encrypted before storage.',e:['','Longer keys increase security strength but would worsen latency, not','Stronger IVs prevent ciphertext patterns but do not address processing; and','Confusion is an algorithm design property that hides key-ciphertext relationships'],r:'Goals first, then primitive, then strength'},
+{n:'Q535',f:'f27',s:'A global corporation with 50,000 employees across 20 countries is implementing S/MIME as part of a comprehensive email security strategy that includes SPF, DKIM, and DMARC. Which of the following represents the MOST significant challenge in deploying S/MIME across the entire organization?',o:['Configuring email servers to support S/MIME encryption and existing security protocols','Ensuring compatibility with existing email filtering and anti-malware systems','Training employees to use S/MIME-enabled email clients effectively','Managing and distributing digital certificates for all users across multiple countries'],a:3,w:'While implementing S/MIME involves several challenges, managing and distributing digital certificates for all users across multiple countries is typically the most significant.',e:['','','',''],r:'Goals first, then primitive, then strength'},
+{n:'Q622',f:'f27',s:'In the context of 5G and edge computing environments, which of the following represents the MOST significant challenge for preventing cryptanalytic attacks?',o:['Increased power consumption of edge devices','Lack of standardized encryption protocols','Real-time analysis of massive data volumes','Higher implementation costs of security measures'],a:2,w:'While 5G and edge computing introduce various challenges, the most significant for cryptanalytic attack prevention is the need for real-time analysis of massive data volumes.',e:['','','',''],r:'Goals first, then primitive, then strength'},
+{n:'Q653',f:'f27',s:'Which approach is MOST effective in a comprehensive continuous monitoring strategy for mitigating both internal and external cryptanalytic threats across an organization\'s cryptographic infrastructure?',o:['Outsourcing all cryptographic operations to a third-party security provider','Maintaining cryptographic agility to swiftly update vulnerable components','Conducting monthly penetration testing of cryptographic systems','Implementing quantum-resistant algorithms for all cryptographic operations'],a:1,w:'In a comprehensive continuous monitoring strategy for cryptographic infrastructure, maintaining cryptographic agility is the most effective approach for mitigating both internal and external cryptanalytic threats.',e:['','','',''],r:'Goals first, then primitive, then strength'},
+{n:'Q910',f:'f27',s:'A healthcare organization is implementing secure email for transmitting patient records to external specialists. The compliance officer requires encryption that protects large attachments efficiently while ensuring only the intended recipient can decrypt them. The IT team has limited experience with cryptographic implementations. Which approach BEST meets these requirements?',o:['Symmetric encryption with keys distributed through a separate secure channel','Asymmetric encryption of all attachments using recipient public keys','Hybrid encryption where attachments use symmetric keys protected by recipient public keys','Digital signatures on attachments to verify sender authenticity'],a:2,w:'Hybrid encryption efficiently handles large attachments with symmetric speed while asymmetric encryption of the symmetric key ensures only the intended recipient can decrypt.',e:['Requires establishing a separate secure channel, adding operational complexity','Asymmetric encryption of large files is computationally prohibitive and slow; and','','Digital signatures provide authenticity and integrity, not confidentiality'],r:'Goals first, then primitive, then strength'},
+{n:'Q942',f:'f27',s:'A security architect needs to encrypt a 500GB database backup for offsite storage. Encrypting directly with RSA would take hours. What approach BEST addresses this performance challenge?',o:['Using longer RSA key lengths to increase encryption throughput','Encrypting the data with a symmetric algorithm and protecting that key with RSA','Compressing the data first to reduce the total encryption workload','Using multiple RSA key pairs to parallelize the encryption process'],a:1,w:'Hybrid encryption uses fast symmetric algorithms for bulk data while RSA protects only the symmetric key, combining speed with secure distribution. (A) Longer keys decrease performance, worsening the problem; (C) Compression reduces size but doesn\'t address RSA\'s slowness; and (D) Multiple key...',e:['Longer keys decrease performance, worsening the problem','','Compression reduces size but doesn\'t address RSA\'s slowness; and','Multiple key pairs add complexity without solving RSA\'s inherent slowness'],r:'Goals first, then primitive, then strength'},
+{n:'Q1019',f:'f27',s:'A retail organization experiences a data breach where attackers exfiltrated customer payment information from the database. Post-incident analysis reveals that while data was encrypted during network transmission and on backup media, the production database stored records in plaintext. The compliance officer must explain to regulators which protection gap allowed the breach. What encryption coverage was missing?',o:['Data in motion encryption between application tiers and database servers','Data at rest encryption for the production database storage','Data in use encryption during transaction processing operations','Key management controls for backup media encryption keys'],a:1,w:'Data at rest encryption protects stored information on media; the production database lacked this protection, leaving customer records vulnerable to exfiltration.',e:['Data in motion was already implemented per the scenario description','','Data in use refers to processing, not storage vulnerability exploited; and','Backup key management was not the gap since backups were'],r:'Goals first, then primitive, then strength'},
+];
+
+
+/* ================= family mindmap (two vertical rails) ================= */
+(function buildFamMap(){
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var svg = document.getElementById('fammap');
+  var CX = 1050, CY = 780;
+  var RX_R = 1310, RX_L = 790;
+  var PH = 28, GAP = 7;
+  var mctx = document.createElement('canvas').getContext('2d');
+  function tw(t, size, weight){ mctx.font = (weight||'600') + ' ' + size + 'px system-ui, sans-serif'; return mctx.measureText(t).width; }
+  function el(name, attrs, parent){
+    var e = document.createElementNS(SVGNS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    (parent || svg).appendChild(e); return e;
+  }
+  var gE = el('g',{}), gL = el('g',{}), gB = el('g',{}), gC = el('g',{});
+  function edge(x1,y1,x2,y2,color,width,bend){
+    var dx=x2-x1, dy=y2-y1, len=Math.sqrt(dx*dx+dy*dy)||1;
+    var nx=-dy/len*bend, ny=dx/len*bend;
+    el('path',{class:'edge', d:'M'+x1+' '+y1+' Q'+(x1+(x2-x1)*0.5+nx)+' '+(y1+(y2-y1)*0.5+ny)+' '+x2+' '+y2,
+               fill:'none', stroke:color, 'stroke-width':width, 'stroke-opacity':0.5}, gE);
+  }
+  function goToLadder(id){
+    var card = document.getElementById('lad-' + id);
+    if (!card) return;
+    card.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  var n = FAMILIES.length;
+  var rows = Math.ceil(n/2);
+  var spacing = rows > 1 ? 1250/(rows-1) : 0;
+  FAMILIES.forEach(function(m, idx){
+    var g = GROUPS[m.g];
+    var row = idx % rows;
+    var right = idx < rows;
+    var mp = [right ? RX_R : RX_L, 155 + row*spacing];
+    var mw = Math.ceil(tw(m.name, 15, '800')) + 40;
+    var mh = 48;
+    edge(CX, CY, mp[0], mp[1], g.color, 3, 24);
+    var ln = m.leaves.length;
+    var total = ln*PH + (ln-1)*GAP;
+    var stackY = mp[1];
+    m.leaves.forEach(function(txt, i){
+      var w = Math.ceil(tw(txt, 12.5, '600')) + 22;
+      var y = stackY - total/2 + i*(PH+GAP) + PH/2;
+      var x = right ? 1680 - w : 420;
+      var sx = right ? mp[0] + mw/2 : mp[0] - mw/2;
+      edge(sx, mp[1], right ? x : x + w, y, g.color, 1.6, 12);
+      var lg = el('g', {class:'node leaf', role:'button', tabindex:'0'}, gL);
+      el('title', {}, lg).textContent = m.name + ' - ' + txt;
+      el('rect',{x:x, y:y-PH/2, width:w, height:PH, rx:13, fill:'#ffffff', stroke:g.color, 'stroke-width':1.5}, lg);
+      var t = el('text',{x:x+w/2, y:y, 'text-anchor':'middle', 'dominant-baseline':'central',
+                         'font-size':12.5, 'font-weight':600, fill:'#28303d'}, lg);
+      t.textContent = txt;
+      lg.addEventListener('click', function(){ goToLadder(m.id); });
+    });
+    var bg = el('g', {class:'node branch', role:'button', tabindex:'0'}, gB);
+    el('title', {}, bg).textContent = m.name + ' - ' + m.q + ' questions';
+    el('rect',{x:mp[0]-mw/2, y:mp[1]-mh/2, width:mw, height:mh, rx:13, fill:g.fill}, bg);
+    var t1 = el('text',{x:mp[0], y:mp[1]-7, 'text-anchor':'middle', 'dominant-baseline':'central',
+                        'font-size':15, 'font-weight':800, fill:'#ffffff'}, bg);
+    t1.textContent = m.name;
+    var t2 = el('text',{x:mp[0], y:mp[1]+11, 'text-anchor':'middle', 'dominant-baseline':'central',
+                        'font-size':10, 'font-weight':600, fill:'#ffffff', 'fill-opacity':0.85}, bg);
+    t2.textContent = m.g + ' · ' + m.q + 'Q';
+    bg.addEventListener('click', function(){ goToLadder(m.id); });
+  });
+  var cw = 260, ch = 78;
+  var gc = el('g', {class:'node center'}, gC);
+  el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
+  var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
+                      'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
+  c0.textContent = 'DOMAIN 7 · PART';
+  var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
+                      'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
+  c1.textContent = 'DECISION';
+  var c2 = el('text',{x:CX, y:CY+19, 'text-anchor':'middle', 'dominant-baseline':'central',
+                      'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
+  c2.textContent = 'FAMILIES';
+})();
+
+/* ================= ladders + radar ================= */
+(function buildLadders(){
+  var box = document.getElementById('ladderbox');
+  FAMILIES.forEach(function(m){
+    var g = GROUPS[m.g];
+    var card = document.createElement('article');
+    card.className = 'ladder';
+    card.id = 'lad-' + m.id;
+    card.style.setProperty('--mc', g.color);
+    var head = document.createElement('div'); head.className = 'head';
+    head.innerHTML = '<h3>' + m.name + '</h3><span class="gt t-' + m.g + '">' + m.g + '</span><span class="cnt">' + m.q + ' questions · ' + m.topic + '</span><span class="links"><a href="#drill" data-drill="' + m.g + '">drill these &darr;</a><a href="d1_cheatsheet_p3.html#card-' + m.g + '">knowledge &nearr;</a></span>';
+    card.appendChild(head);
+    var ol = document.createElement('ol');
+    m.factors.forEach(function(f){ var li = document.createElement('li'); li.innerHTML = f; ol.appendChild(li); });
+    card.appendChild(ol);
+    var rule = document.createElement('div'); rule.className = 'rule';
+    rule.innerHTML = '<b>Rule &middot; </b>' + m.rule;
+    card.appendChild(rule);
+    box.appendChild(card);
+  });
+  var rbox = document.getElementById('radarbox');
+  RADAR.forEach(function(r){
+    var d = document.createElement('article'); d.className = 'rad';
+    d.innerHTML = '<h3>' + r.t + '</h3>' + r.d + '<div class="ex">seen in: ' + r.ex + '</div>';
+    rbox.appendChild(d);
+  });
+})();
+
+/* ================= drill ================= */
+var drillState = {};
+(function buildDrill(){
+  var box = document.getElementById('drillbox');
+  var scA = document.getElementById('sc-a'), scC = document.getElementById('sc-c'),
+      scP = document.getElementById('sc-p'), scM = document.getElementById('sc-m');
+  var TOTAL = QS.length;
+  function updateScore(){
+    var ans = 0, cor = 0;
+    for (var k in drillState){ ans++; if (drillState[k].correct) cor++; }
+    scA.textContent = ans; scC.textContent = cor;
+    scP.textContent = ans ? '(' + Math.round(cor/ans*100) + '% of answered)' : '(0%)';
+    scM.style.width = (ans/TOTAL*100) + '%';
+  }
+  var letters = ['A','B','C','D'];
+
+  var currentFam = null;
+  QS.forEach(function(q){
+    var fam = null;
+    for (var i=0;i<FAMILIES.length;i++) if (FAMILIES[i].id === q.f) fam = FAMILIES[i];
+    var g = GROUPS[fam.g];
+    if (currentFam !== q.f){
+      currentFam = q.f;
+      var fh = document.createElement('div');
+      fh.className = 'famhead';
+      fh.setAttribute('data-g', fam.g);
+      fh.style.setProperty('--fc', g.color);
+      fh.innerHTML = '<h3>' + fam.name + '</h3><span class="gt t-' + fam.g + '">' + fam.g + '</span><span class="cnt">' + fam.q + ' questions</span><a href="d1_cheatsheet_p3.html#card-' + fam.g + '">knowledge card &nearr;</a>';
+      box.appendChild(fh);
+    }
+    var div = document.createElement('article');
+    div.className = 'q';
+    div.setAttribute('data-g', fam.g);
+    div.id = 'q-' + q.n;
+    var qh = document.createElement('div'); qh.className = 'qhead';
+    qh.innerHTML = '<span class="qn">' + q.n + '</span><span class="gt t-' + fam.g + '">' + fam.g + ' · ' + fam.name + '</span><span class="qrule">rule: ' + q.r + '</span>';
+    div.appendChild(qh);
+    var st = document.createElement('p'); st.className = 'stem'; st.textContent = q.s;
+    div.appendChild(st);
+    var opts = document.createElement('div'); opts.className = 'opts';
+    q.o.forEach(function(txt, i){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'opt'; b.setAttribute('data-l', letters[i]);
+      b.textContent = txt;
+      b.addEventListener('click', function(){ answer(div, q, i, fam); });
+      opts.appendChild(b);
+    });
+    div.appendChild(opts);
+    var vd = document.createElement('div'); vd.className = 'qverdict';
+    vd.id = 'v-' + q.n;
+    div.appendChild(vd);
+    box.appendChild(div);
+  });
+
+  function answer(div, q, i, fam){
+    if (drillState[q.n]) return;                      // locked after first pick
+    var correct = i === q.a;
+    drillState[q.n] = {pick:i, correct:correct};
+    div.classList.add('done');
+    var btns = div.querySelectorAll('.opt');
+    btns[q.a].classList.add('right');
+    if (!correct) btns[i].classList.add('wrong');
+    for (var j=0;j<btns.length;j++) btns[j].disabled = true;
+    var vd = document.getElementById('v-' + q.n);
+    vd.style.setProperty('--fc', GROUPS[fam.g].color);
+    var html = '<div class="mark ' + (correct ? 'good' : 'bad') + '">' + (correct ? 'Correct' : 'Not quite') + ' — answer ' + letters[q.a] + '</div>';
+    html += '<p class="why"><b>Why &middot; </b>' + q.w + '</p>';
+    if (q.e && q.e.length){
+      html += '<ul>';
+      q.e.forEach(function(e, k){
+        if (e && k !== q.a) html += '<li><b>' + letters[k] + '</b> — ' + e + '</li>';
+      });
+      html += '</ul>';
+    }
+    html += '<a class="klink" href="d1_cheatsheet_p3.html#card-' + fam.g + '">knowledge: ' + GROUPS[fam.g].name + ' &nearr;</a>';
+    vd.innerHTML = html;
+    vd.classList.add('show');
+    updateScore();
+  }
+
+  // group filter chips
+  var chips = document.getElementById('drillchips');
+  var filter = 'all';
+  function applyFilter(){
+    var heads = box.querySelectorAll('.famhead');
+    heads.forEach(function(h){ h.style.display = (filter==='all' || h.getAttribute('data-g')===filter) ? '' : 'none'; });
+    box.querySelectorAll('.q').forEach(function(qq){
+      qq.style.display = (filter==='all' || qq.getAttribute('data-g')===filter) ? '' : 'none';
+    });
+  }
+  var all = document.createElement('button');
+  all.type='button'; all.className='fchip all on'; all.setAttribute('data-g','all');
+  all.textContent = 'All (' + TOTAL + ')';
+  all.addEventListener('click', function(){ setFilter('all'); });
+  chips.appendChild(all);
+  Object.keys(GROUPS).forEach(function(gid){
+    var g = GROUPS[gid];
+    var b = document.createElement('button');
+    b.type='button'; b.className='fchip'; b.setAttribute('data-g', gid);
+    b.style.setProperty('--c', g.fill);
+    var c = QS.reduce(function(a,q){ var f=null; for(var i=0;i<FAMILIES.length;i++) if(FAMILIES[i].id===q.f) f=FAMILIES[i]; return a + (f.g===gid?1:0); }, 0);
+    b.textContent = gid + ' · ' + g.name + ' (' + c + ')';
+    b.addEventListener('click', function(){ setFilter(gid); });
+    chips.appendChild(b);
+  });
+  function setFilter(g){
+    filter = g;
+    Array.prototype.forEach.call(chips.children, function(b){ b.classList.toggle('on', b.getAttribute('data-g')===g); });
+    applyFilter();
+  }
+  applyFilter();
+
+  // ladder "drill these" links
+  document.querySelectorAll('a[data-drill]').forEach(function(a){
+    a.addEventListener('click', function(){ setFilter(a.getAttribute('data-drill')); });
+  });
+
+  document.getElementById('sc-reset').addEventListener('click', function(){
+    drillState = {};
+    box.querySelectorAll('.q').forEach(function(qq){
+      qq.classList.remove('done');
+      qq.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('right','wrong'); b.disabled = false; });
+      var v = qq.querySelector('.qverdict');
+      v.classList.remove('show'); v.innerHTML = '';
+    });
+    updateScore();
+  });
+  updateScore();
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CISSP D1 &middot; Question Drill part 2 &mdash; 74 scenario questions</title>
+<style>
+  :root{
+    --g1:#b91c1c; --g1f:#dc2626;
+    --g2:#b45309; --g2f:#d97706;
+    --g3:#6d28d9; --g3f:#7c3aed;
+    --g4:#1d4ed8; --g4f:#2563eb;
+    --g5:#047857; --g5f:#059669;
+    --g6:#be185d; --g6f:#db2777;
+    --g7:#0e7490; --g7f:#0891b2;
+    --ink:#1e293b; --muted:#64748b; --bg:#f6f7fb; --line:#e2e8f0;
+    --ok:#047857; --bad:#b91c1c;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+  header.hero{padding:44px 0 10px}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  h1{font-size:clamp(26px,4vw,40px);line-height:1.15;margin:8px 0 10px}
+  .sub{font-size:17px;color:#334155}
+  .sub b{font-weight:800}
+  .sub a{color:#0f172a}
+
+  nav.jump{position:sticky;top:0;z-index:50;background:rgba(246,247,251,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin-top:18px}
+  nav.jump .wrap{display:flex;gap:4px;flex-wrap:wrap;padding:8px 20px;align-items:center}
+  nav.jump a{font-size:13.5px;font-weight:600;color:#334155;text-decoration:none;padding:5px 12px;border-radius:999px}
+  nav.jump a:hover{background:#e8ecf5}
+  nav.jump a.kp{border:1.5px solid #cbd5e1;background:#fff}
+
+  section{padding:34px 0 6px;scroll-margin-top:64px}
+  h2{font-size:24px;margin:0 0 4px}
+  .lede{color:var(--muted);margin:0 0 18px;font-size:15px}
+
+  .gt{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap;vertical-align:1px}
+  .t-g1{background:var(--g1f)} .t-g2{background:var(--g2f)} .t-g3{background:var(--g3f)}
+  .t-g4{background:var(--g4f)} .t-g5{background:var(--g5f)} .t-g6{background:var(--g6f)}
+  .t-g7{background:var(--g7f)}
+
+  .map-panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 8px 4px;box-shadow:0 8px 24px rgba(15,23,42,.06)}
+  svg#fammap{width:100%;height:auto;display:block}
+  .maphint{text-align:center;color:var(--muted);font-size:13px;padding:8px 0 10px}
+  .node{cursor:pointer}
+  .node:hover rect{filter:brightness(.94)}
+
+  .ladders{display:grid;grid-template-columns:repeat(auto-fit,minmax(430px,1fr));gap:14px;margin-top:14px}
+  .ladder{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 18px 13px;border-top:5px solid var(--mc,#94a3b8);box-shadow:0 8px 24px rgba(15,23,42,.05);scroll-margin-top:64px}
+  .ladder .head{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+  .ladder h3{margin:0;font-size:17px;color:var(--mc)}
+  .ladder .cnt{font-size:12px;font-weight:700;color:var(--muted)}
+  .ladder .links{margin-left:auto;font-size:12px;font-weight:700}
+  .ladder .links a{color:var(--mc);text-decoration:none;margin-left:10px}
+  .ladder .links a:hover{text-decoration:underline}
+  .ladder ol{margin:8px 0 0;padding:0;list-style:none;counter-reset:fac}
+  .ladder ol li{counter-increment:fac;position:relative;padding:4px 0 4px 34px;font-size:13.6px;color:#334155;border-bottom:1px dashed #eef1f6}
+  .ladder ol li:last-child{border-bottom:none}
+  .ladder ol li::before{content:counter(fac);position:absolute;left:2px;top:5px;width:22px;height:22px;border-radius:50%;background:var(--mc);color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center}
+  .ladder ol li b{color:#0f172a}
+  .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
+  .ladder .rule b{color:var(--mc);font-style:normal}
+
+  .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
+  .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
+  .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
+  .rad .ex{margin-top:6px;font-size:12px;color:var(--muted);font-weight:600}
+
+  .scorebar{position:sticky;top:49px;z-index:40;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:12px;padding:10px 16px;box-shadow:0 6px 18px rgba(15,23,42,.06);display:flex;gap:16px;align-items:center;flex-wrap:wrap;font-size:14px}
+  .scorebar b{font-size:16px}
+  .scorebar .meter{flex:1;min-width:160px;height:9px;background:#e8ecf5;border-radius:999px;overflow:hidden}
+  .scorebar .meter i{display:block;height:100%;background:linear-gradient(90deg,var(--g4f),var(--g5f));width:0;transition:width .25s}
+  .scorebar button{font:inherit;font-size:13px;font-weight:700;background:#fff;color:#334155;border:1.5px solid #cbd5e1;border-radius:999px;padding:5px 14px;cursor:pointer}
+  .scorebar button:hover{border-color:#334155}
+  .fchips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+  .fchip{font:inherit;font-size:12.5px;font-weight:700;color:#fff;border:none;border-radius:999px;padding:6px 14px;cursor:pointer;background:var(--c,#334155);opacity:.5;transition:opacity .12s}
+  .fchip:hover{opacity:.8}
+  .fchip.on{opacity:1;box-shadow:0 0 0 2px rgba(15,23,42,.28)}
+  .fchip.all{background:#0f172a}
+
+  .famhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:26px 0 8px;padding-bottom:6px;border-bottom:2.5px solid var(--fc,#94a3b8)}
+  .famhead h3{margin:0;font-size:19px;color:var(--fc,#334155)}
+  .famhead .cnt{font-size:12.5px;color:var(--muted);font-weight:700}
+  .famhead a{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--fc,#334155);text-decoration:none}
+  .famhead a:hover{text-decoration:underline}
+
+  .q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px 14px;margin:12px 0;box-shadow:0 6px 18px rgba(15,23,42,.04);scroll-margin-top:120px}
+  .q.done{border-color:#c7d2e4}
+  .qhead{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:7px}
+  .qn{font-weight:800;font-size:13px;color:#fff;background:#0f172a;border-radius:7px;padding:2px 9px}
+  .qrule{margin-left:auto;font-size:11.5px;font-weight:700;color:var(--muted);background:#f1f5f9;border-radius:999px;padding:2px 10px}
+  .stem{margin:0 0 12px;font-size:14.8px;color:#0f172a}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  @media (max-width:760px){.opts{grid-template-columns:1fr}}
+  .opt{font:inherit;font-size:13.6px;text-align:left;color:#334155;background:#fbfcfe;border:1.5px solid #d8dfea;border-radius:10px;padding:9px 12px 9px 38px;cursor:pointer;position:relative;transition:all .12s;line-height:1.4}
+  .opt::before{content:attr(data-l);position:absolute;left:11px;top:9px;font-weight:800;color:#64748b}
+  .opt:hover:not(:disabled){border-color:#64748b;background:#f1f5f9}
+  .opt:disabled{cursor:default;opacity:.88}
+  .opt.right{border-color:var(--ok);background:#ecfdf5;opacity:1}
+  .opt.right::before{color:var(--ok)}
+  .opt.wrong{border-color:var(--bad);background:#fef2f2;opacity:1}
+  .opt.wrong::before{color:var(--bad)}
+  .qverdict{display:none;margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+  .qverdict.show{display:block}
+  .qverdict .mark{font-size:15px;font-weight:800;margin-bottom:4px}
+  .qverdict .mark.good{color:var(--ok)}
+  .qverdict .mark.bad{color:var(--bad)}
+  .qverdict .why{margin:4px 0 8px;font-size:14px;color:#0f172a}
+  .qverdict ul{margin:0;padding:0;list-style:none;font-size:13.2px;color:#334155}
+  .qverdict li{padding:2px 0 2px 20px;position:relative}
+  .qverdict li::before{content:"\2716";position:absolute;left:2px;color:#c2410c;font-weight:700;font-size:11px;top:4px}
+  .qverdict .klink{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;color:var(--fc,#334155);text-decoration:none;border:1.5px solid var(--fc,#94a3b8);border-radius:999px;padding:2px 11px}
+  .qverdict .klink:hover{background:#f1f5f9}
+
+  footer{padding:30px 0 44px;color:var(--muted);font-size:13px}
+  footer code{background:#eef1f6;border-radius:5px;padding:1px 6px;font-size:12px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 2 of 6</div>
+    <h1>D1 Question Drill 2 &mdash; Policy, People & Risk Concepts (topics 8-10)</h1>
+    <p class="sub"><b>92 scenario questions</b> (topics 1&ndash;12) &middot; <b>12 decision families</b> &middot; <b>5 knowledge groups</b> &mdash; forensics and evidence, monitoring and intel, malware defense, change and patch, resources and environment. Continues in <a href="d7_drill_p2.html">part 2: continuity and recovery (80 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+  </div>
+</header>
+
+<nav class="jump">
+  <div class="wrap">
+    <a href="#fmap">Family map</a><a href="#ladders">Factor ladders</a><a href="#radar">Distractor radar</a><a href="#drill">Question drill</a><a class="kp" href="d1_index.html">D1 hub</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="fmap">
+    <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
+    <p class="lede">The 12 part-1 families (of D7&rsquo;s 18 total), colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <div class="map-panel">
+      <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D1 drill part 2"></svg>
+      <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
+    </div>
+  </section>
+
+  <section id="ladders">
+    <h2>2 &middot; Factor ladders &mdash; what beats what, under which circumstances</h2>
+    <p class="lede">For each family: the ranked decision factors distilled from the official explanations. When a scenario highlights factor 1, that answer wins over factor 2 &mdash; and over every distractor archetype below.</p>
+    <div class="ladders" id="ladderbox"></div>
+  </section>
+
+  <section id="radar">
+    <h2>3 &middot; Distractor radar &mdash; the 9 recurring wrong answers</h2>
+    <p class="lede">Wrong options in this bank recycle nine archetypes. Spot the archetype, eliminate instantly, and the choice usually collapses to one answer.</p>
+    <div class="radar" id="radarbox"></div>
+  </section>
+
+  <section id="drill">
+    <h2>4 &middot; Question drill &mdash; all 74, options and all</h2>
+    <p class="lede">Real stems, real A&ndash;D options. Click your pick: it locks, the verdict opens with the why, per-option eliminations, the rule exercised, and a link into the matching knowledge card. Filter by group; the score bar follows you.</p>
+
+    <div class="scorebar">
+      <span>Answered <b id="sc-a">0</b>/74</span>
+      <span>Correct <b id="sc-c">0</b> <span id="sc-p" style="color:var(--muted);font-weight:600">(0%)</span></span>
+      <span class="meter"><i id="sc-m"></i></span>
+      <button id="sc-reset" type="button">reset answers</button>
+    </div>
+    <div class="fchips" id="drillchips"></div>
+    <div id="drillbox"></div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Built from <code>domain1_logic_questions.txt</code> (674 logic questions, 27 topics; this part: 74). Stems, options and answers are the source text; verdicts compress the official explanations.
+  </div>
+</footer>
+
+<script>
+var GROUPS={g1:{name:"Risk Treatment & Controls A",color:"#b91c1c",fill:"#dc2626"},g2:{name:"Risk Treatment & Controls B",color:"#b45309",fill:"#d97706"},g3:{name:"Risk Treatment & Controls C",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"Risk Treatment & Controls D",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Risk Treatment & Controls E",color:"#047857",fill:"#059669"},g6:{name:"Risk Frameworks & RMF",color:"#be185d",fill:"#db2777"},g7:{name:"Threat Modeling & Supply Chain",color:"#0e7490",fill:"#0891b2"}};
+var FAMILIES = [
+{ id:'f08', g:'g1', name:"Policies & Standards", topic:"Security Policies, Standards, Procedures & Guidelines", q:9, leaves:["Managerial or technical?","Loss exceeds appetite?"],
+    factors:[
+     "<b>Managerial or technical?</b> &mdash; CISSP frames risk treatment and control-selection decisions as managerial, risk-based choices, not purely technical ones. Controls exist to manage risk to an acceptable...",
+     "<b>Loss exceeds appetite?</b> &mdash; Choose transfer (insurance) when the potential loss exceeds the organization's risk appetite but the activity must continue."],
+    rule:"Policy mandates, standards specify, procedures execute" },
+{ id:'f09', g:'g1', name:"Personnel Security", topic:"Personnel Security & Human Resources", q:7, leaves:["Managerial or technical?","Loss exceeds appetite?"],
+    factors:[
+     "<b>Managerial or technical?</b> &mdash; CISSP frames risk treatment and control-selection decisions as managerial, risk-based choices, not purely technical ones. Controls exist to manage risk to an acceptable...",
+     "<b>Loss exceeds appetite?</b> &mdash; Choose transfer (insurance) when the potential loss exceeds the organization's risk appetite but the activity must continue."],
+    rule:"Screening, agreements and awareness control the human risk" },
+{ id:'f10', g:'g6', name:"Risk Concepts & ALE", topic:"Risk Management Concepts, ALE & Analysis", q:58, leaves:["Society vs employer: who...","Refuse and escalate?","Profession vs any other...","Framework or ethics...","Do ethics vary by..."],
+    factors:[
+     "<b>Society vs employer: who wins?</b> &mdash; When two canons conflict, choose the action that satisfies the lower-numbered canon \u2014 even if it means going against the employer's directive. Society outranks employer;...",
+     "<b>Refuse and escalate?</b> &mdash; When an employer asks you to do something unethical or illegal, refuse and escalate through proper channels (management, legal, HR). Complying makes you ethically...",
+     "<b>Profession vs any other canon?</b> &mdash; When 'advance the profession' (Canon 4) conflicts with any other canon, the other canon wins \u2014 Canon 4 is last in priority. Threat-intel sharing or peer collaboration... <span class=\"qrefs\">[Q559]</span>",
+     "<b>Framework or ethics foundational?</b> &mdash; Frameworks (ISO 27001, NIST CSF) and ethics serve different purposes: frameworks structure controls; ethics governs conduct and decisions \u2014 ethics is the foundational... <span class=\"qrefs\">[Q315]</span>",
+     "<b>Do ethics vary by geography?</b> &mdash; When operating across regions with differing laws or norms, apply ISC2 ethics consistently and globally \u2014 ethics are universal and do not vary by geography or local...",
+     "<b>Contract or harm prevention?</b> &mdash; Healthcare vendor risk with CEO preference for a supplier: the governing principle is doing nothing harmful to others. Contractual obligations are legally bounded but... <span class=\"qrefs\">[Q362]</span>"],
+    rule:"SLE = AV x EF; ALE = SLE x ARO - compute before answering" }
+];
+
+var RADAR=[
+{t:'Property confusion', d:'Confidentiality, integrity, availability traded as if interchangeable - read which property the stem sacrifices.', ex:'see factor ladders'},
+{t:'Owner misplaced', d:'Risk acceptance or governance duties assigned to the wrong role.', ex:'see factor ladders'},
+{t:'Verb skipped', d:'Controls chosen before the treatment verb (avoid, transfer, mitigate, accept) is named.', ex:'see factor ladders'},
+{t:'ALE arithmetic ignored', d:'Qualitative answers where the stem gives numbers - compute SLE and ALE first.', ex:'see factor ladders'},
+{t:'Framework step swapped', d:'RMF steps out of order, authorization before assessment.', ex:'see factor ladders'},
+{t:'Compliance absolutes', d:'Certification treated as compliance; audits treated as guarantees.', ex:'see factor ladders'},
+{t:'Cloud duty transfer', d:'Provider answers where customer data accountability remains.', ex:'see factor ladders'},
+{t:'Layer skipped', d:'Technology-first answers where the question names policy or governance.', ex:'see factor ladders'},
+{t:'Once-and-done', d:'Point-in-time fixes where continuous monitoring or review is asked.', ex:'see factor ladders'}
+];
+
+var QS = [
+{n:'Q1213',f:'f08',s:'Which approach BEST addresses the ethical and legal considerations of implementing advanced anti-skimming measures at point-of-sale terminals while maintaining customer privacy?',o:['Employing a risk-based approach guided by privacy frameworks to balance security and privacy','Retaining all surveillance data for the maximum period allowed by law','Implementing covert behavioral analytics without customer notification','Utilizing facial recognition for all transactions to prevent fraud'],a:0,w:'Employing a risk-based approach guided by privacy frameworks to balance security and privacy is the most effective method for addressing skimming concerns while respecting customer privacy.',e:['','','',''],r:'Policy mandates, standards specify, procedures execute'},
+{n:'Q267',f:'f08',s:'A multinational corporation is upgrading its perimeter security system with facial recognition technology. Which approach BEST addresses both security needs and privacy concerns when implementing a data retention policy for this system?',o:['Sharing collected data with law enforcement agencies upon request','Deleting all facial recognition data immediately after capture','Implementing a time-limited retention policy with strict access controls','Storing all collected data indefinitely with unrestricted internal access'],a:2,w:'Implementing a time-limited retention policy with strict access controls for facial recognition data in perimeter security systems strikes the best balance between security needs and privacy concerns.',e:['','','',''],r:'Policy mandates, standards specify, procedures execute'},
+{n:'Q330',f:'f08',s:'A financial institution is developing a new web application that processes sensitive customer data. The security team wants to implement a Content Security Policy (CSP) to prevent XSS attacks while ensuring essential functionality. Which of the following CSP configurations is MOST effective in achieving this goal?',o:['default-src \'none\'; script-src \'self\'; connect-src \'self\'; img-src \'self\'','default-src \'self\'; script-src \'self\' https://trusted-cdn.com; style-src \'self\' \'unsafe-inline\'','default-src \'self\'; script-src \'nonce-random123\' \'strict-dynamic\' https:; object-src \'none\'; base-uri \'self\'','script-src \'nonce-random123\'; object-src \'none\'; base-uri \'self\'; form-action \'self\''],a:2,w:'The correct answer provides the most effective balance between security and functionality. It uses \'nonce-random123\' and \'strict-dynamic\' for script sources, which allows for dynamic script loading while preventing inline scripts without proper nonces.',e:['','','',''],r:'Policy mandates, standards specify, procedures execute'},
+{n:'Q334',f:'f08',s:'A security team is redesigning a company\'s password reset process. Which implementation best adheres to the Principle of Least Astonishment while maintaining strong security?',o:['Sending a time-limited password reset link to the user\'s registered email address','Implementing a complex series of steps involving email, SMS, and biometric verification','Automatically resetting passwords to a default value and forcing immediate change upon login','Requiring users to answer five security questions in a specific order'],a:0,w:'The Principle of Least Astonishment states that system behavior should not surprise users. Sending a time-limited password reset link to a registered email is a common, expected process that doesn\'t confuse users while maintaining security.',e:['','','',''],r:'Policy mandates, standards specify, procedures execute'},
+{n:'Q649',f:'f08',s:'A multinational corporation is implementing a new CCTV system across its global offices. Which approach BEST aligns with NIST SP 800-53 AC-23 (Data Mining Protection) while optimally balancing security benefits, employee privacy concerns, and organizational culture?',o:['Developing a comprehensive CCTV policy with guidelines, training, and data protection','Restricting CCTV to building entrances and exits only','Creating a balanced CCTV policy with clear guidelines, training, and data safeguards','Implementing continuous CCTV monitoring in all areas without notifying employees'],a:2,w:'Developing a comprehensive CCTV policy with clear usage guidelines, employee awareness training, and data protection measures is the best approach as it aligns with NIST SP 800-53 AC-23, which emphasizes protecting against unauthorized data mining.',e:['','','',''],r:'Policy mandates, standards specify, procedures execute'},
+{n:'Q673',f:'f08',s:'A security manager discovers that employees frequently ignore security policies because the documents are lengthy and filled with technical jargon. What policy characteristic was violated?',o:['Policies should be brief, clear, and easy to understand','Policies should include detailed step-by-step procedures','Policies should specify mandatory hardware and software products','Policies should contain minimum configuration baselines'],a:0,w:'Effective policies must be concise and easy to understand so that all employees can follow them, ensuring compliance through clarity rather than complexity.',e:['','Step-by-step instructions belong in procedures, not policies; adding them increases','Specifying products is the role of standards, not policies, and; and','Configuration baselines are separate documents; embedding them in policy increases'],r:'Policy mandates, standards specify, procedures execute'},
+{n:'Q715',f:'f08',s:'A healthcare organization\'s security team drafted a comprehensive endpoint protection policy that specifies exact antivirus software versions, detailed installation steps, and minimum scan schedules in a single 40-page document. During an audit, the assessor flags this as a governance problem because the document requires frequent updates whenever software versions change. The CISO must restructure the documentation. Which approach BEST aligns with the security governance hierarchy?',o:['Separate the document into a high-level policy, a standard for product selection, a procedure for installation, and a baseline for scan configurations','Convert the entire document into a guideline so that updates are optional and less disruptive','Keep the single document but delegate update authority to individual department managers','Move all content into the overarching security policy so the board can approve changes centrally'],a:0,w:'Separating into policy, standard, procedure, and baseline ensures the high-level policy rarely changes while technical details are updated independently at the appropriate governance level.',e:['','Converting to a guideline removes mandatory enforcement, leaving endpoint protection','Delegating updates without restructuring still forces frequent changes to the; and','Embedding technical details in the overarching policy contradicts the principle'],r:'Policy mandates, standards specify, procedures execute'},
+{n:'Q759',f:'f08',s:'During an incident review, investigators find that a help desk technician improvised the account provisioning process because no written instructions existed. What document type was missing?',o:['A standard specifying mandatory identity management software','A guideline suggesting recommended provisioning approaches','A baseline defining minimum account configuration settings','A procedure providing step-by-step mandatory provisioning actions'],a:3,w:'Procedures provide mandatory step-by-step instructions for tasks like user provisioning, preventing ad hoc improvisation that introduces security gaps.',e:['Standards define which products to use, but the technician lacked','Guidelines are optional recommendations that do not prevent improvisation in; and','Baselines define minimum configurations for systems, not the sequential steps',''],r:'Policy mandates, standards specify, procedures execute'},
+{n:'Q807',f:'f08',s:'A procurement manager wants to ensure vendors meet minimum security standards before products are accepted. What mechanism BEST supports this goal?',o:['Establishing baseline security requirements as part of the acquisition process','Reviewing the vendor\'s internal operational level agreements for completeness','Requesting the vendor sign a privacy level agreement before negotiations','Conducting a service level report review prior to contract finalization'],a:0,w:'Minimum security requirements establish baseline standards that vendors must meet before products or services are accepted, directly supporting the procurement manager\'s goal.',e:['','OLAs are internal agreements and do not set vendor security','PLAs address personal data protection, not minimum security standards; and','Service level reports measure existing performance, not pre-acceptance standards'],r:'Policy mandates, standards specify, procedures execute'},
+{n:'Q809',f:'f09',s:'After a merger, the CISO finds that acquired staff were never informed about existing security policies. What governance failure does this represent?',o:['Failure to conduct a policy impact assessment before the merger','Failure to continuously communicate policies to all personnel','Failure to establish functional security policies for the new staff','Failure to update baselines for the acquired company\'s systems'],a:1,w:'Policies must be constantly communicated to all personnel; failing to inform acquired staff means the governance process for ongoing communication broke down.',e:['A policy impact assessment addresses changes to policies, but the','','Functional policies may already exist; the gap is that staff; and',''],r:'Screening, agreements and awareness control the human risk'},
+{n:'Q403',f:'f09',s:'A pharmaceutical company\'s R&D lab requires single-person entry verification. Security cameras record tailgating incidents daily but cannot prevent them. The security director must reduce unauthorized physical access while maintaining throughput for 200 researchers. Which physical control BEST addresses this requirement?',o:['Installing turnstile-based mantraps that permit only one person through at a time','Deploying additional high-resolution cameras with real-time alert capabilities','Adding proximity card readers with anti-passback logic at each entrance','Posting security guards at every entry point during all operational hours'],a:0,w:'Mantraps using turnstiles physically allow only one person through at a time, directly preventing tailgating rather than merely detecting it, while supporting throughput for many users.',e:['','Additional cameras enhance detection but still cannot physically prevent tailgating','Anti-passback detects credential misuse but does not physically block followers; and','Guards add human judgment but cannot guarantee prevention at high'],r:'Screening, agreements and awareness control the human risk'},
+{n:'Q442',f:'f09',s:'A healthcare organization is hiring a database administrator who will access patient records containing sensitive medical histories. The security team recommends comprehensive pre-employment verification including criminal history, employment references, and education credentials. The HR director questions whether this level of scrutiny is excessive for a technical role. What principle should guide this decision?',o:['All technical roles require identical screening regardless of access levels','Background checks should be avoided to expedite hiring','Criminal checks are only appropriate for executive positions','Controls should be cost-effective based on the value at risk'],a:3,w:'Security controls including background checks should be cost-effective and proportional to the value at risk—a DBA accessing sensitive patient data warrants thorough screening.',e:['Screening levels should vary based on access and risk, not','Expediting hiring should not override security requirements for sensitive roles; and','Criminal checks apply based on role sensitivity, not organizational level',''],r:'Screening, agreements and awareness control the human risk'},
+{n:'Q557',f:'f09',s:'A healthcare organization experienced a breach after an attacker called the billing department, claimed to be from a partner hospital conducting an audit, and convinced staff to share patient scheduling information. The attacker used intimidation by threatening compliance violations if staff did not cooperate immediately. The CISO must brief the board on root cause. Which factor BEST explains why technical controls failed to prevent this breach?',o:['Firewall rules were not configured to block VoIP traffic from external sources','Social engineering bypasses technical controls by exploiting human psychology','Intrusion detection signatures were outdated for this attack type','Encryption was not implemented on voice communications channels'],a:1,w:'Social engineering uses deception and intimidation to manipulate people into unauthorized actions, rendering technical controls ineffective against human decision-making vulnerabilities.',e:['Attack succeeded through psychological manipulation, not VoIP protocol exploitation','','IDS monitors network traffic patterns, not voice conversation content; and','Voice encryption protects confidentiality during transmission, not decision-making processes'],r:'Screening, agreements and awareness control the human risk'},
+{n:'Q625',f:'f09',s:'A financial services firm discovers that its CFO received a highly customized email appearing to be from a board member, requesting an urgent wire transfer. The email contained specific details about recent acquisitions. What type of attack targeted this executive?',o:['Standard phishing campaign','Spear phishing attack','Whaling attack','Vishing attempt'],a:2,w:'Whaling specifically targets high-level executives like CFOs with customized attacks containing organizational details to increase credibility and success rates.',e:['Standard phishing sends mass emails without targeting specific individuals','Spear phishing targets individuals but not specifically executives; and','','Vishing uses voice calls rather than email messages'],r:'Screening, agreements and awareness control the human risk'},
+{n:'Q688',f:'f09',s:'A financial services firm is onboarding a managed security services provider (MSSP) to handle threat monitoring. The CISO wants to ensure the MSSP maintains agreed response times, detection accuracy, and incident escalation procedures. The legal team insists any commitments be enforceable as part of the contract. Which combination of documents BEST addresses both operational expectations and contractual enforceability?',o:['SLRs to define requirements and SLAs as enforceable contract addenda','OLAs to define internal expectations and PLAs for data protection','Service level reports to document metrics and OLAs for escalation','PLAs to define privacy requirements and SLRs for performance targets'],a:0,w:'SLRs define detailed service descriptions and targets used during procurement, while SLAs serve as enforceable contract addenda documenting the provider\'s commitments to those expectations.',e:['','OLAs govern internal agreements and PLAs address personal data, not','Service level reports measure performance after the fact, not establish; and','PLAs address personal data protection, not threat monitoring performance targets'],r:'Screening, agreements and awareness control the human risk'},
+{n:'Q878',f:'f09',s:'A global e-commerce company is experiencing an increase in phishing attacks targeting their customers. To enhance trust and security in online transactions, they decide to implement Extended Validation (EV) certificates. What is the primary advantage of EV certificates over standard SSL/TLS certificates in combating phishing attacks?',o:['Prominent visual indicators in browser address bars','Longer certificate validity periods reducing maintenance overhead','Enhanced encryption key length for data transmission','Automatic detection and blocking of fraudulent websites'],a:0,w:'Extended Validation (EV) certificates provide a higher level of authentication and verification for websites. In this scenario, their primary advantage over standard SSL/TLS certificates is the prominent visual indicators in browser address bars, such as the organization\'s name and a green address...',e:['','','',''],r:'Screening, agreements and awareness control the human risk'},
+{n:'Q1230',f:'f10',s:'Which biometric authentication method for mobile devices is MOST vulnerable to environmental factors and social engineering attacks, potentially compromising its security effectiveness?',o:['Fingerprint recognition','Facial recognition','Iris scanning','Voice recognition'],a:3,w:'While all biometric methods have vulnerabilities, voice recognition is generally considered the most susceptible to environmental factors (e.g., background noise, illness affecting the user\'s voice) and social engineering attacks (e.g., voice imitation or recorded playback).',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q2',f:'f10',s:'An organization wants to implement a threat modeling methodology that aligns business objectives with technical requirements and provides an attacker-centric view. Which methodology should they select?',o:['STRIDE','DREAD','VAST','PASTA'],a:3,w:'PASTA is a risk-centric, seven-step methodology that aligns business objectives with technical requirements while providing an attacker-centric view of applications and infrastructure.',e:['STRIDE categorizes threats but does not align business objectives','DREAD is a scoring model, not a complete methodology; and','VAST focuses on scalability, not business alignment',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q34',f:'f10',s:'Following a SQL injection attack that compromised sensitive data of over 100,000 customers, which action would BEST mitigate the LONG-TERM business impact for an e-commerce company?',o:['Develop and execute a transparent customer communication and remediation plan','Conduct a comprehensive third-party security audit','Implement real-time database monitoring and alerting systems','Increase the cybersecurity budget by 50% for the next fiscal year'],a:0,w:'While all options are important steps following a SQL injection attack, developing and executing a transparent customer communication and remediation plan is the most critical action to mitigate long-term business impacts.',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q37',f:'f10',s:'An organization must prioritize hardening activities for limited resources. Which approach provides the MOST effective risk reduction?',o:['Focusing hardening efforts on systems with greatest exposure and value','Applying all available patches regardless of system criticality','Implementing identical configurations across all environments','Delegating hardening decisions to individual system administrators'],a:0,w:'Prioritizing hardening based on system exposure and business value ensures limited resources address the highest risks first, maximizing overall vulnerability reduction across the environment.',e:['','Blanket patching ignores risk prioritization','Identical configurations ignore varying risks; and','Decentralized decisions lack strategic focus'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q40',f:'f10',s:'An organization wants to reduce the attack surface of its web servers. Which approach BEST addresses this objective?',o:['Disabling unnecessary services and closing unneeded ports on each server','Implementing network segmentation between server tiers','Deploying intrusion detection systems at network perimeters','Conducting regular vulnerability assessments of applications'],a:0,w:'Hardening reduces system vulnerability by disabling unnecessary services, closing unneeded ports, and removing unused components to minimize the attack surface available to adversaries.',e:['','Segmentation isolates networks, not individual systems','IDS detects attacks, not reduces vulnerabilities; and','Assessments identify issues, not remediate them'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q45',f:'f10',s:'A major bank is transitioning from traditional card-based systems to fingerprint-based biometric payment systems. Which of the following represents the MOST significant new security challenge they should be prepared to address?',o:['Complete elimination of card-related fraud risks','Increased vulnerability to traditional magnetic stripe skimming','Potential for biometric data theft and replay attacks','Reduced need for data encryption in payment transactions'],a:2,w:'While fingerprint-based biometric payment systems offer enhanced security features compared to traditional card-based systems, they introduce new potential vulnerabilities, particularly the risk of biometric data theft and replay attacks.',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q72',f:'f10',s:'In a large-scale IoT deployment for a smart city project, which firmware-level vulnerability in symmetric cryptography implementation poses the highest risk to device security, and what is the most effective mitigation strategy that maintains performance while addressing the specific challenges of resource-constrained IoT devices?',o:['Lack of perfect forward secrecy, mitigated by implementing ephemeral key exchange protocols','Insufficient entropy in key generation, mitigated by using a hybrid cryptosystem with asymmetric key exchange','Weak pseudo-random number generator (PRNG), mitigated by integrating a hardware-based true random number generator (TRNG) with continuous entropy assessment','Side-channel attacks on key extraction, mitigated by implementing power analysis countermeasures'],a:2,w:'In IoT devices, a weak pseudo-random number generator (PRNG) at the firmware level is a critical vulnerability for symmetric cryptography implementation.',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q111',f:'f10',s:'In a government facility implementing a state-of-the-art biometric lock system for high-security areas, which of the following represents the most critical vulnerability according to NIST Special Publication 800-63B guidelines?',o:['Inconsistent fingerprint template extraction algorithms','Insufficient encryption of stored biometric templates','Lack of liveness detection in facial recognition systems','Susceptibility to presentation attacks using artificial biometric characteristics'],a:3,w:'While all options present vulnerabilities in biometric systems, the susceptibility to presentation attacks using artificial biometric characteristics is considered the most critical vulnerability according to NIST SP 800-63B.',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q120',f:'f10',s:'In a bank\'s multi-factor ATM authentication system utilizing Passive Infrared Devices (PIR) for presence detection, PINs, and card readers, which of the following represents the MOST significant vulnerability?',o:['Physical tampering with the ATM card reader','Social engineering attacks targeting ATM users','Spoofing of PIR signals to simulate presence','Electromagnetic interference with the PIR sensors'],a:1,w:'While PIR devices enhance physical security by detecting human presence, and PINs and card readers provide authentication factors, the system remains most vulnerable to social engineering.',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q152',f:'f10',s:'Why is risk management considered a cyclical process rather than a one-time activity?',o:['Regulatory requirements mandate annual assessments regardless of organizational changes','Asset values, threats, and controls change over time requiring continuous reassessment','Insurance providers require periodic documentation updates for coverage renewal','Auditors expect quarterly risk reports for compliance verification purposes'],a:1,w:'Risk management is cyclical because asset values, threats, and controls change over time, necessitating continuous monitoring and reassessment to maintain effective protection.',e:['Regulations vary, not the primary driver','','Insurance is one treatment, not the reason; and','Audit schedules vary by organization'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q173',f:'f10',s:'An organization is evaluating potential vendors for a critical business function. What should be the PRIMARY consideration when assessing these third parties?',o:['The vendor\'s geographic location and time zone alignment','The vendor\'s marketing reputation and brand recognition','The vendor\'s ability to provide the lowest cost services','The vendor\'s risk profile and security control effectiveness'],a:3,w:'Risk management methodologies should be applied to all vendors, suppliers, and service providers, requiring assessment of their risk profile and security controls.',e:['Geographic location is operational, not risk-focused','Brand reputation does not indicate security posture; and','Cost optimization ignores security risk factors',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q191',f:'f10',s:'An organization needs to prioritize security investments across its IT infrastructure. Which approach assigns objective monetary values to assets for risk analysis?',o:['Qualitative analysis using relative ranking systems','Quantitative analysis using monetary values','Categorical analysis using threat classifications','Subjective analysis using expert opinions'],a:1,w:'Quantitative analysis assigns objective numerical and monetary values to assets, enabling precise cost-benefit comparisons and prioritization of security investments based on measurable impact.',e:['Qualitative analysis uses relative rankings like high/medium/low rather than exact values','','categorical threat classification organizes threats but does not assign asset value in dollars; and','subjective expert opinion aligns more with qualitative judgment than objective quantitative measurement'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q194',f:'f10',s:'A security manager must rank organizational assets but lacks precise financial data. Which valuation method would be MOST appropriate?',o:['Quantitative analysis using calculated monetary figures','Fully quantitative assessment using exact dollar amounts','Qualitative analysis using relative ranking categories','Numerical analysis using percentage-based metrics'],a:2,w:'Qualitative analysis uses relative rankings (such as high, medium, and low) to estimate asset value when precise financial figures are unavailable or unnecessary.',e:['Quantitative analysis uses exact monetary values and numeric data','requiring exact dollar amounts describes a quantitative approach, not qualitative; and','','percentage-based metrics are numerical and typically require a quantitative baseline for meaningful interpretation'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q197',f:'f10',s:'Before an organization can effectively identify and manage risks, what must FIRST be accomplished?',o:['Implementation of security controls across all systems','Development of comprehensive incident response procedures','Creation of business continuity plans','Identification and valuation of organizational assets'],a:3,w:'Asset identification and valuation ensures an organization first determines what assets exist and assesses their value using qualitative or quantitative methods before prioritizing protection efforts.',e:['Implementing security controls happens after assets and risks are understood','incident response procedures address how to handle events, not how to identify or value assets; and','business continuity planning focuses on continuing operations during disruption rather than valuing assets',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q203',f:'f10',s:'When balancing security investments, how does understanding both probability and impact improve risk prioritization?',o:['It enables ranking risks to allocate resources to highest-priority items','It ensures all threats receive equal resources regardless of likelihood','It eliminates the need for qualitative assessment methods','It guarantees complete mitigation of all identified vulnerabilities'],a:0,w:'Risk analysis evaluates threats, vulnerabilities, likelihood, and impact so risks can be ranked and resources allocated to the most serious exposures first.',e:['','assigning equal resources ignores prioritization and risk severity','both quantitative and qualitative methods may be used, but the core purpose remains risk prioritization; and','analysis does not guarantee complete mitigation—it supports informed decision-making and treatment planning'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q206',f:'f10',s:'An organization has high-impact assets with low-probability threats and low-impact assets with high-probability threats. Which approach demonstrates proper risk analysis?',o:['Address only high-impact risks regardless of probability','Evaluate both likelihood and impact to determine overall risk ranking','Focus exclusively on high-probability threats regardless of impact','Treat all identified risks as equally important to address'],a:1,w:'Risk analysis requires evaluating likelihood and impact together to accurately rank and prioritize risks using qualitative or quantitative methods. (A) ignoring probability results in an incomplete assessment because likelihood drives prioritization; (C) ignoring impact misses the magnitude of harm...',e:['ignoring probability results in an incomplete assessment because likelihood drives prioritization','','ignoring impact misses the magnitude of harm and business consequence; and','treating all risks equally fails to reflect real differences in severity and exposure'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q212',f:'f10',s:'Why must residual risk acceptance involve senior management rather than security teams alone?',o:['Security teams lack technical expertise to evaluate remaining risks','Owners bear accountability for business consequences of accepted risks','Senior management has more time to review detailed risk assessments','Regulatory requirements mandate executive signatures on all documents'],a:1,w:'Residual risk acceptance belongs to owners and senior management because they are accountable for business outcomes and must formally approve remaining risk after controls are applied.',e:['Security teams provide technical input but typically do not own business risk decisions','','time availability is unrelated to formal risk acceptance; and','acceptance is driven by authority and accountability rather than regulatory signatures'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q227',f:'f10',s:'An organization must prioritize risk mitigation investments. How should ALE inform this decision?',o:['Higher ALE risks should receive mitigation priority when control costs are less than the expected annual loss reduction','Lower ALE risks should receive priority because they are easier to remediate with available resources','ALE should be ignored in favor of qualitative assessments that consider organizational culture and risk appetite','ALE should only influence decisions when the exposure factor exceeds fifty percent of total asset value'],a:0,w:'ALE enables rational investment decisions by quantifying expected annual losses, allowing organizations to justify control expenditures that cost less than the projected risk reduction.',e:['','Lower ALE indicates less annual impact','ALE provides essential quantitative data; and','No threshold limits ALE applicability'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q236',f:'f10',s:'When determining asset value for risk calculations, which approach provides the MOST accurate assessment?',o:['Consider only the replacement cost of physical hardware components','Include both the hardware value and the value of data stored','Use the original purchase price from procurement records','Apply the depreciated book value from accounting systems'],a:1,w:'Asset value encompasses all components including hardware and data, as a laptop\'s total value includes both its physical worth and the value of information it contains.',e:['Hardware alone ignores valuable data components','','Original price ignores current data value; and','Depreciation undervalues critical data assets'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q243',f:'f10',s:'A cybersecurity consultant is assessing the risks associated with a smart building\'s integrated HVAC system. Which of the following represents the MOST significant new vulnerability compared to traditional, non-integrated HVAC systems?',o:['Increased risk of temperature sensor manipulation','Abnormal power consumption patterns leading to system instability','Unauthorized physical access to centralized HVAC controls','Expanded attack surface through network connectivity'],a:3,w:'In smart buildings, integrated HVAC systems are connected to the network and other building management systems, significantly expanding the attack surface compared to traditional, isolated HVAC systems.',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q251',f:'f10',s:'When business innovation requires adopting risky technology, which treatment method balances security with organizational objectives?',o:['Risk avoidance to ensure maximum protection','Risk acceptance without any controls','Risk mitigation through compensating controls','Risk transfer to eliminate all liability'],a:2,w:'Risk mitigation allows organizations to pursue beneficial technologies while implementing compensating controls to reduce potential impact to acceptable levels.',e:['Avoidance prevents beneficial technology adoption','Acceptance without controls ignores security; and','','Transfer cannot eliminate all liability'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q260',f:'f10',s:'An organization purchases cybersecurity insurance after a risk assessment. What limitation should management understand about this approach?',o:['Insurance eliminates the need for security controls','Accountability for breaches cannot be outsourced to the insurer','Insurance policies cover all types of cyber incidents','Premiums decrease after a security incident occurs'],a:1,w:'While cybersecurity insurance transfers financial risk, organizations cannot outsource accountability for breaches to insurers and remain responsible for security outcomes.',e:['Insurance supplements controls, not replaces them','','Policies have specific coverage limitations; and','Incidents typically increase premium costs'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q282',f:'f10',s:'A multinational corporation is implementing a new security strategy to combat insider threats. Which of the following approaches would BEST integrate physical and digital security controls while providing the most comprehensive protection against potential insider attacks?',o:['Conducting regular security awareness training and installing CCTV cameras in all areas','Deploying Data Loss Prevention (DLP) software and requiring smart card access to all facilities','Implementing a unified security information and event management (SIEM) system that correlates physical access logs with digital activity logs','Implementing biometric access control and encrypting all internal network traffic'],a:2,w:'While all options contribute to security, implementing a unified SIEM system that correlates physical access logs with digital activity logs provides the most comprehensive and integrated approach to combating insider threats.',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q291',f:'f10',s:'As cybersecurity threats like Advanced Persistent Threats (APTs) and ransomware evolve rapidly, the Common Criteria (CC) framework needs to adapt. Which approach would MOST effectively enhance the CC\'s ability to address these emerging threats?',o:['Increase the frequency of product re-evaluations and shorten certification cycles','Develop specific Protection Profiles for APTs and ransomware','Implement continuous monitoring and real-time threat intelligence integration','Expand the scope of Protection Profiles to include all potential threat vectors'],a:1,w:'Developing specific Protection Profiles for APTs and ransomware is the most effective way to enhance the Common Criteria framework for emerging threats.',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q312',f:'f10',s:'When implementing full-disk encryption on Windows systems controlling physical security sensors, which approach BEST balances security and performance?',o:['Encrypting all sensor data streams in real-time','Selectively encrypting non-critical system components','Using the most computationally intensive encryption algorithm','Implementing separate encryption for each individual sensor'],a:1,w:'When implementing full-disk encryption on Windows systems controlling physical security sensors, selectively encrypting non-critical system components offers the best balance between security and performance.',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q340',f:'f10',s:'A bank\'s fraud prevention team is evaluating which ATM locations face the highest skimming risk. What factor is MOST relevant to their assessment?',o:['The physical accessibility and monitoring level of the ATM card reader','The encryption strength of the ATM\'s network connection to the bank','The software patch level of the ATM\'s operating system','The authentication protocol used for cardholder PIN verification'],a:0,w:'Skimming requires physical placement of disguised devices on card readers, so ATMs with less physical monitoring and greater accessibility face higher risk of skimmer installation.',e:['','Network encryption protects data in transit, not physical device placement','Software patches address digital vulnerabilities, not physical tampering threats; and','PIN verification protocols address authentication, not physical device attachment'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q379',f:'f10',s:'An incident responder discovers clients auto-trust certificates when CRL downloads fail. What vulnerability does this expose?',o:['Attackers can exploit the default trust behavior to present revoked certificates in man-in-the-middle attacks','Attackers can bypass OCSP stapling by redirecting queries to a compromised responder','Attackers can forge new certificates by impersonating the root certificate authority','Attackers can intercept certificate enrollment requests during the initial issuance phase'],a:0,w:'When CRL downloads fail, clients default to trusting certificates, allowing attackers to weaponize revoked certificates undetected in MITM attacks. (B) OCSP responder compromise is unrelated to CRL download failures; (C) CRL failures don\'t grant certificate forgery capabilities; and (D) Enrollment...',e:['','OCSP responder compromise is unrelated to CRL download failures','CRL failures don\'t grant certificate forgery capabilities; and','Enrollment interception is a separate certificate lifecycle phase'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q383',f:'f10',s:'A manufacturing company completed a risk assessment last year but has since deployed new IoT sensors, experienced supply chain disruptions, and implemented new access controls. The security director recommends repeating the assessment. What characteristic of risk management supports this recommendation?',o:['Risk management is a cyclical continuous process','Risk management requires quantitative asset valuation','Risk management mandates formal risk transfer','Risk management requires board-level approval'],a:0,w:'Risk management is cyclical because asset values, threats, and controls change over time—requiring continuous monitoring and reassessment as the company\'s environment has significantly evolved.',e:['','Quantitative valuation is one method, not a process characteristic','Transfer is one treatment option, not a requirement; and','Board involvement varies by organization, not inherent to process'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q392',f:'f10',s:'A retail company expanding its e-commerce platform discovers that its current threat modeling process cannot scale across multiple development teams working in parallel sprints. The CISO wants a methodology that integrates with Agile practices while maintaining consistent threat identification across the organization. The security budget limits hiring additional threat modeling specialists. Which approach BEST addresses the scalability and resource constraints while supporting Agile integration?',o:['STRIDE categorical analysis','PASTA risk-centric methodology','Kill chain attack analysis','VAST scalable threat modeling'],a:3,w:'VAST stands for Visual, Agile and Simple Threat modeling, specifically designed for scalable, organization-wide modeling that integrates with Agile practices while reducing specialist dependency through simplified approaches.',e:['STRIDE provides threat categories but does not address organizational scalability','PASTA is comprehensive but resource-intensive with seven stages, not optimized; and','Kill chain analyzes attack stages but does not provide scalable',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q423',f:'f10',s:'A fintech startup requires a threat modeling approach that aligns security analysis with business objectives while providing an attacker-centric perspective. Which methodology BEST meets these requirements?',o:['PASTA risk-centric methodology','STRIDE threat categorization framework','VAST scalable modeling approach','Kill chain attack progression framework'],a:0,w:'PASTA explicitly aligns business objectives with technical requirements while providing an attacker-centric view, making it the correct choice for this scenario.',e:['','STRIDE categorizes threats but lacks business objective alignment','VAST emphasizes scalability and simplicity, not business alignment; and','Kill chain maps attack stages, not business-aligned threat modeling'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q434',f:'f10',s:'A healthcare organization completes a risk analysis and determines that a breach would cause regulatory fines, patient lawsuits, and loss of community trust. The security team is documenting which risk component?',o:['Probability of occurrence','Degree of exposure','Impact on the organization','Vulnerability severity'],a:2,w:'Impact encompasses the organizational consequences if risk is realized—including monetary losses, reputational damage, and regulatory penalties. (A) Probability measures likelihood, not consequences of realization; (B) Degree of exposure refers to chance of occurrence, not effects; and (D)...',e:['Probability measures likelihood, not consequences of realization','Degree of exposure refers to chance of occurrence, not effects; and','','Vulnerability severity rates weakness magnitude, not breach consequences'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q463',f:'f10',s:'During a security audit, a team discovers that outdated firewall firmware could allow attackers to bypass network controls. What risk component does the outdated firmware represent?',o:['Vulnerability in the security architecture','Threat to the network perimeter','Impact of a security breach','Residual risk after mitigation'],a:0,w:'Vulnerability is a weakness in architecture that could be exploited—outdated firmware represents a gap in defenses attackers could target. (B) Threats are potential dangers like attackers, not weaknesses; (C) Impact describes consequences after exploitation occurs; and (D) Residual risk remains...',e:['','Threats are potential dangers like attackers, not weaknesses','Impact describes consequences after exploitation occurs; and','Residual risk remains after controls are applied'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q468',f:'f10',s:'In a large financial institution implementing new controls to detect insider threats, which automated response to message integrity violations would be MOST effective in mitigating risks associated with potential data manipulation by insiders?',o:['Automatic revocation of user credentials and initiation of a predefined investigation workflow','Immediate system-wide encryption of all data accessed during the suspicious session','Real-time alerts to the security operations center with detailed audit logs of the violation and affected data','Temporary restriction of all user access to financial systems pending manual review'],a:2,w:'Real-time alerts to the security operations center (SOC) with detailed audit logs of the violation and affected data is the most effective automated response for detecting and mitigating potential insider threats in a financial services organization.',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q482',f:'f10',s:'A security team implements firewall rules and endpoint protection, but ransomware exposure persists. What must senior management formally address?',o:['Threat identification','Vulnerability assessment','Qualitative analysis','Residual risk'],a:3,w:'Residual risk is exposure remaining after implementing compensating controls and requires formal acceptance by senior management or asset owners per organizational policy.',e:['Occurs before control implementation, not after','Identifies weaknesses, not post-control exposure; and','Analysis method, not a risk type',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q506',f:'f10',s:'In the era of quantum computing threats to digital signatures, which key management practice is MOST critical for maintaining the long-term integrity of a Public Key Infrastructure (PKI)?',o:['Implementing quantum-resistant signature algorithms','Ensuring secure generation and protection of root private keys','Using hardware security modules for all signature operations','Increasing the frequency of certificate authority audits'],a:1,w:'While all aspects of key management are important in the face of quantum computing threats, the secure generation and protection of root private keys is the most critical for maintaining the long-term integrity of a Public Key Infrastructure (PKI).',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q517',f:'f10',s:'A healthcare organization implements encryption, access controls, and network segmentation to protect patient records. The security team completes their risk analysis and determines that some exposure to insider threats remains despite all controls. The CISO schedules a meeting with executive leadership. What action must the executives take regarding this remaining exposure?',o:['Conduct additional vulnerability assessments to identify missed security weaknesses','Implement additional compensating controls until exposure reaches zero','Recalculate threat likelihood using quantitative analysis methods','Formally accept the residual risk as owners and senior management'],a:3,w:'Residual risk is exposure remaining after controls are implemented and must be formally accepted by asset owners and senior management per organizational governance requirements.',e:['Assessments identify weaknesses but don\'t address residual risk acceptance','Zero risk is impossible; residual exposure always remains; and','Recalculation doesn\'t fulfill management\'s acceptance responsibility',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q546',f:'f10',s:'In a large enterprise implementing a smart building system with diverse IoT devices, which of the following represents the MOST significant challenge to traditional vulnerability assessment methods?',o:['Challenges in maintaining comprehensive IoT asset inventories','Limited processing capabilities of heterogeneous IoT devices','Varied data collection and privacy practices across IoT manufacturers','Diverse ecosystem of vendors with inconsistent security standards'],a:3,w:'The diverse ecosystem of IoT vendors with inconsistent security standards poses the most significant challenge to traditional vulnerability assessment methods in a smart building system.',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q595',f:'f10',s:'A global financial services company is implementing a virtualization strategy to enhance its disaster recovery capabilities for its critical trading systems. Given that the Recovery Time Objective (RTO) is the maximum tolerable downtime and the Recovery Point Objective (RPO) is the maximum acceptable data loss, which of the following MOST accurately describes the likely impact of this virtualization strategy?',o:['Virtualization will have a minimal impact on both RTO and RPO as the primary benefit is cost reduction, not improved recovery metrics.','Virtualization will substantially improve RPO but may increase RTO due to the additional time required to provision and configure virtual environments during recovery.','Virtualization will likely decrease both RTO and RPO by enabling rapid deployment of pre-configured systems and more frequent, efficient data backups.','Virtualization will significantly reduce RTO but may slightly increase RPO due to the complexity of managing virtual machine snapshots.'],a:2,w:'Virtualization typically improves both RTO and RPO in disaster recovery scenarios. It reduces RTO by allowing quick deployment of pre-configured virtual machines, eliminating the need for physical hardware setup.',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q597',f:'f10',s:'A global manufacturing company is planning to deploy thousands of IoT devices across its facilities to enhance operational efficiency. Which approach would BEST address the challenges of scalability and real-time threat detection when integrating these devices into the organization\'s existing security monitoring infrastructure?',o:['Utilizing cloud-based analytics platforms to process and analyze IoT device data in batches','Implementing a dedicated IoT security operations center (SOC) separate from the main security infrastructure','Deploying adaptive algorithms for pattern recognition and anomaly detection on aggregated IoT data streams','Reducing the frequency of data collection from IoT devices to manage volume and processing load'],a:2,w:'Deploying adaptive algorithms for pattern recognition and anomaly detection on aggregated IoT data streams provides the best solution for scalability and real-time threat detection in a large-scale IoT deployment.',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q630',f:'f10',s:'Which cryptographic vulnerability is MOST concerning for resource-constrained IoT devices in smart home systems?',o:['Vulnerability to timing attacks on cryptographic operations','Use of symmetric encryption for all communications','Insufficient entropy for secure key generation','Lack of perfect forward secrecy in protocols'],a:2,w:'Resource-constrained IoT devices in smart home systems often struggle with generating truly random numbers due to limited computational power and lack of sufficient entropy sources.',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q631',f:'f10',s:'Why is asset valuation considered a prerequisite step before an organization can effectively identify and manage risks?',o:['It establishes network segmentation boundaries for critical infrastructure systems','It creates baseline security configurations required for regulatory compliance audits','It defines the organizational hierarchy responsible for incident response procedures','It determines the monetary or relative worth of assets so protection efforts can be prioritized appropriately'],a:3,w:'Asset valuation identifies valuable assets through quantitative and qualitative analysis, enabling organizations to allocate protection resources proportional to each asset\'s importance.',e:['Network segmentation is a technical control unrelated to determining asset','Baseline configurations address technical hardening, not the valuation of organizational; and','Organizational hierarchy defines roles, not asset worth needed for risk',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q656',f:'f10',s:'A government agency\'s security architect must prioritize protection for hundreds of systems but leadership rejects purely subjective assessments. The agency also lacks resources for complete monetary valuation of every system. The architect proposes a hybrid approach combining both analysis types. Which combination BEST satisfies leadership\'s objectivity concerns while remaining achievable with limited resources?',o:['Apply quantitative monetary analysis to critical systems and qualitative relative rankings to remaining assets','Use qualitative rankings for all systems and present them as final valuations','Assign arbitrary dollar values to all systems to satisfy the objectivity requirement','Delay valuation entirely until full monetary analysis resources become available'],a:0,w:'Applying quantitative monetary values to critical systems satisfies objectivity demands for high-priority assets, while qualitative rankings efficiently address remaining systems within resource constraints.',e:['','Purely qualitative rankings were already rejected by leadership as too','Arbitrary dollar values lack analytical rigor and do not provide; and','Delaying valuation leaves the agency unable to prioritize system protection'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q663',f:'f10',s:'When risk analysis identifies multiple threats to an asset, what organizational objective does this analysis primarily support beyond risk identification?',o:['Justifying security treatments and obtaining management support for control implementation','Documenting compliance requirements for regulatory audit purposes','Establishing baseline security configurations for system hardening procedures','Creating incident response procedures for security event handling'],a:0,w:'Risk analysis supports the objective of justifying security treatments and gaining management approval for implementing controls by identifying threats, vulnerabilities, likelihood, and impact.',e:['','Compliance documentation may use risk results, but documenting compliance is not the primary purpose of risk analysis','Baseline configuration is part of technical implementation, not risk justification; and','Incident response procedures address operational response after incidents occur'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q677',f:'f10',s:'An incident responder finds covert hardware components inside servers that are exfiltrating data. What acquisition risk category does this represent?',o:['Counterfeit devices replacing genuine server components','Product tampering modifying devices after manufacture','Lack of service level agreement monitoring metrics','Implants inserted for unauthorized espionage activities'],a:3,w:'Implants are hardware or software components stealthily inserted into products to perform unauthorized activities such as espionage or data theft, matching covert exfiltration components.',e:['Counterfeits imitate genuine products to deceive buyers, not perform active','Tampering modifies existing components rather than inserting additional covert hardware; and','SLA monitoring gaps are contractual issues, not covert hardware threats',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q690',f:'f10',s:'A startup\'s CISO is building a new risk program from scratch. The board wants a rapid initial assessment using relative categories, followed later by precise financial figures. What sequence of valuation approaches supports this phased strategy?',o:['Quantitative first to establish monetary baselines, then qualitative for ongoing monitoring','Qualitative analysis exclusively, never transitioning to monetary-based valuations later','Quantitative analysis exclusively, skipping the initial rapid assessment phase entirely','Qualitative first using relative rankings, then quantitative using monetary values as the program matures'],a:3,w:'Beginning with qualitative relative rankings provides rapid initial categorization, while transitioning to quantitative monetary analysis delivers the precise financial figures the board expects as the program matures.',e:['Starting with quantitative analysis contradicts the board\'s request for rapid','Never transitioning to monetary values fails to deliver the precise; and','Skipping the rapid assessment phase ignores the board\'s explicit phased',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q692',f:'f10',s:'When budget constraints prevent a fully quantitative asset valuation, what approach provides the MOST practical alternative?',o:['Deferring all valuation until sufficient budget is allocated for full analysis','Eliminating the valuation step and proceeding directly to risk treatment selection','Quantitative analysis estimating precise dollar values for every organizational asset','Qualitative analysis using relative rankings to prioritize assets without monetary figures'],a:3,w:'Qualitative analysis uses relative ranking systems that do not require monetary values, making it practical when budget constraints prevent fully quantitative approaches.',e:['Deferring valuation entirely leaves the organization unable to prioritize risk','Skipping valuation prevents informed risk treatment since asset importance remains; and','Precise dollar values for every asset is the fully quantitative',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q710',f:'f10',s:'A company is migrating its critical applications to a cloud environment. Which of the following is considered the MOST critical vulnerability they should address first?',o:['Physical access to cloud provider data centers','Outdated operating systems in virtual machines','Lack of network segmentation in the cloud','Misconfigured access controls and permissions'],a:3,w:'While all options can be vulnerabilities, misconfigured access controls and permissions are considered the most critical vulnerability specific to cloud environments.',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q729',f:'f10',s:'A financial services firm is merging with a smaller company that used qualitative asset rankings while the acquiring firm uses quantitative monetary valuations. The CISO must unify both approaches under a single risk management framework before the next regulatory audit in 60 days. Which approach BEST addresses the integration challenge while maintaining defensible risk decisions?',o:['Adopt the qualitative system firm-wide for speed and simplicity','Assign monetary values to the acquired firm\'s assets using quantitative analysis','Maintain both systems independently and report them separately to regulators','Defer all valuation activities until after the regulatory audit deadline'],a:1,w:'Quantitative analysis assigns objective monetary values, enabling a unified framework that produces consistent, defensible financial metrics across both organizations for regulatory scrutiny.',e:['Downgrading to qualitative loses the acquiring firm\'s existing monetary precision','','Dual systems create inconsistency and fail to unify risk management; and','Deferring valuation leaves the organization unprepared for the upcoming regulatory'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q732',f:'f10',s:'An organization must calculate precise financial losses for insurance purposes. Which risk analysis methodology provides the required numerical precision?',o:['Qualitative analysis using categorical risk ratings and descriptive scales','Hybrid analysis combining qualitative and quantitative assessment frameworks','Quantitative analysis using numerical values and monetary estimates','Comparative analysis benchmarking against established industry standards'],a:2,w:'Quantitative analysis is the correct answer. It uses numerical values and monetary estimates to calculate risk, which supports decisions such as determining insurance coverage levels.',e:['Qualitative analysis uses descriptive rankings rather than financial metrics','Hybrid analysis combines qualitative and quantitative methods but is not strictly financial; and','','Comparative analysis benchmarks risk posture but does not calculate exact monetary values'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q734',f:'f10',s:'Before conducting a risk assessment, what should a security manager complete FIRST regarding organizational resources?',o:['Implement technical controls to protect the most visible systems','Identify assets and assign a value to each one through valuation','Develop incident response procedures for the highest-profile threats','Establish a vulnerability scanning schedule for all network segments'],a:1,w:'Before risks can be identified and managed, organizational assets must first be identified and valued so that protection efforts align with asset importance.',e:['Implementing controls before knowing asset values leads to misallocated protection','','Incident response procedures address reaction, not the prerequisite asset identification; and','Vulnerability scanning identifies weaknesses but cannot prioritize without knowing asset'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q755',f:'f10',s:'After completing a comprehensive risk analysis, who should ultimately decide whether to accept the residual risk associated with a critical business system?',o:['The Chief Information Security Officer who oversees security controls','The risk assessment team who conducted the analysis','The system owner who understands the asset and has authority','The internal audit department who validates compliance'],a:2,w:'The system owner understands the asset’s mission importance, business value, and operational requirements, making them best suited to determine its value.',e:['The CISO provides oversight and security leadership but may not know detailed business value','The risk assessment team evaluates risk but does not own the asset; and','','Internal audit validates compliance rather than defining business value'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q765',f:'f10',s:'An IT director must quickly rank assets but lacks precise financial data. Which valuation method BEST fits this constraint?',o:['Quantitative analysis assigning exact monetary replacement costs to each asset','Quantitative analysis calculating annualized loss expectancy for every system','Qualitative analysis using a relative ranking system with categories like high, medium, and low','Quantitative analysis deriving single loss expectancy from historical financial records'],a:2,w:'Qualitative analysis uses relative ranking systems without requiring precise monetary data, making it suitable when exact financial figures are unavailable.',e:['Exact monetary replacement costs require the precise financial data the','Annualized loss expectancy calculations demand specific monetary figures unavailable here; and','','Single loss expectancy derivation requires historical financial records the director'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q771',f:'f10',s:'A mid-size retailer\'s risk manager discovers that asset inventories across five regional offices use inconsistent valuation methods—some monetary, others categorical rankings. The CFO demands a consolidated risk report within two weeks to present to investors. The risk manager has limited staff and incomplete financial records for several offices. Which valuation strategy BEST balances accuracy with the reporting deadline?',o:['Conduct full quantitative analysis across all offices before the deadline','Use qualitative relative rankings to consolidate and then convert high-priority assets to monetary values','Report only the offices that already have quantitative valuations completed','Request a deadline extension to perform comprehensive monetary valuation everywhere'],a:1,w:'Starting with qualitative relative rankings enables rapid consolidation across all offices, while converting high-priority assets to monetary values provides the financial data investors need within the deadline.',e:['Full quantitative analysis requires complete financial records and time the','','Partial reporting excludes offices and fails to give investors a; and','Requesting extensions does not address the immediate investor reporting requirement'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q777',f:'f10',s:'A healthcare organization is planning to implement IoT devices for patient monitoring. Which approach BEST addresses the risk assessment phase when integrating third-party APIs in these medical IoT devices?',o:['Performing a comprehensive threat modeling of the API ecosystem','Implementing end-to-end encryption for all API communications','Conducting regular penetration testing on the IoT devices','Establishing a real-time monitoring system for API activities'],a:0,w:'While all options contribute to IoT security, performing a comprehensive threat modeling of the API ecosystem is the most effective approach for the risk assessment phase when integrating third-party APIs in medical IoT devices.',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q797',f:'f10',s:'A security analyst discovers that an employee combined publicly available salary ranges with department headcounts to determine executive compensation. Which technique was employed?',o:['Aggregation','Data diddling','Inference','Data mining'],a:2,w:'Inference deduces insights by combining separate data elements to reveal confidential information not explicitly available in individual sources. (A) Aggregation collects data but doesn\'t deduce conclusions; (B) Data diddling involves data modification, not analysis; and (D) Data mining discovers...',e:['Aggregation collects data but doesn\'t deduce conclusions','Data diddling involves data modification, not analysis; and','','Data mining discovers patterns in large datasets'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q1015',f:'f10',s:'A security researcher demonstrates that by repeatedly accessing specific memory rows in a server\'s DDR4 RAM, they can cause bit flips in adjacent rows and read RSA private keys from other processes. The data center manager must recommend hardware-level protections. What vulnerability class does this attack exploit?',o:['Bypass control mechanisms in memory management','Single point of failure in memory architecture','Physical memory emanation through Rowhammer effects','Time-of-Check Time-of-Use race conditions'],a:2,w:'Rowhammer and RAMBleed exploit physical effects where repeatedly accessing DRAM rows causes adjacent rows to leak charge and flip bits, enabling attackers to read sensitive data through emanation-like physical phenomena.',e:['Bypass controls are intentional circumvention features, not physical memory effects','Single point of failure concerns system redundancy, not memory bit; and','','Race conditions involve timing between check and use, not physical'],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q1209',f:'f10',s:'Which approach is MOST effective for prioritizing vulnerability remediation in a large enterprise environment with limited resources?',o:['Address vulnerabilities based on their exploit availability','Remediate vulnerabilities by system criticality alone','Implement patches based on vendor severity ratings','Prioritize based on risk assessment and business impact analysis'],a:3,w:'In a large enterprise environment with limited resources, prioritizing vulnerability remediation based on risk assessment and business impact analysis is the most effective approach.',e:['','','',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+{n:'Q1226',f:'f10',s:'An organization needs threat modeling that scales across multiple teams and integrates with their existing agile workflows. Which methodology should they evaluate?',o:['STRIDE for its comprehensive threat categories','PASTA for its seven-stage risk analysis','DREAD for its risk scoring capabilities','VAST for its scalable organization-wide approach'],a:3,w:'VAST stands for Visual, Agile and Simple Threat modeling and focuses specifically on scalable, organization-wide modeling that integrates with agile development processes.',e:['STRIDE categorizes threats but lacks scalability focus','PASTA is risk-centric but not agile-focused; and','DREAD scores risks but lacks workflow integration',''],r:'SLE = AV x EF; ALE = SLE x ARO - compute before answering'},
+];
+
+
+/* ================= family mindmap (two vertical rails) ================= */
+(function buildFamMap(){
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var svg = document.getElementById('fammap');
+  var CX = 1050, CY = 780;
+  var RX_R = 1310, RX_L = 790;
+  var PH = 28, GAP = 7;
+  var mctx = document.createElement('canvas').getContext('2d');
+  function tw(t, size, weight){ mctx.font = (weight||'600') + ' ' + size + 'px system-ui, sans-serif'; return mctx.measureText(t).width; }
+  function el(name, attrs, parent){
+    var e = document.createElementNS(SVGNS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    (parent || svg).appendChild(e); return e;
+  }
+  var gE = el('g',{}), gL = el('g',{}), gB = el('g',{}), gC = el('g',{});
+  function edge(x1,y1,x2,y2,color,width,bend){
+    var dx=x2-x1, dy=y2-y1, len=Math.sqrt(dx*dx+dy*dy)||1;
+    var nx=-dy/len*bend, ny=dx/len*bend;
+    el('path',{class:'edge', d:'M'+x1+' '+y1+' Q'+(x1+(x2-x1)*0.5+nx)+' '+(y1+(y2-y1)*0.5+ny)+' '+x2+' '+y2,
+               fill:'none', stroke:color, 'stroke-width':width, 'stroke-opacity':0.5}, gE);
+  }
+  function goToLadder(id){
+    var card = document.getElementById('lad-' + id);
+    if (!card) return;
+    card.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  var n = FAMILIES.length;
+  var rows = Math.ceil(n/2);
+  var spacing = rows > 1 ? 1250/(rows-1) : 0;
+  FAMILIES.forEach(function(m, idx){
+    var g = GROUPS[m.g];
+    var row = idx % rows;
+    var right = idx < rows;
+    var mp = [right ? RX_R : RX_L, 155 + row*spacing];
+    var mw = Math.ceil(tw(m.name, 15, '800')) + 40;
+    var mh = 48;
+    edge(CX, CY, mp[0], mp[1], g.color, 3, 24);
+    var ln = m.leaves.length;
+    var total = ln*PH + (ln-1)*GAP;
+    var stackY = mp[1];
+    m.leaves.forEach(function(txt, i){
+      var w = Math.ceil(tw(txt, 12.5, '600')) + 22;
+      var y = stackY - total/2 + i*(PH+GAP) + PH/2;
+      var x = right ? 1680 - w : 420;
+      var sx = right ? mp[0] + mw/2 : mp[0] - mw/2;
+      edge(sx, mp[1], right ? x : x + w, y, g.color, 1.6, 12);
+      var lg = el('g', {class:'node leaf', role:'button', tabindex:'0'}, gL);
+      el('title', {}, lg).textContent = m.name + ' - ' + txt;
+      el('rect',{x:x, y:y-PH/2, width:w, height:PH, rx:13, fill:'#ffffff', stroke:g.color, 'stroke-width':1.5}, lg);
+      var t = el('text',{x:x+w/2, y:y, 'text-anchor':'middle', 'dominant-baseline':'central',
+                         'font-size':12.5, 'font-weight':600, fill:'#28303d'}, lg);
+      t.textContent = txt;
+      lg.addEventListener('click', function(){ goToLadder(m.id); });
+    });
+    var bg = el('g', {class:'node branch', role:'button', tabindex:'0'}, gB);
+    el('title', {}, bg).textContent = m.name + ' - ' + m.q + ' questions';
+    el('rect',{x:mp[0]-mw/2, y:mp[1]-mh/2, width:mw, height:mh, rx:13, fill:g.fill}, bg);
+    var t1 = el('text',{x:mp[0], y:mp[1]-7, 'text-anchor':'middle', 'dominant-baseline':'central',
+                        'font-size':15, 'font-weight':800, fill:'#ffffff'}, bg);
+    t1.textContent = m.name;
+    var t2 = el('text',{x:mp[0], y:mp[1]+11, 'text-anchor':'middle', 'dominant-baseline':'central',
+                        'font-size':10, 'font-weight':600, fill:'#ffffff', 'fill-opacity':0.85}, bg);
+    t2.textContent = m.g + ' · ' + m.q + 'Q';
+    bg.addEventListener('click', function(){ goToLadder(m.id); });
+  });
+  var cw = 260, ch = 78;
+  var gc = el('g', {class:'node center'}, gC);
+  el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
+  var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
+                      'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
+  c0.textContent = 'DOMAIN 7 · PART';
+  var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
+                      'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
+  c1.textContent = 'DECISION';
+  var c2 = el('text',{x:CX, y:CY+19, 'text-anchor':'middle', 'dominant-baseline':'central',
+                      'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
+  c2.textContent = 'FAMILIES';
+})();
+
+/* ================= ladders + radar ================= */
+(function buildLadders(){
+  var box = document.getElementById('ladderbox');
+  FAMILIES.forEach(function(m){
+    var g = GROUPS[m.g];
+    var card = document.createElement('article');
+    card.className = 'ladder';
+    card.id = 'lad-' + m.id;
+    card.style.setProperty('--mc', g.color);
+    var head = document.createElement('div'); head.className = 'head';
+    head.innerHTML = '<h3>' + m.name + '</h3><span class="gt t-' + m.g + '">' + m.g + '</span><span class="cnt">' + m.q + ' questions · ' + m.topic + '</span><span class="links"><a href="#drill" data-drill="' + m.g + '">drill these &darr;</a><a href="d1_cheatsheet_p2.html#card-' + m.g + '">knowledge &nearr;</a></span>';
+    card.appendChild(head);
+    var ol = document.createElement('ol');
+    m.factors.forEach(function(f){ var li = document.createElement('li'); li.innerHTML = f; ol.appendChild(li); });
+    card.appendChild(ol);
+    var rule = document.createElement('div'); rule.className = 'rule';
+    rule.innerHTML = '<b>Rule &middot; </b>' + m.rule;
+    card.appendChild(rule);
+    box.appendChild(card);
+  });
+  var rbox = document.getElementById('radarbox');
+  RADAR.forEach(function(r){
+    var d = document.createElement('article'); d.className = 'rad';
+    d.innerHTML = '<h3>' + r.t + '</h3>' + r.d + '<div class="ex">seen in: ' + r.ex + '</div>';
+    rbox.appendChild(d);
+  });
+})();
+
+/* ================= drill ================= */
+var drillState = {};
+(function buildDrill(){
+  var box = document.getElementById('drillbox');
+  var scA = document.getElementById('sc-a'), scC = document.getElementById('sc-c'),
+      scP = document.getElementById('sc-p'), scM = document.getElementById('sc-m');
+  var TOTAL = QS.length;
+  function updateScore(){
+    var ans = 0, cor = 0;
+    for (var k in drillState){ ans++; if (drillState[k].correct) cor++; }
+    scA.textContent = ans; scC.textContent = cor;
+    scP.textContent = ans ? '(' + Math.round(cor/ans*100) + '% of answered)' : '(0%)';
+    scM.style.width = (ans/TOTAL*100) + '%';
+  }
+  var letters = ['A','B','C','D'];
+
+  var currentFam = null;
+  QS.forEach(function(q){
+    var fam = null;
+    for (var i=0;i<FAMILIES.length;i++) if (FAMILIES[i].id === q.f) fam = FAMILIES[i];
+    var g = GROUPS[fam.g];
+    if (currentFam !== q.f){
+      currentFam = q.f;
+      var fh = document.createElement('div');
+      fh.className = 'famhead';
+      fh.setAttribute('data-g', fam.g);
+      fh.style.setProperty('--fc', g.color);
+      fh.innerHTML = '<h3>' + fam.name + '</h3><span class="gt t-' + fam.g + '">' + fam.g + '</span><span class="cnt">' + fam.q + ' questions</span><a href="d1_cheatsheet_p2.html#card-' + fam.g + '">knowledge card &nearr;</a>';
+      box.appendChild(fh);
+    }
+    var div = document.createElement('article');
+    div.className = 'q';
+    div.setAttribute('data-g', fam.g);
+    div.id = 'q-' + q.n;
+    var qh = document.createElement('div'); qh.className = 'qhead';
+    qh.innerHTML = '<span class="qn">' + q.n + '</span><span class="gt t-' + fam.g + '">' + fam.g + ' · ' + fam.name + '</span><span class="qrule">rule: ' + q.r + '</span>';
+    div.appendChild(qh);
+    var st = document.createElement('p'); st.className = 'stem'; st.textContent = q.s;
+    div.appendChild(st);
+    var opts = document.createElement('div'); opts.className = 'opts';
+    q.o.forEach(function(txt, i){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'opt'; b.setAttribute('data-l', letters[i]);
+      b.textContent = txt;
+      b.addEventListener('click', function(){ answer(div, q, i, fam); });
+      opts.appendChild(b);
+    });
+    div.appendChild(opts);
+    var vd = document.createElement('div'); vd.className = 'qverdict';
+    vd.id = 'v-' + q.n;
+    div.appendChild(vd);
+    box.appendChild(div);
+  });
+
+  function answer(div, q, i, fam){
+    if (drillState[q.n]) return;                      // locked after first pick
+    var correct = i === q.a;
+    drillState[q.n] = {pick:i, correct:correct};
+    div.classList.add('done');
+    var btns = div.querySelectorAll('.opt');
+    btns[q.a].classList.add('right');
+    if (!correct) btns[i].classList.add('wrong');
+    for (var j=0;j<btns.length;j++) btns[j].disabled = true;
+    var vd = document.getElementById('v-' + q.n);
+    vd.style.setProperty('--fc', GROUPS[fam.g].color);
+    var html = '<div class="mark ' + (correct ? 'good' : 'bad') + '">' + (correct ? 'Correct' : 'Not quite') + ' — answer ' + letters[q.a] + '</div>';
+    html += '<p class="why"><b>Why &middot; </b>' + q.w + '</p>';
+    if (q.e && q.e.length){
+      html += '<ul>';
+      q.e.forEach(function(e, k){
+        if (e && k !== q.a) html += '<li><b>' + letters[k] + '</b> — ' + e + '</li>';
+      });
+      html += '</ul>';
+    }
+    html += '<a class="klink" href="d1_cheatsheet_p2.html#card-' + fam.g + '">knowledge: ' + GROUPS[fam.g].name + ' &nearr;</a>';
+    vd.innerHTML = html;
+    vd.classList.add('show');
+    updateScore();
+  }
+
+  // group filter chips
+  var chips = document.getElementById('drillchips');
+  var filter = 'all';
+  function applyFilter(){
+    var heads = box.querySelectorAll('.famhead');
+    heads.forEach(function(h){ h.style.display = (filter==='all' || h.getAttribute('data-g')===filter) ? '' : 'none'; });
+    box.querySelectorAll('.q').forEach(function(qq){
+      qq.style.display = (filter==='all' || qq.getAttribute('data-g')===filter) ? '' : 'none';
+    });
+  }
+  var all = document.createElement('button');
+  all.type='button'; all.className='fchip all on'; all.setAttribute('data-g','all');
+  all.textContent = 'All (' + TOTAL + ')';
+  all.addEventListener('click', function(){ setFilter('all'); });
+  chips.appendChild(all);
+  Object.keys(GROUPS).forEach(function(gid){
+    var g = GROUPS[gid];
+    var b = document.createElement('button');
+    b.type='button'; b.className='fchip'; b.setAttribute('data-g', gid);
+    b.style.setProperty('--c', g.fill);
+    var c = QS.reduce(function(a,q){ var f=null; for(var i=0;i<FAMILIES.length;i++) if(FAMILIES[i].id===q.f) f=FAMILIES[i]; return a + (f.g===gid?1:0); }, 0);
+    b.textContent = gid + ' · ' + g.name + ' (' + c + ')';
+    b.addEventListener('click', function(){ setFilter(gid); });
+    chips.appendChild(b);
+  });
+  function setFilter(g){
+    filter = g;
+    Array.prototype.forEach.call(chips.children, function(b){ b.classList.toggle('on', b.getAttribute('data-g')===g); });
+    applyFilter();
+  }
+  applyFilter();
+
+  // ladder "drill these" links
+  document.querySelectorAll('a[data-drill]').forEach(function(a){
+    a.addEventListener('click', function(){ setFilter(a.getAttribute('data-drill')); });
+  });
+
+  document.getElementById('sc-reset').addEventListener('click', function(){
+    drillState = {};
+    box.querySelectorAll('.q').forEach(function(qq){
+      qq.classList.remove('done');
+      qq.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('right','wrong'); b.disabled = false; });
+      var v = qq.querySelector('.qverdict');
+      v.classList.remove('show'); v.innerHTML = '';
+    });
+    updateScore();
+  });
+  updateScore();
+})();
+
+</script>
+</body>
+</html>

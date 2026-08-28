@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CISSP D3 &middot; Security Architecture &amp; Engineering &mdash; study hub</title>
+<style>
+  :root{--ink:#1e293b;--muted:#64748b;--bg:#f6f7fb;--line:#e2e8f0}
+  *{box-sizing:border-box}
+  body{margin:0;font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  header{padding:44px 0 8px}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  h1{font-size:clamp(26px,4vw,38px);margin:8px 0 10px}
+  .sub{font-size:16.5px;color:#334155}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin:24px 0 8px}
+  a.card{display:block;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:0 8px 24px rgba(15,23,42,.06);color:var(--ink)}
+  a.card:hover{box-shadow:0 12px 30px rgba(15,23,42,.14)}
+  .kicker{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .card h2{margin:6px 0 6px;font-size:18px}
+  .card p{margin:0;font-size:13.5px;color:#334155}
+  .stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 14px;font-size:13px;color:#334155}
+  .stat b{display:block;font-size:19px;color:#0f172a}
+  footer{padding:24px 0 40px;color:var(--muted);font-size:13px}
+  code{background:#eef1f6;border-radius:5px;padding:1px 6px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">CISSP &middot; Domain 3 &middot; Security Architecture &amp; Engineering</div>
+  <h1>D3 Study Hub</h1>
+  <p class="sub">Three knowledge parts (18 knowledge-map CSVs, 1,614 rows) and five drill parts covering all <b>633 scenario questions</b> across 19 topics.</p>
+  <div class="stats">
+    <div class="stat"><b>18</b>knowledge CSVs</div>
+    <div class="stat"><b>1,614</b>knowledge rows</div>
+    <div class="stat"><b>633</b>drill questions</div>
+    <div class="stat"><b>19</b>question families</div>
+    <div class="stat"><b>18</b>knowledge groups</div>
+  </div>
+</header>
+<div class="grid">
+  <a class="card" href="d3_cheatsheet_p1.html"><div class="kicker">knowledge &middot; part 1</div><h2>Cryptography</h2><p>Symmetric &middot; asymmetric &amp; exchange &middot; hashing/MAC/signatures &middot; PKI &middot; key management &middot; quantum/PQC/steganography &middot; fundamentals &amp; attacks. Drill: part 1 (144 Q).</p></a>
+  <a class="card" href="d3_cheatsheet_p2.html"><div class="kicker">knowledge &middot; part 2</div><h2>Models, Evaluation &amp; Physical</h2><p>Security models &amp; TCB &middot; evaluation criteria &amp; frameworks &middot; physical access &amp; biometrics &middot; site &amp; facility design &middot; environmental controls. Drill: parts 2&ndash;3 (130 + 76 Q).</p></a>
+  <a class="card" href="d3_cheatsheet_p3.html"><div class="kicker">knowledge &middot; part 3</div><h2>Cloud, Architecture &amp; Controls</h2><p>Cloud &amp; virtualization &middot; ICS/SCADA/IoT &amp; zero trust &middot; system architecture &middot; web vulnerabilities &middot; MLS &amp; data controls &middot; hardening &amp; design. Drill: parts 4&ndash;5 (125 + 158 Q).</p></a>
+  <a class="card" href="d3_drill_p1.html"><div class="kicker">drill &middot; part 1</div><h2>Cryptography &mdash; 144 Q</h2><p>Topics 1&ndash;8: symmetric, asymmetric, hashing &amp; signatures, PKI, key management, cryptanalysis, quantum/PQC, fundamentals.</p></a>
+  <a class="card" href="d3_drill_p2.html"><div class="kicker">drill &middot; part 2</div><h2>Models &amp; Physical &mdash; 130 Q</h2><p>Topics 9&ndash;12: security models, TCB, evaluation frameworks, physical access &amp; biometrics.</p></a>
+  <a class="card" href="d3_drill_p3.html"><div class="kicker">drill &middot; part 3</div><h2>Site &amp; Environmental &mdash; 76 Q</h2><p>Topics 13&ndash;14: CPTED &amp; facility layout, HVAC, power and fire protection.</p></a>
+  <a class="card" href="d3_drill_p4.html"><div class="kicker">drill &middot; part 4</div><h2>Cloud &amp; Zero Trust &mdash; 125 Q</h2><p>Topic 15: cloud service &amp; deployment models, virtualization, ICS/SCADA, IoT, zero trust.</p></a>
+  <a class="card" href="d3_drill_p5.html"><div class="kicker">drill &middot; part 5</div><h2>Architecture &amp; MLS &mdash; 158 Q</h2><p>Topics 16&ndash;19: memory/rings/TPM/hypervisor, web vulnerabilities, MLS &amp; data controls, secure design principles.</p></a>
+</div>
+<footer>Built 2026-08-24 from the d3_g01&ndash;g18 knowledge maps, <code>domain3_logic_questions.txt</code> and the destcert D3 mindmaps. Offline pages; no external dependencies.</footer>
+</div>
+</body>
+</html>

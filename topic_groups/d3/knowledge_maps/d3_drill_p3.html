@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CISSP D3 &middot; Question Drill part 3 &mdash; 76 scenario questions</title>
+<style>
+  :root{
+    --g1:#b91c1c; --g1f:#dc2626;
+    --g2:#b45309; --g2f:#d97706;
+    --g3:#6d28d9; --g3f:#7c3aed;
+    --g4:#1d4ed8; --g4f:#2563eb;
+    --g5:#047857; --g5f:#059669;
+    --g6:#be185d; --g6f:#db2777;
+    --g7:#0e7490; --g7f:#0891b2;
+    --ink:#1e293b; --muted:#64748b; --bg:#f6f7fb; --line:#e2e8f0;
+    --ok:#047857; --bad:#b91c1c;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+  header.hero{padding:44px 0 10px}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  h1{font-size:clamp(26px,4vw,40px);line-height:1.15;margin:8px 0 10px}
+  .sub{font-size:17px;color:#334155}
+  .sub b{font-weight:800}
+  .sub a{color:#0f172a}
+
+  nav.jump{position:sticky;top:0;z-index:50;background:rgba(246,247,251,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin-top:18px}
+  nav.jump .wrap{display:flex;gap:4px;flex-wrap:wrap;padding:8px 20px;align-items:center}
+  nav.jump a{font-size:13.5px;font-weight:600;color:#334155;text-decoration:none;padding:5px 12px;border-radius:999px}
+  nav.jump a:hover{background:#e8ecf5}
+  nav.jump a.kp{border:1.5px solid #cbd5e1;background:#fff}
+
+  section{padding:34px 0 6px;scroll-margin-top:64px}
+  h2{font-size:24px;margin:0 0 4px}
+  .lede{color:var(--muted);margin:0 0 18px;font-size:15px}
+
+  .gt{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap;vertical-align:1px}
+  .t-g1{background:var(--g1f)} .t-g2{background:var(--g2f)} .t-g3{background:var(--g3f)}
+  .t-g4{background:var(--g4f)} .t-g5{background:var(--g5f)} .t-g6{background:var(--g6f)}
+  .t-g7{background:var(--g7f)}
+
+  .map-panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 8px 4px;box-shadow:0 8px 24px rgba(15,23,42,.06)}
+  svg#fammap{width:100%;height:auto;display:block}
+  .maphint{text-align:center;color:var(--muted);font-size:13px;padding:8px 0 10px}
+  .node{cursor:pointer}
+  .node:hover rect{filter:brightness(.94)}
+
+  .ladders{display:grid;grid-template-columns:repeat(auto-fit,minmax(430px,1fr));gap:14px;margin-top:14px}
+  .ladder{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 18px 13px;border-top:5px solid var(--mc,#94a3b8);box-shadow:0 8px 24px rgba(15,23,42,.05);scroll-margin-top:64px}
+  .ladder .head{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+  .ladder h3{margin:0;font-size:17px;color:var(--mc)}
+  .ladder .cnt{font-size:12px;font-weight:700;color:var(--muted)}
+  .ladder .links{margin-left:auto;font-size:12px;font-weight:700}
+  .ladder .links a{color:var(--mc);text-decoration:none;margin-left:10px}
+  .ladder .links a:hover{text-decoration:underline}
+  .ladder ol{margin:8px 0 0;padding:0;list-style:none;counter-reset:fac}
+  .ladder ol li{counter-increment:fac;position:relative;padding:4px 0 4px 34px;font-size:13.6px;color:#334155;border-bottom:1px dashed #eef1f6}
+  .ladder ol li:last-child{border-bottom:none}
+  .ladder ol li::before{content:counter(fac);position:absolute;left:2px;top:5px;width:22px;height:22px;border-radius:50%;background:var(--mc);color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center}
+  .ladder ol li b{color:#0f172a}
+  .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
+  .ladder .rule b{color:var(--mc);font-style:normal}
+
+  .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
+  .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
+  .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
+  .rad .ex{margin-top:6px;font-size:12px;color:var(--muted);font-weight:600}
+
+  .scorebar{position:sticky;top:49px;z-index:40;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:12px;padding:10px 16px;box-shadow:0 6px 18px rgba(15,23,42,.06);display:flex;gap:16px;align-items:center;flex-wrap:wrap;font-size:14px}
+  .scorebar b{font-size:16px}
+  .scorebar .meter{flex:1;min-width:160px;height:9px;background:#e8ecf5;border-radius:999px;overflow:hidden}
+  .scorebar .meter i{display:block;height:100%;background:linear-gradient(90deg,var(--g4f),var(--g5f));width:0;transition:width .25s}
+  .scorebar button{font:inherit;font-size:13px;font-weight:700;background:#fff;color:#334155;border:1.5px solid #cbd5e1;border-radius:999px;padding:5px 14px;cursor:pointer}
+  .scorebar button:hover{border-color:#334155}
+  .fchips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+  .fchip{font:inherit;font-size:12.5px;font-weight:700;color:#fff;border:none;border-radius:999px;padding:6px 14px;cursor:pointer;background:var(--c,#334155);opacity:.5;transition:opacity .12s}
+  .fchip:hover{opacity:.8}
+  .fchip.on{opacity:1;box-shadow:0 0 0 2px rgba(15,23,42,.28)}
+  .fchip.all{background:#0f172a}
+
+  .famhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:26px 0 8px;padding-bottom:6px;border-bottom:2.5px solid var(--fc,#94a3b8)}
+  .famhead h3{margin:0;font-size:19px;color:var(--fc,#334155)}
+  .famhead .cnt{font-size:12.5px;color:var(--muted);font-weight:700}
+  .famhead a{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--fc,#334155);text-decoration:none}
+  .famhead a:hover{text-decoration:underline}
+
+  .q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px 14px;margin:12px 0;box-shadow:0 6px 18px rgba(15,23,42,.04);scroll-margin-top:120px}
+  .q.done{border-color:#c7d2e4}
+  .qhead{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:7px}
+  .qn{font-weight:800;font-size:13px;color:#fff;background:#0f172a;border-radius:7px;padding:2px 9px}
+  .qrule{margin-left:auto;font-size:11.5px;font-weight:700;color:var(--muted);background:#f1f5f9;border-radius:999px;padding:2px 10px}
+  .stem{margin:0 0 12px;font-size:14.8px;color:#0f172a}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  @media (max-width:760px){.opts{grid-template-columns:1fr}}
+  .opt{font:inherit;font-size:13.6px;text-align:left;color:#334155;background:#fbfcfe;border:1.5px solid #d8dfea;border-radius:10px;padding:9px 12px 9px 38px;cursor:pointer;position:relative;transition:all .12s;line-height:1.4}
+  .opt::before{content:attr(data-l);position:absolute;left:11px;top:9px;font-weight:800;color:#64748b}
+  .opt:hover:not(:disabled){border-color:#64748b;background:#f1f5f9}
+  .opt:disabled{cursor:default;opacity:.88}
+  .opt.right{border-color:var(--ok);background:#ecfdf5;opacity:1}
+  .opt.right::before{color:var(--ok)}
+  .opt.wrong{border-color:var(--bad);background:#fef2f2;opacity:1}
+  .opt.wrong::before{color:var(--bad)}
+  .qverdict{display:none;margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+  .qverdict.show{display:block}
+  .qverdict .mark{font-size:15px;font-weight:800;margin-bottom:4px}
+  .qverdict .mark.good{color:var(--ok)}
+  .qverdict .mark.bad{color:var(--bad)}
+  .qverdict .why{margin:4px 0 8px;font-size:14px;color:#0f172a}
+  .qverdict ul{margin:0;padding:0;list-style:none;font-size:13.2px;color:#334155}
+  .qverdict li{padding:2px 0 2px 20px;position:relative}
+  .qverdict li::before{content:"\2716";position:absolute;left:2px;color:#c2410c;font-weight:700;font-size:11px;top:4px}
+  .qverdict .klink{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;color:var(--fc,#334155);text-decoration:none;border:1.5px solid var(--fc,#94a3b8);border-radius:999px;padding:2px 11px}
+  .qverdict .klink:hover{background:#f1f5f9}
+
+  footer{padding:30px 0 44px;color:var(--muted);font-size:13px}
+  footer code{background:#eef1f6;border-radius:5px;padding:1px 6px;font-size:12px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 3 of 5</div>
+    <h1>D3 Question Drill 3 &mdash; Site Design & Environmental (topics 13-14)</h1>
+    <p class="sub"><b>92 scenario questions</b> (topics 1&ndash;12) &middot; <b>12 decision families</b> &middot; <b>5 knowledge groups</b> &mdash; forensics and evidence, monitoring and intel, malware defense, change and patch, resources and environment. Continues in <a href="d7_drill_p2.html">part 2: continuity and recovery (80 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+  </div>
+</header>
+
+<nav class="jump">
+  <div class="wrap">
+    <a href="#fmap">Family map</a><a href="#ladders">Factor ladders</a><a href="#radar">Distractor radar</a><a href="#drill">Question drill</a><a class="kp" href="d3_cheatsheet_p2.html">&#9733; knowledge part 2</a><a class="kp" href="d3_index.html">D3 hub</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="fmap">
+    <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
+    <p class="lede">The 12 part-1 families (of D7&rsquo;s 18 total), colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <div class="map-panel">
+      <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D3 drill part 3"></svg>
+      <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
+    </div>
+  </section>
+
+  <section id="ladders">
+    <h2>2 &middot; Factor ladders &mdash; what beats what, under which circumstances</h2>
+    <p class="lede">For each family: the ranked decision factors distilled from the official explanations. When a scenario highlights factor 1, that answer wins over factor 2 &mdash; and over every distractor archetype below.</p>
+    <div class="ladders" id="ladderbox"></div>
+  </section>
+
+  <section id="radar">
+    <h2>3 &middot; Distractor radar &mdash; the 9 recurring wrong answers</h2>
+    <p class="lede">Wrong options in this bank recycle nine archetypes. Spot the archetype, eliminate instantly, and the choice usually collapses to one answer.</p>
+    <div class="radar" id="radarbox"></div>
+  </section>
+
+  <section id="drill">
+    <h2>4 &middot; Question drill &mdash; all 76, options and all</h2>
+    <p class="lede">Real stems, real A&ndash;D options. Click your pick: it locks, the verdict opens with the why, per-option eliminations, the rule exercised, and a link into the matching knowledge card. Filter by group; the score bar follows you.</p>
+
+    <div class="scorebar">
+      <span>Answered <b id="sc-a">0</b>/76</span>
+      <span>Correct <b id="sc-c">0</b> <span id="sc-p" style="color:var(--muted);font-weight:600">(0%)</span></span>
+      <span class="meter"><i id="sc-m"></i></span>
+      <button id="sc-reset" type="button">reset answers</button>
+    </div>
+    <div class="fchips" id="drillchips"></div>
+    <div id="drillbox"></div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Built from <code>domain3_logic_questions.txt</code> (633 logic questions, 19 topics; this part: 76). Stems, options and answers are the source text; verdicts compress the official explanations.
+  </div>
+</footer>
+
+<script>
+var GROUPS={g1:{name:"Security Models & TCB",color:"#b91c1c",fill:"#dc2626"},g2:{name:"Evaluation & Frameworks",color:"#b45309",fill:"#d97706"},g3:{name:"Physical Access & Biometrics",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"Site & Facility Design",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Environmental Controls",color:"#047857",fill:"#059669"}};
+var FAMILIES = [
+{ id:'f13', g:'g4', name:'Site & facility design', topic:'Site & Facility Design (CPTED, Layout)', q:51, leaves:['AC vent shows what?'],
+    factors:['<b>AC vent shows what?</b> &mdash; Intruders bypassing the main entrance via an air conditioning vent demonstrates the principle failure: detection mechanisms should monitor all potential penetration... <span class="qrefs">[Q570]</span>'],
+    rule:'CPTED and layered zones before technology' },
+{ id:'f14', g:'g5', name:'Environmental controls', topic:'Environmental Controls (HVAC, Power, Fire)', q:25, leaves:['Four-hour outage...','RF eavesdropping scenario?','Life safety outranks?','Fire response order?'],
+    factors:['<b>Four-hour outage classification?</b> &mdash; Scenario: four-hour complete outage; UPS depleted after eight minutes; diesel generator failed to start. Classification: a blackout exceeding UPS capacity, compounded by... <span class="qrefs">[Q870]</span>',
+     '<b>RF eavesdropping scenario?</b> &mdash; Scenario: defense contractor whose radio frequency (RF) emissions are captured by a competitor despite fencing and badges. Mitigation: deploy TEMPEST-compliant shielding... <span class="qrefs">[Q877]</span>',
+     '<b>Life safety outranks?</b> &mdash; CISSP mindset: life safety outranks data protection. Priority order: people first, then equipment, then data, then the building. Environmental control selection is a...',
+     '<b>Fire response order?</b> &mdash; Evacuation-first sequencing in fire suppression planning: detect → alarm/evacuate → contain (dampers) → suppress. Life safety always takes priority over equipment.'],
+    rule:'UPS for seconds, generators for hours; detect before suppressing' }
+];
+
+var RADAR=[
+{t:'Wrong artifact attacked', d:'Attacking the key, the ciphertext, the implementation or the math - questions ask which.', ex:'see factor ladders'},
+{t:'Guarantee mismatch', d:'Confidentiality controls offered for integrity or authentication asks - match the property.', ex:'see factor ladders'},
+{t:'Layer skipped', d:'Solutions that start at technology while the question names an earlier planning step.', ex:'see factor ladders'},
+{t:'Single point of trust', d:'One control, vendor or path presented as total protection.', ex:'see factor ladders'},
+{t:'Speed over correctness', d:'Performance options chosen where the scored factor is correctness of the control.', ex:'see factor ladders'},
+{t:'Absolute promises', d:'Guarantees of prevention or unbreakability - reject absolutes.', ex:'see factor ladders'},
+{t:'Detection sold as prevention', d:'Monitoring or audit answers where prevention is asked.', ex:'see factor ladders'},
+{t:'Vendor first', d:'Outsourcing proposed where governance or design ownership is the scored step.', ex:'see factor ladders'},
+{t:'Once-and-done', d:'Point-in-time fixes where lifecycle or continuous operation is required.', ex:'see factor ladders'}
+];
+
+var QS = [
+{n:'Q1129',f:'f13',s:'A mid-size financial services firm is migrating its customer relationship management system to a SaaS provider that uses proprietary data schemas and APIs. The compliance officer raises concerns that regulatory changes may require switching providers within 18 months. Which approach BEST addresses the compliance officer\'s concern while supporting the migration timeline?',o:['Negotiate data portability clauses and use standardized data formats alongside the provider\'s schemas','Delay the migration until regulatory requirements are finalized and a permanent provider is selected','Accept the vendor lock-in risk since SaaS providers typically support regulatory compliance natively','Migrate all data to an on-premises solution to eliminate third-party dependency entirely'],a:0,w:'Using multiple providers and avoiding proprietary dependency mitigates vendor lock-in, and negotiating portability clauses ensures the organization can migrate if regulatory changes require it.',e:['','Delaying migration indefinitely ignores the business need and timeline pressure','Accepting lock-in contradicts the need for flexibility under regulatory change; and',''],r:'CPTED and layered zones before technology'},
+{n:'Q29',f:'f13',s:'A high-security government facility is upgrading its perimeter lighting system to improve energy efficiency while maintaining robust threat detection. Which of the following adaptive lighting features is MOST likely to provide the optimal balance between security effectiveness and energy conservation?',o:['Gradual light intensity changes based on pre-programmed time schedules','Constant low-level lighting with manual override capabilities for security personnel','Motion-activated flood lights that illuminate the entire perimeter when triggered','Smart sensors that trigger targeted lighting in specific zones based on detected movement'],a:3,w:'Smart sensors that trigger targeted lighting in specific zones based on detected movement offer the best balance between security effectiveness and energy conservation.',e:['','','',''],r:'CPTED and layered zones before technology'},
+{n:'Q59',f:'f13',s:'A global organization is implementing a new perimeter security strategy for its geographically dispersed branch offices. Which approach would BEST ensure consistent security implementation and ongoing management across all locations?',o:['Establishing standardized security policies, procedures, and baselines','Conducting quarterly security audits and vulnerability assessments','Implementing Network Access Control (NAC) at each branch office','Deploying a centralized Security Information and Event Management (SIEM) system'],a:0,w:'While all options contribute to a robust security posture, establishing standardized security policies, procedures, and baselines is the BEST approach to ensure consistent implementation and management of perimeter security across geographically dispersed locations.',e:['','','',''],r:'CPTED and layered zones before technology'},
+{n:'Q155',f:'f13',s:'When conducting a comprehensive security survey for a Tier 4 data center, which factor is MOST critical for ensuring both long-term physical security and operational resilience?',o:['Implementation of redundant power systems','Advanced environmental monitoring capabilities','Multi-layered access control measures','Strategic site selection and geographical location'],a:3,w:'Strategic site selection and geographical location is the most critical factor as it impacts both long-term physical security (e.g., natural disaster risks, accessibility) and operational resilience (e.g., space for expansion, power availability, connectivity options).',e:['','','',''],r:'CPTED and layered zones before technology'},
+{n:'Q158',f:'f13',s:'A security operations center receives an alert that a perimeter sensor has been triggered. The team reviews camera footage and identifies an individual attempting to enter through a service entrance. They determine the intruder is targeting the server room and begin coordinating with law enforcement. Which sequence of physical security control functions has the team executed?',o:['Deter, Delay, Detect','Detect, Assess, Respond','Delay, Detect, Assess','Assess, Respond, Deter'],a:1,w:'The sensor triggered detection, camera review enabled assessment of the attack method and target, and coordinating with law enforcement represents the response action to remediate the threat.',e:['Deterrence was not described; the sequence begins with an already-triggered','','No delay mechanism was described; the intruder triggered detection first; and','Assessment cannot precede detection; you must detect before analyzing'],r:'CPTED and layered zones before technology'},
+{n:'Q203',f:'f13',s:'A high-security data center is upgrading its emergency lighting system to meet new industry standards and enhance security. Which feature BEST addresses both regulatory compliance and security concerns in this context?',o:['Dual-circuit lighting system with automatic failover capabilities','Bright, constantly illuminated exit signs with redundant power sources','Motion-activated hallway lights with infrared and heat sensors','Battery-powered backup lighting with automatic activation and audit logging'],a:3,w:'In high-security data centers, emergency lighting systems must balance regulatory compliance, safety requirements, and security needs. Battery-powered backup lighting with automatic activation and audit logging is the best feature because it ensures continuous illumination during power outages,...',e:['','','',''],r:'CPTED and layered zones before technology'},
+{n:'Q272',f:'f13',s:'A financial institution\'s branch manager reports that employees prop open the rear entrance for convenience during deliveries. The CISO discovers that the door has no alarm, no camera coverage, and uses a simple spring latch. Budget allows addressing only two of the three gaps immediately. Which two controls provide the BEST combination of preventive and detective capability?',o:['Install a deadbolt lock and a door-ajar alarm sensor','Add a camera and a door-ajar alarm sensor','Install a deadbolt lock and add camera coverage','Replace the door with a mantrap and add camera coverage'],a:0,w:'A deadbolt provides stronger preventive control against unauthorized entry, while a door-ajar alarm provides detective capability to alert when the door is propped open, covering both control types within budget.',e:['','Two detective controls without a stronger lock leave the preventive','A camera is detective only; this pair lacks alerting when; and','A mantrap is disproportionate for a delivery entrance and likely'],r:'CPTED and layered zones before technology'},
+{n:'Q358',f:'f13',s:'A facility manager needs to improve nighttime safety for employees in a parking structure. Which physical security control BEST addresses this requirement?',o:['Installing additional closed-circuit television cameras throughout the structure','Deploying radio-frequency identification badge readers at all entry points','Implementing adequate lighting throughout the parking structure areas','Placing bollards and vehicle barriers at the structure\'s entrance points'],a:2,w:'Lighting is an important physical security control for the safety of people, directly addressing the nighttime safety concern for employees in the parking structure.',e:['Cameras monitor activity but do not directly improve personal safety','Badge readers control access but do not address safety in; and','','Bollards prevent vehicle intrusion but do not improve personal safety'],r:'CPTED and layered zones before technology'},
+{n:'Q383',f:'f13',s:'An organization wants to slow down an attacker attempting to gain unauthorized entry to a secure facility. Which type of physical security control should be implemented?',o:['Detective controls such as motion sensors','Deterrent controls such as warning signage','Delay controls such as physical locks','Response controls such as security guards'],a:2,w:'Delay controls impede attacker progress by requiring additional time to bypass obstacles like locks, providing opportunity for detection and response.',e:['Detective controls identify intrusion events, not slow attackers','Deterrent controls discourage attempts, not delay progress; and','','Response controls remediate after detection, not during intrusion'],r:'CPTED and layered zones before technology'},
+{n:'Q384',f:'f13',s:'When designing physical intrusion detection, which approach provides the MOST comprehensive protection?',o:['Monitoring only primary entry points like doors and windows','Installing sensors exclusively on exterior walls','Focusing detection on high-value asset storage areas','Covering all penetration routes including ventilation ducts'],a:3,w:'Comprehensive physical security requires monitoring all possible penetration routes including obvious entries and less apparent paths like ventilation systems and construction openings.',e:['Ignores less obvious entry points attackers exploit','Excludes internal areas and alternate routes; and','Misses perimeter vulnerabilities and entry points',''],r:'CPTED and layered zones before technology'},
+{n:'Q386',f:'f13',s:'A security team discovers that an intrusion has occurred at a facility. They must now determine the attack method and identify the target. Which physical security control function are they performing?',o:['Assess','Detect','Respond','Delay'],a:0,w:'Assessment analyzes the attack method, identifies the target, and determines appropriate remediation after an intrusion has been detected. (B) Detection identifies occurrence, not method or target; (C) Response implements remediation after assessment completes; and (D) Delay prevents intrusion, not...',e:['','Detection identifies occurrence, not method or target','Response implements remediation after assessment completes; and','Delay prevents intrusion, not investigates afterward'],r:'CPTED and layered zones before technology'},
+{n:'Q387',f:'f13',s:'An organization wants to protect its data center from physical intrusion. Which approach provides the MOST comprehensive protection?',o:['Implementing multiple overlapping preventive, detective, and corrective controls','Deploying armed security guards at the perimeter','Installing high-resolution cameras at all entry points','Constructing reinforced concrete walls around the facility'],a:0,w:'A layered defense model combines preventive, detective, and corrective controls so that if one fails, others detect or delay intrusion long enough for response.',e:['','Guards alone are corrective, missing detection','Cameras are detective only, lacking prevention; and','Walls provide deterrence and delay only'],r:'CPTED and layered zones before technology'},
+{n:'Q388',f:'f13',s:'A security architect is designing physical controls for a data center. Which combination BEST represents the layered defense model?',o:['Fences to deter, cameras to detect, and guards to respond','Multiple firewalls configured with identical rule sets','Redundant power supplies and backup generators','Encrypted storage drives with strong key management'],a:0,w:'Layered defense combines preventive controls like fences with detective controls like cameras and corrective controls like guards to ensure overlapping protection.',e:['','Identical firewalls lack control type diversity','Power redundancy addresses availability, not intrusion; and','Encryption protects data confidentiality, not physical'],r:'CPTED and layered zones before technology'},
+{n:'Q391',f:'f13',s:'When implementing advanced physical security measures in a corporate environment, which approach BEST balances security needs with employee privacy concerns?',o:['Requiring employees to wear RFID tracking badges at all times','Installing biometric scanners at every internal doorway','Adopting a layered security approach with transparent policies','Implementing continuous video surveillance in all areas'],a:2,w:'Adopting a layered security approach with transparent policies is the best way to balance security needs and employee privacy concerns. This approach allows for the implementation of necessary security measures while being open about their purpose and limitations.',e:['','','',''],r:'CPTED and layered zones before technology'},
+{n:'Q394',f:'f13',s:'An attacker bypasses the perimeter fence but is recorded by cameras and intercepted by guards. Which layered defense principle does this demonstrate?',o:['Single points of failure create unacceptable risk in physical security architectures','Preventive controls alone provide sufficient protection against determined attackers','Multiple control types compensate when individual controls are defeated','Detective controls should be deployed only after preventive controls prove ineffective'],a:2,w:'The layered defense model ensures that when the preventive control failed, detective controls identified the intrusion and corrective controls responded to neutralize the threat.',e:['This describes risk, not the demonstrated principle','The scenario shows preventive control failure; and','','All control types deploy simultaneously, not sequentially'],r:'CPTED and layered zones before technology'},
+{n:'Q396',f:'f13',s:'An attacker bypasses perimeter fencing at a facility. How does layered defense address this scenario?',o:['The fence automatically repairs itself to prevent future bypass attempts','Insurance policies compensate for losses from the security breach','Subsequent layers like cameras and guards detect and respond to the intrusion','Access logs are preserved for post-incident forensic analysis only'],a:2,w:'Layered defense requires multiple overlapping controls, so when barriers are bypassed, detective controls like cameras and corrective controls like guards assess and respond.',e:['Self-repair is not a security control function','Insurance is financial recovery, not active defense; and','','Forensics is post-incident, not active response'],r:'CPTED and layered zones before technology'},
+{n:'Q400',f:'f13',s:'How do physical barriers such as fences function within a comprehensive layered defense strategy?',o:['They serve as the sole protection requiring no additional controls','They deter and delay intruders while other controls detect and respond','They replace the need for security personnel and monitoring systems','They provide corrective capabilities to neutralize active threats'],a:1,w:'Barriers deter and delay intruders, requiring detective controls like cameras and corrective controls like guards to assess and respond effectively. (A) Barriers require complementary detective and corrective controls; (C) Barriers complement rather than replace personnel and monitoring; and (D)...',e:['Barriers require complementary detective and corrective controls','','Barriers complement rather than replace personnel and monitoring; and','Barriers function as preventive controls, not corrective controls'],r:'CPTED and layered zones before technology'},
+{n:'Q408',f:'f13',s:'When balancing physical security controls with other organizational priorities, what must ALWAYS be the primary consideration?',o:['Minimizing operational disruption to business processes','Ensuring the safety and protection of people','Maximizing return on security investment','Maintaining aesthetic appeal of the facility'],a:1,w:'Physical security must always prioritize the safety and protection of people above all other considerations, as human life takes precedence over assets and operations.',e:['Business continuity is secondary to human safety','','Financial considerations follow safety requirements; and','Aesthetics never supersede safety concerns'],r:'CPTED and layered zones before technology'},
+{n:'Q429',f:'f13',s:'A security manager must justify the budget for improved parking lot lighting. Which argument BEST supports this investment?',o:['Lighting eliminates the need for security camera systems in the lot','Lighting provides authentication of personnel entering the parking lot','Lighting serves as a corrective control after security incidents occur','Lighting acts as a deterrent while improving employee safety'],a:3,w:'Lighting serves dual purposes: deterring malicious activity as a physical security control while providing essential safety protection for personnel in parking areas.',e:['Lighting complements cameras through defense in depth, not replaces them','Authentication requires identity verification systems, not lighting; and','Lighting functions as preventive and deterrent, not corrective control',''],r:'CPTED and layered zones before technology'},
+{n:'Q431',f:'f13',s:'An organization is evaluating physical security controls for its new data center. Which security function does external lighting PRIMARILY serve?',o:['Detection of unauthorized personnel through motion tracking capabilities','Deterrence of potential intruders and safety for authorized personnel','Prevention of tailgating incidents at building entrances','Compensation for failed or bypassed access control mechanisms'],a:1,w:'External lighting serves dual purposes: deterring potential intruders while providing essential safety illumination for personnel accessing the facility.',e:['Lighting provides illumination but lacks motion tracking capabilities','','Tailgating prevention requires access control procedures, not lighting; and','Lighting functions as deterrent control, not compensatory mechanism'],r:'CPTED and layered zones before technology'},
+{n:'Q436',f:'f13',s:'An organization must prioritize physical controls that address multiple security objectives. Why should lighting be considered a high-priority control?',o:['Lighting encrypts sensitive data transmitted across facility networks','Lighting authenticates personnel before granting physical access to facilities','Lighting addresses both security deterrence and human safety concerns','Lighting provides corrective response to detected security incidents'],a:2,w:'Lighting serves dual purposes as a deterrent physical security control and a critical safety control for personnel, addressing multiple organizational objectives simultaneously.',e:['Encryption is a logical control, not physical','Authentication requires dedicated verification systems, not lighting; and','','Lighting functions as deterrent control, not corrective'],r:'CPTED and layered zones before technology'},
+{n:'Q445',f:'f13',s:'A financial services firm is designing a secure operations center that requires windows resistant to both ballistic impacts and chemical exposure. The security architect must recommend a window material that provides maximum protection while meeting these specific threat requirements. Which window material BEST addresses both requirements?',o:['Glass-clad polycarbonate','Tempered glass with steel mesh','Standard polycarbonate windows','Shatter-resistant laminated glass'],a:0,w:'Glass-clad polycarbonate combines glass and plastic strengths, providing resistance to abrasion, chemicals, fire, and ballistic impacts for high-security applications.',e:['','Tempered glass with mesh lacks ballistic and chemical resistance','Standard polycarbonate lacks chemical and abrasion resistance of glass-clad versions; and','Laminated glass prevents shattering but lacks ballistic protection'],r:'CPTED and layered zones before technology'},
+{n:'Q451',f:'f13',s:'A healthcare organization is constructing a new medical records archive. The architect proposes walls that extend from the raised floor to the drop ceiling, citing cost efficiency. The CISO reviews the plans and identifies that cable trays run above the drop ceiling throughout the building, and the archive will store backup tapes containing patient data. What modification should the CISO require?',o:['Install motion sensors above the drop ceiling to detect unauthorized movement','Replace the raised floor with solid concrete flooring throughout the archive','Add a secondary locked door to create a mantrap entrance system','Extend walls from the true floor slab to the structural ceiling slab'],a:3,w:'Slab-to-slab construction eliminates ceiling void vulnerability, preventing intruders from bypassing walls and containing fires from cable trays above.',e:['Motion sensors detect intrusion but don\'t prevent ceiling-void bypass','Floor material doesn\'t address ceiling-void intrusion routes; and','Mantraps secure entry points, not ceiling bypass vulnerabilities',''],r:'CPTED and layered zones before technology'},
+{n:'Q474',f:'f13',s:'A financial services firm relocates to a new building and tasks the CISO with designing the physical security program. The building has standard doors and windows, but also features rooftop HVAC systems with large access panels and an underground parking garage with maintenance tunnels connecting to adjacent buildings. Which physical security design principle should the CISO prioritize to address these unique building characteristics?',o:['Deploying deterrent signage at all standard entry points throughout the building','Implementing respond procedures focused on the main lobby entrance area','Installing delay controls exclusively on doors and windows as primary barriers','Assessing all possible penetration routes including non-obvious entry points'],a:3,w:'Effective physical security requires comprehensive assessment of all penetration routes including less obvious entry points such as ventilation ducts, construction openings, and maintenance tunnels beyond standard doors and windows.',e:['Signage at standard entries ignores the non-obvious routes that represent','Limiting response to the lobby ignores the underground and rooftop; and','Focusing exclusively on doors and windows leaves maintenance tunnels and',''],r:'CPTED and layered zones before technology'},
+{n:'Q481',f:'f13',s:'A security architect requires server room walls to extend from structural floor to ceiling slab. What vulnerability does this PRIMARILY address?',o:['Unauthorized physical bypass through ceiling spaces','Electromagnetic interference from adjacent areas','Sound transmission compromising confidential discussions','Temperature fluctuations affecting equipment performance'],a:0,w:'Slab-to-slab construction prevents intruders from bypassing security by climbing over walls through suspended ceiling voids, eliminating this common physical breach route.',e:['','EMI shielding requires specialized materials, not extended wall height','Acoustic isolation addresses privacy concerns, not physical intrusion prevention; and','Temperature control depends on HVAC systems, not wall construction methods'],r:'CPTED and layered zones before technology'},
+{n:'Q482',f:'f13',s:'A manufacturing company is expanding into a new industrial park. The CISO needs a comprehensive physical security assessment evaluating potential threats, identifying what attackers might target, and analyzing the building\'s structural vulnerabilities. Which process addresses all three components?',o:['Security site survey incorporating threat and facility analysis','Business impact analysis for the new facility','Penetration testing of physical access controls','Compliance audit against industry security standards'],a:0,w:'Security site surveys systematically evaluate threat definition, target identification, and facility characteristics for physical security planning decisions.',e:['','Assesses business impact, not physical threats or vulnerabilities','Tests existing controls, not pre-deployment threat assessment; and','Verifies standards compliance, not site-specific threat analysis'],r:'CPTED and layered zones before technology'},
+{n:'Q504',f:'f13',s:'A security consultant is advising a corporate data center on perimeter security improvements. Which of the following lighting strategies is MOST effective and cost-efficient for enhancing perimeter security while minimizing energy consumption?',o:['Adaptive lighting system with varying intensities based on time and detected activity','Motion-activated spotlights at key entry points','Continuous high-intensity floodlighting around the entire perimeter','Low-level ambient lighting combined with infrared cameras'],a:0,w:'An adaptive lighting system with varying intensities based on time and detected activity is the most effective and cost-efficient strategy for enhancing perimeter security while minimizing energy consumption in a corporate data center.',e:['','','',''],r:'CPTED and layered zones before technology'},
+{n:'Q509',f:'f13',s:'When designing a Demilitarized Zone (DMZ) for a critical infrastructure facility, which lighting strategy provides the HIGHEST level of both physical and cybersecurity?',o:['Deploying a network of thermal imaging cameras coupled with low-wattage ambient lighting','Utilizing motion-activated LED lights with infrared sensors throughout the perimeter','Installing high-pressure sodium lamps with automated dimming controls','Implementing a combination of constant low-level LED lighting and strategically placed motion-activated bright spots'],a:3,w:'This approach provides the optimal balance between physical security and cybersecurity for a critical infrastructure facility\'s DMZ. Constant low-level LED lighting ensures continuous visibility and basic surveillance, while strategically placed motion-activated bright spots offer enhanced...',e:['','','',''],r:'CPTED and layered zones before technology'},
+{n:'Q532',f:'f13',s:'A financial services firm is relocating to a new building and the CISO must present a comprehensive physical security strategy to the board. The building has multiple entry points including a parking garage, main lobby, loading dock, and rooftop access. Which combination of goals should the CISO emphasize as the foundation of the physical security program?',o:['Cost efficiency, regulatory compliance, and operational continuity','Perimeter security, access control, and surveillance coverage','Prevention, detection, and response to security incidents','Confidentiality, integrity, and availability of organizational assets'],a:3,w:'Physical security programs share the same foundational CIA goals as information security, ensuring comprehensive protection of organizational assets across all domains.',e:['Business and compliance considerations, not foundational security goals','Implementation methods representing tactical controls, not strategic goals; and','Control functions describing operational mechanisms, not foundational goals',''],r:'CPTED and layered zones before technology'},
+{n:'Q537',f:'f13',s:'In a large-scale, multi-tenant virtualized environment using microservices and container technology, which of the following approaches is MOST effective for securing the API gateway and ensuring overall container security?',o:['Implementing end-to-end encryption for all inter-container communication','Enforcing mandatory access controls on individual container processes','Utilizing a single, centralized container orchestration platform with role-based access control','Implementing container image scanning, runtime security monitoring, and API-specific threat detection'],a:3,w:'Container image scanning, runtime security monitoring, and API-specific threat detection provide comprehensive security throughout the container lifecycle and for the API gateway.',e:['','','',''],r:'CPTED and layered zones before technology'},
+{n:'Q560',f:'f13',s:'A facilities manager discovers that office partition walls terminate at the suspended ceiling rather than the structural slab. What security control becomes ineffective due to this construction gap?',o:['Biometric access controls at entry points','Badge readers on exterior doors','Video surveillance cameras in hallways','Motion-activated intrusion detection sensors'],a:3,w:'Intrusion detection sensors mounted on walls become ineffective when intruders can bypass them entirely by climbing through the ceiling void above hollow walls that do not extend slab-to-slab.',e:['Biometric controls protect entry points, not ceiling voids','Badge readers control door access, not wall penetration; and','Cameras monitor visible areas, not above-ceiling spaces',''],r:'CPTED and layered zones before technology'},
+{n:'Q570',f:'f13',s:'A facility security team discovers that intruders bypassed the main entrance by entering through an air conditioning vent. What security principle did this vulnerability demonstrate?',o:['Detection mechanisms should monitor all potential penetration routes','Deterrent controls should be visible at all building entrances','Response procedures should be automated for faster reaction','Assessment controls should evaluate attack methods after incidents'],a:0,w:'Effective physical security requires comprehensive assessment of all building vulnerabilities including less obvious entry points like ventilation ducts, ensuring detectors monitor all spaces attackers might exploit.',e:['','Deterrence at entrances would not address hidden penetration routes','Response automation addresses reaction time, not entry point coverage; and','Assessment occurs after detection, not preventing the initial bypass'],r:'CPTED and layered zones before technology'},
+{n:'Q573',f:'f13',s:'A financial services firm is renovating its trading floor and must secure a new compliance records room. The contractor proposes standard office partitions to save costs, but the security team insists on slab-to-slab construction with fire-rated materials. The CFO questions the additional expense. Which argument BEST justifies the security team\'s requirement?',o:['Slab-to-slab walls meet building code requirements for commercial spaces','Fire-rated materials qualify for reduced insurance premiums','Standard partitions allow intruders to bypass door controls through ceiling voids and permit fire spread','Solid walls improve acoustic privacy for confidential phone calls'],a:2,w:'Standard office walls stopping at drop ceilings create dual vulnerabilities: intruders can climb over to bypass physical access controls, and fires can spread unchecked through.',e:['Building codes set minimums, not security requirements','Insurance benefits are secondary to security rationale; and','','Acoustic privacy addresses confidentiality, not intrusion'],r:'CPTED and layered zones before technology'},
+{n:'Q575',f:'f13',s:'A manufacturing company experiences a security breach where motion sensors detected an intruder, but security personnel were uncertain whether the alarm indicated an actual threat or equipment malfunction. The security director needs to improve the security program. Which physical security control function requires enhancement?',o:['Detection capabilities to identify intrusion events','Deterrent measures to discourage intrusion attempts','Delay mechanisms to slow attacker progression','Assessment capabilities to evaluate detected events'],a:3,w:'Assessment controls evaluate detected events to determine attack methods, identify targets, and determine appropriate remediation, directly addressing the uncertainty about alarm validity and threat determination.',e:['Detection already occurred when motion sensors triggered','Deterrent measures prevent attempts, not post-detection uncertainty; and','Delay mechanisms do not resolve alarm interpretation issues',''],r:'CPTED and layered zones before technology'},
+{n:'Q610',f:'f13',s:'A financial services firm is implementing a new physical security program. The CISO emphasizes that while protecting servers and financial records is critical, one objective must take absolute precedence over all others. The security team must design controls that never compromise this priority, even during active security incidents. What objective should the team prioritize above all others?',o:['Maintaining continuous availability of critical financial systems','Preserving the confidentiality of customer account data','Ensuring integrity of transaction records and audit logs','Protecting the safety and welfare of employees and visitors'],a:3,w:'The primary goal of physical security is the safety and protection of human life, which must take precedence over protecting assets, data, or systems in all circumstances.',e:['System availability supports business operations but is secondary to human','Data confidentiality protects information but never supersedes protecting people; and','Record integrity ensures accountability but ranks below human life protection',''],r:'CPTED and layered zones before technology'},
+{n:'Q678',f:'f13',s:'A CISO is designing a layered physical security program. Which pairing BEST represents the dual benefit that exterior lighting provides?',o:['Access control enforcement and intrusion detection system activation','Environmental monitoring and regulatory compliance documentation support','Perimeter hardening and automated incident response triggering capabilities','Deterrence of unauthorized activity and improved safety for personnel'],a:3,w:'Exterior lighting serves two key functions: it acts as a deterrent physical security control and provides an important control for the safety of people on the premises.',e:['Access control and intrusion detection are separate control categories','Environmental monitoring and compliance documentation are unrelated to lighting; and','Perimeter hardening and automated response are not lighting functions',''],r:'CPTED and layered zones before technology'},
+{n:'Q688',f:'f13',s:'A data center uses badge readers at building entry, biometric scanners at the server room, and locked cabinets for individual servers. What security approach does this configuration represent?',o:['Defense in depth through layered physical controls','Compensating controls for regulatory compliance','Redundant authentication for high availability','Access control lists for network segmentation'],a:0,w:'Defense in depth layers multiple controls so compromising one barrier does not grant complete access to protected assets. (B) Compensating controls substitute when primary controls cannot be implemented; (C) Redundant authentication addresses availability, not layered protection; and (D) Access...',e:['','Compensating controls substitute when primary controls cannot be implemented','Redundant authentication addresses availability, not layered protection; and','Access control lists manage network permissions, not physical barriers'],r:'CPTED and layered zones before technology'},
+{n:'Q699',f:'f13',s:'How does a security site survey relate to an organization\'s broader risk management program?',o:['It replaces formal risk assessments for physical assets','It extends risk management principles to physical security decisions','It operates independently from enterprise risk frameworks','It focuses exclusively on regulatory compliance requirements'],a:1,w:'Security site surveys are essentially the risk management process applied to physical security, evaluating threats and facility characteristics to determine appropriate controls.',e:['Surveys complement, not replace, formal risk assessments','','Surveys integrate with enterprise risk management; and','Compliance is one factor, not the exclusive focus'],r:'CPTED and layered zones before technology'},
+{n:'Q787',f:'f13',s:'A financial institution\'s branch manager reports that employees prop open the rear entrance for convenience during deliveries. The CISO discovers that the door has no alarm, no camera coverage, and uses a simple spring latch. Budget allows addressing only two of the three gaps immediately. Which two controls provide the BEST combination of preventive and detective capability?',o:['Install a deadbolt lock and a door-ajar alarm sensor','Add a camera and a door-ajar alarm sensor','Install a deadbolt lock and add camera coverage','Replace the door with a mantrap and add camera coverage'],a:0,w:'A deadbolt provides stronger preventive control against unauthorized entry, while a door-ajar alarm provides detective capability to alert when the door is propped open, covering both control types within budget.',e:['','Two detective controls without a stronger lock leave the preventive','A camera is detective only; this pair lacks alerting when; and','A mantrap is disproportionate for a delivery entrance and likely'],r:'CPTED and layered zones before technology'},
+{n:'Q802',f:'f13',s:'A facility manager needs to improve nighttime safety for employees in a parking structure. Which physical security control BEST addresses this requirement?',o:['Installing additional closed-circuit television cameras throughout the structure','Deploying radio-frequency identification badge readers at all entry points','Implementing adequate lighting throughout the parking structure areas','Placing bollards and vehicle barriers at the structure\'s entrance points'],a:2,w:'Lighting is an important physical security control for the safety of people, directly addressing the nighttime safety concern for employees in the parking structure.',e:['Cameras monitor activity but do not directly improve personal safety','Badge readers control access but do not address safety in; and','','Bollards prevent vehicle intrusion but do not improve personal safety'],r:'CPTED and layered zones before technology'},
+{n:'Q846',f:'f13',s:'A CISO is designing a layered physical security program. Which pairing BEST represents the dual benefit that exterior lighting provides?',o:['Access control enforcement and intrusion detection system activation','Environmental monitoring and regulatory compliance documentation support','Perimeter hardening and automated incident response triggering capabilities','Deterrence of unauthorized activity and improved safety for personnel'],a:3,w:'Exterior lighting serves two key functions: it acts as a deterrent physical security control and provides an important control for the safety of people on the premises.',e:['Access control and intrusion detection are separate control categories','Environmental monitoring and compliance documentation are unrelated to lighting; and','Perimeter hardening and automated response are not lighting functions',''],r:'CPTED and layered zones before technology'},
+{n:'Q850',f:'f13',s:'A security consultant recommends lighting improvements as part of a physical security upgrade. Which outcome should the consultant PRIMARILY emphasize to gain stakeholder approval?',o:['Reduced reliance on logical access controls within the organization\'s network infrastructure','Enhanced ability to support attacker prosecution through improved digital forensics','Improved deterrence against unauthorized approach and enhanced employee safety','Demonstrated compliance with software development lifecycle security testing requirements'],a:2,w:'Lighting deters unauthorized activity and protects personnel safety—both are compelling, source-grounded arguments for stakeholder approval. (A) Logical access controls are unrelated to physical lighting improvements; (B) Digital forensics addresses cyber evidence, not physical lighting; and (D)...',e:['Logical access controls are unrelated to physical lighting improvements','Digital forensics addresses cyber evidence, not physical lighting; and','','Software development lifecycle requirements are unrelated to physical lighting'],r:'CPTED and layered zones before technology'},
+{n:'Q854',f:'f13',s:'A retail chain\'s loss prevention director notices that stores with adequate exterior lighting report fewer after-hours burglary attempts than stores relying solely on alarm systems. The director wants to propose a standardized security enhancement across all locations to reduce both theft attempts and slip-and-fall liability claims from employees. Which justification BEST supports prioritizing lighting over additional alarm systems?',o:['Lighting provides both proactive deterrence and personnel safety benefits that alarm systems alone cannot deliver','Alarm systems generate excessive false positives that reduce overall security program effectiveness significantly','Lighting eliminates the need for all other physical security controls at retail store locations entirely','Alarm systems require ongoing monitoring contracts that exceed the total cost of lighting installations permanently'],a:0,w:'Lighting functions as a deterrent control that discourages unauthorized activity while simultaneously serving as an important safety control for people, addressing both theft reduction and employee safety goals.',e:['','False positive rates are operational issues, not the core justification','Lighting complements other controls; it does not eliminate their need; and','Cost comparison alone does not address both security and safety'],r:'CPTED and layered zones before technology'},
+{n:'Q869',f:'f13',s:'A manufacturing facility experienced a break-in at its poorly lit loading dock area. The security director must now present a remediation plan that addresses both the immediate vulnerability and long-term worker safety concerns during overnight shifts. The board wants a single control that addresses both issues. Which physical security control BEST satisfies both requirements simultaneously?',o:['Deploying additional security guards to patrol the loading dock area','Installing reinforced doors with electronic access control systems','Implementing comprehensive exterior lighting at the loading dock','Adding intrusion detection sensors along the facility perimeter'],a:2,w:'Lighting uniquely serves as both a deterrent physical security control to discourage future break-ins and an important safety control for overnight workers, satisfying both board requirements with a single control.',e:['Guards address security but are an ongoing cost, not a','Reinforced doors prevent access but do not address worker safety; and','','Intrusion sensors detect breaches but do not improve worker safety'],r:'CPTED and layered zones before technology'},
+{n:'Q876',f:'f13',s:'A security consultant recommends lighting improvements as part of a physical security upgrade. Which outcome should the consultant PRIMARILY emphasize to gain stakeholder approval?',o:['Reduced reliance on logical access controls within the organization\'s network infrastructure','Enhanced ability to support attacker prosecution through improved digital forensics','Improved deterrence against unauthorized approach and enhanced employee safety','Demonstrated compliance with software development lifecycle security testing requirements'],a:2,w:'Lighting deters unauthorized activity and protects personnel safety—both are compelling, source-grounded arguments for stakeholder approval. (A) Logical access controls are unrelated to physical lighting improvements; (B) Digital forensics addresses cyber evidence, not physical lighting; and (D)...',e:['Logical access controls are unrelated to physical lighting improvements','Digital forensics addresses cyber evidence, not physical lighting; and','','Software development lifecycle requirements are unrelated to physical lighting'],r:'CPTED and layered zones before technology'},
+{n:'Q891',f:'f13',s:'After motion sensors detect an intruder in a restricted area, what physical security control category should be activated NEXT?',o:['Deploy deterrent controls to discourage the intruder from proceeding further','Activate delay controls to prevent the intruder from reaching critical assets','Initiate assess controls to determine the attack method and intended target','Engage respond controls to immediately remediate the identified risk'],a:2,w:'After detection occurs, the assess control category activates to evaluate the method of attack, identify the target, and determine the appropriate remediation before response actions are taken.',e:['Deterrence is ineffective after an intruder is already detected inside','Delay controls should already be in place; the next step; and','','Responding before assessing the situation risks inappropriate or ineffective remediation'],r:'CPTED and layered zones before technology'},
+{n:'Q904',f:'f13',s:'A facility manager discovers that intrusion sensors cover doors and windows but not ventilation ducts. What should be addressed FIRST?',o:['Install additional delay controls such as reinforced locks on all ventilation access points','Conduct a comprehensive assessment of all possible penetration routes throughout the facility','Deploy respond controls to ensure security personnel can react to ventilation breaches','Implement deterrent signage near ventilation ducts to discourage unauthorized entry attempts'],a:1,w:'Physical security requires a comprehensive assessment of all building vulnerabilities and possible penetration routes before deploying specific detection mechanisms throughout the facility.',e:['Locks address one entry point but do not identify whether','','Response controls cannot function effectively without first identifying all vulnerable; and','Signage alone does not address the gap in detection coverage'],r:'CPTED and layered zones before technology'},
+{n:'Q916',f:'f13',s:'A university campus security team is reviewing incident data showing that 70% of assaults occur in poorly illuminated walkways between buildings. The campus safety committee, which includes student representatives, demands immediate action. The security budget can fund either enhanced lighting infrastructure or additional emergency call stations, but not both. Which option BEST addresses the committee\'s primary concern?',o:['Emergency call stations to enable rapid reporting of incidents in progress','Enhanced lighting to deter potential attackers and improve pedestrian safety','Increased security patrol frequency along the identified walkway routes','Installation of surveillance cameras to record incidents for investigation'],a:1,w:'Lighting serves as a deterrent to discourage attacks while simultaneously functioning as an important safety control for people, directly addressing the assault correlation with poor illumination.',e:['Call stations enable reporting after incidents but do not prevent','','Increased patrols are not within the stated budget options available; and','Cameras record incidents but do not deter or improve safety'],r:'CPTED and layered zones before technology'},
+{n:'Q971',f:'f13',s:'A security manager is justifying the budget for upgraded exterior lighting to senior leadership. Which argument BEST supports this investment?',o:['Lighting supplements guard patrols but eliminates the need for nighttime rounds','Lighting serves as both a deterrent to intruders and a safety measure for personnel','Lighting reduces perimeter vulnerability but eliminates the need for perimeter fencing','Lighting provides a corrective response capability during active security incidents'],a:1,w:'Lighting delivers dual value as a deterrent control and a personnel safety measure, providing a compelling, source-supported budget justification. (A) Lighting supplements patrols; active monitoring and response still require guards; (C) Lighting complements fencing; it does not replace perimeter...',e:['Lighting supplements patrols; active monitoring and response still require guards','','Lighting complements fencing; it does not replace perimeter barriers; and','Lighting is a deterrent control, not a corrective response measure'],r:'CPTED and layered zones before technology'},
+{n:'Q1008',f:'f13',s:'A university campus security team is reviewing incident data showing that 70% of assaults occur in poorly illuminated walkways between buildings. The campus safety committee, which includes student representatives, demands immediate action. The security budget can fund either enhanced lighting infrastructure or additional emergency call stations, but not both. Which option BEST addresses the committee\'s primary concern?',o:['Emergency call stations to enable rapid reporting of incidents in progress','Enhanced lighting to deter potential attackers and improve pedestrian safety','Increased security patrol frequency along the identified walkway routes','Installation of surveillance cameras to record incidents for investigation'],a:1,w:'Lighting serves as a deterrent to discourage attacks while simultaneously functioning as an important safety control for people, directly addressing the assault correlation with poor illumination.',e:['Call stations enable reporting after incidents but do not prevent','','Increased patrols are not within the stated budget options available; and','Cameras record incidents but do not deter or improve safety'],r:'CPTED and layered zones before technology'},
+{n:'Q1016',f:'f13',s:'A data center operations manager is conducting a gap analysis of physical security controls. The facility has fencing, badge readers, and CCTV but nighttime surveillance footage is consistently unusable. The security team must also address recent employee complaints about feeling unsafe walking to their vehicles after late shifts. What single control improvement addresses both gaps?',o:['Upgrading CCTV cameras to models with enhanced low-light sensor capabilities','Implementing biometric authentication at all facility entry and exit points','Adding perimeter intrusion detection sensors along the existing fence line','Installing comprehensive exterior lighting around the facility and parking areas'],a:3,w:'Exterior lighting simultaneously improves camera system visibility of the surrounding area and serves as an important safety control for employees, resolving both the surveillance quality gap and personnel safety concern.',e:['Camera upgrades address footage quality but not employee safety walking','Biometric access controls address entry security, not surveillance or safety; and','Perimeter sensors detect intrusions but do not improve footage or',''],r:'CPTED and layered zones before technology'},
+{n:'Q1130',f:'f14',s:'A government research facility is upgrading its security systems to protect classified information. Which of the following approaches best addresses the requirement for a multi-layered physical and logical access control strategy that integrates advanced locking systems?',o:['Implementing biometric locks on all doors and encrypting all data at rest','Combining PIN-enabled electronic locks with biometric verification, integrating them into a centralized access management system, and using hardware security modules for key storage','Deploying facial recognition systems at checkpoints and implementing a strict password policy','Installing smart card readers at entry points and using virtual private networks for remote access'],a:1,w:'The most effective approach for a multi-layered physical and logical access control strategy integrates advanced locking systems by combining PIN-enabled electronic locks with biometric verification, integrating them into a centralized access management system, and using hardware security modules...',e:['','','',''],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q6',f:'f14',s:'A security consultant is tasked with upgrading the HVAC system in a multi-tenant office building to enhance security, energy efficiency, and tenant control. The building houses various businesses with different temperature needs and operating hours. Which approach BEST addresses security concerns, individual tenant requirements, and overall system efficiency?',o:['Installing smart thermostats in each office space connected to a central network','Deploying a building automation system with role-based access control and energy optimization algorithms','Providing tenants with full access to the building\'s centralized HVAC management system','Implementing separate HVAC systems for each tenant with dedicated controls'],a:1,w:'A building automation system with role-based access control and energy optimization algorithms provides the best balance between security, individual tenant control, and overall system efficiency.',e:['','','',''],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q39',f:'f14',s:'A multinational corporation is designing a new state-of-the-art data center. At which stage of the project should fire protection measures be PRIMARILY addressed to ensure optimal integration, cost-effectiveness, and compliance with international standards?',o:['After the initial architectural design is approved','When finalizing the construction budget','During the equipment procurement phase','During the initial planning and site selection phase'],a:3,w:'Addressing fire protection measures during the initial planning and site selection phase is crucial for optimal integration, cost-effectiveness, and compliance with international standards.',e:['','','',''],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q64',f:'f14',s:'When designing an integrated HVAC and fire suppression strategy for a multi-story building with diverse occupancy types, which approach would provide the MOST comprehensive and cost-effective protection while minimizing potential damage and ensuring efficient system integration?',o:['Deploy FM-200 in server rooms, preaction systems in offices, and dry systems in storage areas, with centralized monitoring and control','Deploy a single Aero-K system throughout the building for consistency and ease of maintenance','Implement FM-200 systems in all areas with advanced air filtration to prevent HVAC-based attacks','Install water sprinkler systems in all areas and rely on water-resistant server enclosures for protection'],a:0,w:'The correct answer provides a tailored, cost-effective approach that addresses the specific needs of different areas while integrating with the overall building management system.',e:['','','',''],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q144',f:'f14',s:'A security operations center experiences equipment malfunctions traced to unwanted signals from cables running parallel to power lines. Server network interfaces show intermittent errors correlating with HVAC compressor cycles. The facility team has ruled out voltage issues and the UPS reports clean power output. What environmental factor is MOST likely causing these disruptions?',o:['Surge conditions from HVAC motor startup cycles','Fault conditions affecting power distribution','Sag events during compressor activation cycles','Electrical noise from circuits in close proximity'],a:3,w:'Electrical noise generates unwanted signals in proximate circuits, disrupting operations without voltage changes, matching the scenario\'s intermittent errors and clean UPS output.',e:['Surges cause sustained voltage elevation, contradicting UPS clean power confirmation','Faults cause momentary outages, not signal interference; and','Sags cause voltage drops, ruled out by clean power',''],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q157',f:'f14',s:'Which fire-resistant material should be considered MOST critical for maintaining data center operations during a fire event?',o:['Fire-resistant server racks','Intumescent paint on structural components','Fire-resistant cabling','Fire-resistant flooring materials'],a:2,w:'Fire-resistant cabling is the most critical for maintaining data center operations during a fire event. While all fire-resistant materials are important, cabling is essential for maintaining connectivity and data transmission.',e:['','','',''],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q199',f:'f14',s:'Which of the following is the MOST effective component of a data center\'s fire protection strategy for ensuring both personnel safety and preservation of critical digital assets?',o:['Regular fire drills and offsite backup storage','Redundant power supplies for fire alarm systems','Fireproof server racks and fire-resistant safes','Automated fire suppression with early detection and data replication'],a:3,w:'While all options contribute to fire protection, an automated fire suppression system with early detection and data replication is the most effective component.',e:['','','',''],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q409',f:'f14',s:'A data center manager notices equipment failures occurring more frequently during summer months. Which environmental factor is MOST likely contributing to this issue?',o:['Excessive air temperature causing component failures','Low humidity generating static electricity discharge','Negative air pressure allowing dust infiltration','High humidity creating condensation on circuits'],a:0,w:'Excessive heat during summer months directly causes electronic components to fail, as high temperatures exceed operational thresholds and degrade hardware performance and reliability.',e:['','Static electricity relates to dryness, not heat','Dust infiltration is not seasonal-specific; and','Summer typically brings dryness, not humidity'],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q411',f:'f14',s:'Which combination of HVAC failures would create the MOST comprehensive threat to data center operations?',o:['Loss of positive pressurization combined with humidity control failure','Temperature regulation failure combined with air filtration breakdown','Clean air supply failure combined with positive pressurization loss','Humidity control failure combined with temperature regulation loss'],a:3,w:'Combined humidity and temperature failures create multiple simultaneous threats including component overheating, static discharge, and condensation damage affecting both equipment and operations.',e:['Pressurization and humidity affect different risks','Filtration supports cleanliness, not direct damage; and','These are related air quality functions',''],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q414',f:'f14',s:'An organization is designing a new data center. What is the PRIMARY security benefit of implementing positive pressurization in the HVAC system?',o:['Reducing energy costs by maintaining optimal cooling efficiency','Preventing external contaminants from entering the protected space','Eliminating the need for separate humidity control systems','Providing backup power capabilities during electrical outages'],a:1,w:'Positive pressurization creates higher internal air pressure, forcing clean air outward through gaps and preventing contaminated external air from infiltrating when doors open or cracks exist.',e:['Energy efficiency is operational benefit, not security','','Humidity control remains a separate required function; and','Pressurization provides no electrical power backup capability'],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q415',f:'f14',s:'A facilities manager discovers water droplets forming on server chassis. What environmental control has MOST likely failed?',o:['Temperature regulation preventing overheating conditions','Positive pressurization preventing contaminant entry','Humidity control preventing excessive moisture levels','Air filtration preventing particulate accumulation'],a:2,w:'Excessive humidity causes water vapor to condense on cooler surfaces like server chassis, creating moisture that damages electronic components and indicates failed humidity control.',e:['Temperature issues cause component failures, not condensation','Pressurization controls air purity, not moisture levels; and','','Particulates are solid contaminants, not water droplets'],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q449',f:'f14',s:'A multinational corporation is constructing a new headquarters with both public areas and restricted zones. Which strategy would BEST mitigate vulnerabilities associated with ground-level HVAC intakes while balancing security, system efficiency, and cost-effectiveness?',o:['Elevate HVAC intakes and implement biometric access control for mechanical rooms','Use tamper-evident seals on intake vents and conduct daily inspections','Install CCTV cameras and reinforced grilles around all HVAC intakes','Implement a virtual private network for HVAC control systems'],a:0,w:'The correct answer provides a comprehensive approach that addresses physical security (elevating intakes) and access control (biometric access). This strategy effectively mitigates risks associated with ground-level intakes and limits unauthorized access to critical systems.',e:['','','',''],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q487',f:'f14',s:'A financial services firm is designing a new data center and must ensure critical infrastructure remains protected from unauthorized access. The security architect reviews power system requirements. Which rooms must be secured according to facility design principles?',o:['Breakers and transformers','Server rooms and network closets','HVAC equipment rooms','Loading docks and entry points'],a:0,w:'Critical rooms containing breakers and transformers must be secured because physical access to power infrastructure could enable attackers to disrupt operations.',e:['','Server rooms need security but aren\'t specified for power','HVAC requires access controls but is separate from power; and','Entry points are perimeter security, not power infrastructure'],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q512',f:'f14',s:'A security architect reviewing fire controls for a new facility must address prevention, detection, and correction. Which action represents the prevention control category?',o:['Installing ionization smoke detectors throughout the facility','Deploying FM-200 gas suppression systems in server rooms','Limiting combustible materials in high-risk areas','Configuring VESDA aspirating detection systems'],a:2,w:'Prevention eliminates conditions enabling fire ignition, such as limiting combustible materials like cardboard in data centers and using fire-resistant construction materials.',e:['Detection control identifying fires after ignition occurs','Corrective control suppressing active fires; and','','Detection control identifying smoke particles early'],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q529',f:'f14',s:'A pharmaceutical company\'s cold storage facility operates at sub-freezing temperatures year-round. The facility manager must select a water-based fire suppression system that prevents pipe damage from freezing while avoiding false activation that could destroy temperature-sensitive medications. Which system configuration BEST addresses both constraints?',o:['Wet-pipe system with antifreeze additives','Dry-pipe system with pressurized nitrogen','Pre-action system with detection integration','Deluge system with manual activation'],a:2,w:'Pre-action systems maintain dry pipes to prevent freezing while incorporating detection systems that must activate before water releases, significantly reducing false activation risk that could damage sensitive inventory.',e:['Wet-pipe systems with additives still risk accidental discharge damaging medications','Dry-pipe systems prevent freezing but lack false activation protection; and','','Deluge systems flood all areas simultaneously, causing catastrophic inventory loss'],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q636',f:'f14',s:'A healthcare organization\'s critical patient monitoring systems require continuous operation. The facility manager must design a power protection strategy that addresses both momentary outages and extended blackouts. The budget allows for comprehensive protection, but installation space is limited in the existing server room. Which approach provides the MOST complete protection for this scenario?',o:['Deploy oversized UPS units capable of extended runtime','Install dedicated power feeders from separate utility substations','Implement UPS for immediate protection with generator for extended outages','Configure automatic load shedding to reduce power requirements'],a:2,w:'UPS provides near-instantaneous short-term power allowing time for generators to come online, creating a layered approach that addresses both momentary faults and prolonged blackouts.',e:['UPS alone cannot sustain operations during prolonged blackouts regardless of','Dedicated feeders improve reliability but cannot address utility-wide outages; and','','Load shedding reduces consumption but does not provide backup power'],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q715',f:'f14',s:'A pharmaceutical company is renovating its research laboratory where irreplaceable biological samples are stored in specialized freezers requiring continuous power. The facility manager must select fire suppression that protects both equipment and samples while minimizing false activation damage. The budget allows for enhanced detection integration. Which suppression approach BEST addresses these competing requirements?',o:['Wet-pipe sprinkler system with temperature-sensitive heads','Deluge system with rapid full-area coverage','Pre-action system with integrated detection requirements','Dry-pipe system with pressurized nitrogen'],a:2,w:'Pre-action systems incorporate detection requirements before water release, significantly reducing false activation damage while providing water-based suppression when genuinely needed, balancing protection with sample preservation.',e:['Wet-pipe systems risk water damage from false activations or leaks','Deluge systems flood entire areas, causing catastrophic damage to sensitive; and','','Dry-pipe systems still release water without detection verification, risking false'],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q722',f:'f14',s:'A cybersecurity consultant is assessing the risks associated with a smart building\'s integrated HVAC system. Which of the following represents the MOST significant new vulnerability compared to traditional, non-integrated HVAC systems?',o:['Increased risk of temperature sensor manipulation','Abnormal power consumption patterns leading to system instability','Unauthorized physical access to centralized HVAC controls','Expanded attack surface through network connectivity'],a:3,w:'In smart buildings, integrated HVAC systems are connected to the network and other building management systems, significantly expanding the attack surface compared to traditional, isolated HVAC systems.',e:['','','',''],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q777',f:'f14',s:'A multinational corporation is constructing a new headquarters with both public areas and restricted zones. Which strategy would BEST mitigate vulnerabilities associated with ground-level HVAC intakes while balancing security, system efficiency, and cost-effectiveness?',o:['Elevate HVAC intakes and implement biometric access control for mechanical rooms','Use tamper-evident seals on intake vents and conduct daily inspections','Install CCTV cameras and reinforced grilles around all HVAC intakes','Implement a virtual private network for HVAC control systems'],a:0,w:'The correct answer provides a comprehensive approach that addresses physical security (elevating intakes) and access control (biometric access). This strategy effectively mitigates risks associated with ground-level intakes and limits unauthorized access to critical systems.',e:['','','',''],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q791',f:'f14',s:'When designing a fire protection system for a new data center, which factor is MOST critical in determining the appropriate fire suppression method?',o:['Equipment heat release rate','Total number of server racks','Overall facility square footage','Average room temperature'],a:0,w:'The equipment heat release rate is the most critical factor in determining the appropriate fire suppression method for a data center. It directly impacts the fire load and potential fire intensity, which are crucial for designing an effective suppression system.',e:['','','',''],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q870',f:'f14',s:'A financial services firm experiences a complete commercial power loss lasting four hours during a regional grid failure. The UPS batteries depleted after eight minutes, and the diesel generator failed to start due to a maintenance oversight. The IT director must explain to the board why systems went offline. Which power event classification and backup failure combination BEST describes this incident?',o:['A fault handled by UPS, with the generator being unnecessary for this event duration','A blackout exceeding UPS capacity, compounded by generator failure that eliminated long-term backup','A brownout where reduced voltage degraded systems gradually over the four-hour period','A surge that damaged both UPS batteries and the generator\'s starting mechanism simultaneously'],a:1,w:'A blackout is a prolonged outage beyond UPS capacity requiring generator backup, and when the generator failed to start, the facility lost both its short-term bridge and long-term power source.',e:['A fault is momentary, not a four-hour outage that far','','A brownout is intentional voltage reduction, not a complete four-hour; and','A surge involves excess voltage, not a complete loss of'],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q877',f:'f14',s:'A defense contractor\'s security team discovers that a competitor has been using specialized equipment to capture radio frequency emissions from the contractor\'s engineering workstations, reconstructing proprietary circuit designs. The facility already uses perimeter fencing and access badges. The CISO must select an additional control that directly addresses this threat vector. Which countermeasure MOST directly mitigates this specific risk?',o:['Installing redundant workstations so engineers can switch if one is compromised','Deploying TEMPEST-compliant shielding around the engineering work area','Adding logging and monitoring to track who accesses the workstations','Implementing frequent re-authentication during engineering design sessions'],a:1,w:'TEMPEST-compliant shielding directly contains RF emissions so they cannot be captured externally, similar to how a soundproof conference room prevents conversations from being overheard outside the walls.',e:['Redundant workstations address availability through eliminating single points of failure','','Logging tracks who uses workstations for accountability, but it does; and','Frequent re-authentication mitigates race condition timing gaps, but it has'],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q903',f:'f14',s:'A security architect designing a new data center must secure rooms containing breakers and transformers. What is the primary rationale for this requirement?',o:['To comply with Tier 4 uptime standards that mandate physical barriers around all equipment','To prevent unauthorized access to critical power infrastructure that could disrupt operations','To ensure HVAC systems maintain positive pressure within transformer enclosures','To enable auto-shutoff mechanisms that respond to environmental faults in breaker rooms'],a:1,w:'Critical rooms like breakers and transformers must be secured as part of facility design, because unauthorized access to power infrastructure could compromise the entire data center\'s availability.',e:['Tier standards address uptime design, not specific physical security of','','Positive pressure relates to air quality, not securing power rooms; and','Auto-shutoff addresses fault response, not the reason for securing these'],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q952',f:'f14',s:'A security architect designing a new data center must secure rooms containing breakers and transformers. What is the primary rationale for this requirement?',o:['To comply with Tier 4 uptime standards that mandate physical barriers around all equipment','To prevent unauthorized access to critical power infrastructure that could disrupt operations','To ensure HVAC systems maintain positive pressure within transformer enclosures','To enable auto-shutoff mechanisms that respond to environmental faults in breaker rooms'],a:1,w:'Critical rooms like breakers and transformers must be secured as part of facility design, because unauthorized access to power infrastructure could compromise the entire data center\'s availability.',e:['Tier standards address uptime design, not specific physical security of','','Positive pressure relates to air quality, not securing power rooms; and','Auto-shutoff addresses fault response, not the reason for securing these'],r:'UPS for seconds, generators for hours; detect before suppressing'},
+{n:'Q983',f:'f14',s:'When designing an integrated HVAC and fire suppression strategy for a multi-story building with diverse occupancy types, which approach would provide the MOST comprehensive and cost-effective protection while minimizing potential damage and ensuring efficient system integration?',o:['Deploy FM-200 in server rooms, preaction systems in offices, and dry systems in storage areas, with centralized monitoring and control','Deploy a single Aero-K system throughout the building for consistency and ease of maintenance','Implement FM-200 systems in all areas with advanced air filtration to prevent HVAC-based attacks','Install water sprinkler systems in all areas and rely on water-resistant server enclosures for protection'],a:0,w:'The correct answer provides a tailored, cost-effective approach that addresses the specific needs of different areas while integrating with the overall building management system.',e:['','','',''],r:'UPS for seconds, generators for hours; detect before suppressing'},
+];
+
+
+/* ================= family mindmap (two vertical rails) ================= */
+(function buildFamMap(){
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var svg = document.getElementById('fammap');
+  var CX = 1050, CY = 780;
+  var RX_R = 1310, RX_L = 790;
+  var PH = 28, GAP = 7;
+  var mctx = document.createElement('canvas').getContext('2d');
+  function tw(t, size, weight){ mctx.font = (weight||'600') + ' ' + size + 'px system-ui, sans-serif'; return mctx.measureText(t).width; }
+  function el(name, attrs, parent){
+    var e = document.createElementNS(SVGNS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    (parent || svg).appendChild(e); return e;
+  }
+  var gE = el('g',{}), gL = el('g',{}), gB = el('g',{}), gC = el('g',{});
+  function edge(x1,y1,x2,y2,color,width,bend){
+    var dx=x2-x1, dy=y2-y1, len=Math.sqrt(dx*dx+dy*dy)||1;
+    var nx=-dy/len*bend, ny=dx/len*bend;
+    el('path',{class:'edge', d:'M'+x1+' '+y1+' Q'+(x1+(x2-x1)*0.5+nx)+' '+(y1+(y2-y1)*0.5+ny)+' '+x2+' '+y2,
+               fill:'none', stroke:color, 'stroke-width':width, 'stroke-opacity':0.5}, gE);
+  }
+  function goToLadder(id){
+    var card = document.getElementById('lad-' + id);
+    if (!card) return;
+    card.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  var n = FAMILIES.length;
+  var rows = Math.ceil(n/2);
+  var spacing = rows > 1 ? 1250/(rows-1) : 0;
+  FAMILIES.forEach(function(m, idx){
+    var g = GROUPS[m.g];
+    var row = idx % rows;
+    var right = idx < rows;
+    var mp = [right ? RX_R : RX_L, 155 + row*spacing];
+    var mw = Math.ceil(tw(m.name, 15, '800')) + 40;
+    var mh = 48;
+    edge(CX, CY, mp[0], mp[1], g.color, 3, 24);
+    var ln = m.leaves.length;
+    var total = ln*PH + (ln-1)*GAP;
+    var stackY = mp[1];
+    m.leaves.forEach(function(txt, i){
+      var w = Math.ceil(tw(txt, 12.5, '600')) + 22;
+      var y = stackY - total/2 + i*(PH+GAP) + PH/2;
+      var x = right ? 1680 - w : 420;
+      var sx = right ? mp[0] + mw/2 : mp[0] - mw/2;
+      edge(sx, mp[1], right ? x : x + w, y, g.color, 1.6, 12);
+      var lg = el('g', {class:'node leaf', role:'button', tabindex:'0'}, gL);
+      el('title', {}, lg).textContent = m.name + ' - ' + txt;
+      el('rect',{x:x, y:y-PH/2, width:w, height:PH, rx:13, fill:'#ffffff', stroke:g.color, 'stroke-width':1.5}, lg);
+      var t = el('text',{x:x+w/2, y:y, 'text-anchor':'middle', 'dominant-baseline':'central',
+                         'font-size':12.5, 'font-weight':600, fill:'#28303d'}, lg);
+      t.textContent = txt;
+      lg.addEventListener('click', function(){ goToLadder(m.id); });
+    });
+    var bg = el('g', {class:'node branch', role:'button', tabindex:'0'}, gB);
+    el('title', {}, bg).textContent = m.name + ' - ' + m.q + ' questions';
+    el('rect',{x:mp[0]-mw/2, y:mp[1]-mh/2, width:mw, height:mh, rx:13, fill:g.fill}, bg);
+    var t1 = el('text',{x:mp[0], y:mp[1]-7, 'text-anchor':'middle', 'dominant-baseline':'central',
+                        'font-size':15, 'font-weight':800, fill:'#ffffff'}, bg);
+    t1.textContent = m.name;
+    var t2 = el('text',{x:mp[0], y:mp[1]+11, 'text-anchor':'middle', 'dominant-baseline':'central',
+                        'font-size':10, 'font-weight':600, fill:'#ffffff', 'fill-opacity':0.85}, bg);
+    t2.textContent = m.g + ' · ' + m.q + 'Q';
+    bg.addEventListener('click', function(){ goToLadder(m.id); });
+  });
+  var cw = 260, ch = 78;
+  var gc = el('g', {class:'node center'}, gC);
+  el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
+  var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
+                      'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
+  c0.textContent = 'DOMAIN 7 · PART';
+  var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
+                      'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
+  c1.textContent = 'DECISION';
+  var c2 = el('text',{x:CX, y:CY+19, 'text-anchor':'middle', 'dominant-baseline':'central',
+                      'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
+  c2.textContent = 'FAMILIES';
+})();
+
+/* ================= ladders + radar ================= */
+(function buildLadders(){
+  var box = document.getElementById('ladderbox');
+  FAMILIES.forEach(function(m){
+    var g = GROUPS[m.g];
+    var card = document.createElement('article');
+    card.className = 'ladder';
+    card.id = 'lad-' + m.id;
+    card.style.setProperty('--mc', g.color);
+    var head = document.createElement('div'); head.className = 'head';
+    head.innerHTML = '<h3>' + m.name + '</h3><span class="gt t-' + m.g + '">' + m.g + '</span><span class="cnt">' + m.q + ' questions · ' + m.topic + '</span><span class="links"><a href="#drill" data-drill="' + m.g + '">drill these &darr;</a><a href="d3_cheatsheet_p2.html#card-' + m.g + '">knowledge &nearr;</a></span>';
+    card.appendChild(head);
+    var ol = document.createElement('ol');
+    m.factors.forEach(function(f){ var li = document.createElement('li'); li.innerHTML = f; ol.appendChild(li); });
+    card.appendChild(ol);
+    var rule = document.createElement('div'); rule.className = 'rule';
+    rule.innerHTML = '<b>Rule &middot; </b>' + m.rule;
+    card.appendChild(rule);
+    box.appendChild(card);
+  });
+  var rbox = document.getElementById('radarbox');
+  RADAR.forEach(function(r){
+    var d = document.createElement('article'); d.className = 'rad';
+    d.innerHTML = '<h3>' + r.t + '</h3>' + r.d + '<div class="ex">seen in: ' + r.ex + '</div>';
+    rbox.appendChild(d);
+  });
+})();
+
+/* ================= drill ================= */
+var drillState = {};
+(function buildDrill(){
+  var box = document.getElementById('drillbox');
+  var scA = document.getElementById('sc-a'), scC = document.getElementById('sc-c'),
+      scP = document.getElementById('sc-p'), scM = document.getElementById('sc-m');
+  var TOTAL = QS.length;
+  function updateScore(){
+    var ans = 0, cor = 0;
+    for (var k in drillState){ ans++; if (drillState[k].correct) cor++; }
+    scA.textContent = ans; scC.textContent = cor;
+    scP.textContent = ans ? '(' + Math.round(cor/ans*100) + '% of answered)' : '(0%)';
+    scM.style.width = (ans/TOTAL*100) + '%';
+  }
+  var letters = ['A','B','C','D'];
+
+  var currentFam = null;
+  QS.forEach(function(q){
+    var fam = null;
+    for (var i=0;i<FAMILIES.length;i++) if (FAMILIES[i].id === q.f) fam = FAMILIES[i];
+    var g = GROUPS[fam.g];
+    if (currentFam !== q.f){
+      currentFam = q.f;
+      var fh = document.createElement('div');
+      fh.className = 'famhead';
+      fh.setAttribute('data-g', fam.g);
+      fh.style.setProperty('--fc', g.color);
+      fh.innerHTML = '<h3>' + fam.name + '</h3><span class="gt t-' + fam.g + '">' + fam.g + '</span><span class="cnt">' + fam.q + ' questions</span><a href="d3_cheatsheet_p2.html#card-' + fam.g + '">knowledge card &nearr;</a>';
+      box.appendChild(fh);
+    }
+    var div = document.createElement('article');
+    div.className = 'q';
+    div.setAttribute('data-g', fam.g);
+    div.id = 'q-' + q.n;
+    var qh = document.createElement('div'); qh.className = 'qhead';
+    qh.innerHTML = '<span class="qn">' + q.n + '</span><span class="gt t-' + fam.g + '">' + fam.g + ' · ' + fam.name + '</span><span class="qrule">rule: ' + q.r + '</span>';
+    div.appendChild(qh);
+    var st = document.createElement('p'); st.className = 'stem'; st.textContent = q.s;
+    div.appendChild(st);
+    var opts = document.createElement('div'); opts.className = 'opts';
+    q.o.forEach(function(txt, i){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'opt'; b.setAttribute('data-l', letters[i]);
+      b.textContent = txt;
+      b.addEventListener('click', function(){ answer(div, q, i, fam); });
+      opts.appendChild(b);
+    });
+    div.appendChild(opts);
+    var vd = document.createElement('div'); vd.className = 'qverdict';
+    vd.id = 'v-' + q.n;
+    div.appendChild(vd);
+    box.appendChild(div);
+  });
+
+  function answer(div, q, i, fam){
+    if (drillState[q.n]) return;                      // locked after first pick
+    var correct = i === q.a;
+    drillState[q.n] = {pick:i, correct:correct};
+    div.classList.add('done');
+    var btns = div.querySelectorAll('.opt');
+    btns[q.a].classList.add('right');
+    if (!correct) btns[i].classList.add('wrong');
+    for (var j=0;j<btns.length;j++) btns[j].disabled = true;
+    var vd = document.getElementById('v-' + q.n);
+    vd.style.setProperty('--fc', GROUPS[fam.g].color);
+    var html = '<div class="mark ' + (correct ? 'good' : 'bad') + '">' + (correct ? 'Correct' : 'Not quite') + ' — answer ' + letters[q.a] + '</div>';
+    html += '<p class="why"><b>Why &middot; </b>' + q.w + '</p>';
+    if (q.e && q.e.length){
+      html += '<ul>';
+      q.e.forEach(function(e, k){
+        if (e && k !== q.a) html += '<li><b>' + letters[k] + '</b> — ' + e + '</li>';
+      });
+      html += '</ul>';
+    }
+    html += '<a class="klink" href="d3_cheatsheet_p2.html#card-' + fam.g + '">knowledge: ' + GROUPS[fam.g].name + ' &nearr;</a>';
+    vd.innerHTML = html;
+    vd.classList.add('show');
+    updateScore();
+  }
+
+  // group filter chips
+  var chips = document.getElementById('drillchips');
+  var filter = 'all';
+  function applyFilter(){
+    var heads = box.querySelectorAll('.famhead');
+    heads.forEach(function(h){ h.style.display = (filter==='all' || h.getAttribute('data-g')===filter) ? '' : 'none'; });
+    box.querySelectorAll('.q').forEach(function(qq){
+      qq.style.display = (filter==='all' || qq.getAttribute('data-g')===filter) ? '' : 'none';
+    });
+  }
+  var all = document.createElement('button');
+  all.type='button'; all.className='fchip all on'; all.setAttribute('data-g','all');
+  all.textContent = 'All (' + TOTAL + ')';
+  all.addEventListener('click', function(){ setFilter('all'); });
+  chips.appendChild(all);
+  Object.keys(GROUPS).forEach(function(gid){
+    var g = GROUPS[gid];
+    var b = document.createElement('button');
+    b.type='button'; b.className='fchip'; b.setAttribute('data-g', gid);
+    b.style.setProperty('--c', g.fill);
+    var c = QS.reduce(function(a,q){ var f=null; for(var i=0;i<FAMILIES.length;i++) if(FAMILIES[i].id===q.f) f=FAMILIES[i]; return a + (f.g===gid?1:0); }, 0);
+    b.textContent = gid + ' · ' + g.name + ' (' + c + ')';
+    b.addEventListener('click', function(){ setFilter(gid); });
+    chips.appendChild(b);
+  });
+  function setFilter(g){
+    filter = g;
+    Array.prototype.forEach.call(chips.children, function(b){ b.classList.toggle('on', b.getAttribute('data-g')===g); });
+    applyFilter();
+  }
+  applyFilter();
+
+  // ladder "drill these" links
+  document.querySelectorAll('a[data-drill]').forEach(function(a){
+    a.addEventListener('click', function(){ setFilter(a.getAttribute('data-drill')); });
+  });
+
+  document.getElementById('sc-reset').addEventListener('click', function(){
+    drillState = {};
+    box.querySelectorAll('.q').forEach(function(qq){
+      qq.classList.remove('done');
+      qq.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('right','wrong'); b.disabled = false; });
+      var v = qq.querySelector('.qverdict');
+      v.classList.remove('show'); v.innerHTML = '';
+    });
+    updateScore();
+  });
+  updateScore();
+})();
+
+</script>
+</body>
+</html>

@@ -143,6 +143,14 @@
 
   footer{padding:30px 0 44px;color:var(--muted);font-size:13px}
   footer code{background:#eef1f6;border-radius:5px;padding:1px 6px;font-size:12px}
+
+/* compressed concept tree embeds (from verified mindmap artifacts) */
+.bc details.mmrows{margin:12px 0 0}
+.bc details.mmrows>summary{cursor:pointer;font-weight:700;font-size:13px;color:var(--gc);letter-spacing:.03em;text-transform:uppercase}
+.bc details.mmrows>summary::marker{color:var(--gc)}
+.bc pre.mmtree{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:12.4px;line-height:1.5;margin:8px 0 2px;padding:12px 14px;background:#f8fafc;border:1px solid var(--line);border-radius:10px;overflow-x:auto;white-space:pre;color:#0f172a}
+.bc pre.mmtree .qrefs{color:#7c2d12;font-weight:700;font-size:11.8px}
+.bc pre.mmtree .mmwarn{color:#b45309;font-weight:700}
 </style>
 </head>
 <body>
@@ -500,6 +508,147 @@
         <tr><td class="rowhead">Q148 lesson</td><td>Integrate security stories and acceptance criteria into each sprint; never defer security to a final dedicated sprint. <span class="qrefs">[Q148]</span></td></tr>
         <tr><td class="rowhead">Q152 lesson</td><td>Under NIST SSDF in Agile/DevOps, integrate automated tests into CI/CD rather than manual reviews after each sprint. <span class="qrefs">[Q152]</span></td></tr>
         </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 131 lines · 34 Q-refs · 8 tree sections</summary>
+<pre class="mmtree">├─ Foundations
+│  ├─ Lifecycle = risk-mgmt sequence: classify → reqs → design → build/verify
+│  │  → authorize → monitor → dispose; security is NOT a testing-only activity
+│  ├─ Several valid answers? pick the EARLIEST preventive lifecycle action
+│  ├─ SLC = System Life Cycle: concept→budget→acquire→dev→ops→retire→dispose;
+│  │  scope incl. ops/retirement/disposal ⇒ SLC, not SDLC [<span class="qrefs">Q27</span>]
+│  ├─ SDLC = Software Dev Life Cycle = software-focused subset of SLC
+│  ├─ Initiation sets context: impact categorization, preliminary risk
+│  │  assessment, sensitivity classification, asset ownership
+│  ├─ Cue "first / initial impact / initial category" ⇒ initiation step
+│  ├─ Assign asset OWNER early ⇒ accountability, inventory currency, risk
+│  │  visibility, accreditation readiness [<span class="qrefs">Q87</span>]
+│  ├─ FIPS 199: categorize by WORST-CASE adverse impact of C/I/A loss;
+│  │  category drives control rigor + RMF effort
+│  ├─ Levels: Low=limited · Moderate=serious · High=severe/catastrophic
+│  └─ <span class="mmwarn">⚠</span> FIPS 199 categorization occurs in INITIATION, before development,
+│     and drives later security effort (exam framing) [<span class="qrefs">Q50</span>]
+
+├─ Requirements &amp; Design
+│  ├─ Requirements = what protection is needed, before architecture/code;
+│  │  sources: laws, policies, standards, risk analysis
+│  ├─ Risk analysis feeding mandatory security needs ⇒ requirements defn [<span class="qrefs">Q24</span>]
+│  ├─ Begin risk analysis + threat modeling in reqs/design, before code
+│  │  exists — not static analysis [<span class="qrefs">Q26 Q43</span>]
+│  ├─ Requirements must precede coding; pentest cannot fix a missing
+│  │  requirement; embed at specification/design [<span class="qrefs">Q61</span>]
+│  ├─ Engage security professionals during requirements gathering — a
+│  │  post-design review is too late [<span class="qrefs">Q92</span>]
+│  ├─ Security by design from initiation, not after schema finalization [<span class="qrefs">Q93</span>]
+│  ├─ At initiation/planning: foundational threat modeling + third-party
+│  │  supply-chain risk assessment [<span class="qrefs">Q147</span>]
+│  ├─ Training at SDLC initiation embeds security ownership + cross-team
+│  │  communication through all phases [<span class="qrefs">Q154</span>]
+│  ├─ Design = how architecture/controls satisfy reqs + classifications;
+│  │  define secure architecture + formal baselines BEFORE code [<span class="qrefs">Q55</span>]
+│  ├─ Minimize attack surface at design (exposed functions/interfaces)
+│  ├─ Select controls at design per classification/reqs/detailed risk
+│  ├─ Architect granular access + least privilege at design; retrofit is
+│  │  costlier and may be incomplete [<span class="qrefs">Q131</span>]
+│  ├─ Fail-secure: failures preserve security, never default insecure
+│  ├─ Formal design review evaluates architecture before implementation
+│  ├─ Classification → concrete media handling + granular access = DESIGN [<span class="qrefs">Q102</span>]
+│  └─ <span class="mmwarn">⚠</span> Establishing a classification scheme that informs design =
+│     REQUIREMENTS ANALYSIS [<span class="qrefs">Q130</span>] (see Contradictions)
+
+├─ Development &amp; Testing
+│  ├─ Secure coding standards: OWASP (Open Worldwide App Sec Project)
+│  │  + CERT during development
+│  ├─ Peer code review; Fagan = structured inspection of work products
+│  ├─ Code signing: integrity + publisher authenticity of artifacts
+│  ├─ Code exists but NOT executing ⇒ SAST or peer review
+│  ├─ Sequence: unit (isolated components) → integration (interactions) →
+│  │  system (complete) → UAT (business sign-off); regression = changes
+│  │  didn't break prior behavior
+│  ├─ Penetration testing: actively evaluates exploitable weaknesses; does
+│  │  NOT replace reqs, certification, or management authorization
+│  ├─ SAST=static, no execution (dev/CI) · DAST=external probe of running
+│  │  app · IAST=instrumented runtime · fuzz=malformed/random input
+│  ├─ Running app / input-robustness cue ⇒ DAST or fuzzing, not static
+│  ├─ SAST/DAST/IAST/fuzz are COMPLEMENTARY; none authorizes operation
+│  └─ <span class="mmwarn">⚠</span> Source groups static/dynamic/fuzz under the TESTING phase;
+│     technically SAST commonly runs in dev/CI [<span class="qrefs">Q22 Q49</span>]
+
+├─ Certification &amp; Accreditation
+│  ├─ Certification = independent TECHNICAL evaluation of deployed controls
+│  │  vs stated reqs; produces evidence, does not authorize
+│  ├─ Accreditation = MANAGEMENT's documented decision to accept residual
+│  │  risk and authorize operation
+│  ├─ AO = Authorizing Official; DAA = legacy Designated Approving
+│  │  Authority; modern wording: A&amp;A / ATO — keep the distinction
+│  ├─ Sequence: test → certify → accredit → THEN release to production [<span class="qrefs">Q25</span>]
+│  ├─ Live without formal sign-off ⇒ missing accreditation/authorization,
+│  │  even if internal testing occurred [<span class="qrefs">Q25 Q39 Q58</span>]
+│  ├─ Vendor/internal tests find defects but don't replace documented
+│  │  independent verification; don't speculate about vendor tool quality [<span class="qrefs">Q58</span>]
+│  └─ C&amp;A governs operational authorization, NOT retirement retention,
+│     sanitization, or disposal [<span class="qrefs">Q42</span>]
+
+├─ Operations &amp; Disposition
+│  ├─ Operations = ongoing security administration, monitoring, recurring
+│  │  vulnerability assessment, patching preserves posture [<span class="qrefs">Q59</span>]
+│  ├─ Logging: records for monitoring, investigation, accountability
+│  ├─ Change control: request → review → approve → test → record, before
+│  │  implementation [<span class="qrefs">Q40</span>]
+│  ├─ Config mgmt maintains authorized baselines; unauthorized live changes
+│  │  = CM failure, not a dev-phase static-testing issue [<span class="qrefs">Q40</span>]
+│  ├─ After migration/major change: reassess data SENSITIVITY to realign
+│  │  access/handling — distinct from vulnerability discovery [<span class="qrefs">Q76</span>]
+│  ├─ Disposition: validate retention → archive required records →
+│  │  sanitize media → documented disposal, keep evidence [<span class="qrefs">Q29 Q42</span>]
+│  ├─ Validate legal/regulatory/contractual retention BEFORE destruction
+│  ├─ NIST SP 800-88 guides media sanitization; crypto-erase when key
+│  │  destruction renders data inaccessible
+│  ├─ Retain destruction certificates + sanitization + disposal records
+│  └─ Unencrypted records on decommissioned servers = DISPOSITION failure,
+│     not an operations-patching failure [<span class="qrefs">Q52</span>]
+
+└─ Cross-phase Traps
+   ├─ Tailor controls to impact/criticality/threats/regulation/project risk;
+   │  uniform controls over-/under-protect [<span class="qrefs">Q16</span>]
+   ├─ Patch-later ≠ security by design: retrofit costs more, exposure
+   │  windows, architectural weaknesses remain [<span class="qrefs">Q28</span>]
+   ├─ <span class="mmwarn">⚠</span> 10–100× downstream remediation cost = directional exam logic, not
+   │  a universal formula
+   ├─ <span class="mmwarn">⚠</span> Continuous security ≠ mandatory sign-off at EVERY individual
+   │  milestone; principle = continuous integration + pre-op authorization
+   ├─ Bug bounty = reactive assurance after availability; no substitute for
+   │  early reqs/architecture/coding/verification [<span class="qrefs">Q67</span>]
+   ├─ Testing evidence SUPPORTS a decision; only the authorized management
+   │  role accepts residual risk and permits operation
+   ├─ Verb cues: classify/categorize→initiation or reqs · architect controls
+   │  →design · realign after migration→operations [<span class="qrefs">Q102 Q130</span>]
+   ├─ Security engaged only in testing ⇒ costly gaps testing can't remediate;
+   │  the issue is INTEGRATION, not sign-off paperwork [<span class="qrefs">Q54</span>]
+   ├─ Continuously test + reassess risk during implementation/DB changes;
+   │  end-sprint reviews are only periodic [<span class="qrefs">Q63</span>]
+   └─ EHR: risk-based HIPAA compliance + PHI sensitivity checks in EVERY
+      phase [<span class="qrefs">Q79</span>]
+g2 · DEVSECOPS &amp; CI/CD
+
+├─ Definitions
+│  ├─ DevOps = dev+ops integrated via automation + CI/CD pipelines
+│  ├─ DevSecOps = security as shared, continuous responsibility across
+│  │  dev/sec/ops; culture+process model, not a toolset [<span class="qrefs">Q142</span>]
+│  ├─ Shift left: reqs, threat modeling, review, automated testing earlier
+│  │  ⇒ prevent defects, cut downstream risk + remediation cost
+│  ├─ Continuous checks = fast per-change feedback; end-sprint/end-release
+│  │  audits batch findings, delay feedback, create bottlenecks
+│  ├─ Automate routine checks; retain human judgment + gate policy-defined
+│  │  CRITICAL/HIGH findings
+│  └─ Strategic long-term benefit = lower lifecycle risk + remediation cost
+│     via early security+compliance integration; automation is enabler [<span class="qrefs">Q120</span>]
+
+├─ Foundations
+│  └─ DBMS anatomy: hardware + software (MySQL, Oracle, DB2, SQL Server,
+│     RDS) + tables; rows=tuples/records, columns=attributes; PK identifies,
+│     FK relates; SQL = the language; ACID = atomicity, consistency,
+│     isolation, durability</pre>
+</details>
       <a class="decklink" href="#flashcards" data-deck="g1">flashcards: lifecycle &rarr;</a>
     </div>
 
@@ -580,6 +729,97 @@
         <tr><td class="rowhead">Offline patch flow</td><td>For air-gapped systems, use controlled offline acquisition, validation, transfer, deployment, and recordkeeping so patching does not defeat isolation.</td></tr>
         <tr><td class="rowhead">Patch tradeoff</td><td>Patch strategy balances urgency against availability, testing confidence, system criticality, and network isolation.</td></tr>
         </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 84 lines · 35 Q-refs · 5 tree sections</summary>
+<pre class="mmtree">├─ Pipeline
+│  ├─ CI = frequent merges to shared branch, automated build+test per
+│  │  merge; validates changes, does NOT release [<span class="qrefs">Q37</span>]
+│  ├─ Delivery = every passing build READY for production + explicit manual
+│  │  gate; deciding word = "ready" [<span class="qrefs">Q35</span>]
+│  ├─ Deployment = every passing change released to production
+│  │  automatically, no human intervention [<span class="qrefs">Q31 Q35</span>]
+│  ├─ Ladder: manual → CI → Delivery (manual gate) → Deployment (auto push)
+│  │  → DevSecOps (security as code throughout) [<span class="qrefs">Q36</span>]
+│  ├─ <span class="mmwarn">⚠</span> Highest CI/CD automation level = Continuous DEPLOYMENT; DevSecOps
+│  │  is broader security integration, not a release-automation level [<span class="qrefs">Q36</span>]
+│  ├─ Why automate: early defect detection, fewer human errors, repeatable
+│  │  builds, consistent security gates, shorter commit→production [<span class="qrefs">Q32</span>]
+│  ├─ CI security value = early consistent automated detection; SPEED is a
+│  │  delivery benefit, not the security objective [<span class="qrefs">Q33</span>]
+│  ├─ Pipeline integrity: RBAC + least privilege on pipeline config (MFA is
+│  │  the distractor — authn ≠ modification rights) [<span class="qrefs">Q6</span>]
+│  ├─ Pipeline-as-code + IaC in version control, peer-reviewed; build ONCE,
+│  │  promote the same immutable artifact; code-sign final artifact
+│  ├─ Fail CLOSED: failed SAST/DAST/SCA/unit/compliance check halts the
+│  │  pipeline and blocks promotion — never bypass the gate [<span class="qrefs">Q30</span>]
+│  ├─ SAST as automated commit/merge gate for custom code, no execution [<span class="qrefs">Q9</span>]
+│  ├─ Custom-code-without-execution clue ⇒ SAST; third-party components/
+│  │  licenses/SBOM/CVEs ⇒ SCA [<span class="qrefs">Q82</span>]
+│  ├─ DAST tests running app outside-in (black box); IAST instruments the
+│  │  running app during QA, sees inside
+│  ├─ Automated scanning at each relevant build stage covers integration
+│  │  contexts IDE-only analysis misses [<span class="qrefs">Q112</span>]
+│  ├─ Embed tools in CI/CD; manual review just before deployment = serialized
+│  │  bottleneck undermining cadence [<span class="qrefs">Q113</span>]
+│  ├─ Risk-based automated testing on predefined acceptance criteria; a
+│  │  separate parallel security pipeline fragments accountability [<span class="qrefs">Q115</span>]
+│  ├─ Compliance-as-code pre-release: PII scanning, encryption settings,
+│  │  SBOM/CVE checks — GDPR-at-speed + payments = automated, not manual [<span class="qrefs">Q77 Q155</span>]
+│  └─ Canary: release to small subset, monitor health, auto-rollback
+│     anomalies, expand progressively · <span class="mmwarn">⚠</span> NO zero-downtime guarantee [<span class="qrefs">Q121</span>]
+
+├─ Agile &amp; Roles
+│  ├─ Product Owner prioritizes backlog (incl. security stories)
+│  ├─ Scrum Master facilitates; no authority, doesn't own security decisions
+│  ├─ Development team executes sprint work, shares security responsibility
+│  ├─ Security user story = needed control in backlog form + MEASURABLE
+│  │  acceptance criteria [<span class="qrefs">Q5 Q78</span>]
+│  ├─ Security stories + criteria in EVERY sprint; a final security sprint
+│  │  = reactive bolt-on [<span class="qrefs">Q114 Q148</span>]
+│  ├─ Champion = embedded developer advocate/liaison; auditor = independent
+│  │  evaluator — independence differentiates them [<span class="qrefs">Q1 Q122</span>]
+│  └─ Cross-functional teams with embedded security beat centralized
+│     phase-end review (bottleneck, lacks project context) [<span class="qrefs">Q1 Q122</span>]
+
+├─ Modeling &amp; Frameworks
+│  ├─ Threat modeling anticipates attack paths/design risk BEFORE code
+│  │  testing; scanners only detect weakness classes; update continuously
+│  │  as architecture/threats evolve [<span class="qrefs">Q15 Q129</span>]
+│  ├─ STRIDE / PASTA / DREAD named approaches (expansions at g7)
+│  ├─ SCA = Software Composition Analysis: third-party dependencies = a
+│  │  supply-chain and dependency control
+│  ├─ Security-as-Code = policies/configs as version-controlled code;
+│  │  IaC = infrastructure as code (Terraform, CloudFormation); both
+│  │  versioned, reviewed, tested, traceable
+│  ├─ SSDF (NIST Secure Software Development Framework): define security
+│  │  reqs → code securely → verify software → respond to vulnerabilities;
+│  │  automated tests in CI/CD [<span class="qrefs">Q152</span>]
+│  ├─ DevSecOps REPLACES reactive end-cycle manual pentesting and
+│  │  point-in-time manual compliance audits with automated continuous
+│  │  testing/checks [<span class="qrefs">Q91 Q125</span>]
+│  └─ Automate SAST/DAST/IAST in CI/CD to integrate security into global
+│     Agile without slowing delivery; continuous pipeline-wide testing
+│     balances rigor + agility [<span class="qrefs">Q14 Q45 Q100 Q116</span>]
+
+├─ Pipeline placement
+│  └─ Embed security tests at appropriate pipeline STAGES, not a separate
+│     end-stage review
+
+└─ Patch Management
+   ├─ Operations must CONTINUE patch management post-deployment [<span class="qrefs">Q59</span>]
+   ├─ Distributed mission-critical: staged rollout, testing prioritized by
+   │  system criticality — never immediate universal deployment [<span class="qrefs">Q11</span>]
+   ├─ Agent-based patching ⇒ consistent, timely updates across systems;
+   │  bandwidth savings is SECONDARY [<span class="qrefs">Q123</span>]
+   ├─ Air-gapped systems can't reach repositories ⇒ controlled manual
+   │  patching (offline acquisition→validation→transfer→deploy→records);
+   │  "tools introduce vulns" speculation is weaker [<span class="qrefs">Q80</span>]
+   ├─ Patch tradeoff: urgency vs availability, testing confidence, system
+   │  criticality, network isolation
+   └─ Continuous monitoring evaluates deployed system + changing risk;
+      authorization is not the end of security work
+g3 · SECURE CODING &amp; MEMORY SAFETY</pre>
+</details>
       <a class="decklink" href="#flashcards" data-deck="g2">flashcards: DevSecOps &rarr;</a>
     </div>
 
@@ -691,6 +931,66 @@
         <tr><td class="rowhead">Count connections</td><td>Tight coupling can be estimated by the number of dependencies or interconnections a module has. More dependencies generally increase change impact and incident blast radius.</td></tr>
         <tr><td class="rowhead">Interface boundaries</td><td>Reduce coupling with abstraction layers, dependency injection, design patterns, and enforced Application Programming Interface (API) boundaries. These localize change and faults.</td></tr>
         </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 54 lines · 14 Q-refs · 4 tree sections</summary>
+<pre class="mmtree">├─ Input Validation
+│  ├─ Enforce validation SERVER-SIDE; client-side JS is UX, bypassable via
+│  │  proxies/curl/dev-tools [<span class="qrefs">Q17</span>]
+│  ├─ ALLOW-list known-good input; deny-lists are incomplete + reactive
+│  │  (unlisted encodings/payloads) [<span class="qrefs">Q17</span>]
+│  ├─ Four checks before processing: TYPE, LENGTH, FORMAT, RANGE —
+│  │  preventive, defense in depth [<span class="qrefs">Q17</span>]
+│  └─ No stack traces/debug info/internal paths to users; generic message
+│     outside, log details inside [<span class="qrefs">Q44</span>]
+
+├─ Memory Safety
+│  ├─ Overflow root: unbounded writes into fixed buffers — strcpy(), gets(),
+│  │  scanf("%s") classics
+│  ├─ Code-level fix: bounded ops strncpy()/strncat()/snprintf() + bounds
+│  │  checking AT the vulnerable operation [<span class="qrefs">Q21</span>]
+│  ├─ Caveat: generic validation misses overflows from internal logic or
+│  │  wrong length calculations; bounds checking is more direct [<span class="qrefs">Q21</span>]
+│  ├─ ASLR randomizes locations (hinders, doesn't prevent) · DEP/NX marks
+│  │  stack non-executable · stack canary detects overwrite before return [<span class="qrefs">Q75</span>]
+│  ├─ Compiler-assisted bounds checking/detection = overflow protection with
+│  │  MINIMAL runtime degradation (more direct than ASLR) [<span class="qrefs">Q75</span>]
+│  ├─ <span class="mmwarn">⚠</span> "Most effective" is wording-dependent: bounds checking + size/type
+│  │  validation [<span class="qrefs">Q140</span>] vs SDLC-wide secure-coding training on buffer
+│  │  management as root cause (runtime checks are tactical) [<span class="qrefs">Q141</span>]
+│  └─ Rust: ownership/borrowing at compile time prevents overflow/UAF/
+│     dangling pointers, zero-cost safety, steeper learning curve than C++
+│     smart pointers; unsafe blocks reintroduce risk [<span class="qrefs">Q127</span>]
+
+├─ Reuse
+│  ├─ Standard libraries = prebuilt, tested, maintained reuse; NEVER roll
+│  │  your own crypto — OpenSSL, libsodium, native APIs [<span class="qrefs">Q60</span>]
+│  └─ Preventive controls, training, libraries, SAST are more scalable and
+│     cheaper than post-release patching
+
+└─ OOP &amp; Modules
+   ├─ Exposed attributes + unsanitized searches ⇒ ENCAPSULATION of objects
+   │  + INPUT VALIDATION of search fields (two controls, two risks) [<span class="qrefs">Q41</span>]
+   ├─ Encapsulation = data + methods, hidden state, validated public
+   │  interface — integrity barrier [<span class="qrefs">Q47</span>]
+   ├─ Abstraction models essentials, hides complexity, can shrink attack
+   │  surface — but doesn't itself enforce access [<span class="qrefs">Q41</span>]
+   ├─ Inheritance propagates parent vulnerabilities; prefer composition
+   ├─ Polymorphism = one interface, multiple implementations (testable,
+   │  replaceable components)
+   ├─ Cohesion = elements support ONE task; coincidental (arbitrary
+   │  grouping) is WORST [<span class="qrefs">Q51</span>]
+   ├─ Coupling = interdependence; low coupling = independent operation +
+   │  fault isolation; high lets defects cascade [<span class="qrefs">Q53 Q57</span>]
+   ├─ Ideal: HIGH cohesion within, LOW coupling between ⇒ maintainability,
+   │  testability, auditability, fault containment
+   ├─ Cross-module breakage + mixed-responsibility modules ⇒ reduce
+   │  coupling, raise cohesion (inheritence won't fix it) [<span class="qrefs">Q48</span>]
+   ├─ Estimate tight coupling by COUNTING dependencies/interconnections =
+   │  change impact + incident blast radius
+   └─ Reduce coupling: abstraction layers, dependency injection, design
+      patterns, enforced API boundaries
+g4 · CODE OBFUSCATION &amp; IP PROTECTION</pre>
+</details>
       <a class="decklink" href="#flashcards" data-deck="g3">flashcards: coding &rarr;</a>
     </div>
 
@@ -727,6 +1027,38 @@
         <tr><td class="rowhead">obfuscate</td><td>Code obfuscation deliberately transforms source or binaries to hinder human understanding and automated analysis. Its primary purpose is deterring decompilation, reverse engineering, and theft of proprietary intellectual property or trade secrets. <span class="qrefs">[Q85]</span></td></tr>
         <tr><td class="rowhead">Lexical rename</td><td>Lexical obfuscation renames variables, functions, and classes to meaningless tokens while preserving program logic. It removes readability but does not encrypt the code.</td></tr>
         </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 22 lines · 6 Q-refs · 8 tree sections</summary>
+<pre class="mmtree">├─ Definition/purpose: deliberately transform source/binaries to hinder
+│  human + automated analysis; PRIMARY purpose = deter decompilation,
+│  reverse engineering, theft of proprietary IP/trade secrets [<span class="qrefs">Q85</span>]
+
+├─ Lexical rename = meaningless tokens, logic preserved (easiest, weakest);
+│  other transforms: control-flow flattening, string encryption, dead-code
+│  insertion, binary packing [<span class="qrefs">Q105</span>]
+
+├─ Surgical, not blanket: obfuscate only critical proprietary algorithms;
+│  leave commodity code readable for maintenance/review/audit [<span class="qrefs">Q156</span>]
+
+├─ Deterrent ONLY — not cryptographic secrecy; executable code can be
+│  reversed with sufficient effort [<span class="qrefs">Q85</span>]
+
+├─ Trade-offs: own-developer maintenance falls (VCS diffs lose meaning),
+│  debugging harder (transformed symbols), audits weakened (reviewers,
+│  SAST, compliance lose visibility — dominant concern in regulated
+│  finance); balance RE protection vs lifecycle quality [<span class="qrefs">Q19 Q105 Q110</span>]
+
+├─ Do NOT obfuscate third-party/OSS libraries: breaks SCA, dependency
+│  tracking, SBOM generation, license verification, community support [<span class="qrefs">Q12</span>]
+
+├─ Late then sign: controlled, logged, reproducible LATE-stage build step,
+│  then code-sign; unmanaged obfuscation undermines reproducible builds [<span class="qrefs">Q110</span>]
+
+└─ Code signing = asymmetric crypto (private key signs, public verifies):
+   publisher authenticity + modification detection, NO confidentiality;
+   authenticity/integrity⇒signing · confidentiality⇒encryption [<span class="qrefs">Q85 Q156</span>]
+g5 · DATABASES &amp; MULTI-LEVEL SECURITY</pre>
+</details>
       <a class="decklink" href="#flashcards" data-deck="g4">flashcards: obfuscation &rarr;</a>
     </div>
 
@@ -801,6 +1133,92 @@
         <tr><td class="rowhead">Restrict catalogs</td><td>Restrict catalog and metadata access through fine-grained least privilege rather than blanket access. This protects structural intelligence while preserving transaction throughput. <span class="qrefs">[Q153]</span></td></tr>
         <tr><td class="rowhead">Logs or catalogs</td><td>The source uses metadata broadly for transaction logs when asking about activity tracking, and structurally for catalogs/data dictionaries when asking about schema inference. Select the interpretation that matches the question wording. <span class="qrefs">[Q108 Q145]</span></td></tr>
         </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 78 lines · 18 Q-refs · 6 tree sections</summary>
+<pre class="mmtree">├─ Foundations
+│  ├─ Lifecycle = risk-mgmt sequence: classify → reqs → design → build/verify
+│  │  → authorize → monitor → dispose; security is NOT a testing-only activity
+│  ├─ Several valid answers? pick the EARLIEST preventive lifecycle action
+│  ├─ SLC = System Life Cycle: concept→budget→acquire→dev→ops→retire→dispose;
+│  │  scope incl. ops/retirement/disposal ⇒ SLC, not SDLC [<span class="qrefs">Q27</span>]
+│  ├─ SDLC = Software Dev Life Cycle = software-focused subset of SLC
+│  ├─ Initiation sets context: impact categorization, preliminary risk
+│  │  assessment, sensitivity classification, asset ownership
+│  ├─ Cue "first / initial impact / initial category" ⇒ initiation step
+│  ├─ Assign asset OWNER early ⇒ accountability, inventory currency, risk
+│  │  visibility, accreditation readiness [<span class="qrefs">Q87</span>]
+│  ├─ FIPS 199: categorize by WORST-CASE adverse impact of C/I/A loss;
+│  │  category drives control rigor + RMF effort
+│  ├─ Levels: Low=limited · Moderate=serious · High=severe/catastrophic
+│  └─ <span class="mmwarn">⚠</span> FIPS 199 categorization occurs in INITIATION, before development,
+│     and drives later security effort (exam framing) [<span class="qrefs">Q50</span>]
+
+├─ SQL Injection
+│  ├─ Parameterized queries/prepared statements: SQL structure and user
+│  │  data travel separately — input can never become executable SQL;
+│  │  gold-standard code-level control [<span class="qrefs">Q89 Q107</span>]
+│  ├─ <span class="mmwarn">⚠</span> Correct parameterization prevents SQLi WITHOUT inherently
+│  │  sacrificing normal database performance [<span class="qrefs">Q107</span>]
+│  ├─ Input validation = useful defense-in-depth BACKUP, insufficient alone
+│  ├─ Stored procedures still vulnerable when concatenating untrusted input
+│  │  into dynamic SQL — parameterize inside
+│  └─ ORM abstracts queries but can be misused/configured insecurely; ORM
+│     use ≠ proven SQLi resistance
+
+├─ Foundations
+│  └─ DBMS anatomy: hardware + software (MySQL, Oracle, DB2, SQL Server,
+│     RDS) + tables; rows=tuples/records, columns=attributes; PK identifies,
+│     FK relates; SQL = the language; ACID = atomicity, consistency,
+│     isolation, durability
+
+├─ Multi-Level Security
+│  ├─ MLS DB enforces MAC via security labels (classifications +
+│  │  compartments); the DBMS — not application code — filters rows by
+│  │  clearance; labels are the critical metadata [<span class="qrefs">Q150</span>]
+│  ├─ Bell-LaPadula: NO READ UP (Secret can't read Top Secret); NO WRITE
+│  │  DOWN (Top Secret can't write Secret) [<span class="qrefs">Q38</span>]
+│  ├─ Every tuple carries a label; DBMS returns only rows permitted by
+│  │  clearance + categories
+│  ├─ Inference: lower-cleared users deduce protected facts from permitted
+│  │  data/behavior — NULL values, aggregate counts, empty results,
+│  │  existence checks [<span class="qrefs">Q62</span>]
+│  ├─ Polyinstantiation: same primary key, different labels — each clearance
+│  │  sees its own version; empty results stop leaking existence [<span class="qrefs">Q38 Q46</span>]
+│  └─ When redaction/empty result would reveal classified data EXISTS,
+│     return a classification-appropriate polyinstantiated record [<span class="qrefs">Q62</span>]
+
+├─ Concurrency
+│  ├─ 2PL: acquire locks (grow) then release (shrink); strong
+│  │  serializability, reduced throughput, deadlock-prone
+│  ├─ MVCC: readers see a consistent snapshot, writers version — readers
+│  │  don't block writers; costs storage + cleanup; long transactions
+│  │  retain old versions [<span class="qrefs">Q126</span>]
+│  ├─ Choose MVCC for high concurrency; 2PL/Serializable for strictness [<span class="qrefs">Q126</span>]
+│  ├─ Lock granularity: TABLE=cheap, low concurrency · PAGE=balance ·
+│  │  ROW=max concurrency, many locks, memory + contention overhead [<span class="qrefs">Q64 Q136</span>]
+│  ├─ Fine-grained locks ⇒ lock-exhaustion/contention DoS exposure —
+│  │  max concurrency is not free [<span class="qrefs">Q64 Q136</span>]
+│  ├─ Escalation: row locks → page/table locks past thresholds; mitigate
+│  │  with batching, better indexes, tuned thresholds — never disable [<span class="qrefs">Q137</span>]
+│  ├─ <span class="mmwarn">⚠</span> Choose row vs page by granularity of actual data-ACCESS PATTERNS,
+│  │  not average row size (physical attribute) [<span class="qrefs">Q138</span>]
+│  └─ Isolation: Read Uncommitted (dirty) → Read Committed (no dirty;
+│  │  <span class="mmwarn">⚠</span> supplied SQL Server default) → Repeatable Read (no reread change)
+│  │  → Serializable (no phantoms, strongest, costliest) — isolation level
+│  │  is NOT a SQLi control [<span class="qrefs">Q71</span>]
+
+└─ Logs &amp; Metadata
+   ├─ WAL/transaction logs record changes for rollback/recovery; show who
+   │  did what, when — audits + compliance; logs hold SENSITIVE values and
+   │  need table-grade protection [<span class="qrefs">Q108</span>]
+   ├─ System catalogs/data dictionaries/SYS views/INFORMATION_SCHEMA reveal
+   │  schema, constraints, relationships, counts — reconnaissance goldmine [<span class="qrefs">Q145</span>]
+   ├─ Restrict catalog access via FINE-GRAINED least privilege, not blanket
+   │  denial (protects structural intelligence, preserves throughput) [<span class="qrefs">Q153</span>]
+   └─ <span class="mmwarn">⚠</span> "Metadata" is dual-use in the source: logs for activity tracking,
+      catalogs for schema inference — pick by question wording [<span class="qrefs">Q108 Q145</span>]
+g6 · APIs &amp; MICROSERVICES</pre>
+</details>
       <a class="decklink" href="#flashcards" data-deck="g5">flashcards: databases &rarr;</a>
     </div>
 
@@ -872,6 +1290,64 @@
         <tr><td class="rowhead">Lock gateway policy</td><td>Prevent gateway abuse through strict authentication and access-control policy; encryption alone cannot reject unauthorized use. <span class="qrefs">[Q143]</span></td></tr>
         <tr><td class="rowhead">Mobile delegation</td><td>Mobile Single Sign-On (SSO) and delegated access favor OAuth 2.0 over JWT alone. <span class="qrefs">[Q151]</span></td></tr>
         </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 52 lines · 10 Q-refs · 4 tree sections</summary>
+<pre class="mmtree">├─ Tokens
+│  ├─ OAuth 2.0 = delegated, SCOPED authorization without sharing
+│  │  passwords; an authorization framework, NOT authentication; mobile
+│  │  SSO/delegation favors it [<span class="qrefs">Q151</span>]
+│  ├─ JWT = signed, self-contained claims for stateless validation; a
+│  │  TOKEN FORMAT, not a delegation framework [<span class="qrefs">Q65</span>]
+│  ├─ <span class="mmwarn">⚠</span> Exam pattern: scalable sensitive REST/cloud APIs ⇒ OAuth 2.0 with
+│  │  signed JWTs; SOAP/WS-Security = legacy heavyweight [<span class="qrefs">Q65 Q128</span>]
+│  ├─ <span class="mmwarn">⚠</span> Exam vs reality: exam picks OAuth2+JWT; in reality OAuth delegates
+│  │  authZ, a separate identity layer authenticates, JWT merely carries
+│  │  claims — preserve the distinction when wording permits [<span class="qrefs">Q65 Q128</span>]
+│  ├─ mTLS: BOTH services prove identity with X.509 certificates [<span class="qrefs">Q106</span>]
+│  ├─ Service mesh: sidecar proxies centralize mTLS, authn/authz, traffic
+│  │  policy, observability — without embedding in app code [<span class="qrefs">Q106</span>]
+│  └─ Selection: mutual service identity ⇒ mTLS; claims transport ⇒ JWT [<span class="qrefs">Q106</span>]
+
+├─ Gateway
+│  ├─ API gateway/reverse proxy = central enforcement chokepoint
+│  ├─ Centralizes AUTHENTICATION before routing to backends
+│  ├─ Central access-control POLICY; backends still enforce
+│  │  resource-specific authorization
+│  ├─ Centralized RATE LIMITING against abuse/resource exhaustion
+│  ├─ Input validation as common FIRST layer (doesn't remove service-level)
+│  ├─ Central logging ⇒ auditability + visibility across services
+│  ├─ Route only AFTER policy evaluation; validate authorization on EVERY
+│  │  request, not just initial login
+│  └─ <span class="mmwarn">⚠</span> Gateway abuse/misconfiguration ⇒ strict authentication +
+│     access-control policy; encryption protects transit, fixes neither [<span class="qrefs">Q143</span>]
+
+├─ API Styles
+│  ├─ REST: stateless resource endpoints; per-endpoint policy + rate
+│  │  limiting comparatively straightforward [<span class="qrefs">Q23</span>]
+│  ├─ GraphQL: ONE endpoint, client-shaped queries ⇒ must analyze
+│  │  requested work [<span class="qrefs">Q23</span>]
+│  ├─ Controls: query-DEPTH limits + complexity/COST analysis + rate
+│  │  limits (request count ≠ workload) [<span class="qrefs">Q23</span>]
+│  ├─ Neither REST nor GraphQL is inherently secure — engineer controls
+│  └─ SOAP/WS-Security may fit a legacy mandate but is heavyweight vs
+│     token-based security for scalable REST
+
+└─ Secrets &amp; Privilege
+   ├─ Keep secrets SERVER-SIDE: proxy / BFF / token vault so credentials
+   │  aren't extractable from mobile/SPA/browser code [<span class="qrefs">Q118</span>]
+   ├─ Server-side proxy exchanges SHORT-LIVED tokens (limits compromise
+   │  exposure); short-lived tokens in serverless too [<span class="qrefs">Q118</span>]
+   ├─ NEVER long-lived API keys in mobile/SPA/browser code
+   ├─ Separate administrative and ordinary-user endpoints/policies
+   ├─ Minimum scopes: only permissions needed; all-users-full-access =
+   │  textbook least-privilege violation [<span class="qrefs">Q10 Q81</span>]
+   ├─ Third-party API integration risk ⇒ robust authentication + FINE-
+   │  GRAINED authorization [<span class="qrefs">Q81</span>]
+   └─ <span class="mmwarn">⚠</span> Healthcare/regulated API retirement: GRADUAL deprecation, extended
+      legacy support, mandatory security patches — abrupt discontinuation
+      threatens availability + patient care [<span class="qrefs">Q97</span>]
+g7 · SUPPLY CHAIN, CLOUD &amp; GOVERNANCE</pre>
+</details>
       <a class="decklink" href="#flashcards" data-deck="g6">flashcards: APIs &rarr;</a>
     </div>
 
@@ -1093,6 +1569,234 @@
         <tr><td class="rowhead">Cloud-native ABAC</td><td>ABAC is critical for cloud-native, context-aware least privilege using user, resource, and environmental attributes. <span class="qrefs">[Q149]</span></td></tr>
         <tr><td class="rowhead">Initiation to lifecycle</td><td>Training at SDLC initiation should embed security ownership and cross-team communication throughout all phases. <span class="qrefs">[Q154]</span></td></tr>
         </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 212 lines · 43 Q-refs · 14 tree sections</summary>
+<pre class="mmtree">├─ Principles
+│  ├─ Centralized auditable policy + implementation adapts to project and
+│  │  regional requirements
+│  ├─ Define measurable security requirements BEFORE build-or-buy; verify
+│  │  continuously through the lifecycle
+│  ├─ Shrink blast radius: delegation, least privilege, short-lived access,
+│  │  segmentation, per-request authorization
+│  ├─ Cloud RELOCATES control ownership; customer accountability for data,
+│  │  identity, access, configuration never disappears
+│  ├─ Inventories + metadata make assets/dependencies/obligations visible;
+│  │  continuous automation keeps visibility current
+│  ├─ Tools assist people: automation scales assurance; accountable humans
+│  │  review context, model threats, own risk decisions
+│  └─ Match control to scenario; prefer earliest, scalable, auditable,
+│     business-aware answer
+
+├─ Acquisition
+│  ├─ RFP FIRST: measurable security reqs before vendor selection,
+│  │  contracts, or pre-acceptance testing — earliest mitigation of
+│  │  inherited third-party risk [<span class="qrefs">Q18 Q95 Q96</span>]
+│  ├─ State MEASURABLE encryption requirements — not "must be secure"
+│  ├─ Require SBOM delivery (expose components + dependencies)
+│  ├─ Specify vulnerability-disclosure + remediation timelines
+│  ├─ Include regulatory/industry/risk-management reqs (healthcare RFP:
+│  │  mandated standards + RMF) [<span class="qrefs">Q139</span>]
+│  ├─ Define patching expectations + SLAs before purchase/outsourcing
+│  ├─ SOC 2 Type II = evidence of control operation over a PERIOD —
+│  │  assurance evidence, not a guarantee
+│  ├─ ISO/IEC 27001 certification = POINT-IN-TIME evidence; doesn't replace
+│  │  lifecycle assessment
+│  ├─ Common Criteria: informs product assurance; doesn't eliminate
+│  │  contextual testing or monitoring
+│  ├─ Request pen-test summaries/comparable test evidence in due diligence
+│  ├─ Review breach history (past performance informs third-party risk)
+│  ├─ Assess financial viability (vendor failure threatens support/BC)
+│  ├─ Patch cadence = how quickly + reliably vendor FIXES vulnerabilities,
+│  │  not merely whether updates are issued [<span class="qrefs">Q72</span>]
+│  └─ Contracts: RIGHT TO AUDIT + patch SLA (enforceable timing) +
+│     source-code ESCROW released on defined vendor failure [<span class="qrefs">Q20</span>]
+
+├─ Supply Chain
+│  ├─ SBOM records components + dependencies incl. TRANSITIVE — answers
+│  │  "what is present"
+│  ├─ SCA continuously checks third-party components for known CVEs +
+│  │  license issues; scales across many direct/transitive libs [<span class="qrefs">Q98 Q119</span>]
+│  ├─ Use BOTH: SBOM for inventory + SCA/dependency tracking for newly
+│  │  disclosed risk — either alone is incomplete
+│  ├─ Attack patterns: legitimately named dependency compromised ·
+│  │  malicious maintainer with release authority · typosquatting
+│  │  look-alike package names [<span class="qrefs">Q72 Q99 Q133</span>]
+│  ├─ Assess BOTH direct selections and indirectly pulled dependencies
+│  ├─ Vulnerability HISTORY is a stronger lifecycle-risk indicator than a
+│  │  single certification snapshot [<span class="qrefs">Q72</span>]
+│  ├─ Evaluate how quickly + effectively maintainers remediate disclosed
+│  │  flaws
+│  ├─ Low/declining maintainer activity ⇒ abandonment + patch risk
+│  ├─ Fork viability: could you safely maintain an internal fork? For
+│  │  critical abandoned components: replace or controlled fork
+│  └─ Licenses: GPL copyleft (derivative distribution obligations) vs
+│     permissive MIT/Apache (notice/patent terms still matter)
+
+├─ Cloud
+│  ├─ IaaS: provider = physical + virtualization; customer secures OS,
+│  │  apps, data, IAM, network config
+│  ├─ PaaS: provider adds OS/runtime/middleware; customer secures code,
+│  │  data, identity, access
+│  ├─ SaaS: provider runs the app stack; customer still governs data,
+│  │  identity/access, configuration
+│  ├─ Abstraction rises IaaS→SaaS: customer infrastructure duty SHRINKS;
+│  │  data classification + access governance duty NEVER disappears
+│  ├─ Models: public (shared multi-tenant) · private (single org) ·
+│  │  hybrid (orchestrated mix) · community (shared mission)
+│  ├─ Classify workloads/data by sensitivity, THEN separate into security
+│  │  domains — e.g. public + highly sensitive financial data in separate
+│  │  modular domains [<span class="qrefs">Q13</span>]
+│  ├─ VPC segmentation isolates by sensitivity/purpose; security groups
+│  │  restrict permitted flows between tiers
+│  ├─ Machine-readable TAGS drive IAM policies per classification
+│  ├─ Distinct namespaces/storage boundaries/encryption KEYS for different
+│  │  sensitivity tiers
+│  ├─ Segregation = compensating control limiting blast radius of compromise
+│  └─ CASB: visibility (shadow-IT discovery) + compliance policy + data
+│     security (DLP) + cloud threat protection
+
+├─ Serverless &amp; Containers
+│  ├─ Serverless: MINIMIZE execution-role permissions (over-privileged
+│  │  roles enlarge impact)
+│  ├─ Validate/sanitize event payloads — triggers + inputs are attack surface
+│  ├─ Surface SHIFTS: IAM triggers, API gateways, function injection,
+│  │  execution roles (no persistent customer-managed compute)
+│  ├─ Scan base images + layers for known vulns BEFORE deployment [<span class="qrefs">Q70</span>]
+│  ├─ Signed images verify provenance/integrity; allow-listed registries only
+│  ├─ Patch containers by REBUILDING immutable images, never modifying
+│  │  running containers
+│  ├─ Run containers with minimum required privileges
+│  ├─ Read-only container filesystem limits persistence + tampering
+│  └─ seccomp + AppArmor profiles restrict syscalls + OS capabilities
+
+├─ IaC Governance
+│  ├─ IaC definitions in version control (traceability, repeatability) +
+│  │  peer review before deployment
+│  ├─ Policy-as-code: rules evaluated consistently in automated provisioning
+│  ├─ Drift detection: divergence between approved IaC and deployed state
+│  ├─ Pre-deploy scanning for misconfiguration — config errors propagate
+│  │  FAST and CONSISTENTLY
+│  └─ <span class="mmwarn">⚠</span> Central challenge: balance rapid automated provisioning with
+│     continuous audit + compliance verification [<span class="qrefs">Q84</span>]
+
+├─ Access Control Models
+│  ├─ MAC: system-enforced labels + clearances; users/owners cannot freely
+│  │  override; MLS supports multiple classification levels
+│  ├─ RBAC: permissions via stable role membership; suits predictable
+│  │  structures
+│  ├─ ABAC: user/resource/environmental ATTRIBUTES for dynamic decisions;
+│  │  avoids role explosion; critical for cloud-native context-aware least
+│  │  privilege [<span class="qrefs">Q132 Q149</span>]
+│  ├─ DAC: owner grants identity-based permissions, commonly via ACLs
+│  └─ JIT access: temporary privileged elevation, auto-revoked after task —
+│     productive administration WITHOUT standing privilege [<span class="qrefs">Q124</span>]
+
+├─ Data Governance
+│  ├─ System/business OWNER is accountable for classifying by value/
+│  │  sensitivity/impact — done at initiation [<span class="qrefs">Q4</span>]
+│  ├─ Information LIBRARIAN catalogs project artifacts + metadata, governs
+│  │  lifecycle/access, enforces granular artifact access policies; does
+│  │  NOT assign business value [<span class="qrefs">Q101</span>]
+│  ├─ Metadata TAGS encode classification so systems automate policy
+│  │  enforcement (incl. PII) [<span class="qrefs">Q68</span>]
+│  ├─ DLP uses tags to identify + control sensitive information
+│  ├─ Metadata tracks data movement + information-flow enforcement
+│  ├─ Privacy tags discover personal data; support GDPR + CCPA requests
+│  │  across jurisdictions [<span class="qrefs">Q135</span>]
+│  ├─ Undervaluing an apparently low-value but highly INTERCONNECTED system
+│  │  creates exploitable gaps across dependents [<span class="qrefs">Q90</span>]
+│  └─ Centralized REAL-TIME software inventory + license management across
+│     global offices [<span class="qrefs">Q83</span>]
+
+├─ Maturity &amp; Metrics
+│  ├─ SAMM (OWASP) = PRESCRIPTIVE framework for building/improving software
+│  │  security; targets input validation, session mgmt; Security Champion =
+│  │  embedded liaison [<span class="qrefs">Q94 Q104</span>]
+│  ├─ BSIMM = descriptive/empirical; benchmark what peers actually do
+│  ├─ CMMI = GENERAL process maturity (not security-specific); levels:
+│  │  Initial, Repeatable, Defined, Managed, Optimizing
+│  ├─ Hybrid CMMI + SAMM = org-wide process discipline + security depth [<span class="qrefs">Q134</span>]
+│  ├─ OUTCOME metrics over activity: vulnerability reduction, prevented
+│  │  attack vectors, reduced pen-test findings [<span class="qrefs">Q34 Q109</span>]
+│  ├─ Trend vulnerabilities by SDLC PHASE + defect type; tailor/reassess
+│  │  metrics per phase, not one fixed dashboard [<span class="qrefs">Q69 Q146</span>]
+│  ├─ <span class="mmwarn">⚠</span> Mean time to patch/patch criticals for board exposure reporting;
+│  │  source may say MTTP vs MTTR — follow the exact metric asked [<span class="qrefs">Q7</span>]
+│  ├─ Defect density = defects per KLOC; meaningful only normalized + trended
+│  └─ Champion program: embedded developer liaison; long-term challenge =
+│     sustaining consistent ENGAGEMENT across teams [<span class="qrefs">Q74</span>]
+
+├─ Threat Modeling (expansions)
+│  ├─ STRIDE checklist: Spoofing, Tampering, Repudiation, Information
+│  │  Disclosure, Denial of Service, Elevation of Privilege
+│  ├─ PASTA: 7-step risk-centric attack simulation aligning technical
+│  │  threats with business impact; fits complex microservices +
+│  │  third-party integrations [<span class="qrefs">Q86</span>]
+│  └─ DREAD scoring: Damage, Reproducibility, Exploitability, Affected
+│     Users, Discoverability
+
+├─ Automation Limits
+│  ├─ SAST/DAST/SCA miss logic flaws, access-control errors, contextual
+│  │  weaknesses, novel vulnerabilities
+│  ├─ Supplement with human review, threat modeling, security culture,
+│  │  accountable judgment
+│  └─ <span class="mmwarn">⚠</span> Biggest automation risk = FALSE CONFIDENCE leaving context-specific
+│     vulnerabilities undiscovered [<span class="qrefs">Q144</span>]
+
+├─ AI &amp; Low-Code
+│  ├─ Validate + sanitize TRAINING/fine-tuning data via trusted pipelines
+│  │  (poisoning corrupts learning) [<span class="qrefs">Q73</span>]
+│  ├─ Validate OPERATIONAL inputs (evasion crafts runtime input to
+│  │  misclassify/bypass) [<span class="qrefs">Q73</span>]
+│  ├─ Prefer ALLOW-list validation for AI inputs (consistent with secure
+│  │  coding)
+│  ├─ Fuzz/robustness testing evaluates behavior under crafted inputs
+│  ├─ AI may inform; an ACCOUNTABLE HUMAN reviews and owns architectural
+│  │  + security decisions [<span class="qrefs">Q8</span>]
+│  ├─ <span class="mmwarn">⚠</span> Air-gapping reduces connectivity exposure but does NOT prevent
+│  │  poisoned training data or crafted inference input
+│  ├─ <span class="mmwarn">⚠</span> Over-reliance on AI/ML detection creates false confidence →
+│  │  complex vulnerabilities MISSED [<span class="qrefs">Q2</span>]
+│  ├─ <span class="mmwarn">⚠</span> Greatest inherent low-code/no-code risk = LIMITED VISIBILITY into
+│  │  underlying logic + controls hidden by abstraction [<span class="qrefs">Q3</span>]
+│  ├─ INVENTORY citizen apps so security retains visibility
+│  ├─ <span class="mmwarn">⚠</span> Embed automated platform gates in the workflow — weekly manual
+│  │  review can't match apps built in hours/days [<span class="qrefs">Q66</span>]
+│  ├─ Require vendor dependency disclosure + SBOM where applicable
+│  ├─ Citizen devs bypass SDLC review ⇒ shadow IT; hidden API calls, data
+│  │  flows, third-party dependencies
+│  └─ Proprietary abstraction ⇒ vendor lock-in, reduced control
+
+├─ Global Governance
+│  ├─ Standardized framework + customizable components = consistency +
+│  │  project flexibility [<span class="qrefs">Q103</span>]
+│  ├─ Global security framework + LOCALIZED implementation guidance for
+│  │  multinational regulatory variation [<span class="qrefs">Q56</span>]
+│  ├─ Global ERP: centralized policies, localized implementation, global
+│  │  governance committee [<span class="qrefs">Q88</span>]
+│  └─ <span class="mmwarn">⚠</span> Avoid both extremes: fully global uniform policy misses regional
+│     law; fully federated governance creates inconsistent control +
+│     compliance gaps
+
+└─ Scenario Rules
+   ├─ PRIMARY control before supporting: authn/authz before validation for
+   │  unauthorized calls; image scanning before orchestrator privileges
+   ├─ EARLY + CONTINUOUS beats late/periodic: reqs before selection;
+   │  continuous CI/CD testing + real-time inventory vs predefined-stage
+   │  scans [<span class="qrefs">Q111</span>]
+   ├─ Input checks around a vulnerable library = COMPENSATING only — patch,
+   │  replace, or fork
+   ├─ One unified encryption treatment ≠ segregation by sensitivity; may
+   │  burden low-risk data unnecessarily
+   ├─ Evidence is incomplete: certifications = snapshots, SBOMs =
+   │  inventories, patching = known flaws; none alone = lifecycle assurance
+   ├─ Continuously threat-model, assess risk, review third-party providers
+   │  across the SDLC [<span class="qrefs">Q133</span>]
+   ├─ <span class="mmwarn">⚠</span> Critical acquired software needs a COMPREHENSIVE security audit;
+   │  a vulnerability scan is only one component [<span class="qrefs">Q117</span>]
+   └─ Regularly update third-party libraries; PRIORITIZE patches for known
+      buffer-overflow CVEs [<span class="qrefs">Q99</span>]</pre>
+</details>
       <a class="decklink" href="#flashcards" data-deck="g7">flashcards: supply chain &amp; governance &rarr;</a>
     </div>
 

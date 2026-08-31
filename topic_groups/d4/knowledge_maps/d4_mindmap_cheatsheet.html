@@ -142,6 +142,14 @@
 
   footer{padding:30px 0 44px;color:var(--muted);font-size:13px}
   footer code{background:#eef1f6;border-radius:5px;padding:1px 6px;font-size:12px}
+
+/* compressed concept tree embeds (from verified mindmap artifacts) */
+.bc details.mmrows{margin:12px 0 0}
+.bc details.mmrows>summary{cursor:pointer;font-weight:700;font-size:13px;color:var(--gc);letter-spacing:.03em;text-transform:uppercase}
+.bc details.mmrows>summary::marker{color:var(--gc)}
+.bc pre.mmtree{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:12.4px;line-height:1.5;margin:8px 0 2px;padding:12px 14px;background:#f8fafc;border:1px solid var(--line);border-radius:10px;overflow-x:auto;white-space:pre;color:#0f172a}
+.bc pre.mmtree .qrefs{color:#7c2d12;font-weight:700;font-size:11.8px}
+.bc pre.mmtree .mmwarn{color:#b45309;font-weight:700}
 </style>
 </head>
 <body>
@@ -407,6 +415,171 @@
 <tr><td class="rowhead">protocol traits ensure...</td><td>Ordered delivery with acknowledgment mechanisms and sequence tracking is essential for reliable transport; connectionless transmission deliberately lacks delivery guarantees and error correction. <span class="qrefs">[Q177]</span></td></tr>
 <tr><td class="rowhead">SIP vs SRTP</td><td>SIP initiates, maintains, and terminates voice and video sessions, while SRTP adds encryption, authentication, integrity, and replay protection to the media stream.</td></tr>
 </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 162 lines · 80 Q-refs</summary>
+<pre class="mmtree">g1 · OSI, TCP/IP &amp; MEDIA ── 112 concepts
+│
+├─ OSI MODEL
+│  ├─ 1.01 OSI = 7 layers; exam: map function/protocol/attack → layer
+│  ├─ 1.02 L7 App: resource access; HTTP/S DNS SSH FTP SMTP; app FW
+│  ├─ 1.03 L6 Presentation: formatting, encryption, compression (XML JPEG)
+│  ├─ 1.04 L5 Session: interhost dialogue; circuit-level proxy (SOCKS)
+│  ├─ 1.05 L4 Transport: end-to-end connection, errors, ports; TCP/UDP
+│  ├─ 1.06 L3 Network: IP logical addressing, routing, datagrams
+│  ├─ 1.07 L2 Data Link: MAC, frames, switching; ARP, L2TP, PPTP
+│  │  │      [<span class="qrefs">Q297 Q303</span>]
+│  ├─ 1.08 L1 Physical: raw bits; hubs, repeaters, NICs, cabling, RF
+│  ├─ 1.09 TCP/IP = 4 layers: Link(1-2) Internet(3) Transport(4) App(5-7)
+│  └─ 1.10 encapsulation: Segment→Packet→Frame→Bits down; strip up
+│
+├─ LAYER DECISION RULES (exam cues)
+│  ├─ 1.11 routing / IP addressing / packet filtering → L3 [<span class="qrefs">Q169 Q265 Q252</span>]
+│  ├─ 1.12 end-to-end error correction / reliability / ports → L4
+│  │  │      [<span class="qrefs">Q164 Q171 Q2</span>]
+│  ├─ 1.13 MAC forwarding / switching / ARP resolution → L2 [<span class="qrefs">Q170</span>]
+│  ├─ 1.14 end-to-end = L4 (TCP) vs per-hop point-to-point = L2 [<span class="qrefs">Q263</span>]
+│  ├─ 1.15 encryption during format conversion/transformation → L6 [<span class="qrefs">Q410</span>]
+│  ├─ 1.16 TLS/SSL session encryption classified L4; universal, multi-app
+│  │  │      [<span class="qrefs">Q38 Q89</span>]
+│  ├─ 1.17 <span class="mmwarn">⚠</span> <span class="qrefs">Q130</span>: HTTPS encryption+auth implemented at L4, not L7 [<span class="qrefs">Q130</span>]
+│  ├─ 1.18 least privilege: action control→L7 RBAC; data protection→L6
+│  │  │      selective encryption [<span class="qrefs">Q100</span>]
+│  ├─ 1.19 <span class="mmwarn">⚠</span> ZT layer conflict (C1): segmentation→L3 [<span class="qrefs">Q37</span>]; app-aware
+│  │  │      identity/context policy→L6-7 [<span class="qrefs">Q100</span>]
+│  ├─ 1.20 <span class="mmwarn">⚠</span> timing side-channel most vulnerable at L2 (frame timing) [<span class="qrefs">Q4</span>]
+│  ├─ 1.21 IP spoofing + routing-table attacks: mitigate at L3 [<span class="qrefs">Q5 Q399</span>]
+│  ├─ 1.22 L3 threat trio: spoofing, DDoS, routing-table poisoning [<span class="qrefs">Q399</span>]
+│  ├─ 1.23 mindset: lower = transport; upper = access control + protection
+│  └─ 1.24 device transmits nothing → troubleshoot L1 first [<span class="qrefs">Q165</span>]
+│
+├─ TOPOLOGIES
+│  ├─ 1.25 topology + media choice constrains every control
+│  ├─ 1.26 bus: one shared wire; SPOF; any device intercepts; least secure
+│  ├─ 1.27 eliminate bus when fault isolation / break resistance needed
+│  ├─ 1.28 star: central switch = SPOF; most common, centralized mgmt
+│  │  │      [<span class="qrefs">Q197 Q198</span>]
+│  ├─ 1.29 ring: closed loop; one break disrupts all [<span class="qrefs">Q196</span>]
+│  ├─ 1.30 token passing eliminates collisions; CSMA/CD detects after
+│  │  │      [<span class="qrefs">Q196 Q199</span>]
+│  ├─ 1.31 mesh: maximum redundancy + fault tolerance, maximum cost [<span class="qrefs">Q194</span>]
+│  ├─ 1.32 full mesh n(n−1)/2 links; least scalable
+│  ├─ 1.33 partial mesh: practical redundancy-vs-cost enterprise choice
+│  ├─ 1.34 mesh = HA but expensive; "bus high redundancy" is false [<span class="qrefs">Q195</span>]
+│  ├─ 1.35 tree: hierarchical branches give moderate isolation
+│  ├─ 1.36 <span class="qrefs">Q62</span> multi-cloud ZT + microservices → hybrid mesh-star [<span class="qrefs">Q62</span>]
+│  └─ 1.37 topology selection = risk decision (SPOF/interception/cost)
+│
+├─ MEDIA
+│  ├─ 1.38 UTP: cheap/common; EMI + crosstalk; easy to tap
+│  ├─ 1.39 STP: foil shield reduces EMI; still copper residual risks
+│  ├─ 1.40 coax: electrical, shared medium, tappable
+│  ├─ 1.41 fiber: light; fastest, longest; hardest tap = most secure
+│  ├─ 1.42 twists cancel EMI, but copper stays crosstalk-vulnerable
+│  ├─ 1.43 connectors: RJ-45 UTP · BNC coax · LC/SC/ST/MTRJ fiber
+│  └─ 1.44 <span class="qrefs">Q411</span> detect fiber taps → in-line OTDR + real-time monitoring
+│  │         [<span class="qrefs">Q411</span>] (encryption doesn't detect tampering)
+│
+├─ TRANSMISSION MODES &amp; MEDIA ACCESS
+│  ├─ 1.45 unicast 1:1 = most secure (only recipient sees traffic)
+│  ├─ 1.46 multicast 1:subscribed-group = moderate exposure
+│  ├─ 1.47 broadcast 1:all = least secure; +interception +load
+│  ├─ 1.48 collision domain per switch port; switches segment collisions
+│  ├─ 1.49 routers break broadcast domains; switches/hubs don't
+│  ├─ 1.50 CSMA/CD detect+backoff (wired) vs CSMA/CA avoid (Wi-Fi)
+│  └─ 1.51 token passing &amp; polling = alternative access methods
+│
+├─ DEVICES, SWITCHING &amp; ADDRESS TRANSLATION
+│  ├─ 1.52 L1: hub, repeater, concentrator — interpret no addresses
+│  ├─ 1.53 <span class="mmwarn">⚠</span> hub = highest-risk device; repeats all to every port [<span class="qrefs">Q379</span>]
+│  ├─ 1.54 L2: switch, bridge (L3 switch straddles L2+L3); 802.1Q, STP
+│  ├─ 1.55 L3: router, L3 switch, packet-filter FW; BGP/OSPF/RIP
+│  ├─ 1.56 L4: no standalone native device; stateful FW tracks transport
+│  ├─ 1.57 L7: application proxy / application firewall
+│  ├─ 1.58 switch = MAC + collision domains; router = IP + broadcast
+│  ├─ 1.59 L3 switch forwards by dest IP by default — ACLs required
+│  │  │      [<span class="qrefs">Q309</span>]; logical segmentation ≠ enforcement
+│  ├─ 1.60 VLAN 802.1Q: logical segmentation, no rewiring, NOT a security
+│  │  │      boundary → add FW [<span class="qrefs">Q231 Q314 Q336 Q337 Q343</span>]
+│  ├─ 1.61 proxy = intelligent L7 intermediary; one per service = cost
+│  ├─ 1.62 NAT 1:1 private↔public; PAT many:1 via unique source ports
+│  ├─ 1.63 NAT hides topology, blocks unsolicited inbound — not a control
+│  │  │      [<span class="qrefs">Q50</span>]
+│  └─ 1.64 PAT masks true source from perimeter IDS → attribution loss
+│         [<span class="qrefs">Q32</span>]
+│
+├─ WAN PROTOCOLS
+│  ├─ 1.65 X.25: oldest; per-node error correction; high overhead
+│  │  │      reliability &gt; performance; legacy only [<span class="qrefs">Q255</span>]
+│  ├─ 1.66 <span class="mmwarn">⚠</span> <span class="qrefs">Q262</span> bank on bad links → X.25 (Frame Relay sacrifices ECC)
+│  │         [<span class="qrefs">Q262</span>]
+│  ├─ 1.67 X.25 only when ECC &gt; throughput; migration argument = slow
+│  │  │      speeds (never claim "no error correction") [<span class="qrefs">Q306</span>]
+│  ├─ 1.68 Frame Relay: packet-switched, faster than X.25, less ECC
+│  ├─ 1.69 ATM: fixed 53-byte cells; L2; high-speed backbone [<span class="qrefs">Q280</span>]
+│  ├─ 1.70 <span class="qrefs">Q280</span> ATM successor = MPLS; Frame Relay would regress [<span class="qrefs">Q280</span>]
+│  ├─ 1.71 MPLS: label paths, traffic isolation, NO encryption — provider
+│  │  │      sees plaintext [<span class="qrefs">Q268</span>]
+│  ├─ 1.72 <span class="qrefs">Q270</span> trading firm: MPLS = isolation + real-time performance
+│  │         [<span class="qrefs">Q270</span>]
+│  ├─ 1.73 rule: MPLS for perf/isolation + IPsec for confidentiality
+│  ├─ 1.74 <span class="qrefs">Q299</span> provider can view WAN data → encrypt everything [<span class="qrefs">Q299</span>]
+│  ├─ 1.75 packet switching = dynamic shared channels, efficient
+│  │  │      [<span class="qrefs">Q281 Q292</span>]; circuit switching = dedicated path/session
+│  ├─ 1.76 <span class="qrefs">Q347</span> vendor access → authenticated extranet [<span class="qrefs">Q347</span>]
+│  └─ 1.77 VRF: multiple isolated routing tables in one router = L3
+│         multi-tenant separation [<span class="qrefs">Q272</span>]
+│
+├─ L2 PROTOCOLS &amp; PROTECTIONS
+│  ├─ 1.78 STP blocks redundant paths → loop-free L2 with redundancy [<span class="qrefs">Q54</span>]
+│  ├─ 1.79 STP manipulation → BPDU Guard + Root Guard [<span class="qrefs">Q54</span>]
+│  ├─ 1.80 MAC flooding → port security (limit MACs/port; CAM overflow)
+│  │  │      [<span class="qrefs">Q55</span>]
+│  ├─ 1.81 Dynamic ARP Inspection handles ARP spoofing [<span class="qrefs">Q55</span>]
+│  ├─ 1.82 VLAN hopping → disable DTP on access ports [<span class="qrefs">Q68</span>]
+│  ├─ 1.83 iSCSI: block storage over IP/TCP; routable [<span class="qrefs">Q227</span>]
+│  ├─ 1.84 FCoE: FC frames over Ethernet; NOT routable (L2 only) [<span class="qrefs">Q283</span>]
+│  └─ 1.85 RDMA bypasses stack → low latency; IBoE = RDMA over Ethernet
+│         [<span class="qrefs">Q294</span>]
+│
+├─ ROUTING
+│  ├─ 1.86 inter-AS: BGP + MD5 auth + route filtering (OSPF = interior
+│  │  │      trap) [<span class="qrefs">Q83 Q200</span>]
+│  ├─ 1.87 ROV validates route-advertisement origin; anti-hijack [<span class="qrefs">Q136</span>]
+│  ├─ 1.88 <span class="qrefs">Q366</span> L3 security + traffic engineering → BGP auth + MPLS [<span class="qrefs">Q366</span>]
+│  ├─ 1.89 PBR: granular policy-based traffic control [<span class="qrefs">Q101</span>]
+│  ├─ 1.90 RIP: max hop count 15 prevents loops [<span class="qrefs">Q335</span>]
+│  ├─ 1.91 OSPF: link-state + Dijkstra shortest path [<span class="qrefs">Q359</span>]
+│  ├─ 1.92 router = L3; forwards between networks by dest IP [<span class="qrefs">Q321</span>]
+│  ├─ 1.93 router (not switch) for broadcast separation + IP ACLs [<span class="qrefs">Q282</span>]
+│  ├─ 1.94 mirror/SPAN port copies VLAN traffic to IDS sensor [<span class="qrefs">Q244</span>]
+│  └─ 1.95 CXL: open standard CPU↔device/memory high-speed links [<span class="qrefs">Q233</span>]
+│
+├─ TCP vs UDP
+│  ├─ 1.96 TCP: connection-oriented; seq+ACK; ordered; 20B header; slower
+│  ├─ 1.97 UDP: connectionless best-effort; 8B header; faster
+│  ├─ 1.98 TCP for transactions/commands; UDP for streaming/VoIP/DNS/DHCP
+│  │  │      [<span class="qrefs">Q174 Q177</span>]
+│  ├─ 1.99 TCP reliability = sequence numbers + ACKs + checksums [<span class="qrefs">Q172</span>]
+│  ├─ 1.100 TCP header enables session tracking; UDP's cannot [<span class="qrefs">Q175</span>]
+│  ├─ 1.101 handshake: SYN(ISN) → SYN-ACK → ACK; full-duplex [<span class="qrefs">Q176</span>]
+│  ├─ 1.102 seq numbers: reassembly, retransmit, anti-hijack order
+│  │  │      [<span class="qrefs">Q57 Q377</span>]
+│  └─ 1.103 predictable ISN → session hijacking; randomize ISNs [<span class="qrefs">Q222</span>]
+│
+└─ PORTS &amp; SUPPORT PROTOCOLS
+   ├─ 1.104 well-known 0-1,023 · registered 1,024-49,151 · ephemeral
+   │        49,152-65,535 [<span class="qrefs">Q173</span>]
+   ├─ 1.105 21 FTP(clear) · 22 SSH · 23 Telnet(clear) · 25 SMTP · 53 DNS
+   │        (UDP, TCP for zone xfer) · 67/68 DHCP server/client
+   ├─ 1.106 80 HTTP(clear) · 443 HTTPS (well-known) · 6667 IRC default
+   ├─ 1.107 off-hours outbound spikes on 6667 = IRC botnet C2 [<span class="qrefs">Q383</span>]
+   ├─ 1.108 ARP: IP→MAC at L2 [<span class="qrefs">Q271</span>]; RARP: MAC→IP (reverse)
+   ├─ 1.109 ICMP: L3 error/control, no ports; traceroute diagnostics [<span class="qrefs">Q320</span>]
+   ├─ 1.110 rogue DHCP hands attacker IP/DNS/gateway; OSPF assigns none
+   │        [<span class="qrefs">Q342</span>]
+   ├─ 1.111 IP fragmentation; overlapping fragments evade inspection [<span class="qrefs">Q344</span>]
+   └─ 1.112 DoH visibility → centralized DoH proxy [<span class="qrefs">Q85</span>]</pre>
+</details>
 <a class="decklink" href="#flashcards" data-deck="g1">▦ 129 flashcards &rarr;</a></div>
 <div class="bc" id="card-g2" style="--gc:var(--g2)">
 <h3>g2 &middot; IP Addressing &amp; Subnetting</h3>
@@ -530,6 +703,173 @@
 <tr><td class="rowhead">Proxy for PHI: what...</td><td>In a proxy-based segmented healthcare network under HIPAA, the correct capability is filtering and logging access to patient-data repositories with real-time alerts — granular access control plus continuous monitoring and audit logging for breach detection, minimizing attack surface. Distractor logic: RBAC (Role-Based Access Control) enforces permissions but lacks the proxy-layer continuous monitoring, filtering, and audit logging HIPAA requires. <span class="qrefs">[Q333]</span></td></tr>
 <tr><td class="rowhead">Risk manager or packet...</td><td>CISSP mindset for network defense: select the control that balances the required level of inspection against acceptable performance and operational complexity — think like a risk manager, not a packet engineer; match the right control to the right threat.</td></tr>
 </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 164 lines · 74 Q-refs</summary>
+<pre class="mmtree">g2 · IP ADDRESSING &amp; SUBNETTING (+ firewalls, VoIP per source) ── 81 concepts
+│
+├─ IPv4 / IPv6 ADDRESSING
+│  ├─ 2.01 IPv4: 32-bit, 4 octets; ~4.3B addresses, exhausted [<span class="qrefs">Q261</span>]
+│  ├─ 2.02 IPv6: 128-bit, 8 groups; 340 undecillion addresses [<span class="qrefs">Q242 Q285</span>]
+│  ├─ 2.03 IPv4 scarcity: NAT/PAT effectively required; insufficient for
+│  │  │      IoT-scale unique addressing [<span class="qrefs">Q261 Q285</span>]
+│  ├─ 2.04 IPv6 space defeats sequential scanning / host enumeration [<span class="qrefs">Q367</span>]
+│  ├─ 2.05 IPv4 IPsec = optional add-on; IPv6 mandates IPsec support
+│  │  │      [<span class="qrefs">Q21 Q259 Q285</span>]
+│  ├─ 2.06 <span class="mmwarn">⚠</span> IPv6 does NOT auto-encrypt; mandatory support ≠ operation;
+│  │  │      firewalls still needed [<span class="qrefs">Q21</span>]
+│  ├─ 2.07 IPv6 rarely needs NAT (scarcity arguments vanish)
+│  ├─ 2.08 autoconfig: IPv4 = DHCP; IPv6 = SLAAC or DHCPv6
+│  ├─ 2.09 <span class="qrefs">Q137</span> SLAAC disrupts scanning/asset tracking (address sprawl;
+│  │  │      link-local does NOT cause it) [<span class="qrefs">Q137</span>]
+│  ├─ 2.10 <span class="qrefs">Q211</span> EUI-64 embeds MAC → tracking/fingerprinting; temporary
+│  │  │      addresses actually improve privacy [<span class="qrefs">Q211</span>]
+│  ├─ 2.11 <span class="qrefs">Q19</span> privacy extensions: randomized rotating interface IDs;
+│  │  │      monitoring/attribution cost [<span class="qrefs">Q19</span>]
+│  ├─ 2.12 <span class="qrefs">Q20</span> global branches: unique prefix per region = aggregation,
+│  │  │      simpler mgmt, regional security [<span class="qrefs">Q20</span>]
+│  ├─ 2.13 <span class="qrefs">Q150</span> hide internal IPv6 servers: ULA + randomized subnet IDs
+│  │  │      (non-routable); random interface IDs insufficient [<span class="qrefs">Q150</span>]
+│  ├─ 2.14 <span class="qrefs">Q149</span> dual-stack doubles attack surface; IPv4-era tools (SIEM,
+│  │  │      correlators, TI) miss IPv6 — IDS alone insufficient [<span class="qrefs">Q149</span>]
+│  ├─ 2.15 <span class="qrefs">Q226</span>/<span class="qrefs">Q302</span> exhaustion + native encryption in one → IPv6
+│  │  │      (128-bit + IPsec); VPN concentrator solves only one [<span class="qrefs">Q226 Q302</span>]
+│  ├─ 2.16 mindset: IPv6 scale vs asset inventory/monitoring/attribution
+│  ├─ 2.17 classful: A 1-126 /8 · B 128-191 /16 · C 192-223 /24 ·
+│  │  │      D 224-239 multicast · E 240-255 reserved · 127 loopback
+│  ├─ 2.18 RFC1918 private (10/8 · 172.16/12 · 192.168/16) never
+│  │  │      internet-routable
+│  ├─ 2.19 private IPs in external logs / at ISP = perimeter NAT/FW
+│  │  │      misconfiguration or spoofing [<span class="qrefs">Q312 Q352</span>]
+│  ├─ 2.20 CIDR /n replaces classful (flexible subnet sizes) [<span class="qrefs">Q242 Q285</span>]
+│  ├─ 2.21 subnet math: borrow host bits; usable hosts = 2^h − 2
+│  │  │      [<span class="qrefs">Q367 Q32</span>]; /30 = 4 addresses, 2 usable (p2p links)
+│  ├─ 2.22 subnet per trust zone — the addressing plan IS the
+│  │  │      segmentation plan [<span class="qrefs">Q423 Q367</span>]
+│  └─ 2.23 exam lens: do the arithmetic; the mask answers [<span class="qrefs">Q423 Q406</span>]
+│
+├─ CONVERGED NETWORKS &amp; VoIP
+│  ├─ 2.24 converged: voice+video+data on one IP pipe; cost-efficient but
+│  │  │      merged risk, expanded attack surface [<span class="qrefs">Q423</span>]
+│  ├─ 2.25 UC bundles VoIP/IM/presence/video/email/voicemail — one
+│  │  │      vulnerability cascades across modalities
+│  ├─ 2.26 VoIP = voice as IP packets over packet networks [<span class="qrefs">Q269</span>];
+│  │  │      PSTN = circuit-switched; PBX = internal telephony
+│  ├─ 2.27 SIP: L7 signaling only (UDP/5060, TCP/5061); securing SIP
+│  │  │      does NOT protect media stream
+│  ├─ 2.28 RTP: media over UDP; NO built-in encryption/auth/integrity —
+│  │  │      cleartext eavesdropping
+│  ├─ 2.29 SRTP: encryption+auth+integrity+replay for media; go-to for
+│  │  │      VoIP eavesdropping/MITM [<span class="qrefs">Q22 Q253 Q412</span>]
+│  ├─ 2.30 <span class="mmwarn">⚠</span> <span class="qrefs">Q24</span> lawful intercept (CALEA) → SRTP + key escrow (TLS lacks
+│  │  │      escrow mechanism) [<span class="qrefs">Q24</span>]
+│  ├─ 2.31 QoS prioritizes time-sensitive traffic (shaping, queuing,
+│  │  │      DSCP/802.1p tagging)
+│  ├─ 2.32 QoS abuse = DoS vector (flood low-priority queues, manipulate
+│  │  │      priority tags)
+│  ├─ 2.33 vishing = voice phishing; caller-ID spoofing trivial;
+│  │  │      awareness training + caller authentication
+│  ├─ 2.34 smishing = SMS phishing; training + message authentication
+│  ├─ 2.35 VoIP attack catalog: eavesdropping, interception, toll fraud,
+│  │  │      signaling manipulation, SPIT
+│  ├─ 2.36 compromised data VLAN pivots into voice VLAN; data DoS kills
+│  │  │      the emergency channel
+│  ├─ 2.37 first control: voice VLAN (802.1Q) + ACL/firewall between
+│  │  │      voice and data
+│  ├─ 2.38 CALEA: retain wiretap capability at gateway/SBC; never disable
+│  │  │      logging for confidentiality
+│  ├─ 2.39 <span class="qrefs">Q151</span> remote workforce: zero trust + SRTP inside VPN + mutual
+│  │  │      auth/MFA [<span class="qrefs">Q151</span>]
+│  └─ 2.40 <span class="qrefs">Q423</span> balance convergence: segmentation + least privilege
+│  │  │      (fully separate network negates the benefit) [<span class="qrefs">Q423</span>]
+│
+├─ FIREWALL / SEGMENTATION PRINCIPLES
+│  ├─ 2.41 defense in depth: multiple independent layers; any single
+│  │  │      failure survivable
+│  ├─ 2.42 partitioning: segments control/stop traffic between zones
+│  ├─ 2.43 perimeter = last controllable point; anchors preventive,
+│  │  │      detective, AND corrective controls
+│  ├─ 2.44 choke point: funnel all ingress/egress through one inspection
+│  ├─ 2.45 bastion host: hardened, deliberately exposed, DMZ-placed
+│  ├─ 2.46 DMZ/screened subnet: public services isolated between two
+│  │  │      filtering devices [<span class="qrefs">Q346</span>]
+│  ├─ 2.47 implicit deny: everything not explicitly allowed is dropped
+│  ├─ 2.48 allow list (known-good) stronger; deny list weaker, needs
+│  │  │      constant updates (source rows live in g3)
+│  ├─ 2.49 <span class="qrefs">Q225</span> deny list blocks listed addresses and permits ALL
+│  │  │      unlisted traffic [<span class="qrefs">Q225</span>]
+│  └─ 2.50 org security requirements drive FW technology/architecture
+│  │  │      (bandwidth = capacity only) [<span class="qrefs">Q212 Q353</span>]
+│
+├─ FIREWALL TYPES (intelligence ladder)
+│  ├─ 2.51 packet filter: L3 ACL on headers; fast, stateless, no payload
+│  │  │      [<span class="qrefs">Q163</span>]
+│  ├─ 2.52 stateful: L4 dynamic state tables; replies matched to prior
+│  │  │      outbound requests [<span class="qrefs">Q204 Q254</span>]
+│  ├─ 2.53 <span class="qrefs">Q254</span> UDP: static ACLs can't judge sessions; stateful table
+│  │  │      tracks connectionless context [<span class="qrefs">Q254</span>]
+│  ├─ 2.54 circuit-level proxy: L5 virtual circuits (SOCKS); session
+│  │  │      control, hides internals, no app content [<span class="qrefs">Q168 Q206 Q207</span>
+│  │  │      <span class="qrefs">Q266 Q305</span>]
+│  ├─ 2.55 <span class="qrefs">Q114</span> circuit-proxy constraint: concurrent session-state volume
+│  │  │      [<span class="qrefs">Q114</span>]
+│  ├─ 2.56 application-level proxy: L7 payload reassembly, deep content
+│  │  │      (email attachments); one per service = bottleneck [<span class="qrefs">Q202 Q274</span>]
+│  ├─ 2.57 NGFW: L3-7+, stateful + app-aware + IPS + SSL inspection [<span class="qrefs">Q111</span>]
+│  ├─ 2.58 <span class="qrefs">Q141</span>/<span class="qrefs">Q400</span> APT covert C2 → DPI + application-level filtering
+│  │  │      (TI feeds enrich but don't inspect payload) [<span class="qrefs">Q141 Q400</span>]
+│  ├─ 2.59 <span class="qrefs">Q118</span> HIPAA VPN: app-aware inspection of ALL traffic + PHI
+│  │  │      logging/auditing (selective decryption = blind spots) [<span class="qrefs">Q118</span>]
+│  ├─ 2.60 more intelligence = less throughput; L7 proxy biggest
+│  │  │      bottleneck [<span class="qrefs">Q201</span>]
+│  ├─ 2.61 L7 FW inspects HTTP/DNS/FTP content; NOT TCP/IP/MAC operations
+│  │  │      [<span class="qrefs">Q163 Q166 Q277</span>]
+│  ├─ 2.62 <span class="qrefs">Q84</span> L5 state tracking invites session hijacking (replay
+│  │  │      secondary) [<span class="qrefs">Q84</span>]
+│  ├─ 2.63 <span class="qrefs">Q103</span> session-state management: security AND performance;
+│  │  │      multiplexing = perf only [<span class="qrefs">Q103</span>]
+│  ├─ 2.64 <span class="qrefs">Q205</span>/<span class="qrefs">Q276</span> latency-critical ICS / high-volume filtering →
+│  │  │      simple packet filter + ACLs [<span class="qrefs">Q205 Q276</span>]
+│  ├─ 2.65 <span class="qrefs">Q213</span> packet filter (speed/simplicity) vs dual-homed host
+│  │  │      (deep inspection, complexity) [<span class="qrefs">Q213</span>]
+│  ├─ 2.66 <span class="qrefs">Q251</span> stateful at perimeter; proxy ONLY sensitive transactions
+│  │  │      [<span class="qrefs">Q251</span>]
+│  ├─ 2.67 <span class="mmwarn">⚠</span> <span class="qrefs">Q298</span> WAF: HTTP content + data-format validation at L7 AND
+│  │  │      L6 [<span class="qrefs">Q298</span>]
+│  └─ 2.68 <span class="qrefs">Q308</span> baseline architecture: L3 router with ACLs — cheapest
+│  │  │      fast perimeter filtering [<span class="qrefs">Q308</span>]
+│
+├─ FIREWALL ARCHITECTURES
+│  ├─ 2.69 dual-homed host: 2 NICs, IP forwarding disabled; one device
+│  │  │      inspecting all layers [<span class="qrefs">Q214 Q328</span>]
+│  ├─ 2.70 screened host: filter router → single bastion (L3 first, deep
+│  │  │      L7 second); bastion compromise = direct path inside
+│  │  │      [<span class="qrefs">Q329 Q349 Q358</span>]
+│  ├─ 2.71 <span class="qrefs">Q327</span> breach via HTTP payload + one-device budget → add bastion
+│  │  │      behind router (screened subnet exceeds budget) [<span class="qrefs">Q327</span>]
+│  ├─ 2.72 screened subnet: two firewalls sandwich a DMZ [<span class="qrefs">Q208 Q346</span>]
+│  ├─ 2.73 <span class="mmwarn">⚠</span> two DIFFERENT firewall vendors: one firmware flaw can't kill
+│  │  │      both layers; management more complex [<span class="qrefs">Q210 Q313 Q326</span>]
+│  ├─ 2.74 <span class="qrefs">Q329</span> contain compromised bastion (2-FW max) → screened subnet
+│  │  │      [<span class="qrefs">Q329</span>]
+│  ├─ 2.75 three-legged: single device, 3 zones (int/ext/DMZ); cheaper,
+│  │  │      but SPOF + single-vendor risk [<span class="qrefs">Q209 Q324 Q326 Q357</span>]
+│  ├─ 2.76 distributed firewalls: policy enforced at each VM/container
+│  │  │      vNIC; security follows workload mobility [<span class="qrefs">Q238 Q318 Q39</span>]
+│  └─ 2.77 concentric security zones with graduated access controls
+│  │  │      (balance feasibility) [<span class="qrefs">Q311</span>]
+│
+└─ FIREWALL OPERATIONS &amp; MINDSET
+   ├─ 2.78 <span class="qrefs">Q330</span> ICMP exfil: filter ICMP toward external, keep internal
+   │        diagnostics (blanket bans destroy utility) [<span class="qrefs">Q330</span>]
+   ├─ 2.79 <span class="qrefs">Q406</span> reject absolutes ("eliminates all ICMP attacks") — strict
+   │        filtering hampers troubleshooting [<span class="qrefs">Q406</span>]
+   ├─ 2.80 <span class="qrefs">Q333</span> proxy PHI: filter + log repository access + real-time
+   │        alerts (RBAC lacks monitoring) [<span class="qrefs">Q333</span>]
+   └─ 2.81 think risk manager, not packet engineer: match inspection depth
+            to performance and complexity budget + know what each tech does
+            NOT protect (MPLS confidentiality, VLAN boundary) → layer
+            controls, never trust one device</pre>
+</details>
 <a class="decklink" href="#flashcards" data-deck="g2">▦ 61 flashcards &rarr;</a></div>
 <div class="bc" id="card-g3" style="--gc:var(--g3)">
 <h3>g3 &middot; IDS/IPS &amp; Detection</h3>
@@ -653,6 +993,165 @@
 <tr><td class="rowhead">GDPR transfers:...</td><td>For GDPR compliance across EU and non-EU jurisdictions using VPN for global data transfers, implement granular access controls based on user location and jurisdictional requirements. End-to-end encryption with centralized key management protects confidentiality but does not enforce jurisdiction-specific data localization or cross-border transfer restrictions dictated by GDPR. <span class="qrefs">[Q142]</span></td></tr>
 <tr><td class="rowhead">MDM feature for remote...</td><td>For a global organization with a large remote workforce and rising endpoint incidents outside the traditional perimeter, the critical MDM (Mobile Device Management) feature is continuous device health monitoring, providing real-time, ongoing visibility into device compliance state. Remote wiping and encryption are reactive or static controls lacking continuous visibility. <span class="qrefs">[Q395]</span></td></tr>
 </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 156 lines · 51 Q-refs</summary>
+<pre class="mmtree">g3 · IDS/IPS &amp; DETECTION (+ VPN/tunneling per source) ── 78 concepts
+│
+├─ IDS vs IPS CORE
+│  ├─ 3.01 IDS = detective, passive; IPS = preventive, active [<span class="qrefs">Q94 Q287</span>]
+│  ├─ 3.02 IDS detects/logs/reports (may trigger other controls); IPS
+│  │  │      drops/blocks/resets; honeypots decoy, don't protect [<span class="qrefs">Q232 Q7</span>]
+│  ├─ 3.03 IDS out-of-band via mirror/SPAN port; IPS inline
+│  ├─ 3.04 IDS failure = silent breach (FN); IPS failure = blocks legit
+│  │  │      traffic, disrupts availability (FP)
+│  ├─ 3.05 IPS when real-time blocking demanded; IDS when availability +
+│  │  │      avoiding FP disruption dominate
+│  ├─ 3.06 selection = risk decision; layer detective + preventive, never
+│  │  │      single tool
+│  ├─ 3.07 NIDS: sensors per segment; big picture; blind to encrypted
+│  │  │      payloads [<span class="qrefs">Q9 Q88</span>]
+│  ├─ 3.08 HIDS: host agents; OS/files/processes; catches encrypted +
+│  │  │      host-local [<span class="qrefs">Q9 Q88</span>]
+│  ├─ 3.09 NIDS + HIDS complementary, not substitutes — deploy both
+│  ├─ 3.10 <span class="qrefs">Q40</span> IDS/IPS complement firewalls: DPI + behavioral analysis
+│  │  │      for zero-day/multi-stage that rules miss [<span class="qrefs">Q40</span>]
+│  ├─ 3.11 <span class="qrefs">Q8</span> IPS auto-blocking = real-time mitigation; shrinks
+│  │  │      vulnerability window vs manual response [<span class="qrefs">Q8</span>]
+│  └─ 3.12 <span class="qrefs">Q365</span> insider exfiltration: integrate UEBA + DLP (raising
+│  │  │      sensitivity alone = noise) [<span class="qrefs">Q365</span>]
+│
+├─ DETECTION METHODS
+│  ├─ 3.13 signature: known-pattern database; precise, fast, low noise
+│  │  │      [<span class="qrefs">Q287</span>]
+│  ├─ 3.14 signatures CANNOT catch zero-day/unknown — most-tested limit
+│  │  │      [<span class="qrefs">Q250</span>]
+│  ├─ 3.15 <span class="qrefs">Q250</span> inline signature IPS misses new ransomware variants;
+│  │  │      inline latency = red herring [<span class="qrefs">Q250</span>]
+│  ├─ 3.16 anomaly/heuristic/AI-ML: baseline of normal, flag deviations;
+│  │  │      no prior attack knowledge needed
+│  ├─ 3.17 choose anomaly for zero-day, APT, insider, fileless/LotL
+│  ├─ 3.18 anomaly price: high FP + baseline tuning; alert fatigue
+│  │  │      (seasonal surges, off-hours access) [<span class="qrefs">Q94 Q287</span>]
+│  ├─ 3.19 <span class="qrefs">Q287</span> hospital off-hours alert after learning period =
+│  │  │      statistical anomaly detection (not signature) [<span class="qrefs">Q287</span>]
+│  ├─ 3.20 NBA: flow-pattern anomaly detection; real-time unknown
+│  │  │      threats [<span class="qrefs">Q88</span>]
+│  ├─ 3.21 <span class="qrefs">Q88</span>/<span class="qrefs">Q126</span> low-and-slow DDoS / APT lateral movement → NBA
+│  │  │      (NIDS signature-based misses; SNMP = device metrics) [<span class="qrefs">Q88 Q126</span>]
+│  ├─ 3.22 <span class="qrefs">Q70</span> AI/ML IDS's own threat: adversarial attacks / poisoned
+│  │  │      training data [<span class="qrefs">Q70</span>]
+│  ├─ 3.23 <span class="qrefs">Q94</span> seasonal e-commerce traffic → hybrid signature + anomaly
+│  │  │      with dynamic updates [<span class="qrefs">Q94</span>]
+│  ├─ 3.24 <span class="qrefs">Q95</span> smart-city/IoT: baselining across heterogeneous devices is
+│  │  │      the fundamental accuracy problem [<span class="qrefs">Q95</span>]
+│  ├─ 3.25 tuning: baseline first, then thresholds — untuned detection
+│  │  │      drowns the team [<span class="qrefs">Q94 Q287</span>]
+│  └─ 3.26 evasion: fragmentation, encryption, obfuscation [<span class="qrefs">Q94 Q250</span>]
+│
+├─ PLACEMENT &amp; OUTCOME MATRIX
+│  ├─ 3.27 ingress filters inbound; egress = exfiltration, insiders,
+│  │  │      attacks launched from inside
+│  ├─ 3.28 FP = alert without attack (fatigue/cost); FN = attack without
+│  │  │      alert (worst: undetected breach)
+│  ├─ 3.29 true positive + true negative = the desired outcomes
+│  └─ 3.30 name what the stem needs (detect vs prevent), then pick the
+│  │  │      device [<span class="qrefs">Q109 Q88</span>]
+│
+├─ DETECTION TOOLS &amp; DECEPTION
+│  ├─ 3.31 sandbox: isolate + detonate untrusted code before production
+│  │  │      [<span class="qrefs">Q9</span>]
+│  ├─ 3.32 <span class="qrefs">Q361</span> cloud sandboxes: scalability + global TI sharing (capex
+│  │  │      = business benefit) [<span class="qrefs">Q361</span>]
+│  ├─ 3.33 <span class="qrefs">Q145</span> EDR &gt; signature AV: behavioral analytics, real-time
+│  │  │      telemetry, automated response/remediation [<span class="qrefs">Q145</span>]
+│  ├─ 3.34 NAC: posture check (patch/AV) BEFORE network admission
+│  ├─ 3.35 honeypot = single decoy; honeynet = networked decoys at scale
+│  ├─ 3.36 low-interaction = simulated services (safe, thin intel);
+│  │  │      high-interaction = real OS (rich intel, risk) [<span class="qrefs">Q93</span>]
+│  ├─ 3.37 <span class="qrefs">Q93</span> worst high-interaction risk: attacker pivots for lateral
+│  │  │      movement in production [<span class="qrefs">Q93</span>]
+│  ├─ 3.38 enticement (legal, attacker already trespassing) vs entrapment
+│  │  │      (illegal, defender induced crime)
+│  ├─ 3.39 APT honeypot value: early warning, diversion, IOCs, TTP study
+│  ├─ 3.40 <span class="qrefs">Q78</span> GDPR/finance: low-interaction, minimal-data honeypots
+│  │  │      (high-interaction risks regulated data) [<span class="qrefs">Q78</span>]
+│  ├─ 3.41 <span class="qrefs">Q159</span> safety: virtualization isolation + strict network
+│  │  │      isolation + limited interaction [<span class="qrefs">Q159</span>]
+│  ├─ 3.42 <span class="qrefs">Q232</span> virtualized decoys: snapshot/restore to known-clean state
+│  │  │      [<span class="qrefs">Q232</span>]
+│  ├─ 3.43 <span class="qrefs">Q159</span> sharing zero-day honeypot intel: isolate + sanitize data
+│  │  │      first [<span class="qrefs">Q159</span>]
+│  ├─ 3.44 <span class="qrefs">Q393</span> vs sophisticated APTs: distributed honeynet with varied
+│  │  │      interaction across segments [<span class="qrefs">Q393</span>]
+│  ├─ 3.45 <span class="qrefs">Q117</span> fileless/LotL → behavioral analysis + ML (sandboxing needs
+│  │  │      files to detonate) [<span class="qrefs">Q117</span>]
+│  ├─ 3.46 <span class="qrefs">Q296</span> APTs dwell long and slowly; avoid automated-scan triggers;
+│  │  │      deception surfaces them [<span class="qrefs">Q296</span>]
+│  ├─ 3.47 <span class="qrefs">Q414</span> APT covert channels on-prem + cloud → NBA + cloud-native
+│  │  │      security + TI feeds (SIEM playbooks lack traffic view) [<span class="qrefs">Q414</span>]
+│  └─ 3.48 <span class="qrefs">Q7</span> MTTD/MTTR: actionable but miss context/severity — "no
+│  │  │      insight" is overstated [<span class="qrefs">Q7</span>]
+│
+├─ VPN &amp; TUNNELING
+│  ├─ 3.49 VPN = tunneling + encryption, both required [<span class="qrefs">Q219 Q331</span>]
+│  ├─ 3.50 tunneling: the ENTIRE original packet (headers+data) becomes
+│  │  │      payload [<span class="qrefs">Q351</span>]
+│  ├─ 3.51 tunneling = encapsulation vs routing = header-based forwarding
+│  │  │      [<span class="qrefs">Q220</span>]
+│  ├─ 3.52 GRE: encapsulates diverse L3 protocols (IPv4/IPv6/multicast/
+│  │  │      IPX) point-to-point [<span class="qrefs">Q215 Q323 Q354</span>]
+│  ├─ 3.53 GRE has NO native encryption/auth; pair with IPsec [<span class="qrefs">Q217 Q332</span>]
+│  ├─ 3.54 <span class="qrefs">Q338</span> legacy IPX over internet → GRE (SSL/TLS can't carry
+│  │  │      arbitrary L3) [<span class="qrefs">Q338</span>]
+│  ├─ 3.55 <span class="qrefs">Q310</span> IPv6 over IPv4-only infra → tunneling (dual-stack needs
+│  │  │      every device) [<span class="qrefs">Q310</span>]
+│  ├─ 3.56 IPsec default for site-to-site (+IPv6); TLS VPNs dominate
+│  │  │      remote access
+│  ├─ 3.57 site-to-site = gateway-to-gateway, whole networks; remote
+│  │  │      access = client-to-gateway
+│  ├─ 3.58 <span class="qrefs">Q131</span> site-to-site: hides topology + reduces attack surface
+│  │  │      (manageability = operational ease) [<span class="qrefs">Q131</span>]
+│  ├─ 3.59 TLS handshake: Client Hello → Server Hello → key exchange →
+│  │  │      secure session [<span class="qrefs">Q403</span>]
+│  ├─ 3.60 TLS current; SSL obsolete; DROWN exploits SSLv2
+│  ├─ 3.61 TLS VPN = browser-native, NAT-friendly (BYOD); IPsec = robust
+│  │  │      site-to-site
+│  ├─ 3.62 split tunneling: corporate via VPN, internet direct,
+│  │  │      simultaneously [<span class="qrefs">Q216 Q397</span>]
+│  ├─ 3.63 split risks: internet path bypasses inspection — exfil,
+│  │  │      reinfection of tunnel, lost monitoring [<span class="qrefs">Q397</span>]
+│  ├─ 3.64 <span class="qrefs">Q218</span> security trade-off = control bypass (bandwidth/encryption
+│  │  │      overhead = performance, not security) [<span class="qrefs">Q218</span>]
+│  ├─ 3.65 <span class="qrefs">Q316</span>/<span class="qrefs">Q319</span> split = routing through different-posture network
+│  │  │      while holding corporate access (full tunnel = opposite) [<span class="qrefs">Q316 Q319</span>]
+│  ├─ 3.66 <span class="qrefs">Q325</span> hotel Wi-Fi + active VPN = pivot path into corporate;
+│  │  │      full tunnel prevents [<span class="qrefs">Q325</span>]
+│  ├─ 3.67 <span class="qrefs">Q316</span> misconception: personal internet traffic never traverses
+│  │  │      the tunnel — no VPN overload [<span class="qrefs">Q316</span>]
+│  ├─ 3.68 <span class="qrefs">Q348</span> disable split when DLP/egress/compliance (GDPR/HIPAA)
+│  │  │      must inspect all traffic [<span class="qrefs">Q348</span>]
+│  ├─ 3.69 <span class="qrefs">Q143</span> healthcare split mode: route ALL patient data through the
+│  │  │      hospital tunnel (RBAC governs access, not path) [<span class="qrefs">Q143</span>]
+│  ├─ 3.70 <span class="qrefs">Q76</span> PPTP + MS-CHAPv2 = highest-risk VPN (weak crypto, offline
+│  │  │      cracking) — avoid [<span class="qrefs">Q76</span>]
+│  ├─ 3.71 <span class="qrefs">Q362</span> university P2P: application-layer filtering permitting
+│  │  │      only approved P2P (NGFW DPI not selective enough) [<span class="qrefs">Q362</span>]
+│  ├─ 3.72 VPN = risk reduction, never a guarantee; mind off-tunnel paths
+│  └─ 3.73 <span class="qrefs">Q31</span> rapid secure remote at global scale → ZTNA + micro-seg +
+│  │  │      continuous risk assessment (CASB+DLP lacks network-level
+│  │  │      per-app decisions) [<span class="qrefs">Q31</span>]
+│
+└─ REMOTE-ACCESS OPERATIONS
+   ├─ 3.74 <span class="qrefs">Q109</span> BYOD VPN: MFA + device posture checks (FDE unenforceable
+   │        on unowned devices) [<span class="qrefs">Q109</span>]
+   ├─ 3.75 <span class="qrefs">Q113</span> core BYOD challenge: uniform endpoint security across
+   │        heterogeneous platforms [<span class="qrefs">Q113</span>]
+   ├─ 3.76 <span class="qrefs">Q189</span> long-term distributed: VPN segmentation + CASB + endpoint
+   │        protection = layered tiers [<span class="qrefs">Q189</span>]
+   ├─ 3.77 <span class="qrefs">Q142</span> GDPR global transfers: granular access by user location/
+   │        jurisdiction (E2E encryption ≠ localization) [<span class="qrefs">Q142</span>]
+   └─ 3.78 <span class="qrefs">Q395</span> MDM critical: continuous device health monitoring [<span class="qrefs">Q395</span>]</pre>
+</details>
 <a class="decklink" href="#flashcards" data-deck="g3">▦ 83 flashcards &rarr;</a></div>
 <div class="bc" id="card-g4" style="--gc:var(--g4)">
 <h3>g4 &middot; Authentication &amp; AAA</h3>
@@ -803,6 +1302,226 @@
 <tr><td class="rowhead">Never which legacy...</td><td>Never choose WEP (or WPA/TKIP) for any new deployment — both are legacy and cryptographically broken; WEP especially is never acceptable on the exam.</td></tr>
 <tr><td class="rowhead">Layered wireless mindset</td><td>CISSP mindset: treat all wireless as an untrusted broadcast medium — assume compromise, layer WPA3 plus 802.1X plus WIDS/WIPS plus NAC, and never rely on a single control.</td></tr>
 </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 217 lines · 64 Q-refs</summary>
+<pre class="mmtree">g4 · AUTHENTICATION &amp; AAA (+ IPsec/TLS/PKI, wireless per source) ── 111 concepts
+│
+├─ AAA TRIAD &amp; PROTOCOLS
+│  ├─ 4.01 AAA order: identification → authentication → authorization →
+│  │  │      accounting (who / allowed what / did what) [<span class="qrefs">Q81 Q43</span>]
+│  ├─ 4.02 centralized AAA: single policy control, easy audit; server =
+│  │  │      enterprise-wide SPOF
+│  ├─ 4.03 decentralized AAA: no SPOF; harder consistent management/audit
+│  ├─ 4.04 RADIUS: UDP; encrypts ONLY password; combines authn+authz
+│  │  │      (accounting separate); network access + 802.1X [<span class="qrefs">Q73 Q246</span>]
+│  ├─ 4.05 TACACS+: TCP 49; encrypts entire body; full AAA separation;
+│  │  │      per-command authorization; device administration [<span class="qrefs">Q236 Q99</span>]
+│  ├─ 4.06 Diameter: TCP/SCTP; TLS/IPsec all traffic; AAA separation;
+│  │  │      EAP support; RADIUS successor; mobile/IMS [<span class="qrefs">Q256 Q246</span>]
+│  ├─ 4.07 reliable transport needed → TACACS+/Diameter (not RADIUS/UDP)
+│  ├─ 4.08 encryption scope: password-only &lt; full body &lt; all traffic
+│  ├─ 4.09 AAA separation: RADIUS combined; TACACS+/Diameter modular
+│  ├─ 4.10 succession: Diameter succeeded RADIUS; TACACS+ succeeded
+│  │  │      XTACACS
+│  ├─ 4.11 choose TACACS+: granular per-command admin authorization or
+│  │  │      full-packet encryption
+│  ├─ 4.12 choose Diameter: reliable transport, EAP, modern mobile/IMS
+│  ├─ 4.13 <span class="qrefs">Q99</span> insider monitoring under Zero Trust → TACACS+ command
+│  │  │      accounting [<span class="qrefs">Q99</span>]
+│  └─ 4.14 the use case names the protocol: SSO / network access / device
+│  │  │      admin [<span class="qrefs">Q246 Q99</span>]
+│
+├─ AUTHENTICATION PROTOCOLS
+│  ├─ 4.15 PAP: username/password in cleartext — only inside an encrypted
+│  │  │      tunnel [<span class="qrefs">Q249</span>]
+│  ├─ 4.16 CHAP: server challenge → client MD5(password+challenge);
+│  │  │      password never sent [<span class="qrefs">Q237</span>]
+│  ├─ 4.17 CHAP unique per-session challenge defeats replay [<span class="qrefs">Q237 Q257</span>]
+│  ├─ 4.18 MS-CHAPv2 adds mutual authentication (client verifies server)
+│  ├─ 4.19 unencrypted link → CHAP, never PAP
+│  ├─ 4.20 EAP = authentication framework (certs, tokens, biometrics),
+│  │  │      not a single method
+│  ├─ 4.21 EAP-MD5: one-way only, no key derivation → MITM/rogue AP/
+│  │  │      dictionary; weakest [<span class="qrefs">Q295</span>]
+│  ├─ 4.22 PEAP: TLS tunnel around inner EAP; server cert only, client
+│  │  │      certs optional [<span class="qrefs">Q260 Q18</span>]
+│  ├─ 4.23 <span class="qrefs">Q260</span> client-cert deployment infeasible → PEAP; EAP-TLS needs
+│  │  │      both sides' certificates [<span class="qrefs">Q260</span>]
+│  ├─ 4.24 <span class="qrefs">Q273</span> existing PKI + mutual auth requirement → EAP-TLS
+│  │  │      (EAP-TTLS authenticates credentials, underuses PKI) [<span class="qrefs">Q273</span>]
+│  └─ 4.25 802.1X: supplicant – authenticator (switch/AP) – auth server,
+│  │  │      port access rides RADIUS [<span class="qrefs">Q295 Q246</span>]
+│
+├─ KERBEROS
+│  ├─ 4.26 symmetric-key SSO on a KDC (trusted third party of realm)
+│  │  │      [<span class="qrefs">Q82 Q403</span>]
+│  ├─ 4.27 flow: AS → TGT; TGS → service ticket; ticket → resource
+│  ├─ 4.28 tickets are time-stamped + encrypted → clock sync mandatory
+│  ├─ 4.29 <span class="qrefs">Q290</span> KDC compromise: forge any ticket, impersonate anyone,
+│  │  │      realm trust collapses [<span class="qrefs">Q290</span>]
+│  ├─ 4.30 <span class="qrefs">Q247</span> stolen tickets impersonate until expiry — shared
+│  │  │      multi-user workstations leak tickets from memory [<span class="qrefs">Q247</span>]
+│  ├─ 4.31 <span class="qrefs">Q290</span> Kerberos never sends passwords on the wire (distractor
+│  │  │      vs KDC hardening) [<span class="qrefs">Q290</span>]
+│  └─ 4.32 <span class="qrefs">Q82</span> hybrid cloud Kerberos: KDC SPOF = top security+ops
+│  │  │      trade-off [<span class="qrefs">Q82</span>]
+│
+├─ MFA SCENARIOS
+│  ├─ 4.33 <span class="qrefs">Q51</span> global traveling workforce → MFA + device certs +
+│  │  │      geolocation + adaptive authentication [<span class="qrefs">Q51</span>]
+│  ├─ 4.34 <span class="qrefs">Q65</span> credential-theft resistance + convenience → push +
+│  │  │      device cert + biometric (SMS OTP = SIM-swap risk) [<span class="qrefs">Q65</span>]
+│  ├─ 4.35 <span class="qrefs">Q73</span> diverse global workforce → hardware token + facial
+│  │  │      recognition + risk-based analysis [<span class="qrefs">Q73</span>]
+│  ├─ 4.36 <span class="qrefs">Q119</span> MFA benefit: stolen password alone no longer grants
+│  │  │      access [<span class="qrefs">Q119</span>]
+│  ├─ 4.37 <span class="qrefs">Q132</span> adaptive auth: escalate factors only when risk warrants
+│  │  │      (OAuth/OIDC; max-every-login = friction) [<span class="qrefs">Q132</span>]
+│  ├─ 4.38 <span class="qrefs">Q178</span> high-security pair: hardware token + fingerprint &gt; smart
+│  │  │      card + PIN (shareable, cognitive burden) [<span class="qrefs">Q178</span>]
+│  ├─ 4.39 <span class="qrefs">Q401</span> continuous authentication: behavioral biometrics layered
+│  │  │      on TOTP/FIDO2 [<span class="qrefs">Q401</span>]
+│  ├─ 4.40 <span class="qrefs">Q405</span> biometrics + EAP: stronger auth, infra-compatible [<span class="qrefs">Q405</span>]
+│  ├─ 4.41 <span class="mmwarn">⚠</span> <span class="qrefs">Q390</span> least global friction = facial recognition (source also
+│  │  │      notes cultural resistance, device quality, demographic bias)
+│  │  │      [<span class="qrefs">Q390</span>]
+│  ├─ 4.42 <span class="qrefs">Q388</span> IDaaS + on-prem AD: dominant risk = multi-jurisdiction
+│  │  │      data-protection compliance (GDPR/PIPL/CCPA) [<span class="qrefs">Q388</span>]
+│  └─ 4.43 <span class="qrefs">Q256</span> OAuth 2.0/OIDC token forgery → validate signatures +
+│  │  │      claims (scope limits ≠ anti-forgery) [<span class="qrefs">Q256</span>]
+│
+├─ IPSEC
+│  ├─ 4.44 IPsec: Layer-3 framework of open standards; default security
+│  │  │      of IPv6 [<span class="qrefs">Q317</span>]
+│  ├─ 4.45 AH: integrity + origin auth + anti-replay (whole packet incl
+│  │  │      header); NO confidentiality [<span class="qrefs">Q43 Q279</span>]
+│  ├─ 4.46 ESP: confidentiality + integrity + authentication +
+│  │  │      anti-replay for payload [<span class="qrefs">Q43</span>]
+│  ├─ 4.47 <span class="qrefs">Q240</span> AH-only deployment gap = payload encryption (anti-replay
+│  │  │      already provided by AH) [<span class="qrefs">Q240</span>]
+│  ├─ 4.48 <span class="qrefs">Q221</span> ESP sequence-number verification = replay protection
+│  │  │      without AH; stronger encryption ≠ duplicate rejection [<span class="qrefs">Q221</span>]
+│  ├─ 4.49 transport mode: payload only, original header visible;
+│  │  │      host-to-host [<span class="qrefs">Q236</span>]
+│  ├─ 4.50 tunnel mode ESP: whole packet inside new header; hides
+│  │  │      topology; site-to-site [<span class="qrefs">Q156 Q230</span>]
+│  ├─ 4.51 IKE: key management; establishes SAs by negotiating auth,
+│  │  │      encryption, connection attributes [<span class="qrefs">Q248</span>]
+│  ├─ 4.52 Diffie-Hellman: both ends derive identical symmetric keys,
+│  │  │      keys never transmitted
+│  ├─ 4.53 <span class="qrefs">Q291</span> SA is simplex/one-way: 2 SAs bidirectional; 4 for AH+ESP
+│  │  │      tunnel (not control/data-plane split) [<span class="qrefs">Q291</span>]
+│  ├─ 4.54 <span class="qrefs">Q339</span> GRE encapsulates (multicast/routing support) + IPsec
+│  │  │      encrypts = both requirements [<span class="qrefs">Q339</span>]
+│  ├─ 4.55 <span class="mmwarn">⚠</span> <span class="qrefs">Q44</span> constrained IoT: lightweight IPsec with compressed SAs +
+│  │  │      optimized ciphers (IKEv2+ESP still too heavy) [<span class="qrefs">Q44</span>]
+│  ├─ 4.56 <span class="qrefs">Q123</span> SD-WAN migration: tailor IPsec configuration to dynamic
+│  │  │      traffic patterns [<span class="qrefs">Q123</span>]
+│  ├─ 4.57 <span class="qrefs">Q167</span> Shor algorithm breaks DH → adopt lattice-based PQC (key
+│  │  │      size increases = temporary only) [<span class="qrefs">Q167</span>]
+│  └─ 4.58 <span class="qrefs">Q408</span> IPv6 inter-office VPN: properly configure built-in IPsec
+│  │  │      (compatibility = function, not security) [<span class="qrefs">Q408</span>]
+│
+├─ TLS / PKI / CRYPTO STRATEGY
+│  ├─ 4.59 TLS is current; SSL deprecated (DROWN, POODLE); mandate TLS
+│  │  │      1.2+, ideally 1.3
+│  ├─ 4.60 DROWN: SSLv2 breaks TLS connections sharing RSA keys
+│  ├─ 4.61 handshake: Client Hello → Server Hello + certificate →
+│  │  │      asymmetric protects session key → symmetric session [<span class="qrefs">Q403</span>]
+│  ├─ 4.62 <span class="qrefs">Q102</span> TLS = confidentiality + integrity + server auth; NOT
+│  │  │      non-repudiation (needs app-layer signatures) [<span class="qrefs">Q102</span>]
+│  ├─ 4.63 <span class="qrefs">Q146</span> TLS does NOT perform NAT [<span class="qrefs">Q146</span>]
+│  ├─ 4.64 <span class="qrefs">Q96</span> session resumption = abbreviated handshake; reused state
+│  │  │      enables hijacking [<span class="qrefs">Q96</span>]
+│  ├─ 4.65 <span class="qrefs">Q162</span> TLS 1.3: removes RSA key exchange/CBC, MANDATES PFS
+│  │  │      (1.2 had it optional), encrypted handshake, fewer RTT [<span class="qrefs">Q162</span>]
+│  ├─ 4.66 PKI: CA issues certificates; RA verifies identity first
+│  ├─ 4.67 mutual TLS: both sides present certs — zero trust, API-to-API
+│  ├─ 4.68 ECDHE ephemeral keys → compromise of long-term key leaves past
+│  │  │      sessions safe
+│  ├─ 4.69 <span class="qrefs">Q13</span> PFS: unique session key per session; overhead cost [<span class="qrefs">Q13</span>]
+│  ├─ 4.70 choose IPsec for network-layer VPNs; TLS for app/session (HTTPS)
+│  ├─ 4.71 <span class="qrefs">Q6</span> heterogeneous global links (LAN/mobile/satellite) →
+│  │  │      multi-layered encryption tailored per medium + overarching
+│  │  │      E2E [<span class="qrefs">Q6</span>]
+│  ├─ 4.72 <span class="qrefs">Q12</span> quantum MITM in 5-10y → phased PQC transition (immediate
+│  │  │      rollout = immature-standard risk) [<span class="qrefs">Q12</span>]
+│  ├─ 4.73 <span class="qrefs">Q413</span> strategic quantum shift: develop + deploy PQC algorithms
+│  │  │      [<span class="qrefs">Q413</span>]
+│  ├─ 4.74 <span class="qrefs">Q75</span> classified quantum hash risk → new lattice-based 512-bit
+│  │  │      hashes (resizing SHA-3 insufficient) [<span class="qrefs">Q75</span>]
+│  ├─ 4.75 <span class="qrefs">Q129</span> large-scale banking authn → SHA-3 with large output (MD5
+│  │  │      broken; speed doesn't excuse) [<span class="qrefs">Q129</span>]
+│  ├─ 4.76 <span class="qrefs">Q140</span> PCI DSS + multi-region → TLS 1.3 with PFS + IPsec layered
+│  │  │      [<span class="qrefs">Q140</span>]
+│  ├─ 4.77 <span class="qrefs">Q234</span> SSL/TLS has built-in session security; NetBIOS relies on
+│  │  │      application layer (matters to circuit proxies) [<span class="qrefs">Q234</span>]
+│  ├─ 4.78 <span class="qrefs">Q419</span> multi-facility healthcare WAN → E2E encryption of all
+│  │  │      data in transit (HIPAA) [<span class="qrefs">Q419</span>]
+│  └─ 4.79 <span class="qrefs">Q398</span> massive IoT key management → hierarchical, distributed +
+│  │  │      dynamic generation (centralized = SPOF/bottleneck) [<span class="qrefs">Q398</span>]
+│
+└─ WIRELESS
+   ├─ 4.80 wireless = untrusted L2 RF broadcast; anyone in range
+   │        intercepts; assume compromise, layer controls
+   ├─ 4.81 bands: legacy/b/g=2.4 · a=5 · n=2.4+5 · ac=5 · ax=2.4/5/6 ·
+   │        ad=60 GHz short range
+   ├─ 4.82 speeds: 2 → 11 → 54 → 72-600 → 422-1300 Mbps → 10 Gbps;
+   │        ad 7 Gbps short range
+   ├─ 4.83 four mandatory 802.11 services: access control, authn,
+   │        encryption, integrity
+   ├─ 4.84 WEP: open/shared-key authn, RC4, broken, NO integrity, static
+   │        keys — never acceptable
+   ├─ 4.85 <span class="qrefs">Q275</span> WEP root cause: 24-bit static IV reused in cleartext →
+   │        key recovery [<span class="qrefs">Q275</span>]
+   ├─ 4.86 WPA (2003): TKIP (RC4) + Michael MIC stopgap — never for new
+   │        deployments
+   ├─ 4.87 WPA2 (2004): EAP/PSK + CCMP/AES + 802.1X/PSK
+   ├─ 4.88 CCMP = AES Counter Mode + CBC-MAC: encryption AND integrity in
+   │        one mechanism; WPA2 core; WPA3 adds GCMP-256 (strongest data-
+   │        link security) [<span class="qrefs">Q81</span>]
+   ├─ 4.89 SAE (WPA3) replaces PSK 4-way handshake; defeats OFFLINE
+   │        dictionary attacks (WPA2-PSK vulnerable) [<span class="qrefs">Q81</span>]
+   ├─ 4.90 WPA3 mandates Protected Management Frames (PMF)
+   ├─ 4.91 Open System auth = association only, no credential check
+   ├─ 4.92 Shared Key (WEP) challenge-response leaks key information
+   ├─ 4.93 EAP over 802.1X + RADIUS = enterprise-grade centralized
+   │        wireless authentication
+   ├─ 4.94 rogue AP (unauthorized real AP) → WIPS, NAC, port security,
+   │        802.1X
+   ├─ 4.95 evil twin: fake AP impersonating legitimate one to harvest
+   │        credentials; WIDS/WIPS + certificate EAP-TLS
+   ├─ 4.96 rogue = unauthorized real AP vs evil twin = impersonator
+   ├─ 4.97 wardriving: mobile scanning → strong encryption, signal mgmt
+   │        (hiding SSID = weak control)
+   ├─ 4.98 WIDS/WIPS = detect AND auto-contain rogues/evil twins
+   ├─ 4.99 SDR attack vector → RF shielding, frequency hopping,
+   │        encryption, signal power management
+   ├─ 4.100 <span class="qrefs">Q23</span> multi-frequency SDR attacks → real-time spectrum
+   │        monitoring + anomaly detection + automated response [<span class="qrefs">Q23</span>]
+   ├─ 4.101 <span class="qrefs">Q27</span> Wi-Fi 6E: uncrowded 6 GHz → less congestion, better
+   │        isolation, harder eavesdropping [<span class="qrefs">Q27</span>]
+   ├─ 4.102 <span class="qrefs">Q69</span> ZT wireless: integrate with overall network strategy,
+   │        identity-based access (not isolated WPA3 hardening) [<span class="qrefs">Q69</span>]
+   ├─ 4.103 <span class="qrefs">Q105</span> ICS/OT wireless → WPA3-Enterprise + certificates +
+   │        segmentation (separate physical net = inflexible) [<span class="qrefs">Q105</span>]
+   ├─ 4.104 <span class="qrefs">Q154</span> holistic alignment → risk-based wireless security
+   │        framework (governance, not just tech) [<span class="qrefs">Q154</span>]
+   ├─ 4.105 <span class="qrefs">Q246</span> per-device/user identity → WPA2-Enterprise + RADIUS
+   │        (shared PSK authenticates network, not individuals) [<span class="qrefs">Q246</span>]
+   ├─ 4.106 <span class="qrefs">Q288</span> hospital monitoring + cordless phones → unlicensed
+   │        shared-band RF interference (not bandwidth limits) [<span class="qrefs">Q288</span>]
+   ├─ 4.107 <span class="qrefs">Q385</span> smart-grid ICS → layered security + real-time monitoring
+   │        (E2E encryption risks latency) [<span class="qrefs">Q385</span>]
+   ├─ 4.108 <span class="qrefs">Q386</span> hospital WBAN → encryption + access controls + regular
+   │        audits (defense in depth, not E2E alone) [<span class="qrefs">Q386</span>]
+   ├─ 4.109 <span class="qrefs">Q416</span> mixed legacy/modern wireless vs APTs → ML anomaly
+   │        detection (auto-containment = excess FP) [<span class="qrefs">Q416</span>]
+   ├─ 4.110 never choose WEP or WPA/TKIP; choose WPA3 for offline-
+   │        dictionary resistance and modern enterprise/IoT/OT
+   └─ 4.111 layered wireless mindset: WPA3 + 802.1X + WIDS/WIPS + NAC;
+            never a single control</pre>
+</details>
 <a class="decklink" href="#flashcards" data-deck="g4">▦ 85 flashcards &rarr;</a></div>
 <div class="bc" id="card-g5" style="--gc:var(--g5)">
 <h3>g5 &middot; Cloud &amp; SDN</h3>
@@ -912,6 +1631,176 @@
 <tr><td class="rowhead">Context-aware through...</td><td>For large hospitals protecting patient data across maintenance and disclosure stages under HIPAA, choose dynamic micro-segmentation with context-aware policy controls and continuous monitoring. Exam trap: RBAC (Role-Based Access Control) with VLANs is static and coarse-grained, unable to adapt to real-time context changes during data disclosure and maintenance workflows. <span class="qrefs">[Q373]</span></td></tr>
 <tr><td class="rowhead">Powerful but concentrated</td><td>CISSP risk-aware manager mindset: centralized control is powerful but concentrates risk. Always protect the controller, enforce consistent segmentation across hybrid environments, and apply Zero Trust (never trust, always verify) at the workload level. Exam answers favor risk-aware governance of centralized architectures over purely technical fixes.</td></tr>
 </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 167 lines · 60 Q-refs</summary>
+<pre class="mmtree">g5 · CLOUD &amp; SDN ── 76 concepts
+│
+├─ SDN ARCHITECTURE
+│  ├─ 5.01 shift: hardware-bound perimeter → programmable, logically
+│  │  │      isolated, centrally managed; answer through a ZT lens
+│  ├─ 5.02 three planes: Application (intent/services) → Control (the
+│  │  │      brain/controller) → Data (switches forward)
+│  ├─ 5.03 control/data separation moves routing intelligence from
+│  │  │      switches to central controller [<span class="qrefs">Q224</span>]
+│  ├─ 5.04 <span class="qrefs">Q318</span> advantage over distributed: consistent policy enforcement
+│  │  │      across the topology (≠ physical isolation) [<span class="qrefs">Q318</span>]
+│  ├─ 5.05 northbound API: Application ↔ Control (apps request services)
+│  │  │      [<span class="qrefs">Q301 Q341</span>]; OpenFlow is NOT northbound
+│  ├─ 5.06 southbound API: Control → Data (controller pushes forwarding
+│  │  │      rules; OpenFlow) [<span class="qrefs">Q258 Q340</span>]
+│  ├─ 5.07 hook: north = up toward applications; south = down to switches
+│  ├─ 5.08 <span class="qrefs">Q293</span>/<span class="qrefs">Q307</span> OpenFlow + TLS = encrypted controller-switch channel
+│  │  │      AND standardized central rules (SNMP only monitors) [<span class="qrefs">Q293 Q307</span>]
+│  ├─ 5.09 <span class="qrefs">Q286</span> controller compromise = complete control of all routing
+│  │  │      decisions (latency = performance, not security) [<span class="qrefs">Q286</span>]
+│  ├─ 5.10 <span class="qrefs">Q56</span> systemic risk: controller compromise &gt; inadequate micro-seg
+│  │  │      config gap [<span class="qrefs">Q56</span>]
+│  ├─ 5.11 <span class="qrefs">Q63</span> SDN + NFV most critical vulnerability: centralization in
+│  │  │      the controller [<span class="qrefs">Q63</span>]
+│  ├─ 5.12 <span class="qrefs">Q418</span> SDN + VLANs: controller compromise beats policy
+│  │  │      inconsistency (config concern) [<span class="qrefs">Q418</span>]
+│  ├─ 5.13 <span class="qrefs">Q355</span> protect the brain: redundancy + hardening + secure TLS
+│  │  │      comms (don't abandon SDN for traditional routing) [<span class="qrefs">Q355</span>]
+│  ├─ 5.14 <span class="qrefs">Q278</span> ICS SDN: centralized control-plane vulnerability is the
+│  │  │      first concern [<span class="qrefs">Q278</span>]
+│  ├─ 5.15 <span class="qrefs">Q350</span> multi-tenant: rapid create/destroy of isolated virtual
+│  │  │      networks (per-switch VLANs = manual bottleneck) [<span class="qrefs">Q350</span>]
+│  ├─ 5.16 <span class="qrefs">Q158</span> prevent inter-VLAN access at scale: SDN central dynamic
+│  │  │      ACLs (per-VLAN virtual FWs = static, fragmented) [<span class="qrefs">Q158</span>]
+│  ├─ 5.17 <span class="qrefs">Q315</span> isolate everywhere fast: southbound update ALL switches
+│  │  │      simultaneously [<span class="qrefs">Q315</span>]
+│  ├─ 5.18 <span class="qrefs">Q28</span> BYOD: dynamic segmentation adapting to device/role/
+│  │  │      conditions (static VLAN too rigid) [<span class="qrefs">Q28</span>]
+│  ├─ 5.19 <span class="qrefs">Q71</span> financial: real-time micro-segmentation driven by threat
+│  │  │      intelligence [<span class="qrefs">Q71</span>]
+│  ├─ 5.20 <span class="qrefs">Q79</span> legacy L1 into SDN: most immediate gap = confidentiality/
+│  │  │      integrity between legacy and SDN components [<span class="qrefs">Q79</span>]
+│  └─ 5.21 policy drift: phased migration + consistent cross-environment
+│  │  │      enforcement
+│
+├─ SD-WAN &amp; NFV
+│  ├─ 5.22 SD-WAN: centralized control across MPLS/broadband/LTE with
+│  │  │      dynamic policy-based path selection
+│  ├─ 5.23 <span class="qrefs">Q91</span> key advantage: consistent security policies across
+│  │  │      locations (central control does NOT remove SPOFs) [<span class="qrefs">Q91</span>]
+│  ├─ 5.24 <span class="qrefs">Q289</span> top security benefit: intelligent path selection by
+│  │  │      real-time security+performance metrics (encryption isn't
+│  │  │      unique to SD-WAN) [<span class="qrefs">Q289</span>]
+│  ├─ 5.25 <span class="qrefs">Q300</span> MPLS → SD-WAN: dynamic micro-segmentation with app-aware
+│  │  │      policies (static VLANs lack agility) [<span class="qrefs">Q300</span>]
+│  ├─ 5.26 NFV: replaces appliance hardware (FW/router/LB) with software
+│  │  │      on commodity servers
+│  └─ 5.27 <span class="qrefs">Q63</span> SDN centralizes CONTROL vs NFV virtualizes FUNCTIONS;
+│  │  │      complementary [<span class="qrefs">Q63</span>]
+│
+├─ SEGMENTATION MODELS
+│  ├─ 5.28 802.1Q VLANs: L2 broadcast-domain isolation, coarse, no
+│  │  │      rewiring
+│  ├─ 5.29 VLAN hopping = the known attack; proves VLANs alone are
+│  │  │      insufficient boundaries
+│  ├─ 5.30 overlay networks (VXLAN, GRE) tunneled over underlay enable
+│  │  │      micro-segmentation + multi-tenancy
+│  ├─ 5.31 east-west = lateral between workloads; north-south = through
+│  │  │      perimeter [<span class="qrefs">Q370</span>]
+│  ├─ 5.32 micro-segmentation: granular workload-to-workload isolation,
+│  │  │      per VM/container policy
+│  ├─ 5.33 rule: traditional = coarse/VLAN/perimeter N-S; micro-seg =
+│  │  │      fine/identity/workload E-W
+│  └─ 5.34 <span class="qrefs">Q66</span> primary benefit: limits lateral movement / ransomware
+│  │  │      spread [<span class="qrefs">Q66</span>]
+│
+├─ MICRO-SEGMENTATION SCENARIOS
+│  ├─ 5.35 <span class="qrefs">Q334</span>/<span class="qrefs">Q370</span> cloud E-W: precise "granular control between
+│  │  │      workloads" beats vague "improved posture" [<span class="qrefs">Q334 Q370</span>]
+│  ├─ 5.36 <span class="qrefs">Q122</span> justification = enhanced security, NOT simplified
+│  │  │      management (it adds complexity) [<span class="qrefs">Q122</span>]
+│  ├─ 5.37 <span class="qrefs">Q243</span> compromised host reaching HR+engineering → workload-level
+│  │  │      policies (perimeter hardening does nothing internal) [<span class="qrefs">Q243</span>]
+│  ├─ 5.38 <span class="qrefs">Q39</span> global financial: granular + agile + scalable → micro-seg
+│  │  │      + network virtualization + intent-based [<span class="qrefs">Q39 Q318</span>]
+│  ├─ 5.39 <span class="qrefs">Q47</span> hybrid cloud resilience: micro-seg + policy-driven
+│  │  │      security groups (SDP lacks workload granularity) [<span class="qrefs">Q47</span>]
+│  ├─ 5.40 <span class="qrefs">Q391</span> mainframes + cloud-native: micro-segmentation with SDN [<span class="qrefs">Q391</span>]
+│  ├─ 5.41 <span class="qrefs">Q369</span> granular global control without degrading access →
+│  │  │      micro-seg + SDN (FW+DPI can't do per-workload) [<span class="qrefs">Q369</span>]
+│  ├─ 5.42 <span class="qrefs">Q98</span> large hybrid: micro-seg CRITICAL assets + broader
+│  │  │      segmentation elsewhere (identical everywhere = overhead) [<span class="qrefs">Q98</span>]
+│  ├─ 5.43 <span class="qrefs">Q375</span> AI/ML advantage: policies adapt in real time to behavior
+│  │  │      (config reduction secondary) [<span class="qrefs">Q375</span>]
+│  ├─ 5.44 <span class="qrefs">Q420</span> 5G network slicing: software-defined perimeter per slice [<span class="qrefs">Q420</span>]
+│  ├─ 5.45 <span class="qrefs">Q112</span> dynamic public cloud: micro-seg + security groups +
+│  │  │      network ACLs + peering (layered) [<span class="qrefs">Q112</span>]
+│  ├─ 5.46 <span class="qrefs">Q372</span> data residency enforcement: micro-seg + SDN + geo-fencing
+│  │  │      (regional VPCs too coarse) [<span class="qrefs">Q372</span>]
+│  └─ 5.47 <span class="qrefs">Q127</span> ransomware containment: surgical workload-level isolation
+│  │  │      (department VLANs too coarse) [<span class="qrefs">Q127</span>]
+│
+├─ CLOUD NETWORK SECURITY
+│  ├─ 5.48 FWaaS: firewalling as elastic cloud service; central policy,
+│  │  │      no on-prem hardware
+│  ├─ 5.49 <span class="qrefs">Q64</span> FWaaS advantage: scalable central policy without per-site
+│  │  │      hardware [<span class="qrefs">Q64</span>]
+│  ├─ 5.50 <span class="qrefs">Q36</span> rapid multi-cloud: central management + automatic scaling
+│  │  │      [<span class="qrefs">Q36</span>]
+│  ├─ 5.51 <span class="qrefs">Q364</span> cloud-native FW edge: automatic scalability/elasticity
+│  │  │      [<span class="qrefs">Q364</span>]
+│  ├─ 5.52 <span class="qrefs">Q402</span> hybrid both domains: cloud-native FW with central
+│  │  │      management (host FWs fragment policy) [<span class="qrefs">Q402</span>]
+│  ├─ 5.53 <span class="qrefs">Q14</span> multi-provider posture: unified policy system + central
+│  │  │      enforcement (CASB only sees cloud↔premises) [<span class="qrefs">Q14</span>]
+│  ├─ 5.54 cloud models: IaaS you build the network · PaaS you configure
+│  │  │      endpoints · SaaS network invisible but still governed
+│  │  │      [<span class="qrefs">Q49 Q402</span>] (patch GAP-3)
+│  ├─ 5.55 <span class="qrefs">Q107</span> strongest cloud isolation between departments: separate
+│  │  │      VPCs (subnets share routing/address space) [<span class="qrefs">Q107</span>]
+│  ├─ 5.56 <span class="qrefs">Q381</span> multi-tenant leakage: VPCs with dedicated subnets +
+│  │  │      routing tables [<span class="qrefs">Q381</span>]
+│  ├─ 5.57 VPC = hard tenant/department boundary; workload-level
+│  │  │      residency granularity → micro-seg + geo-fencing [<span class="qrefs">Q107 Q372 Q381</span>]
+│  ├─ 5.58 <span class="qrefs">Q267</span> cross-tenant deduplication → data-presence inference
+│  │  │      attack [<span class="qrefs">Q267</span>]
+│  └─ 5.59 <span class="qrefs">Q415</span> container challenge: static rules cannot track ephemeral
+│  │  │      provisioning/de-provisioning [<span class="qrefs">Q415</span>]
+│
+├─ VIRTUALIZATION &amp; CONTAINERS
+│  ├─ 5.60 hypervisor = trust boundary; its compromise exposes every
+│  │  │      workload on the host
+│  ├─ 5.61 containers share host kernel → weaker isolation than VMs;
+│  │  │      segmentation/runtime consistency matter MORE
+│  ├─ 5.62 <span class="qrefs">Q11</span> container sprawl priority: consistent policies across ALL
+│  │  │      containers [<span class="qrefs">Q11</span>]
+│  ├─ 5.63 <span class="qrefs">Q15</span>/<span class="qrefs">Q389</span> per-container micro-segmentation governs container
+│  │  │      east-west traffic [<span class="qrefs">Q15 Q389</span>]
+│  ├─ 5.64 <span class="qrefs">Q389</span> core value: granular control + VISIBILITY (encryption is
+│  │  │      transport security, not micro-seg) [<span class="qrefs">Q389</span>]
+│  ├─ 5.65 <span class="qrefs">Q49</span> IaaS tooling acquisition: verify network-policy
+│  │  │      enforcement granularity [<span class="qrefs">Q49</span>]
+│  └─ 5.66 <span class="qrefs">Q394</span> ephemeral containers: container-native runtime security
+│  │  │      (traditional AV/HIDS unfit) [<span class="qrefs">Q394</span>]
+│
+└─ ZERO TRUST NETWORKING
+   ├─ 5.67 never trust, always verify — enforced at workload level, not
+   │        just perimeter
+   ├─ 5.68 <span class="qrefs">Q407</span> most effective ZT control at L3: micro-segmentation
+   │        [<span class="qrefs">Q407</span>]
+   ├─ 5.69 <span class="qrefs">Q120</span> IoT-heavy ZTA: granular per-device-type micro-segments +
+   │        continuous trust evaluation (NAC = entry only) [<span class="qrefs">Q120</span>]
+   ├─ 5.70 <span class="qrefs">Q160</span> multi-cloud ZT: policy enforcement at EACH workload;
+   │        implicit in-cloud trust violates ZT [<span class="qrefs">Q160</span>]
+   ├─ 5.71 <span class="qrefs">Q376</span> consistent hybrid isolation: micro-seg + ZT (physical
+   │        separation cannot extend into cloud) [<span class="qrefs">Q376</span>]
+   ├─ 5.72 <span class="qrefs">Q3</span> SDN vs low-and-slow APTs: centralized long-term behavioral
+   │        analysis (edge inspection misses dwell) [<span class="qrefs">Q3</span>]
+   ├─ 5.73 <span class="qrefs">Q16</span> HIPAA + clinical speed: micro-segments by sensitivity +
+   │        automated enforcement + continuous monitoring (quarterly
+   │        audits too static) [<span class="qrefs">Q16</span>]
+   ├─ 5.74 <span class="qrefs">Q373</span> hospital data lifecycle: dynamic context-aware micro-seg
+   │        + continuous monitoring (RBAC+VLAN static/coarse) [<span class="qrefs">Q373</span>]
+   ├─ 5.75 <span class="qrefs">Q380</span> smart city: SDN intent-based + dynamic segmentation
+   │        (micro-seg too granular for interop at city scale) [<span class="qrefs">Q380</span>]
+   └─ 5.76 centralization cuts both ways: policy efficiency vs blast
+            radius — protect controller, keep policies consistent [<span class="qrefs">Q286 Q418</span>]</pre>
+</details>
 <a class="decklink" href="#flashcards" data-deck="g5">▦ 73 flashcards &rarr;</a></div>
 <div class="bc" id="card-g6" style="--gc:var(--g6)">
 <h3>g6 &middot; Attacks &amp; Reconnaissance</h3>
@@ -1014,6 +1903,117 @@
 <tr><td class="rowhead">Attack-to-layer pairs</td><td>Layer anchors: ARP poisoning = Layer 2; Smurf and Teardrop = Layer 3; SYN scan/SYN flood = Layer 4; session hijacking = Layer 5; CRIME = Layer 6 (Presentation); DNS poisoning = Layer 7. Layer identification drives control selection. <span class="qrefs">[Q80 Q245 Q284 Q378]</span></td></tr>
 <tr><td class="rowhead">False MAC mapping...</td><td>Mechanism detail: ARP poisoning exploits the protocol responsible for mapping logical IP addresses to physical MAC addresses, injecting false MAC mappings to redirect traffic to the attacker's device. <span class="qrefs">[Q228]</span></td></tr>
 </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 108 lines · 30 Q-refs</summary>
+<pre class="mmtree">g6 · ATTACKS &amp; RECONNAISSANCE ── 50 concepts
+│
+├─ PASSIVE vs ACTIVE
+│  ├─ 6.01 passive = observe/monitor (recon, sniffing, traffic analysis,
+│  │  │      wardriving); active = modify/disrupt (SYN flood, MITM,
+│  │  │      spoofing, DoS/DDoS) — "does the attacker change anything?"
+│  │  │      [<span class="qrefs">Q181</span>]
+│  └─ 6.02 passive harder to DETECT (nothing modified); active harder to
+│  │  │      HIDE (visibly alters) [<span class="qrefs">Q181</span>]
+│
+├─ ATTACK PHASES (ordered)
+│  ├─ 6.03 sequence: 1 Reconnaissance → 2 Enumeration → 3 Vulnerability
+│  │  │      Analysis → 4 Exploitation
+│  ├─ 6.04 recon: broad, quiet gathering (WHOIS, DNS lookups, ping sweeps)
+│  ├─ 6.05 enumeration: active probing — Nmap port scans, banner
+│  │  │      grabbing, netstat → service inventory
+│  ├─ 6.06 vulnerability analysis: weaknesses in enumerated services
+│  ├─ 6.07 exploitation: acts on weakness — where compromise occurs [<span class="qrefs">Q184</span>]
+│  └─ 6.08 recon vs exploitation: data modification separates phases [<span class="qrefs">Q184</span>]
+│
+├─ L3/L4 ATTACKS
+│  ├─ 6.09 SYN scan (L4): SYN → SYN-ACK = open, RST = closed; handshake
+│  │  │      never completed [<span class="qrefs">Q180</span>]
+│  ├─ 6.10 SYN scan = stealthy reconnaissance (not an attack per se);
+│  │  │      objective: find open ports/services without full connections
+│  ├─ 6.11 SYN flood (L4): incomplete handshakes exhaust server resources
+│  │  │      with half-open connections [<span class="qrefs">Q58</span>]
+│  ├─ 6.12 <span class="qrefs">Q409</span> SYN-flood fix: SYN cookies + larger backlog; dropping ALL
+│  │  │      SYNs = self-inflicted DoS [<span class="qrefs">Q409</span>]
+│  ├─ 6.13 Smurf (L3): spoofed-source ICMP echo to broadcast network →
+│  │  │      amplified flood at victim [<span class="qrefs">Q185</span>]
+│  ├─ 6.14 Teardrop (L3): overlapping/malformed fragment offsets crash
+│  │  │      reassembly
+│  └─ 6.15 DoS = single source; DDoS = multiple coordinated (botnet) [<span class="qrefs">Q179</span>]
+│
+├─ REDIRECT &amp; INTERCEPT ATTACKS
+│  ├─ 6.16 MITM (L3-7): attacker inserted into the communication path
+│  │  │      [<span class="qrefs">Q181 Q304</span>]
+│  ├─ 6.17 ARP poisoning (L2): corrupt IP→MAC caches on switches/hosts;
+│  │  │      false MAC mappings redirect traffic → interception,
+│  │  │      eavesdropping, modification [<span class="qrefs">Q182 Q228</span>]
+│  ├─ 6.18 root cause: ARP has no authentication — false entries can be
+│  │  │      injected [<span class="qrefs">Q304</span>]
+│  ├─ 6.19 ARP maps logical IP → physical MAC; DNS maps names → IPs
+│  │  │      (different function) [<span class="qrefs">Q284</span>]
+│  ├─ 6.20 signature: new device + intermittent connectivity +
+│  │  │      conflicting mapping entries = ARP poisoning (not IP spoofing)
+│  │  │      [<span class="qrefs">Q235</span>]
+│  ├─ 6.21 DNS poisoning (L7): redirects resolution to malicious IP;
+│  │  │      underlies pharming [<span class="qrefs">Q183</span>]
+│  ├─ 6.22 pharming: automatic redirect to fraudulent credential-
+│  │  │      capturing sites WITHOUT any click [<span class="qrefs">Q183</span>]
+│  ├─ 6.23 <span class="qrefs">Q378</span> session hijacking (L5, banking): session encryption +
+│  │  │      random session IDs; frequent timeouts = compensating only
+│  │  │      [<span class="qrefs">Q378</span>]
+│  ├─ 6.24 <span class="qrefs">Q245</span> CRIME (L6): compression-ratio analysis of encrypted data
+│  │  │      leaks plaintext (compression happens before encryption; can
+│  │  │      leak session tokens) [<span class="qrefs">Q245</span>]
+│  ├─ 6.25 <span class="qrefs">Q86</span> DNS tunneling signature: internal hosts making rapid
+│  │  │      external DNS queries = covert exfil channel [<span class="qrefs">Q86</span>]
+│  ├─ 6.26 <span class="qrefs">Q86</span> fix: DNS analytics + anomaly detection; treating it as
+│  │  │      DDoS and rate-limiting is the trap [<span class="qrefs">Q86</span>]
+│  └─ 6.27 <span class="qrefs">Q157</span> nslookup cannot detect cached-record poisoning — needs
+│  │  │      specialized tools [<span class="qrefs">Q157</span>]
+│
+├─ SPOOFING FAMILY
+│  ├─ 6.28 email spoofing: forged sender address
+│  ├─ 6.29 DNS spoofing: bogus name resolution · IP spoofing: forged
+│  │  │      source address
+│  ├─ 6.30 MAC spoofing: forged L2 identity; primary risk = bypasses
+│  │  │      network access controls [<span class="qrefs">Q80</span>]
+│  └─ 6.31 trap: MAC spoofing does NOT touch routing tables (L3) [<span class="qrefs">Q80</span>]
+│
+├─ TOOLS (dual-use recon/troubleshooting)
+│  ├─ 6.32 ping (ICMP echo) = host liveness/reachability [<span class="qrefs">Q192</span>]
+│  ├─ 6.33 trap: dig shows DNS records, not host availability [<span class="qrefs">Q192</span>]
+│  ├─ 6.34 traceroute (ICMP/TTL) = per-hop path + latency location [<span class="qrefs">Q193</span>]
+│  ├─ 6.35 ping = reachability without per-hop view; traceroute locates
+│  │  │      the delay point [<span class="qrefs">Q193</span>]
+│  ├─ 6.36 WHOIS: registration/ownership OSINT [<span class="qrefs">Q187</span>]
+│  ├─ 6.37 WHOIS ethics: minimal essential queries under privacy law;
+│  │  │      consent does NOT override regulation [<span class="qrefs">Q106</span>]
+│  ├─ 6.38 dig / nslookup: DNS record inspection [<span class="qrefs">Q188</span>]
+│  ├─ 6.39 ipconfig: local IP + MAC configuration display [<span class="qrefs">Q190</span>]
+│  ├─ 6.40 ifconfig exposes MAC (spoofing prep): restrict access to the
+│  │  │      tool; disabling it breaks ops [<span class="qrefs">Q125</span>]
+│  ├─ 6.41 Nmap: signature scan/enumeration tool, offensive+defensive [<span class="qrefs">Q45</span>]
+│  ├─ 6.42 internal audit (misconfigs/unauthorized services) vs external
+│  │  │      pentest (attacker's outside-in view) [<span class="qrefs">Q34</span>]
+│  ├─ 6.43 <span class="qrefs">Q45</span> dominant managerial risk: scan data disclosure reveals
+│  │  │      topology/vulnerabilities (scan-DoS = tactical) [<span class="qrefs">Q45</span>]
+│  ├─ 6.44 <span class="qrefs">Q90</span> authorized use = scheduled, policy-aligned assessments
+│  │  │      (secret continuous scanning violates governance) [<span class="qrefs">Q90</span>]
+│  ├─ 6.45 netstat: enumerates local open ports/connections
+│  ├─ 6.46 dual-use tools (Nmap/ping/WHOIS): authorization decides
+│  │  │      legitimacy; privilege varies by configuration, not intent
+│  │  │      [<span class="qrefs">Q186</span>]
+│  └─ 6.47 <span class="qrefs">Q191</span> need route AND owner → traceroute + WHOIS together (dig/
+│  │  │      ipconfig insufficient) [<span class="qrefs">Q191</span>]
+│
+└─ SYNTHESIS
+   ├─ 6.48 identify attack → map to OSI layer → pick detective (IDS/IPS)
+   │        + preventive control; every control exists to counter a vector
+   ├─ 6.49 attack-to-layer pairs: ARP poison = L2 · Smurf/Teardrop = L3 ·
+   │        SYN scan/flood = L4 · session hijack = L5 · CRIME = L6 · DNS
+   │        poisoning = L7 [<span class="qrefs">Q80 Q245 Q284 Q378</span>]
+   └─ 6.50 session attacks: hijacking steals an established session;
+            fixation plants the ID first [<span class="qrefs">Q80 Q245</span>]</pre>
+</details>
 <a class="decklink" href="#flashcards" data-deck="g6">▦ 38 flashcards &rarr;</a></div>
 <div class="bc" id="card-g7" style="--gc:var(--g7)">
 <h3>g7 &middot; Monitoring &amp; Operations</h3>
@@ -1138,6 +2138,202 @@
 <tr><td class="rowhead">Emergency delay</td><td>In a healthcare network with extensive segmentation for regulatory compliance, delayed access to patient records during emergencies stems from over-segmentation impacting timely patient care — security must not impede critical business or clinical functions; attributing the delay to insufficient bandwidth misidentifies the root cause, which is the segmentation design itself. <span class="qrefs">[Q421]</span></td></tr>
 <tr><td class="rowhead">Guards or automated zone...</td><td>For a high-security government data center protecting classified information, implement effective physical segmentation using separate access-controlled zones with multi-factor authentication for different security/clearance levels; armed guards supplement security but do not provide continuous, automated, granular access control at each zone boundary. <span class="qrefs">[Q422]</span></td></tr>
 </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 193 lines · 68 Q-refs</summary>
+<pre class="mmtree">g7 · MONITORING &amp; OPERATIONS ── 89 concepts
+│
+├─ SECURITY ARCHITECTURE PRINCIPLES
+│  ├─ 7.01 Domain 4 = 13% of exam: segment, monitor, recover networks
+│  ├─ 7.02 defense in depth: overlapping controls across physical/network/
+│  │  │      application/data layers; no single-technology silver bullet
+│  │  │      [<span class="qrefs">Q108 Q59</span>]
+│  ├─ 7.03 least privilege: minimum access per role, via RBAC + NAC +
+│  │  │      segmented zones
+│  ├─ 7.04 segregation of duties: no single person owns an entire
+│  │  │      critical process (prevent + conceal fraud)
+│  ├─ 7.05 zero trust: every connection authenticated regardless of
+│  │  │      location; micro-seg replaces implicit perimeter trust [<span class="qrefs">Q392</span>]
+│  ├─ 7.06 <span class="qrefs">Q392</span> fundamental ZT shift: network location → continuous
+│  │  │      authentication + authorization [<span class="qrefs">Q392</span>]
+│  ├─ 7.07 fail securely: failure defaults to closed/deny, never open
+│  ├─ 7.08 choke points: force all traffic through controlled ingress/
+│  │  │      egress so inspection can't be bypassed
+│  ├─ 7.09 segmentation's primary value = containment / blast-radius
+│  │  │      limit; also IoT zones, GDPR residency, insider detection
+│  │  │      [<span class="qrefs">Q121 Q144 Q368</span>]
+│  ├─ 7.10 improved IDS/IPS is only a side benefit; containment is the
+│  │  │      primary tested value [<span class="qrefs">Q144</span>]
+│  ├─ 7.11 VLANs = logical segmentation; physical separation preferred
+│  │  │      for high-risk OT/IoT/medical systems
+│  ├─ 7.12 IDS detects/logs/reports; IPS ALSO takes corrective action
+│  ├─ 7.13 signature = known attacks; anomaly = baseline + catches zero-
+│  │  │      days
+│  ├─ 7.14 honeypots/honeynets must entice (legal), never entrap
+│  └─ 7.15 architect for the breach: assume compromise, contain, detect,
+│  │  │      recover
+│
+├─ MONITORING &amp; DETECTION
+│  ├─ 7.16 baseline first: document normal traffic/behavior/performance
+│  │  │      — no deviation detection without it [<span class="qrefs">Q133 Q30</span>]
+│  ├─ 7.17 telemetry breadth beats depth: flow data, logs, packet
+│  │  │      capture, endpoint state [<span class="qrefs">Q155 Q10</span>]
+│  ├─ 7.18 monitoring loop: collect → aggregate/correlate (SIEM) → alert
+│  │  │      → respond → tune; single pane of glass [<span class="qrefs">Q41 Q404</span>]
+│  ├─ 7.19 SIEM = central normalization + correlation + alerting;
+│  │  │      disparate formats must unify before correlation [<span class="qrefs">Q41</span>]
+│  ├─ 7.20 <span class="qrefs">Q417</span> multi-vector attack → SIEM: real-time collection,
+│  │  │      aggregation, correlation across diverse sources [<span class="qrefs">Q417</span>]
+│  ├─ 7.21 <span class="qrefs">Q41</span> IDS/IPS + SIEM integration: log normalization is the
+│  │  │      bottleneck (real-time = capacity concern) [<span class="qrefs">Q41</span>]
+│  ├─ 7.22 <span class="qrefs">Q115</span> real-time exfil detection: unusual outbound traffic
+│  │  │      spikes [<span class="qrefs">Q115</span>]
+│  ├─ 7.23 metrics for monitoring itself: coverage, false-positive rate,
+│  │  │      time-to-detect [<span class="qrefs">Q404 Q384</span>]
+│  ├─ 7.24 false negative = worst outcome: intrusion proceeds undetected
+│  ├─ 7.25 <span class="qrefs">Q203</span> perimeter outbound monitoring exists for botnet C2 + data
+│  │  │      exfiltration (bandwidth mgmt = ops) [<span class="qrefs">Q203</span>]
+│  ├─ 7.26 egress monitoring: exfiltration, insider threats, internally
+│  │  │      launched attacks [<span class="qrefs">Q203 Q239 Q241</span>]
+│  ├─ 7.27 <span class="qrefs">Q241</span> C2 callbacks are internally initiated: outbound
+│  │  │      monitoring required beyond inbound stateful inspection [<span class="qrefs">Q241</span>]
+│  ├─ 7.28 <span class="qrefs">Q29</span> enterprise traffic analysis: integrate SIEM + NBA + TI
+│  │  │      feeds + automated response (single IDS+ML = point solution)
+│  │  │      [<span class="qrefs">Q29</span>]
+│  ├─ 7.29 sensor/ops design: fail-secure monitoring, separation of duties
+│  │  │      on alerts, least privilege for sensor mgmt [<span class="qrefs">Q59 Q60</span>]
+│  ├─ 7.30 <span class="qrefs">Q374</span> segmentation + threat hunting: better detect/contain
+│  │  │      within segments (reduced cross-segment view = drawback) [<span class="qrefs">Q374</span>]
+│  └─ 7.31 layered detective + preventive + corrective; insider = segment
+│           + least privilege + monitoring [<span class="qrefs">Q59 Q60</span>]
+│
+├─ RESILIENCE &amp; RECOVERY
+│  ├─ 7.32 redundancy (mesh, RAID, clustering; redundant ISPs, load
+│  │  │      balancers, failover clusters) + documented recovery
+│  ├─ 7.33 restore critical-path services first, aligned with the BIA
+│  ├─ 7.34 <span class="qrefs">Q1</span> aggressive RTO on segmented network: segment-aware
+│  │  │      replication respecting boundaries (full-mesh replication
+│  │  │      crosses classifications) [<span class="qrefs">Q1</span>]
+│  └─ 7.35 <span class="qrefs">Q421</span> over-segmentation root cause: emergency record-access
+│  │  │      delay — security must not impede clinical function [<span class="qrefs">Q421</span>]
+│
+├─ SEGMENTATION IN PRACTICE (scenarios)
+│  ├─ 7.36 unpatchable IoT/ICS (no agents/patches): physical or air-gapped
+│  │  │      segmentation [<span class="qrefs">Q35 Q67</span>]
+│  ├─ 7.37 rapid IoT adoption: IoT network segmentation + physical access
+│  │  │      controls (zones alone miss logical isolation) [<span class="qrefs">Q67</span>]
+│  ├─ 7.38 lateral-movement containment = segmentation/micro-seg; red
+│  │  │      teams test by attempting moves between segments [<span class="qrefs">Q26 Q121</span>]
+│  ├─ 7.39 vendor compromise: segmentation restricts + contains (never
+│  │  │      claims automatic isolation/complete elimination) [<span class="qrefs">Q121</span>]
+│  ├─ 7.40 5G smart factory: isolated security zones stop foothold spread
+│  │  │      (encryption protects transit only) [<span class="qrefs">Q124</span>]
+│  ├─ 7.41 IoT manufacturing: segmentation + role-based access (VLAN alone
+│  │  │      enforces no least privilege) [<span class="qrefs">Q87</span>]
+│  ├─ 7.42 classified insider defense: physical segmentation + logical
+│  │  │      access controls + continuous monitoring [<span class="qrefs">Q59</span>]
+│  ├─ 7.43 segmentation improves insider detection via granular per-
+│  │  │      boundary monitoring/anomaly detection (limits, never
+│  │  │      eliminates, lateral movement) [<span class="qrefs">Q60</span>]
+│  ├─ 7.44 insider defense needs granular access control + monitoring
+│  │  │      enforcement (visibility alone insufficient) [<span class="qrefs">Q404</span>]
+│  ├─ 7.45 open collaborative culture: access controls with audit trails
+│  │  │      (covert accountability); visible cameras breed distrust [<span class="qrefs">Q74</span>]
+│  ├─ 7.46 physical segmentation primary objective: limit breach impact/
+│  │  │      spread (compliance = secondary) [<span class="qrefs">Q48</span>]
+│  ├─ 7.47 data-center zones keyed to data classification; biometrics only
+│  │  │      harden doors [<span class="qrefs">Q61</span>]
+│  ├─ 7.48 classified government zones: access-controlled zones + MFA per
+│  │  │      clearance level; guards are not continuous/granular [<span class="qrefs">Q422</span>]
+│  ├─ 7.49 tiered access zones with progressively stricter controls
+│  │  │      (single secure zone collapses defense in depth) [<span class="qrefs">Q108</span>]
+│  ├─ 7.50 air-gapped zones vs SDN logical boundaries (logical can be
+│  │  │      bypassed; physical = true trust boundary) [<span class="qrefs">Q72</span>]
+│  ├─ 7.51 maximum internal-threat protection: air-gapped critical systems
+│  │  │      (SDP still permits exploitable connections) [<span class="qrefs">Q139</span>]
+│  ├─ 7.52 balance granular controls with performance/efficiency/
+│  │  │      compliance — air gaps everywhere destroy operations [<span class="qrefs">Q77</span>]
+│  ├─ 7.53 multinational + multi-jurisdiction + APT: hierarchical model
+│  │  │      with ZT principles (micro-seg everywhere = over-complex) [<span class="qrefs">Q97</span>]
+│  ├─ 7.54 validate isolation: penetration testing proves containment
+│  │  │      (vulnerability scans don't) [<span class="qrefs">Q322</span>]
+│  ├─ 7.55 over-segmented network pain: traffic analysis before
+│  │  │      consolidating (blind merging creates gaps) [<span class="qrefs">Q133</span>]
+│  ├─ 7.56 startup scaling to many public IPs: VLANs + micro-seg + NGFW +
+│  │  │      intelligent NAT/PAT combined [<span class="qrefs">Q128</span>]
+│  ├─ 7.57 small budget: VLANs + host firewalls + prioritize critical
+│  │  │      assets [<span class="qrefs">Q147</span>]
+│  ├─ 7.58 legacy cost-sensitive: VLANs + ACLs on existing devices [<span class="qrefs">Q223</span>]
+│  ├─ 7.59 global PHI: separate tightly controlled segment aligned to data
+│  │  │      sensitivity/flow (department cuts scatter PHI) [<span class="qrefs">Q148</span>]
+│  ├─ 7.60 GDPR purpose limitation/minimization: segment per processing
+│  │  │      purpose (RBAC doesn't architect purpose limits) [<span class="qrefs">Q116</span>]
+│  ├─ 7.61 GDPR financial records: segments per data type + granular
+│  │  │      access + geographic consideration [<span class="qrefs">Q53</span>]
+│  ├─ 7.62 GDPR segmentation model: central policy framework + localized
+│  │  │      implementation (uniform global over-applies) [<span class="qrefs">Q17</span>]
+│  ├─ 7.63 attack across 20 countries: central coordination + empowered
+│  │  │      local response units (jurisdiction agility) [<span class="qrefs">Q25</span>]
+│  └─ 7.64 global endpoint security under GDPR+CCPA: detection depth vs
+│  │  │      data-minimization tension [<span class="qrefs">Q10</span>]
+│
+└─ OPERATIONS &amp; GOVERNANCE (scenarios)
+   ├─ 7.65 threat-intel sharing: decentralized platform + strict data
+   │        sanitization (leakage risk &gt; cost concern) [<span class="qrefs">Q152</span>]
+   ├─ 7.66 power-plant ICS segmentation: balance cybersecurity with
+   │        operational continuity (broader than latency) [<span class="qrefs">Q30</span>]
+   ├─ 7.67 working legacy ICS: protocol-aware firewalls + unidirectional
+   │        gateways (air gap kills required connectivity) [<span class="qrefs">Q371</span>]
+   ├─ 7.68 segmented microservices performance: measure end-to-end request
+   │        latency (hop count = structural) [<span class="qrefs">Q92</span>]
+   ├─ 7.69 cloud microservices sandboxing: isolation/containment per
+   │        service (attack-surface reduction = byproduct) [<span class="qrefs">Q42</span>]
+   ├─ 7.70 ZT + collaboration: MFA-secured enclaves for sensitive projects
+   │        + open spaces (VDI-for-all over-applies) [<span class="qrefs">Q33</span>]
+   ├─ 7.71 smart building: network-connected smart LOCKS = highest risk
+   │        (grant physical entry; sensors only detect) [<span class="qrefs">Q35</span>]
+   ├─ 7.72 financial automation: balance with human-in-the-loop oversight
+   │        (integration = solvable tech issue) [<span class="qrefs">Q46</span>]
+   ├─ 7.73 limited resources: prioritize by business impact/critical
+   │        processes, not attack novelty [<span class="qrefs">Q104</span>]
+   ├─ 7.74 finite security resources: asset inventory + valuation drives
+   │        risk-based maximum reduction [<span class="qrefs">Q153</span>]
+   ├─ 7.75 security debt metric: implemented vs deferred measures mapped
+   │        to compliance requirements [<span class="qrefs">Q110</span>]
+   ├─ 7.76 board/IT/compliance: tailor metric presentation per audience
+   │        (one dashboard fails) [<span class="qrefs">Q134</span>]
+   ├─ 7.77 continuous improvement: balanced scorecard of leading +
+   │        lagging indicators (compliance-only too narrow) [<span class="qrefs">Q360</span>]
+   ├─ 7.78 training effectiveness: simulated attack success + culture
+   │        assessments (reduction/compliance alone insufficient) [<span class="qrefs">Q382</span>]
+   ├─ 7.79 multi-cloud detection + investment case: MTTR across platforms
+   │        (scan frequency = preventive) [<span class="qrefs">Q384</span>]
+   ├─ 7.80 court-admissible evidence: tamper-evident logging + chain of
+   │        custody (encryption ≠ provenance) [<span class="qrefs">Q387</span>]
+   ├─ 7.81 admin/management traffic: out-of-band dedicated management
+   │        network (in-band encryption shares the exposed path) [<span class="qrefs">Q229</span>]
+   ├─ 7.82 intercepted router commands root cause: management path lacked
+   │        physical segmentation from production [<span class="qrefs">Q264</span>]
+   ├─ 7.83 Layer-1 supply-chain tamper detection: tamper-evident seals on
+   │        enclosures (biometrics = facility) [<span class="qrefs">Q135</span>]
+   ├─ 7.84 ZT remote offices: tamper-resistant hardware + secure remote
+   │        attestation (TPM encryption ≠ physical tamper) [<span class="qrefs">Q356</span>]
+   ├─ 7.85 smart-city IoT real-time: lightweight ECC + edge computing +
+   │        MQTT (blockchain too slow/complex) [<span class="qrefs">Q363</span>]
+   ├─ 7.86 offline field laptops: local offline protection + scheduled
+   │        updates (NAC ≠ disconnected protection) [<span class="qrefs">Q161</span>]
+   ├─ 7.87 BYOD with NAC + privacy: role-based access + risk-based device
+   │        assessment (mandatory monitoring violates balance) [<span class="qrefs">Q396</span>]
+   ├─ 7.88 DevOps under strict compliance: balance separation with
+   │        collaboration + secure channels (per-stage rooms = silos) [<span class="qrefs">Q138</span>]
+   ├─ 7.89 CI/CD agility: containerization + network virtualization secure
+   │        zones (air gaps break the pipeline) [<span class="qrefs">Q345</span>]
+   ├─ 7.90 <span class="qrefs">Q52</span> Wassenaar crypto export controls → inconsistent encrypted-
+   │        tunnel/enclave implementation across countries (legal
+   │        restriction, not vendor incompatibility) [<span class="qrefs">Q52</span>]
+   └─ 7.91 <span class="qrefs">Q155</span> granular threat visibility + least privilege across
+            segments → flow-metadata analyzer with RBAC (NIDS full packet
+            capture over-collects payload data, no access governance) [<span class="qrefs">Q155</span>]</pre>
+</details>
 <a class="decklink" href="#flashcards" data-deck="g7">▦ 90 flashcards &rarr;</a></div>
   </section>
   <section id="flashcards">

@@ -159,6 +159,13 @@
 
   footer{padding:30px 0 44px;color:var(--muted);font-size:13px}
   footer code{background:#eef1f6;border-radius:5px;padding:1px 6px;font-size:12px}
+
+/* compressed concept tree embeds (from verified mindmap artifacts) */
+details.mmrows{margin:12px 0 0}
+details.mmrows>summary{cursor:pointer;font-weight:700}
+pre.mmtree{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:12.4px;line-height:1.5;margin:8px 0 2px;padding:12px 14px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:10px;overflow-x:auto;white-space:pre;color:#0f172a}
+pre.mmtree .qrefs{color:#7c2d12;font-weight:700;font-size:11.8px}
+pre.mmtree .mmwarn{color:#b45309;font-weight:700}
 </style>
 </head>
 <body>
@@ -446,7 +453,50 @@
       </article>
 
       <article class="card" id="card-g2" style="--mc:var(--g2);--mf:var(--g2f)">
-        <div class="head"><h3>2 &middot; Privacy &amp; PIA</h3><span class="fam">cross-border data</span><a class="flink" href="#flash" data-g="g2">&#9638; <span class="cnt">&ndash;</span> flashcards</a><a class="up" href="#map">&uarr; map</a></div>
+        <div class="head">
+<details class="mmrows">
+<summary>compressed concept tree — 39 lines · 16 Q-refs</summary>
+<pre class="mmtree">├─ 1 · STRATEGY &amp; PARTIES
+│   ├─ 1.1 C001 Definitions: assessment = holistic, judgment-based · test =
+│   │        authorized hands-on technical validation · audit = evidence
+│   │        vs criteria, may attest · NONE of the three redesigns controls
+│   ├─ 1.2 C002 Party ladder: 1st = self (lowest credibility) · 2nd =
+│   │        customer/counterparty (external, business interest → NOT
+│   │        independent) · 3rd = independent provider (most credible)
+│   ├─ 1.3 C003 Internal audit = first-party org-wide, must stay
+│   │        independent of IT operations
+│   ├─ 1.4 C004 Plan OBJECTIVES &amp; SCOPE first — before teams, cadence,
+│   │        interviews, schedules (<span class="qrefs">Q6</span>); <span class="mmwarn">⚠</span> under global time/resource
+│   │        limits the critical element = overall scope &amp; objectives —
+│   │        the timeline is SECONDARY (<span class="qrefs">Q61</span>)
+│   ├─ 1.5 C005 Allocate by business impact, likelihood, change rate,
+│   │        exposure, legal duty — NOT asset count
+│   ├─ 1.6 C006 Cadence ← change velocity: CI/CD, agile, auto-scaling →
+│   │        continuous validation; deployment rate, not calendar (<span class="qrefs">Q53</span>)
+│   ├─ 1.7 C007+C008 Remote = scalable, repeatable, weak on physical ·
+│   │        on-site = irreplaceable for physical controls, paper,
+│   │        air-gapped systems (<span class="qrefs">Q129</span>)
+│   ├─ 1.8 C010 Deciding factor remote-vs-on-site = comprehensive
+│   │        coverage of BOTH physical AND logical controls (<span class="qrefs">Q64</span>)
+│   ├─ 1.9 C009 Hybrid: tier method &amp; frequency by per-location risk;
+│   │        unequal offices → tier sites and cadence (<span class="qrefs">Q134</span>, <span class="qrefs">Q80</span>)
+│   ├─ 1.10 C011 Team capability = diverse expertise, qualifications,
+│   │        independence, clear roles, secure collaboration, documented
+│   │        method (<span class="qrefs">Q76</span>, <span class="qrefs">Q77</span>)
+│   ├─ 1.11 C012 Six quality gates: independence · skill · methodology ·
+│   │        authorization · safety · actionable reporting
+│   ├─ 1.12 C013 Global org: common-core framework + local modules
+│   │        (ISO 27001 / COBIT-style flexibility) (<span class="qrefs">Q62</span>, <span class="qrefs">Q66</span>)
+│   ├─ 1.13 C014 Hybrid audits inspect end-to-end flows + cross-platform
+│   │        IAM integration (<span class="qrefs">Q9</span>, <span class="qrefs">Q10</span>, <span class="qrefs">Q108</span>)
+│   ├─ 1.14 C015 Outsourcing ≠ prioritization — risk ranking stays
+│   │        managerial (<span class="qrefs">Q94</span>)
+│   ├─ 1.15 C016 Uniform coverage ≠ comprehensive — risk-adjust depth
+│   │        and frequency (<span class="qrefs">Q93</span>)
+│   └─ 1.16 C017 CISSP lens: pick lawful, risk-based, independent,
+│            actionable; safety/continuity/legality before completeness</pre>
+</details>
+      <h3>2 &middot; Privacy &amp; PIA</h3><span class="fam">cross-border data</span><a class="flink" href="#flash" data-g="g2">&#9638; <span class="cnt">&ndash;</span> flashcards</a><a class="up" href="#map">&uarr; map</a></div>
         <p class="oneliner">&ldquo;Map every flow, pick the most restrictive law on the exam, and never copy production PII for realism.&rdquo;</p>
         <table class="cheat">
           <thead><tr><th style="width:118px">Aspect</th><th>Facts</th></tr></thead>
@@ -482,7 +532,40 @@
       </article>
 
       <article class="card" id="card-g3" style="--mc:var(--g3);--mf:var(--g3f)">
-        <div class="head"><h3>3 &middot; Vulnerability Management &amp; SCAP</h3><span class="fam">scan &middot; CVE/CVSS</span><a class="flink" href="#flash" data-g="g3">&#9638; <span class="cnt">&ndash;</span> flashcards</a><a class="up" href="#map">&uarr; map</a></div>
+        <div class="head">
+<details class="mmrows">
+<summary>compressed concept tree — 29 lines · 3 Q-refs</summary>
+<pre class="mmtree">├─ 2 · PRIVACY &amp; PIA
+│   ├─ 2.1 C018+C019 Triggers for PIA: new system · new data collection ·
+│   │        new use of existing data · changed processing scope · new
+│   │        cross-border transfer · DPIA = GDPR HIGH-RISK processing
+│   │        (not a generic PIA)
+│   ├─ 2.2 C020 Sequence: identify need → map data flows → assess privacy
+│   │        risk → define mitigation → approval/sign-off → residual
+│   │        risk to risk register
+│   ├─ 2.3 C021 Cross-border map: origin, transit path, storage location,
+│   │        access points, responsible actors, applicable laws (<span class="qrefs">Q119</span>);
+│   │        remote-vs-on-site decided by mapping flows/gaps, not cost
+│   ├─ 2.4 C022 <span class="mmwarn">⚠</span> EXAM picks the most restrictive jurisdiction (GDPR
+│   │        floor); REALITY maps every regime + counsel
+│   ├─ 2.5 C023 Transfer ladder: adequacy decision (simplest) → SCCs
+│   │        (external) → BCRs (intra-group recurring) → Art. 49
+│   │        derogations (exceptional, never the default)
+│   ├─ 2.6 C024 GDPR opt-in orientation vs CCPA/CPRA rights: know,
+│   │        delete, correct, opt out of sale/sharing, limit sensitive
+│   │        data
+│   ├─ 2.7 C025+C026 Test data: synthetic / anonymized / irreversibly
+│   │        masked preferred — compliance outranks realism (<span class="qrefs">Q128</span>);
+│   │        pseudonymization is REVERSIBLE ≠ anonymized, still
+│   │        controlled by residual risk
+│   ├─ 2.8 C027 Global PIA: umbrella assessment + jurisdiction
+│   │        annotations; localized PIAs when national law, culture,
+│   │        privacy regimes genuinely differ — cross-border HR cloud →
+│   │        per-country PIAs (<span class="qrefs">Q2</span>)
+│   └─ 2.9 C028 <span class="mmwarn">⚠</span> Exam simplifies to ONE best answer; real conflicts
+│            need counsel + every-regime mapping</pre>
+</details>
+      <h3>3 &middot; Vulnerability Management &amp; SCAP</h3><span class="fam">scan &middot; CVE/CVSS</span><a class="flink" href="#flash" data-g="g3">&#9638; <span class="cnt">&ndash;</span> flashcards</a><a class="up" href="#map">&uarr; map</a></div>
         <p class="oneliner">&ldquo;Scanning finds known weakness at breadth; SCAP is the language, CVSS the severity &mdash; neither is risk.&rdquo;</p>
         <table class="cheat">
           <thead><tr><th style="width:118px">Aspect</th><th>Facts</th></tr></thead>
@@ -519,7 +602,48 @@
       </article>
 
       <article class="card" id="card-g4" style="--mc:var(--g4);--mf:var(--g4f)">
-        <div class="head"><h3>4 &middot; Penetration Testing &amp; Adversarial Exercises</h3><span class="fam">exploit &middot; red/blue/purple &middot; BAS</span><a class="flink" href="#flash" data-g="g4">&#9638; <span class="cnt">&ndash;</span> flashcards</a><a class="up" href="#map">&uarr; map</a></div>
+        <div class="head">
+<details class="mmrows">
+<summary>compressed concept tree — 37 lines · 20 Q-refs</summary>
+<pre class="mmtree">├─ 3 · VULNERABILITY MANAGEMENT &amp; SCAP
+│   ├─ 3.1 C029 Scanning = breadth at scale: CVEs, open ports, versions,
+│   │        missing patches, misconfigs — IDENTIFICATION, never
+│   │        exploitation; thousands of endpoints → automated scanning
+│   │        (<span class="qrefs">Q46</span>, <span class="qrefs">Q113</span>)
+│   ├─ 3.2 C030 Credentialed scans log in → local software/patch/config
+│   │        depth, fewer FNs · unauthenticated read banners from
+│   │        outside — shallow (<span class="qrefs">Q38</span>, <span class="qrefs">Q39</span>)
+│   ├─ 3.3 C031+C032 FP = reported not real (wasted effort) · FN = real
+│   │        not reported = hidden risk + false confidence — FN is the
+│   │        dangerous one (<span class="qrefs">Q19</span>, <span class="qrefs">Q25</span>) · <span class="mmwarn">⚠</span> zero findings on an
+│   │        unauthenticated scan ≠ secure
+│   ├─ 3.4 C033+C034 SCAP = standardized machine-readable vuln/config
+│   │        content for cross-vendor exchange — <span class="mmwarn">⚠</span> a LANGUAGE, not a
+│   │        scanner (<span class="qrefs">Q24</span>, <span class="qrefs">Q41</span>); SCAP standardizes content vs BAS
+│   │        actively simulates (<span class="qrefs">Q130</span>)
+│   ├─ 3.5 C035–C039 Components: XCCDF checklists/benchmarks (<span class="qrefs">Q28</span>) ·
+│   │        OVAL system-state tests · CVE vulnerability IDs · CPE
+│   │        platform names · CCE configuration IDs
+│   ├─ 3.6 C040+C041 CVSS v3.1: 0.0 None · 0.1–3.9 Low · 4.0–6.9 Medium
+│   │        · 7.0–8.9 High · 9.0–10 Critical (7.0 starts High, 9.0
+│   │        starts Critical) (<span class="qrefs">Q37</span>) — severity INPUT, not business
+│   │        priority
+│   ├─ 3.7 C042–C044 Risk = Threat × Vulnerability × Asset Value
+│   │        (6.3 §2); then add exposure, data sensitivity, asset
+│   │        criticality, known exploitation — CISA KEV; SCAP + BAS
+│   │        proves demonstrated exploitability (<span class="qrefs">Q34</span>, <span class="qrefs">Q70</span>, <span class="qrefs">Q89</span>, <span class="qrefs">Q124</span>);
+│   │        a medium on an exposed critical asset can outrank a
+│   │        critical on an isolated one · <span class="mmwarn">⚠</span> raw counts and scores
+│   │        mislead — contextual risk decides (<span class="qrefs">Q117</span>)
+│   └─ 3.8 C045–C048 Humans &amp; AI: complex business logic, workflow
+│            abuse, algorithm errors, nuanced authz bypass → human
+│            review (<span class="qrefs">Q81</span>); AI accelerates discovery/correlation,
+│            humans validate + contextualize (<span class="qrefs">Q57</span>); complex multi-tier
+│            app = automated scanning + targeted manual testing of
+│            critical components (<span class="qrefs">Q106</span>); known signatures miss
+│            zero-days → add behavioral BAS + threat intel (<span class="qrefs">Q63</span>)</pre>
+</details>
+      <h3>4 &middot; Penetration Testing &amp; Adversarial Exercises</h3><span class="fam">exploit &middot; red/blue/purple &middot; BAS</span><a class="flink" href="#flash" data-g="g4">&#9638; <span class="cnt">&ndash;</span> flashcards</a><a class="up" href="#map">&uarr; map</a></div>
         <p class="oneliner">&ldquo;Exploit within authorized scope; test the organization, not just the patch list; safety and legality gate everything.&rdquo;</p>
         <table class="cheat">
           <thead><tr><th style="width:118px">Aspect</th><th>Facts</th></tr></thead>
@@ -558,7 +682,61 @@
       </article>
 
       <article class="card" id="card-g5" style="--mc:var(--g5);--mf:var(--g5f)">
-        <div class="head"><h3>5 &middot; Software Testing &amp; Threat Modeling</h3><span class="fam">SAST &middot; DAST &middot; STRIDE</span><a class="flink" href="#flash" data-g="g5">&#9638; <span class="cnt">&ndash;</span> flashcards</a><a class="up" href="#map">&uarr; map</a></div>
+        <div class="head">
+<details class="mmrows">
+<summary>compressed concept tree — 50 lines · 21 Q-refs</summary>
+<pre class="mmtree">├─ 4 · PENETRATION TESTING &amp; ADVERSARIAL EXERCISES
+│   ├─ 4.1 C049 Process (memorize order): reconnaissance → scanning/
+│   │        enumeration → vulnerability analysis → exploitation →
+│   │        post-exploitation → reporting
+│   ├─ 4.2 C050–C053 Recon = passive info gathering (OSINT, job
+│   │        postings, DNS — destcert) · enumeration = active probing
+│   │        of ports/services · banner grabbing collects service
+│   │        strings, usually counts as ACTIVE · fingerprinting infers
+│   │        OS/app from packet/system behavior even when banners lie
+│   │        (<span class="qrefs">Q30</span>, <span class="qrefs">Q42</span>)
+│   ├─ 4.3 C054+C055 Black/grey/white box = TESTER knowledge (none/
+│   │        partial/full) · blind/double-blind = DEFENDER awareness;
+│   │        double-blind evaluates detection &amp; response under surprise
+│   ├─ 4.4 C056 Assumed breach: start from internal foothold/valid
+│   │        access → tests segmentation &amp; lateral movement; provides
+│   │        little perimeter-defense evidence (<span class="qrefs">Q69</span>)
+│   ├─ 4.5 C057–C060 Governance: signed WRITTEN authorization (scope,
+│   │        timing, RoE, exclusions) precedes testing — certs/verbal
+│   │        never substitute (<span class="qrefs">Q5</span>); production breach sims need
+│   │        explicit stakeholder consent (<span class="qrefs">Q133</span>); unclear scope → key
+│   │        systems untested (<span class="qrefs">Q102</span>); <span class="mmwarn">⚠</span> RoE — not off-hours timing —
+│   │        define prohibited actions; off-peak destructive testing
+│   │        still risks disruption (<span class="qrefs">Q73</span>; carries B1 item)
+│   ├─ 4.6 C061–C068 Teams: RED = realistic adversary across people/
+│   │        process/tech (<span class="qrefs">Q82</span>) · BLUE = detect, respond, harden ·
+│   │        PURPLE = continuous Red↔Blue collaboration PROCESS (not a
+│   │        permanent squad), differentiator = rapid knowledge
+│   │        transfer (<span class="qrefs">Q75</span>), success = persistent detection/response
+│   │        improvement; coordinated purple exercise tests control
+│   │        effectiveness + IR readiness together — passive monitoring
+│   │        does NOT exercise the human response function (<span class="qrefs">Q4</span>); threat
+│   │        intel makes scenarios plausible (<span class="qrefs">Q65</span>); SDLC purple
+│   │        improves controls pre-deployment (<span class="qrefs">Q51</span>); strategic
+│   │        challenge = harmonizing offensive tactics with defensive
+│   │        priorities inside risk assessment (<span class="qrefs">Q72</span>); logic-bomb
+│   │        threats → purple builds proactive detection/IR readiness
+│   │        (<span class="qrefs">Q109</span>)
+│   ├─ 4.7 C069+C070 BAS = safely, continuously emulates attacker TTPs
+│   │        to validate detection/prevention (<span class="qrefs">Q21</span>, <span class="qrefs">Q43</span>); complements,
+│   │        never replaces, periodic human testing; never assigns CVE
+│   │        IDs
+│   ├─ 4.8 C071–C073 Safety: healthcare/utilities/water/power →
+│   │        simulate first + tightly limited live validation;
+│   │        availability &amp; public safety outrank realism (<span class="qrefs">Q52</span>, <span class="qrefs">Q86</span>,
+│   │        <span class="qrefs">Q100</span>); sustained infrastructure testing builds public/
+│   │        stakeholder trust (<span class="qrefs">Q54</span>); vs AI-enhanced attacks →
+│   │        adaptive learning posture — a tool alone is a tactic, not
+│   │        the strategy (<span class="qrefs">Q95</span>)
+│   └─ 4.9 C074 Boundary: pen test skips execution in vulnerability
+│            assessments; VA jumps identification → reporting (destcert)</pre>
+</details>
+      <h3>5 &middot; Software Testing &amp; Threat Modeling</h3><span class="fam">SAST &middot; DAST &middot; STRIDE</span><a class="flink" href="#flash" data-g="g5">&#9638; <span class="cnt">&ndash;</span> flashcards</a><a class="up" href="#map">&uarr; map</a></div>
         <p class="oneliner">&ldquo;Rerun the baseline after every change; shift left with SAST; model threats before code exists.&rdquo;</p>
         <table class="cheat">
           <thead><tr><th style="width:118px">Aspect</th><th>Facts</th></tr></thead>
@@ -601,7 +779,70 @@
       </article>
 
       <article class="card" id="card-g6" style="--mc:var(--g6);--mf:var(--g6f)">
-        <div class="head"><h3>6 &middot; Logging, Metrics &amp; Reporting</h3><span class="fam">SIEM &middot; KPI/KRI</span><a class="flink" href="#flash" data-g="g6">&#9638; <span class="cnt">&ndash;</span> flashcards</a><a class="up" href="#map">&uarr; map</a></div>
+        <div class="head">
+<details class="mmrows">
+<summary>compressed concept tree — 59 lines · 21 Q-refs</summary>
+<pre class="mmtree">├─ 5 · SOFTWARE TESTING &amp; THREAT MODELING
+│   ├─ 5.1 C075–C079 Regression: rerun established tests vs known-good
+│   │        baseline after ANY change — code, security patch (<span class="qrefs">Q33</span>;
+│   │        login fails after patch = regression gap, <span class="qrefs">Q35</span>), new
+│   │        feature, config, detection rules; downstream dependents
+│   │        (shared libs, APIs, data formats) propagate breakage
+│   │        (<span class="qrefs">Q40</span>); patches touch core paths, configs silently alter
+│   │        firewall/GPO/routing/logging — BOTH get rigor (<span class="qrefs">Q27</span>);
+│   │        testing only new features → previously functional software
+│   │        breaks undetected (<span class="qrefs">Q22</span>) — baseline comparison is the proof
+│   │        (<span class="qrefs">Q20</span>); <span class="mmwarn">⚠</span> severe SIEM patch broke correlation → KEEP the
+│   │        patch, regression-test rules — no blind rollback (<span class="qrefs">Q29</span>)
+│   ├─ 5.2 C080–C083 Ownership &amp; automation: developers + QA execute,
+│   │        MANAGEMENT makes risk-based go/no-go (<span class="qrefs">Q26</span>); evidence =
+│   │        version-controlled baseline + repeatable reruns (change
+│   │        records prove workflow, not function); frequent releases/
+│   │        analyst strain → automated regression suites in CI/CD
+│   │        preserving coverage — never cut cases or merely add
+│   │        headcount (<span class="qrefs">Q36</span>, <span class="qrefs">Q44</span>); CFO case = production, release,
+│   │        revenue risk (<span class="qrefs">Q31</span>)
+│   ├─ 5.3 C084–C087 SAST vs DAST: SAST = static analysis of source/
+│   │        bytecode/binary without execution — commit-time shift-left
+│   │        before a functional app exists (<span class="qrefs">Q79</span>, <span class="qrefs">Q111</span>); finds
+│   │        hardcoded secrets, injection patterns, insecure API use;
+│   │        noisier (more FPs); DAST = running app outside-in
+│   │        black-box, no source; finds XSS, auth bypass, runtime
+│   │        misconfig; needs deployable instance — later, slower,
+│   │        cannot run pre-build (SAST can) (<span class="qrefs">Q111</span>); shift left =
+│   │        automated scans on each commit + immediate feedback —
+│   │        manual review only before release = late bottleneck (<span class="qrefs">Q88</span>)
+│   ├─ 5.4 C088+C089 Fuzzing: random/malformed/boundary input into a
+│   │        running executable → crashes, memory leaks, buffer
+│   │        overflows, unhandled exceptions (<span class="qrefs">Q110</span>, <span class="qrefs">Q120</span>); mutation
+│   │        fuzzers are structure-blind, generation fuzzers understand
+│   │        the input format (destcert)
+│   ├─ 5.5 C090–C092 Misuse &amp; review: misuse cases model attacker/
+│   │        negative paths from threat models — NOT ordinary
+│   │        functional testing; confirm fail-securely: deny, log, no
+│   │        leakage, no insecure crash (<span class="qrefs">Q118</span>); human code review finds
+│   │        logic flaws scanners miss; Fagan = formal six-step
+│   │        inspection (destcert)
+│   ├─ 5.6 C093–C096 Threat modeling: EARLIEST SDLC risk technique
+│   │        (requirements/design), iterative — updated as architecture,
+│   │        suppliers, threats change; a single pre-coding list goes
+│   │        stale (<span class="qrefs">Q67</span>); includes vendor trust boundaries (<span class="qrefs">Q138</span>); a
+│   │        continuous program beats monthly pentests (<span class="qrefs">Q116</span>);
+│   │        artifacts = DFDs, entry points, actors, assets, trust
+│   │        boundaries; STRIDE: Spoofing→authn · Tampering→integrity ·
+│   │        Repudiation→non-repudiation via accountability evidence ·
+│   │        Info Disclosure→confidentiality · DoS→availability ·
+│   │        Elevation of Privilege→authz
+│   ├─ 5.7 C097+C098 Levels &amp; coverage: unit → interface → integration
+│   │        → system (destcert); coverage efficiency via equivalence
+│   │        partitioning + boundary values
+│   └─ 5.8 C099 Deployed smart contracts may be IMMUTABLE → formal
+│            verification, audit, testnet simulation BEFORE deployment;
+│            remediation barrier = immutability itself, beyond needing
+│            special scanners (<span class="qrefs">Q101</span>) [B7 blockchain line cross-links
+│            here]</pre>
+</details>
+      <h3>6 &middot; Logging, Metrics &amp; Reporting</h3><span class="fam">SIEM &middot; KPI/KRI</span><a class="flink" href="#flash" data-g="g6">&#9638; <span class="cnt">&ndash;</span> flashcards</a><a class="up" href="#map">&uarr; map</a></div>
         <p class="oneliner">&ldquo;Logs are evidence &mdash; preserve history, clip noise, sync clocks; metrics tell the board what changed.&rdquo;</p>
         <table class="cheat">
           <thead><tr><th style="width:118px">Aspect</th><th>Facts</th></tr></thead>
@@ -644,7 +885,80 @@
       </article>
 
       <article class="card" id="card-g7" style="--mc:var(--g7);--mf:var(--g7f)">
-        <div class="head"><h3>7 &middot; Assurance, Emerging Tech &amp; Resilience</h3><span class="fam">SOC &middot; ISO &middot; DR ladder</span><a class="flink" href="#flash" data-g="g7">&#9638; <span class="cnt">&ndash;</span> flashcards</a><a class="up" href="#map">&uarr; map</a></div>
+        <div class="head">
+<details class="mmrows">
+<summary>compressed concept tree — 69 lines · 24 Q-refs</summary>
+<pre class="mmtree">├─ 6 · LOGGING, METRICS &amp; REPORTING
+│   ├─ 6.1 C100–C102 Logs as evidence: support investigation &amp; audit —
+│   │        preserve required history + integrity while tuning noise;
+│   │        post-incident analysis reconstructs timeline &amp; scope (<span class="qrefs">Q12</span>)
+│   │        — forensic, NOT real-time alerting; monitor for errors
+│   │        (404 floods), unauthorized modification (attacker patching
+│   │        behind a backdoor), breach indicators (mining,
+│   │        exfiltration, ransomware) (destcert)
+│   ├─ 6.2 C103+C104 Clipping level = threshold suppressing routine
+│   │        below-threshold activity; surfaces anomalies; cuts noise,
+│   │        fatigue, storage, processing (<span class="qrefs">Q11</span>, <span class="qrefs">Q13</span>); flood of isolated
+│   │        single failed logins → clipping thresholds + correlation —
+│   │        forwarding noisy events to the SIEM just moves the problem
+│   │        (<span class="qrefs">Q17</span>); <span class="mmwarn">⚠</span> EXAM may phrase it log-only-after-threshold —
+│   │        reality keeps detail and clips ALERTS
+│   ├─ 6.3 C105+C106 Circular logging: cap + overwrite oldest → bounded
+│   │        storage (<span class="qrefs">Q14</span>, <span class="qrefs">Q16</span>); primary risk = silent loss of EARLIEST
+│   │        forensic evidence; delayed discovery → old entries
+│   │        overwritten — <span class="mmwarn">⚠</span> MISSING, not corrupted (<span class="qrefs">Q18</span>)
+│   ├─ 6.4 C107–C109 Retention: overwrite acceptability decided by
+│   │        whether historical evidence must be preserved (<span class="qrefs">Q15</span>);
+│   │        forensics/legal → sequential non-overwrite under policy;
+│   │        tiers hot (recent/fast) → warm (compliance age) → cold
+│   │        (long-term/legal hold) (<span class="qrefs">Q56</span>); tiering + variable retention
+│   │        + suitable clipping beats blanket deletion; regulation,
+│   │        policy, legal holds OVERRULE storage optimization
+│   ├─ 6.5 C110+C111 Centralization: unified SIEM across on-prem +
+│   │        cloud; NTP/PTP-synchronized timestamps in ONE consistent
+│   │        format — else sequencing unreliable and cross-environment
+│   │        correlation breaks; separate tools fragment into silos
+│   │        (<span class="qrefs">Q55</span>); pipeline: generation → transmission (realtime) →
+│   │        collection/aggregation → normalization → analysis
+│   │        (correlation, rules, statistics) → retention → disposal
+│   │        (secure, defensible) (destcert)
+│   ├─ 6.6 C112–C114 KPI vs KRI: KPI = "are we doing it well?" (process:
+│   │        patch SLA, MTTR) · KRI = "are we exposed?" (risk:
+│   │        exploitable criticals); missed KPI → improve process, KRI
+│   │        breach → escalate to management; trends beat snapshots —
+│   │        test counts = activity, multi-year time-to-patch =
+│   │        effectiveness (<span class="qrefs">Q23</span>)
+│   ├─ 6.7 C115–C120 Risk weighting: compare unequal programs by
+│   │        risk-adjusted impact, not counts (<span class="qrefs">Q98</span>); KRIs focus scarce
+│   │        testing — do not broaden blindly (<span class="qrefs">Q97</span>); dynamic KPIs
+│   │        adjust with threat intel + incident data (<span class="qrefs">Q103</span>) — annual
+│   │        updates are NOT dynamic; map one metric set to NIST CSF /
+│   │        ISO 27001 / GDPR (<span class="qrefs">Q8</span>); global mix = quantitative +
+│   │        qualitative KRIs (<span class="qrefs">Q127</span>); GDPR 72-hour notification metric
+│   │        when the rule applies
+│   ├─ 6.8 C121 <span class="mmwarn">⚠</span> "Critical vulnerabilities within seven days" = common
+│   │        benchmark, NOT a universal SLA — policy, active
+│   │        exploitation, asset criticality, compensating controls set
+│   │        the actual deadline (6.2 §6)
+│   ├─ 6.9 C122–C125 Reporting: right audience, right language — board =
+│   │        business/financial impact, visuals, priorities, decisions
+│   │        (<span class="qrefs">Q90</span>, <span class="qrefs">Q91</span>, <span class="qrefs">Q135</span>); EHR dosage-calculation regression to
+│   │        board → audience-relevant risk &amp; impact metrics, not raw
+│   │        pass/fail (<span class="qrefs">Q32</span>); engineers = assets, evidence,
+│   │        reproduction, remediation; auditors = methodology,
+│   │        traceability, control relevance; multi-level audiences →
+│   │        per-role tailoring incl. middle management; SOC 2 findings
+│   │        map to Trust Services Criteria (<span class="qrefs">Q85</span>); every recommendation
+│   │        = owner + action + date; leadership needs prioritized
+│   │        actionable recommendations, not exhaustive specs (<span class="qrefs">Q125</span>);
+│   │        disclose scope limits &amp; blind spots BEFORE trusting
+│   │        severity (<span class="qrefs">Q47</span>)
+│   └─ 6.10 C126+C127 Output maturity: raw XML/CSV → normalized CVE+
+│            CVSS findings → detailed technical report → executive
+│            summary; <span class="mmwarn">⚠</span> standardized file formats ≠ comparative trend
+│            insight (<span class="qrefs">Q58</span>)</pre>
+</details>
+      <h3>7 &middot; Assurance, Emerging Tech &amp; Resilience</h3><span class="fam">SOC &middot; ISO &middot; DR ladder</span><a class="flink" href="#flash" data-g="g7">&#9638; <span class="cnt">&ndash;</span> flashcards</a><a class="up" href="#map">&uarr; map</a></div>
         <p class="oneliner">&ldquo;Match evidence to purpose; safety caps intrusiveness; only a restore test proves recovery.&rdquo;</p>
         <table class="cheat">
           <thead><tr><th style="width:118px">Aspect</th><th>Facts</th></tr></thead>
@@ -687,7 +1001,98 @@
   </section>
 
   <!-- ================= 6. FLASHCARDS ================= -->
-  <section id="flash">
+  
+<details class="mmrows">
+<summary>compressed concept tree — 87 lines · 34 Q-refs</summary>
+<pre class="mmtree">└─ 7 · ASSURANCE, EMERGING TECH &amp; RESILIENCE
+    ├─ 7.1 C128–C131 SOC family: SOC 1 = financial-reporting controls
+    │        (SSAE 18 / ISAE 3402) · SOC 2 = TSC detail, restricted
+    │        distribution — Type I design at a date, Type II operating
+    │        effectiveness over 6–12 months (stronger; <span class="qrefs">Q48</span>, <span class="qrefs">Q96</span>); <span class="mmwarn">⚠</span>
+    │        still an ATTESTATION, not a certification; "gold standard"
+    │        ≠ zero risk, does not outrank every framework · SOC 3 =
+    │        public summary, no NDA, insufficient for gap analysis ·
+    │        TSC rule: Security ALWAYS in scope; Availability,
+    │        Processing Integrity, Confidentiality, Privacy depend on
+    │        engagement scope — never assume all five
+    ├─ 7.2 C132–C135 Frameworks: ISO 27001 = ISMS certification ·
+    │        HITRUST = healthcare-prescriptive, harmonizes ISO/NIST/
+    │        HIPAA/PCI · SOC 2 vs ISO = detailed tested controls vs
+    │        internationally recognized management-system certification
+    │        (ISO ≠ control-test detail); evidence strength: tests of
+    │        controls + results beat objectives/descriptions (<span class="qrefs">Q71</span>);
+    │        period evidence proves sustained operation; granular
+    │        log-monitoring tests reveal SIEM gaps better than an
+    │        overall opinion (<span class="qrefs">Q83</span>)
+    ├─ 7.3 C136–C140 Third-party risk: favorable report ≠ guarantee —
+    │        review scope, period, exceptions, CUECs, residual risk;
+    │        discrepancies → notify, gap analysis, critical fixes,
+    │        communicate plan, verify closure, escalate (<span class="qrefs">Q49</span>); global
+    │        scale → tier vendors + SOC 2 Type II + continuous
+    │        monitoring (<span class="qrefs">Q50</span>); expand scope for AI and IoT risk (<span class="qrefs">Q60</span>);
+    │        sustained Type II should visibly improve practices &amp;
+    │        awareness — documentation without behavioral change =
+    │        checkbox compliance (<span class="qrefs">Q99</span>)
+    ├─ 7.4 C141–C144 Auditors: external = independent evaluator, objective
+    │        attestation, industry benchmarks, regulatory assurance
+    │        (<span class="qrefs">Q84</span>, <span class="qrefs">Q104</span>); internal = process knowledge, ongoing
+    │        improvement, but employer conflict remains; MANAGEMENT owns
+    │        controls, auditors assure; continuous monitoring supplements
+    │        rather than replaces periodic attestation (<span class="qrefs">Q115</span>, <span class="qrefs">Q139</span>)
+    ├─ 7.5 C145–C149 Audit tooling: COBIT = governance/business alignment
+    │        · ITAF = audit methodology · NIST SP 800-53A = control
+    │        assessment; predictive analytics = proactive anticipation of
+    │        fraud, control degradation, risk hotspots (<span class="qrefs">Q74</span>, <span class="qrefs">Q122</span>);
+    │        emerging-tech audits align to risk strategy FIRST, adapt
+    │        evidence (API-based, cloud-native, SMEs) (<span class="qrefs">Q92</span>); core-skills
+    │        challenge = keeping pace with evolution (<span class="qrefs">Q131</span>); integrated
+    │        cross-domain findings need RECURRING collaboration meetings
+    │        (IT, security, legal, compliance, HR, business units) —
+    │        periodic report sharing is passive/one-way (<span class="qrefs">Q137</span>)
+    ├─ 7.6 C150–C159 Emerging tech: distributed/ephemeral/immutable/
+    │        safety-critical → runtime + continuous tests beat static
+    │        images, diagrams, quarterly snapshots (6.3 §5) — IoT:
+    │        heterogeneity of devices/OS/firmware/protocols defeats
+    │        uniform tools; weak defaults + limited compute break
+    │        agent-based scanning (<span class="qrefs">Q68</span>, <span class="qrefs">Q87</span>, <span class="qrefs">Q114</span>) — ICS/SCADA: safety +
+    │        availability outrank depth → least intrusive adequate test
+    │        (<span class="qrefs">Q126</span>) — Edge: distributed physically exposed nodes,
+    │        intermittent connectivity; dynamically test edge-to-cloud
+    │        flows (MQTT/CoAP/AMQP); static firmware misses cross-
+    │        component behavior (<span class="qrefs">Q1</span>, <span class="qrefs">Q132</span>) — Containers: ephemeral →
+    │        runtime assessment; shared host kernel; privileged mode +
+    │        mounted Docker sockets raise escape risk; escape = top
+    │        blast radius (<span class="qrefs">Q121</span>, <span class="qrefs">Q136</span>) — Blockchain: immutable →
+    │        pre-deploy verification (<span class="qrefs">Q101</span>) [= C099, §5.8] — AR/VR:
+    │        spatial/sensor/environmental-capture manipulation + privacy
+    │        (<span class="qrefs">Q59</span>) — Mobile: permissions, sandbox, APIs; web-only is
+    │        incomplete (<span class="qrefs">Q112</span>) — Zero trust: prove enforcement via
+    │        attempted east-west movement + identity-based decisions,
+    │        not diagrams (<span class="qrefs">Q7</span>); <span class="mmwarn">⚠</span> microsegmented net: discovering/
+    │        reaching ALL isolated segments = the foundational
+    │        challenge — persistence irrelevant before coverage (<span class="qrefs">Q123</span>) —
+    │        Multi-cloud: CSPM + IAM policy + API testing + provider-
+    │        boundary review (<span class="qrefs">Q78</span>)
+    ├─ 7.7 C160–C162 Resilience: RTO = max acceptable restore time · RPO
+    │        = max acceptable data-loss window; criticality +
+    │        dependencies set recovery order · <span class="mmwarn">⚠</span> EXAM: testing results
+    │        can help identify critical systems &amp; prioritize recovery
+    │        (<span class="qrefs">Q45</span>) — REAL planning: BIA, dependencies, criticality,
+    │        RTO/RPO are authoritative, testing validates/corrects · DR
+    │        ladder: checklist → structured walk-through → simulation →
+    │        parallel → full interruption (management-authorized;
+    │        fidelity &amp; disruption rise together)
+    └─ 7.8 C163–C168 Process evidence: account reviews expose privilege
+             creep, dormant/orphaned accounts; awareness = BEHAVIORAL
+             metrics (phishing clicks, reporting) — completion is
+             activity (<span class="qrefs">Q107</span>); backup verification proves data written,
+             only a successful RESTORE test proves recoverability; ISCM
+             = near-real-time awareness via automated high-frequency
+             assessment (<span class="qrefs">Q140</span>); PDCA closes the loop; a logged finding
+             is NOT closure — owner, remediation, verification,
+             reassessment</pre>
+</details>
+      <section id="flash">
     <h2>6 &middot; Flashcards &mdash; the tree, drilled</h2>
     <p class="lede">Every card knows which branch of the mindmap it belongs to. Filter by group, flip with click or <code>Space</code>, navigate with the arrow keys (click the deck first). Branch cards link straight into this deck.</p>
     <div class="fchips" id="fchips"></div>

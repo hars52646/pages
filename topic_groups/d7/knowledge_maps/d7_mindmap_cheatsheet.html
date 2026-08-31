@@ -143,6 +143,14 @@
 
   footer{padding:30px 0 44px;color:var(--muted);font-size:13px}
   footer code{background:#eef1f6;border-radius:5px;padding:1px 6px;font-size:12px}
+
+/* compressed concept tree embeds (from verified mindmap artifacts) */
+.bc details.mmrows{margin:12px 0 0}
+.bc details.mmrows>summary{cursor:pointer;font-weight:700;font-size:13px;color:var(--gc);letter-spacing:.03em;text-transform:uppercase}
+.bc details.mmrows>summary::marker{color:var(--gc)}
+.bc pre.mmtree{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:12.4px;line-height:1.5;margin:8px 0 2px;padding:12px 14px;background:#f8fafc;border:1px solid var(--line);border-radius:10px;overflow-x:auto;white-space:pre;color:#0f172a}
+.bc pre.mmtree .qrefs{color:#7c2d12;font-weight:700;font-size:11.8px}
+.bc pre.mmtree .mmwarn{color:#b45309;font-weight:700}
 </style>
 </head>
 <body>
@@ -501,6 +509,135 @@
         <tr><td class="rowhead">Cloud four</td><td>Recall cloud forensic pressure points as ephemeral, distributed, multi-tenant, and provider-dependent.</td></tr>
         <tr><td class="rowhead">Global four</td><td>Recall global evidence requirements as lawful authority, jurisdiction, privacy compliance, and synchronized time.</td></tr>
         </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 126 lines · 59 Q-refs</summary>
+<pre class="mmtree">├─ g1 · FORENSICS &amp; EVIDENCE
+│  │
+│  ├─ 1 · Foundations
+│  │  ├─ F1 Preserve-then-analyze: protect the original; work on verified copies [<span class="qrefs">Q157</span>]
+│  │  ├─ F2 Volatile-first: collect most-volatile evidence before stable evidence
+│  │  ├─ F3 Chain of custody = 5W time-stamped record (who/what/when/where/why) over
+│  │  │  identity, possession, access, transfers, location, purpose
+│  │  │  [<span class="qrefs">Q1 Q3 Q27 Q66 Q117 Q118 Q165 Q177 Q205</span>]
+│  │  ├─ F4 Custody's primary purpose = integrity + admissibility (not recovery/speed)
+│  │  │  [<span class="qrefs">Q1 Q3 Q27 Q66 Q177 Q205</span>]
+│  │  ├─ F5 Undocumented transfer (who/when/where) breaks the chain despite hashes
+│  │  │  and write blockers [<span class="qrefs">Q117 Q118</span>]
+│  │  ├─ F6 Defensibility wins: principle &gt; speed, cost, storage, tool novelty [<span class="qrefs">Q205</span>]
+│  │  └─ F7 Principle vs nuance: exam picks the principle; real work documents changes,
+│  │     validates outputs, preserves provenance
+│  │
+│  ├─ 2 · Evidence qualities &amp; workflow
+│  │  ├─ F8 Admissible — legally acceptable; authority, collection, integrity [<span class="qrefs">Q205</span>]
+│  │  ├─ F9 Authentic — is what it claims; attributable to its source
+│  │  ├─ F10 Complete — presents events fairly, not a misleading fragment
+│  │  ├─ F11 Reliable — trustworthy tools/methods/results withstand scrutiny
+│  │  ├─ F12 <span class="mmwarn">⚠</span> Source also groups "custody or believability" with the qualities
+│  │  ├─ F13 Workflow: preserve → collect → validate → identify → analyze [<span class="qrefs">Q227</span>]
+│  │  ├─ F14 <span class="mmwarn">⚠</span> "Five Rules" ambiguous: qualities OR workflow — follow the stem; for
+│  │  │  AI questions favor traditional validation + human corroboration [<span class="qrefs">Q227</span>]
+│  │  └─ F15 AI may triage evidence but humans must validate; reject AI-only [<span class="qrefs">Q227</span>]
+│  │
+│  ├─ 3 · Acquisition technique
+│  │  ├─ F16 Write blocker = source-media integrity (not decryption/speed) [<span class="qrefs">Q100 Q226</span>]
+│  │  ├─ F17 At collection: create write-protected copies; analyze exact copies [<span class="qrefs">Q226</span>]
+│  │  ├─ F18 Bit-for-bit image: allocated + deleted + slack + swap + filesystem [<span class="qrefs">Q157</span>]
+│  │  ├─ F19 Backup ≠ image: not bit-for-bit, write-blocked, hashed, custody-tracked
+│  │  ├─ F20 Never analyze original (no live AV, plain copy, visual compare) [<span class="qrefs">Q157</span>]
+│  │  ├─ F21 Zero the destination first — residual data contaminates copies [<span class="qrefs">Q142</span>]
+│  │  ├─ F22 Hash original + image; match = bit identity, detects alteration [<span class="qrefs">Q152</span>]
+│  │  ├─ F23 Hash ≠ custody: content only; no possession/transfer record [<span class="qrefs">Q117</span>]
+│  │  ├─ F24 Library vs working copy: untouched primary + analysis copy [<span class="qrefs">Q154</span>]
+│  │  └─ F25 Recall chain: write block → bit image → hash → library → working copy
+│  │
+│  ├─ 4 · Order of volatility
+│  │  ├─ F26 Ladder: registers/cache → RAM → network state → disk [<span class="qrefs">Q120 Q194 Q213</span>]
+│  │  ├─ F27 If registers/cache not offered, RAM is the most volatile pick
+│  │  │  [<span class="qrefs">Q61 Q67 Q213</span>]
+│  │  ├─ F28 Shutdown-risk stems: memory capture over disk/logs/reboot [<span class="qrefs">Q61 Q67 Q120 Q213</span>]
+│  │  ├─ F29 <span class="mmwarn">⚠</span> Real life: some network state changes faster than memory; exam model
+│  │  │  keeps the fixed ladder anyway
+│  │  ├─ F30 Uptime conflict: volatile memory first, then persistent pre-shutdown [<span class="qrefs">Q120</span>]
+│  │  ├─ F31 Never reboot/power off: destroys RAM; reboots change persistent state
+│  │  │  [<span class="qrefs">Q120 Q194 Q213</span>]
+│  │  └─ F32 Sophisticated rootkit → memory-dump analysis (procs, modules, hidden) [<span class="qrefs">Q43</span>]
+│  │
+│  ├─ 5 · Live response
+│  │  ├─ F33 Live forensics changes state; "no impact" is not credible [<span class="qrefs">Q224</span>]
+│  │  ├─ F34 Controlled live change: minimal trusted tools, record, hash, explain
+│  │  ├─ F35 Live (saves RAM, alters it) vs dead-box (pristine disk, loses RAM)
+│  │  └─ F36 SIEM stem + volatility emphasis: protect memory over ingestion [<span class="qrefs">Q174</span>]
+│  │
+│  ├─ 6 · Locard's Exchange Principle
+│  │  ├─ F37 Every contact leaves and takes traces [<span class="qrefs">Q60 Q80 Q85 Q86 Q206</span>]
+│  │  ├─ F38 Bidirectional: intruder leaves artifacts, takes data (exfiltration)
+│  │  │  [<span class="qrefs">Q80 Q84</span>]
+│  │  ├─ F39 Digital examples: logs, fragments, metadata, malware remnants [<span class="qrefs">Q60</span>]
+│  │  ├─ F40 Deletion still leaves recoverable unallocated fragments [<span class="qrefs">Q206</span>]
+│  │  ├─ F41 Logging pays: controls capture attacker traces (forensic rationale) [<span class="qrefs">Q83</span>]
+│  │  ├─ F42 Least privilege/DiD/SoD don't explain why traces exist [<span class="qrefs">Q81 Q82 Q85 Q86</span>]
+│  │  ├─ F43 Trace ≠ proof: still collect, correlate, validate, keep custody
+│  │  └─ F44 Complete trace elimination is practically impossible [<span class="qrefs">Q82</span>]
+│  │
+│  ├─ 7 · Evidence types
+│  │  ├─ F45 Real = tangible object (laptop/drive/SSD/USB); its data is separate [<span class="qrefs">Q147</span>]
+│  │  ├─ F46 Direct = firsthand observation, no inference needed
+│  │  ├─ F47 Circumstantial = conclusion via inference
+│  │  ├─ F48 Hearsay = out-of-court secondhand statement; admissibility risk
+│  │  │  [<span class="qrefs">Q116 Q127</span>]
+│  │  ├─ F49 Secondary = reproduction; printed logs are secondary despite paper
+│  │  │  [<span class="qrefs">Q151</span>]
+│  │  ├─ F50 Corroborative = independent support, not retelling
+│  │  ├─ F51 Best evidence: original preferred; verified image acceptable [<span class="qrefs">Q149</span>]
+│  │  ├─ F52 Convenient/readable copy ≠ best evidence [<span class="qrefs">Q149 Q151</span>]
+│  │  └─ F53 Integrity (alteration) vs confidentiality (disclosure); encryption ≠
+│  │     custody documentation
+│  │
+│  ├─ 8 · Timelines &amp; time
+│  │  ├─ F54 Build timelines by cross-referencing system/app/network logs [<span class="qrefs">Q20</span>]
+│  │  ├─ F55 One source/timestamp is weaker — misses omissions, discrepancies [<span class="qrefs">Q20</span>]
+│  │  └─ F56 Precise clock sync across zones → ordering, correlation, admissibility
+│  │     [<span class="qrefs">Q175</span>]
+│  │
+│  ├─ 9 · Cloud &amp; cross-border
+│  │  ├─ F57 Cloud five: distributed, ephemeral, multi-tenant, CSP-dependent,
+│  │  │  multi-jurisdiction
+│  │  ├─ F58 Virtual traces spread across services; reject hypervisor-only absolutes
+│  │  │  [<span class="qrefs">Q32</span>]
+│  │  ├─ F59 Cloud evidence is NOT automatically admissible [<span class="qrefs">Q32</span>]
+│  │  ├─ F60 Multi-CSP Locard: collect + correlate distributed traces [<span class="qrefs">Q50</span>]
+│  │  ├─ F61 Shared-infra custody → accountability for ownership/access/handling
+│  │  │  [<span class="qrefs">Q42 Q45</span>]
+│  │  ├─ F62 Multi-tenant Locard → isolate one user's traces from intermingling [<span class="qrefs">Q163</span>]
+│  │  ├─ F63 Main acquisition challenge: ephemeral storage + tenant isolation [<span class="qrefs">Q185</span>]
+│  │  ├─ F64 Containers/microservices are created/destroyed fast — collect now [<span class="qrefs">Q44</span>]
+│  │  ├─ F65 Central evidence mgmt: consistent IDs, ACLs, custody, retention [<span class="qrefs">Q165</span>]
+│  │  ├─ F66 Multi-CSP: detailed time-stamped custody stays decisive [<span class="qrefs">Q176 Q204</span>]
+│  │  ├─ F67 Client-managed keys can make content practically inaccessible [<span class="qrefs">Q184</span>]
+│  │  ├─ F68 <span class="mmwarn">⚠</span> Exam pick: client-held encryption &gt; timestomping/metadata/compression
+│  │  │  [<span class="qrefs">Q184</span>]
+│  │  ├─ F69 Cross-border: conflicting laws beat timezones/translation/tools [<span class="qrefs">Q164</span>]
+│  │  ├─ F70 Distributed jurisdictions complicate acquisition→admissibility
+│  │  │  [<span class="qrefs">Q65 Q214</span>]
+│  │  ├─ F71 Unencrypted EU personal data → US analysis = GDPR risk; need lawful
+│  │  │  basis [<span class="qrefs">Q74</span>]
+│  │  ├─ F72 <span class="mmwarn">⚠</span> 72-hour GDPR notice exists, but unsafe transfer is the trap [<span class="qrefs">Q74</span>]
+│  │  ├─ F73 Technical access/provider cooperation ≠ legal authority
+│  │  ├─ F74 Recall cloud four: ephemeral, distributed, multi-tenant, provider-dep
+│  │  ├─ F75 Recall global four: authority, jurisdiction, privacy, synced time
+│  │  └─ F76 Stem decides cloud answers: custody→accountability, Locard→isolation,
+│  │     acquisition→ephemerality, admissibility→custody+jurisdiction
+│  │     [<span class="qrefs">Q42 Q45 Q163 Q176 Q185 Q204 Q214</span>]
+│  │
+│  └─ 10 · Special sources
+│     ├─ F77 IoT: volatile memory dies at power-off; preserve early [<span class="qrefs">Q245</span>]
+│     ├─ F78 Social media: forensic capture with metadata + integrity; user
+│     │  screenshots are weak [<span class="qrefs">Q219</span>]
+│     ├─ F79 eDiscovery prep = data mapping + retention policy first [<span class="qrefs">Q26</span>]
+│     ├─ F80 Retention's primary purpose = legal/regulatory compliance [<span class="qrefs">Q29</span>]
+│     ├─ F81 BYOD: legal authority decides (warrants for external cases) [<span class="qrefs">Q231</span>]
+│     └─ F82 BYOD: tool choice/timeline/scope secondary to authority [<span class="qrefs">Q231</span>]</pre>
+</details>
       <a class="decklink" href="#flashcards" data-deck="g1">flashcards: forensics &rarr;</a>
     </div>
 
@@ -592,6 +729,63 @@
         <tr><td class="rowhead">Native can fragment</td><td>Relying only on each cloud provider’s native tools can fragment multi-cloud policy, telemetry, and response. A cloud-agnostic orchestration layer supports uniform controls and centralized visibility. <span class="qrefs">[Q36]</span></td></tr>
         <tr><td class="rowhead">Agnostic orchestration</td><td>For consistent anti-malware policy across cloud providers, choose a cloud-agnostic security orchestration platform with anti-malware capabilities rather than disconnected provider-specific products. <span class="qrefs">[Q36]</span></td></tr>
         </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 54 lines · 30 Q-refs</summary>
+<pre class="mmtree">├─ g2 · MONITORING &amp; THREAT INTEL
+│  │
+│  ├─ 1 · Platforms
+│  │  ├─ M1 Risk before tools: business-aligned governance over isolated fixes
+│  │  ├─ M2 SIEM = collect/correlate/analyze → visibility + detection, not response
+│  │  │  [<span class="qrefs">Q123</span>]
+│  │  ├─ M3 Logs first: real-time log collection is SIEM's detection base [<span class="qrefs">Q123</span>]
+│  │  ├─ M4 SOAR = orchestration + automated playbooks; coordinated action is the
+│  │  │  tell
+│  │  ├─ M5 SIEM+SOAR: accelerate + standardize incident response [<span class="qrefs">Q16 Q134</span>]
+│  │  ├─ M6 Central SOAR+SIEM: one multi-cloud view + automated response [<span class="qrefs">Q201</span>]
+│  │  └─ M7 Automate then oversee: humans keep critical decisions [<span class="qrefs">Q209</span>]
+│  │
+│  ├─ 2 · Threat intelligence
+│  │  ├─ M8 Intel adds context; rank feeds by risk profile, not blanket ingest [<span class="qrefs">Q9</span>]
+│  │  ├─ M9 Supplied IoCs → deploy into IDS/IPS, not scans/training [<span class="qrefs">Q9 Q58 Q210</span>]
+│  │  ├─ M10 Proactive (intel-driven) vs reactive (post-incident) [<span class="qrefs">Q51 Q75 Q179 Q208</span>]
+│  │  ├─ M11 FMEA + real-time intel = dynamic, not merely more frequent [<span class="qrefs">Q51 Q75</span>]
+│  │  └─ M12 Supplier threats: monitoring + intel + predictive analytics [<span class="qrefs">Q13</span>]
+│  │
+│  ├─ 3 · Detection content
+│  │  ├─ M13 AI/ML: patterns/anomalies at scale + triage, with human oversight
+│  │  │  [<span class="qrefs">Q186 Q201 Q217</span>]
+│  │  ├─ M14 Validate model output; humans contextualize and stay accountable [<span class="qrefs">Q209</span>]
+│  │  ├─ M15 Explainable AI: interpretable, justifiable IDS decisions [<span class="qrefs">Q156</span>]
+│  │  ├─ M16 Insider/UEBA: user-activity logs + behavior-anomaly correlation [<span class="qrefs">Q182</span>]
+│  │  ├─ M17 Privileged-account activity shift = compromise/exfil IoC [<span class="qrefs">Q216</span>]
+│  │  ├─ M18 Activity monitoring = live operations (format/alter attempts) [<span class="qrefs">Q121</span>]
+│  │  ├─ M19 DevSecOps: SIEM spans CI/CD; complements (not replaces) testing [<span class="qrefs">Q47</span>]
+│  │  ├─ M20 Correlate disparate sources/business units → enterprise context [<span class="qrefs">Q78</span>]
+│  │  ├─ M21 Broad correlation serves detect→scope→contain→recover→lessons [<span class="qrefs">Q68</span>]
+│  │  ├─ M22 Cloud-native SIEM migration: data-integration strategy first [<span class="qrefs">Q75</span>]
+│  │  └─ M23 Cloud-agnostic orchestration beats fragmented native tools [<span class="qrefs">Q36</span>]
+│  │
+│  ├─ 4 · Monitoring governance
+│  │  ├─ M24 Employee monitoring: transparent, proportionate, policy-based, consent
+│  │  │  [<span class="qrefs">Q179 Q186 Q240</span>]
+│  │  ├─ M25 <span class="mmwarn">⚠</span> Exam answer = transparency/policy; real world also needs lawful basis
+│  │  │  [<span class="qrefs">Q186</span>]
+│  │  ├─ M26 API set: rate limiting + OAuth 2.0 + continuous monitoring [<span class="qrefs">Q14</span>]
+│  │  └─ M27 No single control covers abuse + delegated auth + detection [<span class="qrefs">Q14</span>]
+│  │
+│  ├─ 5 · IR coordination &amp; comms
+│  │  ├─ M28 Breach comms: regular verified facts + remediation + legal duties [<span class="qrefs">Q240</span>]
+│  │  ├─ M29 Subsidiaries/partners: common IR framework = shared language/roles [<span class="qrefs">Q28</span>]
+│  │  ├─ M30 Remote workforce: secure responder access + tools [<span class="qrefs">Q56</span>]
+│  │  ├─ M31 Real incidents &gt; exercises as strategic evidence [<span class="qrefs">Q178</span>]
+│  │  ├─ M32 Tabletop = simulation; post-incident review = real performance
+│  │  └─ M33 Fix the stated gap: the control must address the described failure
+│  │
+│  └─ 6 · Ops balance
+│     ├─ M34 Automate change testing/validation; retain human judgment [<span class="qrefs">Q49</span>]
+│     ├─ M35 AI/ML patch prioritization: predictive, never guaranteed [<span class="qrefs">Q230</span>]
+│     └─ M36 Security vs mission: risk assess, controlled tests, rollback history</pre>
+</details>
       <a class="decklink" href="#flashcards" data-deck="g2">flashcards: monitoring &rarr;</a>
     </div>
 
@@ -647,6 +841,40 @@
         <tr><td class="rowhead">Code or enterprise pattern</td><td>Choose heuristic sandboxing when the stem emphasizes suspicious code or novel payloads. Choose ML behavior anomaly detection when it emphasizes adaptive, enterprise-scale detection of sophisticated unknown attacks. <span class="qrefs">[Q89 Q122]</span></td></tr>
         <tr><td class="rowhead">Past change or live act</td><td>A retrospectively discovered file modification points to FIM. An observed live attempt to alter files or invoke dangerous system operations points to activity monitoring. <span class="qrefs">[Q121 Q131 Q146]</span></td></tr>
         </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 31 lines · 23 Q-refs</summary>
+<pre class="mmtree">├─ g3 · MALWARE DEFENSE
+│  │
+│  ├─ 1 · Detection strategy
+│  │  ├─ W1 Known → signature; unknown/zero-day → heuristic/behavioral/anomaly/ML
+│  │  ├─ W2 Signature = catalogued-characteristic matching; novel code escapes [<span class="qrefs">Q113</span>]
+│  │  ├─ W3 Keep signatures current; hourly updates still miss unseen code [<span class="qrefs">Q109</span>]
+│  │  ├─ W4 Heuristic/sandbox: detonate suspect code; novel + zero-day payloads
+│  │  │  [<span class="qrefs">Q122 Q148 Q160 Q161 Q191</span>]
+│  │  ├─ W5 Hidden files + registry edits = behavioral indicators [<span class="qrefs">Q140</span>]
+│  │  ├─ W6 Behavioral beats polymorphic/metamorphic: actions outlive code
+│  │  │  [<span class="qrefs">Q36 Q77 Q109</span>]
+│  │  ├─ W7 ML anomaly: adaptive, enterprise-scale zero-day detection [<span class="qrefs">Q89 Q131 Q148</span>]
+│  │  └─ W8 Rootkit/fileless: memory-resident → live memory + behavioral [<span class="qrefs">Q79 Q156</span>]
+│  │
+│  ├─ 2 · Integrity &amp; monitoring
+│  │  ├─ W9 FIM requires a trusted baseline (hashes/checksums/CRC) first [<span class="qrefs">Q135</span>]
+│  │  ├─ W10 Hash vs baseline catches edits despite unchanged size [<span class="qrefs">Q131 Q146</span>]
+│  │  ├─ W11 FIM proves change, not malware identity/actor/intent
+│  │  └─ W12 Past change → FIM; live attempt → activity monitoring [<span class="qrefs">Q121 Q131 Q146</span>]
+│  │
+│  └─ 3 · Threat profiles
+│     ├─ W13 Layered detections complement; consensus not required [<span class="qrefs">Q36 Q131 Q159</span>]
+│     ├─ W14 Worm self-propagates via exploits → segmentation + patching [<span class="qrefs">Q14 Q145</span>]
+│     ├─ W15 APT tell = long-term persistence + stealth (vs cybercrime) [<span class="qrefs">Q161 Q191</span>]
+│     ├─ W16 Container malware: ephemeral targets → runtime + image scanning
+│     │  [<span class="qrefs">Q190 Q191</span>]
+│     ├─ W17 No patch, must operate → preventive compensating controls [<span class="qrefs">Q211</span>]
+│     ├─ W18 More monitoring ≠ less exploitability; shutdown hurts continuity [<span class="qrefs">Q211</span>]
+│     ├─ W19 Anti-malware + SIEM: correlate with identity/network data [<span class="qrefs">Q210</span>]
+│     └─ W20 Stem guide: suspicious code → sandbox; adaptive enterprise → ML
+│        [<span class="qrefs">Q89 Q122</span>]</pre>
+</details>
       <a class="decklink" href="#flashcards" data-deck="g3">flashcards: malware &rarr;</a>
     </div>
 
@@ -729,6 +957,61 @@
         <tr><td class="rowhead">Q9 conclusion</td><td>Automate threat prioritization using the organization’s risk profile to avoid analyst overload. <span class="qrefs">[Q9]</span></td></tr>
         <tr><td class="rowhead">Q240 conclusion</td><td>Provide regular factual breach updates while emphasizing remediation and legal compliance. <span class="qrefs">[Q240]</span></td></tr>
         </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 52 lines · 25 Q-refs</summary>
+<pre class="mmtree">├─ g4 · CHANGE, CONFIGURATION &amp; PATCH MANAGEMENT
+│  │
+│  ├─ 1 · Configuration vs change
+│  │  ├─ C1 CM defines approved states; change management governs movement [<span class="qrefs">Q11 Q49</span>]
+│  │  └─ C2 Continuously enforce secure baselines across the lifecycle [<span class="qrefs">Q8</span>]
+│  │
+│  ├─ 2 · CMDB
+│  │  ├─ C3 CMDB = relationship-aware CI repository, not a spreadsheet
+│  │  │  [<span class="qrefs">Q17 Q48 Q199 Q238</span>]
+│  │  ├─ C4 Hybrid env: centralized CMDB + platform-specific agents [<span class="qrefs">Q69</span>]
+│  │  ├─ C5 Tagging/classification maps CIs to multiple frameworks [<span class="qrefs">Q229 Q238</span>]
+│  │  ├─ C6 Success metric: fewer misconfiguration-caused incidents [<span class="qrefs">Q17</span>]
+│  │  └─ C7 Version control: known-good baselines → rollback + forensics [<span class="qrefs">Q180 Q199</span>]
+│  │
+│  ├─ 3 · Change discipline
+│  │  ├─ C8 Assess security risk + business value before approving [<span class="qrefs">Q11 Q48 Q59 Q199</span>]
+│  │  ├─ C9 Embed risk assessment at every stage of complex change [<span class="qrefs">Q70</span>]
+│  │  ├─ C10 Test in controlled environment before production [<span class="qrefs">Q212</span>]
+│  │  ├─ C11 Rollback plan limits damage; testing prevents it [<span class="qrefs">Q212</span>]
+│  │  ├─ C12 <span class="mmwarn">⚠</span> Validation happens both before AND after go-live [<span class="qrefs">Q70 Q180 Q212</span>]
+│  │  ├─ C13 Unauthorized change = the classic outage cause [<span class="qrefs">Q48 Q59 Q199</span>]
+│  │  ├─ C14 CAB: representative stakeholders; not all approve everything [<span class="qrefs">Q192</span>]
+│  │  └─ C15 ECAB: emergency = expedited review, never skipped [<span class="qrefs">Q19 Q69 Q192</span>]
+│  │
+│  ├─ 4 · Cloud-native change
+│  │  ├─ C16 Automated pipelines with embedded security/compliance checks [<span class="qrefs">Q19</span>]
+│  │  ├─ C17 Shift left: security earlier in lifecycle = cheaper [<span class="qrefs">Q76</span>]
+│  │  ├─ C18 DevOps automation: speed + tracked/validated/documented change [<span class="qrefs">Q238</span>]
+│  │  ├─ C19 Change policy manages cloud-implementation risk [<span class="qrefs">Q188</span>]
+│  │  ├─ C20 Regulated migration: governance framework + continuous monitoring [<span class="qrefs">Q199</span>]
+│  │  └─ C21 ITSM: change ↔ incident ↔ problem → recurring root causes [<span class="qrefs">Q239</span>]
+│  │
+│  ├─ 5 · Patch management
+│  │  ├─ C22 Priority = severity × business impact (never age/origin/vendor fame)
+│  │  │  [<span class="qrefs">Q10 Q202 Q236 Q237</span>]
+│  │  ├─ C23 Process: identify → evaluate → prioritize → schedule → deploy → verify
+│  │  │  → document → update baseline [<span class="qrefs">Q10 Q31 Q187</span>]
+│  │  ├─ C24 Modes: agent (deep) / agentless (broad) / passive (zero-touch)
+│  │  │  [<span class="qrefs">Q187 Q202</span>]
+│  │  └─ C25 Prioritization is the defining risk-based step [<span class="qrefs">Q237</span>]
+│  │
+│  ├─ 6 · Software supply chain
+│  │  ├─ C26 SCA: identify/track third-party + open-source components [<span class="qrefs">Q31</span>]
+│  │  ├─ C27 SBOM: component/dependency inventory for vuln + licensing [<span class="qrefs">Q31</span>]
+│  │  ├─ C28 Trio: SCA + vulnerability mgmt + maintained SBOM [<span class="qrefs">Q31 Q236 Q237</span>]
+│  │  ├─ C29 No vendor patch → build in-house remediation capability [<span class="qrefs">Q187</span>]
+│  │  └─ C30 Legacy isolation = compensating and temporary only [<span class="qrefs">Q187 Q230 Q237</span>]
+│  │
+│  └─ 7 · Exam heuristics
+│     ├─ C31 MOST/BEST/PRIMARY = the most direct option; supporting = distractor
+│     ├─ C32 Broad governance wins only when it directly covers the stem
+│     └─ C33 Standardize + centralize scales; keep platform-specific integration</pre>
+</details>
       <a class="decklink" href="#flashcards" data-deck="g4">flashcards: change &amp; patch &rarr;</a>
     </div>
 
@@ -837,6 +1120,68 @@
         <tr><td class="rowhead">Leakage: access or...</td><td>MP-2 Media Access is the bank's best control for distributed personal-device/cloud media leakage. <span class="qrefs">[Q234]</span></td></tr>
         <tr><td class="rowhead">Narrow controls second</td><td>Endpoint Detection and Response (EDR), Mobile Device Management (MDM), monitoring, audits, and awareness training are useful but narrower than first securing the remote-access path in the supplied crisis. <span class="qrefs">[Q173]</span></td></tr>
         </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 59 lines · 20 Q-refs</summary>
+<pre class="mmtree">├─ g5 · RESOURCES &amp; OPERATIONAL ENVIRONMENT
+│  │
+│  ├─ 1 · Media lifecycle
+│  │  ├─ R1 Full lifecycle: inventory, access, retention, integrity, migration,
+│  │  │  sanitization, disposal [<span class="qrefs">Q33</span>]
+│  │  ├─ R2 GDPR/CCPA lifecycle: retention + sanitization policy &gt; encryption
+│  │  │  [<span class="qrefs">Q33</span>]
+│  │  ├─ R3 Verify sanitization (crypto-erase/wipe/destroy) before release
+│  │  │  [<span class="qrefs">Q33 Q189 Q233</span>]
+│  │  └─ R4 Retention schedule — not media age — authorizes disposal [<span class="qrefs">Q103</span>]
+│  │
+│  ├─ 2 · Longevity &amp; redundancy
+│  │  ├─ R5 Match media lifespan to the retention requirement [<span class="qrefs">Q105</span>]
+│  │  ├─ R6 Integrity-check aging media; migrate before decay loses data
+│  │  │  [<span class="qrefs">Q103 Q105 Q234</span>]
+│  │  ├─ R7 HDD ≈ 3-5 years [<span class="qrefs">Q35 Q104 Q107</span>]
+│  │  ├─ R8 DVD ≈ 7-10 years; at year 7 verify + migrate [<span class="qrefs">Q103</span>]
+│  │  ├─ R9 Microfiche/microform = longest lived (centuries) [<span class="qrefs">Q104</span>]
+│  │  ├─ R10 Guard both degradation AND unauthorized access [<span class="qrefs">Q106</span>]
+│  │  ├─ R11 Same-site duplicates keep the location SPOF [<span class="qrefs">Q106</span>]
+│  │  ├─ R12 Warranty replaces hardware, never the data on it [<span class="qrefs">Q106</span>]
+│  │  ├─ R13 Newest storage tech ≠ best archival choice [<span class="qrefs">Q106</span>]
+│  │  └─ R14 Physical locks don't stop bit rot/degradation [<span class="qrefs">Q103</span>]
+│  │
+│  ├─ 3 · Media taxonomy
+│  │  ├─ R15 Magnetic: HDD, magnetic disk, tape [<span class="qrefs">Q105 Q108</span>]
+│  │  ├─ R16 Flash: SSD, memory cards, USB (not magnetic) [<span class="qrefs">Q108</span>]
+│  │  ├─ R17 Optical: CD, DVD, Blu-ray [<span class="qrefs">Q108</span>]
+│  │  └─ R18 Microform: microfilm + microfiche [<span class="qrefs">Q104 Q105 Q108</span>]
+│  │
+│  ├─ 4 · NIST SP 800-53 media protection
+│  │  ├─ R19 MP-2 media access — bank's pick for hybrid leakage [<span class="qrefs">Q234</span>]
+│  │  ├─ R20 MP-6 media sanitization [<span class="qrefs">Q233</span>]
+│  │  ├─ R21 MP-7 media use [<span class="qrefs">Q234</span>]
+│  │  ├─ R22 <span class="mmwarn">⚠</span> MP-8 = "disposal accountability" [<span class="qrefs">Q233</span>] vs "downgrading" [<span class="qrefs">Q234</span>]
+│  │  └─ R23 Follow the stem noun: lifecycle→policy/MP-6; leakage→MP-2
+│  │
+│  ├─ 5 · Asset inventory
+│  │  ├─ R24 Continuous automated discovery → near-real-time inventory [<span class="qrefs">Q35 Q189</span>]
+│  │  ├─ R25 Discovery + reconciliation catches shadow IT [<span class="qrefs">Q189</span>]
+│  │  ├─ R26 Automation beats spreadsheets/manual counts [<span class="qrefs">Q35</span>]
+│  │  ├─ R27 SNMP/scanning = current broad visibility (bank's answer) [<span class="qrefs">Q233</span>]
+│  │  ├─ R28 Blind spots: offline/hidden assets still need reconciliation [<span class="qrefs">Q233</span>]
+│  │  └─ R29 Criticality = business impact × data sensitivity (feeds BIA)
+│  │     [<span class="qrefs">Q7 Q112 Q125</span>]
+│  │
+│  ├─ 6 · Endpoint &amp; access
+│  │  ├─ R30 Mobile: third-party app installs = top malware risk [<span class="qrefs">Q18</span>]
+│  │  ├─ R31 Zero trust: verify every request; no inherent internal trust [<span class="qrefs">Q218</span>]
+│  │  ├─ R32 Perimeter model insufficient — firewalls don't confer trust [<span class="qrefs">Q218</span>]
+│  │  ├─ R33 Crisis remote work: zero trust + MFA + encrypted VPN first [<span class="qrefs">Q173</span>]
+│  │  ├─ R34 EDR/MDM/awareness secondary to securing the access path [<span class="qrefs">Q173</span>]
+│  │  └─ R35 Global hybrid policy: MFA + least privilege + RBAC + geo [<span class="qrefs">Q207</span>]
+│  │
+│  └─ 7 · Physical &amp; surveillance
+│     ├─ R36 <span class="mmwarn">⚠</span> ISO 27002 balance: visible cameras + signage + low resolution [<span class="qrefs">Q2</span>]
+│     ├─ R37 Reject covert cams, always-on audio, blanket facial recognition [<span class="qrefs">Q2</span>]
+│     ├─ R38 <span class="mmwarn">⚠</span> High-threat DC: layered perimeter + guards + CCTV [<span class="qrefs">Q183</span>]
+│     └─ R39 Real world: documented threat/legal/life-safety analysis first [<span class="qrefs">Q183</span>]</pre>
+</details>
       <a class="decklink" href="#flashcards" data-deck="g5">flashcards: resources &rarr;</a>
     </div>
 
@@ -956,6 +1301,79 @@
         <tr><td class="rowhead">Q200 What builds...</td><td>Use multi-tier geographic supplier diversity with real-time monitoring. <span class="qrefs">[Q200]</span></td></tr>
         <tr><td class="rowhead">Q215 Which BIA outputs...</td><td>BIA critical functions with RTOs and MTDs provide restoration-order priorities. <span class="qrefs">[Q215]</span></td></tr>
         </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 70 lines · 39 Q-refs</summary>
+<pre class="mmtree">├─ g6 · BUSINESS CONTINUITY &amp; BIA
+│  │
+│  ├─ 1 · Response priority order
+│  │  ├─ B1 People first — life irreversible; systems/data rebuild
+│  │  │  [<span class="qrefs">Q119 Q125 Q141 Q150 Q162</span>]
+│  │  ├─ B2 Damage limitation second [<span class="qrefs">Q144 Q162</span>]
+│  │  ├─ B3 Business survival third — restore viability-critical functions [<span class="qrefs">Q138 Q162</span>]
+│  │  ├─ B4 IT-only plan misses the human-safety goal [<span class="qrefs">Q119</span>]
+│  │  └─ B5 Exams ask which step came too soon [<span class="qrefs">Q162</span>]
+│  │
+│  ├─ 2 · Failure modes
+│  │  ├─ B6 Fail-soft: reduced capability, keeps serving [<span class="qrefs">Q62</span>]
+│  │  ├─ B7 Fail-secure: locked / access-denied on failure [<span class="qrefs">Q73</span>]
+│  │  ├─ B8 Fail-stop: halt rather than degrade [<span class="qrefs">Q62</span>]
+│  │  └─ B9 Fail-safe protects people ≠ fail-secure [<span class="qrefs">Q62 Q73</span>]
+│  │
+│  ├─ 3 · BCM framing
+│  │  ├─ B10 BCM umbrella = BCP + DRP; people/process/tech/suppliers [<span class="qrefs">Q129</span>]
+│  │  ├─ B11 Objective: minimize disruption; reject zero-downtime absolutes
+│  │  │  [<span class="qrefs">Q72 Q223</span>]
+│  │  ├─ B12 Payoff: operational resilience + stakeholder confidence [<span class="qrefs">Q244</span>]
+│  │  ├─ B13 Anchor: integrate risk appetite into strategy [<span class="qrefs">Q53 Q72 Q125</span>]
+│  │  ├─ B14 Governance before tooling; tools implement, never decide [<span class="qrefs">Q244</span>]
+│  │  ├─ B15 AI predicts disruption; humans decide; no guarantees
+│  │  │  [<span class="qrefs">Q193 Q223 Q244</span>]
+│  │  ├─ B16 BCP lifecycle: develop → train → test → maintain [<span class="qrefs">Q141 Q144</span>]
+│  │  ├─ B17 Update via change management after each test/incident [<span class="qrefs">Q141 Q144</span>]
+│  │  └─ B18 Teams: defined roles, alternate comms, contact trees [<span class="qrefs">Q126 Q141</span>]
+│  │
+│  ├─ 4 · Criticality
+│  │  ├─ B19 Resources → functions whose loss threatens viability [<span class="qrefs">Q128 Q153</span>]
+│  │  ├─ B20 Traps: revenue-only, headcount, complexity, equal split [<span class="qrefs">Q128 Q153</span>]
+│  │  ├─ B21 Payroll can be continuity-essential [<span class="qrefs">Q110</span>]
+│  │  ├─ B22 Compliance/reporting deadlines can be viability-critical [<span class="qrefs">Q126</span>]
+│  │  └─ B23 Disaster = critical-function disruption beyond tolerance
+│  │     [<span class="qrefs">Q5 Q39 Q112</span>]
+│  │
+│  ├─ 5 · BIA
+│  │  ├─ B24 BIA identifies + prioritizes critical functions, dependencies [<span class="qrefs">Q170</span>]
+│  │  ├─ B25 BIA comes before sites, backups, teams, tactics, RTOs [<span class="qrefs">Q193 Q197</span>]
+│  │  ├─ B26 Update the BIA continuously in fast-changing environments [<span class="qrefs">Q38</span>]
+│  │  ├─ B27 AI/IoT adoption shifts criticality — reassess functions [<span class="qrefs">Q64</span>]
+│  │  ├─ B28 Culture: daily risk awareness + shared responsibility [<span class="qrefs">Q198</span>]
+│  │  ├─ B29 <span class="mmwarn">⚠</span> Downtime cost/hour quantifies priority [<span class="qrefs">Q225</span>]; BIA is still
+│  │  │  broader than financial [<span class="qrefs">Q225</span>]
+│  │  ├─ B30 BIA ≠ risk assessment: impacts/recovery vs threats/likelihood
+│  │  ├─ B31 Most critical output: MTD for mission-critical processes [<span class="qrefs">Q22</span>]
+│  │  ├─ B32 Impact-over-time curves set the tolerance windows [<span class="qrefs">Q22 Q53</span>]
+│  │  ├─ B33 Fast-changing regs: adaptable trained personnel decisive [<span class="qrefs">Q196</span>]
+│  │  ├─ B34 BIA sets business priority, not technical startup order [<span class="qrefs">Q95 Q98</span>]
+│  │  ├─ B35 BIA links critical functions → RTO/MTD priorities [<span class="qrefs">Q215</span>]
+│  │  └─ B36 Impact + data sensitivity drive asset criticality [<span class="qrefs">Q7</span>]
+│  │
+│  ├─ 6 · Governance
+│  │  └─ B37 Capability below tolerance → escalate; leadership accepts risk
+│  │     formally [<span class="qrefs">Q133</span>]
+│  │
+│  ├─ 7 · Suppliers &amp; spares (continuity side)
+│  │  ├─ B38 Supplier tests risk exposing sensitive info → NDAs + least access [<span class="qrefs">Q34</span>]
+│  │  ├─ B39 Don't gut realism: non-critical-only or separate sessions fail [<span class="qrefs">Q34</span>]
+│  │  ├─ B40 Legacy spares: risk-based strategy by criticality/exposure [<span class="qrefs">Q195</span>]
+│  │  └─ B41 Spares traps: uniform controls, universal JIT, blanket outsourcing
+│  │     [<span class="qrefs">Q195</span>]
+│  │
+│  └─ 8 · Recovery artifacts
+│     ├─ B42 On-prem DR packages need detailed hardware configuration [<span class="qrefs">Q55</span>]
+│     ├─ B43 Review inventories; update restoration orders as cloud changes [<span class="qrefs">Q181</span>]
+│     ├─ B44 "First"-question heuristic: assumes prior planning + done life-safety
+│     └─ B45 Scenario exercises validate people + process, not just systems
+│        [<span class="qrefs">Q141 Q144 Q198</span>]</pre>
+</details>
       <a class="decklink" href="#flashcards" data-deck="g6">flashcards: BCM &amp; BIA &rarr;</a>
     </div>
 
@@ -1261,6 +1679,160 @@
         <tr><td class="rowhead">Q241 When is RAID 5 the...</td><td>RAID 5 is the source’s exam choice for economical read gains and one-drive tolerance; actual performance varies. <span class="qrefs">[Q241]</span></td></tr>
         <tr><td class="rowhead">Q246 How does automation...</td><td>Automation lowers RTO and improves RPO adherence without guaranteeing zero loss. <span class="qrefs">[Q246]</span></td></tr>
         </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 151 lines · 73 Q-refs</summary>
+<pre class="mmtree">└─ g7 · DISASTER RECOVERY &amp; RESILIENCE
+   ├─ 1 · Metric definitions
+   │  ├─ D1 RPO = max acceptable data loss, measured back to last recovery point
+   │  │  [<span class="qrefs">Q52 Q243</span>]
+   │  ├─ D2 RTO = target max time to restore service (not priority/backup age)
+   │  │  [<span class="qrefs">Q95 Q243</span>]
+   │  ├─ D3 WRT = post-restore verification + return to normal operations
+   │  │  [<span class="qrefs">Q124 Q137</span>]
+   │  ├─ D4 MTD = longest tolerable total disruption [<span class="qrefs">Q155 Q215</span>]
+   │  └─ D5 MTTR = average repair duration (operational metric) [<span class="qrefs">Q46 Q242</span>]
+   ├─ 2 · Metric arithmetic
+   │  ├─ D6 <span class="mmwarn">⚠</span> Bank formula: MTD = RTO + WRT [<span class="qrefs">Q132 Q136</span>]
+   │  ├─ D7 <span class="mmwarn">⚠</span> Boundary conflict: one source folds validation into RTO — follow
+   │  │  the stem's explicit definition [<span class="qrefs">Q52</span>]
+   │  ├─ D8 6h RTO + 4h WRT = 10h &gt; 8h MTD → breach [<span class="qrefs">Q132</span>]
+   │  ├─ D9 4h restore + 2h verify = 6h MTD consumed [<span class="qrefs">Q136</span>]
+   │  ├─ D10 Online ≠ ready: RTO met while WRT checks pending [<span class="qrefs">Q137</span>]
+   │  ├─ D11 EHR medication data: finish WRT validation before go-live [<span class="qrefs">Q158</span>]
+   │  ├─ D12 Midnight backup, 11 PM failure → 23h exposure (measure backward)
+   │  │  [<span class="qrefs">Q130</span>]
+   │  ├─ D13 30-min-old backup violates a 5-min RPO despite RTO/WRT met [<span class="qrefs">Q115</span>]
+   │  ├─ D14 <span class="mmwarn">⚠</span> JIT case: 24h RPO vs 4h RTO → 20h order-data gap [<span class="qrefs">Q242</span>]
+   │  └─ D15 Don't subtract RPO/RTO — different dimensions [<span class="qrefs">Q242</span>]
+   ├─ 3 · Managing metrics
+   │  ├─ D16 RPO + RTO jointly sequence recovery; short + low = urgent [<span class="qrefs">Q23 Q79</span>]
+   │  ├─ D17 Lower RPO → more frequent backup/replication → more cost [<span class="qrefs">Q139 Q143</span>]
+   │  ├─ D18 Lower RTO needs faster capability, not more backups [<span class="qrefs">Q133</span>]
+   │  ├─ D19 Relaxing both lowers cost; accepts loss + slower recovery [<span class="qrefs">Q114</span>]
+   │  ├─ D20 RPO cannot offset an overlong RTO [<span class="qrefs">Q133</span>]
+   │  ├─ D21 Never zero the WRT to rescue an RTO — corrupted data returns [<span class="qrefs">Q133</span>]
+   │  ├─ D22 Chronically missed RTO → account recovery + WRT [<span class="qrefs">Q52</span>]
+   │  ├─ D23 MTD predetermined in planning; never renegotiated mid-incident
+   │  │  [<span class="qrefs">Q132 Q155 Q158</span>]
+   │  ├─ D24 Exceeding MTD = unacceptable impact; triggers no mechanism [<span class="qrefs">Q155</span>]
+   │  ├─ D25 Impossible RTO + denied funding → escalate / formal acceptance [<span class="qrefs">Q133</span>]
+   │  └─ D26 Patient-care systems: RTO is the decisive BIA factor [<span class="qrefs">Q228</span>]
+   ├─ 4 · Disaster declaration
+   │  ├─ D27 Defined command, roles, authority, escalation criteria [<span class="qrefs">Q5</span>]
+   │  ├─ D28 <span class="mmwarn">⚠</span> Exam: CEO holds ultimate declaration authority [<span class="qrefs">Q39</span>]
+   │  ├─ D29 CISO/COO/CRO advise on impact; CEO decides [<span class="qrefs">Q39</span>]
+   │  ├─ D30 Primary trigger: impact on critical business functions [<span class="qrefs">Q169 Q171</span>]
+   │  ├─ D31 Distractors: server count, duration, time-of-day, insurance,
+   │  │  backup state, alternate site [<span class="qrefs">Q169 Q171</span>]
+   │  ├─ D32 Tiered escalation with thresholds = fast but controlled
+   │  │  [<span class="qrefs">Q39 Q46 Q57 Q169</span>]
+   │  ├─ D33 Reject: single alert, automated threshold, mandatory 24h wait [<span class="qrefs">Q57</span>]
+   │  ├─ D34 Internal declaration: activate teams, assess impact, notify [<span class="qrefs">Q4</span>]
+   │  ├─ D35 Internal declaration does not itself require public disclosure [<span class="qrefs">Q4</span>]
+   │  ├─ D36 Sudden widespread ransomware = fastest declaration + response [<span class="qrefs">Q46</span>]
+   │  ├─ D37 Hurricane (warned), sabotage (local), corruption (gradual) slower [<span class="qrefs">Q46</span>]
+   │  └─ D38 Rapid declaration + response cuts MTTR [<span class="qrefs">Q46</span>]
+   ├─ 5 · Testing
+   │  ├─ D39 Test frequency follows rate of change in processes/risks [<span class="qrefs">Q25</span>]
+   │  ├─ D40 Update risk methodology as threats/tech evolve [<span class="qrefs">Q111</span>]
+   │  ├─ D41 Core limit: exercises cannot replicate real disasters [<span class="qrefs">Q12</span>]
+   │  ├─ D42 Automation/backups/coordination don't cure the realism gap [<span class="qrefs">Q12</span>]
+   │  ├─ D43 Ladder: read-through → walkthrough → simulation → parallel →
+   │  │  full interruption [<span class="qrefs">Q12 Q25 Q40 Q41</span>]
+   │  ├─ D44 Tabletop: plans/roles/decisions at low operational risk [<span class="qrefs">Q220 Q222</span>]
+   │  ├─ D45 Off-peak tabletop + targeted simulations balance assurance [<span class="qrefs">Q222</span>]
+   │  ├─ D46 Full interruption: strongest proof, highest disruption risk [<span class="qrefs">Q203</span>]
+   │  ├─ D47 Mitigation: detailed plan + rollback procedures [<span class="qrefs">Q203</span>]
+   │  ├─ D48 Assess business impact before adopting a deeper test type [<span class="qrefs">Q41</span>]
+   │  ├─ D49 Joint internal + provider exercise tests communications [<span class="qrefs">Q40</span>]
+   │  ├─ D50 Multi-location/global: central coordinating team + clear plan [<span class="qrefs">Q71</span>]
+   │  ├─ D51 Validate failure modes in isolated env with realistic data [<span class="qrefs">Q220</span>]
+   │  ├─ D52 Production data only if isolated + protected; else mask [<span class="qrefs">Q220</span>]
+   │  ├─ D53 Live failover testing = production risk; justify + control [<span class="qrefs">Q220</span>]
+   │  └─ D54 Cadence: regular, scenario-varied, all-hands [<span class="qrefs">Q12 Q71 Q203 Q220 Q221 Q222</span>]
+   ├─ 6 · Sites &amp; capacity
+   │  ├─ D55 Site distance set by the one-disaster footprint rule [<span class="qrefs">Q37</span>]
+   │  ├─ D56 Distance trades correlated risk vs latency/cost/compliance [<span class="qrefs">Q37</span>]
+   │  ├─ D57 Site ladder: cold → warm → hot → mobile → mirror [<span class="qrefs">Q15 Q37 Q54 Q166 Q241</span>]
+   │  └─ D58 Spares ladder: cold → warm → hot; condition-monitor aging gear
+   │     [<span class="qrefs">Q99 Q232</span>]
+   ├─ 7 · Restoration order
+   │  ├─ D59 Prioritized critical-systems list accelerates recovery [<span class="qrefs">Q15</span>]
+   │  ├─ D60 Scarce capacity: restore greatest-loss services first [<span class="qrefs">Q54</span>]
+   │  ├─ D61 BIA criticality decides; user count/complexity don't [<span class="qrefs">Q95</span>]
+   │  ├─ D62 Restore foundations before dependents (prevent cascades) [<span class="qrefs">Q6</span>]
+   │  ├─ D63 No simultaneous startup: dependencies/capacity/validation [<span class="qrefs">Q6 Q96</span>]
+   │  ├─ D64 Web app: database → web servers → load balancer [<span class="qrefs">Q96</span>]
+   │  ├─ D65 Dependency chart = technical bring-up order [<span class="qrefs">Q98 Q99</span>]
+   │  ├─ D66 Inventory lists resources; proves no criticality/tolerance
+   │  ├─ D67 Tight RTO: restore core app servers at the designated hot site [<span class="qrefs">Q232</span>]
+   │  └─ D68 Don't cold-site everything; assessment must not block recovery [<span class="qrefs">Q232</span>]
+   ├─ 8 · Failback
+   │  ├─ D69 Non-critical systems return first to validate the site [<span class="qrefs">Q101</span>]
+   │  ├─ D70 Recovery = critical-first; failback = low-risk-first (reversal)
+   │  │  [<span class="qrefs">Q97 Q101 Q102 Q167</span>]
+   │  ├─ D71 Failback keeps per-workload dependency order [<span class="qrefs">Q97</span>]
+   │  ├─ D72 Validate environment, then migrate the critical load [<span class="qrefs">Q102</span>]
+   │  └─ D73 Keep restoration orders current through change management [<span class="qrefs">Q181</span>]
+   ├─ 9 · Cloud &amp; automation
+   │  ├─ D74 Cloud DR packages need less hardware detail (abstraction) [<span class="qrefs">Q55</span>]
+   │  ├─ D75 Cloud still needs procedures, state, identity, networking [<span class="qrefs">Q55</span>]
+   │  ├─ D76 Geographic separation; multi-region SaaS &gt; single-region [<span class="qrefs">Q55 Q63 Q246</span>]
+   │  ├─ D77 Automation lowers RTO + improves RPO adherence [<span class="qrefs">Q246</span>]
+   │  └─ D78 Automation never guarantees zero loss / instant recovery [<span class="qrefs">Q246</span>]
+   ├─ 10 · Backups
+   │  ├─ D79 Only restore tests prove backups; job status proves nothing [<span class="qrefs">Q235</span>]
+   │  ├─ D80 Restore testing checks integrity, credentials, procedures, timing [<span class="qrefs">Q235</span>]
+   │  ├─ D81 Frequency, scheduling automation, geo-replication ≠ proof [<span class="qrefs">Q235</span>]
+   │  ├─ D82 Restore speed/space: mirror &gt; full &gt; differential &gt; incremental
+   │  │  [<span class="qrefs">Q92 Q94 Q241</span>]
+   │  ├─ D83 Microservices: application-aware distributed snapshots [<span class="qrefs">Q30</span>]
+   │  ├─ D84 Container images are not state [<span class="qrefs">Q30</span>]
+   │  ├─ D85 Provider snapshots may lack app-aware consistency [<span class="qrefs">Q30</span>]
+   │  ├─ D86 Hybrid multi-cloud: cross-platform consistency + recoverability [<span class="qrefs">Q166</span>]
+   │  ├─ D87 Centralize-everything is not the backup strategy [<span class="qrefs">Q166</span>]
+   │  ├─ D88 Long-lived backups: plan quantum-resistant encryption [<span class="qrefs">Q21</span>]
+   │  ├─ D89 Add quantum/AI defenses without breaking the DR framework [<span class="qrefs">Q63</span>]
+   │  ├─ D90 ML classification prioritizes sensitive-data protection [<span class="qrefs">Q167</span>]
+   │  ├─ D91 Monitoring/scheduling/capacity-prediction are narrower [<span class="qrefs">Q167</span>]
+   │  ├─ D92 Threat-informed recovery: adapt procedures to current intel [<span class="qrefs">Q221</span>]
+   │  └─ D93 Patching/pentest/encrypted backups ≠ continuous adaptation [<span class="qrefs">Q221</span>]
+   ├─ 11 · RAID &amp; high availability
+   │  ├─ D94 RAID = Redundant Array of Independent Disks (performance/redundancy)
+   │  ├─ D95 RAID 0: stripe, max speed, zero redundancy [<span class="qrefs">Q90</span>]
+   │  ├─ D96 RAID 1: mirror; tolerance with the fewest drives [<span class="qrefs">Q93</span>]
+   │  ├─ D97 RAID 5: distributed single parity, ≥3 drives [<span class="qrefs">Q88 Q241</span>]
+   │  ├─ D98 RAID 5 rebuild = XOR of survivors + parity [<span class="qrefs">Q91</span>]
+   │  ├─ D99 RAID 5 write + rebuild overhead penalties
+   │  ├─ D100 <span class="mmwarn">⚠</span> RAID 5 = bank's pick for cheap reads + 1-drive tolerance; the
+   │  │  "20% improvement" is workload-dependent [<span class="qrefs">Q241</span>]
+   │  ├─ D101 RAID 6: double parity, ≥4 drives, survives any two [<span class="qrefs">Q94</span>]
+   │  ├─ D102 RAID 10: stripe + mirror, ≥4 drives [<span class="qrefs">Q87 Q92</span>]
+   │  ├─ D103 <span class="mmwarn">⚠</span> RAID 10 survives two failures only outside one mirror pair [<span class="qrefs">Q94</span>]
+   │  ├─ D104 RAID ≠ backup: controller, corruption, ransomware, site loss
+   │  │  [<span class="qrefs">Q88 Q90 Q91 Q92 Q93 Q94</span>]
+   │  ├─ D105 Redundant load balancers remove the SPOF [<span class="qrefs">Q168</span>]
+   │  ├─ D106 HA clustering / failover pairs target availability [<span class="qrefs">Q168 Q195 Q241</span>]
+   │  └─ D107 HA ≠ DR — no substitute for backups + plans
+   ├─ 12 · Supply-chain resilience
+   │  ├─ D108 CSP assessment: third-party software supply-chain vuln mgmt [<span class="qrefs">Q24</span>]
+   │  ├─ D109 Monitor the full ecosystem incl. lower tiers, continuously
+   │  │  [<span class="qrefs">Q172 Q200</span>]
+   │  ├─ D110 Multi-vendor IoT: adaptive third-party risk program [<span class="qrefs">Q172</span>]
+   │  ├─ D111 Reject: access-only, traffic-only, quarterly audits [<span class="qrefs">Q172</span>]
+   │  ├─ D112 Multi-tier geographic diversity + real-time monitoring [<span class="qrefs">Q200</span>]
+   │  ├─ D113 Reject: tier-one-only, redundant-all, outsourced accountability [<span class="qrefs">Q200</span>]
+   │  └─ D114 Toolkit: qualified diverse suppliers, critical spares, SLAs, audits,
+   │     financial-viability review [<span class="qrefs">Q24 Q34 Q172 Q200</span>]
+   └─ 13 · Exam meta-strategy
+      ├─ D115 Metric arithmetic first; criteria &gt; instincts; dependencies &gt;
+      │  simultaneity [<span class="qrefs">Q165 Q227</span>]
+      ├─ D116 Prefer governance/impact answers over isolated tools when the
+      │  scenario supports it
+      ├─ D117 Exam wants one best answer; real recovery blends many factors
+      └─ D118 "Critical first" = prioritize BIA-critical services, restore their
+         prerequisites first, failback validates with non-critical first</pre>
+</details>
       <a class="decklink" href="#flashcards" data-deck="g7">flashcards: DR &amp; resilience &rarr;</a>
     </div>
 

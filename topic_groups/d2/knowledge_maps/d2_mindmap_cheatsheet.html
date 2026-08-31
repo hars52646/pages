@@ -142,6 +142,14 @@
 
   footer{padding:30px 0 44px;color:var(--muted);font-size:13px}
   footer code{background:#eef1f6;border-radius:5px;padding:1px 6px;font-size:12px}
+
+/* compressed concept tree embeds (from verified mindmap artifacts) */
+.bc details.mmrows{margin:12px 0 0}
+.bc details.mmrows>summary{cursor:pointer;font-weight:700;font-size:13px;color:var(--gc);letter-spacing:.03em;text-transform:uppercase}
+.bc details.mmrows>summary::marker{color:var(--gc)}
+.bc pre.mmtree{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:12.4px;line-height:1.5;margin:8px 0 2px;padding:12px 14px;background:#f8fafc;border:1px solid var(--line);border-radius:10px;overflow-x:auto;white-space:pre;color:#0f172a}
+.bc pre.mmtree .qrefs{color:#7c2d12;font-weight:700;font-size:11.8px}
+.bc pre.mmtree .mmwarn{color:#b45309;font-weight:700}
 </style>
 </head>
 <body>
@@ -350,6 +358,149 @@
 <tr><td class="rowhead">Digital object...</td><td>For digital objects (files, documents, databases), use metadata tags — classification is embedded in file properties; no physical label is needed, and it enables automated policy enforcement (e.g., DLP, DRM) at the system level.</td></tr>
 <tr><td class="rowhead">drives labeling investment</td><td>The primary factor guiding labeling method investment decisions is the value of the assets being tracked — not personnel count, which drives access control system design rather than the labeling method's cost-to-value calculus. Core exam logic: higher asset value justifies higher-cost, higher-precision tracking; lower value demands the most economical method that still meets the inventory requirement. <span class="qrefs">[Q14]</span></td></tr>
 </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 140 lines · 83 Q-refs</summary>
+<pre class="mmtree">├─ g1 · CLASSIFICATION &amp; LABELING
+│  ├─ Purpose &amp; valuation
+│  │  ├─ Foundation: protection effort ∝ asset value — what/how hard/who [<span class="qrefs">Q144</span>]
+│  │  ├─ Primary purpose (incl. system initiation): select controls by sensitivity [<span class="qrefs">Q144</span>]
+│  │  ├─ Value drivers: laws/regs, privacy, customer reqs, creation cost, ops
+│  │  │  impact, liability, reputation — NOT replacement cost [<span class="qrefs">Q31</span>]
+│  │  ├─ <span class="mmwarn">⚠</span> Scan &amp; threat-intel results feed RISK assessment, never asset VALUE;
+│  │  │  pick the driver set above (<span class="qrefs">Q31</span>=B) [<span class="qrefs">Q31</span>]
+│  │  ├─ Quantitative $ (loss expectancy): precise but data-hungry [<span class="qrefs">Q11 Q46</span>]
+│  │  ├─ Qualitative ordered labels H/M/L or T1-3: pragmatic, scalable — the
+│  │  │  preferred classification basis; info resists exact pricing [<span class="qrefs">Q11 Q46 Q187</span>]
+│  │  └─ <span class="mmwarn">⚠</span> Audit near, no market prices → qualitative TS/S/Public (<span class="qrefs">Q36</span>=B);
+│  │     uniform max controls = cost-prohibitive trap [<span class="qrefs">Q36</span>]
+│  ├─ Scheme design
+│  │  ├─ Classification = build the tier ladder; categorization = assign asset [<span class="qrefs">Q8</span>]
+│  │  ├─ Categorize = sort into EXISTING class — no new levels, no sys labels [<span class="qrefs">Q63</span>]
+│  │  ├─ Govt: mandated uniform levels TS/S/C/U, same meaning everywhere [<span class="qrefs">Q150</span>]
+│  │  ├─ Private: fully custom tiers to own risk — no intl mandate (A) [<span class="qrefs">Q71 Q150</span>]
+│  │  ├─ ISO 27002: 2–4 tiers best; 10 tiers kill adoption/consistency (A) [<span class="qrefs">Q72</span>]
+│  │  ├─ Labels org-relative: same name ≠ same meaning; educate owners [<span class="qrefs">Q24</span>]
+│  │  ├─ ALL asset forms: paper, tape, digital, hardware, contracts — not
+│  │  │  just databases/documents [<span class="qrefs">Q37 Q52 Q122</span>]
+│  │  ├─ <span class="mmwarn">⚠</span> Healthcare classifying only patient records violates coverage;
+│  │  │  digital never outranks physical (A) [<span class="qrefs">Q122</span>]
+│  │  ├─ Rank CIA independently (backup: high-AV, low-C); one disclosure
+│  │  │  scale misses I&amp;A for equipment/IP (D) [<span class="qrefs">Q164 Q239</span>]
+│  │  ├─ Strategic output: drives ACCESS-CONTROL selection — ROI is not it (D) [<span class="qrefs">Q160</span>]
+│  │  ├─ More sensitive tier → more restrictive controls; spend scales w/ tier
+│  │  ├─ Biggest posture win (global corp): allocate resources by criticality (B) [<span class="qrefs">Q169</span>]
+│  │  ├─ Standardized labels → consistent protection across all locations,
+│  │  │  full lifecycle [<span class="qrefs">Q177</span>]
+│  │  ├─ Cloud assets: classify on data sensitivity &amp; business impact (B) [<span class="qrefs">Q156</span>]
+│  │  └─ M&amp;A: non-hierarchical sets (PII, financial) coexist with hierarchy [<span class="qrefs">Q17</span>]
+│  ├─ Labeling vs marking
+│  │  ├─ Labeling: machine-readable security attributes/metadata (XML tag,
+│  │  │  cloud label, ACL attr); makes scheme enforceable
+│  │  ├─ Automated enforcement: access engines, DLP, cloud policy [<span class="qrefs">Q82 Q182</span>]
+│  │  ├─ Labels live inside data structure — absent = no automated enforcement [<span class="qrefs">Q195 Q238</span>]
+│  │  ├─ Marking: human-readable handling instructions (CONFIDENTIAL stamp,
+│  │  │  banners) → uniform processing/storage/disposal direction [<span class="qrefs">Q21 Q1</span>]
+│  │  ├─ Marking = process-based enforcement: policy + training + humans [<span class="qrefs">Q172</span>]
+│  │  ├─ Rule: automated access/DLP → labeling; consistent human
+│  │  │  handling → marking [<span class="qrefs">Q53 Q82 Q134 Q159 Q182</span>]
+│  │  ├─ <span class="mmwarn">⚠</span> Stamp = marking (guides people); label = metadata (drives machines) [<span class="qrefs">Q21</span>]
+│  │  ├─ ORDER: classify → categorize → label → mark (technical before human) [<span class="qrefs">Q40</span>]
+│  │  └─ Digital objects: metadata in file properties → DLP/DRM automation
+│  ├─ Consistency &amp; automation scenarios
+│  │  ├─ Apply consistently across all assets &amp; time — no drift [<span class="qrefs">Q183</span>]
+│  │  ├─ Key factor for global mark/label system: consistent interpretation
+│  │  │  across departments (B); training only supports [<span class="qrefs">Q183</span>]
+│  │  ├─ Metadata tags power DLP sensors, cloud IAM, email gateways [<span class="qrefs">Q195</span>]
+│  │  ├─ Label gap = DLP blind even with policy + markings present [<span class="qrefs">Q195 Q218</span>]
+│  │  ├─ Attributes on BOTH subjects and objects → automated enforcement [<span class="qrefs">Q27 Q240</span>]
+│  │  ├─ 1000s docs/day → labels embedded in data structures (B); header
+│  │  │  stamps need humans, fail at volume [<span class="qrefs">Q38</span>]
+│  │  ├─ Automated AC without humans → metadata tagging (C); stickers unreadable [<span class="qrefs">Q157</span>]
+│  │  ├─ Marked but DLP blind → labeling was skipped (A), not marking [<span class="qrefs">Q218</span>]
+│  │  ├─ Partner sharing → interoperable mark/label standards (A); one
+│  │  │  universal scheme may miss each partner's regs [<span class="qrefs">Q105 Q134</span>]
+│  │  ├─ Enforce AND guide (disposal worry) → deploy BOTH label+mark (C) [<span class="qrefs">Q212</span>]
+│  │  ├─ Label method cost ∝ asset value; over-label waste, under-label risk (B) [<span class="qrefs">Q214</span>]
+│  │  ├─ Folder tabs → cloud: convert to metadata attributes (B) [<span class="qrefs">Q213</span>]
+│  │  └─ Labeling investment driven by asset value tracked, not headcount [<span class="qrefs">Q14</span>]
+│  ├─ Who classifies
+│  │  ├─ Data owners define levels &amp; access policy from business value + risk [<span class="qrefs">Q66</span>]
+│  │  └─ Owners classify, security consults — security lacks business context
+│  │     (startup 60-day; first program) [<span class="qrefs">Q176 Q189</span>]
+│  ├─ Classification governance
+│  │  ├─ Goal: consistent, fair, cost-effective application org-wide
+│  │  ├─ Committee/board: cross-functional — legal, IT, HR, privacy, business
+│  │  ├─ Standardized objective scoring: kills subjective over/under-labeling
+│  │  ├─ Federated: central standards+audit, local execution — multinationals
+│  │  ├─ Senior mgmt: universal applicability, no owner opt-outs; governs
+│  │  │  policy, not technical enforcement [<span class="qrefs">Q18</span>]
+│  │  ├─ Root causes of failure: no standard criteria; no cross-functional oversight
+│  │  ├─ Over-classification: inflated cost, bottlenecks, alert fatigue,
+│  │  │  circumvention, policy erosion
+│  │  ├─ Under-classification: critical assets unprotected, legal/reg exposure
+│  │  ├─ M&amp;A divergence: reconcile label MEANINGS first (mapping) [<span class="qrefs">Q60 Q126</span>]
+│  │  ├─ Value uncertain → default classify HIGHER, never skip
+│  │  ├─ Training gap = errors/inconsistency — NOT deliberate pattern [<span class="qrefs">Q118</span>]
+│  │  ├─ AI classification at scale still needs oversight, audits, validation
+│  │  ├─ Multinational frameworks: flex for local law, one governance backbone
+│  │  ├─ Owner refuses → escalate to committee/senior mgmt; mandated, not
+│  │  │  optional; reassigning to security fails [<span class="qrefs">Q49</span>]
+│  │  ├─ Pick board when stem stresses cross-department consistency
+│  │  ├─ Pick scoring when stem stresses subjective over/under-labeling
+│  │  └─ Mindset: consistency + accountability beat technical sophistication
+│  ├─ Governance scenarios
+│  │  ├─ <span class="mmwarn">⚠</span> Deliberate low labels to dodge controls: root = absent
+│  │  │  accountability linking labels to protection duties [<span class="qrefs">Q4</span>]
+│  │  ├─ Everything top-secret: committee + standardized scoring; security
+│  │  │  approval per label = bottleneck [<span class="qrefs">Q32</span>]
+│  │  ├─ SOC as sole classifier: NO — board gives org-wide view [<span class="qrefs">Q33</span>]
+│  │  ├─ IP value unquantifiable: board judges sensitivity (risk committee
+│  │  │  only prices replacement) [<span class="qrefs">Q34</span>]
+│  │  ├─ Security overriding dept labels: NO — advisory only; ask senior
+│  │  │  mgmt to establish board [<span class="qrefs">Q35</span>]
+│  │  ├─ PHI over-labeling under cost pressure: standardized scoring across
+│  │  │  CIA; blanket one-tier cut risks regulated data [<span class="qrefs">Q44</span>]
+│  │  ├─ 3 schemes + deadline: board builds unified compliant policy — not IT [<span class="qrefs">Q47</span>]
+│  │  ├─ Same label, different meaning at merger: inconsistent protection =
+│  │  │  core risk; DLP metadata conflicts secondary [<span class="qrefs">Q60</span>]
+│  │  ├─ Strictest-country-uniform: NO — flexible per-country framework [<span class="qrefs">Q86</span>]
+│  │  ├─ Multinational + diverse depts: central committee w/ dept reps; AI
+│  │  │  alone lacks human governance [<span class="qrefs">Q92</span>]
+│  │  ├─ Discovery tools find data, give NO classification governance → board [<span class="qrefs">Q111</span>]
+│  │  ├─ Systematic over-label root: no accountability for protecting
+│  │  │  high-value assets (not training) [<span class="qrefs">Q118</span>]
+│  │  ├─ Acquisitions: unify classification BEFORE integrating systems;
+│  │  │  marking depends on it [<span class="qrefs">Q126</span>]
+│  │  ├─ Primary global challenge: consistent interpretation/application;
+│  │  │  level-count is one-time design [<span class="qrefs">Q158</span>]
+│  │  ├─ Multi-jurisdiction + diverse data: AI tools + role training +
+│  │  │  periodic audits (centralized global rules too rigid) [<span class="qrefs">Q163</span>]
+│  │  ├─ Stalled program (no owners, stale labels): tools + procedures +
+│  │  │  education + training + reassessment [<span class="qrefs">Q170</span>]
+│  │  ├─ Managers resist, security lacks authority: governance committee
+│  │  │  sets owner accountability [<span class="qrefs">Q174</span>]
+│  │  ├─ NIST 800-53 + local flex: FEDERATED w/ explicit governance — hybrid
+│  │  │  lacks the governance frame [<span class="qrefs">Q175</span>]
+│  │  └─ Self-label-all-critical: committee + scoring correct owner bias;
+│  │  │  tools cannot fix accountability bias [<span class="qrefs">Q200</span>]
+│  ├─ Lifecycle of classification
+│  │  ├─ Continuous activity: reassess as regs, sensitivity, value change [<span class="qrefs">Q48</span>]
+│  │  ├─ 3-year-old labels after product/legacy changes: omitted step =
+│  │  │  assessment &amp; review [<span class="qrefs">Q130</span>]
+│  │  └─ Labels survive into archive — never expire or auto-downgrade;
+│  │     full logical/admin/physical controls persist [<span class="qrefs">Q147</span>]
+│  └─ Compact rows
+│     ├─ Data Owner/Controller accountable: classification + transfer
+│     │  compliance (GDPR/CCPA); consent withdrawal → privacy/legal [<span class="qrefs">Q133</span>]
+│     ├─ Policy must align w/ laws, regs, contracts, privacy — external
+│     │  mandates set the floor; encryption ≠ policy fix [<span class="qrefs">Q12</span>]
+│     ├─ Roles: owner classifies/accepts/reviews · custodian implements ·
+│     │  user follows handling [<span class="qrefs">Q23 Q222</span>]
+│     ├─ Uniform criteria across units; per-silo scheme = inconsistency [<span class="qrefs">Q59 Q80</span>]
+│     ├─ Over-class guard: clear criteria + appeals path [<span class="qrefs">Q193 Q98</span>]
+│     ├─ DPAs/stewards coordinate; librarians catalog access artifacts [<span class="qrefs">Q22 Q5</span>]
+│     └─ Duty follows title — match role to action [<span class="qrefs">Q81 Q39</span>]</pre>
+</details>
 <a class="decklink" href="#flashcards" data-deck="g1">▦ 56 flashcards &rarr;</a></div>
 <div class="bc" id="card-g2" style="--gc:var(--g2)">
 <h3>g2 &middot; Roles &amp; Governance</h3>
@@ -428,6 +579,93 @@
 <tr><td class="rowhead">bridges legal to controls</td><td>The Privacy Officer (DPO, Data Protection Officer) oversees privacy strategy, ensures the classification policy reflects GDPR/CCPA (California Consumer Privacy Act) obligations, and bridges legal/regulatory requirements to technical control selection; reports to the highest management level and must be independent. Under a GDPR classification mandate, the primary function is overseeing implementation of data subject access rights (access, erasure, portability); retention schedules are important... <span class="qrefs">[Q15]</span></td></tr>
 <tr><td class="rowhead">Acts on whose behalf</td><td>The Data Processor acts on behalf of the controller and is bound by contract (GDPR Article 28). This distinction from the controller matters for accountability exam questions.</td></tr>
 </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 84 lines · 58 Q-refs</summary>
+<pre class="mmtree">├─ g2 · ROLES &amp; GOVERNANCE
+│  ├─ Role definitions
+│  │  ├─ Data Owner/Controller: ultimate authority — classifies, approves
+│  │  │  access, defines protection; accountability NEVER delegates [<span class="qrefs">Q10 Q22 Q83</span>]
+│  │  ├─ <span class="mmwarn">⚠</span> Delegating ops ≠ transferring accountability (trading desk
+│  │  │  labeled everything 'internal') — committee only supports [<span class="qrefs">Q180 Q223</span>]
+│  │  ├─ Custodian: implements for owner — backups, encryption, access
+│  │  │  enforcement; missed backups = custodian failing [<span class="qrefs">Q23</span>]
+│  │  ├─ Steward: metadata definitions, quality standards, accuracy,
+│  │  │  regulatory alignment, usage oversight [<span class="qrefs">Q61 Q112 Q173</span>]
+│  │  ├─ Steward multi-cloud: data quality &amp; proper usage — encryption is
+│  │  │  delegated, not steward work [<span class="qrefs">Q80</span>]
+│  │  ├─ Steward AI/ML (evolving): quality, metadata accuracy, ETHICAL use [<span class="qrefs">Q110</span>]
+│  │  ├─ Processor: processes on controller's documented instructions,
+│  │  │  contract/DPA bound (GDPR Art.28); owns nothing [<span class="qrefs">Q45 Q168</span>]
+│  │  ├─ Data Subject: the person the data describes — rights-holder
+│  │  │  (consent, access, deletion) [<span class="qrefs">Q5</span>]
+│  │  ├─ System Owner: system-level controls; aligns system to new
+│  │  │  classification — never dictates classification [<span class="qrefs">Q39</span>]
+│  │  └─ Process Owner: business outcomes; aligns controls to process — not
+│  │     a classification authority [<span class="qrefs">Q139</span>]
+│  ├─ Authority &amp; accountability
+│  │  ├─ Security = advisor (recommend/implement/monitor); never the
+│  │  │  classifier [<span class="qrefs">Q107 Q176</span>]
+│  │  ├─ Controller decides why+how; outsourced host = processor, not owner [<span class="qrefs">Q30</span>]
+│  │  ├─ Controller legally accountable regardless of who processes/stores [<span class="qrefs">Q191</span>]
+│  │  ├─ Business owner classifies — never IT/sysadmins/security; healthcare:
+│  │  │  creators/owners over CIO [<span class="qrefs">Q109 Q189</span>]
+│  │  ├─ <span class="mmwarn">⚠</span> Owner decisions prevail, BUT AC-policy disputes owner-vs-IT →
+│  │  │  collaborative process + escalation [<span class="qrefs">Q81</span>]
+│  │  ├─ Owner resigns → assign TEMPORARY owner; freezing access ≠ governance [<span class="qrefs">Q7</span>]
+│  │  ├─ Unassigned ownership → shadow data, compliance violations;
+│  │  │  post-merger IP: rights/control undefined = root risk [<span class="qrefs">Q219</span>]
+│  │  └─ Fix is explicit owner assignment, not more technical controls
+│  ├─ Owner duties (scenario sweep)
+│  │  ├─ Label confusion caused leak → FIRST educate owners on label meaning [<span class="qrefs">Q6</span>]
+│  │  ├─ Unclassified breach → owner failed to define class + approve AC [<span class="qrefs">Q22</span>]
+│  │  ├─ Inconsistent controls on same-class data → undefined roles between
+│  │  │  system owners and custodians (steward ≠ fix) [<span class="qrefs">Q59</span>]
+│  │  ├─ Owner sets &amp; enforces retention/disposal POLICY — not destruction [<span class="qrefs">Q78</span>]
+│  │  ├─ Data owner decides distribution; system owner governs hosting only [<span class="qrefs">Q98 Q192</span>]
+│  │  ├─ Controls misaligned w/ class → process owner UPDATES CONTROLS;
+│  │  │  reclassifying to fit controls inverts accountability [<span class="qrefs">Q104</span>]
+│  │  ├─ Strategy shaping = define classification levels + handling [<span class="qrefs">Q125</span>]
+│  │  ├─ Primary duty: access requirements + classification levels [<span class="qrefs">Q127</span>]
+│  │  ├─ Undocumented class on critical DB → no owner assigned [<span class="qrefs">Q151</span>]
+│  │  ├─ Owner classification drives ALL downstream controls/rights [<span class="qrefs">Q152</span>]
+│  │  ├─ Inconsistent labels retail → owners drive, not stewards [<span class="qrefs">Q153</span>]
+│  │  ├─ Breach: owner ASSESSES impact + determines response; notifying is
+│  │  │  delegated [<span class="qrefs">Q165</span>]
+│  │  ├─ Info owner classifies — best knows value/sensitivity/impact [<span class="qrefs">Q179</span>]
+│  │  ├─ DLP foundation: owner defines data types + classification levels [<span class="qrefs">Q186</span>]
+│  │  ├─ GDPR/HIPAA: owner establishes/oversees class + handling policies [<span class="qrefs">Q188</span>]
+│  │  ├─ Encryption budget blocked → assign owner to classify &amp; scope needs [<span class="qrefs">Q193</span>]
+│  │  ├─ Risk role: owner determines sensitivity/business value [<span class="qrefs">Q203</span>]
+│  │  ├─ Security labeled everything → root: owners never assigned duty [<span class="qrefs">Q208</span>]
+│  │  ├─ Disclosure w/ no access owner → missing owner accountability [<span class="qrefs">Q222</span>]
+│  │  ├─ Board guides for consistency — never replaces owners [<span class="qrefs">Q231</span>]
+│  │  └─ Vendor changed retention → exceeded PROCESSOR scope: controller
+│  │     decision reserved [<span class="qrefs">Q235</span>]
+│  ├─ Policy-to-controls bridge
+│  │  ├─ Handling requirements + per-tier baselines = the bridge from
+│  │  │  classification to operational protection
+│  │  ├─ Order: (1) define levels+handling (2) assign owners (3) owners
+│  │  │  categorize (4) baselines auto-apply (5) risk assessment augments
+│  │  ├─ Encryption SUPPLEMENTS access control on stored data — never replaces
+│  │  ├─ Multinational policy → RBAC + quarterly reviews; annual audit too slow [<span class="qrefs">Q171</span>]
+│  │  ├─ Owners identified at inventory; unclassified assets = skipped
+│  │  │  inventory or missing owners
+│  │  ├─ Sustainment = standardized procedures + ongoing training + exec
+│  │  │  support — never a tool purchase
+│  │  ├─ <span class="mmwarn">⚠</span> AI in destruction: improves classification accuracy for method
+│  │  │  choice; humans stay for compliance [<span class="qrefs">Q2</span>]
+│  │  └─ Privacy Officer/DPO: privacy strategy, GDPR/CCPA reflection,
+│  │     independent, top-level reporting; oversees data-subject access
+│  │     rights (access/erasure/portability) [<span class="qrefs">Q15</span>]
+│  └─ Compact rows
+│     ├─ Handling: per-tier storage/transmission/printing/disposal rules,
+│     │  written &amp; trained [<span class="qrefs">Q101 Q196</span>]
+│     ├─ Baselines: minimum controls per tier — encryption, access, logging [<span class="qrefs">Q25 Q9</span>]
+│     ├─ Access: need-to-know within tier; least privilege on tooling [<span class="qrefs">Q242 Q51</span>]
+│     ├─ Physical: inventory, RFID/barcode tags, custody logs for media [<span class="qrefs">Q242 Q194</span>]
+│     ├─ Labeling tech: printed headers, embedded metadata, DLP-read tags [<span class="qrefs">Q101 Q196</span>]
+│     └─ Handling questions start FROM THE LABEL [<span class="qrefs">Q201 Q56</span>]</pre>
+</details>
 <a class="decklink" href="#flashcards" data-deck="g2">▦ 22 flashcards &rarr;</a></div>
 <div class="bc" id="card-g3" style="--gc:var(--g3)">
 <h3>g3 &middot; Handling, Baselines &amp; Assets</h3>
@@ -480,6 +718,59 @@
 <tr><td class="rowhead">Cheapest per tag</td><td>QR (Quick Response) codes/barcodes offer cost-effective fixed-point tracking for stationary or lower-value assets (desks, monitors, fixed equipment) — lowest cost per tag, manual scanning required, no real-time location. Choose them when budget is the driving constraint: they maximize inventory precision per dollar. RFID provides superior automation but may exceed stated budget constraints — the CISSP mindset selects the most appropriate trade-off, not the most capable option. <span class="qrefs">[Q227]</span></td></tr>
 <tr><td class="rowhead">Visibility proportional...</td><td>Asset tracking and labeling is a managerial, risk-based cost decision — select the method providing adequate visibility proportional to asset value, never gold-plating low-value assets nor under-investing in high-value ones. Always weigh tracking precision against cost.</td></tr>
 </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 50 lines · 26 Q-refs</summary>
+<pre class="mmtree">├─ g3 · HANDLING, BASELINES &amp; ASSETS
+│  ├─ Handling &amp; baselines
+│  │  ├─ Document handling per level BEFORE owners categorize — policy
+│  │  │  precedes assignment [<span class="qrefs">Q101 Q196</span>]
+│  │  ├─ <span class="mmwarn">⚠</span> Metadata tags are DOWNSTREAM enforcement, not a prerequisite —
+│  │  │  never the "must exist first" answer [<span class="qrefs">Q101 Q196</span>]
+│  │  ├─ Baseline = minimum controls per tier (crypto strength, access,
+│  │  │  logging, retention); floor, not ceiling [<span class="qrefs">Q25</span>]
+│  │  ├─ Enforce uniformly across ALL locations — no site-specific weakening
+│  │  ├─ Assess risk BEFORE selecting controls; match strength to threat/impact
+│  │  │  (in-transit encryption option = control, not assessment) [<span class="qrefs">Q62</span>]
+│  │  ├─ Chain: classify → handling → uniform baselines → least privilege →
+│  │  │  central monitoring → periodic review
+│  │  └─ 200 stores/60 days/min disruption → per-tier baselines (B);
+│  │     centralizing all data disrupts operations [<span class="qrefs">Q9</span>]
+│  ├─ Access &amp; least privilege
+│  │  ├─ Stored-data AC: only authorized read/modify; RBAC + ACLs/DACLs [<span class="qrefs">Q51</span>]
+│  │  ├─ Ex-employee creds on encrypted storage → revoke + periodic access
+│  │  │  reviews; replacing hardware/keys is disproportionate [<span class="qrefs">Q236</span>]
+│  │  └─ Least privilege spans physical (safes, custody) AND digital
+│  │     (permissions, keys) + regular log audit; RBAC-digital-only fails [<span class="qrefs">Q242</span>]
+│  ├─ Inventory &amp; pipeline
+│  │  ├─ Inventory = step 1 — cannot classify unknown assets [<span class="qrefs">Q233</span>]
+│  │  ├─ No centralized asset record → comprehensive inventory FIRST;
+│  │  │  assigning owners comes second [<span class="qrefs">Q233</span>]
+│  │  ├─ Pipeline: classification → categorization → handling → protection;
+│  │  │  classes exist before any label/mark [<span class="qrefs">Q201</span>]
+│  │  └─ Handling tracks the LEVEL, never the media type
+│  ├─ Destruction &amp; storage assurance
+│  │  ├─ Shred/incinerate/crush/pulverize/melt = greatest assurance; destroyed
+│  │  │  media NOT reusable [<span class="qrefs">Q85</span>]
+│  │  ├─ Decades archive in dynamic org → ABAC with automated policy updates;
+│  │  │  manual oversight unsustainable (B) [<span class="qrefs">Q41</span>]
+│  │  └─ Tapes in unlocked closet → primary risk: unauthorized access/theft
+│  │     (degradation/EMI secondary) [<span class="qrefs">Q26</span>]
+│  ├─ Asset tracking selection
+│  │  ├─ GPS: continuous real-time for mobile/high-value (vehicles, laptops
+│  │  │  in transit); highest cost; barcodes/QR lack live location [<span class="qrefs">Q113 Q136</span>]
+│  │  ├─ RFID: bulk automated reads, no line-of-sight, multi-location;
+│  │  │  prototypes across facilities under budget [<span class="qrefs">Q194</span>]
+│  │  ├─ QR/barcode: cheapest per tag, manual scans, fixed-point/stationary
+│  │  │  assets; pick under budget constraints [<span class="qrefs">Q227</span>]
+│  │  └─ Managerial rule: visibility ∝ value — no gold-plating, no under-invest
+│  └─ Data-state compact
+│     ├─ States: rest (storage) · transit (movement) · use (processing) [<span class="qrefs">Q19 Q120</span>]
+│     ├─ Rest: FDE/database/file crypto — key management decides all [<span class="qrefs">Q185 Q190</span>]
+│     ├─ Transit: TLS channels, IPsec tunnels, mTLS services [<span class="qrefs">Q19 Q28</span>]
+│     ├─ Use: memory protection, enclaves, minimization — exposed [<span class="qrefs">Q94 Q100</span>]
+│     ├─ Every hop = state change; controls must span transitions [<span class="qrefs">Q94 Q100</span>]
+│     └─ Stem names the state; the state names the control [<span class="qrefs">Q13 Q20</span>]</pre>
+</details>
 <a class="decklink" href="#flashcards" data-deck="g3">▦ 21 flashcards &rarr;</a></div>
 <div class="bc" id="card-g4" style="--gc:var(--g4)">
 <h3>g4 &middot; States &amp; Communications</h3>
@@ -534,6 +825,61 @@
 <tr><td class="rowhead">File share scanning</td><td>DLP for data at rest uses a server/storage agent to discover and classify sensitive data in repositories — file shares, databases, cloud storage — scanning stored (including archived) data to identify policy violations. Choose it for scenarios like sensitive vendor contracts sitting unreviewed on network file shares for 2+ years; DLP in Motion monitors network traffic flows in transit, not stored data. <span class="qrefs">[Q120 Q217]</span></td></tr>
 <tr><td class="rowhead">Document action...</td><td>IRM (Information Rights Management) applies DRM mechanisms to documents, restricting specific actions — print, forward, copy, edit — on individual files. Choose IRM when users still need access but specific document actions must be restricted on sensitive enterprise documents. <span class="qrefs">[Q226]</span></td></tr>
 </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 52 lines · 29 Q-refs</summary>
+<pre class="mmtree">├─ g4 · STATES &amp; COMMUNICATIONS
+│  ├─ Program gaps (branch-opening entries)
+│  │  ├─ 40% unclassified after inventory (owners lack criteria) → fix =
+│  │  │  training, education, standardized procedures; discovery tools
+│  │  │  assist but don't teach owners [<span class="qrefs">Q234</span>]
+│  │  └─ Object reuse: media/memory reassigned without sanitization
+│  │     exposes residual data → sanitize BEFORE reassignment [<span class="qrefs">Q197</span>]
+│  ├─ State definitions &amp; controls
+│  │  ├─ At rest: inactive on media (disks, tapes, DBs, sheets); best
+│  │  │  protection = encryption + access controls + physical [<span class="qrefs">Q13 Q19</span>]
+│  │  ├─ In motion: crossing network — TLS, link, end-to-end, onion, IPsec;
+│  │  │  firewalls/VPN/TLS protect transmission, not storage [<span class="qrefs">Q19</span>]
+│  │  ├─ In use: processed in memory/CPU — homomorphic encryption, RBAC,
+│  │  │  DLP, DRM; endpoint controls because users touch active data
+│  │  └─ Match control to state + threat model — never blanket-encrypt
+│  ├─ Link vs end-to-end
+│  │  ├─ Link: encrypts headers AND payload per hop [<span class="qrefs">Q94 Q97</span>]
+│  │  ├─ E2E: payload only — visible routing ⇒ E2E in use [<span class="qrefs">Q94 Q97</span>]
+│  │  ├─ Link decrypts at each node (plaintext exposure/hop); E2E stays
+│  │  │  encrypted through every node [<span class="qrefs">Q94 Q100 Q103</span>]
+│  │  ├─ Link hides routing metadata between hops; E2E leaves src/dst readable
+│  │  ├─ Link needs TRUSTED intermediate nodes — insider threat per relay [<span class="qrefs">Q100</span>]
+│  │  └─ E2E weakness: metadata enables traffic analysis
+│  ├─ Transit tooling
+│  │  ├─ TLS: transit client↔server — confidentiality + integrity +
+│  │  │  authentication (certs prove server, detect tampering) [<span class="qrefs">Q28 Q121</span>]
+│  │  ├─ Global CDN multi-region → TLS 1.3 + perfect forward secrecy +
+│  │  │  region-specific key management [<span class="qrefs">Q129</span>]
+│  │  ├─ Anonymity requirement → onion routing (multi-layer); VPN still
+│  │  │  exposes addresses in headers [<span class="qrefs">Q91</span>]
+│  │  ├─ Encrypt BEFORE cloud migration — unreadable without customer keys
+│  │  │  even if provider media compromised [<span class="qrefs">Q20 Q232</span>]
+│  │  └─ <span class="mmwarn">⚠</span> SLA = contractual reliance on provider — NOT a technical
+│  │     confidentiality guarantee (cloud admin scenario) [<span class="qrefs">Q20</span>]
+│  ├─ Obfuscation quick set (details in g5)
+│  │  ├─ Encryption: reversible w/ key — choose when recovery needed;
+│  │  │  attribute/column-level decryptable in normal operations [<span class="qrefs">Q185 Q190</span>]
+│  │  ├─ Tokenization: vault reversal, no math relation, no key to steal [<span class="qrefs">Q202</span>]
+│  │  ├─ Ladder: masking → tokenization → pseudonymization → anonymization
+│  │  │  → encryption [<span class="qrefs">Q131 Q202</span>]
+│  │  └─ Re-identity rule: nobody→anonymize · app→tokenize · holder→encrypt
+│  └─ Tool compact
+│     ├─ DLP in use: endpoint agent — print/copy/USB/clipboard [<span class="qrefs">Q162</span>]
+│     ├─ DLP at rest: storage agent scans file shares/DBs/cloud — vendor
+│     │  contracts on shares for years [<span class="qrefs">Q120 Q217</span>]
+│     ├─ IRM: restricts document ACTIONS (print/forward/copy/edit) while
+│     │  access continues [<span class="qrefs">Q226</span>]
+│     ├─ DLP engines: endpoint + network + cloud; pattern/label at egress [<span class="qrefs">Q229 Q116</span>]
+│     ├─ DRM/IRM: persistent controls — print/copy/expiry travel with doc [<span class="qrefs">Q128 Q230</span>]
+│     ├─ CASB: cloud visibility, compliance, DLP, threat defense (sanctioned
+│     │  + shadow SaaS) [<span class="qrefs">Q229 Q184</span>]
+│     └─ Lens: reversibility question FIRST, tool second [<span class="qrefs">Q90 Q241</span>]</pre>
+</details>
 <a class="decklink" href="#flashcards" data-deck="g4">▦ 20 flashcards &rarr;</a></div>
 <div class="bc" id="card-g5" style="--gc:var(--g5)">
 <h3>g5 &middot; Obfuscation &amp; Data Protection Tools</h3>
@@ -598,6 +944,79 @@
 <tr><td class="rowhead">Pseudonymized</td><td>True anonymization is irreversible; if data is pseudonymized (reversible), it is still PII and informed consent is required for use in testing. When anonymized data could re-identify a subject, treat it as PII requiring consent — obfuscation methods (pruning, fabricating, trimming) reduce risk but do not automatically satisfy consent requirements.</td></tr>
 <tr><td class="rowhead">Consent still required</td><td>When using anonymized customer data for global cloud testing, the most critical ethical and legal obligation is ensuring GDPR compliance and obtaining explicit informed consent. Encryption protects data technically but does not fulfill the ethical and legal consent obligations required for using personal data. <span class="qrefs">[Q68]</span></td></tr>
 </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 70 lines · 35 Q-refs</summary>
+<pre class="mmtree">├─ g5 · OBFUSCATION &amp; DATA PROTECTION TOOLS
+│  ├─ Method definitions
+│  │  ├─ Obfuscation: hide/alter sensitive data keeping it usable — the
+│  │  │  prod→test scenario is the most-tested case
+│  │  ├─ Concealing: full attribute suppression — removed from ALL screens/
+│  │  │  reports; irreversible [<span class="qrefs">Q155</span>]
+│  │  ├─ Pruning: clears contents, blank/null fields, structure intact [<span class="qrefs">Q209</span>]
+│  │  ├─ Trimming: deliberate PARTIAL display (last-4 card/SSN); PCI
+│  │  │  receipts; irreversible [<span class="qrefs">Q204</span>]
+│  │  ├─ Fabricating: fake-but-plausible synthetic data, no keys, test DBs [<span class="qrefs">Q132 Q211 Q220</span>]
+│  │  ├─ Masking: realistic fictitious, format/type preserved, usable [<span class="qrefs">Q90 Q131 Q241</span>]
+│  │  ├─ Tokenization: random format-preserving surrogate; reversal via
+│  │  │  vault/lookup ONLY — no key, no math relation [<span class="qrefs">Q131 Q202</span>]
+│  │  ├─ Prune vs trim: blank fields vs partial display — receipts=trim,
+│  │  │  QA-empty-fields=prune [<span class="qrefs">Q204 Q209</span>]
+│  │  ├─ Mask vs fabricate: both no-key, both fine for prod→test/QA
+│  │  └─ Encryption alone = decryptable — the ONLY reversible one [<span class="qrefs">Q185 Q190</span>]
+│  ├─ Code obfuscation
+│  │  ├─ Control-flow flattening: destroys recognizable execution structure —
+│  │  │  best anti-reverse-engineering [<span class="qrefs">Q69</span>]
+│  │  ├─ Code obfuscation: functionally equivalent, hard to understand —
+│  │  │  protects IP / prevents RE [<span class="qrefs">Q199</span>]
+│  │  └─ Different domain: applies to source/binaries, NOT databases
+│  ├─ Test-data scenarios
+│  │  ├─ Prod→QA: fabricate or mask — encryption leaves REAL values exposed
+│  │  │  to testers [<span class="qrefs">Q90 Q241</span>]
+│  │  ├─ Schema must stay populated → fabricate fictitious SSNs same format;
+│  │  │  blanking OK → pruning [<span class="qrefs">Q132</span>]
+│  │  ├─ Format + referential relationships for valid testing → format-
+│  │  │  preserving TOKENIZATION (substitution breaks refs) [<span class="qrefs">Q114</span>]
+│  │  ├─ No key-mgmt allowed → fabricate account numbers matching formats [<span class="qrefs">Q220</span>]
+│  │  ├─ Cloud test env needing utility → masking + RBAC; E2E encryption
+│  │  │  kills test performance [<span class="qrefs">Q146</span>]
+│  │  ├─ Layering: justify each technique by purpose + usability; <span class="mmwarn">⚠</span>
+│  │  │  obfuscation ADDS overhead — it is not compression [<span class="qrefs">Q225</span>]
+│  │  ├─ Enables GDPR/PCI compliance without operational disruption [<span class="qrefs">Q206</span>]
+│  │  └─ Rule: least-reversible method that still meets the use case
+│  ├─ DLP in motion
+│  │  ├─ Network sensor/gateway deep inspection of SMTP/HTTP/FTP incl.
+│  │  │  pre-transmission recipient analysis
+│  │  ├─ SSNs emailed externally → DLP deep CONTENT inspection + recipient
+│  │  │  authorization; encryption secures channel, inspects nothing [<span class="qrefs">Q178</span>]
+│  │  ├─ Block uploads to personal cloud → endpoint DLP; watermarks only
+│  │  │  trace AFTER exfiltration [<span class="qrefs">Q116</span>]
+│  │  └─ DLP prevents/detects; watermarks attribute forensically [<span class="qrefs">Q116</span>]
+│  ├─ DRM / IRM
+│  │  ├─ DRM: license + encryption + embedded tags; legal basis DMCA
+│  │  ├─ Rental access ends automatically → DRM time-based expiry [<span class="qrefs">Q230</span>]
+│  │  ├─ Trial dies after N days / license charges → DRM licensing — NOT
+│  │  │  DLP or AC [<span class="qrefs">Q128 Q230</span>]
+│  │  └─ Split: IRM = document actions ("print?"); DRM = usage rights
+│  │     ("open? expire?")
+│  ├─ Privacy consent
+│  │  ├─ Pseudonymized = reversible = STILL PII; consent required
+│  │  └─ Anonymized cloud testing still needs GDPR compliance + explicit
+│  │     informed consent — encryption ≠ consent [<span class="qrefs">Q68</span>]
+│  ├─ Cloud tool selection
+│  │  ├─ CASB: cloud-resident broker/API, multi-cloud visibility +
+│  │  │  centralized policy across CSPs (HIPAA/PCI) [<span class="qrefs">Q229</span>]
+│  │  └─ Telemedicine on-prem + cloud: DLP (monitoring) + IRM (usage) +
+│  │     CASB (visibility) — omitting DLP leaves transfer gap [<span class="qrefs">Q184</span>]
+│  └─ Lifecycle bridge compact (g6 preview rows)
+│     ├─ Retention: legal + business obligations set schedule — not age [<span class="qrefs">Q87 Q237</span>]
+│     ├─ Archiving: searchable, integrity-protected, retrieval-tested [<span class="qrefs">Q87 Q215</span>]
+│     ├─ Legal hold: suspend destruction on trigger; deletes = spoliation [<span class="qrefs">Q96 Q95</span>]
+│     ├─ Sanitization ladder: clear (overwrite) → purge (degauss/crypto-erase)
+│     │  → destroy (shred/incinerate) — verify each [<span class="qrefs">Q67 Q79</span>]
+│     ├─ Media: SSDs resist overwrite → crypto-erase/shred; NIST 800-88 [<span class="qrefs">Q67 Q96</span>]
+│     ├─ Evidence: certificates of destruction, logged custody to the end [<span class="qrefs">Q76 Q181</span>]
+│     └─ Obligation authorizes disposal — never the calendar [<span class="qrefs">Q76 Q207</span>]</pre>
+</details>
 <a class="decklink" href="#flashcards" data-deck="g5">▦ 32 flashcards &rarr;</a></div>
 <div class="bc" id="card-g6" style="--gc:var(--g6)">
 <h3>g6 &middot; Lifecycle, Retention &amp; Destruction</h3>
@@ -722,6 +1141,165 @@
 <tr><td class="rowhead">Strictest jurisdiction...</td><td>When scoping controls for cloud migration, first determine jurisdictional scope — the data's origin, storage location, and processing location each trigger different regulatory regimes, and controls must satisfy the strictest applicable jurisdiction. For multinational public-cloud migration, regulatory compliance requirements across jurisdictions drive control scope; the shared responsibility model is important but secondary — compliance requirements drive and shape the scope of all other... <span class="qrefs">[Q74]</span></td></tr>
 <tr><td class="rowhead">Legal down to control</td><td>Privacy and compliance are managerial obligations flowing downward into technical controls — always reason from the legal/regulatory requirement to the control, never the reverse. They are input drivers that shape how data is classified, which controls are selected, and how data is handled across its lifecycle.</td></tr>
 </tbody></table></details>
+<details class="mmrows">
+<summary>compressed concept tree — 156 lines · 63 Q-refs</summary>
+<pre class="mmtree">└─ g6 · LIFECYCLE, RETENTION &amp; DESTRUCTION
+   ├─ Monitoring &amp; detection
+   │  ├─ RBAC needs quarterly recertification — orphaned accounts, role creep
+   │  ├─ SIEM: enterprise log aggregation, correlation, real-time breach
+   │  │  detection — DLP lacks central audit view [<span class="qrefs">Q75</span>]
+   │  ├─ Test-env breach detection → real-time access logging + automated
+   │  │  analysis/alerting (periodic audit is reactive) [<span class="qrefs">Q142</span>]
+   │  └─ Two subsidiaries, different schemes → FIRST step = comprehensive
+   │     asset inventory across all entities (levels-by-regs waits) [<span class="qrefs">Q210</span>]
+   ├─ Lifecycle risk map (<span class="mmwarn">⚠</span> see Contradiction C-1)
+   │  ├─ Creation = highest (no controls yet, class pending) — generic answer
+   │  ├─ Usage/distribution = moderate-high; archival = moderate
+   │  ├─ Destruction = critical (remanence, defensible disposal)
+   │  └─ <span class="mmwarn">⚠</span> Multinational + diverse jurisdictions scenario → DESTRUCTION is
+   │     the answer (varying disposal regs, remnants, multi-infra) [<span class="qrefs">Q137</span>]
+   ├─ Reassessment
+   │  ├─ Periodic scheduled reviews — never ad hoc/event-only [<span class="qrefs">Q57</span>]
+   │  ├─ Triggers: business value change · legal/reg change · tech shift
+   │  ├─ Stale labels vs priorities → neglected periodic reassessment [<span class="qrefs">Q207</span>]
+   │  ├─ Post-acquisition + cloud: reassess classification FIRST (retention
+   │  │  depends on it) [<span class="qrefs">Q237</span>]
+   │  ├─ Purpose: protect per CURRENT value/sensitivity; <span class="mmwarn">⚠</span> compliance is
+   │  │  secondary to that [<span class="qrefs">Q140</span>]
+   │  └─ Sustain globally → continuous risk assessment + control adaptation;
+   │     annual audits = snapshots [<span class="qrefs">Q54</span>]
+   ├─ Data policy &amp; archiving
+   │  ├─ Policy governs classification, retention, destruction, archiving [<span class="qrefs">Q58</span>]
+   │  ├─ Living-process test: who owns it · what is it · last review when?
+   │  ├─ Archiving = lifecycle control, NOT a backup strategy
+   │  ├─ Fundamental archive question: how long retained + who needs access [<span class="qrefs">Q149</span>]
+   │  ├─ Retention rules live in the classification program — not backup
+   │  │  policy or tool config [<span class="qrefs">Q205</span>]
+   │  ├─ WORM: write-once immutability, compliance archives (SEC 17a-4) [<span class="qrefs">Q215</span>]
+   │  ├─ "Actively prevents" alteration → WORM; hash checks only DETECT [<span class="qrefs">Q29</span>]
+   │  ├─ Media degrades silently → scheduled migration to fresh media
+   │  ├─ Formats obsolesce → conversion strategy (distinct from degradation)
+   │  ├─ 25-yr data / 10-yr media → migration schedule + format plan (not
+   │  │  capacity) [<span class="qrefs">Q124</span>]
+   │  ├─ 150-yr retention → readability of format+media outranks key mgmt [<span class="qrefs">Q143</span>]
+   │  ├─ Recoverability = app/format dependency chain + regular test
+   │  │  restores; readable media + unreadable data = failed archive
+   │  ├─ Unretrievable logs (app gone) → neglected recoverability planning [<span class="qrefs">Q145</span>]
+   │  ├─ Distributed dynamic data → consistent time-stamping + versioning
+   │  │  for integrity proof [<span class="qrefs">Q228</span>]
+   │  ├─ Tiered archive hot→warm→cold + progressive minimization (prune/
+   │  │  trim/anonymize) per tier
+   │  ├─ Retain value, shed detail → tiered progressive transformation;
+   │  │  rigid 7-yr deletion fails [<span class="qrefs">Q161</span>]
+   │  ├─ Legal/reg archives: integrity + authenticity for ADMISSIBILITY
+   │  │  beat BI retrieval speed [<span class="qrefs">Q87</span>]
+   │  ├─ Analytics archive: RBAC + masking + retention policies (not split
+   │  │  archives) [<span class="qrefs">Q119</span>]
+   │  ├─ Sole offsite tape backup failed → redundant methods + restoration
+   │  │  testing; encryption ≠ availability [<span class="qrefs">Q43</span>]
+   │  ├─ Device failure recovery = backup + restoration procedures [<span class="qrefs">Q50</span>]
+   │  └─ Mindset: balance retention duty, defensible destruction, provable
+   │     recoverability vs cost/liability
+   ├─ Remanence &amp; sanitization
+   │  ├─ Remanence: residual data after erasure attempts [<span class="qrefs">Q73 Q224</span>]
+   │  ├─ Ascending assurance: clear → purge → destroy; crypto-erase strong
+   │  │  if AES-256 pre-applied; selection follows media/class/context
+   │  ├─ Clearing: single-pass overwrite — defeats keyboard attacks; reuse
+   │  │  within SAME level
+   │  ├─ Purging: degauss/multi-pass — defeats lab/forensic; reuse at LOWER level
+   │  ├─ Formatting: removes pointers only — NOT sanitization [<span class="qrefs">Q221</span>]
+   │  ├─ Degaussing: magnetic media (HDD/tape) ONLY — never SSD
+   │  ├─ SSD wear-leveling defeats targeted overwrite; over-provisioned
+   │  │  blocks survive → maker sanitize or crypto-erase [<span class="qrefs">Q64</span>]
+   │  ├─ CPU cache L1/L2/L3: flush instructions + power cycle [<span class="qrefs">Q89</span>]
+   │  ├─ BYOD: containerization + selective corporate wipe (MDM/UEM); full
+   │  │  wipe violates privacy [<span class="qrefs">Q102</span>]
+   │  └─ Method choice driven by sensitivity + provable unrecoverability —
+   │     cost is secondary [<span class="qrefs">Q70</span>]
+   ├─ Sanitization scenarios
+   │  ├─ Mixed SSD+HDD fleet: SSD secure-erase + destroy; HDD multi-pass;
+   │  │  verify both [<span class="qrefs">Q84</span>]
+   │  ├─ Volatile + non-volatile mix: per-media erasure + destruction +
+   │  │  independent verification [<span class="qrefs">Q115</span>]
+   │  ├─ Regulated finance: certified destruction + third-party verify +
+   │  │  chain of custody [<span class="qrefs">Q181</span>]
+   │  ├─ Crypto-erase: destroy ALL key copies — valid only if no plaintext
+   │  │  copies exist (AES-256 pre-applied) [<span class="qrefs">Q79</span>]
+   │  └─ Sanitize decommissioned SSDs keep reuse: ATA Secure Erase + key
+   │     destruction; DoD multi-pass unreliable on SSD [<span class="qrefs">Q77 Q154</span>]
+   ├─ Cloud destruction
+   │  ├─ Crypto-shredding needs NO physical media control — built for cloud [<span class="qrefs">Q67</span>]
+   │  ├─ Cloud archive: elastic scale, cost, provider refreshes media;
+   │  │  sovereignty + egress costs are the tradeoffs [<span class="qrefs">Q216</span>]
+   │  ├─ Any cloud model destruction → cryptographic erasure (no
+   │  │  physical/deg auss access)
+   │  ├─ Hybrid multi-CSP → crypto-erase + secure overwrite + independent
+   │  │  verification [<span class="qrefs">Q3</span>]
+   │  ├─ Multi-region → tiered classification + per-region methods; single
+   │  │  strictest method wastes [<span class="qrefs">Q42</span>]
+   │  ├─ Multi-cloud verifiable → crypto-erase + CENTRALIZED key management;
+   │  │  vendor tools fragment [<span class="qrefs">Q65</span>]
+   │  ├─ Multi-CSP + minimize → tailored combo: erasure + overwrite +
+   │  │  minimization per environment [<span class="qrefs">Q96</span>]
+   │  ├─ Multi-jurisdiction proof → per-jurisdiction trio + independent
+   │  │  verification; provider self-attestation insufficient [<span class="qrefs">Q99</span>]
+   │  ├─ Edge IoT: centralized orchestration + distributed agents + real-
+   │  │  time verification [<span class="qrefs">Q135</span>]
+   │  ├─ Multi-tenant financial: erasure + overwrite + verification;
+   │  │  attestation misses virtualization remnants [<span class="qrefs">Q138</span>]
+   │  ├─ Commingled tenant data (no isolation): same trio [<span class="qrefs">Q167</span>]
+   │  └─ Healthcare legacy removal proof → encrypt + destroy all keys
+   │     (degauss inapplicable) [<span class="qrefs">Q166</span>]
+   ├─ Retention policy &amp; defensible destruction
+   │  ├─ Driver quartet: laws/regs (GDPR/HIPAA/SOX/FINRA/tax) · standards
+   │  │  (PCI/ISO) · business (litigation, IP, analytics) · privacy/minimization
+   │  ├─ Retain only as long as required — over-retention = breach impact +
+   │  │  legal risk
+   │  ├─ Policy trio: retention periods + destruction schedules + legal-hold
+   │  │  exceptions
+   │  ├─ Central oversight, LOCAL jurisdictional enforcement (EU data in EU)
+   │  ├─ GDPR/CCPA multi-region → classify by sensitivity + jurisdiction;
+   │  │  strictest-uniform rejected [<span class="qrefs">Q117</span>]
+   │  ├─ Efficiency + rapid retrieval → region-specific policies, central
+   │  │  oversight, customizable rules [<span class="qrefs">Q123</span>]
+   │  ├─ Defensible destruction: provable, documented, irrecoverable —
+   │  │  documentation + custody + certificate [<span class="qrefs">Q76</span>]
+   │  ├─ Certificate of destruction = most critical proof doc (SSD case) [<span class="qrefs">Q108</span>]
+   │  └─ Varying e-discovery → classification-based destruction per
+   │     jurisdiction [<span class="qrefs">Q55</span>]
+   ├─ Crypto &amp; transport selection
+   │  ├─ AES: preferred symmetric (rest + inside TLS); satellite/bandwidth
+   │  │  constrained links — 3DES deprecated/slow = distractor [<span class="qrefs">Q16</span>]
+   │  ├─ ChaCha20: faster in software on low-power CPUs → mobile/IoT
+   │  ├─ Onion routing: layers peeled per relay; confidentiality AND
+   │  │  anonymity — no node links src↔dst [<span class="qrefs">Q91</span>]
+   │  ├─ Hide payload AND communication patterns → onion; VPN exposes
+   │  │  endpoint addresses [<span class="qrefs">Q88</span>]
+   │  ├─ Onion cost: layered crypto at every node = performance hit [<span class="qrefs">Q106</span>]
+   │  ├─ Blockchain: immutable distributed ledger for multi-party tamper-
+   │  │  evident audit w/o central trust; <span class="mmwarn">⚠</span> consensus validates but does
+   │  │  NOT prevent tampering once written [<span class="qrefs">Q93</span>]
+   │  └─ Constrained industrial IoT: lightweight encryption + periodic key
+   │     rotation (E2E-everything too heavy) [<span class="qrefs">Q148</span>]
+   ├─ Attribution &amp; tool-for-job
+   │  ├─ Digital watermarks: embedded traceable markers → attribute/trace
+   │  │  leaks to source/license-holder; passive, forensic [<span class="qrefs">Q141 Q198</span>]
+   │  └─ Job matrix: prevention→DLP · enforcement→DRM/IRM · visibility→CASB
+   │     · attribution→watermark; layered deploy is the real answer [<span class="qrefs">Q184</span>]
+   └─ Privacy law → controls
+      ├─ Right to Access: must know where ALL PII lives → inventory+classify
+      ├─ Right to Erasure: verifiable complete deletion incl. backups
+      ├─ Right to Portability: structured machine-readable export
+      ├─ NIST SP 800-37 R2 Task P-15: privacy integrated INTO control
+      │  selection per classification level — no separate tiers, no
+      │  uniform controls [<span class="qrefs">Q95</span>]
+      ├─ Cross-border GDPR: Adequacy Decision · SCCs · BCRs — absent all
+      │  three, halt the transfer
+      ├─ Cloud scoping: determine jurisdictional scope FIRST (origin/
+      │  storage/processing each trigger regimes); satisfy strictest
+      │  APPLICABLE; compliance shapes scope over shared-responsibility [<span class="qrefs">Q74</span>]
+      └─ Reason law→control, never control→law</pre>
+</details>
 <a class="decklink" href="#flashcards" data-deck="g6">▦ 67 flashcards &rarr;</a></div>
   </section>
   <section id="flashcards">

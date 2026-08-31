@@ -65,6 +65,11 @@
   .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
   .ladder .rule b{color:var(--mc);font-style:normal}
 
+  .ladder ol li .qrefs{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .ladder ol li .qrefs a{color:var(--mc);text-decoration:none;border-bottom:1px dotted var(--mc);margin:0 1px}
+  .ladder ol li .qrefs a:hover{border-bottom-style:solid}
+  .rad .ex a{color:#b91c1c;text-decoration:none;font-weight:800}
+  .rad .ex a:hover{text-decoration:underline}
   .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
   .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
   .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
@@ -124,9 +129,9 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 3 of 5</div>
+    <div class="eyebrow">CISSP &middot; Domain 3 &middot; Exam preparation &middot; logic-based scenarios &middot; part 3 of 5</div>
     <h1>D3 Question Drill 3 &mdash; Site Design & Environmental (topics 13-14)</h1>
-    <p class="sub"><b>92 scenario questions</b> (topics 1&ndash;12) &middot; <b>12 decision families</b> &middot; <b>5 knowledge groups</b> &mdash; forensics and evidence, monitoring and intel, malware defense, change and patch, resources and environment. Continues in <a href="d7_drill_p2.html">part 2: continuity and recovery (80 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+    <p class="sub"><b>76 scenario questions</b> (topics 13&ndash;14 of 19) &middot; <b>2 decision families</b> &mdash; site &amp; facility design and environmental controls. Continues in <a href="d3_drill_p4.html">part 4: cloud, ICS/SCADA, IoT &amp; zero trust</a>. Companion: the <a href="d3_cheatsheet_p2.html">knowledge cheatsheet</a> &middot; <a href="d3_index.html">D3 hub</a>.</p>
   </div>
 </header>
 
@@ -140,7 +145,7 @@
 
   <section id="fmap">
     <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
-    <p class="lede">The 12 part-1 families (of D7&rsquo;s 18 total), colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <p class="lede">The 2 families on this page, colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
     <div class="map-panel">
       <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D3 drill part 3"></svg>
       <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
@@ -184,27 +189,35 @@
 <script>
 var GROUPS={g1:{name:"Security Models & TCB",color:"#b91c1c",fill:"#dc2626"},g2:{name:"Evaluation & Frameworks",color:"#b45309",fill:"#d97706"},g3:{name:"Physical Access & Biometrics",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"Site & Facility Design",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Environmental Controls",color:"#047857",fill:"#059669"}};
 var FAMILIES = [
-{ id:'f13', g:'g4', name:'Site & facility design', topic:'Site & Facility Design (CPTED, Layout)', q:51, leaves:['AC vent shows what?'],
-    factors:['<b>AC vent shows what?</b> &mdash; Intruders bypassing the main entrance via an air conditioning vent demonstrates the principle failure: detection mechanisms should monitor all potential penetration... <span class="qrefs">[Q570]</span>'],
-    rule:'CPTED and layered zones before technology' },
-{ id:'f14', g:'g5', name:'Environmental controls', topic:'Environmental Controls (HVAC, Power, Fire)', q:25, leaves:['Four-hour outage...','RF eavesdropping scenario?','Life safety outranks?','Fire response order?'],
-    factors:['<b>Four-hour outage classification?</b> &mdash; Scenario: four-hour complete outage; UPS depleted after eight minutes; diesel generator failed to start. Classification: a blackout exceeding UPS capacity, compounded by... <span class="qrefs">[Q870]</span>',
-     '<b>RF eavesdropping scenario?</b> &mdash; Scenario: defense contractor whose radio frequency (RF) emissions are captured by a competitor despite fencing and badges. Mitigation: deploy TEMPEST-compliant shielding... <span class="qrefs">[Q877]</span>',
-     '<b>Life safety outranks?</b> &mdash; CISSP mindset: life safety outranks data protection. Priority order: people first, then equipment, then data, then the building. Environmental control selection is a...',
-     '<b>Fire response order?</b> &mdash; Evacuation-first sequencing in fire suppression planning: detect → alarm/evacuate → contain (dampers) → suppress. Life safety always takes priority over equipment.'],
-    rule:'UPS for seconds, generators for hours; detect before suppressing' }
+{ id:'f13', g:'g4', name:"Site & facility design", topic:"Site Design, CPTED, Perimeter & Physical Layers", q:51, leaves:["Deter / delay / detect", "Detect → assess → respond", "Lighting = dual purpose", "Cover every route", "Safety first"],
+    factors:[
+     "<b>Layer physical controls across functions</b> &mdash; fences deter and delay, cameras detect, guards respond; overlapping preventive/detective/corrective layers compensate when one fails &mdash; badge → biometric → mantrap is the depth pattern. <span class=\"qrefs\">[<a href=\"#q-Q388\">Q388</a> <a href=\"#q-Q394\">Q394</a> <a href=\"#q-Q400\">Q400</a> <a href=\"#q-Q387\">Q387</a> <a href=\"#q-Q688\">Q688</a>]</span>",
+     "<b>Detection triggers assess, then respond</b> &mdash; a tripped perimeter sensor initiates assessment of method and intent before response; sensors without assessment capabilities leave breaches unhandled. <span class=\"qrefs\">[<a href=\"#q-Q158\">Q158</a> <a href=\"#q-Q891\">Q891</a> <a href=\"#q-Q386\">Q386</a> <a href=\"#q-Q575\">Q575</a>]</span>",
+     "<b>Lighting is the dual-purpose control</b> &mdash; deterrence plus people safety, better camera footage at night, CPTED-consistent uniform illumination, and adaptive/sensor-triggered variants for high-security perimeters. <span class=\"qrefs\">[<a href=\"#q-Q436\">Q436</a> <a href=\"#q-Q429\">Q429</a> <a href=\"#q-Q869\">Q869</a> <a href=\"#q-Q916\">Q916</a> <a href=\"#q-Q29\">Q29</a> <a href=\"#q-Q504\">Q504</a>]</span>",
+     "<b>Cover every penetration route</b> &mdash; vents, walls, ceilings and gaps between partitions; slab-to-structure walls close ceiling bypass; gap analyses start with comprehensive route assessment; propped doors get deadbolt plus ajar alarm. <span class=\"qrefs\">[<a href=\"#q-Q384\">Q384</a> <a href=\"#q-Q474\">Q474</a> <a href=\"#q-Q451\">Q451</a> <a href=\"#q-Q481\">Q481</a> <a href=\"#q-Q573\">Q573</a> <a href=\"#q-Q560\">Q560</a> <a href=\"#q-Q272\">Q272</a>]</span>",
+     "<b>Site selection leads the survey</b> &mdash; strategic location dominates Tier-4 assessments; security joins at planning/site-selection phase; surveys extend risk management to the physical realm. <span class=\"qrefs\">[<a href=\"#q-Q155\">Q155</a> <a href=\"#q-Q482\">Q482</a> <a href=\"#q-Q699\">Q699</a>]</span>",
+     "<b>People safety outranks asset protection</b> &mdash; the primary purpose includes welfare of employees and visitors; construction choices (glass-clad polycarbonate, fire-resistant cabling) follow. <span class=\"qrefs\">[<a href=\"#q-Q408\">Q408</a> <a href=\"#q-Q610\">Q610</a> <a href=\"#q-Q445\">Q445</a> <a href=\"#q-Q157\">Q157</a>]</span>"],
+    rule:"Deter, delay, detect, assess, respond — and cover the routes nobody watches." },
+{ id:'f14', g:'g5', name:"Environmental controls", topic:"HVAC, Power, Fire Suppression & Environmental Threats", q:25, leaves:["Suppress to the hazard", "UPS bridges, generators carry", "HVAC = temp + humidity", "Guard the power rooms", "Elevate the intakes"],
+    factors:[
+     "<b>Fire suppression matches the hazard</b> &mdash; FM-200/gas in server rooms, pre-action (detection-gated water) for archives and cold storage, heat-release rate drives the design, combustible limits reduce it. <span class=\"qrefs\">[<a href=\"#q-Q64\">Q64</a> <a href=\"#q-Q529\">Q529</a> <a href=\"#q-Q715\">Q715</a> <a href=\"#q-Q791\">Q791</a> <a href=\"#q-Q512\">Q512</a> <a href=\"#q-Q199\">Q199</a>]</span>",
+     "<b>Power layers: UPS bridges, generators carry</b> &mdash; continuous medical monitoring pairs UPS with generators; breaker/transformer rooms are the crown jewels to secure; blackout analysis exposes UPS-plus-generator gaps; electrical noise from co-located circuits distorts equipment. <span class=\"qrefs\">[<a href=\"#q-Q636\">Q636</a> <a href=\"#q-Q487\">Q487</a> <a href=\"#q-Q903\">Q903</a> <a href=\"#q-Q870\">Q870</a> <a href=\"#q-Q144\">Q144</a>]</span>",
+     "<b>HVAC fails as a pair: humidity + temperature</b> &mdash; condensation on chassis = humidity control; frequent failures = excessive heat; combined failure is the comprehensive threat; positive pressurization keeps contaminants out. <span class=\"qrefs\">[<a href=\"#q-Q411\">Q411</a> <a href=\"#q-Q415\">Q415</a> <a href=\"#q-Q409\">Q409</a> <a href=\"#q-Q414\">Q414</a>]</span>",
+     "<b>Public-facing buildings elevate intakes and add biometrics</b> &mdash; mixed public/private headquarters protect HVAC intakes and restrict access; building automation gets role-based access; smart-building risk = expanded attack surface. <span class=\"qrefs\">[<a href=\"#q-Q449\">Q449</a> <a href=\"#q-Q777\">Q777</a> <a href=\"#q-Q6\">Q6</a> <a href=\"#q-Q722\">Q722</a>]</span>",
+     "<b>Emanations are environmental too</b> &mdash; competitor RF eavesdropping is answered with TEMPEST shielding. <span class=\"qrefs\">[<a href=\"#q-Q877\">Q877</a>]</span>"],
+    rule:"Match each environmental control to its failure mode — suppression to hazard, power to duration, air to moisture." }
 ];
 
 var RADAR=[
-{t:'Wrong artifact attacked', d:'Attacking the key, the ciphertext, the implementation or the math - questions ask which.', ex:'see factor ladders'},
-{t:'Guarantee mismatch', d:'Confidentiality controls offered for integrity or authentication asks - match the property.', ex:'see factor ladders'},
-{t:'Layer skipped', d:'Solutions that start at technology while the question names an earlier planning step.', ex:'see factor ladders'},
-{t:'Single point of trust', d:'One control, vendor or path presented as total protection.', ex:'see factor ladders'},
-{t:'Speed over correctness', d:'Performance options chosen where the scored factor is correctness of the control.', ex:'see factor ladders'},
-{t:'Absolute promises', d:'Guarantees of prevention or unbreakability - reject absolutes.', ex:'see factor ladders'},
-{t:'Detection sold as prevention', d:'Monitoring or audit answers where prevention is asked.', ex:'see factor ladders'},
-{t:'Vendor first', d:'Outsourcing proposed where governance or design ownership is the scored step.', ex:'see factor ladders'},
-{t:'Once-and-done', d:'Point-in-time fixes where lifecycle or continuous operation is required.', ex:'see factor ladders'}
+{t:"Single-layer perimeter", d:"Fence or lock praised alone; no detect-and-respond pairing behind it.", ex:"<a href=\"#q-Q387\">Q387</a>, <a href=\"#q-Q400\">Q400</a>, <a href=\"#q-Q383\">Q383</a>"},
+{t:"Detect without assess", d:"Alarms installed with no evaluation step between detection and response.", ex:"<a href=\"#q-Q575\">Q575</a>, <a href=\"#q-Q891\">Q891</a>"},
+{t:"Route blind spots", d:"Sensors on doors and windows; vents, walls and ceilings forgotten.", ex:"<a href=\"#q-Q384\">Q384</a>, <a href=\"#q-Q481\">Q481</a>, <a href=\"#q-Q573\">Q573</a>"},
+{t:"Safety traded away", d:"Physical hardening that endangers the people it claims to protect.", ex:"<a href=\"#q-Q408\">Q408</a>, <a href=\"#q-Q610\">Q610</a>"},
+{t:"Suppression mismatch", d:"Wrong agent for the room — water over electronics, gas where people work.", ex:"<a href=\"#q-Q64\">Q64</a>, <a href=\"#q-Q529\">Q529</a>, <a href=\"#q-Q715\">Q715</a>"},
+{t:"Power layering skipped", d:"Generators without UPS bridging, or battery-only for multi-hour outages.", ex:"<a href=\"#q-Q636\">Q636</a>, <a href=\"#q-Q870\">Q870</a>"},
+{t:"Humidity neglected", d:"Temperature managed while condensation corrodes the racks.", ex:"<a href=\"#q-Q415\">Q415</a>, <a href=\"#q-Q411\">Q411</a>"},
+{t:"Lighting as decoration", d:"Illumination budgeted without deterrence and camera-performance rationale.", ex:"<a href=\"#q-Q429\">Q429</a>, <a href=\"#q-Q436\">Q436</a>, <a href=\"#q-Q869\">Q869</a>"},
+{t:"Late security input", d:"Facility designed first; security consulted after site selection.", ex:"<a href=\"#q-Q155\">Q155</a>, <a href=\"#q-Q482\">Q482</a>"}
 ];
 
 var QS = [
@@ -357,7 +370,7 @@ var QS = [
   el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
   var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
-  c0.textContent = 'DOMAIN 7 · PART';
+  c0.textContent = "DOMAIN 3 · PART";
   var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
   c1.textContent = 'DECISION';

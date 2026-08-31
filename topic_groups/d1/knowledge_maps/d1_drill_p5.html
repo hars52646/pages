@@ -65,6 +65,11 @@
   .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
   .ladder .rule b{color:var(--mc);font-style:normal}
 
+  .ladder ol li .qrefs{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .ladder ol li .qrefs a{color:var(--mc);text-decoration:none;border-bottom:1px dotted var(--mc);margin:0 1px}
+  .ladder ol li .qrefs a:hover{border-bottom-style:solid}
+  .rad .ex a{color:#b91c1c;text-decoration:none;font-weight:800}
+  .rad .ex a:hover{text-decoration:underline}
   .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
   .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
   .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
@@ -124,9 +129,9 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 5 of 6</div>
+    <div class="eyebrow">CISSP &middot; Domain 1 &middot; Exam preparation &middot; logic-based scenarios &middot; part 5 of 6</div>
     <h1>D1 Question Drill 5 &mdash; Cloud, Architecture & Investigations (topics 17-21)</h1>
-    <p class="sub"><b>92 scenario questions</b> (topics 1&ndash;12) &middot; <b>12 decision families</b> &middot; <b>5 knowledge groups</b> &mdash; forensics and evidence, monitoring and intel, malware defense, change and patch, resources and environment. Continues in <a href="d7_drill_p2.html">part 2: continuity and recovery (80 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+    <p class="sub"><b>154 scenario questions</b> (topics 17&ndash;21 of 27) &middot; <b>5 decision families</b> &mdash; cloud &amp; IoT, system architecture, security models, web vulnerabilities and investigations. Continues in <a href="d1_drill_p6.html">part 6: cryptography</a>. Companion: the <a href="d1_cheatsheet_p3.html">knowledge cheatsheet</a> &middot; <a href="d1_index.html">D1 hub</a>.</p>
   </div>
 </header>
 
@@ -140,7 +145,7 @@
 
   <section id="fmap">
     <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
-    <p class="lede">The 12 part-1 families (of D7&rsquo;s 18 total), colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <p class="lede">The 5 families on this page, colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
     <div class="map-panel">
       <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D1 drill part 5"></svg>
       <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
@@ -184,54 +189,56 @@
 <script>
 var GROUPS={g1:{name:"Cloud & Virtualization A",color:"#b91c1c",fill:"#dc2626"},g2:{name:"Cloud & Virtualization B",color:"#b45309",fill:"#d97706"},g3:{name:"System Architecture",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"OS & Security Models",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Investigations & IR",color:"#047857",fill:"#059669"},g6:{name:"Hashing, MAC & Signatures",color:"#be185d",fill:"#db2777"},g7:{name:"Cryptanalysis & PQC",color:"#0e7490",fill:"#0891b2"}};
 var FAMILIES = [
-{ id:'f17', g:'g1', name:"Cloud & IoT", topic:"Cloud, Virtualization & IoT Security", q:91, leaves:["Society vs employer: who...","Refuse and escalate?","Profession vs any other...","Framework or ethics...","Do ethics vary by..."],
+{ id:'f17', g:'g1', name:"Cloud & IoT", topic:"Cloud, Virtualization, IoT & Zero Trust", q:91, leaves:["Service model duties", "Tenant isolation", "Zero trust = continuous", "Container risks", "IoT constraint crypto"],
     factors:[
-     "<b>Society vs employer: who wins?</b> &mdash; When two canons conflict, choose the action that satisfies the lower-numbered canon \u2014 even if it means going against the employer's directive. Society outranks employer;...",
-     "<b>Refuse and escalate?</b> &mdash; When an employer asks you to do something unethical or illegal, refuse and escalate through proper channels (management, legal, HR). Complying makes you ethically...",
-     "<b>Profession vs any other canon?</b> &mdash; When 'advance the profession' (Canon 4) conflicts with any other canon, the other canon wins \u2014 Canon 4 is last in priority. Threat-intel sharing or peer collaboration... <span class=\"qrefs\">[Q559]</span>",
-     "<b>Framework or ethics foundational?</b> &mdash; Frameworks (ISO 27001, NIST CSF) and ethics serve different purposes: frameworks structure controls; ethics governs conduct and decisions \u2014 ethics is the foundational... <span class=\"qrefs\">[Q315]</span>",
-     "<b>Do ethics vary by geography?</b> &mdash; When operating across regions with differing laws or norms, apply ISC2 ethics consistently and globally \u2014 ethics are universal and do not vary by geography or local...",
-     "<b>Contract or harm prevention?</b> &mdash; Healthcare vendor risk with CEO preference for a supplier: the governing principle is doing nothing harmful to others. Contractual obligations are legally bounded but... <span class=\"qrefs\">[Q362]</span>"],
-    rule:"Shared responsibility sets the boundary; data duty stays" },
-{ id:'f18', g:'g3', name:"Architecture", topic:"System Architecture (Memory, Rings, TCB, TPM)", q:19, leaves:["Cross-process...","Runtime boundaries vs...","Original backup server...","Shielding or monitoring?"],
+     "<b>Service model sets the boundary</b> &mdash; custom trading apps = IaaS; shared regulated workloads across hospitals = community cloud; the CFO&rsquo;s capex-to-opex push is the pay-as-you-go answer; pre-migration the step is due diligence on needs and providers. <span class=\"qrefs\">[<a href=\"#q-Q885\">Q885</a> <a href=\"#q-Q741\">Q741</a> <a href=\"#q-Q875\">Q875</a> <a href=\"#q-Q1160\">Q1160</a>]</span>",
+     "<b>Multi-tenancy = isolation is the design center</b> &mdash; hypervisor controls with hardware assist, tenant-specific virtual segmentation, and consistent policy enforcement across services; the hybrid cloud&rsquo;s risk concentrates in the public segment with least visibility. <span class=\"qrefs\">[<a href=\"#q-Q123\">Q123</a> <a href=\"#q-Q132\">Q132</a> <a href=\"#q-Q585\">Q585</a> <a href=\"#q-Q264\">Q264</a> <a href=\"#q-Q615\">Q615</a> <a href=\"#q-Q367\">Q367</a>]</span>",
+     "<b>Zero trust = continuous verification, microsegmentation, adaptive auth</b> &mdash; API gateways enforce it in ZTA rollouts; blocked by provider limits? Trust-but-verify with enhanced assurance. <span class=\"qrefs\">[<a href=\"#q-Q9\">Q9</a> <a href=\"#q-Q441\">Q441</a> <a href=\"#q-Q529\">Q529</a> <a href=\"#q-Q601\">Q601</a> <a href=\"#q-Q661\">Q661</a> <a href=\"#q-Q909\">Q909</a>]</span>",
+     "<b>Containerization trades isolation for speed</b> &mdash; container escape, vulnerable bundled libraries and expanded container-to-container surface are the scored risks; counter with image scanning, runtime security and least-privilege inter-process communication. <span class=\"qrefs\">[<a href=\"#q-Q930\">Q930</a> <a href=\"#q-Q175\">Q175</a> <a href=\"#q-Q520\">Q520</a> <a href=\"#q-Q1191\">Q1191</a> <a href=\"#q-Q998\">Q998</a> <a href=\"#q-Q273\">Q273</a>]</span>",
+     "<b>Constrained IoT crypto = lightweight and ECC</b> &mdash; PRESENT/SIMON-class ciphers, ECC-256 for 100k-device fleets, lightweight ECC implementations, secure boot with limited compute; pair with segmentation, whitelisting and staged ICS patching. <span class=\"qrefs\">[<a href=\"#q-Q537\">Q537</a> <a href=\"#q-Q607\">Q607</a> <a href=\"#q-Q1091\">Q1091</a> <a href=\"#q-Q1078\">Q1078</a> <a href=\"#q-Q437\">Q437</a> <a href=\"#q-Q1039\">Q1039</a>]</span>",
+     "<b>ICS lives isolated</b> &mdash; ransomware reaching treatment plants through shared infrastructure, indirect DCS paths and long hardware lifecycles make isolation/air-gapping plus tailored defense the answers. <span class=\"qrefs\">[<a href=\"#q-Q328\">Q328</a> <a href=\"#q-Q343\">Q343</a> <a href=\"#q-Q643\">Q643</a> <a href=\"#q-Q1115\">Q1115</a> <a href=\"#q-Q865\">Q865</a> <a href=\"#q-Q1252\">Q1252</a>]</span>",
+     "<b>Cloud crypto = central, agnostic key management</b> &mdash; multi-cloud strategies centralize KMS across providers; cloud-agnostic software KMS for global key programs; VM migrations get a dedicated encrypted migration network. <span class=\"qrefs\">[<a href=\"#q-Q1195\">Q1195</a> <a href=\"#q-Q1026\">Q1026</a> <a href=\"#q-Q67\">Q67</a> <a href=\"#q-Q213\">Q213</a> <a href=\"#q-Q1251\">Q1251</a>]</span>"],
+    rule:"Isolation, continuous verification and right-sized crypto decide every cloud/IoT answer." },
+{ id:'f18', g:'g3', name:"Architecture", topic:"System Architecture, TCB & Memory Protection", q:19, leaves:["Security kernel enforces", "Isolate processes", "Modular TCB", "Verify with hybrid methods", "Watch emanations"],
     factors:[
-     "<b>Cross-process modification fix?</b> &mdash; When a custom application interacting with a system service in a separate memory space can modify variables belonging to another independently running process, the... <span class=\"qrefs\">[Q163]</span>",
-     "<b>Runtime boundaries vs labels?</b> &mdash; To stop a compromised process from accessing other processes' allocated memory, enforce memory allocation boundaries at runtime via secure memory management. Data hiding... <span class=\"qrefs\">[Q705]</span>",
-     "<b>Original backup server only?</b> &mdash; When encrypted backup tapes are decryptable on any company server but policy requires decryption only on the original backup server, choose Binding. Sealing fails as a... <span class=\"qrefs\">[Q1004]</span>",
-     "<b>Shielding or monitoring?</b> &mdash; For a defense contractor whose competitor captures RF emissions from engineering workstations to reconstruct proprietary circuit designs (with perimeter fencing and... <span class=\"qrefs\">[Q1110]</span>"],
-    rule:"Rings, TCB and TPM enforce what software cannot" },
-{ id:'f19', g:'g4', name:"Security Models", topic:"Security Models & Operating System Security", q:3, leaves:["Scenario wording \u2192 which...","Unsanitized comments...","Logged-in bank, silent...","Manager's..."],
+     "<b>The security kernel enforces the reference monitor</b> &mdash; OS designs with enhanced protection center on it; modernization adds TPM-backed integrity verification of TCB components. <span class=\"qrefs\">[<a href=\"#q-Q6\">Q6</a> <a href=\"#q-Q1\">Q1</a>]</span>",
+     "<b>Compromised process ≠ compromised system</b> &mdash; process isolation plus secure memory management contains buffer overflows, cross-application and kernel-mode escalation. <span class=\"qrefs\">[<a href=\"#q-Q1007\">Q1007</a> <a href=\"#q-Q163\">Q163</a> <a href=\"#q-Q705\">Q705</a> <a href=\"#q-Q712\">Q712</a> <a href=\"#q-Q385\">Q385</a>]</span>",
+     "<b>Adaptable TCB = modular, pluggable, still simple</b> &mdash; AI features attach as external modules with well-defined interfaces; dynamic IaaS TCBs stay conceptually simple; hybrid TCBs split regional modules from a shared core. <span class=\"qrefs\">[<a href=\"#q-Q48\">Q48</a> <a href=\"#q-Q51\">Q51</a> <a href=\"#q-Q378\">Q378</a> <a href=\"#q-Q1264\">Q1264</a>]</span>",
+     "<b>Verify the kernel with hybrid methods</b> &mdash; formal methods plus dynamic analysis together prove correctness. <span class=\"qrefs\">[<a href=\"#q-Q485\">Q485</a>]</span>",
+     "<b>Hardware quirks are attack classes</b> &mdash; Rowhammer bit flips leak across processes; TEMPEST shielding stops RF eavesdropping; SDS needs memory-page encryption plus integrity checks. <span class=\"qrefs\">[<a href=\"#q-Q319\">Q319</a> <a href=\"#q-Q1110\">Q1110</a> <a href=\"#q-Q447\">Q447</a>]</span>"],
+    rule:"Isolation at every layer — process, memory, tenant — is what architecture buys you." },
+{ id:'f19', g:'g4', name:"Security Models", topic:"Security Models & Data Flow", q:3, leaves:["Track the data lifecycle", "Adaptive rule models", "Hybrid TCB"],
     factors:[
-     "<b>Scenario wording \u2192 which model?</b> &mdash; Exam decision rules: preventing unauthorized disclosure, read up, or write down \u2192 Bell-LaPadula. Data accuracy, unauthorized modification, read down or write up \u2192 Biba....",
-     "<b>Unsanitized comments enable what?</b> &mdash; A web application displaying user-submitted comments without sanitization enables stored XSS attacks targeting visitor browsers. Exam trap: CSRF requires forged... <span class=\"qrefs\">[Q877]</span>",
-     "<b>Logged-in bank, silent transfers?</b> &mdash; A user staying logged into a bank while browsing other sites risks unauthorized fund transfers executed silently via CSRF\u2014forged requests using the already-authenticated... <span class=\"qrefs\">[Q911]</span>",
-     "<b>Manager's control-selection rules?</b> &mdash; Topic decision rules: choose parameterized queries over any input filtering for SQL injection remediation; choose allow-list over deny-list validation; choose..."],
-    rule:"BLP confidentiality, Biba integrity - match the model to the goal" },
-{ id:'f20', g:'g3', name:"Vulnerabilities", topic:"Vulnerabilities & Web Application Security", q:37, leaves:["Cross-process...","Runtime boundaries vs...","Original backup server...","Shielding or monitoring?"],
+     "<b>Classified systems live on data-flow tracking</b> &mdash; collection, use, storage and archive — the lifecycle view governs modernization. <span class=\"qrefs\">[<a href=\"#q-Q337\">Q337</a>]</span>",
+     "<b>Rule-based models adapt via learning supplements</b> &mdash; static rules alone cannot track a dynamic threat landscape. <span class=\"qrefs\">[<a href=\"#q-Q156\">Q156</a>]</span>"],
+    rule:"Follow the data; the model is the lens, not the answer." },
+{ id:'f20', g:'g3', name:"Vulnerabilities", topic:"Web Vulnerabilities: Injection, XSS, CSRF & Secure Coding", q:37, leaves:["Parameterize queries", "Server-side allow-lists", "Client checks never suffice", "CSP + anti-CSRF", "Shift left"],
     factors:[
-     "<b>Cross-process modification fix?</b> &mdash; When a custom application interacting with a system service in a separate memory space can modify variables belonging to another independently running process, the... <span class=\"qrefs\">[Q163]</span>",
-     "<b>Runtime boundaries vs labels?</b> &mdash; To stop a compromised process from accessing other processes' allocated memory, enforce memory allocation boundaries at runtime via secure memory management. Data hiding... <span class=\"qrefs\">[Q705]</span>",
-     "<b>Original backup server only?</b> &mdash; When encrypted backup tapes are decryptable on any company server but policy requires decryption only on the original backup server, choose Binding. Sealing fails as a... <span class=\"qrefs\">[Q1004]</span>",
-     "<b>Shielding or monitoring?</b> &mdash; For a defense contractor whose competitor captures RF emissions from engineering workstations to reconstruct proprietary circuit designs (with perimeter fencing and... <span class=\"qrefs\">[Q1110]</span>"],
-    rule:"Name the flaw class; the control closes code-data mixing" },
-{ id:'f21', g:'g5', name:"Investigations", topic:"Investigations & Incident Response", q:4, leaves:["Replacing DES \u2014 pick what?","Enterprise ransomware...","Nonrepudiation \u2014 which..."],
+     "<b>SQLi dies on parameterized queries</b> &mdash; prepared statements and stored procedures separate data from code; layer input validation and least privilege for defense in depth. <span class=\"qrefs\">[<a href=\"#q-Q22\">Q22</a> <a href=\"#q-Q84\">Q84</a> <a href=\"#q-Q903\">Q903</a> <a href=\"#q-Q747\">Q747</a> <a href=\"#q-Q639\">Q639</a> <a href=\"#q-Q253\">Q253</a>]</span>",
+     "<b>Validation is server-side and allow-list</b> &mdash; client-side checks are bypassable decoration; deny-lists can&rsquo;t anticipate obfuscation; accept only predefined formats before processing. <span class=\"qrefs\">[<a href=\"#q-Q25\">Q25</a> <a href=\"#q-Q884\">Q884</a> <a href=\"#q-Q304\">Q304</a> <a href=\"#q-Q139\">Q139</a> <a href=\"#q-Q190\">Q190</a> <a href=\"#q-Q1005\">Q1005</a> <a href=\"#q-Q1101\">Q1101</a>]</span>",
+     "<b>XSS: output side matters</b> &mdash; user comments rendered to visitors = stored XSS; CSP plus anti-CSRF tokens harden beyond HTTP-only cookies; DOM-based XSS needs sanitization and safe APIs like textContent; SPAs need extra DOM protection. <span class=\"qrefs\">[<a href=\"#q-Q877\">Q877</a> <a href=\"#q-Q195\">Q195</a> <a href=\"#q-Q987\">Q987</a> <a href=\"#q-Q491\">Q491</a>]</span>",
+     "<b>CSRF = forged requests on an authenticated session</b> &mdash; funds moving while the victim browses elsewhere; per-session tokens answer even at exchange-scale performance. <span class=\"qrefs\">[<a href=\"#q-Q911\">Q911</a> <a href=\"#q-Q198\">Q198</a>]</span>",
+     "<b>Shift left: security in design, CI/CD and tooling</b> &mdash; automated scanning in pipelines, dependency scanning, MSTG gates per mobile phase — not a pre-release gate. <span class=\"qrefs\">[<a href=\"#q-Q3\">Q3</a> <a href=\"#q-Q138\">Q138</a> <a href=\"#q-Q285\">Q285</a> <a href=\"#q-Q800\">Q800</a> <a href=\"#q-Q1013\">Q1013</a> <a href=\"#q-Q180\">Q180</a>]</span>"],
+    rule:"Trust no input: parameterize, allow-list server-side, encode output, tokenize state changes." },
+{ id:'f21', g:'g5', name:"Investigations", topic:"Investigations & Incident Response", q:4, leaves:["Breach notification first", "Stego = bit-plane", "Heterogeneous IR", "SRI vs CSP"],
     factors:[
-     "<b>Replacing DES \u2014 pick what?</b> &mdash; When replacing DES or 3DES with a 10+ year durability requirement and minimal integration changes, choose AES with 256-bit keys (GCM mode if integrity is also needed).... <span class=\"qrefs\">[Q896]</span>",
-     "<b>Enterprise ransomware defense \u2014 pick?</b> &mdash; For multinational multi-data-center ransomware defense needing high-speed encryption, robust key management, and disaster recovery/business continuity (DR/BC): AES-256... <span class=\"qrefs\">[Q462]</span>",
-     "<b>Nonrepudiation \u2014 which crypto?</b> &mdash; When you need nonrepudiation, choose asymmetric (RSA, ECC) \u2014 shared symmetric keys cannot prove who originated data. Hybrid systems retain nonrepudiation through their... <span class=\"qrefs\">[Q73]</span>"],
-    rule:"Evidence type and custody decide admissibility" }
+     "<b>Confirmed extraction → breach notification process</b> &mdash; the first organizational move when sensitive data provably leaves. <span class=\"qrefs\">[<a href=\"#q-Q531\">Q531</a>]</span>",
+     "<b>Suspected steganography → bit-plane analysis</b> &mdash; time-sensitive exfiltration checks hide data in image bit-planes. <span class=\"qrefs\">[<a href=\"#q-Q647\">Q647</a>]</span>",
+     "<b>Heterogeneous environments streamline IR</b> &mdash; one response process across cloud and on-prem beats per-platform improvisation. <span class=\"qrefs\">[<a href=\"#q-Q177\">Q177</a>]</span>",
+     "<b>Know your browser defenses apart</b> &mdash; SRI verifies fetched-resource integrity; CSP constrains what may execute. <span class=\"qrefs\">[<a href=\"#q-Q1293\">Q1293</a>]</span>"],
+    rule:"Contain, notify per policy, and analyze with the right lens — in that order." }
 ];
 
 var RADAR=[
-{t:'Property confusion', d:'Confidentiality, integrity, availability traded as if interchangeable - read which property the stem sacrifices.', ex:'see factor ladders'},
-{t:'Owner misplaced', d:'Risk acceptance or governance duties assigned to the wrong role.', ex:'see factor ladders'},
-{t:'Verb skipped', d:'Controls chosen before the treatment verb (avoid, transfer, mitigate, accept) is named.', ex:'see factor ladders'},
-{t:'ALE arithmetic ignored', d:'Qualitative answers where the stem gives numbers - compute SLE and ALE first.', ex:'see factor ladders'},
-{t:'Framework step swapped', d:'RMF steps out of order, authorization before assessment.', ex:'see factor ladders'},
-{t:'Compliance absolutes', d:'Certification treated as compliance; audits treated as guarantees.', ex:'see factor ladders'},
-{t:'Cloud duty transfer', d:'Provider answers where customer data accountability remains.', ex:'see factor ladders'},
-{t:'Layer skipped', d:'Technology-first answers where the question names policy or governance.', ex:'see factor ladders'},
-{t:'Once-and-done', d:'Point-in-time fixes where continuous monitoring or review is asked.', ex:'see factor ladders'}
+{t:"Perimeter nostalgia", d:"Castle-and-moat answers where zero trust, microsegmentation and continuous verification are asked.", ex:"<a href=\"#q-Q9\">Q9</a>, <a href=\"#q-Q529\">Q529</a>, <a href=\"#q-Q313\">Q313</a>"},
+{t:"Tenant separation ignored", d:"Multi-tenancy treated as a pricing model rather than the isolation problem it is.", ex:"<a href=\"#q-Q123\">Q123</a>, <a href=\"#q-Q264\">Q264</a>, <a href=\"#q-Q889\">Q889</a>"},
+{t:"Container complacency", d:"Containers praised as inherently isolated; escape and bundled-library risk overlooked.", ex:"<a href=\"#q-Q930\">Q930</a>, <a href=\"#q-Q175\">Q175</a>, <a href=\"#q-Q273\">Q273</a>"},
+{t:"Lock-in blindness", d:"Cloud migration approved without portability and exit-cost analysis.", ex:"<a href=\"#q-Q996\">Q996</a>, <a href=\"#q-Q1141\">Q1141</a>"},
+{t:"Client-side trust", d:"JavaScript validation or filtering accepted as the injection defense.", ex:"<a href=\"#q-Q25\">Q25</a>, <a href=\"#q-Q884\">Q884</a>, <a href=\"#q-Q259\">Q259</a>"},
+{t:"Deny-list theology", d:"Block-list validation expected to catch novel and obfuscated payloads.", ex:"<a href=\"#q-Q304\">Q304</a>, <a href=\"#q-Q1101\">Q1101</a>"},
+{t:"Full-strength crypto everywhere", d:"AES-class suites prescribed for sensors and actuators that cannot run them.", ex:"<a href=\"#q-Q537\">Q537</a>, <a href=\"#q-Q607\">Q607</a>, <a href=\"#q-Q1078\">Q1078</a>"},
+{t:"ICS = IT", d:"Enterprise patch cadence and controls imposed on long-lifecycle control systems.", ex:"<a href=\"#q-Q1039\">Q1039</a>, <a href=\"#q-Q865\">Q865</a>, <a href=\"#q-Q1252\">Q1252</a>"},
+{t:"Late security gate", d:"Testing at release instead of shift-left integration into design and CI/CD.", ex:"<a href=\"#q-Q3\">Q3</a>, <a href=\"#q-Q138\">Q138</a>, <a href=\"#q-Q800\">Q800</a>"}
 ];
 
 var QS = [
@@ -462,7 +469,7 @@ var QS = [
   el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
   var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
-  c0.textContent = 'DOMAIN 7 · PART';
+  c0.textContent = "DOMAIN 1 · PART";
   var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
   c1.textContent = 'DECISION';

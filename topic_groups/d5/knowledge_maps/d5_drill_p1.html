@@ -65,6 +65,11 @@
   .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
   .ladder .rule b{color:var(--mc);font-style:normal}
 
+  .ladder ol li .qrefs{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .ladder ol li .qrefs a{color:var(--mc);text-decoration:none;border-bottom:1px dotted var(--mc);margin:0 1px}
+  .ladder ol li .qrefs a:hover{border-bottom-style:solid}
+  .rad .ex a{color:#b91c1c;text-decoration:none;font-weight:800}
+  .rad .ex a:hover{text-decoration:underline}
   .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
   .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
   .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
@@ -124,9 +129,9 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 1 of 2</div>
+    <div class="eyebrow">CISSP &middot; Domain 5 &middot; Exam preparation &middot; logic-based scenarios &middot; part 1 of 2</div>
     <h1>D5 Question Drill 1 &mdash; Foundations, Factors, Federation & Models (topics 1-9)</h1>
-    <p class="sub"><b>92 scenario questions</b> (topics 1&ndash;12) &middot; <b>12 decision families</b> &middot; <b>5 knowledge groups</b> &mdash; forensics and evidence, monitoring and intel, malware defense, change and patch, resources and environment. Continues in <a href="d7_drill_p2.html">part 2: continuity and recovery (80 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+    <p class="sub"><b>112 scenario questions</b> (topics 1&ndash;9 of 16) &middot; <b>9 decision families</b> across <b>5 knowledge groups</b> &mdash; IAAA foundations, authentication factors, passwords and MFA assurance levels, biometrics, identity lifecycle, federation and SSO, Kerberos, and access control models. Continues in <a href="d5_drill_p2.html">part 2: models to governance</a>. Companion: the <a href="d5_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d5_index.html">D5 hub</a>.</p>
   </div>
 </header>
 
@@ -140,7 +145,7 @@
 
   <section id="fmap">
     <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
-    <p class="lede">The 12 part-1 families (of D7&rsquo;s 18 total), colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <p class="lede">The 9 families on this page, colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
     <div class="map-panel">
       <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D5 drill part 1"></svg>
       <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
@@ -184,95 +189,90 @@
 <script>
 var GROUPS={g1:{name:"IAAA & Foundations",color:"#b91c1c",fill:"#dc2626"},g2:{name:"Factors, Passwords & MFA",color:"#b45309",fill:"#d97706"},g3:{name:"Federated Identity & SSO",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"Kerberos & Tickets",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Access Control Models",color:"#047857",fill:"#059669"},g6:{name:"Sessions & Auth Threats",color:"#be185d",fill:"#db2777"},g7:{name:"IAM Governance & Cloud",color:"#0e7490",fill:"#0891b2"}};
 var FAMILIES = [
-{ id:'f01', g:'g1', name:"IAAA & Foundations", topic:"Access Control Foundations & IAAA Model", q:10, leaves:["POS restrict AND audit?","High-value banking token?","Password plus email code?","Global token biggest...","Cloning is the top..."],
+{ id:'f01', g:'g1', name:"IAAA & Foundations", topic:"Identification, Authentication, Authorization & Accountability", q:9, leaves:["No attribution = fail", "Unique IDs", "Log every action", "One policy, many PEPs"],
     factors:[
-     "<b>POS restrict AND audit?</b> &mdash; A retail point-of-sale (POS) system requiring role-based function limits (for example cashier refund thresholds) plus PCI DSS documentation of who performed each... <span class=\"qrefs\">[Q157]</span>",
-     "<b>High-value banking token?</b> &mdash; For high-value online banking transactions requiring strong security with good user experience, the best ownership-based factor balancing security and usability is a... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Password plus email code?</b> &mdash; Exam trap: password + email code is vulnerable to email account compromise and phishing, and email delivery is less reliable and slower than a hardware token OTP \u2014 do... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Global token biggest headache?</b> &mdash; The most critical security challenge of physical token-based authentication in global hybrid IT (on-premises, public cloud, private cloud across multiple countries) is... <span class=\"qrefs\">[Q46]</span>",
-     "<b>Cloning is the top challenge?</b> &mdash; Exam trap: token cloning mitigation is important but is a subset concern; the overarching global challenge is the full token lifecycle (issuance, distribution,... <span class=\"qrefs\">[Q46]</span>",
-     "<b>How to measure smart card ROI?</b> &mdash; The most effective first-year ROI (Return on Investment) measurement for a smart card deployment at a financial institution is analyzing the reduction in security... <span class=\"qrefs\">[Q47]</span>"],
-    rule:"Identification, authentication, authorization, accounting - in that order" },
-{ id:'f02', g:'g2', name:"Factors & Passwords", topic:"Authentication Factors, Passwords & Tokens", q:24, leaves:["Phishing-resistant means...","Heterogeneous rollout and...","Privacy laws biggest...","Ownership plus risk...","18-month phased upgrade?"],
+     "<b>Shared accounts destroy accountability</b> &mdash; when actions can&rsquo;t be traced to an individual, that is the primary security concern — unique identification plus activity logging is the fix. <span class=\"qrefs\">[<a href=\"#q-Q124\">Q124</a> <a href=\"#q-Q122\">Q122</a> <a href=\"#q-Q126\">Q126</a> <a href=\"#q-Q120\">Q120</a>]</span>",
+     "<b>Centralize decisions, distribute enforcement</b> &mdash; many PEPs with one consistent PDP keeps policy uniform across every access point. <span class=\"qrefs\">[<a href=\"#q-Q150\">Q150</a> <a href=\"#q-Q151\">Q151</a> <a href=\"#q-Q152\">Q152</a>]</span>",
+     "<b>Accountability is designed in from the start</b> &mdash; card-processing and new systems score authorization plus accountability as first-class requirements. <span class=\"qrefs\">[<a href=\"#q-Q127\">Q127</a> <a href=\"#q-Q157\">Q157</a>]</span>"],
+    rule:"If you cannot attribute the action, the control failed — identification precedes everything." },
+{ id:'f02', g:'g2', name:"Factors & Passwords", topic:"Authentication Factors & Password Security", q:24, leaves:["Categories beat count", "Ownership scales", "Hardware vs software", "Vaults > rules", "Adaptive step-up"],
     factors:[
-     "<b>Phishing-resistant means AAL3?</b> &mdash; When an exam scenario describes phishing-resistant, hardware-based, impersonation-resistant authentication, choose AAL3 - software OTP is insufficient. IP filtering is a... <span class=\"qrefs\">[Q13 Q201]</span>",
-     "<b>Heterogeneous rollout and testing?</b> &mdash; For heterogeneous or legacy environments, choose phased, risk-prioritized MFA rollout over big-bang. Pen-testing MFA across on-premises, cloud, and hybrid infrastructure... <span class=\"qrefs\">[Q228]</span>",
-     "<b>Privacy laws biggest barrier?</b> &mdash; Deploying biometric MFA across diverse regional offices in a global organization: the most critical implementation challenge is navigating varied privacy laws and... <span class=\"qrefs\">[Q8]</span>",
-     "<b>Ownership plus risk analysis?</b> &mdash; Financial institution balancing security and user convenience in online banking, with MFA using ownership factors for high-value transactions: best approach is... <span class=\"qrefs\">[Q30]</span>",
-     "<b>18-month phased upgrade?</b> &mdash; Multinational corporation with an 18-month upgrade window moving from passwords to advanced authentication, balancing security enhancement, user adaptation, and... <span class=\"qrefs\">[Q73]</span>",
-     "<b>Adjust factors dynamically?</b> &mdash; Cloud-based enterprise environment with diverse user risk profiles, enhancing MFA security while minimizing user friction: dynamically adjust authentication factors... <span class=\"qrefs\">[Q76]</span>"],
-    rule:"Know / have / are - independence of factors is the scored property" },
-{ id:'f03', g:'g2', name:"MFA & AAL Levels", topic:"MFA Design & NIST AAL Levels", q:19, leaves:["Phishing-resistant means...","Heterogeneous rollout and...","Privacy laws biggest...","Ownership plus risk...","18-month phased upgrade?"],
+     "<b>Different categories beat stronger singles</b> &mdash; effective MFA combines knowledge + ownership + inherence; two factors from one category is still single-factor. <span class=\"qrefs\">[<a href=\"#q-Q145\">Q145</a> <a href=\"#q-Q24\">Q24</a> <a href=\"#q-Q123\">Q123</a>]</span>",
+     "<b>Ownership factor for constrained and autonomous actors</b> &mdash; IoT devices get certificate-based mutual authentication; high-turnover orgs get smart cards with integrated biometrics. <span class=\"qrefs\">[<a href=\"#q-Q84\">Q84</a> <a href=\"#q-Q273\">Q273</a> <a href=\"#q-Q220\">Q220</a> <a href=\"#q-Q12\">Q12</a>]</span>",
+     "<b>Hardware vs software by threat and budget</b> &mdash; hardware tokens resist malware exfiltration and phishing; mobile authenticator apps scale globally and cost least — the scenario picks. <span class=\"qrefs\">[<a href=\"#q-Q16\">Q16</a> <a href=\"#q-Q23\">Q23</a> <a href=\"#q-Q64\">Q64</a> <a href=\"#q-Q85\">Q85</a>]</span>",
+     "<b>Vaults beat composition rules</b> &mdash; complexity requirements push users into insecure behavior; managed vaults reduce password risk — but concentrate it in the master secret. <span class=\"qrefs\">[<a href=\"#q-Q128\">Q128</a> <a href=\"#q-Q130\">Q130</a> <a href=\"#q-Q133\">Q133</a>]</span>",
+     "<b>Adaptive authentication steps up on risk</b> &mdash; transfers from new devices or unusual contexts trigger stronger checks. <span class=\"qrefs\">[<a href=\"#q-Q83\">Q83</a> <a href=\"#q-Q247\">Q247</a>]</span>",
+     "<b>Measure outcomes, not features</b> &mdash; success is reduced unauthorized-access incidents, not factor count. <span class=\"qrefs\">[<a href=\"#q-Q47\">Q47</a>]</span>"],
+    rule:"Something you have beats something you know; category diversity beats strength of any single factor." },
+{ id:'f03', g:'g2', name:"MFA & AAL Levels", topic:"MFA Design & NIST AAL Levels", q:19, leaves:["Assurance → AAL level", "AAL violations", "Phishing → hardware keys", "Adaptive for diversity", "Phased rollouts"],
     factors:[
-     "<b>Phishing-resistant means AAL3?</b> &mdash; When an exam scenario describes phishing-resistant, hardware-based, impersonation-resistant authentication, choose AAL3 - software OTP is insufficient. IP filtering is a... <span class=\"qrefs\">[Q13 Q201]</span>",
-     "<b>Heterogeneous rollout and testing?</b> &mdash; For heterogeneous or legacy environments, choose phased, risk-prioritized MFA rollout over big-bang. Pen-testing MFA across on-premises, cloud, and hybrid infrastructure... <span class=\"qrefs\">[Q228]</span>",
-     "<b>Privacy laws biggest barrier?</b> &mdash; Deploying biometric MFA across diverse regional offices in a global organization: the most critical implementation challenge is navigating varied privacy laws and... <span class=\"qrefs\">[Q8]</span>",
-     "<b>Ownership plus risk analysis?</b> &mdash; Financial institution balancing security and user convenience in online banking, with MFA using ownership factors for high-value transactions: best approach is... <span class=\"qrefs\">[Q30]</span>",
-     "<b>18-month phased upgrade?</b> &mdash; Multinational corporation with an 18-month upgrade window moving from passwords to advanced authentication, balancing security enhancement, user adaptation, and... <span class=\"qrefs\">[Q73]</span>",
-     "<b>Adjust factors dynamically?</b> &mdash; Cloud-based enterprise environment with diverse user risk profiles, enhancing MFA security while minimizing user friction: dynamically adjust authentication factors... <span class=\"qrefs\">[Q76]</span>"],
-    rule:"Assurance scales with independent factors and resistant authenticators" },
-{ id:'f04', g:'g2', name:"Biometrics", topic:"Biometric Authentication", q:9, leaves:["Phishing-resistant means...","Heterogeneous rollout and...","Privacy laws biggest...","Ownership plus risk...","18-month phased upgrade?"],
+     "<b>Map the asset to the AAL</b> &mdash; low-sensitivity internal wiki → AAL1 single factor; customer data after credential stuffing → AAL2 MFA; wire transfers and classified designs → AAL3 hardware cryptographic verifiers. <span class=\"qrefs\">[<a href=\"#q-Q160\">Q160</a> <a href=\"#q-Q161\">Q161</a> <a href=\"#q-Q187\">Q187</a> <a href=\"#q-Q201\">Q201</a>]</span>",
+     "<b>Spot the AAL violation</b> &mdash; a system &ldquo;at AAL2&rdquo; that permits single-factor or un-phishing-resistant authenticators is non-compliant — patient records need hardware cryptographic authenticators. <span class=\"qrefs\">[<a href=\"#q-Q173\">Q173</a> <a href=\"#q-Q181\">Q181</a>]</span>",
+     "<b>Phishing resistance → hardware security keys</b> &mdash; classified systems and high-risk tiers score FIDO-class keys plus OTP over softer options. <span class=\"qrefs\">[<a href=\"#q-Q285\">Q285</a> <a href=\"#q-Q134\">Q134</a>]</span>",
+     "<b>Diverse populations → adaptive, risk-based MFA</b> &mdash; adjusting factors to behavior and transaction risk keeps global banks both secure and usable. <span class=\"qrefs\">[<a href=\"#q-Q30\">Q30</a> <a href=\"#q-Q76\">Q76</a> <a href=\"#q-Q226\">Q226</a>]</span>",
+     "<b>Integration is the global MFA bottleneck</b> &mdash; legacy + cloud diversity is the stated hardest challenge; phased, targeted rollouts are the scored approach. <span class=\"qrefs\">[<a href=\"#q-Q95\">Q95</a> <a href=\"#q-Q73\">Q73</a> <a href=\"#q-Q228\">Q228</a>]</span>",
+     "<b>Continuous authentication via behavior</b> &mdash; passwordless designs stay verified with biometrics + possession + behavioral analysis through the session. <span class=\"qrefs\">[<a href=\"#q-Q218\">Q218</a> <a href=\"#q-Q252\">Q252</a>]</span>"],
+    rule:"Match assurance level to the asset; when stakes rise, verify with hardware." },
+{ id:'f04', g:'g2', name:"Biometrics", topic:"Biometric Authentication", q:9, leaves:["Templates are forever", "FRR/FAR trade", "Behavioral = continuous", "Liveness defeats spoof"],
     factors:[
-     "<b>Phishing-resistant means AAL3?</b> &mdash; When an exam scenario describes phishing-resistant, hardware-based, impersonation-resistant authentication, choose AAL3 - software OTP is insufficient. IP filtering is a... <span class=\"qrefs\">[Q13 Q201]</span>",
-     "<b>Heterogeneous rollout and testing?</b> &mdash; For heterogeneous or legacy environments, choose phased, risk-prioritized MFA rollout over big-bang. Pen-testing MFA across on-premises, cloud, and hybrid infrastructure... <span class=\"qrefs\">[Q228]</span>",
-     "<b>Privacy laws biggest barrier?</b> &mdash; Deploying biometric MFA across diverse regional offices in a global organization: the most critical implementation challenge is navigating varied privacy laws and... <span class=\"qrefs\">[Q8]</span>",
-     "<b>Ownership plus risk analysis?</b> &mdash; Financial institution balancing security and user convenience in online banking, with MFA using ownership factors for high-value transactions: best approach is... <span class=\"qrefs\">[Q30]</span>",
-     "<b>18-month phased upgrade?</b> &mdash; Multinational corporation with an 18-month upgrade window moving from passwords to advanced authentication, balancing security enhancement, user adaptation, and... <span class=\"qrefs\">[Q73]</span>",
-     "<b>Adjust factors dynamically?</b> &mdash; Cloud-based enterprise environment with diverse user risk profiles, enhancing MFA security while minimizing user friction: dynamically adjust authentication factors... <span class=\"qrefs\">[Q76]</span>"],
-    rule:"FAR, FRR and the crossover - sensitivity trades false accepts for rejects" },
-{ id:'f05', g:'g1', name:"Proofing & Lifecycle", topic:"Identity Proofing, Provisioning Lifecycle & JML", q:7, leaves:["POS restrict AND audit?","High-value banking token?","Password plus email code?","Global token biggest...","Cloning is the top..."],
+     "<b>Compromised biometrics cannot be reissued</b> &mdash; protecting stored templates (encryption, access control) is the top evaluation factor and the top risk. <span class=\"qrefs\">[<a href=\"#q-Q48\">Q48</a> <a href=\"#q-Q195\">Q195</a> <a href=\"#q-Q165\">Q165</a>]</span>",
+     "<b>Sensitivity tuning trades errors</b> &mdash; tightening to cut false accepts raises false rejects (and vice versa); the target is minimizing both simultaneously. <span class=\"qrefs\">[<a href=\"#q-Q192\">Q192</a> <a href=\"#q-Q184\">Q184</a> <a href=\"#q-Q22\">Q22</a>]</span>",
+     "<b>Behavioral biometrics verify continuously</b> &mdash; typing patterns and similar &ldquo;something you do&rdquo; traits passively re-authenticate the session. <span class=\"qrefs\">[<a href=\"#q-Q29\">Q29</a> <a href=\"#q-Q275\">Q275</a>]</span>",
+     "<b>Spoofing → liveness detection</b> &mdash; characteristic-based methods score highest when paired with proof the sample is live. <span class=\"qrefs\">[<a href=\"#q-Q234\">Q234</a>]</span>"],
+    rule:"You cannot reissue a fingerprint: guard templates and accept the error-rate trade-off." },
+{ id:'f05', g:'g1', name:"Proofing & Lifecycle", topic:"Identity Proofing & Provisioning Lifecycle", q:7, leaves:["Revoke on exit", "Proofing gates trust", "Automate for DevOps", "Log lifecycle actions"],
     factors:[
-     "<b>POS restrict AND audit?</b> &mdash; A retail point-of-sale (POS) system requiring role-based function limits (for example cashier refund thresholds) plus PCI DSS documentation of who performed each... <span class=\"qrefs\">[Q157]</span>",
-     "<b>High-value banking token?</b> &mdash; For high-value online banking transactions requiring strong security with good user experience, the best ownership-based factor balancing security and usability is a... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Password plus email code?</b> &mdash; Exam trap: password + email code is vulnerable to email account compromise and phishing, and email delivery is less reliable and slower than a hardware token OTP \u2014 do... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Global token biggest headache?</b> &mdash; The most critical security challenge of physical token-based authentication in global hybrid IT (on-premises, public cloud, private cloud across multiple countries) is... <span class=\"qrefs\">[Q46]</span>",
-     "<b>Cloning is the top challenge?</b> &mdash; Exam trap: token cloning mitigation is important but is a subset concern; the overarching global challenge is the full token lifecycle (issuance, distribution,... <span class=\"qrefs\">[Q46]</span>",
-     "<b>How to measure smart card ROI?</b> &mdash; The most effective first-year ROI (Return on Investment) measurement for a smart card deployment at a financial institution is analyzing the reduction in security... <span class=\"qrefs\">[Q47]</span>"],
-    rule:"Identity proofing before provisioning; JML keeps access aligned" },
-{ id:'f06', g:'g3', name:"Federation & SSO", topic:"Federated Identity & SSO Protocols", q:8, leaves:["Enterprise SSO standard =...","OIDC for identity, OAuth...","Cross-jurisdiction...","Data minimization in..."],
+     "<b>Termination triggers immediate revocation</b> &mdash; contractors retaining access after status change is the classic deprovisioning failure — automate it. <span class=\"qrefs\">[<a href=\"#q-Q4\">Q4</a> <a href=\"#q-Q114\">Q114</a>]</span>",
+     "<b>Identity proofing gates everything after it</b> &mdash; credentials issued to imposters undermine every downstream control; multinational proofing adapts verification by country risk. <span class=\"qrefs\">[<a href=\"#q-Q115\">Q115</a> <a href=\"#q-Q42\">Q42</a>]</span>",
+     "<b>DevOps speed → integrated IAM automation</b> &mdash; provisioning must keep pace with pipeline churn to stay least-privilege. <span class=\"qrefs\">[<a href=\"#q-Q26\">Q26</a>]</span>",
+     "<b>Centrally managed access still needs logged accountability</b> &mdash; lifecycle actions performed off-platform create audit gaps. <span class=\"qrefs\">[<a href=\"#q-Q172\">Q172</a> <a href=\"#q-Q246\">Q246</a>]</span>",
+     "<b>Zero trust re-verifies continuously</b> &mdash; behavioral signals and adaptive risk scoring extend proofing past login. <span class=\"qrefs\">[<a href=\"#q-Q250\">Q250</a>]</span>"],
+    rule:"Access has a lifecycle — proof, provision, review, revoke — and the ends must be automated." },
+{ id:'f06', g:'g3', name:"Federation & SSO", topic:"Federated Identity & Single Sign-On", q:8, leaves:["SSO needs step-up", "SAML vs OAuth fit", "Trust chains", "Consent granularity"],
     factors:[
-     "<b>Enterprise SSO standard = SAML 2.0</b> &mdash; When a question asks for the enterprise SSO standard, choose SAML 2.0 - the XML-based assertion standard for browser-based enterprise federation. <span class=\"qrefs\">[Q20 Q65]</span>",
-     "<b>OIDC for identity, OAuth for delegated access</b> &mdash; When distinguishing authentication vs authorization, choose OIDC for identity and OAuth 2.0 for delegated access; OAuth 2.0 alone is not an authentication protocol. <span class=\"qrefs\">[Q19 Q283]</span>",
-     "<b>Cross-jurisdiction federation consent</b> &mdash; When federation spans jurisdictions, choose the answer addressing cross-border data-transfer consent and local privacy law (e.g., GDPR); attribute release to a foreign... <span class=\"qrefs\">[Q222]</span>",
-     "<b>Data minimization in attribute release</b> &mdash; When fine-grained access with privacy preservation is needed, choose attribute-based or claims-based access with minimal attribute disclosure - release only what each SP... <span class=\"qrefs\">[Q248]</span>"],
-    rule:"Trust the IdP, not the password - protocol follows the use case" },
-{ id:'f07', g:'g4', name:"Kerberos", topic:"Kerberos & Ticket-Based SSO", q:6, leaves:["Enterprise SSO standard =...","OIDC for identity, OAuth...","Cross-jurisdiction...","Data minimization in..."],
+     "<b>SSO amplifies credential compromise</b> &mdash; one stolen SSO credential yields widespread access — mitigate with MFA and step-up authentication on sensitive actions. <span class=\"qrefs\">[<a href=\"#q-Q25\">Q25</a> <a href=\"#q-Q11\">Q11</a>]</span>",
+     "<b>Protocol follows the job</b> &mdash; SAML for enterprise web SSO assertions, OAuth/OIDC for API delegation; multi-cloud combines both rather than choosing one. <span class=\"qrefs\">[<a href=\"#q-Q19\">Q19</a> <a href=\"#q-Q60\">Q60</a>]</span>",
+     "<b>Federation is a trust-chain problem</b> &mdash; intricate relationships among identity providers are both the architecture and its hardest challenge. <span class=\"qrefs\">[<a href=\"#q-Q78\">Q78</a>]</span>",
+     "<b>Privacy needs granular consent</b> &mdash; federated sharing of personal attributes scores purpose-specific consent controls. <span class=\"qrefs\">[<a href=\"#q-Q222\">Q222</a>]</span>",
+     "<b>Zero trust uses federation for UX</b> &mdash; fine-grained access decisions ride on federated identity without password sprawl. <span class=\"qrefs\">[<a href=\"#q-Q248\">Q248</a>]</span>"],
+    rule:"Federation extends trust across boundaries — scope exactly what each assertion authorizes." },
+{ id:'f07', g:'g4', name:"Kerberos", topic:"Kerberos & Ticket Security", q:6, leaves:["Harden the KDC", "Short TGT lives", "Distribute caches", "Layer adaptive auth"],
     factors:[
-     "<b>Enterprise SSO standard = SAML 2.0</b> &mdash; When a question asks for the enterprise SSO standard, choose SAML 2.0 - the XML-based assertion standard for browser-based enterprise federation. <span class=\"qrefs\">[Q20 Q65]</span>",
-     "<b>OIDC for identity, OAuth for delegated access</b> &mdash; When distinguishing authentication vs authorization, choose OIDC for identity and OAuth 2.0 for delegated access; OAuth 2.0 alone is not an authentication protocol. <span class=\"qrefs\">[Q19 Q283]</span>",
-     "<b>Cross-jurisdiction federation consent</b> &mdash; When federation spans jurisdictions, choose the answer addressing cross-border data-transfer consent and local privacy law (e.g., GDPR); attribute release to a foreign... <span class=\"qrefs\">[Q222]</span>",
-     "<b>Data minimization in attribute release</b> &mdash; When fine-grained access with privacy preservation is needed, choose attribute-based or claims-based access with minimal attribute disclosure - release only what each SP... <span class=\"qrefs\">[Q248]</span>"],
-    rule:"KDC tickets: TGT then service ticket - time and KDC are the caveats" },
-{ id:'f08', g:'g5', name:"MAC & DAC", topic:"Access Control Models \u2014 MAC & DAC", q:18, leaves:["POS restrict AND audit?","High-value banking token?","Password plus email code?","Global token biggest...","Cloning is the top..."],
+     "<b>Protect the KDC, add MFA at the ticket</b> &mdash; unauthorized-access spikes and SSO rollouts score MFA plus KDC hardening — the KDC is the single point of failure. <span class=\"qrefs\">[<a href=\"#q-Q2\">Q2</a> <a href=\"#q-Q288\">Q288</a>]</span>",
+     "<b>Short TGT lifetimes with auto-renewal</b> &mdash; plus randomized session keys, shrink the window a stolen ticket is useful. <span class=\"qrefs\">[<a href=\"#q-Q156\">Q156</a>]</span>",
+     "<b>Microservices → distributed ticket validation</b> &mdash; a distributed cache for secure ticket storage/validation scales Kerberos past the monolith. <span class=\"qrefs\">[<a href=\"#q-Q14\">Q14</a>]</span>",
+     "<b>Adoption friction → pre-configured environments</b> &mdash; dev teams integrate Kerberos when the environments come ready. <span class=\"qrefs\">[<a href=\"#q-Q231\">Q231</a>]</span>",
+     "<b>Modernize with adaptive auth layered on top</b> &mdash; AI/adaptive checks complement the ticket protocol rather than replacing it. <span class=\"qrefs\">[<a href=\"#q-Q284\">Q284</a> <a href=\"#q-Q289\">Q289</a>]</span>"],
+    rule:"The ticket is the crown jewel: guard the KDC and keep ticket life short." },
+{ id:'f08', g:'g5', name:"MAC & DAC", topic:"Mandatory & Discretionary Access Control", q:18, leaves:["Labels → MAC", "DAC = owner rules", "Admin grants = smell", "Over-provisioning", "Guide DAC centrally"],
     factors:[
-     "<b>POS restrict AND audit?</b> &mdash; A retail point-of-sale (POS) system requiring role-based function limits (for example cashier refund thresholds) plus PCI DSS documentation of who performed each... <span class=\"qrefs\">[Q157]</span>",
-     "<b>High-value banking token?</b> &mdash; For high-value online banking transactions requiring strong security with good user experience, the best ownership-based factor balancing security and usability is a... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Password plus email code?</b> &mdash; Exam trap: password + email code is vulnerable to email account compromise and phishing, and email delivery is less reliable and slower than a hardware token OTP \u2014 do... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Global token biggest headache?</b> &mdash; The most critical security challenge of physical token-based authentication in global hybrid IT (on-premises, public cloud, private cloud across multiple countries) is... <span class=\"qrefs\">[Q46]</span>",
-     "<b>Cloning is the top challenge?</b> &mdash; Exam trap: token cloning mitigation is important but is a subset concern; the overarching global challenge is the full token lifecycle (issuance, distribution,... <span class=\"qrefs\">[Q46]</span>",
-     "<b>How to measure smart card ROI?</b> &mdash; The most effective first-year ROI (Return on Investment) measurement for a smart card deployment at a financial institution is analyzing the reduction in security... <span class=\"qrefs\">[Q47]</span>"],
-    rule:"Labels vs owner discretion - who may grant decides the model" },
-{ id:'f09', g:'g5', name:"RBAC", topic:"Access Control Models \u2014 RBAC", q:12, leaves:["POS restrict AND audit?","High-value banking token?","Password plus email code?","Global token biggest...","Cloning is the top..."],
+     "<b>Labels and classification → MAC</b> &mdash; top-secret environments enforce non-discretionary label-based access; the prerequisite is proper labeling of resources. <span class=\"qrefs\">[<a href=\"#q-Q31\">Q31</a> <a href=\"#q-Q233\">Q233</a> <a href=\"#q-Q111\">Q111</a>]</span>",
+     "<b>DAC means the owner decides</b> &mdash; doctors granting consult access, department heads setting file rights — flexible and business-friendly by design. <span class=\"qrefs\">[<a href=\"#q-Q6\">Q6</a> <a href=\"#q-Q61\">Q61</a> <a href=\"#q-Q211\">Q211</a> <a href=\"#q-Q261\">Q261</a>]</span>",
+     "<b>DAC&rsquo;s weakness is decentralized inconsistency</b> &mdash; the scored mitigation is central policy guiding owner decisions — not removing owner control. <span class=\"qrefs\">[<a href=\"#q-Q236\">Q236</a> <a href=\"#q-Q237\">Q237</a> <a href=\"#q-Q86\">Q86</a>]</span>",
+     "<b>Non-owner grants are non-discretionary drift</b> &mdash; admins or committees assigning access without owner input undermine accountability — route it back with clear criteria. <span class=\"qrefs\">[<a href=\"#q-Q143\">Q143</a> <a href=\"#q-Q147\">Q147</a> <a href=\"#q-Q148\">Q148</a> <a href=\"#q-Q149\">Q149</a> <a href=\"#q-Q144\">Q144</a>]</span>",
+     "<b>Excess access violates least privilege</b> &mdash; users routinely receiving more than needed is the finding, whatever the model. <span class=\"qrefs\">[<a href=\"#q-Q146\">Q146</a>]</span>"],
+    rule:"Who decides — owner, labels, or admin — names the model; then its known weakness is the answer." },
+{ id:'f09', g:'g5', name:"RBAC", topic:"Role-Based Access Control", q:12, leaves:["Roles mirror jobs", "Granular scoping", "Dynamic for DevOps", "Time-boxed access", "Usability balance"],
     factors:[
-     "<b>POS restrict AND audit?</b> &mdash; A retail point-of-sale (POS) system requiring role-based function limits (for example cashier refund thresholds) plus PCI DSS documentation of who performed each... <span class=\"qrefs\">[Q157]</span>",
-     "<b>High-value banking token?</b> &mdash; For high-value online banking transactions requiring strong security with good user experience, the best ownership-based factor balancing security and usability is a... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Password plus email code?</b> &mdash; Exam trap: password + email code is vulnerable to email account compromise and phishing, and email delivery is less reliable and slower than a hardware token OTP \u2014 do... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Global token biggest headache?</b> &mdash; The most critical security challenge of physical token-based authentication in global hybrid IT (on-premises, public cloud, private cloud across multiple countries) is... <span class=\"qrefs\">[Q46]</span>",
-     "<b>Cloning is the top challenge?</b> &mdash; Exam trap: token cloning mitigation is important but is a subset concern; the overarching global challenge is the full token lifecycle (issuance, distribution,... <span class=\"qrefs\">[Q46]</span>",
-     "<b>How to measure smart card ROI?</b> &mdash; The most effective first-year ROI (Return on Investment) measurement for a smart card deployment at a financial institution is analyzing the reduction in security... <span class=\"qrefs\">[Q47]</span>"],
-    rule:"Roles bundle permissions - membership must be managed and reviewed" }
+     "<b>Big organizations → RBAC by job function</b> &mdash; 50,000-user rollouts define granular roles limiting customer-data access to the functions that need it. <span class=\"qrefs\">[<a href=\"#q-Q79\">Q79</a> <a href=\"#q-Q92\">Q92</a> <a href=\"#q-Q81\">Q81</a> <a href=\"#q-Q45\">Q45</a>]</span>",
+     "<b>DevOps → dynamic RBAC</b> &mdash; automated role assignment keeps pace with changing duties. <span class=\"qrefs\">[<a href=\"#q-Q104\">Q104</a>]</span>",
+     "<b>Time-scoped needs → limited/temporal RBAC</b> &mdash; global banks grant role-based access bounded in time. <span class=\"qrefs\">[<a href=\"#q-Q260\">Q260</a>]</span>",
+     "<b>Measure the cost of decisions</b> &mdash; high-frequency trading scores access-decision latency in microseconds. <span class=\"qrefs\">[<a href=\"#q-Q212\">Q212</a>]</span>",
+     "<b>Hospitals balance granularity with usability</b> &mdash; layered RBAC must not bury clinicians. <span class=\"qrefs\">[<a href=\"#q-Q269\">Q269</a>]</span>",
+     "<b>Prove robustness with targeted penetration testing</b> &mdash; and watch for ownership-factor rules conflicting with roles. <span class=\"qrefs\">[<a href=\"#q-Q56\">Q56</a> <a href=\"#q-Q57\">Q57</a>]</span>"],
+    rule:"Roles mirror job functions — scope them by data, time and task." }
 ];
 
 var RADAR=[
-{t:'Model mismatch', d:'DAC answers where MAC or attributes are asked - identify who grants before answering.', ex:'see factor ladders'},
-{t:'Factor dependence', d:'Same-source factors treated as independent MFA - SMS-after-password is the classic fake.', ex:'see factor ladders'},
-{t:'Authentication equals authorization', d:'Proving identity offered where permission must be decided.', ex:'see factor ladders'},
-{t:'Protocol confusion', d:'SAML, OAuth and OIDC mixed up by use case.', ex:'see factor ladders'},
-{t:'Kerberos misplacement', d:'Ticket steps and KDC roles swapped in sequence questions.', ex:'see factor ladders'},
-{t:'Session neglected', d:'Strong login with weak tokens - fixation and hijack answers missed.', ex:'see factor ladders'},
-{t:'Standing privilege', d:'Permanent admin where JIT elevation is asked.', ex:'see factor ladders'},
-{t:'Cloud absolutes', d:'Provider-managed answers where accountability stays with the customer.', ex:'see factor ladders'},
-{t:'Once-and-done', d:'One-time provisioning where lifecycle review is required.', ex:'see factor ladders'}
+{t:"Factor double-dipping", d:"Two factors from the same category (password + PIN) presented as multi-factor authentication.", ex:"<a href=\"#q-Q102\">Q102</a>, <a href=\"#q-Q123\">Q123</a>"},
+{t:"Shared-account pragmatism", d:"Convenience answers for shared/generic accounts where loss of attribution is the real cost.", ex:"<a href=\"#q-Q124\">Q124</a>, <a href=\"#q-Q122\">Q122</a>"},
+{t:"Biometric complacency", d:"&ldquo;Fingerprints can&rsquo;t be stolen&rdquo; reasoning that ignores template compromise and non-revocability.", ex:"<a href=\"#q-Q48\">Q48</a>, <a href=\"#q-Q165\">Q165</a>"},
+{t:"AAL mismatch", d:"Single-factor or phishing-vulnerable systems described as meeting AAL2/AAL3.", ex:"<a href=\"#q-Q173\">Q173</a>, <a href=\"#q-Q181\">Q181</a>"},
+{t:"Deprovisioning gap", d:"Access outliving employment or contract — lifecycle ends at provisioning in the wrong answers.", ex:"<a href=\"#q-Q114\">Q114</a>, <a href=\"#q-Q4\">Q4</a>"},
+{t:"SSO single-key risk", d:"Federation adopted without step-up authentication for the one credential that now opens everything.", ex:"<a href=\"#q-Q25\">Q25</a>, <a href=\"#q-Q11\">Q11</a>"},
+{t:"DAC inconsistency denied", d:"Decentralized owner grants treated as uniformly enforceable without central guidance.", ex:"<a href=\"#q-Q236\">Q236</a>, <a href=\"#q-Q237\">Q237</a>"},
+{t:"Role sprawl", d:"Coarse catch-all roles handing users more than their job needs — least privilege in name only.", ex:"<a href=\"#q-Q146\">Q146</a>, <a href=\"#q-Q81\">Q81</a>"},
+{t:"Password theology", d:"Ever-stranger composition rules where vaults, monitoring or behavior fixes are scored.", ex:"<a href=\"#q-Q130\">Q130</a>, <a href=\"#q-Q128\">Q128</a>"}
 ];
 
 var QS = [
@@ -461,7 +461,7 @@ var QS = [
   el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
   var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
-  c0.textContent = 'DOMAIN 7 · PART';
+  c0.textContent = "DOMAIN 5 · PART";
   var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
   c1.textContent = 'DECISION';

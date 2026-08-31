@@ -65,6 +65,11 @@
   .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
   .ladder .rule b{color:var(--mc);font-style:normal}
 
+  .ladder ol li .qrefs{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .ladder ol li .qrefs a{color:var(--mc);text-decoration:none;border-bottom:1px dotted var(--mc);margin:0 1px}
+  .ladder ol li .qrefs a:hover{border-bottom-style:solid}
+  .rad .ex a{color:#b91c1c;text-decoration:none;font-weight:800}
+  .rad .ex a:hover{text-decoration:underline}
   .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
   .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
   .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
@@ -124,9 +129,9 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 2 of 2</div>
+    <div class="eyebrow">CISSP &middot; Domain 4 &middot; Exam preparation &middot; logic-based scenarios &middot; part 2 of 2</div>
     <h1>D4 Question Drill 2 &mdash; Wireless, Cloud, Attacks & Operations (topics 12-15)</h1>
-    <p class="sub"><b>92 scenario questions</b> (topics 1&ndash;12) &middot; <b>12 decision families</b> &middot; <b>5 knowledge groups</b> &mdash; forensics and evidence, monitoring and intel, malware defense, change and patch, resources and environment. Continues in <a href="d7_drill_p2.html">part 2: continuity and recovery (80 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+    <p class="sub"><b>140 scenario questions</b> (topics 12&ndash;15) &middot; <b>4 decision families</b> &mdash; wireless security, cloud &amp; SDN segmentation, attacks &amp; reconnaissance, and monitoring &amp; network design. Companion: the <a href="d4_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d4_index.html">D4 hub</a> &middot; back to <a href="d4_drill_p1.html">part 1</a>.</p>
   </div>
 </header>
 
@@ -140,7 +145,7 @@
 
   <section id="fmap">
     <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
-    <p class="lede">The 12 part-1 families (of D7&rsquo;s 18 total), colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <p class="lede">The 4 families on this page, colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
     <div class="map-panel">
       <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D4 drill part 2"></svg>
       <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
@@ -184,50 +189,49 @@
 <script>
 var GROUPS={g1:{name:"OSI, TCP/IP & Media",color:"#b91c1c",fill:"#dc2626"},g2:{name:"IP Addressing & Subnetting",color:"#b45309",fill:"#d97706"},g3:{name:"IDS/IPS & Detection",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"Authentication & AAA",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Cloud & SDN",color:"#047857",fill:"#059669"},g6:{name:"Attacks & Reconnaissance",color:"#be185d",fill:"#db2777"},g7:{name:"Monitoring & Operations",color:"#0e7490",fill:"#0891b2"}};
 var FAMILIES = [
-{ id:'f12', g:'g1', name:"Wireless Security", topic:"Wireless Security", q:9, leaves:["Routing question \u2014 which...","Reliability question \u2014...","MAC question \u2014 which...","Encryption formatting \u2014...","Zero trust \u2014 which layer?"],
+{ id:'f12', g:'g1', name:"Wireless Security", topic:"Wireless Security (WPA3, SDR, WBAN)", q:9, leaves:["WPA3-Enterprise + certs", "Unlicensed = interference", "Integrate with the network", "Risk-based frameworks", "IPv6 VPN = IPsec"],
     factors:[
-     "<b>Routing question \u2014 which layer?</b> &mdash; Exam decision rule: any question about routing, IP addressing, or packet filtering maps to Layer 3 (Network). Routers and packet-filtering firewalls operate here because...",
-     "<b>Reliability question \u2014 which layer?</b> &mdash; Exam decision rule: questions about end-to-end error correction, reliability, or port numbers map to Layer 4 (Transport). TCP provides reliable delivery; UDP does not.",
-     "<b>MAC question \u2014 which layer?</b> &mdash; Exam decision rule: questions about MAC-based forwarding, switching, or ARP resolution map to Layer 2 (Data Link), where MAC addresses and ARP resolution live.",
-     "<b>Encryption formatting \u2014 which layer?</b> &mdash; Exam decision rule: questions about where encryption/formatting occurs map to Layer 6 (Presentation), which transforms data for the application including cryptographic... <span class=\"qrefs\">[Q38 Q89 Q130 Q410]</span>",
-     "<b>Zero trust \u2014 which layer?</b> &mdash; Source conflict preserved: Part A guidance says lean toward Layers 6-7 for zero-trust segmentation and least-privilege access control, because application-aware controls... <span class=\"qrefs\">[Q37 Q100]</span>",
-     "<b>Eliminate bus when?</b> &mdash; Eliminate bus topology when the scenario requires fault isolation or resistance to a single cable break \u2014 one break or one interceptor compromises the entire shared..."],
-    rule:"WPA3/Enterprise beats PSK; rogue APs are the recurring threat" },
-{ id:'f13', g:'g5', name:"Cloud & SDN", topic:"Cloud & Software-Defined Networking", q:49, leaves:["Routing question \u2014 which...","Reliability question \u2014...","MAC question \u2014 which...","Encryption formatting \u2014...","Zero trust \u2014 which layer?"],
+     "<b>Enterprise wireless = WPA3/WPA2-Enterprise with certificates and RADIUS</b> &mdash; manufacturing and rogue-device scenarios score 802.1X authentication over pre-shared keys. <span class=\"qrefs\">[<a href=\"#q-Q105\">Q105</a> <a href=\"#q-Q246\">Q246</a>]</span>",
+     "<b>Unlicensed spectrum means shared interference</b> &mdash; hospital connectivity drops trace to shared bands, not just attackers; SDR fleets need real-time spectrum monitoring and anomaly detection. <span class=\"qrefs\">[<a href=\"#q-Q288\">Q288</a> <a href=\"#q-Q23\">Q23</a>]</span>",
+     "<b>Wireless folds into the whole network security posture</b> &mdash; remote workers and branches integrate wireless with the broader architecture; diverse estates get a risk-based wireless framework; smart grids layer controls with monitoring; WBANs combine data protection layers. <span class=\"qrefs\">[<a href=\"#q-Q69\">Q69</a> <a href=\"#q-Q154\">Q154</a> <a href=\"#q-Q385\">Q385</a> <a href=\"#q-Q386\">Q386</a>]</span>",
+     "<b>IPv6 VPNs lean on built-in IPsec &mdash; properly configured</b> &mdash; the scored word is &ldquo;properly&rdquo;. <span class=\"qrefs\">[<a href=\"#q-Q408\">Q408</a>]</span>"],
+    rule:"Authenticate the user (802.1X), monitor the spectrum, and treat wireless as part of the architecture." },
+{ id:'f13', g:'g5', name:"Cloud & SDN", topic:"SDN, Micro-Segmentation & Cloud Network Security", q:49, leaves:["Controller = brain and target", "Micro-segment east-west", "VPCs per department", "Centralize policy", "Secure the southbound"],
     factors:[
-     "<b>Routing question \u2014 which layer?</b> &mdash; Exam decision rule: any question about routing, IP addressing, or packet filtering maps to Layer 3 (Network). Routers and packet-filtering firewalls operate here because...",
-     "<b>Reliability question \u2014 which layer?</b> &mdash; Exam decision rule: questions about end-to-end error correction, reliability, or port numbers map to Layer 4 (Transport). TCP provides reliable delivery; UDP does not.",
-     "<b>MAC question \u2014 which layer?</b> &mdash; Exam decision rule: questions about MAC-based forwarding, switching, or ARP resolution map to Layer 2 (Data Link), where MAC addresses and ARP resolution live.",
-     "<b>Encryption formatting \u2014 which layer?</b> &mdash; Exam decision rule: questions about where encryption/formatting occurs map to Layer 6 (Presentation), which transforms data for the application including cryptographic... <span class=\"qrefs\">[Q38 Q89 Q130 Q410]</span>",
-     "<b>Zero trust \u2014 which layer?</b> &mdash; Source conflict preserved: Part A guidance says lean toward Layers 6-7 for zero-trust segmentation and least-privilege access control, because application-aware controls... <span class=\"qrefs\">[Q37 Q100]</span>",
-     "<b>Eliminate bus when?</b> &mdash; Eliminate bus topology when the scenario requires fault isolation or resistance to a single cable break \u2014 one break or one interceptor compromises the entire shared..."],
-    rule:"Responsibility and control follow the virtualization boundary" },
-{ id:'f14', g:'g6', name:"Attacks & Recon", topic:"Network Attacks & Reconnaissance", q:14, leaves:["Routing question \u2014 which...","Reliability question \u2014...","MAC question \u2014 which...","Encryption formatting \u2014...","Zero trust \u2014 which layer?"],
+     "<b>SDN centralizes intelligence — and risk</b> &mdash; control/data plane separation enables consistent policy, but the controller is the single point of compromise; its southbound API traffic (OpenFlow) rides TLS. <span class=\"qrefs\">[<a href=\"#q-Q318\">Q318</a> <a href=\"#q-Q63\">Q63</a> <a href=\"#q-Q56\">Q56</a> <a href=\"#q-Q278\">Q278</a> <a href=\"#q-Q286\">Q286</a> <a href=\"#q-Q293\">Q293</a> <a href=\"#q-Q355\">Q355</a>]</span>",
+     "<b>Micro-segmentation controls east-west traffic</b> &mdash; workload-level policies, granular security groups, context-aware rules by data sensitivity; ransomware containment and lateral movement die at the segment boundary; zero trust pairs with it naturally. <span class=\"qrefs\">[<a href=\"#q-Q334\">Q334</a> <a href=\"#q-Q47\">Q47</a> <a href=\"#q-Q16\">Q16</a> <a href=\"#q-Q127\">Q127</a> <a href=\"#q-Q243\">Q243</a> <a href=\"#q-Q376\">Q376</a> <a href=\"#q-Q391\">Q391</a>]</span>",
+     "<b>Cloud segregation: VPCs and dedicated subnets</b> &mdash; per-department VPCs, security groups and NACLs, hybrid segmentation models with central policy; automatic elasticity is the benefit, deduplication-pattern inference the sneaky risk. <span class=\"qrefs\">[<a href=\"#q-Q107\">Q107</a> <a href=\"#q-Q381\">Q381</a> <a href=\"#q-Q112\">Q112</a> <a href=\"#q-Q14\">Q14</a> <a href=\"#q-Q364\">Q364</a> <a href=\"#q-Q267\">Q267</a>]</span>",
+     "<b>Consistent policy across hybrid estates</b> &mdash; unified policy management with centralized control, SD-WAN applying security policy uniformly, MPLS→SD transitions adopting dynamic segmentation. <span class=\"qrefs\">[<a href=\"#q-Q91\">Q91</a> <a href=\"#q-Q36\">Q36</a> <a href=\"#q-Q300\">Q300</a> <a href=\"#q-Q289\">Q289</a>]</span>",
+     "<b>Container and cloud-native networking need native controls</b> &mdash; runtime security solutions, granular policy enforcement per workload, cloud-native firewalls with centralized management for ephemeral estates; legacy Layer-1 integration risks confidentiality gaps. <span class=\"qrefs\">[<a href=\"#q-Q394\">Q394</a> <a href=\"#q-Q49\">Q49</a> <a href=\"#q-Q402\">Q402</a> <a href=\"#q-Q415\">Q415</a> <a href=\"#q-Q79\">Q79</a>]</span>"],
+    rule:"Centralize the policy, micro-segment the workloads, and guard the controller like the crown jewel it is." },
+{ id:'f14', g:'g6', name:"Attacks & Recon", topic:"Network Attacks, Reconnaissance Tools & Countermeasures", q:14, leaves:["ARP has no security", "DNS tunneling", "Name the tool by job", "Dual-use needs authorization", "Encrypt + randomize sessions"],
     factors:[
-     "<b>Routing question \u2014 which layer?</b> &mdash; Exam decision rule: any question about routing, IP addressing, or packet filtering maps to Layer 3 (Network). Routers and packet-filtering firewalls operate here because...",
-     "<b>Reliability question \u2014 which layer?</b> &mdash; Exam decision rule: questions about end-to-end error correction, reliability, or port numbers map to Layer 4 (Transport). TCP provides reliable delivery; UDP does not.",
-     "<b>MAC question \u2014 which layer?</b> &mdash; Exam decision rule: questions about MAC-based forwarding, switching, or ARP resolution map to Layer 2 (Data Link), where MAC addresses and ARP resolution live.",
-     "<b>Encryption formatting \u2014 which layer?</b> &mdash; Exam decision rule: questions about where encryption/formatting occurs map to Layer 6 (Presentation), which transforms data for the application including cryptographic... <span class=\"qrefs\">[Q38 Q89 Q130 Q410]</span>",
-     "<b>Zero trust \u2014 which layer?</b> &mdash; Source conflict preserved: Part A guidance says lean toward Layers 6-7 for zero-trust segmentation and least-privilege access control, because application-aware controls... <span class=\"qrefs\">[Q37 Q100]</span>",
-     "<b>Eliminate bus when?</b> &mdash; Eliminate bus topology when the scenario requires fault isolation or resistance to a single cable break \u2014 one break or one interceptor compromises the entire shared..."],
-    rule:"Name the attack by what it exploits" },
-{ id:'f15', g:'g7', name:"Monitoring & Design", topic:"Network Monitoring, Operations & Design Principles", q:67, leaves:["Unpatchable devices \u2014...","Attacker pivot \u2014 contain..."],
+     "<b>ARP was built without security</b> &mdash; poisoning and MITM trace to that root cause; MAC spoofing bypasses NAC the same way. <span class=\"qrefs\">[<a href=\"#q-Q284\">Q284</a> <a href=\"#q-Q235\">Q235</a> <a href=\"#q-Q80\">Q80</a>]</span>",
+     "<b>Covert channels: DNS tunneling</b> &mdash; unusual DNS volume means exfiltration or C2 — deploy DNS analytics and anomaly detection. <span class=\"qrefs\">[<a href=\"#q-Q86\">Q86</a>]</span>",
+     "<b>Match the diagnostic tool to the job</b> &mdash; path mapping pre-attack = traceroute + WHOIS; is the host alive = ping; where packets die = traceroute. <span class=\"qrefs\">[<a href=\"#q-Q191\">Q191</a> <a href=\"#q-Q192\">Q192</a> <a href=\"#q-Q193\">Q193</a>]</span>",
+     "<b>Recon tools are dual-use — authorization and restraint</b> &mdash; scheduled scans on owned systems; Whois limited to essential queries; strict access controls on the tools themselves; topology exposure is the risk of running them. <span class=\"qrefs\">[<a href=\"#q-Q90\">Q90</a> <a href=\"#q-Q106\">Q106</a> <a href=\"#q-Q125\">Q125</a> <a href=\"#q-Q45\">Q45</a>]</span>",
+     "<b>Session hijacking dies on encryption + randomness</b> &mdash; encrypted sessions with secure random identifiers. <span class=\"qrefs\">[<a href=\"#q-Q378\">Q378</a>]</span>"],
+    rule:"Name the protocol weakness first — the countermeasure follows from it." },
+{ id:'f15', g:'g7', name:"Monitoring & Design", topic:"Segmentation Design, Monitoring & Performance Metrics", q:68, leaves:["Segment for containment", "Watch the egress", "Out-of-band management", "Balance granularity vs ops", "Metrics tell the board"],
     factors:[
-     "<b>Unpatchable devices \u2014 isolate how?</b> &mdash; When designing for IoT/ICS (Industrial Control Systems), choose physical or air-gapped segmentation \u2014 these devices often cannot run endpoint agents or receive patches. <span class=\"qrefs\">[Q35 Q67]</span>",
-     "<b>Attacker pivot \u2014 contain how?</b> &mdash; When asked about lateral-movement containment, choose segmentation or micro-segmentation \u2014 it limits an attacker's ability to pivot after initial compromise. <span class=\"qrefs\">[Q26 Q121]</span>"],
-    rule:"Baseline, detect, respond - and design defense in depth" }
+     "<b>Segmentation exists for containment and monitoring</b> &mdash; separate segments per data type and jurisdiction, restricted zones for patient data, protocol-aware firewalls and unidirectional gates for ICS, VLANs+ACLs for constrained budgets, tamper-evident seals for Layer-1 supply-chain fears. <span class=\"qrefs\">[<a href=\"#q-Q53\">Q53</a> <a href=\"#q-Q148\">Q148</a> <a href=\"#q-Q371\">Q371</a> <a href=\"#q-Q147\">Q147</a> <a href=\"#q-Q135\">Q135</a>]</span>",
+     "<b>Outbound traffic betrays insiders and bots</b> &mdash; egress monitoring catches exfiltration and botnet C2 that inbound rules never see. <span class=\"qrefs\">[<a href=\"#q-Q203\">Q203</a> <a href=\"#q-Q239\">Q239</a> <a href=\"#q-Q241\">Q241</a>]</span>",
+     "<b>Management planes go out-of-band</b> &mdash; dedicated networks for management traffic; physical segmentation gaps in router management are how routers fall; tamper-evident logging guards the monitors. <span class=\"qrefs\">[<a href=\"#q-Q229\">Q229</a> <a href=\"#q-Q264\">Q264</a> <a href=\"#q-Q387\">Q387</a>]</span>",
+     "<b>Every control trades against operations</b> &mdash; granularity vs performance vs patient-care timeliness; ICS continuity vs cybersecurity; automation vs human oversight; verify isolation with penetration tests, then optimize boundaries from traffic analysis. <span class=\"qrefs\">[<a href=\"#q-Q77\">Q77</a> <a href=\"#q-Q421\">Q421</a> <a href=\"#q-Q30\">Q30</a> <a href=\"#q-Q46\">Q46</a> <a href=\"#q-Q322\">Q322</a> <a href=\"#q-Q133\">Q133</a>]</span>",
+     "<b>Metrics speak stakeholder languages</b> &mdash; boards get tailored presentations and balanced scorecards; MTTD/R rules multi-cloud; simulated-attack success rates verify effectiveness; the implemented-vs-deferred ratio fits startups. <span class=\"qrefs\">[<a href=\"#q-Q134\">Q134</a> <a href=\"#q-Q360\">Q360</a> <a href=\"#q-Q384\">Q384</a> <a href=\"#q-Q382\">Q382</a> <a href=\"#q-Q110\">Q110</a>]</span>"],
+    rule:"Contain by design, watch the egress, manage out-of-band — and measure what the audience funds." }
 ];
 
 var RADAR=[
-{t:'Wrong layer', d:'Controls and attacks assigned to the wrong OSI layer - map first, answer second.', ex:'see factor ladders'},
-{t:'Port confusion', d:'Protocol-port pairs mixed up - recall questions with no reasoning shortcut.', ex:'see factor ladders'},
-{t:'Detect vs prevent', d:'IDS answers offered where the stem needs inline prevention, and vice versa.', ex:'see factor ladders'},
-{t:'One boundary', d:'Single-firewall answers where defense in depth is asked.', ex:'see factor ladders'},
-{t:'Crypto placement', d:'IPsec transport vs tunnel mode and TLS versions mismatched to the ask.', ex:'see factor ladders'},
-{t:'Wireless legacy', d:'WEP/WPA answers where modern standards are required.', ex:'see factor ladders'},
-{t:'Cloud absolutes', d:'Provider-trust answers where shared responsibility applies.', ex:'see factor ladders'},
-{t:'Attack mislabel', d:'Spoofing, hijacking and MITM conflated - identify the exploited property.', ex:'see factor ladders'},
-{t:'Skip the baseline', d:'Detection deployed without knowing normal - reject monitoring without baselining.', ex:'see factor ladders'}
+{t:"Shared-key comfort", d:"WPA2-Personal/pre-shared keys where Enterprise 802.1X authentication is asked.", ex:"<a href=\"#q-Q105\">Q105</a>, <a href=\"#q-Q246\">Q246</a>"},
+{t:"Controller blind spot", d:"SDN agility praised while the centralized controller goes unhardened.", ex:"<a href=\"#q-Q56\">Q56</a>, <a href=\"#q-Q278\">Q278</a>, <a href=\"#q-Q286\">Q286</a>"},
+{t:"Flat-cloud euphoria", d:"One big VPC with no micro-segmentation of east-west traffic.", ex:"<a href=\"#q-Q334\">Q334</a>, <a href=\"#q-Q107\">Q107</a>, <a href=\"#q-Q127\">Q127</a>"},
+{t:"Inbound-only monitoring", d:"Egress ignored while exfiltration and C2 ride out unchallenged.", ex:"<a href=\"#q-Q203\">Q203</a>, <a href=\"#q-Q239\">Q239</a>"},
+{t:"In-band management", d:"Management traffic sharing the production path it is supposed to rescue.", ex:"<a href=\"#q-Q229\">Q229</a>, <a href=\"#q-Q264\">Q264</a>"},
+{t:"Dual-use abuse", d:"Reconnaissance tools run without authorization, scoping or access control.", ex:"<a href=\"#q-Q90\">Q90</a>, <a href=\"#q-Q125\">Q125</a>"},
+{t:"Legacy protocol trust", d:"ARP/DNS treated as trustworthy because they are old and everywhere.", ex:"<a href=\"#q-Q284\">Q284</a>, <a href=\"#q-Q86\">Q86</a>"},
+{t:"Over-segmentation", d:"Segment granularity that delays patient care or starves operations.", ex:"<a href=\"#q-Q421\">Q421</a>, <a href=\"#q-Q77\">Q77</a>"},
+{t:"Vanity metrics", d:"Packet counts reported to boards instead of MTTD, attack success rates or scorecards.", ex:"<a href=\"#q-Q384\">Q384</a>, <a href=\"#q-Q134\">Q134</a>, <a href=\"#q-Q382\">Q382</a>"}
 ];
 
 var QS = [
@@ -444,7 +448,7 @@ var QS = [
   el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
   var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
-  c0.textContent = 'DOMAIN 7 · PART';
+  c0.textContent = "DOMAIN 4 · PART";
   var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
   c1.textContent = 'DECISION';

@@ -65,6 +65,11 @@
   .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
   .ladder .rule b{color:var(--mc);font-style:normal}
 
+  .ladder ol li .qrefs{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .ladder ol li .qrefs a{color:var(--mc);text-decoration:none;border-bottom:1px dotted var(--mc);margin:0 1px}
+  .ladder ol li .qrefs a:hover{border-bottom-style:solid}
+  .rad .ex a{color:#b91c1c;text-decoration:none;font-weight:800}
+  .rad .ex a:hover{text-decoration:underline}
   .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
   .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
   .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
@@ -124,9 +129,9 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 1 of 5</div>
+    <div class="eyebrow">CISSP &middot; Domain 3 &middot; Exam preparation &middot; logic-based scenarios &middot; part 1 of 5</div>
     <h1>D3 Question Drill 1 &mdash; Cryptography</h1>
-    <p class="sub"><b>92 scenario questions</b> (topics 1&ndash;12) &middot; <b>12 decision families</b> &middot; <b>5 knowledge groups</b> &mdash; forensics and evidence, monitoring and intel, malware defense, change and patch, resources and environment. Continues in <a href="d7_drill_p2.html">part 2: continuity and recovery (80 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+    <p class="sub"><b>144 scenario questions</b> (topics 1&ndash;8 of 19) &middot; <b>8 decision families</b> across <b>7 knowledge groups</b> &mdash; symmetric and asymmetric cryptography, hashing and signatures, PKI, key management, cryptanalysis, post-quantum and steganography, crypto fundamentals. Continues in <a href="d3_drill_p2.html">part 2: models, evaluation &amp; physical</a>. Companion: the <a href="d3_cheatsheet_p1.html">knowledge cheatsheet</a> &middot; <a href="d3_index.html">D3 hub</a>.</p>
   </div>
 </header>
 
@@ -140,7 +145,7 @@
 
   <section id="fmap">
     <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
-    <p class="lede">The 12 part-1 families (of D7&rsquo;s 18 total), colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <p class="lede">The 8 families on this page, colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
     <div class="map-panel">
       <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D3 drill part 1"></svg>
       <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
@@ -184,72 +189,88 @@
 <script>
 var GROUPS={g1:{name:"Symmetric Algorithms",color:"#b91c1c",fill:"#dc2626"},g2:{name:"Asymmetric & Key Exchange",color:"#b45309",fill:"#d97706"},g3:{name:"Hashing, MAC & Signatures",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"PKI & Certificates",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Key Management & Randomness",color:"#047857",fill:"#059669"},g6:{name:"Quantum, PQC & Steganography",color:"#be185d",fill:"#db2777"},g7:{name:"Crypto Fundamentals & Attacks",color:"#0e7490",fill:"#0891b2"}};
 var FAMILIES = [
-{ id:'f01', g:'g1', name:'Symmetric algorithms', topic:'Symmetric Algorithms (AES/DES/3DES/Blowfish/RC4/ChaCha)', q:26, leaves:['DES/3DES migration target?','Mobile streaming pick?','Confidentiality plus...','Nonce reuse consequence?','Key distribution answer?'],
-    factors:['<b>DES/3DES migration target?</b> &mdash; When migrating from DES/3DES, choose AES-256 (AES-128 minimum). 3DES is deprecated, not merely old. <span class="qrefs">[Q518]</span>',
-     '<b>Mobile streaming pick?</b> &mdash; When high performance, mobile, or IoT streaming is needed, choose ChaCha20 over AES because it has no hardware-acceleration dependency.',
-     '<b>Confidentiality plus integrity mode?</b> &mdash; When a mode must provide confidentiality AND integrity, choose GCM or CCM (AEAD), not CBC alone.',
-     '<b>Nonce reuse consequence?</b> &mdash; IV/nonce reuse catastrophically breaks encryption, especially for CTR/GCM/ChaCha20: keystream reuse enables XOR recovery of plaintext. <span class="qrefs">[Q571]</span>',
-     '<b>Key distribution answer?</b> &mdash; When the key distribution problem is raised, choose asymmetric crypto for key exchange, then symmetric for bulk encryption (hybrid approach). <span class="qrefs">[Q553]</span>',
-     '<b>Hardcoded key remediation?</b> &mdash; Remediate hardcoded symmetric keys via Hardware Security Module (HSM)/Key Management System (KMS), key rotation, and secrets management — not by relocating the key.'],
-    rule:'AES by default; mode and IV discipline decide safety' },
-{ id:'f02', g:'g2', name:'Asymmetric & key exchange', topic:'Asymmetric Algorithms (RSA/ECC/DH/ElGamal)', q:25, leaves:['DES/3DES migration target?','Mobile streaming pick?','Confidentiality plus...','Nonce reuse consequence?','Key distribution answer?'],
-    factors:['<b>DES/3DES migration target?</b> &mdash; When migrating from DES/3DES, choose AES-256 (AES-128 minimum). 3DES is deprecated, not merely old. <span class="qrefs">[Q518]</span>',
-     '<b>Mobile streaming pick?</b> &mdash; When high performance, mobile, or IoT streaming is needed, choose ChaCha20 over AES because it has no hardware-acceleration dependency.',
-     '<b>Confidentiality plus integrity mode?</b> &mdash; When a mode must provide confidentiality AND integrity, choose GCM or CCM (AEAD), not CBC alone.',
-     '<b>Nonce reuse consequence?</b> &mdash; IV/nonce reuse catastrophically breaks encryption, especially for CTR/GCM/ChaCha20: keystream reuse enables XOR recovery of plaintext. <span class="qrefs">[Q571]</span>',
-     '<b>Key distribution answer?</b> &mdash; When the key distribution problem is raised, choose asymmetric crypto for key exchange, then symmetric for bulk encryption (hybrid approach). <span class="qrefs">[Q553]</span>',
-     '<b>Hardcoded key remediation?</b> &mdash; Remediate hardcoded symmetric keys via Hardware Security Module (HSM)/Key Management System (KMS), key rotation, and secrets management — not by relocating the key.'],
-    rule:'RSA compatibility, ECC efficiency, DH shared secrets, hybrid for volume' },
-{ id:'f03', g:'g3', name:'Hashing, MAC & signatures', topic:'Hashing, MAC & Digital Signatures', q:12, leaves:['Hashing vs parity for PHI?'],
-    factors:['<b>Hashing vs parity for PHI?</b> &mdash; For HIPAA (Health Insurance Portability and Accountability Act) protected health record transmission needing detection of BOTH accidental corruption and intentional... <span class="qrefs">[Q439]</span>'],
-    rule:'Integrity then authentication then non-repudiation - match the guarantee' },
-{ id:'f04', g:'g4', name:'PKI & certificates', topic:'PKI & Certificates', q:24, leaves:['Hashing vs parity for PHI?'],
-    factors:['<b>Hashing vs parity for PHI?</b> &mdash; For HIPAA (Health Insurance Portability and Accountability Act) protected health record transmission needing detection of BOTH accidental corruption and intentional... <span class="qrefs">[Q439]</span>'],
-    rule:'Trust lives in the CA hierarchy and certificate lifecycle' },
-{ id:'f05', g:'g5', name:'Key management & randomness', topic:'Key Management & Randomness', q:14, leaves:['DES/3DES migration target?','Mobile streaming pick?','Confidentiality plus...','Nonce reuse consequence?','Key distribution answer?'],
-    factors:['<b>DES/3DES migration target?</b> &mdash; When migrating from DES/3DES, choose AES-256 (AES-128 minimum). 3DES is deprecated, not merely old. <span class="qrefs">[Q518]</span>',
-     '<b>Mobile streaming pick?</b> &mdash; When high performance, mobile, or IoT streaming is needed, choose ChaCha20 over AES because it has no hardware-acceleration dependency.',
-     '<b>Confidentiality plus integrity mode?</b> &mdash; When a mode must provide confidentiality AND integrity, choose GCM or CCM (AEAD), not CBC alone.',
-     '<b>Nonce reuse consequence?</b> &mdash; IV/nonce reuse catastrophically breaks encryption, especially for CTR/GCM/ChaCha20: keystream reuse enables XOR recovery of plaintext. <span class="qrefs">[Q571]</span>',
-     '<b>Key distribution answer?</b> &mdash; When the key distribution problem is raised, choose asymmetric crypto for key exchange, then symmetric for bulk encryption (hybrid approach). <span class="qrefs">[Q553]</span>',
-     '<b>Hardcoded key remediation?</b> &mdash; Remediate hardcoded symmetric keys via Hardware Security Module (HSM)/Key Management System (KMS), key rotation, and secrets management — not by relocating the key.'],
-    rule:'Keys are the real secret - lifecycle discipline' },
-{ id:'f06', g:'g7', name:'Cryptanalytic attacks', topic:'Cryptanalytic Attacks', q:11, leaves:['Oddly structured...','Clean monitoring points...','Encrypt plus obfuscate...','Longer keys vs Shor?','Data hiding vs process...'],
-    factors:['<b>Oddly structured paragraphs?</b> &mdash; Covert communication in seemingly innocent emails with oddly structured paragraphs indicates a null cipher using text arrangement. Audio-metadata embedding or image... <span class="qrefs">[Q116]</span>',
-     '<b>Clean monitoring points to?</b> &mdash; Classified data leaving a defense contractor via social media images with no network or content-filter anomalies indicates steganography embedded in ordinary image... <span class="qrefs">[Q168]</span>',
-     '<b>Encrypt plus obfuscate plus stego?</b> &mdash; To balance layered data protection with performance in a hybrid cloud with multiple virtualization layers: encrypt data at rest and in transit, obfuscate metadata, and... <span class="qrefs">[Q183]</span>',
-     '<b>Longer keys vs Shor?</b> &mdash; A global financial institution with existing classical crypto facing the quantum threat should adopt a hybrid classical + post-quantum approach with phased... <span class="qrefs">[Q246]</span>',
-     '<b>Data hiding vs process isolation?</b> &mdash; To prevent unclassified applications from observing classified application data coexisting on one defense contractor system, choose data hiding enforcement. Process... <span class="qrefs">[Q454]</span>',
-     '<b>Invisible to elevated privileges?</b> &mdash; To keep trading algorithms invisible even to elevated-privileged customer service processes on shared infrastructure, choose data hiding between security levels.... <span class="qrefs">[Q714]</span>'],
-    rule:'Name the attack by what it exploits: key, ciphertext, math or implementation' },
-{ id:'f07', g:'g6', name:'Quantum, PQC & steganography', topic:'Quantum, PQC & Steganography', q:16, leaves:['Oddly structured...','Clean monitoring points...','Encrypt plus obfuscate...','Longer keys vs Shor?','Data hiding vs process...'],
-    factors:['<b>Oddly structured paragraphs?</b> &mdash; Covert communication in seemingly innocent emails with oddly structured paragraphs indicates a null cipher using text arrangement. Audio-metadata embedding or image... <span class="qrefs">[Q116]</span>',
-     '<b>Clean monitoring points to?</b> &mdash; Classified data leaving a defense contractor via social media images with no network or content-filter anomalies indicates steganography embedded in ordinary image... <span class="qrefs">[Q168]</span>',
-     '<b>Encrypt plus obfuscate plus stego?</b> &mdash; To balance layered data protection with performance in a hybrid cloud with multiple virtualization layers: encrypt data at rest and in transit, obfuscate metadata, and... <span class="qrefs">[Q183]</span>',
-     '<b>Longer keys vs Shor?</b> &mdash; A global financial institution with existing classical crypto facing the quantum threat should adopt a hybrid classical + post-quantum approach with phased... <span class="qrefs">[Q246]</span>',
-     '<b>Data hiding vs process isolation?</b> &mdash; To prevent unclassified applications from observing classified application data coexisting on one defense contractor system, choose data hiding enforcement. Process... <span class="qrefs">[Q454]</span>',
-     '<b>Invisible to elevated privileges?</b> &mdash; To keep trading algorithms invisible even to elevated-privileged customer service processes on shared infrastructure, choose data hiding between security levels.... <span class="qrefs">[Q714]</span>'],
-    rule:'Harvest-now-decrypt-later drives PQC migration and agility' },
-{ id:'f08', g:'g7', name:'Crypto fundamentals', topic:'Cryptography Fundamentals', q:17, leaves:['Oddly structured...','Clean monitoring points...','Encrypt plus obfuscate...','Longer keys vs Shor?','Data hiding vs process...'],
-    factors:['<b>Oddly structured paragraphs?</b> &mdash; Covert communication in seemingly innocent emails with oddly structured paragraphs indicates a null cipher using text arrangement. Audio-metadata embedding or image... <span class="qrefs">[Q116]</span>',
-     '<b>Clean monitoring points to?</b> &mdash; Classified data leaving a defense contractor via social media images with no network or content-filter anomalies indicates steganography embedded in ordinary image... <span class="qrefs">[Q168]</span>',
-     '<b>Encrypt plus obfuscate plus stego?</b> &mdash; To balance layered data protection with performance in a hybrid cloud with multiple virtualization layers: encrypt data at rest and in transit, obfuscate metadata, and... <span class="qrefs">[Q183]</span>',
-     '<b>Longer keys vs Shor?</b> &mdash; A global financial institution with existing classical crypto facing the quantum threat should adopt a hybrid classical + post-quantum approach with phased... <span class="qrefs">[Q246]</span>',
-     '<b>Data hiding vs process isolation?</b> &mdash; To prevent unclassified applications from observing classified application data coexisting on one defense contractor system, choose data hiding enforcement. Process... <span class="qrefs">[Q454]</span>',
-     '<b>Invisible to elevated privileges?</b> &mdash; To keep trading algorithms invisible even to elevated-privileged customer service processes on shared infrastructure, choose data hiding between security levels.... <span class="qrefs">[Q714]</span>'],
-    rule:'Goals first, then primitive, then strength' }
+{ id:'f01', g:'g1', name:"Symmetric algorithms", topic:"Symmetric Algorithms (AES/DES/3DES/Blowfish/RC4/ChaCha)", q:25, leaves:["AES-256 default", "Lightweight for IoT", "Key hierarchy + HSM", "Rotate on risk", "KISS"],
+    factors:[
+     "<b>Migrating legacy crypto → AES</b> &mdash; leaving DES/3DES means AES with 256-bit keys (128 minimum); 3DES is deprecated, not merely &ldquo;old&rdquo;. <span class=\"qrefs\">[<a href=\"#q-Q518\">Q518</a> <a href=\"#q-Q81\">Q81</a>]</span>",
+     "<b>Constrained devices → lightweight ciphers</b> &mdash; industrial IoT and sensors get PRESENT/SIMON-class block ciphers or ChaCha-family stream ciphers; full AES assumes hardware it may not have. <span class=\"qrefs\">[<a href=\"#q-Q379\">Q379</a> <a href=\"#q-Q153\">Q153</a>]</span>",
+     "<b>Enterprise scale → key hierarchy with HSM root</b> &mdash; multi-site symmetric crypto is scored on tiered keys, offline/HSM-protected roots and automated rotation &mdash; not on the algorithm choice. <span class=\"qrefs\">[<a href=\"#q-Q1087\">Q1087</a> <a href=\"#q-Q1095\">Q1095</a> <a href=\"#q-Q347\">Q347</a>]</span>",
+     "<b>Hardcoded keys → dynamic establishment</b> &mdash; the remediation is hybrid key exchange and secrets management (rotate, HSM/KMS), never relocating the key in source. <span class=\"qrefs\">[<a href=\"#q-Q553\">Q553</a> <a href=\"#q-Q628\">Q628</a>]</span>",
+     "<b>High-throughput asks speed-class implementations</b> &mdash; HPC/terabyte scenarios score hardware-accelerated modes and throughput, favoring AES-GCM class choices. <span class=\"qrefs\">[<a href=\"#q-Q620\">Q620</a> <a href=\"#q-Q148\">Q148</a>]</span>",
+     "<b>Sprawl itself is the vulnerability</b> &mdash; when an architecture review finds convoluted crypto everywhere, the scored principle is Keep It Simple and Small. <span class=\"qrefs\">[<a href=\"#q-Q625\">Q625</a>]</span>"],
+    rule:"AES unless the device can&rsquo;t; the key lifecycle, not the algorithm, is usually the answer." },
+{ id:'f02', g:'g2', name:"Asymmetric & key exchange", topic:"Asymmetric Algorithms (RSA/ECC/DH/ElGamal)", q:25, leaves:["Private key first", "ECC if constrained", "Hybrid for volume", "Forward secrecy", "PQC = hybrid"],
+    factors:[
+     "<b>Private-key protection is the recurring answer</b> &mdash; leaked private key → request CA revocation; vendor audits score private-key management; new systems hinge on robust private-key measures. <span class=\"qrefs\">[<a href=\"#q-Q731\">Q731</a> <a href=\"#q-Q1054\">Q1054</a> <a href=\"#q-Q1068\">Q1068</a>]</span>",
+     "<b>Constrained or massive fleets → ECC</b> &mdash; 100,000-device IoT or mobile: ECC-256 gives equal strength at a fraction of the compute of RSA. <span class=\"qrefs\">[<a href=\"#q-Q197\">Q197</a> <a href=\"#q-Q679\">Q679</a>]</span>",
+     "<b>Bulk data → hybrid</b> &mdash; asymmetric establishes the session key, symmetric encrypts the payload; &ldquo;pure asymmetric for volume&rdquo; always loses on speed. <span class=\"qrefs\">[<a href=\"#q-Q547\">Q547</a> <a href=\"#q-Q689\">Q689</a> <a href=\"#q-Q371\">Q371</a>]</span>",
+     "<b>TLS at scale → forward secrecy</b> &mdash; ephemeral Diffie-Hellman key exchange so a later key compromise can&rsquo;t decrypt past traffic. <span class=\"qrefs\">[<a href=\"#q-Q393\">Q393</a>]</span>",
+     "<b>Quantum horizon → hybrid classical + PQC</b> &mdash; 25-year protection strategies and new protocol rollouts combine today&rsquo;s algorithms with post-quantum candidates; wholesale replacement is premature. <span class=\"qrefs\">[<a href=\"#q-Q32\">Q32</a> <a href=\"#q-Q215\">Q215</a>]</span>",
+     "<b>Key size vs speed is the growth trade-off</b> &mdash; as processors speed up, key sizes must grow, further slowing asymmetric ops &mdash; the reason hybrid designs persist. <span class=\"qrefs\">[<a href=\"#q-Q373\">Q373</a>]</span>"],
+    rule:"Protect the private key; exchange asymmetrically, encrypt bulk symmetrically." },
+{ id:'f03', g:'g3', name:"Hashing, MAC & signatures", topic:"Hashing, MAC & Digital Signatures", q:12, leaves:["Non-repudiation → sign", "Tamper → crypto hash", "Collision resistance", "Cross-org service", "Avalanche quality"],
+    factors:[
+     "<b>Undeniable origin → digital signatures</b> &mdash; contracts and transactions no party can dispute need hash + private-key signature; MACs and bare hashes cannot give non-repudiation. <span class=\"qrefs\">[<a href=\"#q-Q354\">Q354</a> <a href=\"#q-Q621\">Q621</a>]</span>",
+     "<b>Deliberate tampering → cryptographic hash</b> &mdash; detecting intentional modification of records beats parity/CRC, which only catch accidents. <span class=\"qrefs\">[<a href=\"#q-Q439\">Q439</a>]</span>",
+     "<b>File-integrity mechanism → collision resistance</b> &mdash; secure transfer scenarios score the property (collision resistance), not a particular algorithm. <span class=\"qrefs\">[<a href=\"#q-Q648\">Q648</a>]</span>",
+     "<b>Cross-organization signing → shared third-party service</b> &mdash; multi-cloud or partner ecosystems need an interoperable signature service or middleware bridge, not a bespoke PKI island. <span class=\"qrefs\">[<a href=\"#q-Q55\">Q55</a> <a href=\"#q-Q233\">Q233</a>]</span>",
+     "<b>Ledger scenarios → immutability + signatures</b> &mdash; cross-border chains combine tamper-evident records with signatures for authentication and non-repudiation. <span class=\"qrefs\">[<a href=\"#q-Q359\">Q359</a> <a href=\"#q-Q634\">Q634</a>]</span>",
+     "<b>Algorithm evaluation → avalanche, confusion, diffusion</b> &mdash; weak avalanche response flags a cipher or hash unfit for purpose. <span class=\"qrefs\">[<a href=\"#q-Q863\">Q863</a>]</span>"],
+    rule:"Hash proves integrity, MAC adds shared-key authenticity, signature adds public non-repudiation." },
+{ id:'f04', g:'g4', name:"PKI & certificates", topic:"PKI, Certificates & Trust Management", q:24, leaves:["Root stays offline", "Revoke, then verify", "Automate lifecycle", "New keys on renewal", "Bridges & CT logs"],
+    factors:[
+     "<b>The root CA key stays offline</b> &mdash; subordinate CAs issue certificates; the scored benefit of two-tier designs is limiting root-key exposure. <span class=\"qrefs\">[<a href=\"#q-Q574\">Q574</a> <a href=\"#q-Q115\">Q115</a>]</span>",
+     "<b>Compromise → revoke and check revocation live</b> &mdash; leaked subordinate or server key: revoke via the CA and use OCSP for real-time status; an analyst seeing a revoked certificate must not proceed. <span class=\"qrefs\">[<a href=\"#q-Q728\">Q728</a> <a href=\"#q-Q743\">Q743</a>]</span>",
+     "<b>Scale → automated certificate lifecycle</b> &mdash; enterprise sprawl is solved by CLM with renewal overlap between old and new validity periods &mdash; manual tracking is the failure mode. <span class=\"qrefs\">[<a href=\"#q-Q73\">Q73</a> <a href=\"#q-Q33\">Q33</a>]</span>",
+     "<b>Renewal = fresh keys at current strength</b> &mdash; long-lived certificates accumulate outdated key pairs and unverified bindings; re-issue with new keys meeting today&rsquo;s standards. <span class=\"qrefs\">[<a href=\"#q-Q1021\">Q1021</a> <a href=\"#q-Q1065\">Q1065</a> <a href=\"#q-Q1022\">Q1022</a>]</span>",
+     "<b>Multiple PKIs → bridge CA / cross-certification</b> &mdash; and Certificate Transparency plus pinning to detect mis-issuance when an intermediate CA falls. <span class=\"qrefs\">[<a href=\"#q-Q564\">Q564</a> <a href=\"#q-Q940\">Q940</a>]</span>",
+     "<b>Trust-on-failure is the exploitable default</b> &mdash; clients that auto-trust when CRL/OCSP is unreachable invite rogue certificates &mdash; fix reachability (firewall rules) and require verification. <span class=\"qrefs\">[<a href=\"#q-Q897\">Q897</a> <a href=\"#q-Q1028\">Q1028</a>]</span>"],
+    rule:"Hierarchy discipline — offline root, live revocation, automated renewal — beats any single certificate." },
+{ id:'f05', g:'g5', name:"Key management & randomness", topic:"Key Management & Randomness", q:14, leaves:["Rotate by sensitivity", "Entropy or nothing", "Keys > algorithms", "Cloud-agnostic KMS", "TPM binds device"],
+    factors:[
+     "<b>Rotation frequency follows data value</b> &mdash; key-management policy is driven by the sensitivity and classification of what the keys protect — not by calendar habit. <span class=\"qrefs\">[<a href=\"#q-Q99\">Q99</a> <a href=\"#q-Q356\">Q356</a> <a href=\"#q-Q941\">Q941</a>]</span>",
+     "<b>Weak randomness breaks everything downstream</b> &mdash; predictable patterns invite cryptanalysis; reduced key space makes brute force feasible — entropy is the precondition, especially on constrained devices. <span class=\"qrefs\">[<a href=\"#q-Q377\">Q377</a> <a href=\"#q-Q828\">Q828</a> <a href=\"#q-Q58\">Q58</a>]</span>",
+     "<b>Strong algorithms never rescue poor key practices</b> &mdash; when teams obsess over algorithm strength but mishandle keys, key management is the finding — always. <span class=\"qrefs\">[<a href=\"#q-Q554\">Q554</a> <a href=\"#q-Q350\">Q350</a>]</span>",
+     "<b>Multi-cloud → centralized, cloud-agnostic KMS</b> &mdash; one key-management plane integrating every provider (BYOK-style), avoiding per-cloud silos. <span class=\"qrefs\">[<a href=\"#q-Q1071\">Q1071</a> <a href=\"#q-Q619\">Q619</a>]</span>",
+     "<b>Device-bound keys → TPM</b> &mdash; health-record endpoints and similar rollouts anchor keys in hardware roots of trust. <span class=\"qrefs\">[<a href=\"#q-Q670\">Q670</a>]</span>",
+     "<b>Sovereignty constrains centralization</b> &mdash; global PKI/KMS decisions must reconcile data-sovereignty rules with central control — the recurring primary consideration. <span class=\"qrefs\">[<a href=\"#q-Q1083\">Q1083</a>]</span>"],
+    rule:"Cryptography fails at key management long before the math breaks." },
+{ id:'f06', g:'g6', name:"Cryptanalytic attacks", topic:"Cryptanalytic Attacks", q:11, leaves:["Length + entropy", "Layer the crypto", "Rainbow tables", "Side channels", "Quantum horizon"],
+    factors:[
+     "<b>Key length and entropy are the primary defense</b> &mdash; hardening against modern attack starts with longer, high-entropy keys. <span class=\"qrefs\">[<a href=\"#q-Q22\">Q22</a>]</span>",
+     "<b>Defense in depth applies to crypto</b> &mdash; multi-layered strategies combining algorithms, key rotation and monitoring beat any single mechanism. <span class=\"qrefs\">[<a href=\"#q-Q80\">Q80</a> <a href=\"#q-Q1011\">Q1011</a>]</span>",
+     "<b>Leaked originals → known-plaintext</b> &mdash; recovered plaintext+ciphertext pairs hand attackers that model; hashed credential stores fall to rainbow-table lookup. <span class=\"qrefs\">[<a href=\"#q-Q466\">Q466</a> <a href=\"#q-Q976\">Q976</a>]</span>",
+     "<b>Timing leaks → constant-time + padding</b> &mdash; high-frequency operations need constant-time algorithms to close side channels. <span class=\"qrefs\">[<a href=\"#q-Q708\">Q708</a>]</span>",
+     "<b>Quantum threat → quantum-resistant algorithms</b> &mdash; hybrid-cloud migrations planning decades ahead adopt PQC; cryptanalysis of intercepted traffic aims to deduce keys. <span class=\"qrefs\">[<a href=\"#q-Q232\">Q232</a> <a href=\"#q-Q527\">Q527</a>]</span>"],
+    rule:"Attackers exploit keys, randomness and implementation — rarely the mathematics." },
+{ id:'f07', g:'g6', name:"Quantum, PQC & steganography", topic:"Quantum, Post-Quantum Crypto & Steganography", q:16, leaves:["Hybrid PQC now", "Images carry data", "Watermark to track", "QKD detects taps", "Crypto agility"],
+    factors:[
+     "<b>Harvest-now-decrypt-later → hybrid PQC</b> &mdash; long-lived secrets get classical + post-quantum protection today; lattice-based candidates lead migration answers. <span class=\"qrefs\">[<a href=\"#q-Q246\">Q246</a> <a href=\"#q-Q592\">Q592</a>]</span>",
+     "<b>Images are a data channel</b> &mdash; exfiltration hiding inside image files evades DLP; detection needs content/statistical analysis — think steganography when transfers look clean but data leaves. <span class=\"qrefs\">[<a href=\"#q-Q168\">Q168</a> <a href=\"#q-Q835\">Q835</a> <a href=\"#q-Q721\">Q721</a>]</span>",
+     "<b>Embedded marks track IP</b> &mdash; steganographic watermarking proves ownership and traces leaks of proprietary images. <span class=\"qrefs\">[<a href=\"#q-Q875\">Q875</a> <a href=\"#q-Q1076\">Q1076</a>]</span>",
+     "<b>QKD&rsquo;s value is tap detection</b> &mdash; eavesdropping disturbs the quantum states; specialized hardware limits practicality at scale. <span class=\"qrefs\">[<a href=\"#q-Q450\">Q450</a> <a href=\"#q-Q613\">Q613</a>]</span>",
+     "<b>Evaluate criteria for the future</b> &mdash; Common Criteria reviews of crypto score adaptability to emerging tech — agility over perfection. <span class=\"qrefs\">[<a href=\"#q-Q535\">Q535</a>]</span>"],
+    rule:"Build crypto agility; treat images and files as carriers, not decoration." },
+{ id:'f08', g:'g7', name:"Crypto fundamentals", topic:"Applied Cryptography Fundamentals", q:17, leaves:["Hybrid transfer", "Key mgmt is the ask", "Lightweight for IoT", "Entropy for keys", "Crypto agility"],
+    factors:[
+     "<b>Send a file → symmetric data key, asymmetric wrap</b> &mdash; email attachments, 500&nbsp;GB backups, partner transfers: encrypt content with AES, protect the key with RSA/ECC. <span class=\"qrefs\">[<a href=\"#q-Q374\">Q374</a> <a href=\"#q-Q583\">Q583</a> <a href=\"#q-Q542\">Q542</a>]</span>",
+     "<b>&ldquo;Most careful aspect&rdquo; → key management</b> &mdash; implementations and board justifications alike are scored on key-management practices and procedures. <span class=\"qrefs\">[<a href=\"#q-Q350\">Q350</a> <a href=\"#q-Q638\">Q638</a>]</span>",
+     "<b>IoT constraint pattern → lightweight crypto</b> &mdash; sensors get lightweight ciphers, ECC or DTLS-PSK sized to their compute and battery. <span class=\"qrefs\">[<a href=\"#q-Q153\">Q153</a> <a href=\"#q-Q202\">Q202</a> <a href=\"#q-Q317\">Q317</a>]</span>",
+     "<b>Constrained devices starve entropy</b> &mdash; insufficient randomness for key generation is the signature vulnerability of IoT deployments. <span class=\"qrefs\">[<a href=\"#q-Q210\">Q210</a>]</span>",
+     "<b>Crypto agility = swap algorithms fast</b> &mdash; rapid-migration processes and continuous monitoring keep vulnerable algorithms replaceable before they break you. <span class=\"qrefs\">[<a href=\"#q-Q56\">Q56</a> <a href=\"#q-Q228\">Q228</a>]</span>",
+     "<b>Scope follows the data state</b> &mdash; stolen production databases need at-rest encryption; signed sender proof without confidentiality means signing with the private key. <span class=\"qrefs\">[<a href=\"#q-Q671\">Q671</a> <a href=\"#q-Q776\">Q776</a> <a href=\"#q-Q353\">Q353</a>]</span>"],
+    rule:"Symmetric for bulk, asymmetric for keys, agility for whatever comes next." }
 ];
 
 var RADAR=[
-{t:'Wrong artifact attacked', d:'Attacking the key, the ciphertext, the implementation or the math - questions ask which.', ex:'see factor ladders'},
-{t:'Guarantee mismatch', d:'Confidentiality controls offered for integrity or authentication asks - match the property.', ex:'see factor ladders'},
-{t:'Layer skipped', d:'Solutions that start at technology while the question names an earlier planning step.', ex:'see factor ladders'},
-{t:'Single point of trust', d:'One control, vendor or path presented as total protection.', ex:'see factor ladders'},
-{t:'Speed over correctness', d:'Performance options chosen where the scored factor is correctness of the control.', ex:'see factor ladders'},
-{t:'Absolute promises', d:'Guarantees of prevention or unbreakability - reject absolutes.', ex:'see factor ladders'},
-{t:'Detection sold as prevention', d:'Monitoring or audit answers where prevention is asked.', ex:'see factor ladders'},
-{t:'Vendor first', d:'Outsourcing proposed where governance or design ownership is the scored step.', ex:'see factor ladders'},
-{t:'Once-and-done', d:'Point-in-time fixes where lifecycle or continuous operation is required.', ex:'see factor ladders'}
+{t:"Algorithm myopia", d:"&ldquo;Stronger algorithm&rdquo; answers where key management, rotation or lifecycle is what the scenario scores.", ex:"<a href=\"#q-Q554\">Q554</a>, <a href=\"#q-Q350\">Q350</a>, <a href=\"#q-Q638\">Q638</a>"},
+{t:"Mode blindness", d:"Plain CBC chosen where confidentiality plus integrity requires an AEAD mode such as GCM.", ex:"<a href=\"#q-Q81\">Q81</a>, <a href=\"#q-Q148\">Q148</a>"},
+{t:"Key lifecycle skipped", d:"Generation without rotation, revocation or destruction — the answer stops at half a key program.", ex:"<a href=\"#q-Q36\">Q36</a>, <a href=\"#q-Q192\">Q192</a>, <a href=\"#q-Q347\">Q347</a>"},
+{t:"Trust misconfiguration", d:"Auto-trust on CRL failure, blocked OCSP reachability, or certificates bound to unverified identities.", ex:"<a href=\"#q-Q897\">Q897</a>, <a href=\"#q-Q1028\">Q1028</a>, <a href=\"#q-Q1022\">Q1022</a>"},
+{t:"Quantum panic", d:"Wholesale post-quantum replacement where a hybrid classical+PQC transition is scored.", ex:"<a href=\"#q-Q246\">Q246</a>, <a href=\"#q-Q32\">Q32</a>, <a href=\"#q-Q215\">Q215</a>"},
+{t:"Hidden channel missed", d:"Exfiltration treated as an encryption failure when data hides in images via steganography.", ex:"<a href=\"#q-Q168\">Q168</a>, <a href=\"#q-Q721\">Q721</a>, <a href=\"#q-Q835\">Q835</a>"},
+{t:"Entropy neglected", d:"Strong ciphers fed by weak randomness — the IoT key-generation trap.", ex:"<a href=\"#q-Q377\">Q377</a>, <a href=\"#q-Q210\">Q210</a>, <a href=\"#q-Q58\">Q58</a>"},
+{t:"Symmetric for exchange", d:"Pre-shared symmetric distribution where hybrid or asymmetric key establishment fits.", ex:"<a href=\"#q-Q553\">Q553</a>, <a href=\"#q-Q374\">Q374</a>"},
+{t:"Once-and-done crypto", d:"Deployment without agility or review — algorithms age and monitoring is absent.", ex:"<a href=\"#q-Q56\">Q56</a>, <a href=\"#q-Q228\">Q228</a>"}
 ];
 
 var QS = [
@@ -470,7 +491,7 @@ var QS = [
   el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
   var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
-  c0.textContent = 'DOMAIN 7 · PART';
+  c0.textContent = "DOMAIN 3 · PART";
   var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
   c1.textContent = 'DECISION';

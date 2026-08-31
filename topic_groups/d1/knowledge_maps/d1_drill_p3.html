@@ -65,6 +65,11 @@
   .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
   .ladder .rule b{color:var(--mc);font-style:normal}
 
+  .ladder ol li .qrefs{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .ladder ol li .qrefs a{color:var(--mc);text-decoration:none;border-bottom:1px dotted var(--mc);margin:0 1px}
+  .ladder ol li .qrefs a:hover{border-bottom-style:solid}
+  .rad .ex a{color:#b91c1c;text-decoration:none;font-weight:800}
+  .rad .ex a:hover{text-decoration:underline}
   .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
   .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
   .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
@@ -124,9 +129,9 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 3 of 6</div>
+    <div class="eyebrow">CISSP &middot; Domain 1 &middot; Exam preparation &middot; logic-based scenarios &middot; part 3 of 6</div>
     <h1>D1 Question Drill 3 &mdash; Risk Treatment & Controls (topic 11)</h1>
-    <p class="sub"><b>92 scenario questions</b> (topics 1&ndash;12) &middot; <b>12 decision families</b> &middot; <b>5 knowledge groups</b> &mdash; forensics and evidence, monitoring and intel, malware defense, change and patch, resources and environment. Continues in <a href="d7_drill_p2.html">part 2: continuity and recovery (80 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+    <p class="sub"><b>155 scenario questions</b> (topic 11 of 27) &middot; <b>1 decision family</b> &mdash; risk treatment and control selection: treatment verbs, preventive/detective/corrective pairing, physical and environmental controls, and control justification. Continues in <a href="d1_drill_p4.html">part 4: frameworks, modeling &amp; adjacent topics</a>. Companion: the <a href="d1_cheatsheet_p2.html">knowledge cheatsheet</a> &middot; <a href="d1_index.html">D1 hub</a>.</p>
   </div>
 </header>
 
@@ -140,7 +145,7 @@
 
   <section id="fmap">
     <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
-    <p class="lede">The 12 part-1 families (of D7&rsquo;s 18 total), colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <p class="lede">The 1 family on this page, colored by its knowledge group (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
     <div class="map-panel">
       <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D1 drill part 3"></svg>
       <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
@@ -184,23 +189,28 @@
 <script>
 var GROUPS={g1:{name:"Risk Treatment & Controls A",color:"#b91c1c",fill:"#dc2626"},g2:{name:"Risk Treatment & Controls B",color:"#b45309",fill:"#d97706"},g3:{name:"Risk Treatment & Controls C",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"Risk Treatment & Controls D",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Risk Treatment & Controls E",color:"#047857",fill:"#059669"},g6:{name:"Risk Frameworks & RMF",color:"#be185d",fill:"#db2777"},g7:{name:"Threat Modeling & Supply Chain",color:"#0e7490",fill:"#0891b2"}};
 var FAMILIES = [
-{ id:'f11', g:'g1', name:"Risk Treatment", topic:"Risk Treatment, Controls & Mitigation", q:155, leaves:["Managerial or technical?","Loss exceeds appetite?"],
+{ id:'f11', g:'g1', name:"Risk Treatment", topic:"Risk Treatment, Control Selection & Physical/Environmental Controls", q:155, leaves:["Name the verb first", "Pair control types", "Match control to layer", "Cost vs asset value", "Fail secure, delay, assess"],
     factors:[
-     "<b>Managerial or technical?</b> &mdash; CISSP frames risk treatment and control-selection decisions as managerial, risk-based choices, not purely technical ones. Controls exist to manage risk to an acceptable...",
-     "<b>Loss exceeds appetite?</b> &mdash; Choose transfer (insurance) when the potential loss exceeds the organization's risk appetite but the activity must continue."],
-    rule:"Avoid, transfer, mitigate, accept - then the control that fits" }
+     "<b>Name the treatment verb before any control</b> &mdash; not deploying/too risky = avoidance; documented sign-off to proceed = acceptance (by senior management or the risk owner, never the security team); insurance = transfer that keeps accountability; controls plus insurance plus sign-off = the full mitigation package. <span class=\"qrefs\">[<a href=\"#q-Q413\">Q413</a> <a href=\"#q-Q465\">Q465</a> <a href=\"#q-Q503\">Q503</a> <a href=\"#q-Q341\">Q341</a> <a href=\"#q-Q419\">Q419</a> <a href=\"#q-Q356\">Q356</a> <a href=\"#q-Q574\">Q574</a> <a href=\"#q-Q275\">Q275</a>]</span>",
+     "<b>Complete control strategies pair the types</b> &mdash; preventive + detective + corrective working together; a strategy missing a type (detection without response, prevention without detection) is the scored gap &mdash; and detection must be followed by assess then respond. <span class=\"qrefs\">[<a href=\"#q-Q801\">Q801</a> <a href=\"#q-Q1119\">Q1119</a> <a href=\"#q-Q803\">Q803</a> <a href=\"#q-Q1032\">Q1032</a> <a href=\"#q-Q1116\">Q1116</a> <a href=\"#q-Q837\">Q837</a> <a href=\"#q-Q938\">Q938</a>]</span>",
+     "<b>Physical controls: match the mechanism to the threat</b> &mdash; fire: suppression class to the hazard (deluge for fireworks, pre-action for archives and cold storage, FM-200 for server rooms); power: UPS rides the gap, generators carry the outage; walls floor-slab to structure; HVAC: humidity plus temperature together; lighting: deterrence plus camera performance plus staff safety. <span class=\"qrefs\">[<a href=\"#q-Q280\">Q280</a> <a href=\"#q-Q901\">Q901</a> <a href=\"#q-Q917\">Q917</a> <a href=\"#q-Q271\">Q271</a> <a href=\"#q-Q991\">Q991</a> <a href=\"#q-Q863\">Q863</a> <a href=\"#q-Q844\">Q844</a> <a href=\"#q-Q847\">Q847</a> <a href=\"#q-Q859\">Q859</a> <a href=\"#q-Q851\">Q851</a>]</span>",
+     "<b>Barriers and locks are delay devices, never the answer alone</b> &mdash; locks and doors buy time; alarms, cameras, guards and sensors complete the design &mdash; sensor coverage must include every penetration route (vents, walls, ceilings), and single-factor entries get a second factor added. <span class=\"qrefs\">[<a href=\"#q-Q1022\">Q1022</a> <a href=\"#q-Q964\">Q964</a> <a href=\"#q-Q842\">Q842</a> <a href=\"#q-Q830\">Q830</a> <a href=\"#q-Q1123\">Q1123</a> <a href=\"#q-Q268\">Q268</a> <a href=\"#q-Q217\">Q217</a> <a href=\"#q-Q1016\">Q1016</a> <a href=\"#q-Q1275\">Q1275</a>]</span>",
+     "<b>Compensating controls substitute when the ideal is impractical</b> &mdash; legacy MD5, untrusted cloud providers, legal constraints on preferred access control: bridge with monitoring, segregation of duties and enhanced assurance while transitioning. <span class=\"qrefs\">[<a href=\"#q-Q950\">Q950</a> <a href=\"#q-Q706\">Q706</a> <a href=\"#q-Q775\">Q775</a> <a href=\"#q-Q1002\">Q1002</a> <a href=\"#q-Q1136\">Q1136</a>]</span>",
+     "<b>Controls are justified by cost versus asset value and goal alignment</b> &mdash; implement when control cost &lt; protected value; over-spending diverts resources and hinders the business; the justification frame is organizational goals, cost-effectiveness and risk profile. <span class=\"qrefs\">[<a href=\"#q-Q1158\">Q1158</a> <a href=\"#q-Q1184\">Q1184</a> <a href=\"#q-Q486\">Q486</a> <a href=\"#q-Q540\">Q540</a> <a href=\"#q-Q1012\">Q1012</a> <a href=\"#q-Q1064\">Q1064</a> <a href=\"#q-Q1106\">Q1106</a> <a href=\"#q-Q1279\">Q1279</a>]</span>",
+     "<b>Systems fail secure and stay simple</b> &mdash; crashes lock down (fail securely); complexity itself is risk (KISS); virtual patching covers gaps but not everything; hardening = disable unnecessary services, patch, whitelist, segment. <span class=\"qrefs\">[<a href=\"#q-Q292\">Q292</a> <a href=\"#q-Q1099\">Q1099</a> <a href=\"#q-Q126\">Q126</a> <a href=\"#q-Q921\">Q921</a> <a href=\"#q-Q1057\">Q1057</a> <a href=\"#q-Q518\">Q518</a>]</span>"],
+    rule:"Treatment verb → control-type pairing → mechanism fit → cost justification, in that order." }
 ];
 
 var RADAR=[
-{t:'Property confusion', d:'Confidentiality, integrity, availability traded as if interchangeable - read which property the stem sacrifices.', ex:'see factor ladders'},
-{t:'Owner misplaced', d:'Risk acceptance or governance duties assigned to the wrong role.', ex:'see factor ladders'},
-{t:'Verb skipped', d:'Controls chosen before the treatment verb (avoid, transfer, mitigate, accept) is named.', ex:'see factor ladders'},
-{t:'ALE arithmetic ignored', d:'Qualitative answers where the stem gives numbers - compute SLE and ALE first.', ex:'see factor ladders'},
-{t:'Framework step swapped', d:'RMF steps out of order, authorization before assessment.', ex:'see factor ladders'},
-{t:'Compliance absolutes', d:'Certification treated as compliance; audits treated as guarantees.', ex:'see factor ladders'},
-{t:'Cloud duty transfer', d:'Provider answers where customer data accountability remains.', ex:'see factor ladders'},
-{t:'Layer skipped', d:'Technology-first answers where the question names policy or governance.', ex:'see factor ladders'},
-{t:'Once-and-done', d:'Point-in-time fixes where continuous monitoring or review is asked.', ex:'see factor ladders'}
+{t:"Verb skipped", d:"Controls proposed before naming the treatment (avoid, accept, transfer, mitigate) the scenario asks for.", ex:"<a href=\"#q-Q413\">Q413</a>, <a href=\"#q-Q465\">Q465</a>, <a href=\"#q-Q275\">Q275</a>"},
+{t:"Single-type strategy", d:"Prevention-only or detection-only programs praised while the missing control type is the finding.", ex:"<a href=\"#q-Q1119\">Q1119</a>, <a href=\"#q-Q803\">Q803</a>, <a href=\"#q-Q1038\">Q1038</a>"},
+{t:"Barrier worship", d:"Strong locks and doors treated as sufficient — no delay-plus-assess-plus-response pairing.", ex:"<a href=\"#q-Q964\">Q964</a>, <a href=\"#q-Q1022\">Q1022</a>, <a href=\"#q-Q842\">Q842</a>"},
+{t:"Suppression mismatch", d:"Wrong fire class for the hazard — water near electronics, deluge in an archive.", ex:"<a href=\"#q-Q280\">Q280</a>, <a href=\"#q-Q901\">Q901</a>, <a href=\"#q-Q917\">Q917</a>"},
+{t:"Power layers confused", d:"Generators offered as instant protection or UPS as long-duration backup.", ex:"<a href=\"#q-Q271\">Q271</a>, <a href=\"#q-Q991\">Q991</a>, <a href=\"#q-Q1104\">Q1104</a>"},
+{t:"Wrong accepter", d:"Security team or vendor signing off on residual risk instead of senior management.", ex:"<a href=\"#q-Q341\">Q341</a>, <a href=\"#q-Q503\">Q503</a>, <a href=\"#q-Q419\">Q419</a>"},
+{t:"Cost-blind controls", d:"Gold-plating that ignores control-cost-versus-asset-value or business alignment.", ex:"<a href=\"#q-Q1158\">Q1158</a>, <a href=\"#q-Q1184\">Q1184</a>, <a href=\"#q-Q1106\">Q1106</a>"},
+{t:"Coverage gaps", d:"Sensors on doors and windows while walls, vents and ceilings stay unmonitored.", ex:"<a href=\"#q-Q1123\">Q1123</a>, <a href=\"#q-Q268\">Q268</a>, <a href=\"#q-Q830\">Q830</a>"},
+{t:"Fail-open default", d:"Crash or outage handled for availability while the secure-failure posture is ignored.", ex:"<a href=\"#q-Q292\">Q292</a>, <a href=\"#q-Q952\">Q952</a>"}
 ];
 
 var QS = [
@@ -432,7 +442,7 @@ var QS = [
   el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
   var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
-  c0.textContent = 'DOMAIN 7 · PART';
+  c0.textContent = "DOMAIN 1 · PART";
   var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
   c1.textContent = 'DECISION';

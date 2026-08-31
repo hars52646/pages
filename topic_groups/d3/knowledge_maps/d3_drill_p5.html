@@ -65,6 +65,11 @@
   .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
   .ladder .rule b{color:var(--mc);font-style:normal}
 
+  .ladder ol li .qrefs{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .ladder ol li .qrefs a{color:var(--mc);text-decoration:none;border-bottom:1px dotted var(--mc);margin:0 1px}
+  .ladder ol li .qrefs a:hover{border-bottom-style:solid}
+  .rad .ex a{color:#b91c1c;text-decoration:none;font-weight:800}
+  .rad .ex a:hover{text-decoration:underline}
   .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
   .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
   .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
@@ -124,9 +129,9 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 5 of 5</div>
+    <div class="eyebrow">CISSP &middot; Domain 3 &middot; Exam preparation &middot; logic-based scenarios &middot; part 5 of 5</div>
     <h1>D3 Question Drill 5 &mdash; Architecture, Web Flaws, MLS & Design (topics 16-19)</h1>
-    <p class="sub"><b>92 scenario questions</b> (topics 1&ndash;12) &middot; <b>12 decision families</b> &middot; <b>5 knowledge groups</b> &mdash; forensics and evidence, monitoring and intel, malware defense, change and patch, resources and environment. Continues in <a href="d7_drill_p2.html">part 2: continuity and recovery (80 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+    <p class="sub"><b>158 scenario questions</b> (topics 16&ndash;19 of 19) &middot; <b>4 decision families</b> &mdash; system architecture and protection rings, web &amp; architecture flaws, MLS &amp; data controls, and secure design principles. Companion: the <a href="d3_cheatsheet_p3.html">knowledge cheatsheet</a> &middot; <a href="d3_index.html">D3 hub</a> &middot; back to <a href="d3_drill_p1.html">part 1</a>.</p>
   </div>
 </header>
 
@@ -140,7 +145,7 @@
 
   <section id="fmap">
     <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
-    <p class="lede">The 12 part-1 families (of D7&rsquo;s 18 total), colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <p class="lede">The 4 families on this page, colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
     <div class="map-panel">
       <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D3 drill part 5"></svg>
       <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
@@ -184,41 +189,50 @@
 <script>
 var GROUPS={g1:{name:"Cloud & Virtualization",color:"#b91c1c",fill:"#dc2626"},g2:{name:"ICS, SCADA, IoT & Zero Trust",color:"#b45309",fill:"#d97706"},g3:{name:"System Architecture",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"Web & Architecture Vulnerabilities",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Data System Controls & MLS",color:"#047857",fill:"#059669"},g6:{name:"Hardening & Secure Design",color:"#be185d",fill:"#db2777"}};
 var FAMILIES = [
-{ id:'f16', g:'g3', name:'System architecture', topic:'System Architecture (Memory, Rings, TPM, Hypervisor)', q:21, leaves:['Ring 3 app, kernel access?','Boot integrity or key...'],
-    factors:['<b>Ring 3 app, kernel access?</b> &mdash; A medical imaging application running at Ring 3 but making direct hardware calls to storage controllers (bypassing OS APIs) has escalated to kernel mode with... <span class="qrefs">[Q910]</span>',
-     '<b>Boot integrity or key throughput?</b> &mdash; Decision rule: choose TPM for on-device boot integrity, sealed storage, and attestation; choose HSM for centralized, high-throughput organizational key management such... <span class="qrefs">[Q357]</span>'],
-    rule:'Rings, TPM and hypervisors enforce what software cannot' },
-{ id:'f17', g:'g4', name:'Web & architecture flaws', topic:'Architecture & Web Vulnerabilities', q:39, leaves:['DES/3DES migration target?','Mobile streaming pick?','Confidentiality plus...','Nonce reuse consequence?','Key distribution answer?'],
-    factors:['<b>DES/3DES migration target?</b> &mdash; When migrating from DES/3DES, choose AES-256 (AES-128 minimum). 3DES is deprecated, not merely old. <span class="qrefs">[Q518]</span>',
-     '<b>Mobile streaming pick?</b> &mdash; When high performance, mobile, or IoT streaming is needed, choose ChaCha20 over AES because it has no hardware-acceleration dependency.',
-     '<b>Confidentiality plus integrity mode?</b> &mdash; When a mode must provide confidentiality AND integrity, choose GCM or CCM (AEAD), not CBC alone.',
-     '<b>Nonce reuse consequence?</b> &mdash; IV/nonce reuse catastrophically breaks encryption, especially for CTR/GCM/ChaCha20: keystream reuse enables XOR recovery of plaintext. <span class="qrefs">[Q571]</span>',
-     '<b>Key distribution answer?</b> &mdash; When the key distribution problem is raised, choose asymmetric crypto for key exchange, then symmetric for bulk encryption (hybrid approach). <span class="qrefs">[Q553]</span>',
-     '<b>Hardcoded key remediation?</b> &mdash; Remediate hardcoded symmetric keys via Hardware Security Module (HSM)/Key Management System (KMS), key rotation, and secrets management — not by relocating the key.'],
-    rule:'Validate server-side, encode output, separate code from data' },
-{ id:'f18', g:'g5', name:'MLS & data controls', topic:'Data System Controls, MLS & Hardening', q:82, leaves:['Salary + headcount =...'],
-    factors:['<b>Salary + headcount = which attack?</b> &mdash; An employee combines public salary ranges with department headcounts to deduce confidential executive compensation not directly available in either source. This is... <span class="qrefs">[Q348]</span>'],
-    rule:'Labels and model rules; polyinstantiation defeats inference' },
-{ id:'f19', g:'g6', name:'Secure design principles', topic:'Secure Design Principles & SDLC', q:15, leaves:['Rapidly evolving threats?','Life safety override only?','No single control...','Row existence leaks?','Categorize first?'],
-    factors:['<b>Rapidly evolving threats?</b> &mdash; Choose allow-listing over deny-listing when threats evolve rapidly or the environment is high-value — deny-lists are always one step behind.',
-     '<b>Life safety override only?</b> &mdash; Choose fail-secure when protecting confidentiality/integrity; choose fail-open only when human life-safety overrides security (e.g., panic hardware on fire exits).',
-     '<b>No single control sufficient?</b> &mdash; Choose defense in depth when no single control is sufficient: layered, independent controls ensure that the failure of one does not compromise the asset.',
-     '<b>Row existence leaks?</b> &mdash; Choose polyinstantiation when you must prevent inference from the mere existence of a record at a higher classification.',
-     '<b>Categorize first?</b> &mdash; Choose data classification first before selecting controls — you cannot protect what you have not categorized; classification drives control selection.',
-     '<b>Most appropriate control?</b> &mdash; This topic tests applying layered, defense-in-depth thinking to controls selection rather than reciting definitions: expect scenario-heavy questions requiring the most...'],
-    rule:'Least privilege, fail-secure, complete mediation - from the start' }
+{ id:'f16', g:'g3', name:"System architecture", topic:"Protection Rings, Memory & Firmware Security", q:21, leaves:["Rings mediate privilege", "Isolate + manage memory", "Kernel = total control", "Firmware sits below OS", "Bundle with containers"],
+    factors:[
+     "<b>Privilege is ring-mediated</b> &mdash; Ring 3 tools reach the kernel only through APIs; container escape is a Ring 3 → Ring 0 transition; direct hardware calls from an app mean user mode escalated to kernel mode; classified programs use the hierarchical ring model. <span class=\"qrefs\">[<a href=\"#q-Q961\">Q961</a> <a href=\"#q-Q1073\">Q1073</a> <a href=\"#q-Q146\">Q146</a> <a href=\"#q-Q910\">Q910</a> <a href=\"#q-Q902\">Q902</a> <a href=\"#q-Q899\">Q899</a>]</span>",
+     "<b>Compromise containment = process isolation + secure memory management</b> &mdash; buffer overflows, cross-application access and memory-corruption incidents all answer to the same pair. <span class=\"qrefs\">[<a href=\"#q-Q658\">Q658</a> <a href=\"#q-Q269\">Q269</a> <a href=\"#q-Q270\">Q270</a> <a href=\"#q-Q277\">Q277</a> <a href=\"#q-Q453\">Q453</a> <a href=\"#q-Q1108\">Q1108</a>]</span>",
+     "<b>The kernel holds complete control</b> &mdash; kernel-level compromises outrank everything; supervisory coordination across the OS is its job; SDS needs memory-page encryption plus integrity checks; Rowhammer leaks across processes via induced bit flips. <span class=\"qrefs\">[<a href=\"#q-Q946\">Q946</a> <a href=\"#q-Q988\">Q988</a> <a href=\"#q-Q65\">Q65</a> <a href=\"#q-Q740\">Q740</a>]</span>",
+     "<b>Firmware attacks live below the OS</b> &mdash; device firmware compromise evades OS controls; embedded field gear gets firmware-vulnerability exposure assessment. <span class=\"qrefs\">[<a href=\"#q-Q282\">Q282</a> <a href=\"#q-Q767\">Q767</a> <a href=\"#q-Q1045\">Q1045</a>]</span>",
+     "<b>Dependency conflicts → containers bundling their own</b> &mdash; and BYOD fleets → MDM with granular policies. <span class=\"qrefs\">[<a href=\"#q-Q630\">Q630</a> <a href=\"#q-Q1063\">Q1063</a>]</span>"],
+    rule:"Know which ring the attacker reached — the answer follows the privilege boundary crossed." },
+{ id:'f17', g:'g4', name:"Web & architecture flaws", topic:"Injection, XSS, CSRF & Validation", q:39, leaves:["Parameterize queries", "Server-side allow-lists", "Client checks bypassable", "CSP + per-session tokens", "Name the flaw"],
+    factors:[
+     "<b>SQLi is prevented by parameterization</b> &mdash; prepared statements and stored procedures separate code from data; layer input validation, WAFs and least privilege for depth. <span class=\"qrefs\">[<a href=\"#q-Q300\">Q300</a> <a href=\"#q-Q308\">Q308</a> <a href=\"#q-Q218\">Q218</a> <a href=\"#q-Q540\">Q540</a> <a href=\"#q-Q751\">Q751</a> <a href=\"#q-Q69\">Q69</a>]</span>",
+     "<b>Validation lives server-side, as an allow-list</b> &mdash; client-side JavaScript is bypassed entirely; deny-lists only discard known bad and miss novel payloads; accept only predefined formats. <span class=\"qrefs\">[<a href=\"#q-Q320\">Q320</a> <a href=\"#q-Q314\">Q314</a> <a href=\"#q-Q440\">Q440</a> <a href=\"#q-Q311\">Q311</a> <a href=\"#q-Q315\">Q315</a> <a href=\"#q-Q958\">Q958</a> <a href=\"#q-Q858\">Q858</a>]</span>",
+     "<b>XSS variants by persistence and location</b> &mdash; exfiltrated session cookies from stored comments = stored XSS; DOM manipulation = sanitize and use safe APIs (textContent); CSP plus anti-CSRF tokens harden beyond HTTP-only cookies; nonce-based CSP headers script the fix. <span class=\"qrefs\">[<a href=\"#q-Q152\">Q152</a> <a href=\"#q-Q577\">Q577</a> <a href=\"#q-Q536\">Q536</a> <a href=\"#q-Q1075\">Q1075</a> <a href=\"#q-Q493\">Q493</a>]</span>",
+     "<b>CSRF = per-session tokens, even at exchange scale</b> &mdash; efficient unique tokens answer performance-flavored variants. <span class=\"qrefs\">[<a href=\"#q-Q550\">Q550</a>]</span>",
+     "<b>Virtual patching is a bridge, not a fix</b> &mdash; it cannot cover every vulnerability class; race conditions arise when re-verification lags; input validation is the foundational control executives fund. <span class=\"qrefs\">[<a href=\"#q-Q172\">Q172</a> <a href=\"#q-Q975\">Q975</a> <a href=\"#q-Q1003\">Q1003</a>]</span>"],
+    rule:"Parameterize, allow-list server-side, encode output, tokenize state — name the flaw before the fix." },
+{ id:'f18', g:'g5', name:"MLS & data controls", topic:"Defense in Depth, Least Privilege, SoD, MLS & Hardening", q:82, leaves:["Layer so failures overlap", "Least privilege scopes access", "Separate duties", "Hide between levels", "Harden the basics"],
+    factors:[
+     "<b>Defense in depth = overlapping layers survive single failures</b> &mdash; fences+cameras+guards, dual-vendor firewalls against one vendor&rsquo;s flaw, segmented web stacks, multi-control programs — a single NGFW layer exposes everything when it fails. <span class=\"qrefs\">[<a href=\"#q-Q398\">Q398</a> <a href=\"#q-Q942\">Q942</a> <a href=\"#q-Q524\">Q524</a> <a href=\"#q-Q684\">Q684</a> <a href=\"#q-Q639\">Q639</a> <a href=\"#q-Q710\">Q710</a> <a href=\"#q-Q1051\">Q1051</a> <a href=\"#q-Q1062\">Q1062</a>]</span>",
+     "<b>Least privilege limits blast radius</b> &mdash; minimal DB permissions contain SQLi; dynamic role assignment fixes privilege creep; transactions over $10k through dual approval is layered least privilege. <span class=\"qrefs\">[<a href=\"#q-Q605\">Q605</a> <a href=\"#q-Q1123\">Q1123</a> <a href=\"#q-Q1039\">Q1039</a> <a href=\"#q-Q700\">Q700</a>]</span>",
+     "<b>Separation of duties splits toxic combinations</b> &mdash; vendor-create plus approve in one administrator; bypass-control risks justify SoD plus logging plus physical safeguards. <span class=\"qrefs\">[<a href=\"#q-Q834\">Q834</a> <a href=\"#q-Q931\">Q931</a>]</span>",
+     "<b>MLS: hiding and polyinstantiation defeat inference</b> &mdash; data hiding blocks cross-level visibility; combining harmless rows into secrets is inference — answer with polyinstantiation or minimization; analytics inherits the inference risk. <span class=\"qrefs\">[<a href=\"#q-Q608\">Q608</a> <a href=\"#q-Q348\">Q348</a> <a href=\"#q-Q335\">Q335</a> <a href=\"#q-Q179\">Q179</a> <a href=\"#q-Q1127\">Q1127</a>]</span>",
+     "<b>Hardening is unglamorous and decisive</b> &mdash; disable services, close ports, patch; prioritize by exposure; risk-analyze conflicts with functionality; fail securely; selectively encrypt where full-disk breaks control; MD5 legacies get compensating controls during migration. <span class=\"qrefs\">[<a href=\"#q-Q464\">Q464</a> <a href=\"#q-Q555\">Q555</a> <a href=\"#q-Q321\">Q321</a> <a href=\"#q-Q325\">Q325</a> <a href=\"#q-Q675\">Q675</a> <a href=\"#q-Q1024\">Q1024</a> <a href=\"#q-Q594\">Q594</a>]</span>"],
+    rule:"Layer controls, split powers, scope privileges — and harden before you decorate." },
+{ id:'f19', g:'g6', name:"Secure design principles", topic:"Secure Design, DevSecOps & Psychological Acceptability", q:16, leaves:["Shift left", "Usability = security", "Kill the C2 channel", "Risk-ranked remediation", "SRI vs CSP"],
+    factors:[
+     "<b>Shift security into design and pipeline</b> &mdash; early-stage integration, automated scanning and dependency checks in CI/CD, MSTG gates per mobile phase, security in CRM selection. <span class=\"qrefs\">[<a href=\"#q-Q217\">Q217</a> <a href=\"#q-Q866\">Q866</a> <a href=\"#q-Q923\">Q923</a> <a href=\"#q-Q333\">Q333</a> <a href=\"#q-Q392\">Q392</a>]</span>",
+     "<b>Psychological acceptability: usable security gets used</b> &mdash; SSO with strong initial auth; open-office culture built on awareness; V-model smart cities add continuous threat modeling. <span class=\"qrefs\">[<a href=\"#q-Q15\">Q15</a> <a href=\"#q-Q10\">Q10</a> <a href=\"#q-Q182\">Q182</a>]</span>",
+     "<b>Active attacker: break the command-and-control channel</b> &mdash; containing communications blunts the operation; mapping intrusions to attack frameworks sharpens intelligence. <span class=\"qrefs\">[<a href=\"#q-Q460\">Q460</a> <a href=\"#q-Q748\">Q748</a>]</span>",
+     "<b>Remediation queues run on risk and exploitability</b> &mdash; business impact plus ease of exploitation order the work. <span class=\"qrefs\">[<a href=\"#q-Q607\">Q607</a> <a href=\"#q-Q1043\">Q1043</a>]</span>",
+     "<b>Browser defenses differ</b> &mdash; SRI verifies fetched resources; CSP restricts execution — and layered network controls need application, network and transport layers together. <span class=\"qrefs\">[<a href=\"#q-Q1133\">Q1133</a> <a href=\"#q-Q110\">Q110</a>]</span>"],
+    rule:"Design security in — early, automated, usable — or pay for it in incidents." }
 ];
 
 var RADAR=[
-{t:'Wrong artifact attacked', d:'Attacking the key, the ciphertext, the implementation or the math - questions ask which.', ex:'see factor ladders'},
-{t:'Guarantee mismatch', d:'Confidentiality controls offered for integrity or authentication asks - match the property.', ex:'see factor ladders'},
-{t:'Layer skipped', d:'Solutions that start at technology while the question names an earlier planning step.', ex:'see factor ladders'},
-{t:'Single point of trust', d:'One control, vendor or path presented as total protection.', ex:'see factor ladders'},
-{t:'Speed over correctness', d:'Performance options chosen where the scored factor is correctness of the control.', ex:'see factor ladders'},
-{t:'Absolute promises', d:'Guarantees of prevention or unbreakability - reject absolutes.', ex:'see factor ladders'},
-{t:'Detection sold as prevention', d:'Monitoring or audit answers where prevention is asked.', ex:'see factor ladders'},
-{t:'Vendor first', d:'Outsourcing proposed where governance or design ownership is the scored step.', ex:'see factor ladders'},
-{t:'Once-and-done', d:'Point-in-time fixes where lifecycle or continuous operation is required.', ex:'see factor ladders'}
+{t:"Ring confusion", d:"User-mode tools treated as kernel-equivalent; container escape mistaken for a patchable app bug.", ex:"<a href=\"#q-Q961\">Q961</a>, <a href=\"#q-Q1073\">Q1073</a>, <a href=\"#q-Q910\">Q910</a>"},
+{t:"Client-side trust", d:"Browser validation or character filtering accepted as the injection defense.", ex:"<a href=\"#q-Q320\">Q320</a>, <a href=\"#q-Q559\">Q559</a>, <a href=\"#q-Q330\">Q330</a>"},
+{t:"Deny-list theology", d:"Block-lists of known-bad strings expected to stop novel payloads.", ex:"<a href=\"#q-Q315\">Q315</a>, <a href=\"#q-Q170\">Q170</a>, <a href=\"#q-Q716\">Q716</a>"},
+{t:"Single-layer fortress", d:"One firewall or one control trusted to hold everything.", ex:"<a href=\"#q-Q639\">Q639</a>, <a href=\"#q-Q1\">Q1</a>"},
+{t:"Toxic combinations", d:"One identity holding create-and-approve or pay-and-reconcile powers.", ex:"<a href=\"#q-Q834\">Q834</a>, <a href=\"#q-Q931\">Q931</a>"},
+{t:"Inference blind spot", d:"Harmless-looking data combinations aggregating into classified insight.", ex:"<a href=\"#q-Q348\">Q348</a>, <a href=\"#q-Q335\">Q335</a>, <a href=\"#q-Q1127\">Q1127</a>"},
+{t:"Hardening skipped", d:"Known-exploit software and open management ports left in place.", ex:"<a href=\"#q-Q464\">Q464</a>, <a href=\"#q-Q555\">Q555</a>"},
+{t:"Late security gate", d:"Testing at release rather than shift-left integration.", ex:"<a href=\"#q-Q217\">Q217</a>, <a href=\"#q-Q866\">Q866</a>"},
+{t:"Virtual patch delusion", d:"Virtual patching promoted as a permanent fix.", ex:"<a href=\"#q-Q172\">Q172</a>"}
 ];
 
 var QS = [
@@ -453,7 +467,7 @@ var QS = [
   el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
   var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
-  c0.textContent = 'DOMAIN 7 · PART';
+  c0.textContent = "DOMAIN 3 · PART";
   var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
   c1.textContent = 'DECISION';

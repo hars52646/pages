@@ -65,6 +65,11 @@
   .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
   .ladder .rule b{color:var(--mc);font-style:normal}
 
+  .ladder ol li .qrefs{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .ladder ol li .qrefs a{color:var(--mc);text-decoration:none;border-bottom:1px dotted var(--mc);margin:0 1px}
+  .ladder ol li .qrefs a:hover{border-bottom-style:solid}
+  .rad .ex a{color:#b91c1c;text-decoration:none;font-weight:800}
+  .rad .ex a:hover{text-decoration:underline}
   .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
   .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
   .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
@@ -124,9 +129,9 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 2 of 2</div>
+    <div class="eyebrow">CISSP &middot; Domain 5 &middot; Exam preparation &middot; logic-based scenarios &middot; part 2 of 2</div>
     <h1>D5 Question Drill 2 &mdash; Models to Governance (topics 10-16)</h1>
-    <p class="sub"><b>92 scenario questions</b> (topics 1&ndash;12) &middot; <b>12 decision families</b> &middot; <b>5 knowledge groups</b> &mdash; forensics and evidence, monitoring and intel, malware defense, change and patch, resources and environment. Continues in <a href="d7_drill_p2.html">part 2: continuity and recovery (80 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+    <p class="sub"><b>97 scenario questions</b> (topics 10&ndash;16 of 16) &middot; <b>7 decision families</b> &mdash; rule- and attribute-based access control, IDaaS &amp; cloud IAM, sessions &amp; auth threats, privilege management, zero trust &amp; emerging tech, and reviews &amp; governance. Companion: the <a href="d5_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d5_index.html">D5 hub</a> &middot; back to <a href="d5_drill_p1.html">part 1</a>.</p>
   </div>
 </header>
 
@@ -140,7 +145,7 @@
 
   <section id="fmap">
     <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
-    <p class="lede">The 12 part-1 families (of D7&rsquo;s 18 total), colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <p class="lede">The 7 families on this page, colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
     <div class="map-panel">
       <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D5 drill part 2"></svg>
       <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
@@ -184,81 +189,68 @@
 <script>
 var GROUPS={g1:{name:"IAAA & Foundations",color:"#b91c1c",fill:"#dc2626"},g2:{name:"Factors, Passwords & MFA",color:"#b45309",fill:"#d97706"},g3:{name:"Federated Identity & SSO",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"Kerberos & Tickets",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Access Control Models",color:"#047857",fill:"#059669"},g6:{name:"Sessions & Auth Threats",color:"#be185d",fill:"#db2777"},g7:{name:"IAM Governance & Cloud",color:"#0e7490",fill:"#0891b2"}};
 var FAMILIES = [
-{ id:'f10', g:'g5', name:"RuBAC", topic:"Access Control Models \u2014 Rule-Based (RuBAC)", q:16, leaves:["POS restrict AND audit?","High-value banking token?","Password plus email code?","Global token biggest...","Cloning is the top..."],
+{ id:'f10', g:'g5', name:"RuBAC", topic:"Rule-Based Access Control", q:16, leaves:["Central rules, users can&rsquo;t edit", "Consistency at a cost", "Per-user mappings when granular", "Audit the rule changes"],
     factors:[
-     "<b>POS restrict AND audit?</b> &mdash; A retail point-of-sale (POS) system requiring role-based function limits (for example cashier refund thresholds) plus PCI DSS documentation of who performed each... <span class=\"qrefs\">[Q157]</span>",
-     "<b>High-value banking token?</b> &mdash; For high-value online banking transactions requiring strong security with good user experience, the best ownership-based factor balancing security and usability is a... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Password plus email code?</b> &mdash; Exam trap: password + email code is vulnerable to email account compromise and phishing, and email delivery is less reliable and slower than a hardware token OTP \u2014 do... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Global token biggest headache?</b> &mdash; The most critical security challenge of physical token-based authentication in global hybrid IT (on-premises, public cloud, private cloud across multiple countries) is... <span class=\"qrefs\">[Q46]</span>",
-     "<b>Cloning is the top challenge?</b> &mdash; Exam trap: token cloning mitigation is important but is a subset concern; the overarching global challenge is the full token lifecycle (issuance, distribution,... <span class=\"qrefs\">[Q46]</span>",
-     "<b>How to measure smart card ROI?</b> &mdash; The most effective first-year ROI (Return on Investment) measurement for a smart card deployment at a financial institution is analyzing the reduction in security... <span class=\"qrefs\">[Q47]</span>"],
-    rule:"Rules evaluated per request - firewalls and ACLs are the classic cases" },
-{ id:'f11', g:'g5', name:"ABAC", topic:"Access Control Models \u2014 ABAC", q:16, leaves:["POS restrict AND audit?","High-value banking token?","Password plus email code?","Global token biggest...","Cloning is the top..."],
+     "<b>Rules are centrally defined — users cannot alter them</b> &mdash; firewall/ACL-style enforcement on devices and gateways gives consistent, tamper-proof decisions across branches. <span class=\"qrefs\">[<a href=\"#q-Q169\">Q169</a> <a href=\"#q-Q199\">Q199</a> <a href=\"#q-Q208\">Q208</a> <a href=\"#q-Q210\">Q210</a>]</span>",
+     "<b>The cost is administrative overhead</b> &mdash; thousands of rules across a multinational or multi-tenant cloud strain maintenance and staleness — the scored weakness, every time. <span class=\"qrefs\">[<a href=\"#q-Q87\">Q87</a> <a href=\"#q-Q37\">Q37</a> <a href=\"#q-Q207\">Q207</a> <a href=\"#q-Q224\">Q224</a> <a href=\"#q-Q180\">Q180</a>]</span>",
+     "<b>Granular per-user needs → rule-based with individual ACE mapping</b> &mdash; defense contractors and Alice/Bob directory asymmetries; VPN gateways evaluating system attributes are rule engines too. <span class=\"qrefs\">[<a href=\"#q-Q197\">Q197</a> <a href=\"#q-Q185\">Q185</a> <a href=\"#q-Q188\">Q188</a>]</span>",
+     "<b>Regulated environments audit rule changes</b> &mdash; comprehensive trails of every modification; ML assists dynamic adaptation; hierarchical structures with automation absorb rapid growth. <span class=\"qrefs\">[<a href=\"#q-Q51\">Q51</a> <a href=\"#q-Q213\">Q213</a> <a href=\"#q-Q279\">Q279</a>]</span>"],
+    rule:"Central consistency is the product; administrative weight is the price — size the deployment to both." },
+{ id:'f11', g:'g5', name:"ABAC", topic:"Attribute-Based Access Control", q:16, leaves:["Context-aware by design", "Fine-grained + dynamic", "Policy/attribute sync is the burden", "GDPR minimization fit"],
     factors:[
-     "<b>POS restrict AND audit?</b> &mdash; A retail point-of-sale (POS) system requiring role-based function limits (for example cashier refund thresholds) plus PCI DSS documentation of who performed each... <span class=\"qrefs\">[Q157]</span>",
-     "<b>High-value banking token?</b> &mdash; For high-value online banking transactions requiring strong security with good user experience, the best ownership-based factor balancing security and usability is a... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Password plus email code?</b> &mdash; Exam trap: password + email code is vulnerable to email account compromise and phishing, and email delivery is less reliable and slower than a hardware token OTP \u2014 do... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Global token biggest headache?</b> &mdash; The most critical security challenge of physical token-based authentication in global hybrid IT (on-premises, public cloud, private cloud across multiple countries) is... <span class=\"qrefs\">[Q46]</span>",
-     "<b>Cloning is the top challenge?</b> &mdash; Exam trap: token cloning mitigation is important but is a subset concern; the overarching global challenge is the full token lifecycle (issuance, distribution,... <span class=\"qrefs\">[Q46]</span>",
-     "<b>How to measure smart card ROI?</b> &mdash; The most effective first-year ROI (Return on Investment) measurement for a smart card deployment at a financial institution is analyzing the reduction in security... <span class=\"qrefs\">[Q47]</span>"],
-    rule:"Attributes of user, resource and environment - finest, most dynamic" },
-{ id:'f12', g:'g7', name:"IDaaS & Cloud IAM", topic:"IDaaS, Identity Administration & Cloud IAM", q:23, leaves:["POS restrict AND audit?","High-value banking token?","Password plus email code?","Global token biggest...","Cloning is the top..."],
+     "<b>Dynamic, context-rich scenarios → ABAC</b> &mdash; IoT diversity, DevOps churn, smart cities, diverse departments and clearances, 50-country healthcare: real-time attribute evaluation decides. <span class=\"qrefs\">[<a href=\"#q-Q3\">Q3</a> <a href=\"#q-Q88\">Q88</a> <a href=\"#q-Q178\">Q178</a> <a href=\"#q-Q216\">Q216</a> <a href=\"#q-Q232\">Q232</a> <a href=\"#q-Q276\">Q276</a>]</span>",
+     "<b>The wins are fine grain and dynamism</b> &mdash; context-aware decisions that rule engines can&rsquo;t express; hybrid-cloud migrations adopt ABAC with dynamic policies. <span class=\"qrefs\">[<a href=\"#q-Q62\">Q62</a> <a href=\"#q-Q215\">Q215</a> <a href=\"#q-Q53\">Q53</a>]</span>",
+     "<b>The burden is policy and attribute management</b> &mdash; defining context-sensitive rules, synchronizing attributes with IAM, managing complex rule sets; RuBAC estates add automated conflict detection. <span class=\"qrefs\">[<a href=\"#q-Q77\">Q77</a> <a href=\"#q-Q27\">Q27</a> <a href=\"#q-Q239\">Q239</a> <a href=\"#q-Q238\">Q238</a>]</span>",
+     "<b>ABAC serves GDPR minimization</b> &mdash; fine-grained, attribute-scoped access discloses the least data; AI-driven variants carry bias risk to mitigate. <span class=\"qrefs\">[<a href=\"#q-Q41\">Q41</a> <a href=\"#q-Q93\">Q93</a> <a href=\"#q-Q214\">Q214</a>]</span>"],
+    rule:"When context decides access, attributes decide the answer — budget for the policy complexity." },
+{ id:'f12', g:'g7', name:"IDaaS & Cloud IAM", topic:"Identity as a Service & Cloud Identity Administration", q:23, leaves:["Hybrid = central policy + local flex", "Synced vs federated identity", "Vendor trust & residency", "Availability dependency"],
     factors:[
-     "<b>POS restrict AND audit?</b> &mdash; A retail point-of-sale (POS) system requiring role-based function limits (for example cashier refund thresholds) plus PCI DSS documentation of who performed each... <span class=\"qrefs\">[Q157]</span>",
-     "<b>High-value banking token?</b> &mdash; For high-value online banking transactions requiring strong security with good user experience, the best ownership-based factor balancing security and usability is a... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Password plus email code?</b> &mdash; Exam trap: password + email code is vulnerable to email account compromise and phishing, and email delivery is less reliable and slower than a hardware token OTP \u2014 do... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Global token biggest headache?</b> &mdash; The most critical security challenge of physical token-based authentication in global hybrid IT (on-premises, public cloud, private cloud across multiple countries) is... <span class=\"qrefs\">[Q46]</span>",
-     "<b>Cloning is the top challenge?</b> &mdash; Exam trap: token cloning mitigation is important but is a subset concern; the overarching global challenge is the full token lifecycle (issuance, distribution,... <span class=\"qrefs\">[Q46]</span>",
-     "<b>How to measure smart card ROI?</b> &mdash; The most effective first-year ROI (Return on Investment) measurement for a smart card deployment at a financial institution is analyzing the reduction in security... <span class=\"qrefs\">[Q47]</span>"],
-    rule:"Cloud IAM shifts hosting, never accountability for identity" },
-{ id:'f13', g:'g6', name:"Sessions & Threats", topic:"Session Management & Authentication Threats", q:5, leaves:["POS restrict AND audit?","High-value banking token?","Password plus email code?","Global token biggest...","Cloning is the top..."],
+     "<b>Global estates run hybrid: centralized policy, local adaptation</b> &mdash; mergers, 15 subsidiaries, expanding multinationals and healthcare networks all score centralized frameworks with tailored local administration during transition. <span class=\"qrefs\">[<a href=\"#q-Q5\">Q5</a> <a href=\"#q-Q254\">Q254</a> <a href=\"#q-Q255\">Q255</a> <a href=\"#q-Q186\">Q186</a> <a href=\"#q-Q194\">Q194</a> <a href=\"#q-Q182\">Q182</a>]</span>",
+     "<b>Synced identity mirrors directories; federated trusts assertions</b> &mdash; AD accounts auto-provisioned to cloud = directory synchronization; hybrid identity solutions bridge both; centralized policy spans diverse applications. <span class=\"qrefs\">[<a href=\"#q-Q141\">Q141</a> <a href=\"#q-Q265\">Q265</a> <a href=\"#q-Q282\">Q282</a> <a href=\"#q-Q225\">Q225</a>]</span>",
+     "<b>IDaaS risks concentrate on the provider</b> &mdash; trusting a third party with identity data, dependency on their availability, reduced visibility — countered by vendor assessment, reputable selection, secure-enclave/hardware isolation, and data-residency configuration. <span class=\"qrefs\">[<a href=\"#q-Q142\">Q142</a> <a href=\"#q-Q139\">Q139</a> <a href=\"#q-Q219\">Q219</a> <a href=\"#q-Q97\">Q97</a> <a href=\"#q-Q55\">Q55</a> <a href=\"#q-Q266\">Q266</a>]</span>",
+     "<b>Fragmented administration is the disease IDaaS cures</b> &mdash; per-store access management prevents monitoring; scattered on-prem systems multiply complexity; remote-workforce growth needs scalable identity. <span class=\"qrefs\">[<a href=\"#q-Q171\">Q171</a> <a href=\"#q-Q170\">Q170</a> <a href=\"#q-Q99\">Q99</a> <a href=\"#q-Q39\">Q39</a>]</span>"],
+    rule:"Centralize policy, federate or sync the identity, and never outsource the accountability." },
+{ id:'f13', g:'g6', name:"Sessions & Threats", topic:"Session Management & Authentication Threats", q:5, leaves:["Regenerate IDs at login", "Rotate tokens per transaction", "Adaptive timeouts", "Short-lived JWTs", "Test with hijacking"],
     factors:[
-     "<b>POS restrict AND audit?</b> &mdash; A retail point-of-sale (POS) system requiring role-based function limits (for example cashier refund thresholds) plus PCI DSS documentation of who performed each... <span class=\"qrefs\">[Q157]</span>",
-     "<b>High-value banking token?</b> &mdash; For high-value online banking transactions requiring strong security with good user experience, the best ownership-based factor balancing security and usability is a... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Password plus email code?</b> &mdash; Exam trap: password + email code is vulnerable to email account compromise and phishing, and email delivery is less reliable and slower than a hardware token OTP \u2014 do... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Global token biggest headache?</b> &mdash; The most critical security challenge of physical token-based authentication in global hybrid IT (on-premises, public cloud, private cloud across multiple countries) is... <span class=\"qrefs\">[Q46]</span>",
-     "<b>Cloning is the top challenge?</b> &mdash; Exam trap: token cloning mitigation is important but is a subset concern; the overarching global challenge is the full token lifecycle (issuance, distribution,... <span class=\"qrefs\">[Q46]</span>",
-     "<b>How to measure smart card ROI?</b> &mdash; The most effective first-year ROI (Return on Investment) measurement for a smart card deployment at a financial institution is analyzing the reduction in security... <span class=\"qrefs\">[Q47]</span>"],
-    rule:"Tokens are the asset after login - bind, expire, rotate" },
-{ id:'f14', g:'g7', name:"Privilege Management", topic:"Privilege Management: Least Privilege, SoD, JIT/PAM", q:14, leaves:["POS restrict AND audit?","High-value banking token?","Password plus email code?","Global token biggest...","Cloning is the top..."],
+     "<b>Session IDs regenerate after authentication</b> &mdash; fixation dies when the ID changes at privilege transitions. <span class=\"qrefs\">[<a href=\"#q-Q17\">Q17</a>]</span>",
+     "<b>High-value transactions rotate tokens each time</b> &mdash; and short-lived encrypted JWTs with frequent refresh cover high-traffic designs; adaptive timeouts follow user activity. <span class=\"qrefs\">[<a href=\"#q-Q72\">Q72</a> <a href=\"#q-Q82\">Q82</a> <a href=\"#q-Q18\">Q18</a>]</span>",
+     "<b>Multi-tenant session security is proven by testing</b> &mdash; penetration testing with session-hijacking scenarios validates the controls. <span class=\"qrefs\">[<a href=\"#q-Q67\">Q67</a>]</span>"],
+    rule:"Rotate identifiers at every trust boundary; expire what you cannot rotate." },
+{ id:'f14', g:'g7', name:"Privilege Management", topic:"Least Privilege, JIT Access & Separation of Duties", q:14, leaves:["Just-in-time access", "Time-boxed contractor access", "Continuous monitoring + alerts", "Periodic recertification", "Two-person rules"],
     factors:[
-     "<b>POS restrict AND audit?</b> &mdash; A retail point-of-sale (POS) system requiring role-based function limits (for example cashier refund thresholds) plus PCI DSS documentation of who performed each... <span class=\"qrefs\">[Q157]</span>",
-     "<b>High-value banking token?</b> &mdash; For high-value online banking transactions requiring strong security with good user experience, the best ownership-based factor balancing security and usability is a... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Password plus email code?</b> &mdash; Exam trap: password + email code is vulnerable to email account compromise and phishing, and email delivery is less reliable and slower than a hardware token OTP \u2014 do... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Global token biggest headache?</b> &mdash; The most critical security challenge of physical token-based authentication in global hybrid IT (on-premises, public cloud, private cloud across multiple countries) is... <span class=\"qrefs\">[Q46]</span>",
-     "<b>Cloning is the top challenge?</b> &mdash; Exam trap: token cloning mitigation is important but is a subset concern; the overarching global challenge is the full token lifecycle (issuance, distribution,... <span class=\"qrefs\">[Q46]</span>",
-     "<b>How to measure smart card ROI?</b> &mdash; The most effective first-year ROI (Return on Investment) measurement for a smart card deployment at a financial institution is analyzing the reduction in security... <span class=\"qrefs\">[Q47]</span>"],
-    rule:"Least privilege, SoD, JIT elevation, PAM recording" },
-{ id:'f15', g:'g7', name:"Zero Trust & Emerging", topic:"Zero Trust & Emerging Tech (AI/ML, Blockchain, Quantum)", q:7, leaves:["POS restrict AND audit?","High-value banking token?","Password plus email code?","Global token biggest...","Cloning is the top..."],
+     "<b>Standing privilege → just-in-time, auto-deprovisioned access</b> &mdash; temporary elevation shrinks the attack surface; service accounts and cloud estates adopt JIT with automated provisioning; multi-cloud federates short-lived tokens per task. <span class=\"qrefs\">[<a href=\"#q-Q54\">Q54</a> <a href=\"#q-Q217\">Q217</a> <a href=\"#q-Q167\">Q167</a> <a href=\"#q-Q69\">Q69</a> <a href=\"#q-Q271\">Q271</a>]</span>",
+     "<b>Contractors get time-limited, project-scoped access</b> &mdash; expiring credentials match the engagement. <span class=\"qrefs\">[<a href=\"#q-Q35\">Q35</a>]</span>",
+     "<b>Drift is caught by monitoring, not intentions</b> &mdash; continuous monitoring with automated alerts on privilege anomalies; UBA flags unusual patterns; least privilege balances against productivity. <span class=\"qrefs\">[<a href=\"#q-Q10\">Q10</a> <a href=\"#q-Q21\">Q21</a> <a href=\"#q-Q249\">Q249</a> <a href=\"#q-Q38\">Q38</a> <a href=\"#q-Q240\">Q240</a>]</span>",
+     "<b>Reviews and recertification close the loop</b> &mdash; periodic access review with recertification; business-unit managers plus HR reconcile roles and acquisitions; secure administration pairs least privilege with reviews. <span class=\"qrefs\">[<a href=\"#q-Q263\">Q263</a> <a href=\"#q-Q268\">Q268</a>]</span>",
+     "<b>Two-person rules are separation of duties</b> &mdash; dual control on sensitive actions institutionalizes it. <span class=\"qrefs\">[<a href=\"#q-Q113\">Q113</a>]</span>"],
+    rule:"Grant the minimum, for the minimum time — then verify continuously and recertify periodically." },
+{ id:'f15', g:'g7', name:"Zero Trust & Emerging", topic:"Zero Trust, CAEP, Blockchain, PQC & AI Risk", q:7, leaves:["Attest devices in real time", "CAEP adjusts live", "Blockchain resilience", "PQC now, tested", "Bias in AI access"],
     factors:[
-     "<b>POS restrict AND audit?</b> &mdash; A retail point-of-sale (POS) system requiring role-based function limits (for example cashier refund thresholds) plus PCI DSS documentation of who performed each... <span class=\"qrefs\">[Q157]</span>",
-     "<b>High-value banking token?</b> &mdash; For high-value online banking transactions requiring strong security with good user experience, the best ownership-based factor balancing security and usability is a... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Password plus email code?</b> &mdash; Exam trap: password + email code is vulnerable to email account compromise and phishing, and email delivery is less reliable and slower than a hardware token OTP \u2014 do... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Global token biggest headache?</b> &mdash; The most critical security challenge of physical token-based authentication in global hybrid IT (on-premises, public cloud, private cloud across multiple countries) is... <span class=\"qrefs\">[Q46]</span>",
-     "<b>Cloning is the top challenge?</b> &mdash; Exam trap: token cloning mitigation is important but is a subset concern; the overarching global challenge is the full token lifecycle (issuance, distribution,... <span class=\"qrefs\">[Q46]</span>",
-     "<b>How to measure smart card ROI?</b> &mdash; The most effective first-year ROI (Return on Investment) measurement for a smart card deployment at a financial institution is analyzing the reduction in security... <span class=\"qrefs\">[Q47]</span>"],
-    rule:"Verify explicitly per request; new tech changes the tokens, not the principles" },
-{ id:'f16', g:'g7', name:"Reviews & Governance", topic:"Access Review, Governance, Auditing & Compliance", q:15, leaves:["POS restrict AND audit?","High-value banking token?","Password plus email code?","Global token biggest...","Cloning is the top..."],
+     "<b>Zero trust verifies the device too</b> &mdash; real-time device attestation and centralized policy enforcement for newly acquired or global estates. <span class=\"qrefs\">[<a href=\"#q-Q189\">Q189</a> <a href=\"#q-Q286\">Q286</a>]</span>",
+     "<b>CAEP re-evaluates access on risk, live</b> &mdash; rights adjust in real time rather than waiting for token expiry. <span class=\"qrefs\">[<a href=\"#q-Q221\">Q221</a>]</span>",
+     "<b>Blockchain security = distributed ledger + immutability</b> &mdash; resilience through replication and tamper-evidence. <span class=\"qrefs\">[<a href=\"#q-Q28\">Q28</a>]</span>",
+     "<b>Quantum readiness means testing PQC now</b> &mdash; implementing and exercising post-quantum algorithms before the horizon arrives. <span class=\"qrefs\">[<a href=\"#q-Q49\">Q49</a>]</span>",
+     "<b>AI-driven access carries bias risk</b> &mdash; ML decision engines can perpetuate training bias — mitigation is the scored control. <span class=\"qrefs\">[<a href=\"#q-Q50\">Q50</a> <a href=\"#q-Q242\">Q242</a>]</span>"],
+    rule:"Emerging tech still answers to old questions: who, what device, how risky, how fair." },
+{ id:'f16', g:'g7', name:"Reviews & Governance", topic:"Access Reviews, UBA & IAM Governance Metrics", q:16, leaves:["Automate + human supplement", "Document the decisions", "Baseline before UBA", "CVSS balances risk", "Measure MTTD/R"],
     factors:[
-     "<b>POS restrict AND audit?</b> &mdash; A retail point-of-sale (POS) system requiring role-based function limits (for example cashier refund thresholds) plus PCI DSS documentation of who performed each... <span class=\"qrefs\">[Q157]</span>",
-     "<b>High-value banking token?</b> &mdash; For high-value online banking transactions requiring strong security with good user experience, the best ownership-based factor balancing security and usability is a... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Password plus email code?</b> &mdash; Exam trap: password + email code is vulnerable to email account compromise and phishing, and email delivery is less reliable and slower than a hardware token OTP \u2014 do... <span class=\"qrefs\">[Q44]</span>",
-     "<b>Global token biggest headache?</b> &mdash; The most critical security challenge of physical token-based authentication in global hybrid IT (on-premises, public cloud, private cloud across multiple countries) is... <span class=\"qrefs\">[Q46]</span>",
-     "<b>Cloning is the top challenge?</b> &mdash; Exam trap: token cloning mitigation is important but is a subset concern; the overarching global challenge is the full token lifecycle (issuance, distribution,... <span class=\"qrefs\">[Q46]</span>",
-     "<b>How to measure smart card ROI?</b> &mdash; The most effective first-year ROI (Return on Investment) measurement for a smart card deployment at a financial institution is analyzing the reduction in security... <span class=\"qrefs\">[Q47]</span>"],
-    rule:"Access reviews and audits prove the whole IAM discipline" }
+     "<b>Reviews = automation plus humans</b> &mdash; regular automated reviews supplemented by people; continuous monitoring combined with periodic human judgment; real-time decisions reconciled with scheduled review cycles is the stated tension. <span class=\"qrefs\">[<a href=\"#q-Q96\">Q96</a> <a href=\"#q-Q257\">Q257</a> <a href=\"#q-Q227\">Q227</a> <a href=\"#q-Q264\">Q264</a>]</span>",
+     "<b>Certification decisions are documented</b> &mdash; quarterly review records, automated certification workflows, cross-functional records teams; continuous automated compliance checks after IAM integration. <span class=\"qrefs\">[<a href=\"#q-Q33\">Q33</a> <a href=\"#q-Q63\">Q63</a> <a href=\"#q-Q15\">Q15</a> <a href=\"#q-Q251\">Q251</a>]</span>",
+     "<b>UBA stands on accurate baselines</b> &mdash; behavior analytics succeed or fail on baseline fidelity; context-aware auth is measured by unauthorized-access reduction. <span class=\"qrefs\">[<a href=\"#q-Q52\">Q52</a> <a href=\"#q-Q229\">Q229</a>]</span>",
+     "<b>Governance speaks in risk and outcomes</b> &mdash; CVSS balances technical severity with business context; centralized administration proves itself via mean time to detect/respond/mitigate; CRM security lands through developer collaboration; vendor remote access centralizes policy. <span class=\"qrefs\">[<a href=\"#q-Q66\">Q66</a> <a href=\"#q-Q90\">Q90</a> <a href=\"#q-Q244\">Q244</a> <a href=\"#q-Q101\">Q101</a> <a href=\"#q-Q70\">Q70</a>]</span>"],
+    rule:"Automate the review, keep the human sign-off, and report in the language of risk." }
 ];
 
 var RADAR=[
-{t:'Model mismatch', d:'DAC answers where MAC or attributes are asked - identify who grants before answering.', ex:'see factor ladders'},
-{t:'Factor dependence', d:'Same-source factors treated as independent MFA - SMS-after-password is the classic fake.', ex:'see factor ladders'},
-{t:'Authentication equals authorization', d:'Proving identity offered where permission must be decided.', ex:'see factor ladders'},
-{t:'Protocol confusion', d:'SAML, OAuth and OIDC mixed up by use case.', ex:'see factor ladders'},
-{t:'Kerberos misplacement', d:'Ticket steps and KDC roles swapped in sequence questions.', ex:'see factor ladders'},
-{t:'Session neglected', d:'Strong login with weak tokens - fixation and hijack answers missed.', ex:'see factor ladders'},
-{t:'Standing privilege', d:'Permanent admin where JIT elevation is asked.', ex:'see factor ladders'},
-{t:'Cloud absolutes', d:'Provider-managed answers where accountability stays with the customer.', ex:'see factor ladders'},
-{t:'Once-and-done', d:'One-time provisioning where lifecycle review is required.', ex:'see factor ladders'}
+{t:"Standing privilege", d:"Permanent admin rights where just-in-time, expiring access is scored.", ex:"<a href=\"#q-Q54\">Q54</a>, <a href=\"#q-Q217\">Q217</a>, <a href=\"#q-Q167\">Q167</a>"},
+{t:"Rule sprawl denial", d:"RuBAC consistency praised while thousands of unmaintained rules rot.", ex:"<a href=\"#q-Q87\">Q87</a>, <a href=\"#q-Q180\">Q180</a>, <a href=\"#q-Q207\">Q207</a>"},
+{t:"Static access assumptions", d:"Policies frozen at provisioning; no context, no attributes, no adaptation.", ex:"<a href=\"#q-Q3\">Q3</a>, <a href=\"#q-Q215\">Q215</a>"},
+{t:"Identity outsourced, accountability imagined gone", d:"IDaaS adopted without vendor assessment, residency options or availability planning.", ex:"<a href=\"#q-Q142\">Q142</a>, <a href=\"#q-Q139\">Q139</a>, <a href=\"#q-Q266\">Q266</a>"},
+{t:"Session fixation tolerance", d:"Identifiers surviving authentication and privilege changes unrotated.", ex:"<a href=\"#q-Q17\">Q17</a>, <a href=\"#q-Q72\">Q72</a>"},
+{t:"Review theater", d:"Quarterly attestations without automation, records or continuous monitoring.", ex:"<a href=\"#q-Q96\">Q96</a>, <a href=\"#q-Q33\">Q33</a>, <a href=\"#q-Q257\">Q257</a>"},
+{t:"Set-and-forget zero trust", d:"ZTA deployed without device attestation or live re-evaluation (CAEP).", ex:"<a href=\"#q-Q189\">Q189</a>, <a href=\"#q-Q221\">Q221</a>"},
+{t:"AI neutrality myth", d:"ML-driven access decisions assumed unbiased and left unmitigated.", ex:"<a href=\"#q-Q50\">Q50</a>, <a href=\"#q-Q242\">Q242</a>"},
+{t:"Quantum procrastination", d:"PQC deferred indefinitely despite harvest-now-decrypt-later exposure.", ex:"<a href=\"#q-Q49\">Q49</a>"}
 ];
 
 var QS = [
@@ -432,7 +424,7 @@ var QS = [
   el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
   var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
-  c0.textContent = 'DOMAIN 7 · PART';
+  c0.textContent = "DOMAIN 5 · PART";
   var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
   c1.textContent = 'DECISION';

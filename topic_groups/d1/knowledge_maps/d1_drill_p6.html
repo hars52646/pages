@@ -65,6 +65,11 @@
   .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
   .ladder .rule b{color:var(--mc);font-style:normal}
 
+  .ladder ol li .qrefs{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .ladder ol li .qrefs a{color:var(--mc);text-decoration:none;border-bottom:1px dotted var(--mc);margin:0 1px}
+  .ladder ol li .qrefs a:hover{border-bottom-style:solid}
+  .rad .ex a{color:#b91c1c;text-decoration:none;font-weight:800}
+  .rad .ex a:hover{text-decoration:underline}
   .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
   .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
   .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
@@ -124,9 +129,9 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 6 of 6</div>
+    <div class="eyebrow">CISSP &middot; Domain 1 &middot; Exam preparation &middot; logic-based scenarios &middot; part 6 of 6</div>
     <h1>D1 Question Drill 6 &mdash; Cryptography (topics 22-27)</h1>
-    <p class="sub"><b>92 scenario questions</b> (topics 1&ndash;12) &middot; <b>12 decision families</b> &middot; <b>5 knowledge groups</b> &mdash; forensics and evidence, monitoring and intel, malware defense, change and patch, resources and environment. Continues in <a href="d7_drill_p2.html">part 2: continuity and recovery (80 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+    <p class="sub"><b>84 scenario questions</b> (topics 22&ndash;27 of 27) &middot; <b>6 decision families</b> &mdash; symmetric and asymmetric cryptography, hashing and signatures, PKI, cryptanalysis &amp; post-quantum, and crypto fundamentals. Companion: the <a href="d1_cheatsheet_p3.html">knowledge cheatsheet</a> &middot; <a href="d1_index.html">D1 hub</a> &middot; back to <a href="d1_drill_p1.html">part 1</a>.</p>
   </div>
 </header>
 
@@ -140,7 +145,7 @@
 
   <section id="fmap">
     <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
-    <p class="lede">The 12 part-1 families (of D7&rsquo;s 18 total), colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <p class="lede">The 6 families on this page, colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
     <div class="map-panel">
       <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D1 drill part 6"></svg>
       <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
@@ -184,72 +189,62 @@
 <script>
 var GROUPS={g1:{name:"Cloud & Virtualization A",color:"#b91c1c",fill:"#dc2626"},g2:{name:"Cloud & Virtualization B",color:"#b45309",fill:"#d97706"},g3:{name:"System Architecture",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"OS & Security Models",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Investigations & IR",color:"#047857",fill:"#059669"},g6:{name:"Hashing, MAC & Signatures",color:"#be185d",fill:"#db2777"},g7:{name:"Cryptanalysis & PQC",color:"#0e7490",fill:"#0891b2"}};
 var FAMILIES = [
-{ id:'f22', g:'g6', name:"Symmetric Crypto", topic:"Symmetric & Stream Ciphers", q:17, leaves:["Choosing a hash \u2014 which...","MD5 migration \u2014 top...","Integrity only \u2014 hash or...","Q407 \u2014 signed code proves?","Q592 \u2014 blockchain..."],
+{ id:'f22', g:'g6', name:"Symmetric Crypto", topic:"Symmetric Cryptography & Key Hierarchies", q:17, leaves:["AES-256 default", "Key mgmt is the ask", "Hybrid for partners", "KISS", "High throughput"],
     factors:[
-     "<b>Choosing a hash \u2014 which pass?</b> &mdash; When choosing a hash for security-sensitive integrity, select SHA-2 or SHA-3; reject MD5 or SHA-1 due to proven collisions. Never accept broken algorithms for...",
-     "<b>MD5 migration \u2014 top priority?</b> &mdash; When migrating from deprecated MD5 to SHA-3, the priority is ensuring data integrity. Trap: prioritizing backward compatibility could perpetuate use of the vulnerable... <span class=\"qrefs\">[Q1207]</span>",
-     "<b>Integrity only \u2014 hash or HMAC?</b> &mdash; When verifying data integrity only (no authentication needed), a simple hash suffices; add a key (HMAC) when the source also needs verification. Choose the simplest tool...",
-     "<b>Q407 \u2014 signed code proves?</b> &mdash; Q407: Validating digital signatures on third-party code establishes authenticity \u2014 proof of legitimate vendor origin and detection of tampering. <span class=\"qrefs\">[Q407]</span>",
-     "<b>Q592 \u2014 blockchain properties?</b> &mdash; Q592 (blockchain cross-border financial transactions): answer \u2014 authentication, integrity verification, and non-repudiation. Closest distractor (encryption and... <span class=\"qrefs\">[Q592]</span>",
-     "<b>Q802 \u2014 legacy bridge?</b> &mdash; Q802 (highly regulated healthcare org undergoing digital transformation): answer \u2014 integrate a middleware solution bridging legacy with modern signature technology. Full... <span class=\"qrefs\">[Q802]</span>"],
-    rule:"AES default; mode and IV discipline decide safety" },
-{ id:'f23', g:'g6', name:"Asymmetric Crypto", topic:"Asymmetric Cryptography & Key Exchange", q:17, leaves:["Choosing a hash \u2014 which...","MD5 migration \u2014 top...","Integrity only \u2014 hash or...","Q407 \u2014 signed code proves?","Q592 \u2014 blockchain..."],
+     "<b>Legacy migration → AES-256</b> &mdash; moving off deprecated encryption selects AES with 256-bit keys, ideally GCM for authenticated encryption. <span class=\"qrefs\">[<a href=\"#q-Q896\">Q896</a> <a href=\"#q-Q462\">Q462</a>]</span>",
+     "<b>&ldquo;Biggest challenge&rdquo; in symmetric crypto = key distribution and management</b> &mdash; multi-department and multi-site rollouts are scored on distribution and lifecycle, not algorithm choice. <span class=\"qrefs\">[<a href=\"#q-Q201\">Q201</a> <a href=\"#q-Q1065\">Q1065</a> <a href=\"#q-Q599\">Q599</a> <a href=\"#q-Q1204\">Q1204</a>]</span>",
+     "<b>Partner and bulk transmission → hybrid</b> &mdash; symmetric bulk encryption with asymmetrically protected keys; hardcoded session keys are fixed by dynamic hybrid exchange. <span class=\"qrefs\">[<a href=\"#q-Q922\">Q922</a> <a href=\"#q-Q916\">Q916</a> <a href=\"#q-Q984\">Q984</a>]</span>",
+     "<b>Throughput asks speed-class modes</b> &mdash; HPC scenarios score high-speed encryption/decryption capability. <span class=\"qrefs\">[<a href=\"#q-Q222\">Q222</a> <a href=\"#q-Q117\">Q117</a>]</span>",
+     "<b>Architectural sprawl → KISS</b> &mdash; when complexity itself breeds the vulnerability, reduce it. <span class=\"qrefs\">[<a href=\"#q-Q981\">Q981</a>]</span>"],
+    rule:"AES by default; the lifecycle of the key, not the cipher, is the decision." },
+{ id:'f23', g:'g6', name:"Asymmetric Crypto", topic:"Asymmetric Cryptography & Key Exchange", q:17, leaves:["Private key protection", "Hybrid beats pure", "PQC = hybrid now", "Sign the key exchange", "Distribution scales"],
     factors:[
-     "<b>Choosing a hash \u2014 which pass?</b> &mdash; When choosing a hash for security-sensitive integrity, select SHA-2 or SHA-3; reject MD5 or SHA-1 due to proven collisions. Never accept broken algorithms for...",
-     "<b>MD5 migration \u2014 top priority?</b> &mdash; When migrating from deprecated MD5 to SHA-3, the priority is ensuring data integrity. Trap: prioritizing backward compatibility could perpetuate use of the vulnerable... <span class=\"qrefs\">[Q1207]</span>",
-     "<b>Integrity only \u2014 hash or HMAC?</b> &mdash; When verifying data integrity only (no authentication needed), a simple hash suffices; add a key (HMAC) when the source also needs verification. Choose the simplest tool...",
-     "<b>Q407 \u2014 signed code proves?</b> &mdash; Q407: Validating digital signatures on third-party code establishes authenticity \u2014 proof of legitimate vendor origin and detection of tampering. <span class=\"qrefs\">[Q407]</span>",
-     "<b>Q592 \u2014 blockchain properties?</b> &mdash; Q592 (blockchain cross-border financial transactions): answer \u2014 authentication, integrity verification, and non-repudiation. Closest distractor (encryption and... <span class=\"qrefs\">[Q592]</span>",
-     "<b>Q802 \u2014 legacy bridge?</b> &mdash; Q802 (highly regulated healthcare org undergoing digital transformation): answer \u2014 integrate a middleware solution bridging legacy with modern signature technology. Full... <span class=\"qrefs\">[Q802]</span>"],
-    rule:"RSA compatibility, ECC efficiency, DH exchange, hybrid volume" },
-{ id:'f24', g:'g6', name:"Hash & Signatures", topic:"Hashing, MAC & Digital Signatures", q:4, leaves:["Choosing a hash \u2014 which...","MD5 migration \u2014 top...","Integrity only \u2014 hash or...","Q407 \u2014 signed code proves?","Q592 \u2014 blockchain..."],
+     "<b>Private-key protection is the recurring answer</b> &mdash; new systems hinge on it; a leaked web-server key means requesting CA revocation immediately. <span class=\"qrefs\">[<a href=\"#q-Q516\">Q516</a> <a href=\"#q-Q1072\">Q1072</a>]</span>",
+     "<b>Hybrid beats pure asymmetric for bulk data</b> &mdash; complexity rises but speed gains dominate; hospitals and partner transfers use DH key agreement plus symmetric payloads. <span class=\"qrefs\">[<a href=\"#q-Q73\">Q73</a> <a href=\"#q-Q914\">Q914</a> <a href=\"#q-Q1041\">Q1041</a>]</span>",
+     "<b>Long horizons → hybrid classical + post-quantum</b> &mdash; 25-year strategies and classified systems combine today&rsquo;s public key with quantum-resistant/QKD elements; interoperability with legacy protocols is the constraint. <span class=\"qrefs\">[<a href=\"#q-Q33\">Q33</a> <a href=\"#q-Q1033\">Q1033</a> <a href=\"#q-Q779\">Q779</a> <a href=\"#q-Q309\">Q309</a>]</span>",
+     "<b>Anonymous key exchange must be signed</b> &mdash; DH without hashing and signing the exchange falls to man-in-the-middle; RSA deployments are hunted via factoring attacks. <span class=\"qrefs\">[<a href=\"#q-Q1075\">Q1075</a> <a href=\"#q-Q927\">Q927</a>]</span>",
+     "<b>Asymmetry&rsquo;s enterprise wins are distribution and scale</b> &mdash; simplified public-key distribution, scalable key management, field-level sharing without exposing decryption keys. <span class=\"qrefs\">[<a href=\"#q-Q144\">Q144</a> <a href=\"#q-Q93\">Q93</a> <a href=\"#q-Q589\">Q589</a> <a href=\"#q-Q204\">Q204</a>]</span>"],
+    rule:"Protect the private key; sign the exchange; go hybrid for volume and the quantum era." },
+{ id:'f24', g:'g6', name:"Hash & Signatures", topic:"Hashing & Digital Signatures", q:4, leaves:["Sign = integrity + origin", "Non-repudiation in ledgers", "Bridging legacy", "Public-key distribution"],
     factors:[
-     "<b>Choosing a hash \u2014 which pass?</b> &mdash; When choosing a hash for security-sensitive integrity, select SHA-2 or SHA-3; reject MD5 or SHA-1 due to proven collisions. Never accept broken algorithms for...",
-     "<b>MD5 migration \u2014 top priority?</b> &mdash; When migrating from deprecated MD5 to SHA-3, the priority is ensuring data integrity. Trap: prioritizing backward compatibility could perpetuate use of the vulnerable... <span class=\"qrefs\">[Q1207]</span>",
-     "<b>Integrity only \u2014 hash or HMAC?</b> &mdash; When verifying data integrity only (no authentication needed), a simple hash suffices; add a key (HMAC) when the source also needs verification. Choose the simplest tool...",
-     "<b>Q407 \u2014 signed code proves?</b> &mdash; Q407: Validating digital signatures on third-party code establishes authenticity \u2014 proof of legitimate vendor origin and detection of tampering. <span class=\"qrefs\">[Q407]</span>",
-     "<b>Q592 \u2014 blockchain properties?</b> &mdash; Q592 (blockchain cross-border financial transactions): answer \u2014 authentication, integrity verification, and non-repudiation. Closest distractor (encryption and... <span class=\"qrefs\">[Q592]</span>",
-     "<b>Q802 \u2014 legacy bridge?</b> &mdash; Q802 (highly regulated healthcare org undergoing digital transformation): answer \u2014 integrate a middleware solution bridging legacy with modern signature technology. Full... <span class=\"qrefs\">[Q802]</span>"],
-    rule:"Integrity then authentication then non-repudiation" },
-{ id:'f25', g:'g6', name:"PKI", topic:"PKI, Certificates & Key Management", q:22, leaves:["Choosing a hash \u2014 which...","MD5 migration \u2014 top...","Integrity only \u2014 hash or...","Q407 \u2014 signed code proves?","Q592 \u2014 blockchain..."],
+     "<b>Signatures verify integrity and origin</b> &mdash; API requests and cross-border ledger transactions score authentication, integrity and non-repudiation together. <span class=\"qrefs\">[<a href=\"#q-Q823\">Q823</a> <a href=\"#q-Q592\">Q592</a>]</span>",
+     "<b>Distributed systems still need managed public keys</b> &mdash; efficiently distributing them is the practical bottleneck. <span class=\"qrefs\">[<a href=\"#q-Q1269\">Q1269</a>]</span>",
+     "<b>Regulated modernization bridges via middleware</b> &mdash; legacy systems join signature workflows through integration layers. <span class=\"qrefs\">[<a href=\"#q-Q802\">Q802</a>]</span>"],
+    rule:"A signature is integrity plus origin plus non-repudiation — name which one the stem wants." },
+{ id:'f25', g:'g6', name:"PKI", topic:"PKI, Certificates & Key Management", q:22, leaves:["Offline root, tiered", "Revocation = OCSP/CRL", "Automate lifecycle", "Rotate by sensitivity", "New keys on renewal"],
     factors:[
-     "<b>Choosing a hash \u2014 which pass?</b> &mdash; When choosing a hash for security-sensitive integrity, select SHA-2 or SHA-3; reject MD5 or SHA-1 due to proven collisions. Never accept broken algorithms for...",
-     "<b>MD5 migration \u2014 top priority?</b> &mdash; When migrating from deprecated MD5 to SHA-3, the priority is ensuring data integrity. Trap: prioritizing backward compatibility could perpetuate use of the vulnerable... <span class=\"qrefs\">[Q1207]</span>",
-     "<b>Integrity only \u2014 hash or HMAC?</b> &mdash; When verifying data integrity only (no authentication needed), a simple hash suffices; add a key (HMAC) when the source also needs verification. Choose the simplest tool...",
-     "<b>Q407 \u2014 signed code proves?</b> &mdash; Q407: Validating digital signatures on third-party code establishes authenticity \u2014 proof of legitimate vendor origin and detection of tampering. <span class=\"qrefs\">[Q407]</span>",
-     "<b>Q592 \u2014 blockchain properties?</b> &mdash; Q592 (blockchain cross-border financial transactions): answer \u2014 authentication, integrity verification, and non-repudiation. Closest distractor (encryption and... <span class=\"qrefs\">[Q592]</span>",
-     "<b>Q802 \u2014 legacy bridge?</b> &mdash; Q802 (highly regulated healthcare org undergoing digital transformation): answer \u2014 integrate a middleware solution bridging legacy with modern signature technology. Full... <span class=\"qrefs\">[Q802]</span>"],
-    rule:"Trust lives in the CA hierarchy and certificate lifecycle" },
-{ id:'f26', g:'g7', name:"Cryptanalysis & PQC", topic:"Cryptanalytic Attacks & Post-Quantum", q:13, leaves:["Society vs employer: who...","Refuse and escalate?","Profession vs any other...","Framework or ethics...","Do ethics vary by..."],
+     "<b>Global PKI = tiered hierarchy with offline root</b> &mdash; subordinate CAs issue; the design limits root-key exposure; cross-organization trust uses bridge CAs with cross-certification. <span class=\"qrefs\">[<a href=\"#q-Q414\">Q414</a> <a href=\"#q-Q937\">Q937</a> <a href=\"#q-Q210\">Q210</a>]</span>",
+     "<b>Revocation is live and reachable</b> &mdash; compromised subordinate keys → OCSP for real-time status; outages → hybrid local CRLs plus OCSP; blocked CRL downloads → fix the firewall, and analysts never proceed past a revoked certificate. <span class=\"qrefs\">[<a href=\"#q-Q307\">Q307</a> <a href=\"#q-Q339\">Q339</a> <a href=\"#q-Q1179\">Q1179</a> <a href=\"#q-Q1080\">Q1080</a> <a href=\"#q-Q1222\">Q1222</a>]</span>",
+     "<b>Scale = automated certificate lifecycle</b> &mdash; enterprise CLM with renewal overlap between old and new validity periods; renewal re-issues fresh key pairs at current strength; pinning trades security for update agility. <span class=\"qrefs\">[<a href=\"#q-Q458\">Q458</a> <a href=\"#q-Q411\">Q411</a> <a href=\"#q-Q418\">Q418</a> <a href=\"#q-Q495\">Q495</a>]</span>",
+     "<b>Key management beats algorithm strength</b> &mdash; rotation frequency follows asset value and data classification; hardcoded symmetric keys are remediated by hybrid exchange; remote offices receive keys out-of-band; unified platforms manage diverse needs. <span class=\"qrefs\">[<a href=\"#q-Q920\">Q920</a> <a href=\"#q-Q812\">Q812</a> <a href=\"#q-Q826\">Q826</a> <a href=\"#q-Q984\">Q984</a> <a href=\"#q-Q912\">Q912</a> <a href=\"#q-Q99\">Q99</a> <a href=\"#q-Q42\">Q42</a>]</span>",
+     "<b>Endpoint roots of trust → TPM</b> &mdash; EHR deployments anchor keys in hardware; remote trust stores cache locally for disconnected operation. <span class=\"qrefs\">[<a href=\"#q-Q286\">Q286</a> <a href=\"#q-Q493\">Q493</a>]</span>"],
+    rule:"Hierarchy discipline — offline root, live revocation, automated renewal, rotation by sensitivity." },
+{ id:'f26', g:'g7', name:"Cryptanalysis & PQC", topic:"Cryptanalytic Attacks & Post-Quantum Cryptography", q:13, leaves:["Attack names by access", "Quantum → hybrid PQC", "Stego = covert channel", "Layered crypto defense"],
     factors:[
-     "<b>Society vs employer: who wins?</b> &mdash; When two canons conflict, choose the action that satisfies the lower-numbered canon \u2014 even if it means going against the employer's directive. Society outranks employer;...",
-     "<b>Refuse and escalate?</b> &mdash; When an employer asks you to do something unethical or illegal, refuse and escalate through proper channels (management, legal, HR). Complying makes you ethically...",
-     "<b>Profession vs any other canon?</b> &mdash; When 'advance the profession' (Canon 4) conflicts with any other canon, the other canon wins \u2014 Canon 4 is last in priority. Threat-intel sharing or peer collaboration... <span class=\"qrefs\">[Q559]</span>",
-     "<b>Framework or ethics foundational?</b> &mdash; Frameworks (ISO 27001, NIST CSF) and ethics serve different purposes: frameworks structure controls; ethics governs conduct and decisions \u2014 ethics is the foundational... <span class=\"qrefs\">[Q315]</span>",
-     "<b>Do ethics vary by geography?</b> &mdash; When operating across regions with differing laws or norms, apply ISC2 ethics consistently and globally \u2014 ethics are universal and do not vary by geography or local...",
-     "<b>Contract or harm prevention?</b> &mdash; Healthcare vendor risk with CEO preference for a supplier: the governing principle is doing nothing harmful to others. Contractual obligations are legally bounded but... <span class=\"qrefs\">[Q362]</span>"],
-    rule:"Name the attack by what it exploits; PQC for harvest-now" },
-{ id:'f27', g:'g6', name:"Crypto Fundamentals", topic:"Cryptography Fundamentals", q:10, leaves:["Choosing a hash \u2014 which...","MD5 migration \u2014 top...","Integrity only \u2014 hash or...","Q407 \u2014 signed code proves?","Q592 \u2014 blockchain..."],
+     "<b>Match the attack to the attacker&rsquo;s access</b> &mdash; original+encrypted pairs = known-plaintext; attacker-chosen input = chosen-plaintext; physical presence = power analysis; key strength (length and entropy) is the counter. <span class=\"qrefs\">[<a href=\"#q-Q181\">Q181</a> <a href=\"#q-Q929\">Q929</a> <a href=\"#q-Q919\">Q919</a> <a href=\"#q-Q24\">Q24</a>]</span>",
+     "<b>Quantum exposure → hybrid classical + PQC</b> &mdash; hybrid-cloud migrations and infrastructure upgrades adopt quantum-resistant algorithms in hybrid transitions; QKD&rsquo;s practicality is limited by specialized hardware. <span class=\"qrefs\">[<a href=\"#q-Q147\">Q147</a> <a href=\"#q-Q150\">Q150</a> <a href=\"#q-Q219\">Q219</a> <a href=\"#q-Q970\">Q970</a>]</span>",
+     "<b>Covert channels hide in media</b> &mdash; departing employees and covert signaling use steganography (including null ciphers); detection is content analysis, not traffic filtering. <span class=\"qrefs\">[<a href=\"#q-Q355\">Q355</a> <a href=\"#q-Q466\">Q466</a> <a href=\"#q-Q1120\">Q1120</a>]</span>",
+     "<b>Modern defense layers cryptography</b> &mdash; multi-layered strategies combining algorithms, rotation and monitoring; concealment of existence (obscurity) can add a layer, never the strategy. <span class=\"qrefs\">[<a href=\"#q-Q956\">Q956</a> <a href=\"#q-Q133\">Q133</a>]</span>"],
+    rule:"Name the attack by what the attacker can touch; answer quantum risk with hybrid migration." },
+{ id:'f27', g:'g6', name:"Crypto Fundamentals", topic:"Applied Cryptography Fundamentals", q:11, leaves:["Hybrid transfers", "Agility first", "At-rest scope", "Async for queues"],
     factors:[
-     "<b>Choosing a hash \u2014 which pass?</b> &mdash; When choosing a hash for security-sensitive integrity, select SHA-2 or SHA-3; reject MD5 or SHA-1 due to proven collisions. Never accept broken algorithms for...",
-     "<b>MD5 migration \u2014 top priority?</b> &mdash; When migrating from deprecated MD5 to SHA-3, the priority is ensuring data integrity. Trap: prioritizing backward compatibility could perpetuate use of the vulnerable... <span class=\"qrefs\">[Q1207]</span>",
-     "<b>Integrity only \u2014 hash or HMAC?</b> &mdash; When verifying data integrity only (no authentication needed), a simple hash suffices; add a key (HMAC) when the source also needs verification. Choose the simplest tool...",
-     "<b>Q407 \u2014 signed code proves?</b> &mdash; Q407: Validating digital signatures on third-party code establishes authenticity \u2014 proof of legitimate vendor origin and detection of tampering. <span class=\"qrefs\">[Q407]</span>",
-     "<b>Q592 \u2014 blockchain properties?</b> &mdash; Q592 (blockchain cross-border financial transactions): answer \u2014 authentication, integrity verification, and non-repudiation. Closest distractor (encryption and... <span class=\"qrefs\">[Q592]</span>",
-     "<b>Q802 \u2014 legacy bridge?</b> &mdash; Q802 (highly regulated healthcare org undergoing digital transformation): answer \u2014 integrate a middleware solution bridging legacy with modern signature technology. Full... <span class=\"qrefs\">[Q802]</span>"],
-    rule:"Goals first, then primitive, then strength" }
+     "<b>Files and backups → symmetric data, asymmetric key</b> &mdash; partner files, patient email, 500&nbsp;GB offsite backups all follow the hybrid pattern. <span class=\"qrefs\">[<a href=\"#q-Q247\">Q247</a> <a href=\"#q-Q910\">Q910</a> <a href=\"#q-Q942\">Q942</a>]</span>",
+     "<b>Crypto agility is the meta-answer</b> &mdash; rapid migration processes and updatable algorithms keep monitoring strategies continuous. <span class=\"qrefs\">[<a href=\"#q-Q66\">Q66</a> <a href=\"#q-Q653\">Q653</a>]</span>",
+     "<b>Scope by data state</b> &mdash; stolen production databases need at-rest encryption; 50,000-user secure email needs certificate management at scale. <span class=\"qrefs\">[<a href=\"#q-Q1019\">Q1019</a> <a href=\"#q-Q535\">Q535</a>]</span>",
+     "<b>Real-time queues → asynchronous encryption</b> &mdash; switching synchronization models resolves throughput bottlenecks. <span class=\"qrefs\">[<a href=\"#q-Q388\">Q388</a>]</span>"],
+    rule:"Symmetric for bulk, asymmetric for keys — and agility for whatever breaks next." }
 ];
 
 var RADAR=[
-{t:'Property confusion', d:'Confidentiality, integrity, availability traded as if interchangeable - read which property the stem sacrifices.', ex:'see factor ladders'},
-{t:'Owner misplaced', d:'Risk acceptance or governance duties assigned to the wrong role.', ex:'see factor ladders'},
-{t:'Verb skipped', d:'Controls chosen before the treatment verb (avoid, transfer, mitigate, accept) is named.', ex:'see factor ladders'},
-{t:'ALE arithmetic ignored', d:'Qualitative answers where the stem gives numbers - compute SLE and ALE first.', ex:'see factor ladders'},
-{t:'Framework step swapped', d:'RMF steps out of order, authorization before assessment.', ex:'see factor ladders'},
-{t:'Compliance absolutes', d:'Certification treated as compliance; audits treated as guarantees.', ex:'see factor ladders'},
-{t:'Cloud duty transfer', d:'Provider answers where customer data accountability remains.', ex:'see factor ladders'},
-{t:'Layer skipped', d:'Technology-first answers where the question names policy or governance.', ex:'see factor ladders'},
-{t:'Once-and-done', d:'Point-in-time fixes where continuous monitoring or review is asked.', ex:'see factor ladders'}
+{t:"Algorithm myopia", d:"&ldquo;Stronger cipher&rdquo; answers where key distribution, rotation or lifecycle is the scored issue.", ex:"<a href=\"#q-Q201\">Q201</a>, <a href=\"#q-Q599\">Q599</a>, <a href=\"#q-Q920\">Q920</a>"},
+{t:"Revocation neglect", d:"Leaked or expired keys re-used; CRL/OCSP unreachable and nobody treats it as urgent.", ex:"<a href=\"#q-Q1072\">Q1072</a>, <a href=\"#q-Q1179\">Q1179</a>, <a href=\"#q-Q339\">Q339</a>"},
+{t:"Renewal recycling", d:"Certificates renewed over old key pairs below current strength.", ex:"<a href=\"#q-Q418\">Q418</a>, <a href=\"#q-Q411\">Q411</a>"},
+{t:"Unsigned exchange", d:"Diffie-Hellman praised as self-protecting without hashing and signing the exchange.", ex:"<a href=\"#q-Q1075\">Q1075</a>"},
+{t:"Quantum panic", d:"Wholesale PQC replacement where hybrid classical+quantum transitions are scored.", ex:"<a href=\"#q-Q150\">Q150</a>, <a href=\"#q-Q219\">Q219</a>, <a href=\"#q-Q33\">Q33</a>"},
+{t:"Hidden channel missed", d:"Exfiltration diagnosed as an encryption problem when data rides inside images.", ex:"<a href=\"#q-Q355\">Q355</a>, <a href=\"#q-Q1120\">Q1120</a>"},
+{t:"Pinning absolutism", d:"Certificate pinning adopted without weighing update agility.", ex:"<a href=\"#q-Q495\">Q495</a>"},
+{t:"Hardcoded keys", d:"Shared symmetric keys baked into clients instead of dynamic establishment.", ex:"<a href=\"#q-Q916\">Q916</a>, <a href=\"#q-Q984\">Q984</a>"},
+{t:"Once-and-done crypto", d:"Deployment without agility — no migration process when algorithms age.", ex:"<a href=\"#q-Q66\">Q66</a>, <a href=\"#q-Q653\">Q653</a>"}
 ];
 
 var QS = [
@@ -410,7 +405,7 @@ var QS = [
   el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
   var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
-  c0.textContent = 'DOMAIN 7 · PART';
+  c0.textContent = "DOMAIN 1 · PART";
   var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
   c1.textContent = 'DECISION';

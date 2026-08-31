@@ -65,6 +65,11 @@
   .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
   .ladder .rule b{color:var(--mc);font-style:normal}
 
+  .ladder ol li .qrefs{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .ladder ol li .qrefs a{color:var(--mc);text-decoration:none;border-bottom:1px dotted var(--mc);margin:0 1px}
+  .ladder ol li .qrefs a:hover{border-bottom-style:solid}
+  .rad .ex a{color:#b91c1c;text-decoration:none;font-weight:800}
+  .rad .ex a:hover{text-decoration:underline}
   .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
   .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
   .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
@@ -124,9 +129,9 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 4 of 6</div>
+    <div class="eyebrow">CISSP &middot; Domain 1 &middot; Exam preparation &middot; logic-based scenarios &middot; part 4 of 6</div>
     <h1>D1 Question Drill 4 &mdash; Frameworks, Modeling & Adjacent (topics 12-16)</h1>
-    <p class="sub"><b>92 scenario questions</b> (topics 1&ndash;12) &middot; <b>12 decision families</b> &middot; <b>5 knowledge groups</b> &mdash; forensics and evidence, monitoring and intel, malware defense, change and patch, resources and environment. Continues in <a href="d7_drill_p2.html">part 2: continuity and recovery (80 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+    <p class="sub"><b>42 scenario questions</b> (topics 12&ndash;16 of 27) &middot; <b>5 decision families</b> &mdash; frameworks &amp; RMF, threat modeling, supply chain, continuity and awareness. Continues in <a href="d1_drill_p5.html">part 5: cloud, architecture &amp; investigations</a>. Companion: the <a href="d1_cheatsheet_p2.html">knowledge cheatsheet</a> &middot; <a href="d1_index.html">D1 hub</a>.</p>
   </div>
 </header>
 
@@ -140,7 +145,7 @@
 
   <section id="fmap">
     <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
-    <p class="lede">The 12 part-1 families (of D7&rsquo;s 18 total), colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <p class="lede">The 5 families on this page, colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
     <div class="map-panel">
       <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D1 drill part 4"></svg>
       <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
@@ -184,53 +189,48 @@
 <script>
 var GROUPS={g1:{name:"Risk Treatment & Controls A",color:"#b91c1c",fill:"#dc2626"},g2:{name:"Risk Treatment & Controls B",color:"#b45309",fill:"#d97706"},g3:{name:"Risk Treatment & Controls C",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"Risk Treatment & Controls D",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Risk Treatment & Controls E",color:"#047857",fill:"#059669"},g6:{name:"Risk Frameworks & RMF",color:"#be185d",fill:"#db2777"},g7:{name:"Threat Modeling & Supply Chain",color:"#0e7490",fill:"#0891b2"}};
 var FAMILIES = [
-{ id:'f12', g:'g6', name:"Frameworks & RMF", topic:"Risk Frameworks, RMF & Continuous Improvement", q:26, leaves:["Society vs employer: who...","Refuse and escalate?","Profession vs any other...","Framework or ethics...","Do ethics vary by..."],
+{ id:'f12', g:'g6', name:"Frameworks & RMF", topic:"Security Frameworks, Evaluation Criteria & NIST RMF", q:26, leaves:["RMF step order", "CC = product assurance", "ITSEC flexibility", "Tailor, don&rsquo;t adopt", "Assess after implement"],
     factors:[
-     "<b>Society vs employer: who wins?</b> &mdash; When two canons conflict, choose the action that satisfies the lower-numbered canon \u2014 even if it means going against the employer's directive. Society outranks employer;...",
-     "<b>Refuse and escalate?</b> &mdash; When an employer asks you to do something unethical or illegal, refuse and escalate through proper channels (management, legal, HR). Complying makes you ethically...",
-     "<b>Profession vs any other canon?</b> &mdash; When 'advance the profession' (Canon 4) conflicts with any other canon, the other canon wins \u2014 Canon 4 is last in priority. Threat-intel sharing or peer collaboration... <span class=\"qrefs\">[Q559]</span>",
-     "<b>Framework or ethics foundational?</b> &mdash; Frameworks (ISO 27001, NIST CSF) and ethics serve different purposes: frameworks structure controls; ethics governs conduct and decisions \u2014 ethics is the foundational... <span class=\"qrefs\">[Q315]</span>",
-     "<b>Do ethics vary by geography?</b> &mdash; When operating across regions with differing laws or norms, apply ISC2 ethics consistently and globally \u2014 ethics are universal and do not vary by geography or local...",
-     "<b>Contract or harm prevention?</b> &mdash; Healthcare vendor risk with CEO preference for a supplier: the governing principle is doing nothing harmful to others. Contractual obligations are legally bounded but... <span class=\"qrefs\">[Q362]</span>"],
-    rule:"Categorize, select, implement, assess, authorize, monitor" },
-{ id:'f13', g:'g7', name:"Threat Modeling", topic:"Threat Modeling (STRIDE, PASTA, DREAD)", q:3, leaves:["How to prevent bad..."],
+     "<b>RMF runs categorize → select → implement → assess → authorize → monitor</b> &mdash; controls are selected commensurate with impact category; after implementation the step is assessing whether controls produce desired results; formal operation approval is management&rsquo;s authorization. <span class=\"qrefs\">[<a href=\"#q-Q332\">Q332</a> <a href=\"#q-Q368\">Q368</a> <a href=\"#q-Q430\">Q430</a> <a href=\"#q-Q7\">Q7</a>]</span>",
+     "<b>Common Criteria = standardized product assurance</b> &mdash; it lets buyers compare evaluated products and lets insurers gauge assurance; its tensions are standardization vs uniqueness and adapting to future tech (PQC, AI transparency). <span class=\"qrefs\">[<a href=\"#q-Q105\">Q105</a> <a href=\"#q-Q664\">Q664</a> <a href=\"#q-Q400\">Q400</a> <a href=\"#q-Q932\">Q932</a> <a href=\"#q-Q1192\">Q1192</a> <a href=\"#q-Q1231\">Q1231</a>]</span>",
+     "<b>ITSEC separates function from assurance — TCSEC doesn&rsquo;t</b> &mdash; ITSEC&rsquo;s split enables flexible evaluation of diverse systems; TCSEC assumes centralized control and mirrors DoD focus. <span class=\"qrefs\">[<a href=\"#q-Q336\">Q336</a> <a href=\"#q-Q12\">Q12</a> <a href=\"#q-Q1197\">Q1197</a> <a href=\"#q-Q935\">Q935</a>]</span>",
+     "<b>Frameworks are tailored and hybridized, never adopted raw</b> &mdash; global rollouts combine a centralized baseline with local adaptation; fast-changing orgs take a risk-based approach; framework fatigue is cured by integration, not addition. <span class=\"qrefs\">[<a href=\"#q-Q63\">Q63</a> <a href=\"#q-Q435\">Q435</a> <a href=\"#q-Q294\">Q294</a> <a href=\"#q-Q279\">Q279</a>]</span>",
+     "<b>Requirements decompose into SFRs</b> &mdash; IoT and product security under CC maps goals to Security Functional Requirements. <span class=\"qrefs\">[<a href=\"#q-Q27\">Q27</a>]</span>",
+     "<b>Modern architectures stress old criteria</b> &mdash; multi-tenant clouds need verified tenant separation; microservices bring dynamic scaling the classic criteria never imagined. <span class=\"qrefs\">[<a href=\"#q-Q454\">Q454</a> <a href=\"#q-Q1203\">Q1203</a>]</span>"],
+    rule:"Evaluation criteria trade standardization against flexibility; RMF order is fixed — assess before authorize." },
+{ id:'f13', g:'g7', name:"Threat Modeling", topic:"Threat Modeling & Secure Design", q:3, leaves:["Model in design phase", "Depth over detection", "AI assurance"],
     factors:[
-     "<b>How to prevent bad products?</b> &mdash; To prevent deploying products that fail protection expectations, security teams define requirements and SLA metrics before deployment so acquisition decisions... <span class=\"qrefs\">[Q711]</span>"],
-    rule:"STRIDE classifies, PASTA simulates, DREAD scores" },
-{ id:'f14', g:'g7', name:"Supply Chain", topic:"Supply Chain & Third-Party Risk", q:10, leaves:["How to prevent bad..."],
+     "<b>Threat modeling belongs in the design phase</b> &mdash; the Information System Lifecycle point where changes are cheapest and coverage is broadest. <span class=\"qrefs\">[<a href=\"#q-Q825\">Q825</a>]</span>",
+     "<b>Unusual activity = defense in depth response</b> &mdash; multi-layered strategies beat single-point detection when behavior is anomalous but unattributed. <span class=\"qrefs\">[<a href=\"#q-Q30\">Q30</a>]</span>"],
+    rule:"Model early (design), respond with layers — never with one control." },
+{ id:'f14', g:'g7', name:"Supply Chain", topic:"Supply Chain Risk & Vendor Management", q:10, leaves:["Cascading n-tier risk", "Requirements → validation", "SLA/SLR enforcement", "Tampering after manufacture"],
     factors:[
-     "<b>How to prevent bad products?</b> &mdash; To prevent deploying products that fail protection expectations, security teams define requirements and SLA metrics before deployment so acquisition decisions... <span class=\"qrefs\">[Q711]</span>"],
-    rule:"Third-party risk is program-level, continuous and layered" },
-{ id:'f15', g:'g6', name:"Continuity", topic:"Business Continuity, DR & Resilience", q:1, leaves:["Society vs employer: who...","Refuse and escalate?","Profession vs any other...","Framework or ethics...","Do ethics vary by..."],
+     "<b>Risk cascades through the whole n-tier network</b> &mdash; beyond direct suppliers, interconnection creates exposure no single contract covers — post-SolarWinds answers integrate real-time risk across tiers. <span class=\"qrefs\">[<a href=\"#q-Q158\">Q158</a> <a href=\"#q-Q733\">Q733</a>]</span>",
+     "<b>Vendor lifecycle: define → document → validate → enforce</b> &mdash; clear concise security requirements with stakeholders (security in the acquisition), documented and validated with the vendor, then SLA metrics and enforceable penalties when performance slips. <span class=\"qrefs\">[<a href=\"#q-Q633\">Q633</a> <a href=\"#q-Q660\">Q660</a> <a href=\"#q-Q711\">Q711</a> <a href=\"#q-Q761\">Q761</a> <a href=\"#q-Q561\">Q561</a>]</span>",
+     "<b>Unauthorized firmware = product tampering</b> &mdash; modifications after manufacture, not counterfeiting or transit damage. <span class=\"qrefs\">[<a href=\"#q-Q742\">Q742</a>]</span>",
+     "<b>Internal providers run on OLAs</b> &mdash; shared-services hosting for multiple agencies gets Operational Level Agreements tailored per department. <span class=\"qrefs\">[<a href=\"#q-Q805\">Q805</a>]</span>"],
+    rule:"The weakest tier sets your risk — requirements, validation and enforceable terms travel the chain." },
+{ id:'f15', g:'g6', name:"Continuity", topic:"Business Continuity & Acquisition Risk", q:1, leaves:["Renegotiate with SLR/SLA"],
     factors:[
-     "<b>Society vs employer: who wins?</b> &mdash; When two canons conflict, choose the action that satisfies the lower-numbered canon \u2014 even if it means going against the employer's directive. Society outranks employer;...",
-     "<b>Refuse and escalate?</b> &mdash; When an employer asks you to do something unethical or illegal, refuse and escalate through proper channels (management, legal, HR). Complying makes you ethically...",
-     "<b>Profession vs any other canon?</b> &mdash; When 'advance the profession' (Canon 4) conflicts with any other canon, the other canon wins \u2014 Canon 4 is last in priority. Threat-intel sharing or peer collaboration... <span class=\"qrefs\">[Q559]</span>",
-     "<b>Framework or ethics foundational?</b> &mdash; Frameworks (ISO 27001, NIST CSF) and ethics serve different purposes: frameworks structure controls; ethics governs conduct and decisions \u2014 ethics is the foundational... <span class=\"qrefs\">[Q315]</span>",
-     "<b>Do ethics vary by geography?</b> &mdash; When operating across regions with differing laws or norms, apply ISC2 ethics consistently and globally \u2014 ethics are universal and do not vary by geography or local...",
-     "<b>Contract or harm prevention?</b> &mdash; Healthcare vendor risk with CEO preference for a supplier: the governing principle is doing nothing harmful to others. Contractual obligations are legally bounded but... <span class=\"qrefs\">[Q362]</span>"],
-    rule:"People safety first, then damage minimization, then survival" },
-{ id:'f16', g:'g6', name:"Awareness", topic:"Security Awareness, Training & Education", q:2, leaves:["Society vs employer: who...","Refuse and escalate?","Profession vs any other...","Framework or ethics...","Do ethics vary by..."],
+     "<b>Acquisitions inherit dependencies — renegotiate with SLRs and SLAs</b> &mdash; multi-cloud continuity risk from an acquired firm is absorbed by rebuilding contracts with security requirements and service levels. <span class=\"qrefs\">[<a href=\"#q-Q811\">Q811</a>]</span>"],
+    rule:"Continuity obligations are contractual before they are technical." },
+{ id:'f16', g:'g6', name:"Awareness", topic:"Security Awareness & Leadership", q:2, leaves:["Tone from the top", "Quantum = hybrid certs"],
     factors:[
-     "<b>Society vs employer: who wins?</b> &mdash; When two canons conflict, choose the action that satisfies the lower-numbered canon \u2014 even if it means going against the employer's directive. Society outranks employer;...",
-     "<b>Refuse and escalate?</b> &mdash; When an employer asks you to do something unethical or illegal, refuse and escalate through proper channels (management, legal, HR). Complying makes you ethically...",
-     "<b>Profession vs any other canon?</b> &mdash; When 'advance the profession' (Canon 4) conflicts with any other canon, the other canon wins \u2014 Canon 4 is last in priority. Threat-intel sharing or peer collaboration... <span class=\"qrefs\">[Q559]</span>",
-     "<b>Framework or ethics foundational?</b> &mdash; Frameworks (ISO 27001, NIST CSF) and ethics serve different purposes: frameworks structure controls; ethics governs conduct and decisions \u2014 ethics is the foundational... <span class=\"qrefs\">[Q315]</span>",
-     "<b>Do ethics vary by geography?</b> &mdash; When operating across regions with differing laws or norms, apply ISC2 ethics consistently and globally \u2014 ethics are universal and do not vary by geography or local...",
-     "<b>Contract or harm prevention?</b> &mdash; Healthcare vendor risk with CEO preference for a supplier: the governing principle is doing nothing harmful to others. Contractual obligations are legally bounded but... <span class=\"qrefs\">[Q362]</span>"],
-    rule:"Training changes behavior - measure reduction, not attendance" }
+     "<b>Perception problems are leadership-communication problems</b> &mdash; security seen as obstacle → regular senior-management communication framing security as an enabler. <span class=\"qrefs\">[<a href=\"#q-Q496\">Q496</a>]</span>",
+     "<b>Quantum readiness for certificates = hybrid classical + post-quantum</b> &mdash; the awareness-level answer for PKI facing quantum threats. <span class=\"qrefs\">[<a href=\"#q-Q102\">Q102</a>]</span>"],
+    rule:"Culture moves when senior leadership carries the message." }
 ];
 
 var RADAR=[
-{t:'Property confusion', d:'Confidentiality, integrity, availability traded as if interchangeable - read which property the stem sacrifices.', ex:'see factor ladders'},
-{t:'Owner misplaced', d:'Risk acceptance or governance duties assigned to the wrong role.', ex:'see factor ladders'},
-{t:'Verb skipped', d:'Controls chosen before the treatment verb (avoid, transfer, mitigate, accept) is named.', ex:'see factor ladders'},
-{t:'ALE arithmetic ignored', d:'Qualitative answers where the stem gives numbers - compute SLE and ALE first.', ex:'see factor ladders'},
-{t:'Framework step swapped', d:'RMF steps out of order, authorization before assessment.', ex:'see factor ladders'},
-{t:'Compliance absolutes', d:'Certification treated as compliance; audits treated as guarantees.', ex:'see factor ladders'},
-{t:'Cloud duty transfer', d:'Provider answers where customer data accountability remains.', ex:'see factor ladders'},
-{t:'Layer skipped', d:'Technology-first answers where the question names policy or governance.', ex:'see factor ladders'},
-{t:'Once-and-done', d:'Point-in-time fixes where continuous monitoring or review is asked.', ex:'see factor ladders'}
+{t:"Framework absolutism", d:"A single framework adopted wholesale where hybrid central-baseline-plus-local-tailoring is scored.", ex:"<a href=\"#q-Q63\">Q63</a>, <a href=\"#q-Q294\">Q294</a>, <a href=\"#q-Q435\">Q435</a>"},
+{t:"RMF step swap", d:"Authorization before assessment, or monitoring skipped after authorize.", ex:"<a href=\"#q-Q7\">Q7</a>, <a href=\"#q-Q368\">Q368</a>, <a href=\"#q-Q430\">Q430</a>"},
+{t:"Criteria confusion", d:"TCSEC rigidity praised where ITSEC&rsquo;s functional/assurance separation fits diverse systems.", ex:"<a href=\"#q-Q336\">Q336</a>, <a href=\"#q-Q935\">Q935</a>, <a href=\"#q-Q12\">Q12</a>"},
+{t:"First-tier myopia", d:"Vendor risk stopped at direct suppliers while n-tier cascading exposure is the ask.", ex:"<a href=\"#q-Q158\">Q158</a>, <a href=\"#q-Q733\">Q733</a>"},
+{t:"Contract-free trust", d:"Vendors onboarded without documented, validated requirements or enforceable SLA terms.", ex:"<a href=\"#q-Q660\">Q660</a>, <a href=\"#q-Q761\">Q761</a>, <a href=\"#q-Q561\">Q561</a>"},
+{t:"Modeling too late", d:"Threat modeling postponed to implementation or testing instead of design.", ex:"<a href=\"#q-Q825\">Q825</a>"},
+{t:"Assurance ignored", d:"Certifications treated as guarantees rather than bounded assurance levels.", ex:"<a href=\"#q-Q664\">Q664</a>, <a href=\"#q-Q400\">Q400</a>"},
+{t:"Modern-blind criteria", d:"Classic evaluation criteria applied unchanged to multi-tenancy, microservices or AI.", ex:"<a href=\"#q-Q454\">Q454</a>, <a href=\"#q-Q1203\">Q1203</a>, <a href=\"#q-Q1231\">Q1231</a>"},
+{t:"Quantum panic", d:"Wholesale replacement proposed where hybrid certificates bridge the transition.", ex:"<a href=\"#q-Q102\">Q102</a>, <a href=\"#q-Q1192\">Q1192</a>"}
 ];
 
 var QS = [
@@ -349,7 +349,7 @@ var QS = [
   el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
   var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
-  c0.textContent = 'DOMAIN 7 · PART';
+  c0.textContent = "DOMAIN 1 · PART";
   var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
   c1.textContent = 'DECISION';

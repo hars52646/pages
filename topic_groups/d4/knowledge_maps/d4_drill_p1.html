@@ -65,6 +65,11 @@
   .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
   .ladder .rule b{color:var(--mc);font-style:normal}
 
+  .ladder ol li .qrefs{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .ladder ol li .qrefs a{color:var(--mc);text-decoration:none;border-bottom:1px dotted var(--mc);margin:0 1px}
+  .ladder ol li .qrefs a:hover{border-bottom-style:solid}
+  .rad .ex a{color:#b91c1c;text-decoration:none;font-weight:800}
+  .rad .ex a:hover{text-decoration:underline}
   .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
   .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
   .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
@@ -124,9 +129,9 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 1 of 2</div>
+    <div class="eyebrow">CISSP &middot; Domain 4 &middot; Exam preparation &middot; logic-based scenarios &middot; part 1 of 2</div>
     <h1>D4 Question Drill 1 &mdash; Network Foundations & Security (topics 2-11)</h1>
-    <p class="sub"><b>92 scenario questions</b> (topics 1&ndash;12) &middot; <b>12 decision families</b> &middot; <b>5 knowledge groups</b> &mdash; forensics and evidence, monitoring and intel, malware defense, change and patch, resources and environment. Continues in <a href="d7_drill_p2.html">part 2: continuity and recovery (80 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+    <p class="sub"><b>121 scenario questions</b> (topics 2&ndash;11 of 14) &middot; <b>10 decision families</b> across <b>4 knowledge groups</b> &mdash; topologies and media, network devices and protocols, addressing, converged communications, perimeter defense, detection, remote access, AAA and network cryptography. Continues in <a href="d4_drill_p2.html">part 2: wireless, cloud, attacks &amp; operations</a>. Companion: the <a href="d4_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d4_index.html">D4 hub</a>.</p>
   </div>
 </header>
 
@@ -140,7 +145,7 @@
 
   <section id="fmap">
     <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
-    <p class="lede">The 12 part-1 families (of D7&rsquo;s 18 total), colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <p class="lede">The 10 families on this page, colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
     <div class="map-panel">
       <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D4 drill part 1"></svg>
       <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
@@ -184,93 +189,100 @@
 <script>
 var GROUPS={g1:{name:"OSI, TCP/IP & Media",color:"#b91c1c",fill:"#dc2626"},g2:{name:"IP Addressing & Subnetting",color:"#b45309",fill:"#d97706"},g3:{name:"IDS/IPS & Detection",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"Authentication & AAA",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Cloud & SDN",color:"#047857",fill:"#059669"},g6:{name:"Attacks & Reconnaissance",color:"#be185d",fill:"#db2777"},g7:{name:"Monitoring & Operations",color:"#0e7490",fill:"#0891b2"}};
 var FAMILIES = [
-{ id:'f02', g:'g1', name:"Topologies & Media", topic:"Network Topologies & Physical Media", q:4, leaves:["Routing question \u2014 which...","Reliability question \u2014...","MAC question \u2014 which...","Encryption formatting \u2014...","Zero trust \u2014 which layer?"],
+{ id:'f02', g:'g1', name:"Topologies & Media", topic:"Network Topologies & Media", q:3, leaves:["Availability → mesh", "Redundant paths", "Cost trade-off", "Hybrid for multi-cloud"],
     factors:[
-     "<b>Routing question \u2014 which layer?</b> &mdash; Exam decision rule: any question about routing, IP addressing, or packet filtering maps to Layer 3 (Network). Routers and packet-filtering firewalls operate here because...",
-     "<b>Reliability question \u2014 which layer?</b> &mdash; Exam decision rule: questions about end-to-end error correction, reliability, or port numbers map to Layer 4 (Transport). TCP provides reliable delivery; UDP does not.",
-     "<b>MAC question \u2014 which layer?</b> &mdash; Exam decision rule: questions about MAC-based forwarding, switching, or ARP resolution map to Layer 2 (Data Link), where MAC addresses and ARP resolution live.",
-     "<b>Encryption formatting \u2014 which layer?</b> &mdash; Exam decision rule: questions about where encryption/formatting occurs map to Layer 6 (Presentation), which transforms data for the application including cryptographic... <span class=\"qrefs\">[Q38 Q89 Q130 Q410]</span>",
-     "<b>Zero trust \u2014 which layer?</b> &mdash; Source conflict preserved: Part A guidance says lean toward Layers 6-7 for zero-trust segmentation and least-privilege access control, because application-aware controls... <span class=\"qrefs\">[Q37 Q100]</span>",
-     "<b>Eliminate bus when?</b> &mdash; Eliminate bus topology when the scenario requires fault isolation or resistance to a single cable break \u2014 one break or one interceptor compromises the entire shared..."],
-    rule:"Bus, ring, star, mesh - fault tolerance and cost follow the topology" },
-{ id:'f03', g:'g1', name:"Network Devices", topic:"Network Devices & Infrastructure", q:14, leaves:["Routing question \u2014 which...","Reliability question \u2014...","MAC question \u2014 which...","Encryption formatting \u2014...","Zero trust \u2014 which layer?"],
+     "<b>Critical availability → mesh</b> &mdash; multiple independent paths keep critical systems alive when a link fails; accept the cost that comes with it. <span class=\"qrefs\">[<a href=\"#q-Q194\">Q194</a>]</span>",
+     "<b>Resilience vs cost is the topology trade-off</b> &mdash; mesh buys availability but is expensive to implement and maintain — the answer names both sides. <span class=\"qrefs\">[<a href=\"#q-Q195\">Q195</a>]</span>",
+     "<b>Multi-cloud → hybrid mesh-star</b> &mdash; combine path redundancy with hub-and-spoke manageability across providers. <span class=\"qrefs\">[<a href=\"#q-Q62\">Q62</a>]</span>"],
+    rule:"Availability demands redundant paths; every extra path has a price line." },
+{ id:'f03', g:'g1', name:"Network Devices", topic:"Network Devices & WAN Technologies", q:14, leaves:["MPLS separates", "Legacy trade-offs", "Router vs VLAN", "Encrypt provider WAN", "BGP + MD5"],
     factors:[
-     "<b>Routing question \u2014 which layer?</b> &mdash; Exam decision rule: any question about routing, IP addressing, or packet filtering maps to Layer 3 (Network). Routers and packet-filtering firewalls operate here because...",
-     "<b>Reliability question \u2014 which layer?</b> &mdash; Exam decision rule: questions about end-to-end error correction, reliability, or port numbers map to Layer 4 (Transport). TCP provides reliable delivery; UDP does not.",
-     "<b>MAC question \u2014 which layer?</b> &mdash; Exam decision rule: questions about MAC-based forwarding, switching, or ARP resolution map to Layer 2 (Data Link), where MAC addresses and ARP resolution live.",
-     "<b>Encryption formatting \u2014 which layer?</b> &mdash; Exam decision rule: questions about where encryption/formatting occurs map to Layer 6 (Presentation), which transforms data for the application including cryptographic... <span class=\"qrefs\">[Q38 Q89 Q130 Q410]</span>",
-     "<b>Zero trust \u2014 which layer?</b> &mdash; Source conflict preserved: Part A guidance says lean toward Layers 6-7 for zero-trust segmentation and least-privilege access control, because application-aware controls... <span class=\"qrefs\">[Q37 Q100]</span>",
-     "<b>Eliminate bus when?</b> &mdash; Eliminate bus topology when the scenario requires fault isolation or resistance to a single cable break \u2014 one break or one interceptor compromises the entire shared..."],
-    rule:"Know the device by the layer and direction it operates on" },
-{ id:'f04', g:'g1', name:"Protocols & Ports", topic:"Network Protocols & Ports", q:4, leaves:["Routing question \u2014 which...","Reliability question \u2014...","MAC question \u2014 which...","Encryption formatting \u2014...","Zero trust \u2014 which layer?"],
+     "<b>WAN modernization → MPLS</b> &mdash; label-based forwarding gives traffic separation and performance across regional sites. <span class=\"qrefs\">[<a href=\"#q-Q270\">Q270</a> <a href=\"#q-Q280\">Q280</a>]</span>",
+     "<b>Legacy tech answers hinge on their trade-off</b> &mdash; X.25 brings robust error correction but high overhead and slow speeds — match the property the scenario emphasizes. <span class=\"qrefs\">[<a href=\"#q-Q262\">Q262</a> <a href=\"#q-Q306\">Q306</a>]</span>",
+     "<b>Pick the segmentation device by layer</b> &mdash; routers segment at L3 with logical addressing, VLANs group LANs logically, L3 switches forward by IP at wire speed. <span class=\"qrefs\">[<a href=\"#q-Q282\">Q282</a> <a href=\"#q-Q337\">Q337</a> <a href=\"#q-Q309\">Q309</a>]</span>",
+     "<b>Provider-visible WAN → encrypt everything in transit</b> &mdash; if the carrier can read it, confidentiality is your job, not theirs. <span class=\"qrefs\">[<a href=\"#q-Q299\">Q299</a>]</span>",
+     "<b>Routing infrastructure → BGP with MD5 authentication</b> &mdash; plus route filtering to keep the control plane trustworthy. <span class=\"qrefs\">[<a href=\"#q-Q83\">Q83</a> <a href=\"#q-Q200\">Q200</a>]</span>",
+     "<b>Third parties → authenticated extranet</b> &mdash; vendor and partner access lands in a controlled zone with real authentication and authorization. <span class=\"qrefs\">[<a href=\"#q-Q347\">Q347</a>]</span>"],
+    rule:"Match each device to the layer and trust boundary it actually enforces." },
+{ id:'f04', g:'g1', name:"Protocols & Ports", topic:"Protocols & Ports", q:4, leaves:["Streams → UDP", "Delivery → TCP", "DoH visibility", "Authenticated routing"],
     factors:[
-     "<b>Routing question \u2014 which layer?</b> &mdash; Exam decision rule: any question about routing, IP addressing, or packet filtering maps to Layer 3 (Network). Routers and packet-filtering firewalls operate here because...",
-     "<b>Reliability question \u2014 which layer?</b> &mdash; Exam decision rule: questions about end-to-end error correction, reliability, or port numbers map to Layer 4 (Transport). TCP provides reliable delivery; UDP does not.",
-     "<b>MAC question \u2014 which layer?</b> &mdash; Exam decision rule: questions about MAC-based forwarding, switching, or ARP resolution map to Layer 2 (Data Link), where MAC addresses and ARP resolution live.",
-     "<b>Encryption formatting \u2014 which layer?</b> &mdash; Exam decision rule: questions about where encryption/formatting occurs map to Layer 6 (Presentation), which transforms data for the application including cryptographic... <span class=\"qrefs\">[Q38 Q89 Q130 Q410]</span>",
-     "<b>Zero trust \u2014 which layer?</b> &mdash; Source conflict preserved: Part A guidance says lean toward Layers 6-7 for zero-trust segmentation and least-privilege access control, because application-aware controls... <span class=\"qrefs\">[Q37 Q100]</span>",
-     "<b>Eliminate bus when?</b> &mdash; Eliminate bus topology when the scenario requires fault isolation or resistance to a single cable break \u2014 one break or one interceptor compromises the entire shared..."],
-    rule:"Protocol-port pairs are pure recall - memorize the high-yield set" },
-{ id:'f05', g:'g2', name:"Addressing & Subnetting", topic:"IP Addressing & Subnetting", q:10, leaves:["Exhaustion plus native..."],
+     "<b>Live streams → UDP</b> &mdash; speed and efficiency over retransmission for real-time video and voice. <span class=\"qrefs\">[<a href=\"#q-Q174\">Q174</a>]</span>",
+     "<b>Guaranteed delivery → TCP semantics</b> &mdash; ordered delivery, acknowledgments and sequence numbers are the scored features. <span class=\"qrefs\">[<a href=\"#q-Q177\">Q177</a>]</span>",
+     "<b>Encrypted DNS kills visibility → centralize DoH</b> &mdash; a managed proxy restores monitoring without blocking the protocol. <span class=\"qrefs\">[<a href=\"#q-Q85\">Q85</a>]</span>",
+     "<b>Inter-domain routing → authenticated BGP + MPLS</b> &mdash; architecture questions pair protocol authentication with label separation. <span class=\"qrefs\">[<a href=\"#q-Q366\">Q366</a>]</span>"],
+    rule:"Reliability versus speed is the transport choice; management planes need visibility." },
+{ id:'f05', g:'g2', name:"Addressing & Subnetting", topic:"IP Addressing & Subnetting", q:10, leaves:["Exhaustion → IPv6", "EUI-64 leaks", "Control SLAAC", "Snoop rogue DHCP", "PAT masks sources"],
     factors:[
-     "<b>Exhaustion plus native crypto?</b> &mdash; When a scenario requires solving address exhaustion AND gaining native network-layer encryption in one solution, choose IPv6 (128-bit addressing + mandatory IPsec).... <span class=\"qrefs\">[Q226 Q285 Q302]</span>"],
-    rule:"Compute the mask, network and host range before answering" },
-{ id:'f06', g:'g1', name:"Converged Communications", topic:"Converged Communications & Multimedia", q:3, leaves:["Routing question \u2014 which...","Reliability question \u2014...","MAC question \u2014 which...","Encryption formatting \u2014...","Zero trust \u2014 which layer?"],
+     "<b>Address exhaustion → IPv6</b> &mdash; global IoT fleets and migrations pick IPv6, ideally with mandatory IPsec. <span class=\"qrefs\">[<a href=\"#q-Q226\">Q226</a> <a href=\"#q-Q285\">Q285</a> <a href=\"#q-Q302\">Q302</a>]</span>",
+     "<b>Autoconfiguration cuts both ways</b> &mdash; EUI-64 IDs leak MAC addresses for tracking and SLAAC resists central control — prefer randomized identifiers and ULAs. <span class=\"qrefs\">[<a href=\"#q-Q211\">Q211</a> <a href=\"#q-Q137\">Q137</a> <a href=\"#q-Q150\">Q150</a>]</span>",
+     "<b>Geographic scale → per-region prefixes</b> &mdash; allocate a unique IPv6 prefix per region for aggregation and policy. <span class=\"qrefs\">[<a href=\"#q-Q20\">Q20</a>]</span>",
+     "<b>Rogue addressing → DHCP configuration control</b> &mdash; unauthorized devices getting addresses is a DHCP-snooping/configuration problem. <span class=\"qrefs\">[<a href=\"#q-Q342\">Q342</a>]</span>",
+     "<b>PAT obscures attribution</b> &mdash; translated sources complicate IDS investigation — know it as the visibility cost of NAT. <span class=\"qrefs\">[<a href=\"#q-Q32\">Q32</a>]</span>",
+     "<b>Dual-stack keeps IPv4 security tools relevant</b> &mdash; the transition risk is IPv4-era controls failing to see IPv6 traffic. <span class=\"qrefs\">[<a href=\"#q-Q149\">Q149</a>]</span>"],
+    rule:"Treat IPv6 addresses like credentials: control their assignment or they track you." },
+{ id:'f06', g:'g1', name:"Converged Communications", topic:"Converged Communications (VoIP, Multimedia)", q:3, leaves:["VoIP → SRTP", "Zero-trust remote", "Private ≠ routable"],
     factors:[
-     "<b>Routing question \u2014 which layer?</b> &mdash; Exam decision rule: any question about routing, IP addressing, or packet filtering maps to Layer 3 (Network). Routers and packet-filtering firewalls operate here because...",
-     "<b>Reliability question \u2014 which layer?</b> &mdash; Exam decision rule: questions about end-to-end error correction, reliability, or port numbers map to Layer 4 (Transport). TCP provides reliable delivery; UDP does not.",
-     "<b>MAC question \u2014 which layer?</b> &mdash; Exam decision rule: questions about MAC-based forwarding, switching, or ARP resolution map to Layer 2 (Data Link), where MAC addresses and ARP resolution live.",
-     "<b>Encryption formatting \u2014 which layer?</b> &mdash; Exam decision rule: questions about where encryption/formatting occurs map to Layer 6 (Presentation), which transforms data for the application including cryptographic... <span class=\"qrefs\">[Q38 Q89 Q130 Q410]</span>",
-     "<b>Zero trust \u2014 which layer?</b> &mdash; Source conflict preserved: Part A guidance says lean toward Layers 6-7 for zero-trust segmentation and least-privilege access control, because application-aware controls... <span class=\"qrefs\">[Q37 Q100]</span>",
-     "<b>Eliminate bus when?</b> &mdash; Eliminate bus topology when the scenario requires fault isolation or resistance to a single cable break \u2014 one break or one interceptor compromises the entire shared..."],
-    rule:"Voice and multimedia ride the same QoS and security controls" },
-{ id:'f07', g:'g3', name:"Perimeter Defense", topic:"Network Defense & Perimeter Security", q:25, leaves:["Off-hours alert: which..."],
+     "<b>Voice → SRTP encryption</b> &mdash; converging voice onto data networks protects calls with Secure RTP. <span class=\"qrefs\">[<a href=\"#q-Q24\">Q24</a>]</span>",
+     "<b>Remote-heavy orgs → zero trust + E2E + MFA</b> &mdash; the remote-workforce security bundle covers converged traffic end to end. <span class=\"qrefs\">[<a href=\"#q-Q151\">Q151</a>]</span>",
+     "<b>Private ranges never route outside</b> &mdash; outbound traffic claiming 172.16.0.0/12 sources indicates an internal host — private space is non-routable. <span class=\"qrefs\">[<a href=\"#q-Q352\">Q352</a>]</span>"],
+    rule:"Converged traffic inherits its payload&rsquo;s needs: encrypt, authenticate, segment." },
+{ id:'f07', g:'g3', name:"Perimeter Defense", topic:"Firewalls & Perimeter Defense", q:25, leaves:["Match inspection depth", "Screened subnet", "Diverse vendors", "State for UDP", "Graduated zones"],
     factors:[
-     "<b>Off-hours alert: which technique fired?</b> &mdash; A hospital IDS that alerts on legitimate off-hours emergency access after a one-month learning period is exhibiting statistical anomaly detection: it compares current... <span class=\"qrefs\">[Q287]</span>"],
-    rule:"Defense in depth: layered boundaries, DMZs and segmentation" },
-{ id:'f08', g:'g3', name:"IDS/IPS & Detection", topic:"IDS / IPS & Threat Detection", q:17, leaves:["Off-hours alert: which..."],
+     "<b>Firewall class follows inspection depth</b> &mdash; L3 header speed → packet filtering; session awareness → stateful; content, applications and attachments → NGFW/app proxy. Legacy ICS and budget cases still score simple filters. <span class=\"qrefs\">[<a href=\"#q-Q205\">Q205</a> <a href=\"#q-Q274\">Q274</a> <a href=\"#q-Q141\">Q141</a> <a href=\"#q-Q276\">Q276</a>]</span>",
+     "<b>Public services → screened subnet (DMZ)</b> &mdash; two firewalls beat a screened host; three-legged designs separate internet, DMZ and internal; bastion hosts complete the architecture answers. <span class=\"qrefs\">[<a href=\"#q-Q329\">Q329</a> <a href=\"#q-Q326\">Q326</a> <a href=\"#q-Q327\">Q327</a>]</span>",
+     "<b>Two vendors beat one</b> &mdash; a vulnerability in a single vendor&rsquo;s firewall shouldn&rsquo;t collapse both layers — diversity is the scored rationale. <span class=\"qrefs\">[<a href=\"#q-Q210\">Q210</a> <a href=\"#q-Q313\">Q313</a>]</span>",
+     "<b>UDP needs state to be filtered</b> &mdash; dynamic state tables let connectionless traffic through only when it belongs to an allowed flow. <span class=\"qrefs\">[<a href=\"#q-Q254\">Q254</a>]</span>",
+     "<b>ICMP: allow authorized pairs, filter the rest</b> &mdash; blocking wholesale breaks diagnostics; scope it between managed devices. <span class=\"qrefs\">[<a href=\"#q-Q330\">Q330</a>]</span>",
+     "<b>Requirements drive the architecture</b> &mdash; concentric zones with graduated access match diverse departmental needs. <span class=\"qrefs\">[<a href=\"#q-Q311\">Q311</a> <a href=\"#q-Q353\">Q353</a>]</span>"],
+    rule:"Depth of inspection and layered architecture beat any single box." },
+{ id:'f08', g:'g3', name:"IDS/IPS & Detection", topic:"IDS/IPS, Honeypots & Detection", q:17, leaves:["Novel → behavior", "Low-and-slow → NBA", "Contain honeypots", "UEBA for exfil", "Human oversight"],
     factors:[
-     "<b>Off-hours alert: which technique fired?</b> &mdash; A hospital IDS that alerts on legitimate off-hours emergency access after a one-month learning period is exhibiting statistical anomaly detection: it compares current... <span class=\"qrefs\">[Q287]</span>"],
-    rule:"Detection method plus placement decide the answer" },
-{ id:'f09', g:'g4', name:"Remote Access & VPN", topic:"Remote Access & VPN", q:16, leaves:["CHAP or PAP on clear link?","Risk-manager mindset?","Global remote auth best...","Credential-theft-resistant...","IPsec or TLS for which..."],
+     "<b>Unknown and APT → behavioral detection</b> &mdash; signatures only catch yesterday&rsquo;s malware; anomaly/ML and hybrid detection cover novel campaigns. <span class=\"qrefs\">[<a href=\"#q-Q117\">Q117</a> <a href=\"#q-Q250\">Q250</a> <a href=\"#q-Q94\">Q94</a>]</span>",
+     "<b>Slow anomalies → network behavior analysis</b> &mdash; low-and-slow DDoS and traffic oddities surface in baseline deviation, not signatures. <span class=\"qrefs\">[<a href=\"#q-Q126\">Q126</a> <a href=\"#q-Q88\">Q88</a>]</span>",
+     "<b>Honeypots pay in intel, not safety</b> &mdash; isolate them, sanitize what they collect, prefer low-interaction — they otherwise become launch pads. <span class=\"qrefs\">[<a href=\"#q-Q159\">Q159</a> <a href=\"#q-Q78\">Q78</a> <a href=\"#q-Q93\">Q93</a>]</span>",
+     "<b>Heterogeneous IoT breaks baselines</b> &mdash; establishing &ldquo;normal&rdquo; across mixed devices is the stated design challenge. <span class=\"qrefs\">[<a href=\"#q-Q95\">Q95</a>]</span>",
+     "<b>Exfiltration → UEBA correlation</b> &mdash; integrating IDS/IPS with user-and-entity analytics catches data leaving. <span class=\"qrefs\">[<a href=\"#q-Q365\">Q365</a>]</span>",
+     "<b>Dashboards miss severity and context</b> &mdash; metrics alone don&rsquo;t convey impact; experienced humans still triage. <span class=\"qrefs\">[<a href=\"#q-Q7\">Q7</a>]</span>"],
+    rule:"Signatures for the known, behavior for the novel, containment for everything you deploy." },
+{ id:'f09', g:'g4', name:"Remote Access & VPN", topic:"Remote Access, VPN & Tunneling", q:16, leaves:["ZTNA + MFA", "Split-tunnel risk", "Branches → site-to-site", "Location-aware rules", "GRE for transport"],
     factors:[
-     "<b>CHAP or PAP on clear link?</b> &mdash; On an unencrypted link, choose CHAP (never PAP): the challenge-response design defeats replay and credential interception, while PAP sends passwords in the clear.",
-     "<b>Risk-manager mindset?</b> &mdash; CISSP mindset: no single protocol eliminates risk; select the protocol that balances security properties, operational cost, and single points of failure against the...",
-     "<b>Global remote auth best practice?</b> &mdash; Q51: for a global corporation with traveling employees accessing sensitive data, the best remote authentication is MFA (Multi-Factor Authentication) with device... <span class=\"qrefs\">[Q51]</span>",
-     "<b>Credential-theft-resistant MFA?</b> &mdash; Q65: for a financial institution remote access solution prioritizing credential-theft resistance with user convenience, choose push notifications with device... <span class=\"qrefs\">[Q65]</span>",
-     "<b>IPsec or TLS for which layer?</b> &mdash; Choose IPsec for network-layer VPNs (Virtual Private Networks) protecting all traffic between sites; choose TLS for application/session-layer security such as HTTPS....",
-     "<b>Tailored or uniform encryption?</b> &mdash; Q6: for a global hybrid network (LAN, mobile, satellite) with heterogeneous transmission vulnerabilities, achieve comprehensive end-to-end encryption via multi-layered... <span class=\"qrefs\">[Q6]</span>"],
-    rule:"Tunnel, encrypt, authenticate - in that order of questions" },
-{ id:'f10', g:'g4', name:"AAA Protocols", topic:"Authentication & Access Protocols (AAA)", q:14, leaves:["CHAP or PAP on clear link?","Risk-manager mindset?","Global remote auth best...","Credential-theft-resistant...","IPsec or TLS for which..."],
+     "<b>Modern remote access → ZTNA with MFA and posture</b> &mdash; verify device health and identity per session rather than granting network-flat VPN. <span class=\"qrefs\">[<a href=\"#q-Q31\">Q31</a> <a href=\"#q-Q109\">Q109</a>]</span>",
+     "<b>Split tunneling = bypassed controls</b> &mdash; compromised endpoints bridge internet and corporate networks; sensitive access scenarios score disabling it. <span class=\"qrefs\">[<a href=\"#q-Q348\">Q348</a> <a href=\"#q-Q325\">Q325</a> <a href=\"#q-Q319\">Q319</a>]</span>",
+     "<b>Branch offices → site-to-site VPNs</b> &mdash; they shrink the attack surface and hide internal topology compared to per-user tunnels. <span class=\"qrefs\">[<a href=\"#q-Q131\">Q131</a>]</span>",
+     "<b>Regulated geographies → location-aware access</b> &mdash; granular controls keyed to user jurisdiction satisfy EU/non-EU splits. <span class=\"qrefs\">[<a href=\"#q-Q142\">Q142</a>]</span>",
+     "<b>Mixed fleets → encapsulation</b> &mdash; GRE or IP-transport tunnels carry IPv6 or mixed protocols across infrastructure that doesn&rsquo;t speak them natively. <span class=\"qrefs\">[<a href=\"#q-Q310\">Q310</a> <a href=\"#q-Q338\">Q338</a>]</span>",
+     "<b>BYOD consistency is the VPN hard part</b> &mdash; heterogeneous personal devices need enforced, consistent profiles. <span class=\"qrefs\">[<a href=\"#q-Q113\">Q113</a>]</span>"],
+    rule:"Assume the endpoint is hostile: verify it, contain it, and route it through your controls." },
+{ id:'f10', g:'g4', name:"AAA Protocols", topic:"Authentication, Authorization & Accounting Protocols", q:14, leaves:["EAP-TLS vs PEAP", "Hardware for high risk", "Adaptive factors", "Validate tokens", "KDC is a SPOF"],
     factors:[
-     "<b>CHAP or PAP on clear link?</b> &mdash; On an unencrypted link, choose CHAP (never PAP): the challenge-response design defeats replay and credential interception, while PAP sends passwords in the clear.",
-     "<b>Risk-manager mindset?</b> &mdash; CISSP mindset: no single protocol eliminates risk; select the protocol that balances security properties, operational cost, and single points of failure against the...",
-     "<b>Global remote auth best practice?</b> &mdash; Q51: for a global corporation with traveling employees accessing sensitive data, the best remote authentication is MFA (Multi-Factor Authentication) with device... <span class=\"qrefs\">[Q51]</span>",
-     "<b>Credential-theft-resistant MFA?</b> &mdash; Q65: for a financial institution remote access solution prioritizing credential-theft resistance with user convenience, choose push notifications with device... <span class=\"qrefs\">[Q65]</span>",
-     "<b>IPsec or TLS for which layer?</b> &mdash; Choose IPsec for network-layer VPNs (Virtual Private Networks) protecting all traffic between sites; choose TLS for application/session-layer security such as HTTPS....",
-     "<b>Tailored or uniform encryption?</b> &mdash; Q6: for a global hybrid network (LAN, mobile, satellite) with heterogeneous transmission vulnerabilities, achieve comprehensive end-to-end encryption via multi-layered... <span class=\"qrefs\">[Q6]</span>"],
-    rule:"Centralized AAA - protocol follows the use case" },
-{ id:'f11', g:'g1', name:"Network Cryptography", topic:"Cryptography in Network Security (IPsec/TLS)", q:15, leaves:["CHAP or PAP on clear link?","Risk-manager mindset?","Global remote auth best...","Credential-theft-resistant...","IPsec or TLS for which..."],
+     "<b>Wireless EAP by credential type</b> &mdash; certificate-strong mutual auth → EAP-TLS; protect inner credentials in a tunnel → PEAP. <span class=\"qrefs\">[<a href=\"#q-Q273\">Q273</a> <a href=\"#q-Q260\">Q260</a>]</span>",
+     "<b>High-assurance → hardware plus biometrics</b> &mdash; tokens, security keys and fingerprints combine for classified and financial access; add risk-based analysis where users vary. <span class=\"qrefs\">[<a href=\"#q-Q73\">Q73</a> <a href=\"#q-Q65\">Q65</a> <a href=\"#q-Q178\">Q178</a>]</span>",
+     "<b>Adaptive auth tunes friction</b> &mdash; adjusting factor requirements to behavior and context keeps security usable across populations. <span class=\"qrefs\">[<a href=\"#q-Q132\">Q132</a>]</span>",
+     "<b>OAuth/OIDC → validate signatures and claims</b> &mdash; tokens are only as good as the verification performed on receipt. <span class=\"qrefs\">[<a href=\"#q-Q256\">Q256</a>]</span>",
+     "<b>Kerberos concentrates risk in the KDC</b> &mdash; the Key Distribution Center is the single point of failure to protect and replicate. <span class=\"qrefs\">[<a href=\"#q-Q82\">Q82</a> <a href=\"#q-Q290\">Q290</a>]</span>",
+     "<b>Global rollouts meet privacy law</b> &mdash; biometric and behavioral factors across jurisdictions must satisfy varying data-protection rules. <span class=\"qrefs\">[<a href=\"#q-Q388\">Q388</a> <a href=\"#q-Q390\">Q390</a>]</span>"],
+    rule:"Strongest factor mix the scenario supports; always verify what tokens assert." },
+{ id:'f11', g:'g4', name:"Network Cryptography", topic:"Network Cryptography (IPSec, TLS)", q:15, leaves:["Tunnel + ESP", "TLS 1.3 + PFS", "Anti-replay", "SAs are directional", "Lightweight IPSec"],
     factors:[
-     "<b>CHAP or PAP on clear link?</b> &mdash; On an unencrypted link, choose CHAP (never PAP): the challenge-response design defeats replay and credential interception, while PAP sends passwords in the clear.",
-     "<b>Risk-manager mindset?</b> &mdash; CISSP mindset: no single protocol eliminates risk; select the protocol that balances security properties, operational cost, and single points of failure against the...",
-     "<b>Global remote auth best practice?</b> &mdash; Q51: for a global corporation with traveling employees accessing sensitive data, the best remote authentication is MFA (Multi-Factor Authentication) with device... <span class=\"qrefs\">[Q51]</span>",
-     "<b>Credential-theft-resistant MFA?</b> &mdash; Q65: for a financial institution remote access solution prioritizing credential-theft resistance with user convenience, choose push notifications with device... <span class=\"qrefs\">[Q65]</span>",
-     "<b>IPsec or TLS for which layer?</b> &mdash; Choose IPsec for network-layer VPNs (Virtual Private Networks) protecting all traffic between sites; choose TLS for application/session-layer security such as HTTPS....",
-     "<b>Tailored or uniform encryption?</b> &mdash; Q6: for a global hybrid network (LAN, mobile, satellite) with heterogeneous transmission vulnerabilities, achieve comprehensive end-to-end encryption via multi-layered... <span class=\"qrefs\">[Q6]</span>"],
-    rule:"IPsec modes and TLS versions - what each protects" }
+     "<b>Site-to-site confidentiality → IPSec tunnel mode with ESP</b> &mdash; encapsulating the whole packet hides endpoints and payload between gateways. <span class=\"qrefs\">[<a href=\"#q-Q156\">Q156</a> <a href=\"#q-Q240\">Q240</a>]</span>",
+     "<b>Modern transport → TLS 1.3 with forward secrecy</b> &mdash; ephemeral keys keep later compromise from decrypting today&rsquo;s traffic. <span class=\"qrefs\">[<a href=\"#q-Q140\">Q140</a> <a href=\"#q-Q167\">Q167</a>]</span>",
+     "<b>Replay attacks → sequence-number verification</b> &mdash; captured-then-replayed traffic dies on anti-replay windows. <span class=\"qrefs\">[<a href=\"#q-Q221\">Q221</a>]</span>",
+     "<b>Security associations are one-directional</b> &mdash; bidirectional VPNs need separate SAs per direction — a favorite audit finding. <span class=\"qrefs\">[<a href=\"#q-Q291\">Q291</a>]</span>",
+     "<b>Constrained and dynamic nets → tailored/lightweight IPSec</b> &mdash; compress ESP for IoT, adapt configs to SD-WAN, distribute key management hierarchically. <span class=\"qrefs\">[<a href=\"#q-Q44\">Q44</a> <a href=\"#q-Q123\">Q123</a> <a href=\"#q-Q398\">Q398</a>]</span>",
+     "<b>Quantum exposure → phased PQC transition</b> &mdash; plan the migration before the deadline, hybrid where possible. <span class=\"qrefs\">[<a href=\"#q-Q12\">Q12</a>]</span>"],
+    rule:"Tunnel mode hides endpoints, transport protects payloads; anti-replay keeps both honest." }
 ];
 
 var RADAR=[
-{t:'Wrong layer', d:'Controls and attacks assigned to the wrong OSI layer - map first, answer second.', ex:'see factor ladders'},
-{t:'Port confusion', d:'Protocol-port pairs mixed up - recall questions with no reasoning shortcut.', ex:'see factor ladders'},
-{t:'Detect vs prevent', d:'IDS answers offered where the stem needs inline prevention, and vice versa.', ex:'see factor ladders'},
-{t:'One boundary', d:'Single-firewall answers where defense in depth is asked.', ex:'see factor ladders'},
-{t:'Crypto placement', d:'IPsec transport vs tunnel mode and TLS versions mismatched to the ask.', ex:'see factor ladders'},
-{t:'Wireless legacy', d:'WEP/WPA answers where modern standards are required.', ex:'see factor ladders'},
-{t:'Cloud absolutes', d:'Provider-trust answers where shared responsibility applies.', ex:'see factor ladders'},
-{t:'Attack mislabel', d:'Spoofing, hijacking and MITM conflated - identify the exploited property.', ex:'see factor ladders'},
-{t:'Skip the baseline', d:'Detection deployed without knowing normal - reject monitoring without baselining.', ex:'see factor ladders'}
+{t:"Single-box utopia", d:"&ldquo;One comprehensive firewall/platform solves it&rdquo; where layered zones and multiple control types are scored.", ex:"<a href=\"#q-Q311\">Q311</a>, <a href=\"#q-Q326\">Q326</a>"},
+{t:"Legacy comfort", d:"X.25-era or modem-era answers where MPLS, IPv6 or IPSec modernization fits the scenario.", ex:"<a href=\"#q-Q270\">Q270</a>, <a href=\"#q-Q302\">Q302</a>"},
+{t:"Inspection mismatch", d:"Packet filters chosen for content-level jobs (attachments, application awareness) they cannot do.", ex:"<a href=\"#q-Q205\">Q205</a>, <a href=\"#q-Q274\">Q274</a>"},
+{t:"Split-tunnel blind spot", d:"Convenience options that ignore the bypass-and-bridge risk of concurrent internet and VPN access.", ex:"<a href=\"#q-Q316\">Q316</a>, <a href=\"#q-Q319\">Q319</a>, <a href=\"#q-Q325\">Q325</a>"},
+{t:"Signature-only detection", d:"Known-pattern answers where novel/APT scenarios demand behavioral or anomaly detection.", ex:"<a href=\"#q-Q117\">Q117</a>, <a href=\"#q-Q250\">Q250</a>"},
+{t:"IPv6 assumption", d:"&ldquo;IPv6 is secure because IPsec&rdquo; while ignoring SLAAC and EUI-64 tracking risks.", ex:"<a href=\"#q-Q211\">Q211</a>, <a href=\"#q-Q137\">Q137</a>"},
+{t:"Honeypot overreach", d:"High-interaction honeypots deployed without isolation, creating a lateral-movement launch pad.", ex:"<a href=\"#q-Q93\">Q93</a>, <a href=\"#q-Q78\">Q78</a>"},
+{t:"VPN equals security", d:"Tunnel presence accepted as sufficient where ZTNA, MFA and device posture are asked.", ex:"<a href=\"#q-Q31\">Q31</a>, <a href=\"#q-Q109\">Q109</a>"},
+{t:"Cleartext control plane", d:"BGP, DNS or voice left unauthenticated and invisible — management traffic treated as trusted.", ex:"<a href=\"#q-Q83\">Q83</a>, <a href=\"#q-Q85\">Q85</a>, <a href=\"#q-Q24\">Q24</a>"}
 ];
 
 var QS = [
@@ -468,7 +480,7 @@ var QS = [
   el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
   var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
-  c0.textContent = 'DOMAIN 7 · PART';
+  c0.textContent = "DOMAIN 4 · PART";
   var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
   c1.textContent = 'DECISION';

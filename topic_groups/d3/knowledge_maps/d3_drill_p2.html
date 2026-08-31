@@ -65,6 +65,11 @@
   .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
   .ladder .rule b{color:var(--mc);font-style:normal}
 
+  .ladder ol li .qrefs{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .ladder ol li .qrefs a{color:var(--mc);text-decoration:none;border-bottom:1px dotted var(--mc);margin:0 1px}
+  .ladder ol li .qrefs a:hover{border-bottom-style:solid}
+  .rad .ex a{color:#b91c1c;text-decoration:none;font-weight:800}
+  .rad .ex a:hover{text-decoration:underline}
   .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
   .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
   .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
@@ -124,9 +129,9 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 2 of 5</div>
+    <div class="eyebrow">CISSP &middot; Domain 3 &middot; Exam preparation &middot; logic-based scenarios &middot; part 2 of 5</div>
     <h1>D3 Question Drill 2 &mdash; Models, Evaluation & Physical (topics 9-12)</h1>
-    <p class="sub"><b>92 scenario questions</b> (topics 1&ndash;12) &middot; <b>12 decision families</b> &middot; <b>5 knowledge groups</b> &mdash; forensics and evidence, monitoring and intel, malware defense, change and patch, resources and environment. Continues in <a href="d7_drill_p2.html">part 2: continuity and recovery (80 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+    <p class="sub"><b>130 scenario questions</b> (topics 9&ndash;12 of 19) &middot; <b>4 decision families</b> &mdash; security models, TCB &amp; reference monitor, evaluation criteria &amp; frameworks, physical access &amp; biometrics. Continues in <a href="d3_drill_p3.html">part 3: site design &amp; environmental</a>. Companion: the <a href="d3_cheatsheet_p2.html">knowledge cheatsheet</a> &middot; <a href="d3_index.html">D3 hub</a>.</p>
   </div>
 </header>
 
@@ -140,7 +145,7 @@
 
   <section id="fmap">
     <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
-    <p class="lede">The 12 part-1 families (of D7&rsquo;s 18 total), colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <p class="lede">The 4 families on this page, colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
     <div class="map-panel">
       <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D3 drill part 2"></svg>
       <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
@@ -184,34 +189,49 @@
 <script>
 var GROUPS={g1:{name:"Security Models & TCB",color:"#b91c1c",fill:"#dc2626"},g2:{name:"Evaluation & Frameworks",color:"#b45309",fill:"#d97706"},g3:{name:"Physical Access & Biometrics",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"Site & Facility Design",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Environmental Controls",color:"#047857",fill:"#059669"}};
 var FAMILIES = [
-{ id:'f09', g:'g1', name:'Security models', topic:'Security Models', q:7, leaves:['Two competing banks?'],
-    factors:['<b>Two competing banks?</b> &mdash; When a consultant could access data belonging to two competing banks, the correct answer is Brewer-Nash with conflict-of-interest controls, preventing the same team from... <span class="qrefs">[Q1013]</span>'],
-    rule:'BLP for confidentiality, Biba for integrity - match the model to the goal' },
-{ id:'f10', g:'g1', name:'TCB & reference monitor', topic:'TCB, Reference Monitor & Security Kernel', q:15, leaves:['Two competing banks?'],
-    factors:['<b>Two competing banks?</b> &mdash; When a consultant could access data belonging to two competing banks, the correct answer is Brewer-Nash with conflict-of-interest controls, preventing the same team from... <span class="qrefs">[Q1013]</span>'],
-    rule:'Complete mediation, tamper-proof, verifiable - and small' },
-{ id:'f11', g:'g2', name:'Evaluation & frameworks', topic:'System Evaluation & Governance Frameworks', q:28, leaves:['CIA or confidentiality...','Residual risk acceptance...'],
-    factors:['<b>CIA or confidentiality only?</b> &mdash; Decision rule: choose ITSEC/Common Criteria when the standard must cover full CIA (confidentiality, integrity, availability); choose TCSEC for confidentiality-only —...',
-     '<b>Residual risk acceptance is called?</b> &mdash; Formally accepting residual risk after technical evaluation = accreditation — always a management/authorizing-official decision. Mindset: evaluation frameworks exist for...'],
-    rule:'Criteria grade assurance of evaluation, not product safety' },
-{ id:'f12', g:'g3', name:'Physical access & biometrics', topic:'Physical Access Controls & Biometrics', q:80, leaves:['Accuracy or throughput?','Detects but not prevents?','Varying distances or...','Guard plus badge plus...'],
-    factors:['<b>Accuracy or throughput?</b> &mdash; Select iris over fingerprint when maximum accuracy and anti-spoofing matter; select fingerprint when balancing cost and throughput.',
-     '<b>Detects but not prevents?</b> &mdash; Use mantraps or turnstiles when preventing tailgating is the stated objective. CCTV alone detects tailgating but does not prevent it.',
-     '<b>Varying distances or chokepoint?</b> &mdash; Choose varifocal lenses when monitoring targets at varying or unknown distances; fixed lenses suit fixed chokepoints.',
-     '<b>Guard plus badge plus mantrap?</b> &mdash; Layer controls — guard plus badge plus mantrap plus CCTV — because no single physical control is sufficient. This is defense in depth applied to physical security.'],
-    rule:'Deter-deny-detect-delay; tune biometrics at the crossover' }
+{ id:'f09', g:'g1', name:"Security models", topic:"Security Models (Bell-LaPadula, Biba, Clark-Wilson, Brewer-Nash)", q:7, leaves:["Integrity → Clark-Wilson", "Classified → Bell-LaPadula", "Consultants → Brewer-Nash", "Model by goal"],
+    factors:[
+     "<b>Well-formed transactions and separation of duties → Clark-Wilson</b> &mdash; financial institutions and drug-trial systems preventing unauthorized (and well-meaning bad) changes by authorized subjects. <span class=\"qrefs\">[<a href=\"#q-Q274\">Q274</a> <a href=\"#q-Q692\">Q692</a> <a href=\"#q-Q601\">Q601</a>]</span>",
+     "<b>Conflict-of-interest access → Brewer-Nash (Chinese Wall)</b> &mdash; consultants advising merging firms dynamically re-classify access as relationships change. <span class=\"qrefs\">[<a href=\"#q-Q1013\">Q1013</a>]</span>",
+     "<b>Biba&rsquo;s Simple Integrity rule reads up, writes down</b> &mdash; subjects consume only equal-or-higher integrity data — strict accuracy environments invoke it; the classic weakness of layering is a compromised subject bypassing layers. <span class=\"qrefs\">[<a href=\"#q-Q262\">Q262</a> <a href=\"#q-Q127\">Q127</a>]</span>",
+     "<b>Modernizations track the data lifecycle</b> &mdash; classified-system reviews follow collection, use, storage, archive; real-time queues move to asynchronous encryption. <span class=\"qrefs\">[<a href=\"#q-Q753\">Q753</a> <a href=\"#q-Q930\">Q930</a>]</span>"],
+    rule:"Pick the model by the goal: confidentiality (BLP), integrity (Biba/Clark-Wilson), conflicts (Brewer-Nash)." },
+{ id:'f10', g:'g1', name:"TCB & reference monitor", topic:"Trusted Computing Base, Security Kernel & Reference Monitor", q:15, leaves:["Kernel enforces, must be verifiable", "Keep the TCB small", "Isolation is the cloud test", "Hybrid methods prove correctness"],
+    factors:[
+     "<b>The security kernel implements the reference monitor</b> &mdash; and must be tamper-proof, always invoked, and small enough to verify — verifiability is the property modern complexity strains. <span class=\"qrefs\">[<a href=\"#q-Q12\">Q12</a> <a href=\"#q-Q41\">Q41</a>]</span>",
+     "<b>Keep the TCB conceptually simple and modular</b> &mdash; dynamic IaaS and adaptable redesigns stay small; AI features attach as external modules with well-defined interfaces; TPMs add integrity verification. <span class=\"qrefs\">[<a href=\"#q-Q7\">Q7</a> <a href=\"#q-Q42\">Q42</a> <a href=\"#q-Q40\">Q40</a> <a href=\"#q-Q2\">Q2</a> <a href=\"#q-Q4\">Q4</a>]</span>",
+     "<b>Verify kernel correctness with hybrid methods</b> &mdash; formal methods plus dynamic analysis; heterogeneous fleets make that verification the challenge. <span class=\"qrefs\">[<a href=\"#q-Q95\">Q95</a> <a href=\"#q-Q161\">Q161</a>]</span>",
+     "<b>Cloud and IoT stress the TCB</b> &mdash; multi-tenancy demands strict isolation; IoT resource limits constrain what a TCB can implement; blockchain struggles with centralized policy; microservices need consistent cross-service enforcement. <span class=\"qrefs\">[<a href=\"#q-Q68\">Q68</a> <a href=\"#q-Q227\">Q227</a> <a href=\"#q-Q406\">Q406</a> <a href=\"#q-Q447\">Q447</a>]</span>"],
+    rule:"Small, verifiable, always invoked — every TCB answer defends one of the three properties." },
+{ id:'f11', g:'g2', name:"Evaluation & frameworks", topic:"Evaluation Criteria (TCSEC/ITSEC/CC), Certification & Accreditation", q:28, leaves:["Certify technical, accredit managerial", "CC = flexible assurance", "ITSEC splits function/assurance", "Tailor frameworks"],
+    factors:[
+     "<b>Certification is technical evaluation; accreditation is management&rsquo;s risk acceptance</b> &mdash; a certified-but-unaccredited system cannot enter production; deficiencies found in certification go to management to accept, mitigate or reject. <span class=\"qrefs\">[<a href=\"#q-Q263\">Q263</a> <a href=\"#q-Q264\">Q264</a> <a href=\"#q-Q265\">Q265</a> <a href=\"#q-Q266\">Q266</a> <a href=\"#q-Q268\">Q268</a>]</span>",
+     "<b>Common Criteria = flexible, internationally comparable assurance</b> &mdash; buyers compare products, insurers gauge assurance; Protection Profiles carry the security functional requirements — including new ones for APTs and ransomware. <span class=\"qrefs\">[<a href=\"#q-Q489\">Q489</a> <a href=\"#q-Q405\">Q405</a> <a href=\"#q-Q173\">Q173</a> <a href=\"#q-Q894\">Q894</a> <a href=\"#q-Q1134\">Q1134</a>]</span>",
+     "<b>ITSEC separates function from assurance; TCSEC is DoD-rigid</b> &mdash; the split enables flexible, diverse-system evaluation and disaster-recovery scoping, at the cost of consistency; TCSEC assumed centralized control; CC&rsquo;s challenge is standardization vs uniqueness; PQC evaluation criteria are the open frontier. <span class=\"qrefs\">[<a href=\"#q-Q1066\">Q1066</a> <a href=\"#q-Q290\">Q290</a> <a href=\"#q-Q275\">Q275</a> <a href=\"#q-Q181\">Q181</a> <a href=\"#q-Q907\">Q907</a> <a href=\"#q-Q935\">Q935</a> <a href=\"#q-Q273\">Q273</a> <a href=\"#q-Q981\">Q981</a>]</span>",
+     "<b>Frameworks get tailored and paired, never adopted raw</b> &mdash; hybrid central-baseline-plus-local models; risk-based tailoring for fast movers; framework fatigue cured by integration; financial reporting pairs COSO with SOX; multi-tenant clouds must verify tenant separation; AI adds transparency and bias criteria. <span class=\"qrefs\">[<a href=\"#q-Q54\">Q54</a> <a href=\"#q-Q838\">Q838</a> <a href=\"#q-Q47\">Q47</a> <a href=\"#q-Q908\">Q908</a> <a href=\"#q-Q927\">Q927</a> <a href=\"#q-Q259\">Q259</a> <a href=\"#q-Q91\">Q91</a> <a href=\"#q-Q167\">Q167</a>]</span>"],
+    rule:"Technical evaluation feeds managerial authorization; criteria choice trades consistency for flexibility." },
+{ id:'f12', g:'g3', name:"Physical access & biometrics", topic:"Physical Access Controls, Biometrics & Anti-Skimming", q:80, leaves:["Locks = delay + complement", "Mantraps stop tailgating", "Skimming → anti-tamper", "2nd factor for readers", "Safety before security doors"],
+    factors:[
+     "<b>Locks are delay devices — always pair them</b> &mdash; alarms for detection and guards for response; bypassed in minutes alone; layered lock mixes (biometric server room, electronic ciphers elsewhere) score the layering. <span class=\"qrefs\">[<a href=\"#q-Q122\">Q122</a> <a href=\"#q-Q602\">Q602</a> <a href=\"#q-Q674\">Q674</a> <a href=\"#q-Q1126\">Q1126</a> <a href=\"#q-Q302\">Q302</a>]</span>",
+     "<b>Tailgating and single-entry rules → mantraps</b> &mdash; one door closes before the next opens; turnstiles for high-throughput verification; add biometric MFA for high-security facilities. <span class=\"qrefs\">[<a href=\"#q-Q761\">Q761</a> <a href=\"#q-Q794\">Q794</a> <a href=\"#q-Q985\">Q985</a> <a href=\"#q-Q778\">Q778</a>]</span>",
+     "<b>Card fraud at terminals → skimming, answered by anti-tampering</b> &mdash; skimming captures data during valid transactions — anti-tamper technology on ATMs, fuel pumps and merchant readers is the scored fix. <span class=\"qrefs\">[<a href=\"#q-Q836\">Q836</a> <a href=\"#q-Q873\">Q873</a> <a href=\"#q-Q878\">Q878</a> <a href=\"#q-Q928\">Q928</a> <a href=\"#q-Q972\">Q972</a> <a href=\"#q-Q1089\">Q1089</a>]</span>",
+     "<b>Single-factor readers get a second factor</b> &mdash; magnetic-stripe and proximity bypasses are closed by biometric verification; smart locks add mobile-app auth; and their management channels need end-to-end encryption with granular access levels and audit trails. <span class=\"qrefs\">[<a href=\"#q-Q663\">Q663</a> <a href=\"#q-Q1112\">Q1112</a> <a href=\"#q-Q666\">Q666</a> <a href=\"#q-Q749\">Q749</a> <a href=\"#q-Q77\">Q77</a> <a href=\"#q-Q171\">Q171</a>]</span>",
+     "<b>Life safety outranks entry security</b> &mdash; SCIF renovations and fire codes require outward-opening doors with panic bars; frames anchor to wall studs; door evaluation covers material, hinge side, swing and frame together. <span class=\"qrefs\">[<a href=\"#q-Q914\">Q914</a> <a href=\"#q-Q974\">Q974</a> <a href=\"#q-Q806\">Q806</a> <a href=\"#q-Q432\">Q432</a>]</span>",
+     "<b>CCTV = integration + privacy discipline</b> &mdash; tie to access control and intrusion detection, least-privilege viewing, retention limits, privacy-by-design for public systems; lenses and zoom match the area; lighting fixes night footage; CPTED wants uniform moderate illumination. <span class=\"qrefs\">[<a href=\"#q-Q750\">Q750</a> <a href=\"#q-Q213\">Q213</a> <a href=\"#q-Q764\">Q764</a> <a href=\"#q-Q416\">Q416</a> <a href=\"#q-Q425\">Q425</a> <a href=\"#q-Q732\">Q732</a> <a href=\"#q-Q823\">Q823</a> <a href=\"#q-Q94\">Q94</a>]</span>",
+     "<b>Biometrics: templates and presentation attacks</b> &mdash; secure storage of template data is the deciding factor; artificial fingers defeat naive readers; biometric rollouts weigh theft/replay risk under privacy frameworks. <span class=\"qrefs\">[<a href=\"#q-Q1042\">Q1042</a> <a href=\"#q-Q100\">Q100</a> <a href=\"#q-Q38\">Q38</a> <a href=\"#q-Q112\">Q112</a>]</span>"],
+    rule:"Delay, detect, respond — and when safety codes and security collide, egress wins." }
 ];
 
 var RADAR=[
-{t:'Wrong artifact attacked', d:'Attacking the key, the ciphertext, the implementation or the math - questions ask which.', ex:'see factor ladders'},
-{t:'Guarantee mismatch', d:'Confidentiality controls offered for integrity or authentication asks - match the property.', ex:'see factor ladders'},
-{t:'Layer skipped', d:'Solutions that start at technology while the question names an earlier planning step.', ex:'see factor ladders'},
-{t:'Single point of trust', d:'One control, vendor or path presented as total protection.', ex:'see factor ladders'},
-{t:'Speed over correctness', d:'Performance options chosen where the scored factor is correctness of the control.', ex:'see factor ladders'},
-{t:'Absolute promises', d:'Guarantees of prevention or unbreakability - reject absolutes.', ex:'see factor ladders'},
-{t:'Detection sold as prevention', d:'Monitoring or audit answers where prevention is asked.', ex:'see factor ladders'},
-{t:'Vendor first', d:'Outsourcing proposed where governance or design ownership is the scored step.', ex:'see factor ladders'},
-{t:'Once-and-done', d:'Point-in-time fixes where lifecycle or continuous operation is required.', ex:'see factor ladders'}
+{t:"Lock worship", d:"High-grade deadbolts treated as complete protection rather than delay components.", ex:"<a href=\"#q-Q302\">Q302</a>, <a href=\"#q-Q798\">Q798</a>, <a href=\"#q-Q674\">Q674</a>"},
+{t:"Certification confusion", d:"Technical evaluation mistaken for authorization; certified systems run before accreditation.", ex:"<a href=\"#q-Q264\">Q264</a>, <a href=\"#q-Q268\">Q268</a>, <a href=\"#q-Q265\">Q265</a>"},
+{t:"Criteria rigidity", d:"TCSEC-style fixed ratings applied where flexible function/assurance separation fits.", ex:"<a href=\"#q-Q1066\">Q1066</a>, <a href=\"#q-Q167\">Q167</a>, <a href=\"#q-Q489\">Q489</a>"},
+{t:"Framework fatigue ignored", d:"Another framework stacked on the pile instead of integrating and tailoring.", ex:"<a href=\"#q-Q908\">Q908</a>, <a href=\"#q-Q838\">Q838</a>"},
+{t:"Tailgating blind spot", d:"Badge-only entry praised with no mantrap or single-person verification.", ex:"<a href=\"#q-Q761\">Q761</a>, <a href=\"#q-Q985\">Q985</a>"},
+{t:"Terminal tampering missed", d:"Skimming diagnosed as network fraud while the reader itself is compromised.", ex:"<a href=\"#q-Q873\">Q873</a>, <a href=\"#q-Q878\">Q878</a>, <a href=\"#q-Q928\">Q928</a>"},
+{t:"Single-factor readers", d:"Proximity or magstripe accepted alone where a second factor is the fix.", ex:"<a href=\"#q-Q663\">Q663</a>, <a href=\"#q-Q1112\">Q1112</a>"},
+{t:"Egress blocked", d:"Inward-locked fortress doors violating fire code and life safety.", ex:"<a href=\"#q-Q914\">Q914</a>, <a href=\"#q-Q974\">Q974</a>, <a href=\"#q-Q1101\">Q1101</a>"},
+{t:"Camera theater", d:"CCTV installed for coverage stats without integration, lighting or privacy handling.", ex:"<a href=\"#q-Q732\">Q732</a>, <a href=\"#q-Q764\">Q764</a>, <a href=\"#q-Q425\">Q425</a>"}
 ];
 
 var QS = [
@@ -418,7 +438,7 @@ var QS = [
   el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
   var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
-  c0.textContent = 'DOMAIN 7 · PART';
+  c0.textContent = "DOMAIN 3 · PART";
   var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
   c1.textContent = 'DECISION';

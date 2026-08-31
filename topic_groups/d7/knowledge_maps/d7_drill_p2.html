@@ -65,6 +65,11 @@
   .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
   .ladder .rule b{color:var(--mc);font-style:normal}
 
+  .ladder ol li .qrefs{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .ladder ol li .qrefs a{color:var(--mc);text-decoration:none;border-bottom:1px dotted var(--mc);margin:0 1px}
+  .ladder ol li .qrefs a:hover{border-bottom-style:solid}
+  .rad .ex a{color:#b91c1c;text-decoration:none;font-weight:800}
+  .rad .ex a:hover{text-decoration:underline}
   .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
   .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
   .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
@@ -126,7 +131,7 @@
   <div class="wrap">
     <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 2 of 2</div>
     <h1>D7 Question Drill 2 &mdash; Continuity &amp; Recovery (topics 13&ndash;18)</h1>
-    <p class="sub"><b>81 scenario questions</b> (topics 13&ndash;18) &middot; <b>6 decision families</b> &middot; <b>2 knowledge groups</b> &mdash; business continuity and BIA, disaster recovery and resilience. Continues from <a href="d7_drill_p1.html">part 1: investigations and monitoring (91 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+    <p class="sub"><b>81 scenario questions</b> (topics 13&ndash;18 of 18) &middot; <b>6 decision families</b> &mdash; business continuity, recovery metrics, disaster recovery, DR site strategy and restoration order, RAID &amp; storage, and operational supply chain. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a> &middot; back to <a href="d7_drill_p1.html">part 1</a>.</p>
   </div>
 </header>
 
@@ -183,37 +188,60 @@
 
 <script>
 var GROUPS={g1:{name:"Forensics & Evidence",color:"#b91c1c",fill:"#dc2626"},g2:{name:"Monitoring & Threat Intel",color:"#b45309",fill:"#d97706"},g3:{name:"Malware Defense",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"Change, Configuration & Patching",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Resources & Operational Environment",color:"#047857",fill:"#059669"},g6:{name:"Business Continuity & BIA",color:"#be185d",fill:"#db2777"},g7:{name:"Disaster Recovery & Resilience",color:"#0e7490",fill:"#0891b2"}};
-var FAMILIES=[
-{id:"f13",g:"g6",name:"13. Business Continuity",topic:"13. Business Continuity Management (BCM)  (23 questions: Q7\u2013Q244 and others)",q:23,leaves:["Impact drives priority","What drives criticality?","BIA\u2019s critical time limit?","Keep BIA current","Degrade, don\u2019t stop"],
-    factors:["<b>Impact drives priority</b> &mdash; Business impact and data sensitivity, not technical novelty, determine asset criticality, control strength, recovery priority, and resource allocation. <span class=\"qrefs\">[Q7]</span>","<b>What drives criticality?</b> &mdash; Rank tangible and intangible assets by business-operational impact and data sensitivity when resources are constrained. <span class=\"qrefs\">[Q7]</span>","<b>BIA\u2019s critical time limit?</b> &mdash; The bank treats determining MTD for mission-critical processes as the most critical BIA outcome for resilience. <span class=\"qrefs\">[Q22]</span>","<b>Keep BIA current</b> &mdash; Use regular iterative BIA updates in rapidly evolving environments. <span class=\"qrefs\">[Q38]</span>","<b>Degrade, don\u2019t stop</b> &mdash; Choose fail-soft for continuous reduced operation during partial failure. <span class=\"qrefs\">[Q62]</span>","<b>Emerging tech changes what?</b> &mdash; Assess how AI and IoT alter critical functions and recovery priorities. <span class=\"qrefs\">[Q64]</span>"],
-    rule:"People safety first - BIA before strategy, testing after plans"},
-{id:"f14",g:"g6",name:"14. BC/DR Recovery",topic:"14. BC/DR Recovery Metrics: RPO/RTO/WRT/MTD  (9 questions: Q22\u2013Q242 and others)",q:9,leaves:["Impact drives priority","What drives criticality?","BIA\u2019s critical time limit?","Keep BIA current","Degrade, don\u2019t stop"],
-    factors:["<b>Impact drives priority</b> &mdash; Business impact and data sensitivity, not technical novelty, determine asset criticality, control strength, recovery priority, and resource allocation. <span class=\"qrefs\">[Q7]</span>","<b>What drives criticality?</b> &mdash; Rank tangible and intangible assets by business-operational impact and data sensitivity when resources are constrained. <span class=\"qrefs\">[Q7]</span>","<b>BIA\u2019s critical time limit?</b> &mdash; The bank treats determining MTD for mission-critical processes as the most critical BIA outcome for resilience. <span class=\"qrefs\">[Q22]</span>","<b>Keep BIA current</b> &mdash; Use regular iterative BIA updates in rapidly evolving environments. <span class=\"qrefs\">[Q38]</span>","<b>Degrade, don\u2019t stop</b> &mdash; Choose fail-soft for continuous reduced operation during partial failure. <span class=\"qrefs\">[Q62]</span>","<b>Emerging tech changes what?</b> &mdash; Assess how AI and IoT alter critical functions and recovery priorities. <span class=\"qrefs\">[Q64]</span>"],
-    rule:"RTO + WRT <= MTD - the arithmetic decides"},
-{id:"f15",g:"g7",name:"15. Disaster Recovery",topic:"15. Disaster Recovery & DR Plan Testing  (20 questions: Q4\u2013Q222 and others)",q:20,leaves:["Governance before tool","23-hour exposure","RPO violation test","Six plus four","Four plus two"],
-    factors:["<b>Governance before tool</b> &mdash; When choices compete, prefer safety, policy, business viability, and risk governance over an isolated technical control, when supported by the scenario. <span class=\"qrefs\">[]</span>","<b>23-hour exposure</b> &mdash; With daily midnight backups and failure at 11 PM, maximum exposure is 23 hours since the last completed backup, not one hour until the next backup. <span class=\"qrefs\">[Q130]</span>","<b>RPO violation test</b> &mdash; A 30-minute-old backup violates a five-minute RPO even when restoration and integrity-check times meet RTO and WRT. <span class=\"qrefs\">[Q115]</span>","<b>Six plus four</b> &mdash; An RTO of six hours plus WRT of four hours consumes ten hours and breaches an eight-hour MTD. <span class=\"qrefs\">[Q132]</span>","<b>Four plus two</b> &mdash; Four hours of restoration plus two hours of validation consumes six hours of MTD under the bank formula. <span class=\"qrefs\">[Q136]</span>","<b>Online, not ready</b> &mdash; Bringing a system online satisfies RTO, but normal operations must wait until WRT integrity checks finish. <span class=\"qrefs\">[Q137]</span>"],
-    rule:"Declaration is pre-authorized - the test ladder climbs risk"},
-{id:"f16",g:"g7",name:"16. DR Site",topic:"16. DR Site Strategy, Restoration Sequencing & Failback  (18 questions: Q6\u2013Q235 and others)",q:18,leaves:["Governance before tool","23-hour exposure","RPO violation test","Six plus four","Four plus two"],
-    factors:["<b>Governance before tool</b> &mdash; When choices compete, prefer safety, policy, business viability, and risk governance over an isolated technical control, when supported by the scenario. <span class=\"qrefs\">[]</span>","<b>23-hour exposure</b> &mdash; With daily midnight backups and failure at 11 PM, maximum exposure is 23 hours since the last completed backup, not one hour until the next backup. <span class=\"qrefs\">[Q130]</span>","<b>RPO violation test</b> &mdash; A 30-minute-old backup violates a five-minute RPO even when restoration and integrity-check times meet RTO and WRT. <span class=\"qrefs\">[Q115]</span>","<b>Six plus four</b> &mdash; An RTO of six hours plus WRT of four hours consumes ten hours and breaches an eight-hour MTD. <span class=\"qrefs\">[Q132]</span>","<b>Four plus two</b> &mdash; Four hours of restoration plus two hours of validation consumes six hours of MTD under the bank formula. <span class=\"qrefs\">[Q136]</span>","<b>Online, not ready</b> &mdash; Bringing a system online satisfies RTO, but normal operations must wait until WRT integrity checks finish. <span class=\"qrefs\">[Q137]</span>"],
-    rule:"Criticality, not user count - dependencies first, never simultaneous"},
-{id:"f17",g:"g7",name:"17. RAID",topic:"17. RAID, High Availability & Backup Strategy  (6 questions: Q90\u2013Q241 and others)",q:6,leaves:["Governance before tool","23-hour exposure","RPO violation test","Six plus four","Four plus two"],
-    factors:["<b>Governance before tool</b> &mdash; When choices compete, prefer safety, policy, business viability, and risk governance over an isolated technical control, when supported by the scenario. <span class=\"qrefs\">[]</span>","<b>23-hour exposure</b> &mdash; With daily midnight backups and failure at 11 PM, maximum exposure is 23 hours since the last completed backup, not one hour until the next backup. <span class=\"qrefs\">[Q130]</span>","<b>RPO violation test</b> &mdash; A 30-minute-old backup violates a five-minute RPO even when restoration and integrity-check times meet RTO and WRT. <span class=\"qrefs\">[Q115]</span>","<b>Six plus four</b> &mdash; An RTO of six hours plus WRT of four hours consumes ten hours and breaches an eight-hour MTD. <span class=\"qrefs\">[Q132]</span>","<b>Four plus two</b> &mdash; Four hours of restoration plus two hours of validation consumes six hours of MTD under the bank formula. <span class=\"qrefs\">[Q136]</span>","<b>Online, not ready</b> &mdash; Bringing a system online satisfies RTO, but normal operations must wait until WRT integrity checks finish. <span class=\"qrefs\">[Q137]</span>"],
-    rule:"RAID is availability, not backup - only a restore test proves a backup"},
-{id:"f18",g:"g7",name:"18. Supply Chain",topic:"18. Supply Chain & Third-Party Risk in Operations  (4 questions: Q24\u2013Q200 and others)",q:5,leaves:["Governance before tool","23-hour exposure","RPO violation test","Six plus four","Four plus two"],
-    factors:["<b>Governance before tool</b> &mdash; When choices compete, prefer safety, policy, business viability, and risk governance over an isolated technical control, when supported by the scenario. <span class=\"qrefs\">[]</span>","<b>23-hour exposure</b> &mdash; With daily midnight backups and failure at 11 PM, maximum exposure is 23 hours since the last completed backup, not one hour until the next backup. <span class=\"qrefs\">[Q130]</span>","<b>RPO violation test</b> &mdash; A 30-minute-old backup violates a five-minute RPO even when restoration and integrity-check times meet RTO and WRT. <span class=\"qrefs\">[Q115]</span>","<b>Six plus four</b> &mdash; An RTO of six hours plus WRT of four hours consumes ten hours and breaches an eight-hour MTD. <span class=\"qrefs\">[Q132]</span>","<b>Four plus two</b> &mdash; Four hours of restoration plus two hours of validation consumes six hours of MTD under the bank formula. <span class=\"qrefs\">[Q136]</span>","<b>Online, not ready</b> &mdash; Bringing a system online satisfies RTO, but normal operations must wait until WRT integrity checks finish. <span class=\"qrefs\">[Q137]</span>"],
-    rule:"Supplier risk is tiered, contractual and continuously monitored"}
+var FAMILIES = [
+{ id:'f13', g:'g6', name:"13. Business Continuity", topic:"Business Continuity Management & BIA", q:23, leaves:["People before systems", "BIA drives priority", "Keep the BIA current", "Impact on the mission", "Culture carries the plan"],
+    factors:[
+     "<b>Human safety outranks every recovery goal</b> &mdash; evacuate before containment; account for personnel before systems; damage minimization only after safety is confirmed; BCM plans focused purely on IT recovery miss the people dimension. <span class=\"qrefs\">[<a href=\"#q-Q150\">Q150</a> <a href=\"#q-Q141\">Q141</a> <a href=\"#q-Q144\">Q144</a> <a href=\"#q-Q125\">Q125</a> <a href=\"#q-Q162\">Q162</a> <a href=\"#q-Q119\">Q119</a>]</span>",
+     "<b>The BIA decides where resources go</b> &mdash; recovery targets functions whose loss most threatens the organization; equal allocation across systems is the classic error; the first step of BCP is the impact analysis; e-commerce BIAs quantify financial impact per function. <span class=\"qrefs\">[<a href=\"#q-Q128\">Q128</a> <a href=\"#q-Q153\">Q153</a> <a href=\"#q-Q126\">Q126</a> <a href=\"#q-Q110\">Q110</a> <a href=\"#q-Q193\">Q193</a> <a href=\"#q-Q197\">Q197</a> <a href=\"#q-Q225\">Q225</a>]</span>",
+     "<b>BIAs are living documents</b> &mdash; regular updates; emerging technology analyzed for criticality impact; risk appetite integrated into continuity strategy; predictive analytics sharpen it. <span class=\"qrefs\">[<a href=\"#q-Q38\">Q38</a> <a href=\"#q-Q64\">Q64</a> <a href=\"#q-Q53\">Q53</a> <a href=\"#q-Q223\">Q223</a>]</span>",
+     "<b>Trained people adapt plans that paper can&rsquo;t</b> &mdash; the most critical BCM success factor; culture sustains it; resource-constrained orgs prioritize assets by business impact. <span class=\"qrefs\">[<a href=\"#q-Q196\">Q196</a> <a href=\"#q-Q198\">Q198</a> <a href=\"#q-Q7\">Q7</a> <a href=\"#q-Q72\">Q72</a>]</span>"],
+    rule:"Safety first, BIA-ranked recovery second — and the plan is only as alive as its last update." },
+{ id:'f14', g:'g6', name:"14. BC/DR Recovery", topic:"Recovery Metrics: RPO, RTO, WRT, MTD", q:9, leaves:["RPO = data loss window", "RTO + WRT ≤ MTD", "Online ≠ operational", "Escalate before breach", "Relax targets, pay later"],
+    factors:[
+     "<b>RPO measures data loss, not time to restore</b> &mdash; a 30-minute-old backup violates a 5-minute RPO even when restoration meets every other target; exposure runs back to the last completed backup, not forward to the next one. <span class=\"qrefs\">[<a href=\"#q-Q115\">Q115</a>]</span>",
+     "<b>RTO + WRT must fit inside MTD</b> &mdash; 6h + 4h against an 8h MTD is a breach; when the math fails, escalate for formal acceptance before the deadline passes. <span class=\"qrefs\">[<a href=\"#q-Q132\">Q132</a> <a href=\"#q-Q133\">Q133</a>]</span>",
+     "<b>Online is not operational</b> &mdash; systems meet RTO at boot; normal service waits out WRT integrity verification — complete the checks before declaring recovered. <span class=\"qrefs\">[<a href=\"#q-Q158\">Q158</a>]</span>",
+     "<b>Every relaxed target trades cost for exposure</b> &mdash; loosening RPO/RTO on non-critical systems cuts recovery cost but lengthens outages; underestimated application recovery times surface in simulation. <span class=\"qrefs\">[<a href=\"#q-Q114\">Q114</a> <a href=\"#q-Q52\">Q52</a>]</span>",
+     "<b>The BIA&rsquo;s critical output is MTD</b> &mdash; and ransomware triage starts from the RTO of critical patient-data systems; boards fund continuity as operational resilience and stakeholder confidence. <span class=\"qrefs\">[<a href=\"#q-Q22\">Q22</a> <a href=\"#q-Q228\">Q228</a> <a href=\"#q-Q244\">Q244</a>]</span>"],
+    rule:"Compute the arithmetic before answering: data loss vs RPO, restoration vs RTO+WRT, both vs MTD." },
+{ id:'f15', g:'g7', name:"15. Disaster Recovery", topic:"DR Planning, Declaration & Testing", q:20, leaves:["Declare on business impact", "Tiered escalation", "Chain of command", "Test to the rate of change", "Ransomware = sudden worst case"],
+    factors:[
+     "<b>Disaster declaration rides on business impact</b> &mdash; not on technical severity; tiered response with escalation criteria balances speed against assessment; ransomware&rsquo;s slow encryption still needs a CEO-level declaration decision. <span class=\"qrefs\">[<a href=\"#q-Q169\">Q169</a> <a href=\"#q-Q171\">Q171</a> <a href=\"#q-Q57\">Q57</a> <a href=\"#q-Q39\">Q39</a>]</span>",
+     "<b>Dispersed teams need pre-defined command and joint exercises</b> &mdash; clear chains of authority, central test teams with shared plans, and comprehensive joint exercises to evaluate communication. <span class=\"qrefs\">[<a href=\"#q-Q5\">Q5</a> <a href=\"#q-Q71\">Q71</a> <a href=\"#q-Q40\">Q40</a>]</span>",
+     "<b>Test realism is graduated and deliberate</b> &mdash; tabletop → simulations → full interruption, each step weighed for business impact; full tests carry disruption risk and need detailed plans; security-system testing simulates failures in isolation; tests never fully replicate reality — align frequency with the rate of change. <span class=\"qrefs\">[<a href=\"#q-Q41\">Q41</a> <a href=\"#q-Q222\">Q222</a> <a href=\"#q-Q203\">Q203</a> <a href=\"#q-Q220\">Q220</a> <a href=\"#q-Q12\">Q12</a> <a href=\"#q-Q25\">Q25</a>]</span>",
+     "<b>Threat-integrated DR adapts continuously</b> &mdash; recovery procedures tuned to current intelligence; risk-assessment methodologies kept current; new protections balanced against existing frameworks. <span class=\"qrefs\">[<a href=\"#q-Q221\">Q221</a> <a href=\"#q-Q111\">Q111</a> <a href=\"#q-Q63\">Q63</a>]</span>",
+     "<b>Sudden widespread tech disasters outrank natural ones</b> &mdash; ransomware-style events hit everything at once; geographically close recovery sites share simultaneous-impact risk; disclosure during crisis stays coordinated, not detailed-and-public. <span class=\"qrefs\">[<a href=\"#q-Q46\">Q46</a> <a href=\"#q-Q37\">Q37</a> <a href=\"#q-Q4\">Q4</a>]</span>"],
+    rule:"Declare on impact, command by pre-definition, and test one notch beyond comfort." },
+{ id:'f16', g:'g7', name:"16. DR Site", topic:"DR Site Strategy, Restoration Order & Failback", q:18, leaves:["BIA lists the order", "Dependency charts sequence", "Failback validates on non-critical", "Consistency across platforms", "Cloud churn updates plans"],
+    factors:[
+     "<b>Restoration order comes from the BIA&rsquo;s prioritized list</b> &mdash; critical systems and data first, sequenced by business impact and revenue-loss potential; RTO pressure means core financial servers restore at the hot site first. <span class=\"qrefs\">[<a href=\"#q-Q15\">Q15</a> <a href=\"#q-Q95\">Q95</a> <a href=\"#q-Q54\">Q54</a> <a href=\"#q-Q232\">Q232</a> <a href=\"#q-Q215\">Q215</a>]</span>",
+     "<b>Dependencies dictate sequence</b> &mdash; dependency charts map what must be alive before what: database before web tier before load balancer; cascading failures are contained by restoring along dependency lines. <span class=\"qrefs\">[<a href=\"#q-Q98\">Q98</a> <a href=\"#q-Q99\">Q99</a> <a href=\"#q-Q96\">Q96</a> <a href=\"#q-Q6\">Q6</a>]</span>",
+     "<b>Failback proves the environment on non-critical systems first</b> &mdash; primary-site restoration differs from alternate-site: test environments and validation before production cutover; criticality-based sequencing with environment validation balances speed and risk. <span class=\"qrefs\">[<a href=\"#q-Q101\">Q101</a> <a href=\"#q-Q97\">Q97</a> <a href=\"#q-Q102\">Q102</a> <a href=\"#q-Q55\">Q55</a>]</span>",
+     "<b>Modern backups chase consistency and longevity</b> &mdash; hybrid environments need cross-platform consistency; Kubernetes gets application-aware distributed snapshots; long-term storage plans quantum-resistant encryption; ML classifies and prioritizes sensitive data; evolving cloud adoption forces regular inventory reviews of the Restoration Order plan. <span class=\"qrefs\">[<a href=\"#q-Q166\">Q166</a> <a href=\"#q-Q30\">Q30</a> <a href=\"#q-Q21\">Q21</a> <a href=\"#q-Q167\">Q167</a> <a href=\"#q-Q181\">Q181</a>]</span>"],
+    rule:"Priority from the BIA, sequence from dependencies, confidence from validation — then cut over." },
+{ id:'f17', g:'g7', name:"17. RAID", topic:"RAID, High Availability & Backup Strategy", q:6, leaves:["RAID 0 = speed only", "RAID 1 = mirror simplicity", "RAID 6 = double parity", "RAID 10 = performance + safety", "Test the restores"],
+    factors:[
+     "<b>Match the RAID level to the requirement</b> &mdash; pure temporary performance = RAID 0 striping; availability above all = RAID 1 mirroring; performance plus fault tolerance = RAID 10 (at more drives); dual-drive-failure tolerance = RAID 6 double parity; general DB upgrades default to RAID 5. <span class=\"qrefs\">[<a href=\"#q-Q90\">Q90</a> <a href=\"#q-Q93\">Q93</a> <a href=\"#q-Q92\">Q92</a> <a href=\"#q-Q94\">Q94</a> <a href=\"#q-Q241\">Q241</a>]</span>",
+     "<b>Redundancy is not backup until restores are tested</b> &mdash; storage strategies stand on regularly validated restoration; spare-parts management goes risk-based under CSF/ISO alignment. <span class=\"qrefs\">[<a href=\"#q-Q235\">Q235</a> <a href=\"#q-Q195\">Q195</a>]</span>"],
+    rule:"RAID buys availability, not recoverability — test restores regardless of level." },
+{ id:'f18', g:'g7', name:"18. Supply Chain", topic:"Operational Supply Chain & Third-Party Continuity", q:5, leaves:["Multi-tier supplier diversity", "Third-party risk program", "Suppliers in exercises, NDA-bound", "Cloud software chain"],
+    factors:[
+     "<b>Continuity runs on multi-tier, geo-diverse suppliers</b> &mdash; single-tier or single-region dependencies are the continuity failure; just-in-time chains lose hours of order data with real disruption cost. <span class=\"qrefs\">[<a href=\"#q-Q200\">Q200</a> <a href=\"#q-Q242\">Q242</a>]</span>",
+     "<b>Third-party risk is a standing program</b> &mdash; comprehensive third-party risk management for a fast-changing landscape; cloud assessments prioritize software supply-chain vulnerability management. <span class=\"qrefs\">[<a href=\"#q-Q172\">Q172</a> <a href=\"#q-Q24\">Q24</a>]</span>",
+     "<b>Suppliers join exercises under NDA discipline</b> &mdash; key suppliers participate in annual BCP/DRP tests with strict non-disclosure and information-handling agreements. <span class=\"qrefs\">[<a href=\"#q-Q34\">Q34</a>]</span>"],
+    rule:"Your downtime is built from your suppliers&rsquo; weakest tier — diversify and test with them." }
 ];
 
 var RADAR=[
-{t:"Reimage first",d:"Restoring service before imaging destroys the evidence."},
-{t:"Analyze the original",d:"Working copies only; originals stay sealed and hashed."},
-{t:"Custody auto-excludes",d:"A custody gap challenges integrity - not automatic inadmissibility."},
-{t:"Volatile order swapped",d:"Registers and RAM before disk and logs, always."},
-{t:"Signature for unknowns",d:"Novel malware needs heuristic, behavioral or ML answers."},
-{t:"Patch by age",d:"Severity times impact ranks patches - never release date."},
-{t:"MTD arithmetic skipped",d:"Compute RTO + WRT against MTD before answering."},
-{t:"Backup equals DR",d:"Backups need tested restoration plus a site strategy."},
-{t:"Delete during hold",d:"Legal hold suspends destruction - deletes are spoliation."}
+{t:"Systems before safety", d:"Recovery and containment sequenced ahead of evacuating or accounting for people.", ex:"<a href=\"#q-Q150\">Q150</a>, <a href=\"#q-Q141\">Q141</a>, <a href=\"#q-Q162\">Q162</a>"},
+{t:"Equal-recovery fallacy", d:"Resources spread uniformly instead of following BIA-ranked criticality.", ex:"<a href=\"#q-Q153\">Q153</a>, <a href=\"#q-Q128\">Q128</a>, <a href=\"#q-Q110\">Q110</a>"},
+{t:"Metric arithmetic skipped", d:"RPO confused with restore time; RTO+WRT never checked against MTD.", ex:"<a href=\"#q-Q115\">Q115</a>, <a href=\"#q-Q132\">Q132</a>, <a href=\"#q-Q133\">Q133</a>"},
+{t:"Online-equals-operational", d:"Systems declared recovered at boot, before WRT integrity checks complete.", ex:"<a href=\"#q-Q158\">Q158</a> <a href=\"#q-Q114\">Q114</a>"},
+{t:"Static BIA", d:"Impact analysis filed once; emerging tech and risk appetite never refresh it.", ex:"<a href=\"#q-Q38\">Q38</a>, <a href=\"#q-Q64\">Q64</a>"},
+{t:"Test-fear paralysis", d:"Tabletop forever — no interruption testing because disruption is feared.", ex:"<a href=\"#q-Q203\">Q203</a>, <a href=\"#q-Q41\">Q41</a>"},
+{t:"Sibling-site risk", d:"Recovery site placed in the same disaster footprint as the primary.", ex:"<a href=\"#q-Q37\">Q37</a>"},
+{t:"RAID-as-backup", d:"Redundancy mistaken for recoverability; restores never validated.", ex:"<a href=\"#q-Q235\">Q235</a>, <a href=\"#q-Q90\">Q90</a>"},
+{t:"Single-tier suppliers", d:"Continuity built on one supplier tier or region with no diversity or joint exercises.", ex:"<a href=\"#q-Q200\">Q200</a>, <a href=\"#q-Q242\">Q242</a>"}
 ];
 
 var QS = [
@@ -390,7 +418,7 @@ var QS = [
     card.id = 'lad-' + m.id;
     card.style.setProperty('--mc', g.color);
     var head = document.createElement('div'); head.className = 'head';
-    head.innerHTML = '<h3>' + m.name + '</h3><span class="gt t-' + m.g + '">' + m.g + '</span><span class="cnt">' + m.q + ' questions · ' + m.topic + '</span><span class="links"><a href="#drill" data-drill="' + m.g + '">drill these &darr;</a><a href="d4_mindmap_cheatsheet.html#card-' + m.g + '">knowledge &nearr;</a></span>';
+    head.innerHTML = '<h3>' + m.name + '</h3><span class="gt t-' + m.g + '">' + m.g + '</span><span class="cnt">' + m.q + ' questions · ' + m.topic + '</span><span class="links"><a href="#drill" data-drill="' + m.g + '">drill these &darr;</a><a href="d7_mindmap_cheatsheet.html#card-' + m.g + '">knowledge &nearr;</a></span>';
     card.appendChild(head);
     var ol = document.createElement('ol');
     m.factors.forEach(function(f){ var li = document.createElement('li'); li.innerHTML = f; ol.appendChild(li); });
@@ -435,7 +463,7 @@ var drillState = {};
       fh.className = 'famhead';
       fh.setAttribute('data-g', fam.g);
       fh.style.setProperty('--fc', g.color);
-      fh.innerHTML = '<h3>' + fam.name + '</h3><span class="gt t-' + fam.g + '">' + fam.g + '</span><span class="cnt">' + fam.q + ' questions</span><a href="d4_mindmap_cheatsheet.html#card-' + fam.g + '">knowledge card &nearr;</a>';
+      fh.innerHTML = '<h3>' + fam.name + '</h3><span class="gt t-' + fam.g + '">' + fam.g + '</span><span class="cnt">' + fam.q + ' questions</span><a href="d7_mindmap_cheatsheet.html#card-' + fam.g + '">knowledge card &nearr;</a>';
       box.appendChild(fh);
     }
     var div = document.createElement('article');
@@ -482,7 +510,7 @@ var drillState = {};
       });
       html += '</ul>';
     }
-    html += '<a class="klink" href="d4_mindmap_cheatsheet.html#card-' + fam.g + '">knowledge: ' + GROUPS[fam.g].name + ' &nearr;</a>';
+    html += '<a class="klink" href="d7_mindmap_cheatsheet.html#card-' + fam.g + '">knowledge: ' + GROUPS[fam.g].name + ' &nearr;</a>';
     vd.innerHTML = html;
     vd.classList.add('show');
     updateScore();

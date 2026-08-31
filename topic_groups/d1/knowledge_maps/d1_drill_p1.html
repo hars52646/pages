@@ -65,6 +65,11 @@
   .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
   .ladder .rule b{color:var(--mc);font-style:normal}
 
+  .ladder ol li .qrefs{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .ladder ol li .qrefs a{color:var(--mc);text-decoration:none;border-bottom:1px dotted var(--mc);margin:0 1px}
+  .ladder ol li .qrefs a:hover{border-bottom-style:solid}
+  .rad .ex a{color:#b91c1c;text-decoration:none;font-weight:800}
+  .rad .ex a:hover{text-decoration:underline}
   .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
   .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
   .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
@@ -124,9 +129,9 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 1 of 6</div>
+    <div class="eyebrow">CISSP &middot; Domain 1 &middot; Exam preparation &middot; logic-based scenarios &middot; part 1 of 6</div>
     <h1>D1 Question Drill 1 &mdash; Governance, Risk & Legal (topics 1-7)</h1>
-    <p class="sub"><b>92 scenario questions</b> (topics 1&ndash;12) &middot; <b>12 decision families</b> &middot; <b>5 knowledge groups</b> &mdash; forensics and evidence, monitoring and intel, malware defense, change and patch, resources and environment. Continues in <a href="d7_drill_p2.html">part 2: continuity and recovery (80 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+    <p class="sub"><b>165 scenario questions</b> (topics 1&ndash;7 of 27) &middot; <b>7 decision families</b> across <b>4 knowledge groups</b> &mdash; ethics &amp; professional conduct, security governance &amp; accountability, compliance &amp; legal, privacy. Continues in <a href="d1_drill_p2.html">part 2: policy, people &amp; risk concepts</a>. Companion: the <a href="d1_cheatsheet_p1.html">knowledge cheatsheet</a> &middot; <a href="d1_index.html">D1 hub</a>.</p>
   </div>
 </header>
 
@@ -140,7 +145,7 @@
 
   <section id="fmap">
     <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
-    <p class="lede">The 12 part-1 families (of D7&rsquo;s 18 total), colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <p class="lede">The 7 families on this page, colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
     <div class="map-panel">
       <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D1 drill part 1"></svg>
       <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
@@ -184,77 +189,75 @@
 <script>
 var GROUPS={g1:{name:"Ethics & Professional Conduct",color:"#b91c1c",fill:"#dc2626"},g2:{name:"Governance, Roles & Accountability A",color:"#b45309",fill:"#d97706"},g3:{name:"Governance, Roles & Accountability B",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"Compliance, Audit & Legal",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Privacy & Personal Data",color:"#047857",fill:"#059669"},g6:{name:"Risk Concepts & ALE A",color:"#be185d",fill:"#db2777"},g7:{name:"Risk Concepts & ALE B",color:"#0e7490",fill:"#0891b2"}};
 var FAMILIES = [
-{ id:'f01', g:'g1', name:"Ethics", topic:"Ethics & Professional Conduct", q:3, leaves:["Society vs employer: who...","Refuse and escalate?","Profession vs any other...","Framework or ethics...","Do ethics vary by..."],
+{ id:'f01', g:'g1', name:"Ethics", topic:"Ethics & Professional Conduct", q:2, leaves:["Public harm first", "Canon precedence", "Refuse & escalate", "Ethics are global", "Framework ≠ ethics"],
     factors:[
-     "<b>Society vs employer: who wins?</b> &mdash; When two canons conflict, choose the action that satisfies the lower-numbered canon \u2014 even if it means going against the employer's directive. Society outranks employer;...",
-     "<b>Refuse and escalate?</b> &mdash; When an employer asks you to do something unethical or illegal, refuse and escalate through proper channels (management, legal, HR). Complying makes you ethically...",
-     "<b>Profession vs any other canon?</b> &mdash; When 'advance the profession' (Canon 4) conflicts with any other canon, the other canon wins \u2014 Canon 4 is last in priority. Threat-intel sharing or peer collaboration... <span class=\"qrefs\">[Q559]</span>",
-     "<b>Framework or ethics foundational?</b> &mdash; Frameworks (ISO 27001, NIST CSF) and ethics serve different purposes: frameworks structure controls; ethics governs conduct and decisions \u2014 ethics is the foundational... <span class=\"qrefs\">[Q315]</span>",
-     "<b>Do ethics vary by geography?</b> &mdash; When operating across regions with differing laws or norms, apply ISC2 ethics consistently and globally \u2014 ethics are universal and do not vary by geography or local...",
-     "<b>Contract or harm prevention?</b> &mdash; Healthcare vendor risk with CEO preference for a supplier: the governing principle is doing nothing harmful to others. Contractual obligations are legally bounded but... <span class=\"qrefs\">[Q362]</span>"],
-    rule:"Canon order: society, honor, service, profession" },
-{ id:'f02', g:'g2', name:"Security Concepts", topic:"Security Concepts (CIA, Nonrepudiation)", q:45, leaves:["Authorize fixes = ?","Patch now, document after?","Controls done, docs...","Fixed but no proof?","Historical logs = ?"],
+     "<b>Public harm outranks every loyalty</b> &mdash; when a decision can hurt patients, clients or the public, the scored principle is &ldquo;do nothing harmful to others&rdquo; &mdash; it beats leadership preference, vendor relationships, professional reputation and contract terms. <span class=\"qrefs\">[<a href=\"#q-Q362\">Q362</a>]</span>",
+     "<b>Refuse and escalate</b> &mdash; when asked to act unethically or illegally, the correct response is refusal plus escalation through proper channels (management, legal, HR) &mdash; never compliance and never quiet resignation. <span class=\"qrefs\">[<a href=\"#q-Q362\">Q362</a>]</span>",
+     "<b>Ethics apply globally</b> &mdash; across regions with different norms, ISC2 canons apply consistently; &ldquo;adapt to local custom&rdquo; or &ldquo;each office decides&rdquo; are distractors &mdash; codify one enforced standard instead. <span class=\"qrefs\">[<a href=\"#q-Q398\">Q398</a>]</span>",
+     "<b>Frameworks are not ethics</b> &mdash; asked how control frameworks treat ethics: they emphasize technical controls and compliance with limited explicit ethical treatment &mdash; ethics is a separate, foundational layer. <span class=\"qrefs\">[<a href=\"#q-Q315\">Q315</a>]</span>"],
+    rule:"Canon order: society, honor, service, profession &mdash; the lower-numbered duty wins any conflict." },
+{ id:'f02', g:'g2', name:"Security Concepts", topic:"Security Concepts (CIA, Nonrepudiation)", q:45, leaves:["Name the property", "Layer control types", "Least privilege", "Match integrity tool", "Guard the keys"],
     factors:[
-     "<b>Authorize fixes = ?</b> &mdash; Management authorizing vulnerability remediation after a penetration test or scan is due care through responsible asset protection. Distractors fail because stakeholder... <span class=\"qrefs\">[Q26 Q461]</span>",
-     "<b>Patch now, document after?</b> &mdash; A CISO (Chief Information Security Officer) authorizes emergency patching and documents the timeline, approval chain, and verification: authorization demonstrates due... <span class=\"qrefs\">[Q549]</span>",
-     "<b>Controls done, docs missing?</b> &mdash; Healthcare organization implemented encryption, patching, and risk assessments, but documentation is inconsistent and incomplete when HIPAA (Health Insurance Portability... <span class=\"qrefs\">[Q359]</span>",
-     "<b>Fixed but no proof?</b> &mdash; Remediation was completed after penetration testing but evidence cannot be produced for auditors: insufficient due diligence to demonstrate remediation actions. Due care... <span class=\"qrefs\">[Q511]</span>",
-     "<b>Historical logs = ?</b> &mdash; When a CFO (Chief Financial Officer) questions extensive logs and remediation records during budget justification, their governance and legal value is providing evidence... <span class=\"qrefs\">[Q320]</span>",
-     "<b>Metrics to board = ?</b> &mdash; A CISO presenting quarterly metrics, remediation logs, and audit trails to the board fulfills demonstrating due diligence through documented evidence. Due care is the... <span class=\"qrefs\">[Q534]</span>"],
-    rule:"CIA trade-offs - the scenario tells you which property loses" },
-{ id:'f03', g:'g2', name:"Governance", topic:"Security Governance, Roles & Accountability", q:65, leaves:["Block or inform?","Doing vs proving?"],
+     "<b>Name the property first</b> &mdash; unauthorized viewing = confidentiality, unauthorized modification = integrity, denial of access = availability, disputed action = non-repudiation. The scenario&rsquo;s verb maps 1:1 to the answer; never trade the properties interchangeably. <span class=\"qrefs\">[<a href=\"#q-Q410\">Q410</a> <a href=\"#q-Q614\">Q614</a> <a href=\"#q-Q542\">Q542</a>]</span>",
+     "<b>Layered = different control types at different tiers</b> &mdash; defense in depth pairs preventive + detective + corrective controls across network, application and data layers. &ldquo;One comprehensive solution&rdquo;, &ldquo;strengthen the outermost layer&rdquo; and compliance mapping are all secondary to that layering. <span class=\"qrefs\">[<a href=\"#q-Q94\">Q94</a> <a href=\"#q-Q321\">Q321</a> <a href=\"#q-Q832\">Q832</a> <a href=\"#q-Q1031\">Q1031</a>]</span>",
+     "<b>Least privilege scopes access to the job</b> &mdash; RBAC with minimal per-role permissions protects confidentiality; dynamic cloud environments need real-time, context-based rights adjustments rather than quarterly reviews alone. <span class=\"qrefs\">[<a href=\"#q-Q490\">Q490</a> <a href=\"#q-Q1000\">Q1000</a> <a href=\"#q-Q514\">Q514</a>]</span>",
+     "<b>Match the integrity tool to the threat</b> &mdash; accidental corruption: parity or plain hash suffices; deliberate tampering: cryptographic hashing; provable origin and non-repudiation: digital signatures with PKI &mdash; the stem&rsquo;s adversary decides the strength. <span class=\"qrefs\">[<a href=\"#q-Q861\">Q861</a> <a href=\"#q-Q225\">Q225</a> <a href=\"#q-Q1089\">Q1089</a>]</span>",
+     "<b>Guard the keys</b> &mdash; in PKI questions the scored answer is nearly always private-key confidentiality: separate generation/storage of private keys from public-key distribution &mdash; private keys are never published, shared or centrally exposed. <span class=\"qrefs\">[<a href=\"#q-Q1040\">Q1040</a>]</span>",
+     "<b>Zero trust = verify continuously per request</b> &mdash; not segmentation, MFA or encryption alone: every transaction and access is re-verified. <span class=\"qrefs\">[<a href=\"#q-Q655\">Q655</a> <a href=\"#q-Q662\">Q662</a>]</span>"],
+    rule:"Identify which property the scenario sacrifices, then pick the control that addresses exactly that." },
+{ id:'f03', g:'g2', name:"Governance", topic:"Security Governance, Roles & Accountability", q:65, leaves:["Senior-most owns", "Care vs diligence", "Business enabler", "Outsource keeps owner", "Evidence for boards"],
     factors:[
-     "<b>Block or inform?</b> &mdash; When security strategy conflicts with a profitable business initiative, present the risks with mitigation options so the business can make an informed decision. Exam... <span class=\"qrefs\">[Q1187]</span>",
-     "<b>Doing vs proving?</b> &mdash; When a question contrasts doing the right thing versus proving you did it: map due care to action and due diligence to evidence/documentation. This keyword mapping..."],
-    rule:"Senior management owns risk; alignment to strategy is the scored link" },
-{ id:'f04', g:'g4', name:"Compliance & Legal", topic:"Compliance, Audit & Regulatory Requirements", q:26, leaves:["Borders crossed, which...","Strictest or separate...","Most restrictive...","Conflicting regulations,...","Engage whom first?"],
+     "<b>Accountability rides to the most senior role</b> &mdash; when options list CEO/CFO/VP/IT team, the senior role with ownership of the asset is accountable; delegation moves responsibility for implementation, never accountability. <span class=\"qrefs\">[<a href=\"#q-Q17\">Q17</a> <a href=\"#q-Q386\">Q386</a> <a href=\"#q-Q536\">Q536</a> <a href=\"#q-Q427\">Q427</a>]</span>",
+     "<b>Due care = act, due diligence = prove</b> &mdash; authorizing patches and taking protective action is care; documentation, logs and metrics are diligence. &ldquo;Fixed it but can&rsquo;t show evidence&rdquo; is always a diligence failure. <span class=\"qrefs\">[<a href=\"#q-Q23\">Q23</a> <a href=\"#q-Q359\">Q359</a> <a href=\"#q-Q511\">Q511</a> <a href=\"#q-Q534\">Q534</a>]</span>",
+     "<b>Security enables the business</b> &mdash; when security conflicts with a profitable initiative, present risks plus mitigation options so the business makes an informed decision &mdash; &ldquo;block it&rdquo; and &ldquo;security regardless of cost&rdquo; are the recycled wrong answers. <span class=\"qrefs\">[<a href=\"#q-Q1187\">Q1187</a> <a href=\"#q-Q128\">Q128</a> <a href=\"#q-Q1235\">Q1235</a>]</span>",
+     "<b>Outsourcing keeps the owner accountable</b> &mdash; cloud, MSP or vendor: the customer organization remains accountable for its data; provider responsibility only grows from IaaS toward SaaS. <span class=\"qrefs\">[<a href=\"#q-Q107\">Q107</a> <a href=\"#q-Q353\">Q353</a> <a href=\"#q-Q586\">Q586</a> <a href=\"#q-Q1161\">Q1161</a>]</span>",
+     "<b>Policy hierarchy words are scored</b> &mdash; mandatory standard vs recommended guideline vs policy vs procedure: pick the artifact whose enforcement level the scenario demands, and centralize guidance over decentralized discretion. <span class=\"qrefs\">[<a href=\"#q-Q681\">Q681</a> <a href=\"#q-Q702\">Q702</a> <a href=\"#q-Q580\">Q580</a>]</span>",
+     "<b>Governance is top-down and cross-functional</b> &mdash; committees with executive, HR, legal and IT representation; board framing in business value and cost-effectiveness, never in fear. <span class=\"qrefs\">[<a href=\"#q-Q752\">Q752</a> <a href=\"#q-Q1262\">Q1262</a> <a href=\"#q-Q1223\">Q1223</a>]</span>"],
+    rule:"Accountability sits above delegation; evidence separates diligence from care." },
+{ id:'f04', g:'g4', name:"Compliance & Legal", topic:"Compliance, Audit & Regulatory Requirements", q:26, leaves:["Strictest law wins", "Export rules gate", "Residency first", "Legal experts first", "Verify independently"],
     factors:[
-     "<b>Borders crossed, which law?</b> &mdash; When data crosses international borders, choose the most restrictive applicable law \u2014 GDPR data-residency and transfer rules often override local policies.",
-     "<b>Strictest or separate sets?</b> &mdash; For multi-jurisdiction compliance (e.g., PCI DSS plus GDPR plus local banking rules), implement the strictest requirement from each framework as the baseline control \u2014... <span class=\"qrefs\">[Q576]</span>",
-     "<b>Most restrictive uniformly?</b> &mdash; With conflicting data protection laws across hosting countries, apply the most restrictive jurisdiction's requirements uniformly across all locations \u2014 separate... <span class=\"qrefs\">[Q675]</span>",
-     "<b>Conflicting regulations, who decides?</b> &mdash; When regulations conflict across jurisdictions, consult legal counsel and apply the highest applicable standard \u2014 the security manager recommends but does not interpret...",
-     "<b>Engage whom first?</b> &mdash; When transborder obligations are unclear, engage legal and compliance experts who track regional data protection regulations before designing remediation or continuing... <span class=\"qrefs\">[Q65 Q725 Q817]</span>",
-     "<b>Accept known violations?</b> &mdash; Accepting known regulatory violations is never a defensible first step \u2014 it exposes the organization to legal penalties; expert legal assessment must precede costly or... <span class=\"qrefs\">[Q817]</span>"],
-    rule:"Obligation source (law, regulation, contract) decides enforcement" },
-{ id:'f05', g:'g4', name:"Legal & Cybercrime", topic:"Legal Issues, Cybercrime & Evidence", q:3, leaves:["Borders crossed, which...","Strictest or separate...","Most restrictive...","Conflicting regulations,...","Engage whom first?"],
+     "<b>Strictest applicable law wins</b> &mdash; multi-jurisdiction scenarios (PCI + GDPR + local banking): implement the strictest requirement of each framework as the uniform baseline; per-country control sets and parent-company preferences lose. <span class=\"qrefs\">[<a href=\"#q-Q576\">Q576</a> <a href=\"#q-Q675\">Q675</a>]</span>",
+     "<b>Export controls gate cryptographic products</b> &mdash; selling or deploying encryption across borders: EAR governs dual-use commercial items; sanctioned or non-Wassenaar destinations can be prohibited outright &mdash; check before architecture. <span class=\"qrefs\">[<a href=\"#q-Q59\">Q59</a> <a href=\"#q-Q53\">Q53</a>]</span>",
+     "<b>Data residency precedes architecture</b> &mdash; expanding into strict-localization countries: keeping personal data in-region (segmented instances, geo-fencing, classification-driven placement) is the first-priority requirement, ahead of efficiency. <span class=\"qrefs\">[<a href=\"#q-Q794\">Q794</a> <a href=\"#q-Q821\">Q821</a> <a href=\"#q-Q129\">Q129</a>]</span>",
+     "<b>Unclear obligations → engage legal/compliance first</b> &mdash; before remediation, risk acceptance or infrastructure spend; security recommends, legal interprets. Accepting a known violation is never defensible. <span class=\"qrefs\">[<a href=\"#q-Q65\">Q65</a> <a href=\"#q-Q817\">Q817</a> <a href=\"#q-Q721\">Q721</a>]</span>",
+     "<b>Independent verification needs an auditor</b> &mdash; controls matching approved policy is an audit function; accountable parties set rules while responsible parties implement. <span class=\"qrefs\">[<a href=\"#q-Q11\">Q11</a> <a href=\"#q-Q1280\">Q1280</a>]</span>",
+     "<b>Vendor obligations are documented up front</b> &mdash; security requirements belong in the procurement stage (SLR/SLA metrics, SBOM), evaluated before any agreement is signed. <span class=\"qrefs\">[<a href=\"#q-Q784\">Q784</a> <a href=\"#q-Q1218\">Q1218</a>]</span>"],
+    rule:"Geography and obligation source decide the control &mdash; strictest wins, experts interpret." },
+{ id:'f05', g:'g4', name:"Legal & Cybercrime", topic:"Legal Issues, Cybercrime & Evidence", q:3, leaves:["Fraud needs absence", "Proven crypto + KMS", "Produce the evidence", "Deter, don&rsquo;t assume"],
     factors:[
-     "<b>Borders crossed, which law?</b> &mdash; When data crosses international borders, choose the most restrictive applicable law \u2014 GDPR data-residency and transfer rules often override local policies.",
-     "<b>Strictest or separate sets?</b> &mdash; For multi-jurisdiction compliance (e.g., PCI DSS plus GDPR plus local banking rules), implement the strictest requirement from each framework as the baseline control \u2014... <span class=\"qrefs\">[Q576]</span>",
-     "<b>Most restrictive uniformly?</b> &mdash; With conflicting data protection laws across hosting countries, apply the most restrictive jurisdiction's requirements uniformly across all locations \u2014 separate... <span class=\"qrefs\">[Q675]</span>",
-     "<b>Conflicting regulations, who decides?</b> &mdash; When regulations conflict across jurisdictions, consult legal counsel and apply the highest applicable standard \u2014 the security manager recommends but does not interpret...",
-     "<b>Engage whom first?</b> &mdash; When transborder obligations are unclear, engage legal and compliance experts who track regional data protection regulations before designing remediation or continuing... <span class=\"qrefs\">[Q65 Q725 Q817]</span>",
-     "<b>Accept known violations?</b> &mdash; Accepting known regulatory violations is never a defensible first step \u2014 it exposes the organization to legal penalties; expert legal assessment must precede costly or... <span class=\"qrefs\">[Q817]</span>"],
-    rule:"Know the law category by who prosecutes and what it protects" },
-{ id:'f06', g:'g4', name:"IP & Transborder", topic:"Intellectual Property, Import/Export & Transborder", q:7, leaves:["Borders crossed, which...","Strictest or separate...","Most restrictive...","Conflicting regulations,...","Engage whom first?"],
+     "<b>Long-running fraud needs forced absence</b> &mdash; irregularities surfacing only when a bookkeeper takes leave point to mandatory vacation / rotation controls: independent review during absence breaks collusion. <span class=\"qrefs\">[<a href=\"#q-Q338\">Q338</a>]</span>",
+     "<b>Regulated data needs proven crypto with key management</b> &mdash; HIPAA-grade protection: AES-GCM plus a real KMS, encrypting per data classification &mdash; not bespoke or deprecated schemes. <span class=\"qrefs\">[<a href=\"#q-Q1266\">Q1266</a>]</span>",
+     "<b>Evidence you cannot produce never happened</b> &mdash; remediation records stranded on a decommissioned server equal failure to demonstrate due diligence to regulators. <span class=\"qrefs\">[<a href=\"#q-Q478\">Q478</a>]</span>"],
+    rule:"Match the control to the law&rsquo;s intent: deter collusion, protect records, prove compliance." },
+{ id:'f06', g:'g4', name:"IP & Transborder", topic:"Intellectual Property, Import/Export & Transborder", q:7, leaves:["Export before design", "No temporary leaks", "Volatile first", "Sovereignty vs PKI", "Criteria flexibility"],
     factors:[
-     "<b>Borders crossed, which law?</b> &mdash; When data crosses international borders, choose the most restrictive applicable law \u2014 GDPR data-residency and transfer rules often override local policies.",
-     "<b>Strictest or separate sets?</b> &mdash; For multi-jurisdiction compliance (e.g., PCI DSS plus GDPR plus local banking rules), implement the strictest requirement from each framework as the baseline control \u2014... <span class=\"qrefs\">[Q576]</span>",
-     "<b>Most restrictive uniformly?</b> &mdash; With conflicting data protection laws across hosting countries, apply the most restrictive jurisdiction's requirements uniformly across all locations \u2014 separate... <span class=\"qrefs\">[Q675]</span>",
-     "<b>Conflicting regulations, who decides?</b> &mdash; When regulations conflict across jurisdictions, consult legal counsel and apply the highest applicable standard \u2014 the security manager recommends but does not interpret...",
-     "<b>Engage whom first?</b> &mdash; When transborder obligations are unclear, engage legal and compliance experts who track regional data protection regulations before designing remediation or continuing... <span class=\"qrefs\">[Q65 Q725 Q817]</span>",
-     "<b>Accept known violations?</b> &mdash; Accepting known regulatory violations is never a defensible first step \u2014 it exposes the organization to legal penalties; expert legal assessment must precede costly or... <span class=\"qrefs\">[Q817]</span>"],
-    rule:"IP protection form follows the asset; export rules gate transfer" },
-{ id:'f07', g:'g5', name:"Privacy", topic:"Privacy & Personal Data Protection", q:17, leaves:["Framework or point...","Integrate, restrict,...","Minimize, specify, limit...","Delete now or time-limit?","NIST AC-23 balance?"],
+     "<b>Export law is answered before design</b> &mdash; deploying encryption to a non-Wassenaar or sanctioned country may be prohibited regardless of technical merit; the legal gate comes first. <span class=\"qrefs\">[<a href=\"#q-Q62\">Q62</a>]</span>",
+     "<b>&ldquo;Temporary&rdquo; storage still violates residency</b> &mdash; personal identifiers touched outside the EU break residency rules even in passing; &ldquo;anonymized dataset&rdquo; answers that re-identify across borders fail. <span class=\"qrefs\">[<a href=\"#q-Q698\">Q698</a> <a href=\"#q-Q725\">Q725</a>]</span>",
+     "<b>Ephemeral evidence: volatile state first</b> &mdash; containers and similar environments lose memory and network state on termination &mdash; capture before anything else. <span class=\"qrefs\">[<a href=\"#q-Q636\">Q636</a>]</span>",
+     "<b>Sovereignty vs centralized key ops is the cloud-PKI tension</b> &mdash; global PKI decisions hinge on reconciling jurisdictional data rules with central management, not on cost or scale alone. <span class=\"qrefs\">[<a href=\"#q-Q1201\">Q1201</a> <a href=\"#q-Q71\">Q71</a>]</span>",
+     "<b>Evaluation criteria: policy flexibility</b> &mdash; ITSEC&rsquo;s formal policy models beat TCSEC-style rigid ratings when business-risk tailoring is asked. <span class=\"qrefs\">[<a href=\"#q-Q1200\">Q1200</a>]</span>"],
+    rule:"Where data and cryptography may go is a legal question settled before the technical design." },
+{ id:'f07', g:'g5', name:"Privacy", topic:"Privacy & Personal Data Protection", q:17, leaves:["Assess before deploy", "Minimize by default", "Watch inference", "Camera balance", "Contain BYOD"],
     factors:[
-     "<b>Framework or point solution?</b> &mdash; For metropolitan public surveillance under recent privacy court rulings and NIST (National Institute of Standards and Technology) privacy controls, adopt a... <span class=\"qrefs\">[Q255]</span>",
-     "<b>Integrate, restrict, retain?</b> &mdash; For CCTV in a large corporate environment under NIST SP 800-53 physical controls, integrate with access control, apply least privilege, and define a retention period.... <span class=\"qrefs\">[Q333]</span>",
-     "<b>Minimize, specify, limit retention?</b> &mdash; For CCTV with facial recognition under NIST SP 800-122 PII guidance, apply data minimization, purpose specification, and retention limitation principles. Encryption... <span class=\"qrefs\">[Q472]</span>",
-     "<b>Delete now or time-limit?</b> &mdash; For facial recognition perimeter security in a multinational, choose a time-limited retention policy with strict access controls. Immediate deletion compromises security... <span class=\"qrefs\">[Q267]</span>",
-     "<b>NIST AC-23 balance?</b> &mdash; For multinational CCTV aligned with NIST SP 800-53 AC-23 while balancing security, privacy, and culture, create a balanced CCTV policy with clear guidelines, training,... <span class=\"qrefs\">[Q649]</span>",
-     "<b>Collect what, manage how?</b> &mdash; For resource-constrained smart home IoT devices under GDPR/CCPA (California Consumer Privacy Act), collect only essential data, implement lifecycle management, and use... <span class=\"qrefs\">[Q408]</span>"],
-    rule:"Controller decides, processor acts, transfers need lawful basis" }
+     "<b>Assess before deployment, re-assess over time</b> &mdash; new systems collecting PII need a PIA/DPIA first; two years later the scored gap is ongoing review and monitoring, not the original assessment. <span class=\"qrefs\">[<a href=\"#q-Q578\">Q578</a> <a href=\"#q-Q553\">Q553</a> <a href=\"#q-Q450\">Q450</a>]</span>",
+     "<b>Minimization is the default lever</b> &mdash; collect only essential data, specify purpose, limit retention &mdash; the same trio answers CCTV-with-FR, smart-home IoT and big-data scenarios; encryption alone is the runner-up. <span class=\"qrefs\">[<a href=\"#q-Q472\">Q472</a> <a href=\"#q-Q408\">Q408</a> <a href=\"#q-Q365\">Q365</a>]</span>",
+     "<b>Inference and aggregation are the subtle risks</b> &mdash; individually harmless datasets combining into sensitive profiles: counter with minimization, purpose limits and controlled views (polyinstantiation) rather than more collection. <span class=\"qrefs\">[<a href=\"#q-Q375\">Q375</a> <a href=\"#q-Q575\">Q575</a> <a href=\"#q-Q781\">Q781</a>]</span>",
+     "<b>Surveillance balances, not maximizes</b> &mdash; CCTV done right: integrated with access control, least-privilege viewing, defined retention, transparent policy and notice &mdash; &ldquo;more cameras&rdquo; and &ldquo;delete immediately&rdquo; both lose. <span class=\"qrefs\">[<a href=\"#q-Q333\">Q333</a> <a href=\"#q-Q255\">Q255</a> <a href=\"#q-Q641\">Q641</a>]</span>",
+     "<b>BYOD privacy: contain, don&rsquo;t seize</b> &mdash; containerization isolates work data from personal data, satisfying both security and employee privacy. <span class=\"qrefs\">[<a href=\"#q-Q567\">Q567</a>]</span>",
+     "<b>Educate the approvers</b> &mdash; when managers approve access without grasping privacy impact, training on privacy fundamentals is the scored fix. <span class=\"qrefs\">[<a href=\"#q-Q492\">Q492</a>]</span>"],
+    rule:"Privacy-by-design: assess first, collect least, retain briefly, review continuously." }
 ];
 
 var RADAR=[
-{t:'Property confusion', d:'Confidentiality, integrity, availability traded as if interchangeable - read which property the stem sacrifices.', ex:'see factor ladders'},
-{t:'Owner misplaced', d:'Risk acceptance or governance duties assigned to the wrong role.', ex:'see factor ladders'},
-{t:'Verb skipped', d:'Controls chosen before the treatment verb (avoid, transfer, mitigate, accept) is named.', ex:'see factor ladders'},
-{t:'ALE arithmetic ignored', d:'Qualitative answers where the stem gives numbers - compute SLE and ALE first.', ex:'see factor ladders'},
-{t:'Framework step swapped', d:'RMF steps out of order, authorization before assessment.', ex:'see factor ladders'},
-{t:'Compliance absolutes', d:'Certification treated as compliance; audits treated as guarantees.', ex:'see factor ladders'},
-{t:'Cloud duty transfer', d:'Provider answers where customer data accountability remains.', ex:'see factor ladders'},
-{t:'Layer skipped', d:'Technology-first answers where the question names policy or governance.', ex:'see factor ladders'},
-{t:'Once-and-done', d:'Point-in-time fixes where continuous monitoring or review is asked.', ex:'see factor ladders'}
+{t:"Role swap", d:"Accountability offered to whoever merely implements — SOC teams, IT departments, vendors or auditors — when the senior owner is accountable.", ex:"<a href=\"#q-Q17\">Q17</a>, <a href=\"#q-Q107\">Q107</a>, <a href=\"#q-Q610\">Q610</a>"},
+{t:"Care/diligence blur", d:"&ldquo;We acted correctly&rdquo; chosen where the ask is proof, or documentation praised where action is missing — map care to acts, diligence to evidence.", ex:"<a href=\"#q-Q359\">Q359</a>, <a href=\"#q-Q511\">Q511</a>, <a href=\"#q-Q549\">Q549</a>"},
+{t:"Blocker security", d:"Security-over-business options (block, prohibit, slow down) where presenting risks and enabling an informed decision is scored.", ex:"<a href=\"#q-Q1187\">Q1187</a>, <a href=\"#q-Q1196\">Q1196</a>, <a href=\"#q-Q627\">Q627</a>"},
+{t:"Jurisdiction absolutes", d:"&ldquo;Parent company&rsquo;s rules apply everywhere&rdquo; or per-country control patches where the strictest-law-uniform baseline wins.", ex:"<a href=\"#q-Q675\">Q675</a>, <a href=\"#q-Q746\">Q746</a>, <a href=\"#q-Q576\">Q576</a>"},
+{t:"Residency ignored", d:"Centralization and efficiency answers that quietly move personal data across borders the scenario forbids.", ex:"<a href=\"#q-Q698\">Q698</a>, <a href=\"#q-Q821\">Q821</a>, <a href=\"#q-Q794\">Q794</a>"},
+{t:"Point-in-time compliance", d:"One-off assessments treated as durable; the scenario asks for continuous monitoring, ISCM or periodic re-review.", ex:"<a href=\"#q-Q450\">Q450</a>, <a href=\"#q-Q551\">Q551</a>, <a href=\"#q-Q183\">Q183</a>"},
+{t:"Tech-first privacy", d:"Encryption or tooling offered where the privacy answer is minimization, purpose limitation or retention policy.", ex:"<a href=\"#q-Q472\">Q472</a>, <a href=\"#q-Q408\">Q408</a>, <a href=\"#q-Q575\">Q575</a>"},
+{t:"Provider duty transfer", d:"&ldquo;The cloud provider handles it&rdquo; where the customer keeps data accountability and governance duties.", ex:"<a href=\"#q-Q1245\">Q1245</a>, <a href=\"#q-Q1161\">Q1161</a>, <a href=\"#q-Q353\">Q353</a>"},
+{t:"Evidence lost", d:"Remediation performed but records unreachable — the diligence failure hiding in &ldquo;we fixed it&rdquo; answers.", ex:"<a href=\"#q-Q478\">Q478</a>, <a href=\"#q-Q511\">Q511</a>, <a href=\"#q-Q320\">Q320</a>"}
 ];
 
 var QS = [
@@ -496,7 +499,7 @@ var QS = [
   el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
   var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
-  c0.textContent = 'DOMAIN 7 · PART';
+  c0.textContent = "DOMAIN 1 · PART";
   var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
   c1.textContent = 'DECISION';

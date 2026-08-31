@@ -65,6 +65,11 @@
   .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
   .ladder .rule b{color:var(--mc);font-style:normal}
 
+  .ladder ol li .qrefs{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .ladder ol li .qrefs a{color:var(--mc);text-decoration:none;border-bottom:1px dotted var(--mc);margin:0 1px}
+  .ladder ol li .qrefs a:hover{border-bottom-style:solid}
+  .rad .ex a{color:#b91c1c;text-decoration:none;font-weight:800}
+  .rad .ex a:hover{text-decoration:underline}
   .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
   .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
   .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
@@ -124,9 +129,9 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 4 of 5</div>
+    <div class="eyebrow">CISSP &middot; Domain 3 &middot; Exam preparation &middot; logic-based scenarios &middot; part 4 of 5</div>
     <h1>D3 Question Drill 4 &mdash; Cloud, ICS/SCADA, IoT & Zero Trust</h1>
-    <p class="sub"><b>92 scenario questions</b> (topics 1&ndash;12) &middot; <b>12 decision families</b> &middot; <b>5 knowledge groups</b> &mdash; forensics and evidence, monitoring and intel, malware defense, change and patch, resources and environment. Continues in <a href="d7_drill_p2.html">part 2: continuity and recovery (80 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+    <p class="sub"><b>125 scenario questions</b> (topic 15 of 19) &middot; <b>1 decision family</b> &mdash; cloud models and shared responsibility, virtualization and containers, ICS/SCADA isolation, IoT fleets and zero trust architecture. Continues in <a href="d3_drill_p5.html">part 5: architecture, web flaws, MLS &amp; design</a>. Companion: the <a href="d3_cheatsheet_p2.html">knowledge cheatsheet</a> &middot; <a href="d3_index.html">D3 hub</a>.</p>
   </div>
 </header>
 
@@ -140,7 +145,7 @@
 
   <section id="fmap">
     <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
-    <p class="lede">The 12 part-1 families (of D7&rsquo;s 18 total), colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <p class="lede">The 1 family on this page, colored by its knowledge group (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
     <div class="map-panel">
       <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D3 drill part 4"></svg>
       <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
@@ -184,26 +189,28 @@
 <script>
 var GROUPS={g1:{name:"Cloud & Virtualization",color:"#b91c1c",fill:"#dc2626"},g2:{name:"ICS, SCADA, IoT & Zero Trust",color:"#b45309",fill:"#d97706"},g3:{name:"System Architecture",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"Web & Architecture Vulnerabilities",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Data System Controls & MLS",color:"#047857",fill:"#059669"},g6:{name:"Hardening & Secure Design",color:"#be185d",fill:"#db2777"}};
 var FAMILIES = [
-{ id:'f15', g:'g1', name:'Cloud, ICS, IoT & zero trust', topic:'Cloud, Virtualization, ICS/SCADA, IoT, Zero Trust', q:125, leaves:['Cloud model selection:...','Multi-cloud security:...','Residency plus...','IDaaS in serverless: best...','Multi-tenant logical...'],
-    factors:['<b>Cloud model selection: map what first?</b> &mdash; When selecting a cloud model, map responsibility first: SaaS shifts the most responsibility to the provider, while IaaS retains the most customer control. Responsibility...',
-     '<b>Multi-cloud security: silos or central?</b> &mdash; When designing multi-cloud security, choose centralized policy with federated identity and consistent governance over per-cloud silos. Centralized governance is the...',
-     '<b>Residency plus flexibility: how?</b> &mdash; In a multi-cloud virtualized environment subject to data sovereignty regulations, ensure compliance while maximizing flexibility through data classification with dynamic... <span class="qrefs">[Q70]</span>',
-     '<b>IDaaS in serverless: best use?</b> &mdash; When migrating to serverless and implementing IDaaS, enhance security posture and operational efficiency with least privilege by integrating IDaaS with fine-grained... <span class="qrefs">[Q19]</span>',
-     '<b>Multi-tenant logical separation?</b> &mdash; In a multi-tenant cloud with dynamic resource allocation replacing traditional perimeter models, achieve logical tenant separation and adaptable controls with... <span class="qrefs">[Q205]</span>',
-     '<b>Cloud banking layered defense?</b> &mdash; For a financial institution migrating core banking systems to cloud, the most comprehensive layered defense combines IAM, segmentation, encryption, and SIEM (Security... <span class="qrefs">[Q235]</span>'],
-    rule:'Shared responsibility sets the boundary; verify every request' }
+{ id:'f15', g:'g1', name:"Cloud, ICS, IoT & zero trust", topic:"Cloud Models, Virtualization, ICS/SCADA, IoT & Zero Trust", q:125, leaves:["Service model by need", "Isolate the ICS", "Zero trust = continuous", "Tenant isolation", "IoT lifecycle"],
+    factors:[
+     "<b>Cloud model follows the requirement</b> &mdash; custom trading apps = IaaS; build-and-deploy platform = PaaS; dedicated resources = private; mixed on-prem + public = hybrid; five hospitals sharing regulated needs = community; on-demand/elastic/measured = the NIST essential characteristics; CFO&rsquo;s capex→opex = pay-as-you-go. <span class=\"qrefs\">[<a href=\"#q-Q510\">Q510</a> <a href=\"#q-Q294\">Q294</a> <a href=\"#q-Q298\">Q298</a> <a href=\"#q-Q297\">Q297</a> <a href=\"#q-Q299\">Q299</a> <a href=\"#q-Q673\">Q673</a> <a href=\"#q-Q696\">Q696</a> <a href=\"#q-Q483\">Q483</a>]</span>",
+     "<b>Shared responsibility: the consumer keeps accountability</b> &mdash; ambiguity over who secures what is the model itself; consumers own data, apps, workloads; pre-migration runs due diligence; misconfigured permissions are the top cloud risk; abstraction layers preserve provider independence. <span class=\"qrefs\">[<a href=\"#q-Q664\">Q664</a> <a href=\"#q-Q991\">Q991</a> <a href=\"#q-Q959\">Q959</a> <a href=\"#q-Q990\">Q990</a> <a href=\"#q-Q187\">Q187</a> <a href=\"#q-Q495\">Q495</a>]</span>",
+     "<b>ICS lives isolated</b> &mdash; SCADA on separate air-gapped networks; connecting to corporate makes every host a threat; ransomware crosses shared infrastructure; DCS indirect paths count; legacy systems get segmentation + integrity checks; patches deploy staged; long hardware lifecycles tailor the strategy; chemical-plant cascades get modeled. <span class=\"qrefs\">[<a href=\"#q-Q26\">Q26</a> <a href=\"#q-Q770\">Q770</a> <a href=\"#q-Q919\">Q919</a> <a href=\"#q-Q752\">Q752</a> <a href=\"#q-Q757\">Q757</a> <a href=\"#q-Q735\">Q735</a> <a href=\"#q-Q633\">Q633</a> <a href=\"#q-Q796\">Q796</a> <a href=\"#q-Q890\">Q890</a> <a href=\"#q-Q1106\">Q1106</a>]</span>",
+     "<b>Zero trust = never trust, verify continuously</b> &mdash; adaptive authentication + microsegmentation + per-request checks; API gateways enforce; users without re-verification show the principle in action; blocked by providers → trust-but-verify with enhanced assurance. <span class=\"qrefs\">[<a href=\"#q-Q14\">Q14</a> <a href=\"#q-Q229\">Q229</a> <a href=\"#q-Q193\">Q193</a> <a href=\"#q-Q611\">Q611</a> <a href=\"#q-Q240\">Q240</a> <a href=\"#q-Q61\">Q61</a> <a href=\"#q-Q789\">Q789</a>]</span>",
+     "<b>Virtualization trades convenience for escape risk</b> &mdash; VM escape and hypervisor hardening dominate; Type 1 + hardware assist for zero-trust hosts; live migrations ride a dedicated TLS network; container images bundle vulnerabilities; container-to-container traffic expands the surface — image scanning, runtime security and least-privilege IPC answer. <span class=\"qrefs\">[<a href=\"#q-Q96\">Q96</a> <a href=\"#q-Q163\">Q163</a> <a href=\"#q-Q137\">Q137</a> <a href=\"#q-Q1094\">Q1094</a> <a href=\"#q-Q459\">Q459</a> <a href=\"#q-Q135\">Q135</a> <a href=\"#q-Q939\">Q939</a> <a href=\"#q-Q304\">Q304</a> <a href=\"#q-Q810\">Q810</a>]</span>",
+     "<b>Multi-tenancy = isolation engineering</b> &mdash; hypervisor controls with hardware assist, tenant-specific virtual segmentation, tenant-scoped security layers; the public segment holds the visibility risk. <span class=\"qrefs\">[<a href=\"#q-Q72\">Q72</a> <a href=\"#q-Q792\">Q792</a> <a href=\"#q-Q205\">Q205</a> <a href=\"#q-Q551\">Q551</a> <a href=\"#q-Q893\">Q893</a>]</span>",
+     "<b>IoT security is lifecycle security</b> &mdash; device certificates at scale, firmware signing, secure boot with limited compute, whitelisting + segmentation, OTA update management, continuous vulnerability management, edge computing for latency-sensitive plants, API threat modeling for medical IoT; the people dimension stays the hardest. <span class=\"qrefs\">[<a href=\"#q-Q82\">Q82</a> <a href=\"#q-Q843\">Q843</a> <a href=\"#q-Q49\">Q49</a> <a href=\"#q-Q131\">Q131</a> <a href=\"#q-Q51\">Q51</a> <a href=\"#q-Q178\">Q178</a> <a href=\"#q-Q1058\">Q1058</a> <a href=\"#q-Q909\">Q909</a> <a href=\"#q-Q563\">Q563</a>]</span>"],
+    rule:"Isolation (tenant, network, process) + continuous verification + right-sized device security decide these answers." }
 ];
 
 var RADAR=[
-{t:'Wrong artifact attacked', d:'Attacking the key, the ciphertext, the implementation or the math - questions ask which.', ex:'see factor ladders'},
-{t:'Guarantee mismatch', d:'Confidentiality controls offered for integrity or authentication asks - match the property.', ex:'see factor ladders'},
-{t:'Layer skipped', d:'Solutions that start at technology while the question names an earlier planning step.', ex:'see factor ladders'},
-{t:'Single point of trust', d:'One control, vendor or path presented as total protection.', ex:'see factor ladders'},
-{t:'Speed over correctness', d:'Performance options chosen where the scored factor is correctness of the control.', ex:'see factor ladders'},
-{t:'Absolute promises', d:'Guarantees of prevention or unbreakability - reject absolutes.', ex:'see factor ladders'},
-{t:'Detection sold as prevention', d:'Monitoring or audit answers where prevention is asked.', ex:'see factor ladders'},
-{t:'Vendor first', d:'Outsourcing proposed where governance or design ownership is the scored step.', ex:'see factor ladders'},
-{t:'Once-and-done', d:'Point-in-time fixes where lifecycle or continuous operation is required.', ex:'see factor ladders'}
+{t:"Perimeter nostalgia", d:"Moat-and-castle designs where zero trust and microsegmentation are asked.", ex:"<a href=\"#q-Q14\">Q14</a>, <a href=\"#q-Q730\">Q730</a>, <a href=\"#q-Q546\">Q546</a>"},
+{t:"Provider dependency", d:"Single-provider migrations without abstraction layers or portability.", ex:"<a href=\"#q-Q495\">Q495</a>, <a href=\"#q-Q990\">Q990</a>"},
+{t:"Responsibility hand-off", d:"&ldquo;The cloud provider secures it&rdquo; where the consumer keeps accountability.", ex:"<a href=\"#q-Q959\">Q959</a>, <a href=\"#q-Q991\">Q991</a>, <a href=\"#q-Q511\">Q511</a>"},
+{t:"Flat ICS network", d:"SCADA/DCS/PLC bridged to corporate with no isolation or air gap.", ex:"<a href=\"#q-Q50\">Q50</a>, <a href=\"#q-Q919\">Q919</a>, <a href=\"#q-Q752\">Q752</a>"},
+{t:"Container complacency", d:"Containers treated as isolated by default; image and escape risk ignored.", ex:"<a href=\"#q-Q459\">Q459</a>, <a href=\"#q-Q96\">Q96</a>, <a href=\"#q-Q135\">Q135</a>"},
+{t:"Tenant blending", d:"Shared virtual networks with no tenant separation or per-tenant policy.", ex:"<a href=\"#q-Q792\">Q792</a>, <a href=\"#q-Q205\">Q205</a>"},
+{t:"Set-and-forget IoT", d:"Devices deployed without signing, OTA updates or vulnerability management.", ex:"<a href=\"#q-Q843\">Q843</a>, <a href=\"#q-Q51\">Q51</a>, <a href=\"#q-Q178\">Q178</a>"},
+{t:"Model mix-ups", d:"Service/deployment models confused — PaaS where IaaS fits, public where community fits.", ex:"<a href=\"#q-Q294\">Q294</a>, <a href=\"#q-Q299\">Q299</a>, <a href=\"#q-Q673\">Q673</a>"},
+{t:"Trust-but-forget", d:"&ldquo;Trust but verify&rdquo; quoted without the enhanced-assurance mechanisms.", ex:"<a href=\"#q-Q240\">Q240</a>, <a href=\"#q-Q789\">Q789</a>"}
 ];
 
 var QS = [
@@ -405,7 +412,7 @@ var QS = [
   el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
   var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
-  c0.textContent = 'DOMAIN 7 · PART';
+  c0.textContent = "DOMAIN 3 · PART";
   var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
   c1.textContent = 'DECISION';

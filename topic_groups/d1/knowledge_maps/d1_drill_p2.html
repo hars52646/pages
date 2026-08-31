@@ -65,6 +65,11 @@
   .ladder .rule{margin-top:9px;font-size:13px;font-style:italic;color:#0f172a;background:#fafbfe;border:1px dashed var(--line);border-radius:9px;padding:6px 10px}
   .ladder .rule b{color:var(--mc);font-style:normal}
 
+  .ladder ol li .qrefs{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .ladder ol li .qrefs a{color:var(--mc);text-decoration:none;border-bottom:1px dotted var(--mc);margin:0 1px}
+  .ladder ol li .qrefs a:hover{border-bottom-style:solid}
+  .rad .ex a{color:#b91c1c;text-decoration:none;font-weight:800}
+  .rad .ex a:hover{text-decoration:underline}
   .radar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:14px}
   .rad{background:#fff;border:1px solid var(--line);border-left:6px solid #b91c1c;border-radius:12px;padding:12px 15px;font-size:13.8px;color:#334155}
   .rad h3{margin:0 0 4px;font-size:15px;color:#b91c1c}
@@ -124,9 +129,9 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">CISSP &middot; Domain 7 &middot; Exam preparation &middot; logic-based scenarios &middot; part 2 of 6</div>
+    <div class="eyebrow">CISSP &middot; Domain 1 &middot; Exam preparation &middot; logic-based scenarios &middot; part 2 of 6</div>
     <h1>D1 Question Drill 2 &mdash; Policy, People & Risk Concepts (topics 8-10)</h1>
-    <p class="sub"><b>92 scenario questions</b> (topics 1&ndash;12) &middot; <b>12 decision families</b> &middot; <b>5 knowledge groups</b> &mdash; forensics and evidence, monitoring and intel, malware defense, change and patch, resources and environment. Continues in <a href="d7_drill_p2.html">part 2: continuity and recovery (80 questions)</a>. Companion: the <a href="d7_mindmap_cheatsheet.html">knowledge mindmap</a> &middot; <a href="d7_index.html">D7 hub</a>.</p>
+    <p class="sub"><b>74 scenario questions</b> (topics 8&ndash;10 of 27) &middot; <b>3 decision families</b> &mdash; policies &amp; standards, personnel security, risk concepts &amp; ALE. Continues in <a href="d1_drill_p3.html">part 3: risk treatment &amp; controls</a>. Companion: the <a href="d1_cheatsheet_p2.html">knowledge cheatsheet</a> &middot; <a href="d1_index.html">D1 hub</a>.</p>
   </div>
 </header>
 
@@ -140,7 +145,7 @@
 
   <section id="fmap">
     <h2>1 &middot; The family map &mdash; question groups on the knowledge tree</h2>
-    <p class="lede">The 12 part-1 families (of D7&rsquo;s 18 total), colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
+    <p class="lede">The 3 families on this page, colored by the knowledge group they belong to (same palette as the knowledge page). Each leaf is a decision factor with question refs. Click a branch to open its factor ladder.</p>
     <div class="map-panel">
       <svg id="fammap" viewBox="0 0 2100 1560" role="img" aria-label="Family map, D1 drill part 2"></svg>
       <div class="maphint">&#9757; Click a family node &middot; color = parent knowledge group &middot; leaf = decision factor (Q refs)</div>
@@ -184,37 +189,43 @@
 <script>
 var GROUPS={g1:{name:"Risk Treatment & Controls A",color:"#b91c1c",fill:"#dc2626"},g2:{name:"Risk Treatment & Controls B",color:"#b45309",fill:"#d97706"},g3:{name:"Risk Treatment & Controls C",color:"#6d28d9",fill:"#7c3aed"},g4:{name:"Risk Treatment & Controls D",color:"#1d4ed8",fill:"#2563eb"},g5:{name:"Risk Treatment & Controls E",color:"#047857",fill:"#059669"},g6:{name:"Risk Frameworks & RMF",color:"#be185d",fill:"#db2777"},g7:{name:"Threat Modeling & Supply Chain",color:"#0e7490",fill:"#0891b2"}};
 var FAMILIES = [
-{ id:'f08', g:'g1', name:"Policies & Standards", topic:"Security Policies, Standards, Procedures & Guidelines", q:9, leaves:["Managerial or technical?","Loss exceeds appetite?"],
+{ id:'f08', g:'g1', name:"Policies & Standards", topic:"Policies, Standards, Baselines, Guidelines & Procedures", q:9, leaves:["Match artifact to intent", "Layer policy/standard/proc", "Write to be read", "Baselines at procurement"],
     factors:[
-     "<b>Managerial or technical?</b> &mdash; CISSP frames risk treatment and control-selection decisions as managerial, risk-based choices, not purely technical ones. Controls exist to manage risk to an acceptable...",
-     "<b>Loss exceeds appetite?</b> &mdash; Choose transfer (insurance) when the potential loss exceeds the organization's risk appetite but the activity must continue."],
-    rule:"Policy mandates, standards specify, procedures execute" },
-{ id:'f09', g:'g1', name:"Personnel Security", topic:"Personnel Security & Human Resources", q:7, leaves:["Managerial or technical?","Loss exceeds appetite?"],
+     "<b>Pick the artifact by enforcement level</b> &mdash; policy (mandatory, what), standard (mandatory, specifics), baseline (minimum platform), guideline (recommended), procedure (step-by-step how). A monster document mixing all levels gets split, not shortened. <span class=\"qrefs\">[<a href=\"#q-Q715\">Q715</a> <a href=\"#q-Q759\">Q759</a>]</span>",
+     "<b>Policies must be brief, clear, understandable</b> &mdash; when employees ignore policy, the scored diagnosis is communication and clarity &mdash; for merged staff, continuous communication to all personnel. <span class=\"qrefs\">[<a href=\"#q-Q673\">Q673</a> <a href=\"#q-Q809\">Q809</a>]</span>",
+     "<b>Vendor minimums are baselines at procurement</b> &mdash; baseline security requirements enter the purchasing process before contracts. <span class=\"qrefs\">[<a href=\"#q-Q807\">Q807</a>]</span>",
+     "<b>Privacy-sensitive tech gets risk-based policy</b> &mdash; facial-recognition CCTV: time-limited retention, strict access, training and transparency under a privacy framework. <span class=\"qrefs\">[<a href=\"#q-Q267\">Q267</a> <a href=\"#q-Q649\">Q649</a> <a href=\"#q-Q1213\">Q1213</a>]</span>",
+     "<b>Security details belong in the standard, not the policy</b> &mdash; Content-Security-Policy headers and reset-link mechanics are implementation specifics below policy level. <span class=\"qrefs\">[<a href=\"#q-Q330\">Q330</a> <a href=\"#q-Q334\">Q334</a>]</span>"],
+    rule:"Name the enforcement level first — then the artifact that carries it." },
+{ id:'f09', g:'g1', name:"Personnel Security", topic:"Personnel Security, Screening & Third-Party Risk", q:7, leaves:["Screen to access risk", "Social engineering first", "Name the attack", "SLR before SLA"],
     factors:[
-     "<b>Managerial or technical?</b> &mdash; CISSP frames risk treatment and control-selection decisions as managerial, risk-based choices, not purely technical ones. Controls exist to manage risk to an acceptable...",
-     "<b>Loss exceeds appetite?</b> &mdash; Choose transfer (insurance) when the potential loss exceeds the organization's risk appetite but the activity must continue."],
-    rule:"Screening, agreements and awareness control the human risk" },
-{ id:'f10', g:'g6', name:"Risk Concepts & ALE", topic:"Risk Management Concepts, ALE & Analysis", q:58, leaves:["Society vs employer: who...","Refuse and escalate?","Profession vs any other...","Framework or ethics...","Do ethics vary by..."],
+     "<b>Screening depth follows data access</b> &mdash; a DBA touching patient records justifies deeper background checks; controls scale to the value at risk. <span class=\"qrefs\">[<a href=\"#q-Q442\">Q442</a>]</span>",
+     "<b>Social engineering beats technical controls</b> &mdash; attackers phone the billing dept: the scored lesson is exploiting human trust, so training and verification procedures lead. <span class=\"qrefs\">[<a href=\"#q-Q557\">Q557</a>]</span>",
+     "<b>Name the targeted attack</b> &mdash; customized email to a CFO = whaling; customer-targeted phishing = prominent browser indicators as the counter. <span class=\"qrefs\">[<a href=\"#q-Q625\">Q625</a> <a href=\"#q-Q878\">Q878</a>]</span>",
+     "<b>Physical entry controls match the requirement</b> &mdash; single-person verification at a lab entrance = turnstile mantraps. <span class=\"qrefs\">[<a href=\"#q-Q403\">Q403</a>]</span>",
+     "<b>MSSP onboarding: SLRs define, SLAs enforce</b> &mdash; requirements documents precede and feed the enforceable agreements. <span class=\"qrefs\">[<a href=\"#q-Q688\">Q688</a>]</span>"],
+    rule:"People are the attack surface: screen by access, train by threat, contract by requirements." },
+{ id:'f10', g:'g6', name:"Risk Concepts & ALE", topic:"Risk Management Concepts, Analysis & ALE", q:58, leaves:["Value assets first", "Qual vs quant by data", "ALE ranks the spend", "Owners accept residual", "Model to the goal"],
     factors:[
-     "<b>Society vs employer: who wins?</b> &mdash; When two canons conflict, choose the action that satisfies the lower-numbered canon \u2014 even if it means going against the employer's directive. Society outranks employer;...",
-     "<b>Refuse and escalate?</b> &mdash; When an employer asks you to do something unethical or illegal, refuse and escalate through proper channels (management, legal, HR). Complying makes you ethically...",
-     "<b>Profession vs any other canon?</b> &mdash; When 'advance the profession' (Canon 4) conflicts with any other canon, the other canon wins \u2014 Canon 4 is last in priority. Threat-intel sharing or peer collaboration... <span class=\"qrefs\">[Q559]</span>",
-     "<b>Framework or ethics foundational?</b> &mdash; Frameworks (ISO 27001, NIST CSF) and ethics serve different purposes: frameworks structure controls; ethics governs conduct and decisions \u2014 ethics is the foundational... <span class=\"qrefs\">[Q315]</span>",
-     "<b>Do ethics vary by geography?</b> &mdash; When operating across regions with differing laws or norms, apply ISC2 ethics consistently and globally \u2014 ethics are universal and do not vary by geography or local...",
-     "<b>Contract or harm prevention?</b> &mdash; Healthcare vendor risk with CEO preference for a supplier: the governing principle is doing nothing harmful to others. Contractual obligations are legally bounded but... <span class=\"qrefs\">[Q362]</span>"],
-    rule:"SLE = AV x EF; ALE = SLE x ARO - compute before answering" }
+     "<b>Asset identification and valuation come first</b> &mdash; before any risk work: know what exists and what it is worth, including the data, not just hardware. <span class=\"qrefs\">[<a href=\"#q-Q197\">Q197</a> <a href=\"#q-Q734\">Q734</a> <a href=\"#q-Q631\">Q631</a> <a href=\"#q-Q236\">Q236</a>]</span>",
+     "<b>Qualitative vs quantitative follows the data and the ask</b> &mdash; insurance and precise loss = quantitative (monetary, ALE); ranking without financials, mergers of unlike analyses, or a new program = qualitative first, then quantify the critical few. <span class=\"qrefs\">[<a href=\"#q-Q732\">Q732</a> <a href=\"#q-Q194\">Q194</a> <a href=\"#q-Q690\">Q690</a> <a href=\"#q-Q729\">Q729</a> <a href=\"#q-Q771\">Q771</a>]</span>",
+     "<b>ALE orders the mitigation queue</b> &mdash; higher annualized loss exposure gets priority when resources are constrained; likelihood &times; impact together determine overall risk. <span class=\"qrefs\">[<a href=\"#q-Q227\">Q227</a> <a href=\"#q-Q206\">Q206</a> <a href=\"#q-Q203\">Q203</a>]</span>",
+     "<b>Residual risk is accepted by owners, senior management</b> &mdash; never by the security team or an insurer &mdash; accountability for consequences rides upward, and risk management cycles because assets, threats and controls change. <span class=\"qrefs\">[<a href=\"#q-Q212\">Q212</a> <a href=\"#q-Q517\">Q517</a> <a href=\"#q-Q260\">Q260</a> <a href=\"#q-Q755\">Q755</a> <a href=\"#q-Q152\">Q152</a> <a href=\"#q-Q383\">Q383</a>]</span>",
+     "<b>Threat modeling method fits the goal</b> &mdash; business-risk alignment = PASTA; multi-team scale = VAST; what remains after controls = residual risk. <span class=\"qrefs\">[<a href=\"#q-Q2\">Q2</a> <a href=\"#q-Q423\">Q423</a> <a href=\"#q-Q1226\">Q1226</a> <a href=\"#q-Q392\">Q392</a> <a href=\"#q-Q482\">Q482</a>]</span>",
+     "<b>Emerging tech risk = expanded attack surface</b> &mdash; smart buildings, IoT fleets and biometric rollouts are scored on connectivity-borne exposure, weak randomness and replay/theft of biometric data &mdash; prioritize by greatest exposure. <span class=\"qrefs\">[<a href=\"#q-Q243\">Q243</a> <a href=\"#q-Q37\">Q37</a> <a href=\"#q-Q45\">Q45</a> <a href=\"#q-Q72\">Q72</a> <a href=\"#q-Q630\">Q630</a> <a href=\"#q-Q597\">Q597</a>]</span>"],
+    rule:"Value the asset, choose the analysis you can afford, let ALE rank the spend — owners sign for what remains." }
 ];
 
 var RADAR=[
-{t:'Property confusion', d:'Confidentiality, integrity, availability traded as if interchangeable - read which property the stem sacrifices.', ex:'see factor ladders'},
-{t:'Owner misplaced', d:'Risk acceptance or governance duties assigned to the wrong role.', ex:'see factor ladders'},
-{t:'Verb skipped', d:'Controls chosen before the treatment verb (avoid, transfer, mitigate, accept) is named.', ex:'see factor ladders'},
-{t:'ALE arithmetic ignored', d:'Qualitative answers where the stem gives numbers - compute SLE and ALE first.', ex:'see factor ladders'},
-{t:'Framework step swapped', d:'RMF steps out of order, authorization before assessment.', ex:'see factor ladders'},
-{t:'Compliance absolutes', d:'Certification treated as compliance; audits treated as guarantees.', ex:'see factor ladders'},
-{t:'Cloud duty transfer', d:'Provider answers where customer data accountability remains.', ex:'see factor ladders'},
-{t:'Layer skipped', d:'Technology-first answers where the question names policy or governance.', ex:'see factor ladders'},
-{t:'Once-and-done', d:'Point-in-time fixes where continuous monitoring or review is asked.', ex:'see factor ladders'}
+{t:"Analysis-type swap", d:"Qualitative analysis chosen where money must be precise (insurance, budgets), or quantitative where no financial data exists.", ex:"<a href=\"#q-Q732\">Q732</a>, <a href=\"#q-Q194\">Q194</a>, <a href=\"#q-Q690\">Q690</a>"},
+{t:"Valuation skipped", d:"Risk register built before anyone identified or valued the assets it lists.", ex:"<a href=\"#q-Q197\">Q197</a>, <a href=\"#q-Q734\">Q734</a>"},
+{t:"Security accepts risk", d:"The security team or an insurer offered as the risk owner instead of senior management/asset owners.", ex:"<a href=\"#q-Q212\">Q212</a>, <a href=\"#q-Q260\">Q260</a>, <a href=\"#q-Q517\">Q517</a>"},
+{t:"Once-and-done risk", d:"Last year&rsquo;s assessment treated as current although assets, threats and controls moved.", ex:"<a href=\"#q-Q383\">Q383</a>, <a href=\"#q-Q152\">Q152</a>"},
+{t:"Impact ignored", d:"Ranking by likelihood alone where probability &times; impact decides priority.", ex:"<a href=\"#q-Q206\">Q206</a>, <a href=\"#q-Q203\">Q203</a>"},
+{t:"Policy monolith", d:"One giant document absorbing standards, guidelines and procedures instead of a layered set.", ex:"<a href=\"#q-Q715\">Q715</a>, <a href=\"#q-Q759\">Q759</a>"},
+{t:"Blame the user", d:"Policy-ignoring treated as a discipline problem instead of clarity/communication failure.", ex:"<a href=\"#q-Q673\">Q673</a>, <a href=\"#q-Q809\">Q809</a>"},
+{t:"Tech-first exposure", d:"Smart-building/IoT rollouts praised for features while the expanded attack surface goes unaddressed.", ex:"<a href=\"#q-Q243\">Q243</a>, <a href=\"#q-Q546\">Q546</a>"},
+{t:"Method mismatch", d:"STRIDE-style brainstorming where business-aligned (PASTA) or scalable (VAST) modeling is asked.", ex:"<a href=\"#q-Q2\">Q2</a>, <a href=\"#q-Q1226\">Q1226</a>"}
 ];
 
 var QS = [
@@ -365,7 +376,7 @@ var QS = [
   el('rect',{x:CX-cw/2, y:CY-ch/2, width:cw, height:ch, rx:18, fill:'#0f172a'}, gc);
   var c0 = el('text',{x:CX, y:CY-24, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':11, 'font-weight':700, 'letter-spacing':2, fill:'#94a3b8'}, gc);
-  c0.textContent = 'DOMAIN 7 · PART';
+  c0.textContent = "DOMAIN 1 · PART";
   var c1 = el('text',{x:CX, y:CY-3, 'text-anchor':'middle', 'dominant-baseline':'central',
                       'font-size':19, 'font-weight':800, fill:'#ffffff'}, gc);
   c1.textContent = 'DECISION';

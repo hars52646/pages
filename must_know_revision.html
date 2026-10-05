@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUST-KNOW Topics — Compressed Revision</title>
+<style>
+  :root{--bg:#0e1420;--card:#182032;--line:#2c3a57;--txt:#dbe4f5;--dim:#8fa0c2;--accent:#4fc3f7;
+    --green:#66bb6a;--red:#ef5350;--amber:#ffb74d;--purple:#ba68c8}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.5;padding-bottom:60px}
+  .wrap{max-width:960px;margin:0 auto;padding:18px}
+  h1{color:var(--accent);font-size:1.5em;margin:14px 0 2px}
+  .sub{color:var(--dim);font-size:.9em;margin-bottom:16px}
+  .topic{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:12px 0;overflow:hidden}
+  .topic>summary{cursor:pointer;padding:12px 16px;font-weight:700;display:flex;gap:10px;align-items:center;list-style:none}
+  .topic>summary::-webkit-details-marker{display:none}
+  .topic>summary .tag{margin-left:auto;font-size:.72em;color:var(--dim);font-weight:400}
+  .topic[open]>summary{border-bottom:1px solid var(--line)}
+  .b{padding:12px 16px}
+  table{border-collapse:collapse;width:100%;margin:8px 0;font-size:.9em}
+  th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+  th{background:#202a40;color:var(--accent)}
+  ul{padding-left:18px}li{margin:3px 0}
+  .trap{background:#2d181a;border:1px solid #5c2c30;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:.9em}
+  .trap b{color:var(--red)}
+  .key{background:#14251c;border:1px solid #2c4a36;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:.9em}
+  .key b{color:var(--green)}
+  .mn{background:#2b2413;border:1px solid #5c4d22;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:.9em}
+  .mn b{color:var(--amber)}
+  code{background:#202a40;padding:1px 6px;border-radius:4px;font-size:.9em}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:700px){.grid{grid-template-columns:1fr}}
+  .nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);padding:8px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  button{background:#202a40;color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:6px 12px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>MUST-KNOW Topics — Compressed Revision</h1>
+<div class="sub">The "Topics You MUST KNOW" list from the course, compressed for rapid revision. Full transcripts are next to each video in <code>must_know/</code>. Pair with <code>process_drill.html</code> for the process topics.</div>
+
+<!-- CIA -->
+<details class="topic" open><summary>🔐 CIA Triad <span class="tag">D1 · Remastered video</span></summary><div class="b">
+<table>
+<tr><th></th><th>Goal</th><th>Broken by</th><th>Typical controls</th></tr>
+<tr><td><b>C</b>onfidentiality</td><td>secrets stay secret (need-to-know)</td><td>sniffing, shoulder surfing, social engineering, careless encryption keys</td><td>encryption, access controls, classification, training</td></tr>
+<tr><td><b>I</b>ntegrity</td><td>data isn't improperly modified; accurate &amp; trusted</td><td>unauthorized changes, malware, transmission errors</td><td>hashing, digital signatures, integrity checks (CRC is NOT security)</td></tr>
+<tr><td><b>A</b>vailability</td><td>up when needed (within MTD!)</td><td>DoS/DDoS, hardware failure, disasters</td><td>RAID, redundancy, DR sites, UPS, backups</td></tr>
+</table>
+<div class="key"><b>Opposite sides:</b> Over-availability focus can damage confidentiality (e.g., disabling checks). DAD = Disclosure, Alteration, Destruction (the anti-CIA).</div>
+<div class="trap"><b>Trap:</b> Encryption at rest protects confidentiality, NOT integrity or availability. Hashing alone gives integrity only if tamper-protected.</div>
+</div></details>
+
+<!-- BCP/DRP -->
+<details class="topic"><summary>🏗️ BCP/DRP + BIA <span class="tag">D1 · full drill in process_drill.html</span></summary><div class="b">
+<div class="key"><b>Compression:</b> Risk analysis prices the threat (ALE) → BCP Ph1 scope (senior mgmt!) → BIA (priorities → <b>MTD ⊃ RTO+WRT</b>, separate <b>RPO</b>) → Ph3 strategies (site tier fits under MTD) → Ph4 approval (senior mgmt) → DRP fires by BIA order → test annually (checklist→walkthrough→simulation→parallel→full-interruption).</div>
+<div class="mn"><b>Numbers ladder:</b> RPO (data) · RTO+WRT ≤ MTD · hot site = minutes · warm = days · cold = weeks · site choice = cheapest that fits MTD.</div>
+<div class="trap"><b>Trap:</b> BIA identifies critical business <u>processes</u>; risk analysis identifies <u>assets</u>. Senior management approves/supports everything.</div>
+</div></details>
+
+<!-- SDLC -->
+<details class="topic"><summary>💾 Systems / Software Development Life Cycle <span class="tag">D8 · 3 videos</span></summary><div class="b">
+<table>
+<tr><th>Phase</th><th>Security activity</th></tr>
+<tr><td>1. Initiation / Requirements</td><td>security requirements, data classification, PIA if PII</td></tr>
+<tr><td>2. Design / Development</td><td>threat modeling, attack surface analysis, secure design (least privilege, defense in depth)</td></tr>
+<tr><td>3. Development / Build</td><td>secure coding, code reviews, no credentials in code, version control</td></tr>
+<tr><td>4. Testing / Validation</td><td>unit/integration testing, <b>SAST</b> (static, code-level) vs <b>DAST</b> (dynamic, running app), stress testing</td></tr>
+<tr><td>5. Deployment / Release</td><td>final security review, certification &amp; accreditation, configuration hardening</td></tr>
+<tr><td>6. Operations / Maintenance</td><td>patching, config mgmt, monitoring</td></tr>
+<tr><td>7. Disposal / Retire</td><td>data destruction/declassification, media sanitization</td></tr>
+</table>
+<div class="mn"><b>Mnemonic:</b> "I Don't Typically Develop Good Software, I Deliver" (Initiation, Design, Develop, Test, Go-live/deploy, Sustain, Dispose).</div>
+<div class="trap"><b>Trap:</b> Cost of fixing a flaw grows every phase it survives — security requirements belong in phase 1 (privacy by design = PIA early). Waterfall vs Agile vs Spiral (risk-driven): know Spiral = risk focus per iteration.</div>
+</div></details>
+
+<!-- Common Criteria -->
+<details class="topic"><summary>🧪 Common Criteria (know the levels!) <span class="tag">D3 · 1 video</span></summary><div class="b">
+<div class="key"><b>Two artifacts:</b> <b>PP</b> = Protection Profile (USER/BUYER says "I need a firewall that does X") · <b>ST</b> = Security Target (VENDOR says "my product does X"). Product is evaluated <b>against its ST</b>; PP is the requirement doc. <b>TOE</b> = Target of Evaluation. EALs rate assurance, not security!</div>
+<table>
+<tr><th>EAL</th><th>Level</th><th>Memory hook</th></tr>
+<tr><td>EAL1</td><td>Functionally tested</td><td>1 = just works</td></tr>
+<tr><td>EAL2</td><td>Structurally tested</td><td>2 = design looked at</td></tr>
+<tr><td>EAL3</td><td>Methodically tested &amp; checked</td><td>3 = methodical</td></tr>
+<tr><td>EAL4</td><td>Methodically designed, tested &amp; reviewed</td><td>4 = <b>highest common commercial</b> (old Windows)</td></tr>
+<tr><td>EAL5</td><td>Semi-formally designed &amp; tested</td><td>5 = semi-formal (high assurance chips)</td></tr>
+<tr><td>EAL6</td><td>Semi-formally verified design &amp; tested</td><td>6 = verified</td></tr>
+<tr><td>EAL7</td><td>Formally verified design &amp; tested</td><td>7 = formal proof, extreme</td></tr>
+</table>
+<div class="trap"><b>Trap:</b> EAL ≠ more security features — it's <b>assurance</b> (confidence the claims were verified). Higher EAL = more cost/time. Also: TOE = product + guidance + environment.</div>
+</div></details>
+
+<!-- PKI -->
+<details class="topic"><summary>🔑 Public Key Infrastructure <span class="tag">D3 · 2 videos</span></summary><div class="b">
+<div class="key"><b>Core:</b> Asymmetric pair — public key encrypts → private key decrypts (confidentiality). Private key signs → public key verifies (authenticity + non-repudiation). You never share the private key.</div>
+<ul>
+<li><b>CA</b> issues/signs certificates (X.509). <b>RA</b> verifies identity before issuance. <b>CRL</b>/<b>OCSP</b> check revocation (OCSP = real-time; stapling = CA responds less).</li>
+<li><b>Certificate lifecycle</b>: enrollment → issuance → validation → revocation → renewal. Key escrow = key held in escrow for recovery; M of N control.</li>
+<li><b>Trust models</b>: single CA, hierarchical CA (root → intermediate → leaf; most common), cross-certification, bridge CA, web of trust (PGP).</li>
+<li><b>Hybrid encryption</b>: asymmetric to exchange a symmetric session key, symmetric for bulk data (TLS does exactly this).</li>
+</ul>
+<div class="trap"><b>Trap:</b> Digital signature = hash the message, encrypt hash with <b>sender's PRIVATE</b> key. Confidentiality uses the <b>recipient's PUBLIC</b> key. Non-repudiation only comes from asymmetric signatures.</div>
+</div></details>
+
+<!-- IPSec -->
+<details class="topic"><summary>🌐 IPSec <span class="tag">D4 · 2 videos</span></summary><div class="b">
+<table>
+<tr><th></th><th>AH (51)</th><th>ESP (50)</th></tr>
+<tr><td>Confidentiality (encryption)</td><td>❌</td><td>✅</td></tr>
+<tr><td>Integrity + authentication</td><td>✅ (whole packet)</td><td>✅ (payload only)</td></tr>
+<tr><td>Anti-replay</td><td>✅</td><td>✅</td></tr>
+<tr><td>NAT friendly</td><td>❌ (hash breaks)</td><td>✅ (with NAT-T)</td></tr>
+</table>
+<div class="key"><b>Modes:</b> <b>Transport</b> = payload encrypted, original IP header kept (host-to-host) · <b>Tunnel</b> = entire packet encrypted + NEW IP header (gateway-to-gateway, VPNs).</div>
+<div class="mn"><b>Mnemonic:</b> "AH = Authentication Header = nohide" · "ESP = Encapsulating Security Payload = encryption". Tunnel = whole tunnel packet wrapped.</div>
+<div class="key"><b>IKE</b> (UDP 500/4500) does the key exchange: Phase 1 = secure channel (DH), Phase 2 = negotiate IPSec SAs. <b>SA</b> = one-way agreement (need 2 for bidirectional). <b>SPI</b> identifies the SA.</div>
+</div></details>
+
+<!-- TLS -->
+<details class="topic"><summary>🔒 Transport Layer Security <span class="tag">D4 · 2 videos</span></summary><div class="b">
+<div class="key"><b>TLS 1.2 handshake order:</b> 1) ClientHello (supported ciphers + random) → 2) ServerHello + certificate + ServerHelloDone → 3) Client verifies cert, sends key exchange material → both derive <b>session (symmetric) key</b> → 4) ChangeCipherSpec + Finished. TLS 1.3: fewer round trips, RSA key exchange removed (forward secrecy only).</div>
+<ul>
+<li>Asymmetric (RSA/ECDHE) only to authenticate &amp; exchange keys; all bulk data = symmetric (AES-GCM).</li>
+<li>Handshakes: <b>TLS handshake</b> (connection) ≠ <b>TCP 3-way handshake</b> (SYN/SYN-ACK/ACK underneath).</li>
+</ul>
+<div class="trap"><b>Trap:</b> "Two different handshakes, two different keys" — TCP handshake establishes the connection, TLS handshake establishes encryption. Session keys are symmetric; certificates are asymmetric.</div>
+</div></details>
+
+<!-- IDS/IPS -->
+<details class="topic"><summary>🚨 IDS/IPS Operations <span class="tag">D7 PQ + D4</span></summary><div class="b">
+<table>
+<tr><th></th><th>IDS</th><th>IPS</th></tr>
+<tr><td>Placement</td><td>out-of-band (mirror port)</td><td>inline (in traffic path)</td></tr>
+<tr><td>Action</td><td>detects &amp; ALERTS</td><td>detects &amp; BLOCKS</td></tr>
+<tr><td>Risk</td><td>misses nothing by design; false alarms cost attention</td><td>false positive = blocks legit traffic (availability risk!)</td></tr>
+</table>
+<ul>
+<li><b>Signature-based</b>: known patterns, no false alarms on new attacks, but misses zero-days. <b>Anomaly (behavior/heuristic)</b>: learns baseline, catches novel, more false positives.</li>
+<li><b>NIDS</b> sees all network traffic but can't inspect encrypted payloads; <b>HIDS</b> sees host-level (processes, file changes) but can be tampered with on a compromised host.</li>
+<li>Alert colors: false positive (benign flagged), false negative (attack missed — worst), true positive/negative.</li>
+</ul>
+<div class="trap"><b>Trap:</b> IPS inline = availability risk; IDS passive = detection only. Knowledge-based = signature; behavior-based = anomaly.</div>
+</div></details>
+
+<!-- Mobile -->
+<details class="topic"><summary>📱 Mobile Security <span class="tag">no dedicated video — exam essentials</span></summary><div class="b">
+<ul>
+<li><b>Device security</b>: full-device encryption, screen lock + strong auth, remote wipe, MDM/UEM enrollment, containerization (work profile separated from personal).</li>
+<li><b>BYOD</b> risks: data ownership, support ownership, patching responsibility — mitigate with containers + MDM policies, not total bans.</li>
+<li><b>App stores / sideloading</b>: only official stores; sideloading bypasses vetting. App signing verifies publisher.</li>
+<li><b>Comms</b>: certificate pinning stops MITM via rogue CAs; disable Bluetooth/WiFi auto-connect; COPE vs CYOD vs BYOD ownership models.</li>
+<li><b>Attacks</b>: Bluejacking (send message), Bluesnarfing (steal data), Bluebugging (take control); SMiShing, malicious QR codes.</li>
+</ul>
+<div class="trap"><b>Trap:</b> Remote wipe on BYOD — company container wiped, personal data debate. Bluejacking = harmless message; Bluesnarfing = data theft.</div>
+</div></details>
+
+<!-- Bell-LaPadula / Biba -->
+<details class="topic"><summary>📚 Bell-LaPadula / Biba Models <span class="tag">D3 · 2 videos</span></summary><div class="b">
+<div class="grid">
+<div class="key"><b>Bell-LaPadula = CONFIDENTIALITY</b><br>• Simple Rule: <b>no read up</b> (NRU)<br>• Star Rule: <b>no write down</b> (NWD)<br>Focus: keep secrets in. Military classifications.</div>
+<div class="key"><b>Biba = INTEGRITY</b> (inverse)<br>• Simple Integrity: <b>no read down</b><br>• Star Integrity: <b>no write up</b><br>Focus: keep corruption out. "Biba writes up the wrong tree."</div>
+</div>
+<table>
+<tr><th>Model</th><th>Read</th><th>Write</th><th>Protects</th></tr>
+<tr><td>Bell-LaPadula</td><td>read DOWN ✓ / up ✗</td><td>write UP ✓ / down ✗</td><td>Confidentiality</td></tr>
+<tr><td>Biba</td><td>read UP ✓ / down ✗</td><td>write DOWN ✓ / up ✗</td><td>Integrity</td></tr>
+<tr><td>Clark-Wilson</td><td colspan="2">well-formed transactions via TP + AP, separation of duties (CDI/UDI/IVP)</td><td>Integrity (commercial)</td></tr>
+</table>
+<div class="mn"><b>Mnemonic:</b> BLP: "write up, read down — never leak" (confidentiality). Biba: exact opposite arrows. BLP = Battle Plans; Biba = Bad Input.</div>
+<div class="trap"><b>Trap:</b> Both are multilevel lattice Mandatory Access Control models. BLP's star rule = write UP; Biba's star rule = write DOWN. Don't swap.</div>
+</div></details>
+
+<!-- Hard tokens -->
+<details class="topic"><summary>🎫 Hard Tokens <span class="tag">D5 · 1 video</span></summary><div class="b">
+<ul>
+<li><b>Something you have</b> — factors: Type 1 = something you know (password/PIN), Type 2 = have (token/card), Type 3 = are (biometrics). Strongest = multifactor combining types.</li>
+<li><b>Synchronous</b> dynamic tokens: clock/time-based (RSA SecurID — token + server share a clock/seed) or counter-based (event-sync). <b>Asynchronous</b>: challenge-response (server sends challenge, token computes response).</li>
+<li>Smart card = token + embedded chip (can process/store certs); memory card = storage only. Smart card + PIN = two factors (have + know).</li>
+</ul>
+<div class="trap"><b>Trap:</b> Password + PIN = same factor (knowledge) — NOT multifactor. Smart card reader + PIN = 2 factors.</div>
+</div></details>
+
+<!-- Awareness -->
+<details class="topic"><summary>🎓 Security Awareness Training <span class="tag">D6 PQ</span></summary><div class="b">
+<ul>
+<li><b>Awareness</b> = "know it exists" (posters, phishing sims) · <b>Training</b> = teach skills for a role · <b>Education</b> = deep, career-level (degree). Ladder: awareness → training → education.</li>
+<li>Purpose: reduce human-error risk (the #1 attack vector — social engineering/phishing). Metrics: click rates on simulated phishes, report rates.</li>
+<li>Must be <b>recurring</b>, role-appropriate, and cover: social engineering, password hygiene, data handling/classification, incident reporting duty.</li>
+</ul>
+<div class="trap"><b>Trap:</b> "Security awareness" is for ALL employees; specific role training is separate. Awareness doesn't create skills — training does.</div>
+</div></details>
+
+<!-- Need to know -->
+<details class="topic"><summary>🧭 Need-to-Know &amp; Least Privilege <span class="tag">D5 · 1 video</span></summary><div class="b">
+<div class="key"><b>Need-to-know</b> = even WITH clearance, you get data only if your <b>job requires that specific data</b>. <b>Least privilege</b> = minimum permissions needed to do the job, nothing more. Separation of duties = no single person controls a full critical process (initiate + approve split). Job rotation &amp; mandatory vacations = detective controls against fraud.</div>
+<div class="trap"><b>Trap:</b> Clearance ≠ need-to-know. Least privilege is enforced via RBAC/ABAC defaults-deny. "Privilege creep" = accumulated permissions over time → fix with periodic access reviews (recertification).</div>
+</div></details>
+
+<!-- Access control types -->
+<details class="topic"><summary>🗝️ Types of Access Control <span class="tag">D3/D5 videos</span></summary><div class="b">
+<table>
+<tr><th>Model</th><th>How access is decided</th><th>Hook</th></tr>
+<tr><td><b>DAC</b> Discretionary</td><td>OWNER decides (file permissions, sharing)</td><td>flexible, weakest</td></tr>
+<tr><td><b>MAC</b> Mandatory</td><td>System-enforced labels (clearance vs classification), lattice models</td><td>military; BLP/Biba live here</td></tr>
+<tr><td><b>RBAC</b> Role-based</td><td>Permissions attach to ROLES; users get roles</td><td>enterprises, least privilege by role</td></tr>
+<tr><td><b>ABAC</b> Attribute-based</td><td>Rules on attributes (user, resource, environment: time, location)</td><td>most granular ("context-aware")</td></tr>
+<tr><td><b>Rule-based / RBAC (Rule-BAC)</b><td>Global rules/filters (firewall ACLs)</td><td>applies to all, not per user</td></tr>
+</table>
+<div class="key"><b>Control types by function:</b> Preventive (block: firewall, encryption) · Detective (alert: IDS, logs, audit) · Corrective (fix after: restore backup, patch) · + Deterrent, Recovery, Compensating, Directive. And by nature: Administrative / Technical (Logical) / Physical.</div>
+<div class="mn"><b>Mnemonic:</b> "PDC-DRCD": Prevent, Detect, Correct, Deter, Recover, Compensate, Direct. MAC = Mandatory = labels; DAC = Discretionary = owner's discretion.</div>
+<div class="trap"><b>Trap:</b> RBAC vs Rule-BAC — exam uses "non-discretionary" for role-based. Firewall ACL = rule-based, NOT RBAC. Task-based (TBAC) similar to role-based.</div>
+</div></details>
+
+<!-- Privacy extras -->
+<details class="topic"><summary>🕵️ Privacy topics (PIA, PbD, Protecting Privacy) <span class="tag">D1/D2</span></summary><div class="b">
+<ul>
+<li><b>Privacy by Design — 7 principles</b>: proactive not reactive; privacy as default; embedded in design; full functionality (positive-sum); end-to-end security; visibility &amp; transparency; respect user privacy.</li>
+<li><b>PIA</b> = structured assessment run when PII processing changes; data inventory → lawful basis → risks → mitigations → sign-off → re-review.</li>
+<li><b>Data states:</b> in transit (TLS/IPSec), in use (compute memory), at rest (encryption). U.S. laws: sectoral (HIPAA health, GLBA financial, FERPA education, COPPA children) — no single federal privacy law; EU GDPR = comprehensive.</li>
+<li><b>PII vs IP</b>: PII = personal data about people; IP = intellectual property owned by organizations. Different protection drivers (privacy vs property).</li>
+</ul>
+</div></details>
+
+</div>
+<div class="nav">
+  <button onclick="document.querySelectorAll('.topic').forEach(d=>d.open=true)">Expand all</button>
+  <button onclick="document.querySelectorAll('.topic').forEach(d=>d.open=false)">Collapse all</button>
+  <button onclick="window.print()">Print / PDF</button>
+</div>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CISSP Process Trainer — Put the Activities in Order</title>
+<style>
+  :root{--bg:#0f1420;--card:#1a2233;--card2:#202a40;--line:#2e3a55;--txt:#dbe4f5;--dim:#8fa0c2;
+    --accent:#4fc3f7;--green:#66bb6a;--red:#ef5350;--amber:#ffb74d;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans-serif;padding-bottom:70px;line-height:1.45}
+  .wrap{max-width:1100px;margin:0 auto;padding:18px}
+  h1{color:var(--accent);font-size:1.45em;margin:8px 0 2px}
+  .sub{color:var(--dim);font-size:.92em;margin-bottom:14px}
+  .bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+  select,button{background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:8px 14px;font-size:.92em;cursor:pointer}
+  select{min-width:280px}
+  button:hover{border-color:var(--accent)}
+  button.mode-off{opacity:.55}
+  .score{margin-left:auto;font-weight:700;color:var(--amber)}
+  .panels{display:grid;grid-template-columns:1fr 1.2fr;gap:14px}
+  @media(max-width:760px){.panels{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;min-height:300px}
+  .panel h2{font-size:.95em;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+  .scenario{background:#241b30;border:1px solid #5b4a7a;border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:.95em}
+  .scenario b{color:var(--amber)}
+  .card{background:var(--card2);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:9px 12px;margin:8px 0;cursor:grab;font-size:.93em}
+  .card:active{cursor:grabbing}
+  .card.dragging{opacity:.4}
+  .card .nm{font-weight:700;color:var(--accent)}
+  .card .full{font-size:.88em;color:var(--dim);margin-top:2px}
+  .card.done-wrong{border-left-color:var(--red);background:#2d1a1c}
+  .card.done-right{border-left-color:var(--green);background:#16261a}
+  .slot{border:2px dashed var(--line);border-radius:8px;min-height:52px;margin:8px 0;display:flex;align-items:center;overflow:hidden;transition:.15s}
+  .slot.over{border-color:var(--accent);background:#173047}
+  .slot .lbl{width:74px;flex-shrink:0;text-align:center;font-weight:700;color:var(--dim);font-size:.9em;border-right:1px solid var(--line);align-self:stretch;display:flex;align-items:center;justify-content:center}
+  .slot .content{flex:1;padding:6px 10px;font-size:.93em;min-height:40px;display:flex;align-items:center;color:var(--dim)}
+  .slot.filled .content{color:var(--txt)}
+  .slot .content .card{margin:0;flex:1}
+  .slot .x{padding:0 10px;cursor:pointer;color:var(--red);font-weight:700;flex-shrink:0}
+  .verdict{margin-top:10px;font-weight:700;min-height:24px}
+  .hint{color:var(--dim);font-size:.85em;margin-top:6px;font-style:italic}
+  .why{margin-top:14px;background:#14251c;border:1px solid #2c4a36;border-radius:8px;padding:10px 14px;font-size:.9em;display:none}
+  .why b{color:var(--green)}
+  .why div{margin:4px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>CISSP Process Trainer</h1>
+  <div class="sub">Drag activities into the correct order, then <b>Check</b>. Toggle <b>Names only</b> to practice with just the short step names — the way the exam often presents them.</div>
+
+  <div class="bar">
+    <select id="scenarioPick"></select>
+    <button onclick="loadScenario()">Load</button>
+    <button id="modeBtn" onclick="toggleMode()">🔁 Names only: OFF</button>
+    <button onclick="checkAnswers()">✔ Check</button>
+    <button onclick="revealSolution()">Show solution</button>
+    <button onclick="loadScenario()">↺ Reset / Reshuffle</button>
+    <span class="score" id="score"></span>
+  </div>
+
+  <div class="scenario" id="scenarioDesc"></div>
+
+  <div class="panels">
+    <div class="panel">
+      <h2>Activities (shuffled)</h2>
+      <div id="pool"></div>
+    </div>
+    <div class="panel">
+      <h2>Your order</h2>
+      <div id="slots"></div>
+      <div class="verdict" id="verdict"></div>
+      <div class="why" id="why"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SCENARIOS = [
+{
+  name: "1. Ransomware outbreak (DRP response in the moment)",
+  desc: "<b>Saturday, 3 AM.</b> FinCo's SOC detects ransomware encrypting file servers. The customer portal and trading platform are going down. Staff are standing by. Put the response activities in the correct order.",
+  steps: [
+    {n:"Damage assessment", a:"Assess the damage: what is encrypted, what still works, scope of impact", w:"You can't decide anything without knowing what you're dealing with. Assessment precedes declaration.", s:"unplug/isolate segments; block C2 IPs"},
+    {n:"Containment / isolation", a:"Isolate infected network segments to stop the spread (containment first)", w:"Containment always comes before any recovery — restoring into an infected network re-encrypts everything.", s:"scope: what's encrypted, what works"},
+    {n:"Disaster declaration", a:"Senior management declares a disaster based on predefined activation criteria", w:"Only senior management (or the DRP director) declares a disaster — and only against predefined criteria.", s:"sr mgmt against activation criteria"},
+    {n:"Notifications", a:"Notify insurer, regulators, law enforcement, and customers per SLA", w:"Notification is its own early step — insurer (ransomware = transferred risk) and regulators have clocks running.", s:"insurer+regulator+law enforcement+customers"},
+    {n:"Fail over priority #1", a:"Activate the hot site and fail over the trading platform (BIA priority #1, RTO 1 hr)", w:"Recovery follows BIA criticality order — most critical process first.", s:"hot site, priority #1 system"},
+    {n:"Restore priority #2", a:"Restore the customer portal at the warm site from the immutable vault", w:"Lower-criticality systems come after the top priorities, per the BIA ranking.", s:"warm site restore from vault"},
+    {n:"Data validation (WRT)", a:"Validate data integrity and reconcile transactions (WRT) before declaring 'all clear'", w:"WRT — work recovery time — is part of the MTD budget: systems up ≠ data trusted.", s:"reconcile data before 'all clear'"},
+    {n:"Return to primary", a:"Return operations to the primary site after it is rebuilt and verified", w:"Re-entry/return happens last, only after the primary site is fully rebuilt and tested.", s:"only after rebuild+verified"},
+    {n:"Lessons learned", a:"Write the lessons-learned report and update the BCP/DRP", w:"Every incident ends with lessons learned feeding back into plan maintenance.", s:"report -> update plan"}
+  ]
+},
+{
+  name: "2. Building a BCP from scratch (planning process)",
+  desc: "<b>FinCo's CISO has a blank page.</b> The company has no continuity plan. Order the activities to take it from nothing to a tested, living plan.",
+  steps: [
+    {n:"Senior mgmt support", a:"Secure senior management support and funding for the BCP effort", w:"#1 always: without senior management support the BCP fails — classic exam answer.", s:"funding + mandate"},
+    {n:"Form BCP committee", a:"Form the BCP committee with representatives from every critical business unit", w:"The committee includes all critical business units, not just IT.", s:"all critical business units rep'd"},
+    {n:"Define scope", a:"Define the scope: which business units and which plan types are covered", w:"Scope comes before analysis — you decide what's in the plan before studying it.", s:"units + plan types in/out"},
+    {n:"Prioritize processes", a:"Rank business processes by criticality (business unit prioritization)", w:"Prioritization at scope level tells the BIA where to dig deepest first.", s:"rank by criticality"},
+    {n:"Conduct BIA", a:"Conduct the BIA: identify priorities, risks, likelihood, and impact per process", w:"The BIA is Phase 2 — it builds on the scoped and prioritized processes.", s:"priorities, risks, likelihood, impact"},
+    {n:"Define MTD/RTO/WRT/RPO", a:"Define MTD, RTO, WRT and RPO for each critical process", w:"Impact analysis in the BIA sets the recovery time/data budgets.", s:"MTD split into RTO+WRT; RPO separate"},
+    {n:"Choose strategies", a:"Choose recovery strategies: hot site for trading, warm site for portal, backups", w:"Strategies are chosen to fit UNDER the MTDs that the BIA produced.", s:"site tier fits under MTD"},
+    {n:"Write & approve plan", a:"Write the continuity procedures and get senior management approval", w:"Phase 3 drafts it; Phase 4 opens with senior management approval.", s:"sr mgmt signs"},
+    {n:"Implement & train", a:"Implement provisions, train staff and recovery teams", w:"An approved plan still needs to be provisioned and rehearsed.", s:"provision + train"},
+    {n:"Test & maintain", a:"Test the plan (checklist → walk-through → simulation → parallel → full interruption) and maintain it", w:"Testing proves it; maintenance keeps it alive. The plan is a living document.", s:"checklist->walkthrough->sim->parallel->full"}
+  ]
+},
+{
+  name: "3. Quantitative risk assessment for a new threat (risk mgmt cycle)",
+  desc: "<b>A new threat emerges</b> against FinCo's edge routers. Order the risk management activities from asset valuation to the final decision.",
+  steps: [
+    {n:"Asset valuation (AV)", a:"Identify and value the asset (AV) — the edge router: $10,000", w:"Everything starts with asset identification and valuation.", s:"AV $200k"},
+    {n:"Threat/vuln identification", a:"Identify the threat (DDoS botnet) and the vulnerability (no rate limiting)", w:"Threat/vulnerability identification pairs the risk to the asset.", s:"ransomware; no offline backups"},
+    {n:"Estimate EF", a:"Estimate the Exposure Factor (EF): an attack would wipe 50% of the router's value", w:"EF = % of asset value lost in one realized event.", s:"EF 60%"},
+    {n:"Calculate SLE", a:"Calculate SLE = AV × EF = $10,000 × 50% = $5,000", w:"SLE = single loss expectancy = cost of ONE occurrence.", s:"SLE=120k"},
+    {n:"Estimate ARO", a:"Estimate the Annualized Rate of Occurrence (ARO): 0.5 (once every 2 years)", w:"ARO = expected number of losses per year.", s:"ARO 0.5"},
+    {n:"Calculate ALE", a:"Calculate ALE = SLE × ARO = $5,000 × 0.5 = $2,500", w:"ALE = yearly expected loss = what the risk 'costs' annually.", s:"ALE=60k"},
+    {n:"Evaluate safeguards", a:"Evaluate candidate safeguards and their annual cost vs risk reduced", w:"Control analysis compares the cost of protection with the risk it removes.", s:"vs $25k/yr control"},
+    {n:"Justify & implement", a:"Compute value: (ALE before − ALE after) − safeguard annual cost → implement if positive", w:"The safeguard justification formula. Positive = implement.", s:"formula positive -> buy"},
+    {n:"Accept residual risk", a:"Senior management consciously accepts any residual risk", w:"Whatever risk remains must be knowingly ACCEPTED by senior management — never silently.", s:"documented, conscious"}
+  ]
+},
+{
+  name: "4. BIA deep-dive (impact analysis sub-steps)",
+  desc: "<b>FinCo's BIA team</b> sits down with the business units for the customer portal. Order the BIA sub-activities.",
+  steps: [
+    {n:"Identify priorities", a:"Identify priorities: rank business processes by criticality", w:"BIA step 1: identify priorities among business processes (with the units' input).", s:"rank processes"},
+    {n:"Risk identification", a:"Identify the risks that could disrupt each process", w:"Then risk identification: natural + man-made threats per process.", s:"threats per process"},
+    {n:"Likelihood assessment", a:"Assess the likelihood of each risk (ARO / qualitative rating)", w:"Likelihood assessment quantifies how often each risk may strike.", s:"ARO / heat map"},
+    {n:"Impact analysis", a:"Analyze the impact: revenue loss, regulatory exposure, reputation per outage day", w:"Impact analysis prices an actual occurrence.", s:"$ loss + regulatory + reputation"},
+    {n:"Determine MTD→RTO+WRT", a:"Determine MTD for the process, then split it into RTO + WRT", w:"Maximum tolerable downtime is set, decomposed into recovery + work recovery.", s:"MTD split into RTO + WRT"},
+    {n:"Determine RPO", a:"Determine RPO: how much data loss is tolerable (drives backup frequency)", w:"RPO is the data-loss axis — it decides replication vs nightly vaulting.", s:"data-loss budget -> backup frequency"},
+    {n:"Resource prioritization", a:"Prioritize resources for the processes with the tightest MTD", w:"Resource prioritization closes the BIA: money/people go to the smallest MTDs.", s:"smallest MTD gets resources"}
+  ]
+},
+{
+  name: "5. Data center flood warning (DRP activation, natural disaster)",
+  desc: "<b>Sunday, 6 PM.</b> A severe flood warning is issued for FinCo's primary data center area. Expected in 36 hours. Order the activities.",
+  steps: [
+    {n:"Assess vs criteria", a:"Assess the threat against predefined activation criteria — does 36 hrs of lead time meet the disaster bar?", w:"Assessment against criteria comes first; the flood hasn't hit yet but criteria can trigger early activation.", s:"36hr lead = criteria may trigger early"},
+    {n:"Disaster declaration", a:"Brief senior management and get the disaster declaration", w:"Only senior management declares — early declaration is allowed for slow-onset disasters.", s:"CEO declares"},
+    {n:"Pre-disaster transition", a:"Trigger pre-disaster transition activities at the recovery site (warm it up, sync data)", w:"With warning time you do a GRACEFUL, pre-emptive failover instead of emergency recovery.", s:"warm up DR, sync data"},
+    {n:"Final backups & verify", a:"Take last full backups and verify offsite copies are current and readable", w:"Before the water arrives: backups must be complete, offsite, and TESTED for readability.", s:"full + verify offsite readable"},
+    {n:"Fail over (BIA order)", a:"Fail over trading to the hot site and portal to the warm site, in BIA priority order", w:"Cutover follows BIA criticality order.", s:"trading first (hot), portal (warm)"},
+    {n:"Clean shutdown of primary", a:"Shut down the primary data center cleanly before the flood hits", w:"A clean shutdown prevents corruption — better than letting water do it.", s:"clean shutdown beats water"},
+    {n:"Operate on DR sites", a:"Operate from recovery sites; validate integrity and customer-facing SLAs", w:"Steady state on DR sites with integrity checks (WRT).", s:"validate + SLAs"},
+    {n:"Rebuild & return", a:"After the flood: inspect, rebuild, and plan the return to primary operations", w:"Return-to-primary is a deliberate, tested re-entry — never rushed.", s:"inspect, rebuild, re-entry test"},
+    {n:"Lessons learned", a:"Lessons learned: update the BCP/DRP and re-test the changed plan", w:"Close the loop: maintenance based on what the event taught.", s:"update + retest plan"}
+  ]
+},
+{
+  name: "6. PIA for the rebuilt customer portal (privacy track)",
+  desc: "<b>FinCo rebuilds its customer portal</b> at the DR site and adds a new chatbot that reads customer PII. Order the privacy impact assessment activities.",
+  steps: [
+    {n:"PIA trigger", a:"Trigger the PIA: a system change is about to handle personal data differently", w:"A PIA is triggered by new/changed processing of PII — early in the SDLC (privacy by design).", s:"new/changed PII processing"},
+    {n:"PII inventory", a:"Inventory the PII: what data, why collected, where stored, who accesses it", w:"First know your data: elements, purposes, storage, flows, access.", s:"elements, purpose, storage, flows"},
+    {n:"Lawful basis & minimization", a:"Identify the lawful basis and check collection against purpose limitation / minimization", w:"Legal basis and minimization: do we even need all this PII?", s:"GDPR basis; collect minimum"},
+    {n:"Privacy risk identification", a:"Identify privacy risks: over-collection, secondary use, unauthorized access, disclosure, no deletion path", w:"Then the privacy risk identification pass.", s:"over-collection, secondary use, disclosure"},
+    {n:"Design mitigations", a:"Design mitigations: encryption/pseudonymization, tighter access controls, retention limits", w:"Privacy controls map to the identified risks.", s:"encrypt, pseudonymize, retention limits"},
+    {n:"Document PIA report", a:"Document everything in the PIA report for the privacy officer", w:"The PIA is a formal documented assessment.", s:"privacy officer report"},
+    {n:"Sign-off & implement", a:"Privacy officer reviews and signs off; mitigations are implemented before go-live", w:"Sign-off and implementation BEFORE the system processes live PII.", s:"before go-live"},
+    {n:"Schedule re-review", a:"Schedule PIA re-review whenever processing changes significantly", w:"A PIA is revisited on significant change — it is not one-and-done.", s:"on significant change"}
+  ]
+},
+{
+  name: "7. Malware incident on a server (IR plan in action)",
+  desc: "<b>Rookie security engineer, first day at Rymar Tech.</b> Scheduled tasks on a server are misbehaving: log rotation isn't running, backups aren't reaching the SAN, OS processes die instantly, and the server has established connections to unknown public IPs with high CPU/memory. Put the response activities in the correct order. (Source: D7 practice-question video)",
+  steps: [
+    {n:"Detection", a:"Notice and confirm the anomalies: failed log rotation, missing backups, unknown outbound connections", w:"Detection is where IR begins — indicators come from monitoring and observation.", s:"anomalies logged"},
+    {n:"Capture & record evidence", a:"Capture and record the issues seen on the servers", w:"Evidence must be preserved for possible prosecution — especially critical here because backups are NOT running.", s:"preserve for prosecution (backups are down!)"},
+    {n:"Consult the IR plan", a:"Consult the documentation and implement the predefined incident response procedures", w:"THE CISSP answer: you are NOT to make decisions on your own — follow the already-defined document. Luke hammers this.", s:"THE CISSP answer: never improvise"},
+    {n:"Escalate / triage", a:"Escalate to a senior engineer to begin triage of the incident", w:"A rookie escalates: senior members handle triage, and two people knowing beats one (also protects you from suspicion).", s:"rookie -> senior; two know > one"},
+    {n:"Containment", a:"Contain the compromise: isolate the server and block the command-and-control connections", w:"Stop the bleeding before cleanup — containment precedes eradication.", s:"isolate server, block C2"},
+    {n:"Eradication & recovery", a:"Eradicate the malware and restore systems/data from known-good backups", w:"Clean, then recover — rebuilding on a compromised host repeats the incident.", s:"clean + restore known-good"},
+    {n:"Lessons learned", a:"Hold a lessons-learned review and update the IR plan", w:"Close the loop: every incident feeds plan maintenance.", s:"review -> update IR plan"}
+  ]
+},
+{
+  name: "8. Backup & redundancy verification cycle (SPOF hygiene)",
+  desc: "<b>FinCo's audit found</b> a single firewall at the edge and backups nobody has ever tested. Order the activities that fix this — from finding single points of failure to a provable backup program. (Source: D7 Single Point of Failure + Data Backup Verification videos)",
+  steps: [
+    {n:"Identify SPOFs", a:"Identify single points of failure: one thing breaks, everything else fails with it", w:"Classic SPOFs: single firewall, single power feed, one RAID array, one DNS server.", s:"single firewall, single feed, one array"},
+    {n:"Build redundancy", a:"Eliminate them: dual firewalls, RAID, clustering, secondary links", w:"Redundancy removes the SPOF — no single failure takes the business down.", s:"dual FW, RAID, cluster, 2nd link"},
+    {n:"Schedule backups", a:"Run the backup program: full + incremental/differential, offsite or electronic vaulting", w:"Backups must leave the site — and for ransomware, stay offline/immutable.", s:"full+incr, offsite, immutable"},
+    {n:"Spot-check verification", a:"Periodically verify backups are occurring, accurate, and maintain integrity", w:"Verification is a Domain 6 (Security Assessment & Testing) activity: spot-check the tapes/journals regularly.", s:"spot-check accuracy/integrity"},
+    {n:"Test restoration", a:"Actually restore data from backup and confirm it is usable", w:"A backup you have never restored is a hope, not a control — during a disaster it better be accurate.", s:"actually restore data"},
+    {n:"Document & repeat", a:"Document results and repeat on a schedule (audit finding closed)", w:"Verification is continuous — every cycle, not one-and-done.", s:"document, repeat each cycle"}
+  ]
+},
+{
+  name: "9. Malware incident response — the canonical steps (Malware IR series)",
+  desc: "<b>A virus is found on a user workstation</b> — it turns out to be multi-partite, infecting executables AND BIOS. Order the incident response steps exactly as the (ISC)²/NIST flow Luke teaches: Prevention &amp; Handling steps. Exam tip: they apply to ANY incident — malware, natural disaster, or data breach.",
+  steps: [
+    {n:"Preparation", a:"Preparation — tools, resources, and communication channels ready BEFORE any incident", w:"Step 0-ish: it happens before the first step 'really' — armed knowledge, ready tools, agreed channels.", s:"armed knowledge, tools, channels"},
+    {n:"Detection & Analysis", a:"Detection & analysis — identify and analyze the indicator (virus found on workstation)", w:"You can't respond to what you haven't detected; analysis determines scope and type.", s:"identify indicator, scope, type"},
+    {n:"Containment", a:"Containment — disconnect the workstation from the network (stop further damage)", w:"Same rule as DRP: stop the bleeding first. (ISC)² book and NIST both put containment third.", s:"disconnect host (stop bleeding)"},
+    {n:"Eradication", a:"Eradication — remove the malware (rebuild, clean, or physically dispose of the drive)", w:"Get the attacker/malware OUT — multi-partite infections may force hardware disposal.", s:"remove malware / dispose drive"},
+    {n:"Recovery", a:"Recovery — provision a clean system from a known-good image and return to operations", w:"Restore from verified clean sources — ties straight back to backup verification.", s:"rebuild from clean image"},
+    {n:"Lessons Learned", a:"Lessons learned — document what happened and improve defenses", w:"The step everyone skips — and the classic exam answer for 'which step was NOT followed?'.", s:"the step everyone skips"}
+  ]
+},
+{
+  name: "10. Unapproved change took production down (change management)",
+  desc: "<b>Monday 8 AM:</b> The billing app is down. Nobody knows why. Investigation shows a developer pushed a database schema change to production on Friday evening — no ticket, no testing, no rollback. Reconstruct the change management process that SHOULD have run. (Source: D7 Change Management story + exam content)",
+  steps: [
+    {n:"Change request", a:"Submit a formal change request: what, why, risk, rollback plan", w:"Every change starts as a documented request — 'emergency' is never an excuse for no record.", s:"no ticket = no change"},
+    {n:"Impact/risk analysis", a:"Analyze impact: which systems, which business processes, what could break", w:"Change = risk to availability and integrity; the analysis must precede approval.", s:"systems + processes affected"},
+    {n:"Approval (internal + customer)", a:"Route for approvals: internal change board first, then the customer/owner signs off (emergency changes reviewed after the fact)", w:"Luke's firewall flow: internal approval THEN customer approval — approval is a defined management step; developers never self-approve.", s:"internal board, then customer"},
+    {n:"Test first", a:"Build and test the change in a non-production environment", w:"Testing in prod = no testing. Staging must mirror production.", s:"staging mirrors prod"},
+    {n:"Scheduled implementation", a:"Implement in a maintenance window with rollback plan at hand", w:"Change windows protect the business; rollback plan is mandatory, not optional.", s:"maintenance window + rollback plan"},
+    {n:"Document & close", a:"Make the change exactly as documented, then document what was done and close the ticket", w:"Verification closes the loop; undocumented changes fail audits and incident forensics.", s:"verify works; document; close"}
+  ]
+},
+{
+  name: "11. Breached via a vulnerability patched 8 months ago (patch management)",
+  desc: "<b>Forensics verdict:</b> attackers entered through a web server vulnerability that had a vendor patch available for 8 months. Rebuild the patch & vulnerability management cycle that was skipped.",
+  steps: [
+    {n:"Vulnerability scanning", a:"Run scheduled authenticated scans across all systems", w:"You can't patch what you don't know exists — discovery is step one, and it must be recurring.", s:"recurring authenticated scans"},
+    {n:"Correlate with threat intel", a:"Prioritize: exploitable, internet-facing, and actively-exploited vulns first (severity + context)", w:"CVSS alone isn't prioritization — exploitability and exposure matter (risk-based patching).", s:"exploitable + internet-facing first"},
+    {n:"Test the patch", a:"Test patches in a staging environment before production", w:"Patches are changes — they go through mini change management (test → schedule → rollback plan).", s:"staging first"},
+    {n:"Deploy in windows", a:"Deploy during maintenance windows, critical fixes on emergency track", w:"Emergency patching bypasses the window, never the documentation.", s:"windows; emergency track documented"},
+    {n:"Verify remediation", a:"Re-scan to confirm the vulnerability is actually gone", w:"Deployed ≠ remediated. Verification closes the loop (same discipline as backup verification).", s:"re-scan: deployed != fixed"},
+    {n:"Report & review", a:"Report metrics (mean time to patch, exception list) to management", w:"Unpatchable systems need documented risk acceptance by senior management — with compensating controls.", s:"MTTR metrics; exceptions -> accepted risk"}
+  ]
+},
+{
+  name: "12. Breach sat undetected for 7 months (continuous monitoring)",
+  desc: "<b>Forensics:</b> the attacker was in the environment for 7 months. Logs existed but nobody looked; no baseline; alerts went to an unwatched inbox. Order the continuous monitoring process that should have been running. (Source: D7 Continuous Monitoring series)",
+  steps: [
+    {n:"Define what to monitor", a:"Identify critical systems, key risk indicators, and required logs", w:"Monitoring starts with knowing what matters — driven by the risk register and BIA.", s:"what matters from risk register"},
+    {n:"Collect & centralize logs", a:"Ship logs to a central system (SIEM), sync clocks (NTP)", w:"Scattered logs = no picture. Correlation needs a single normalized store and accurate timestamps.", s:"SIEM + NTP"},
+    {n:"Establish baselines", a:"Baseline normal behavior for systems, users and network traffic", w:"Anomaly detection is meaningless without a 'normal' to compare against.", s:"know 'normal' first"},
+    {n:"Generate & tune alerts", a:"Configure alerts on meaningful events and tune out noise", w:"Untuned = alert fatigue = the watched-inbox problem that let this breach sit.", s:"tune out noise"},
+    {n:"24/7 review & response", a:"Staff continuous review (SOC) with an escalation path into the IR plan", w:"Monitoring feeds incident response — detection without response is just expensive logging.", s:"SOC feeds IR plan"},
+    {n:"Report & improve", a:"Feed findings to management (posture over time) and adjust controls", w:"Continuous monitoring is a feedback loop into risk management, not a one-time setup.", s:"posture over time to mgmt"}
+  ]
+},
+{
+  name: "13. Cloud vendor caused the breach (third-party management)",
+  desc: "<b>FinCo's SaaS vendor</b> misconfigured their storage and leaked FinCo's customer data. FinCo never checked the vendor's security, had no security clauses in the contract, and can't even get evidence now. Order the third-party management process. (Source: D1 Cloud Vendor Violations PQ + exam content)",
+  steps: [
+    {n:"Due diligence before signing", a:"Assess the vendor: SOC 2 report, security practices, breach history", w:"Vendor risk assessment happens BEFORE the contract — SOC reports are the standard evidence.", s:"SOC 2 Type II, history"},
+    {n:"Contract clauses", a:"Put security in the contract: SLAs, breach notification duty, right to audit, data handling rules", w:"The contract is your only real leverage after signing — no clauses = no recourse.", s:"SLA, breach notify, audit right, exit"},
+    {n:"Least-privilege integration", a:"Integrate with minimal data sharing and restricted access", w:"Give the vendor only the data/access it needs (need-to-know extends to third parties).", s:"minimum data/access"},
+    {n:"Ongoing monitoring", a:"Continuously monitor the vendor (reports, reassessments, their breaches)", w:"Vendor risk isn't a one-time checkbox — reassess annually and on major changes.", s:"annual + on change"},
+    {n:"Incident coordination", a:"When they breach, invoke the contract: notification, evidence access, your own regulator notifications", w:"YOUR company answers to ITS regulators for the data — outsourcing the work never outsources accountability.", s:"invoke contract; still YOUR regulators"},
+    {n:"Exit strategy", a:"Ensure data return/destruction on termination (exit clause)", w:"A vendor relationship without an exit plan is a data hostage situation waiting to happen.", s:"data return/destruction"}
+  ]
+},
+{
+  name: "14. Leak via mishandled data (data classification & handling)",
+  desc: "<b>A departing contractor</b> emails a spreadsheet of customer records to their personal address. Investigation finds: the data was labeled 'internal' instead of 'confidential', and nobody had told the contractor the handling rules. Order the data governance process.",
+  steps: [
+    {n:"Classify the data", a:"Assign classification levels (public/internal/confidential/restricted) based on impact", w:"Everything downstream hangs off classification — mislabeling broke this chain at step one.", s:"by impact: public/internal/confidential/restricted"},
+    {n:"Define handling procedures", a:"Map each level to handling rules: storage, transmission, encryption, disposal", w:"A label without handling rules is decoration.", s:"storage/transmission/encryption/disposal per level"},
+    {n:"Label & mark", a:"Actually label the data and systems holding it", w:"Users can only protect what they can identify — labeling makes policy visible.", s:"labels make policy visible"},
+    {n:"Train & assign responsibility", a:"Train staff (incl. contractors!) and make owners accountable for their data", w:"Contractors get the same awareness training; data owners answer for the data (senior mgmt accountability again).", s:"contractors too; owners accountable"},
+    {n:"Enforce with controls", a:"Enforce technically: DLP, egress monitoring, access controls per level", w:"People leak; DLP catches it. Preventive technical control backing the policy.", s:"DLP egress monitoring"},
+    {n:"Incident response + sanction", a:"Treat the leak as an incident, notify per policy/law, review the failure", w:"Close the loop: the mislabeling and the missing training were the processes that broke.", s:"notify per law; fix the broken process"}
+  ]
+},
+{
+  name: "15. Insider embezzlement (personnel lifecycle & fraud controls)",
+  desc: "<b>A payments clerk</b> stole funds for 3 years by creating fake vendors and approving their own invoices. Nobody ever reviewed his access, he never took vacation, and HR offboarding for a prior role granted him extra rights. Order the personnel controls that prevent this.",
+  steps: [
+    {n:"Separation of duties", a:"Split initiation and approval: the person who creates a payment never approves it", w:"The core anti-fraud control — one person must never control a transaction end-to-end.", s:"initiator != approver"},
+    {n:"Dual control / two-person rule", a:"Require two people for critical actions (payments, key changes)", w:"Collusion is now required to commit fraud — dramatically harder.", s:"two people on critical actions"},
+    {n:"Least privilege + periodic review", a:"Grant minimum access and recertify it regularly (catch privilege creep)", w:"The extra rights he accumulated across roles would have been caught at the first review.", s:"minimum access; recertify"},
+    {n:"Job rotation & mandatory vacations", a:"Rotate duties and force vacations — fraud surfaces when someone else does your job", w:"Both are DETECTIVE controls: the substitute discovers the scheme; long-running fraud hates interruptions.", s:"fraud surfaces when substitute works"},
+    {n:"Onboarding/offboarding hygiene", a:"Formal access grant on entry and immediate revocation on transfer/termination", w:"Most leaks of access happen at role changes — HR and security must trigger each other.", s:"revoke on transfer/exit immediately"},
+    {n:"Audit trail", a:"Log and review payment workflows; audit detects the pattern", w:"Detective backstop: regular audit reviews of high-risk transactions.", s:"review high-risk workflows"}
+  ]
+}
+];
+
+let cur = null, placed = [], namesOnly = false;
+
+const $ = id => document.getElementById(id);
+const shuffle = a => { a=[...a]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+
+function initPicker(){
+  const sel = $("scenarioPick");
+  SCENARIOS.forEach((s,i)=>{ const o=document.createElement("option"); o.value=i; o.textContent=s.name; sel.appendChild(o); });
+  sel.onchange = loadScenario;
+}
+
+function cardText(i){ return cur.steps[i].a; }
+
+function cardHTML(i){
+  return namesOnly ? `<span class="nm">${cur.steps[i].n}</span>`
+                   : `<span class="nm">${cur.steps[i].n}</span><div class="full">${cur.steps[i].a}</div>`;
+}
+
+function toggleMode(){
+  namesOnly = !namesOnly;
+  $("modeBtn").textContent = "🔁 Names only: " + (namesOnly ? "ON" : "OFF");
+  $("modeBtn").classList.toggle("mode-off", !namesOnly);
+  renderPool(cur._pool); renderSlots();
+}
+
+function loadScenario(){
+  cur = SCENARIOS[$("scenarioPick").value];
+  $("scenarioDesc").innerHTML = cur.desc;
+  $("verdict").textContent = "";
+  $("why").style.display = "none"; $("why").innerHTML = "";
+  $("score").textContent = "";
+  const pool = shuffle(cur.steps.map((_,i)=>i));
+  placed = new Array(cur.steps.length).fill(null);
+  cur._pool = pool;
+  renderPool(pool);
+  renderSlots();
+}
+
+function renderPool(pool){
+  cur._pool = pool;
+  const p = $("pool"); p.innerHTML = "";
+  pool.forEach(idx=>{
+    const c = document.createElement("div");
+    c.className="card"; c.draggable=true; c.dataset.idx=idx;
+    c.innerHTML = cardHTML(idx);
+    c.addEventListener("dragstart", e=>{ e.dataTransfer.setData("text/plain", idx); c.classList.add("dragging"); });
+    c.addEventListener("dragend", ()=>c.classList.remove("dragging"));
+    c.addEventListener("click", ()=>{
+      const s = placed.indexOf(null);
+      if(s!==-1){ placed[s]=idx; cur._pool=cur._pool.filter(x=>x!==idx); renderPool(cur._pool); renderSlots(); }
+    });
+    p.appendChild(c);
+  });
+}
+
+function renderSlots(){
+  const s = $("slots"); s.innerHTML="";
+  placed.forEach((cardIdx, slotNo)=>{
+    const d = document.createElement("div");
+    d.className = "slot" + (cardIdx!==null ? " filled" : "");
+    d.dataset.slot = slotNo;
+    d.innerHTML = `<div class="lbl">Step ${slotNo+1}</div>`;
+    const content = document.createElement("div");
+    content.className="content";
+    if(cardIdx!==null){
+      const c=document.createElement("div"); c.className="card"; c.innerHTML=cardHTML(cardIdx);
+      content.appendChild(c);
+      const x=document.createElement("div"); x.className="x"; x.textContent="✕";
+      x.title="Remove";
+      x.onclick=()=>{ cur._pool.push(cardIdx); placed[slotNo]=null; renderPool(cur._pool); renderSlots(); };
+      d.appendChild(content); d.appendChild(x);
+    } else {
+      content.textContent = "drop here or click a card";
+      d.appendChild(content);
+    }
+    d.addEventListener("dragover", e=>{ e.preventDefault(); d.classList.add("over"); });
+    d.addEventListener("dragleave", ()=>d.classList.remove("over"));
+    d.addEventListener("drop", e=>{
+      e.preventDefault(); d.classList.remove("over");
+      const idx = +e.dataTransfer.getData("text/plain");
+      if(cur._pool.includes(idx)){
+        const prev = placed.indexOf(idx);
+        if(prev!==-1) placed[prev]=null;
+        else cur._pool = cur._pool.filter(x=>x!==idx);
+        placed[slotNo]=idx;
+        renderPool(cur._pool); renderSlots();
+      }
+    });
+    s.appendChild(d);
+  });
+}
+
+function checkAnswers(){
+  if(placed.includes(null)){ $("verdict").style.color="var(--amber)";
+    $("verdict").textContent="Fill every step first (or click cards to place them)."; return; }
+  let right=0;
+  document.querySelectorAll("#slots .slot").forEach((slot, i)=>{
+    const cardIdx = placed[i];
+    const ok = cardIdx === i;
+    const card = slot.querySelector(".card");
+    card.classList.remove("done-right","done-wrong");
+    card.classList.add(ok ? "done-right" : "done-wrong");
+    if(ok) right++;
+  });
+  const total = cur.steps.length;
+  $("verdict").style.color = right===total ? "var(--green)" : "var(--red)";
+  $("verdict").textContent = right===total
+    ? `✅ Perfect! ${right}/${total} — you've got this process down.`
+    : `❌ ${right}/${total} correct. Red cards are in the wrong position — click ✕ to move them, then re-check.`;
+  $("score").textContent = `${right}/${total}`;
+  const w = $("why"); w.style.display="block";
+  w.innerHTML = "<b>Correct order & why:</b>" + cur.steps.map((s,i)=>{
+    const ok = placed[i]===i;
+    return `<div style="color:${ok?'var(--green)':'var(--red)'}">${i+1}. <b>${s.n}</b> — ${s.a} <i>(${s.w})</i>${s.s?`<br><span style="color:var(--dim)">⬡ sub-steps: ${s.s}</span>`:""}</div>`;
+  }).join("");
+}
+
+function revealSolution(){
+  placed = cur.steps.map((_,i)=>i);
+  cur._pool = [];
+  renderPool(cur._pool); renderSlots();
+  $("verdict").style.color="var(--dim)";
+  $("verdict").textContent="Solution shown. Reshuffle and try again from memory!";
+  const w=$("why"); w.style.display="block";
+  w.innerHTML="<b>Solution & why:</b>"+cur.steps.map((s,i)=>`<div>${i+1}. <b>${s.n}</b> — ${s.a} <i>(${s.w})</i>${s.s?`<br><span style="color:var(--dim)">⬡ sub-steps: ${s.s}</span>`:""}</div>`).join("");
+}
+
+initPicker();
+loadScenario();
+</script>
+</body>
+</html>

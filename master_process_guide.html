@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CISSP Process Master: Risk Management → BCP → BIA → DRP → PIA</title>
+<style>
+  :root{--bg:#0f1420;--card:#1a2233;--card2:#202a40;--line:#2e3a55;--txt:#dbe4f5;--dim:#8fa0c2;
+    --accent:#4fc3f7;--green:#66bb6a;--amber:#ffb74d;--red:#ef5350;--purple:#ba68c8;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.55;padding-bottom:80px}
+  .wrap{max-width:1000px;margin:0 auto;padding:20px}
+  h1{color:var(--accent);font-size:1.6em;margin:18px 0 4px}
+  .sub{color:var(--dim);margin-bottom:18px}
+  /* running example banner */
+  .scenario{background:linear-gradient(135deg,#2b1f3d,#1a2233);border:1px solid var(--purple);border-radius:10px;padding:14px 18px;margin:14px 0}
+  .scenario b{color:var(--purple)}
+  /* flow diagram */
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:18px 0}
+  .flow .node{flex:1 1 130px;background:var(--card2);border:2px solid var(--line);border-radius:8px;padding:10px;text-align:center;font-size:.85em;min-width:120px;cursor:pointer;transition:.2s}
+  .flow .node:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .flow .node.active{border-color:var(--accent);background:#173047}
+  .flow .node .n{font-weight:700;color:var(--accent);display:block;font-size:.95em}
+  .flow .arrow{align-self:center;color:var(--dim);font-size:1.3em}
+  .flow .loop{flex-basis:100%;text-align:center;color:var(--dim);font-size:.85em}
+  /* stage cards */
+  .stage{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:14px 0;overflow:hidden}
+  .stage>summary{cursor:pointer;padding:14px 18px;font-weight:700;font-size:1.05em;display:flex;align-items:center;gap:10px;list-style:none}
+  .stage>summary::-webkit-details-marker{display:none}
+  .stage>summary .num{background:var(--accent);color:#0b1220;border-radius:50%;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9em}
+  .stage>summary .tag{margin-left:auto;font-size:.75em;color:var(--dim);font-weight:400}
+  .stage[open]>summary{border-bottom:1px solid var(--line)}
+  .body{padding:14px 18px}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.cols{grid-template-columns:1fr}}
+  h3{color:var(--accent);font-size:.95em;margin:10px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  h3:first-child{margin-top:0}
+  ul{padding-left:20px}
+  li{margin:4px 0}
+  .who{background:#14251c;border:1px solid #2c4a36;border-radius:8px;padding:10px 14px}
+  .who b{color:var(--green)}
+  .example{background:#2b2413;border:1px solid #5c4d22;border-radius:8px;padding:10px 14px}
+  .example b{color:var(--amber)}
+  .trap{background:#2d181a;border:1px solid #5c2c30;border-radius:8px;padding:10px 14px}
+  .trap b{color:var(--red)}
+  .io{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .chip{background:var(--card2);border:1px solid var(--line);border-radius:20px;padding:3px 12px;font-size:.82em;color:var(--dim)}
+  .chip.in{border-color:#3a6ea5}.chip.out{border-color:#3f7d44}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:.92em}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:var(--card2);color:var(--accent)}
+  .calc{background:var(--card2);border-radius:8px;padding:12px 16px;font-family:Consolas,monospace;font-size:.95em;margin:8px 0}
+  .calc .r{color:var(--green);font-weight:700}
+  .ladder{display:flex;gap:0;margin:12px 0;font-size:.85em;text-align:center}
+  .ladder div{padding:8px 6px;border:1px solid var(--line)}
+  .ladder .mtd{flex:5;background:#3a2530;border-radius:8px 0 0 8px}
+  .ladder .rto{flex:3;background:#2e3a2a}
+  .ladder .wrt{flex:2;background:#25333a;border-radius:0 8px 8px 0}
+  .legend{color:var(--dim);font-size:.85em;margin-top:4px}
+  .nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);padding:8px 12px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  .nav button{background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:6px 12px;cursor:pointer;font-size:.85em}
+  .nav button:hover{border-color:var(--accent)}
+  .openall{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>CISSP Process Master</h1>
+<div class="sub">Risk Management → BCP → BIA → Recovery Strategy → DRP → Testing → PIA — one running example, every stage, every group. Based on Study Notes and Theory Domain 1.</div>
+
+<div class="scenario">
+<b>🏃 OUR RUNNING EXAMPLE — "FinCo" (Fujifilm-style):</b> A mid-size financial services company (2,000 employees, HQ + one DR site) gets hit by <b>ransomware at 3 AM on a Saturday</b>. File servers and the customer portal are encrypted. Finance runs batch jobs overnight; email is still up. Management must now activate plans that were built months ago through the process below. We follow <b>FinCo before, during, and after</b> this attack through every stage.
+</div>
+
+<!-- ================= MASTER FLOW ================= -->
+<div class="flow" id="flow">
+  <div class="node" onclick="go(0)"><span class="n">1. Risk Mgmt</span>ongoing cycle</div>
+  <div class="arrow">→</div>
+  <div class="node" onclick="go(1)"><span class="n">2. BCP Scope</span>Phase 1</div>
+  <div class="arrow">→</div>
+  <div class="node" onclick="go(2)"><span class="n">3. BIA</span>Phase 2</div>
+  <div class="arrow">→</div>
+  <div class="node" onclick="go(3)"><span class="n">4. Continuity<br>Planning</span>Phase 3</div>
+  <div class="arrow">→</div>
+  <div class="node" onclick="go(4)"><span class="n">5. Approval &<br>Implementation</span>Phase 4</div>
+  <div class="arrow">→</div>
+  <div class="node" onclick="go(5)"><span class="n">6. DRP</span>disaster response</div>
+  <div class="arrow">→</div>
+  <div class="node" onclick="go(6)"><span class="n">7. Testing &<br>Maintenance</span>continuous</div>
+  <div class="node" onclick="go(7)" style="flex-basis:100%"><span class="n">+ PIA</span>parallel privacy track whenever personal data is touched</div>
+  <div class="loop">↺ BCP/DRP are living documents — testing feeds back into scope & BIA (annual minimum, or after any major change)</div>
+</div>
+
+<!-- ================= STAGE 1 ================= -->
+<details class="stage" id="s0" open>
+<summary><span class="num">1</span> Risk Management — the never-ending cycle <span class="tag"> feeds everything else</span></summary>
+<div class="body">
+  <div class="who"><b>Who's in the room:</b> Senior management (owns risk), risk manager / CISO (runs the process), asset & system owners (provide data), IT ops, legal & compliance. <b>Senior management is ultimately accountable</b> — favorite exam answer.</div>
+  <h3>Activities — in order</h3>
+  <ul>
+    <li><b>Identify</b> assets & assign value ( AV ) → identify threats → identify vulnerabilities</li>
+    <li><b>Assess</b>: likelihood (ARO) × impact (EF) — quantitatively or qualitatively (Heat map: Low/Med/High)</li>
+    <li><b>Calculate</b>: SLE = AV × EF, then ALE = SLE × ARO</li>
+    <li><b>Treat</b> — pick one of 4: <b>Mitigate</b> (reduce), <b>Transfer</b> (insure), <b>Avoid</b> (stop the activity), <b>Accept</b> (cost of control &gt; ALE)</li>
+    <li><b>Control analysis</b> + safeguard justification: (ALE<sub>before</sub> − ALE<sub>after</sub>) − annual cost of safeguard</li>
+    <li><b>Monitor</b> residual risk continuously → back to identify</li>
+  </ul>
+  <h3>FinCo does this here</h3>
+  <div class="example">Asset: customer-portal server, <b>AV = $200,000</b>. Threat: ransomware. Vulnerability: no offline backups, flat network. EF = 60% (60% would be lost/rewritten). <b>SLE = 200k × 0.6 = $120,000</b>. ARO = 0.5 (expected once per 2 years). <b>ALE = 120k × 0.5 = $60,000</b>. A DR solution costing $25k/yr that cuts EF to 10%: new ALE = 20k×0.5 = $10k → <b>justification = 60k − 10k − 25k = +$25k/yr → BUY IT</b>. (This is why FinCo later has a DR site at all.)</div>
+  <h3>Exam traps</h3>
+  <div class="trap"><ul>
+    <li>Safeguard value is the <b>ALE before − ALE after − annual cost</b>. If positive → implement.</li>
+    <li>Risk <b>acceptance must be a conscious, senior-management decision</b> — never default.</li>
+    <li>Total risk = Threat × Vuln × Asset; Residual = Total − controls.</li>
+    <li>Quantitative needs real $ numbers; qualitative (Delphi, heat maps) when numbers aren't available.</li>
+  </ul></div>
+  <div class="io"><span class="chip in">IN: asset inventory, threat intel, vulnerabilities</span><span class="chip out">OUT: risk register, ALE figures, decision to mitigate (→ drives BCP)</span></div>
+</div>
+</details>
+
+<!-- ================= STAGE 2 ================= -->
+<details class="stage" id="s1">
+<summary><span class="num">2</span> BCP Phase 1 — Project Scope & Planning <span class="tag"> who runs the show</span></summary>
+<div class="body">
+  <div class="who"><b>Who's in the room:</b> <b>Senior management champion</b> (without them the plan fails — #1 exam point), BCP committee (each critical business unit represented), CISO/DRP lead, legal, HR, IT, facilities.</div>
+  <h3>Activities</h3>
+  <ul>
+    <li>Get senior management <b>support & funding</b> — they provide legitimacy & money</li>
+    <li>Define <b>scope</b>: whole org vs one business unit; and what planning <i>types</i> are in/out (BCP, DRP, IRP, …)</li>
+    <li>Perform <b>business unit &amp; process prioritization</b> — decide who gets analyzed first</li>
+    <li>Agree on <b>BCP team structure</b> and roles; assign resources</li>
+    <li>Legal &amp; regulatory requirements review (e.g., financial sector uptime duties)</li>
+  </ul>
+  <h3>FinCo does this here</h3>
+  <div class="example">CEO signs the charter; committee = rep from Retail Banking, Trading, IT, HR, Facilities, Legal. Scope = the whole firm, but Phase-1 analysis prioritizes <b>Trading & Customer Portal</b> first, corporate marketing last. Ransomware classed as the primary disaster scenario to plan for.</div>
+  <h3>Exam traps</h3>
+  <div class="trap"><ul>
+    <li><b>Senior management support</b> = the single most critical element of BCP (appears constantly).</li>
+    <li>BCP committee must include <b>representatives of every critical business unit</b> — not just IT.</li>
+    <li>BCP scope: "all systems" is wrong answer framing — scope starts with <b>most critical business processes</b>.</li>
+  </ul></div>
+  <div class="io"><span class="chip in">IN: risk register, management mandate</span><span class="chip out">OUT: BCP charter, scoped priorities, committee roster</span></div>
+</div>
+</details>
+
+<!-- ================= STAGE 3 ================= -->
+<details class="stage" id="s2">
+<summary><span class="num">3</span> BCP Phase 2 — Business Impact Analysis (BIA) <span class="tag"> the heart of BCP</span></summary>
+<div class="body">
+  <div class="who"><b>Who's in the room:</b> BCP committee + business unit managers (they know their processes), risk manager, finance (to quantify losses). <b>Business units, not IT, define criticality</b>.</div>
+  <h3>Activities — BIA sub-phases, in order</h3>
+  <ul>
+    <li><b>Identify priorities</b> — rank business processes by criticality (asset value &amp; process importance)</li>
+    <li><b>Risk identification</b> — natural + man-made threats per process</li>
+    <li><b>Likelihood assessment</b> — ARO per threat (often qualitative + quantitative mix)</li>
+    <li><b>Impact analysis</b> — for each process define: <b>MTD/MAO</b>, <b>RTO</b>, <b>WRT</b>, <b>RPO</b>; quantify loss of: revenue, payroll, reputation, legal exposure, SLA credits</li>
+    <li><b>Resource prioritization</b> — allocate people/$ to the processes with the smallest MTD first</li>
+  </ul>
+
+  <h3>The downtime ladder (memorize)</h3>
+  <div class="ladder">
+    <div class="mtd"><b>MTD / MAO</b><br>max tolerable downtime<br>(FinCo portal: 5 days)</div>
+    <div class="rto"><b>RTO</b><br>systems back up<br>(FinCo: 4 days)</div>
+    <div class="wrt"><b>WRT</b><br>data integrity checks,<br>reconciliation (1 day)</div>
+  </div>
+  <div class="legend">RTO + WRT ≤ MTD. And separately on the data axis: <b>RPO</b> = max tolerable data loss (how far back your last good backup is). FinCo's trading data: <b>RPO ≈ 0</b> → needs real-time replication, not nightly tapes.</div>
+
+  <h3>FinCo does this here</h3>
+  <div class="example">Committee finds: Trading platform MTD = <b>1 hour</b>, portal MTD = <b>5 days</b>, payroll MTD = <b>1 week</b>. Email (still up during the attack) = MTD 3 days, low priority. Losses modeled per day of outage: trading $2M/day, portal $300k/day + reputational damage with regulators. This ranking later decides <b>who gets restored first</b> in the DRP.</div>
+  <h3>Exam traps</h3>
+  <div class="trap"><ul>
+    <li>BIA identifies <b>critical business <u>processes</u></b> first — risk analysis identifies <b>assets</b>. (Classic A/B distractor.)</li>
+    <li><b>Maximum Tolerable Downtime (MAO)</b> is decided in the BIA — then the DR solution is built to fit <i>under</i> it, never the reverse.</li>
+    <li>RPO is about <b>data loss</b>; RTO is about <b>time to restore</b>. WRT sits inside MTD after RTO.</li>
+  </ul></div>
+  <div class="io"><span class="chip in">IN: process inventory, process owners' input</span><span class="chip out">OUT: MTD/RTO/WRT/RPO per process, recovery priority list, loss estimates</span></div>
+</div>
+</details>
+
+<!-- ================= STAGE 4 ================= -->
+<details class="stage" id="s3">
+<summary><span class="num">4</span> BCP Phase 3 — Continuity Planning <span class="tag"> design how to stay up</span></summary>
+<div class="body">
+  <div class="who"><b>Who's in the room:</b> BCP committee + operations managers; <b>actual plan writing often delegated</b> to the strategy development team, then approved by senior management.</div>
+  <h3>Activities</h3>
+  <ul>
+    <li><b>Strategy development</b> — pick provision approach per MTD (from BIA): which business units need which continuity provisions</li>
+    <li><b>Provisions &amp; processes</b>: people (alternate staff, cross-training), buildings/facilities, infrastructure (redundant systems, comms)</li>
+    <li><b>Backup strategy</b>: full/incremental/differential; <b>3-2-1 rule</b>; offsite storage; electronic vaulting / remote journaling / remote mirroring (RPO decides which!)</li>
+    <li><b>Mutual aid agreements</b> & subscriptions; insurance review</li>
+  </ul>
+  <h3>Site options — know the trade-offs</h3>
+  <table>
+    <tr><th>Site</th><th>Ready in</th><th>Cost</th><th>Fits FinCo?</th></tr>
+    <tr><td><b>Hot site</b> — fully equipped, real-time data</td><td>minutes–hours</td><td>$$$$</td><td>Trading platform (MTD 1 hr)</td></tr>
+    <tr><td><b>Warm site</b> — hardware ready, no live data</td><td>hours–days</td><td>$$$</td><td>Portal (MTD 5 days)</td></tr>
+    <tr><td><b>Cold site</b> — empty building, power & HVAC</td><td>days–weeks</td><td>$</td><td>Payroll (MTD 1 wk)</td></tr>
+    <tr><td><b>Mobile site</b> — trailer / flyaway kit</td><td>varies</td><td>$$</td><td>Backup option</td></tr>
+    <tr><td><b>Cloud / DRaaS</b></td><td>minutes–hours</td><td>$$</td><td>increasingly the answer</td></tr>
+  </table>
+  <div class="example"><b>FinCo decides:</b> hot site with mirrored data for Trading (RPO≈0), warm site + nightly electronic vaulting for the Portal, cold site + weekly offsite tapes for payroll archiving. Backup = daily incremental + weekly full, copies <b>offline &amp; immutable</b> (lesson from ransomware: online backups get encrypted too).</div>
+  <h3>Exam traps</h3>
+  <div class="trap"><ul>
+    <li>Site choice is driven by <b>MTD from the BIA</b> — cheapest site that fits under MTD wins.</li>
+    <li>Warm vs cold: warm has <b>hardware pre-installed</b>; cold is just the shell.</li>
+    <li>Remote journaling (hours of data) vs electronic vaulting (batch, offsite) vs mirroring (near-zero RPO).</li>
+    <li>Mutual aid agreements sound nice but fail operationally — know the caveat.</li>
+  </ul></div>
+  <div class="io"><span class="chip in">IN: MTD/RTO/RPO from BIA, budget</span><span class="chip out">OUT: chosen strategies (sites, backups, alternates), continuity procedures</span></div>
+</div>
+</details>
+
+<!-- ================= STAGE 5 ================= -->
+<details class="stage" id="s4">
+<summary><span class="num">5</span> BCP Phase 4 — Approval & Implementation <span class="tag"> make it real</span></summary>
+<div class="body">
+  <div class="who"><b>Who's in the room:</b> Senior management (final approval — always), then everyone: the plan is distributed to <b>all staff</b> in relevant parts; training assigned.</div>
+  <h3>Activities</h3>
+  <ul>
+    <li>Senior management <b>approves</b> the plan (legitimacy + accountability)</li>
+    <li><b>Implementation</b>: provision the sites, buy the subscriptions, configure the backups</li>
+    <li><b>Training &amp; education</b> for recovery teams and staff</li>
+    <li>BCP = <b>living document</b>: version control, distribution list, review schedule (annual minimum)</li>
+  </ul>
+  <div class="example"><b>FinCo:</b> board approves; DR site contracted; immutable backup vault stands up; recovery team members named with alternates; everyone gets awareness training, recovery teams get role-specific drills.</div>
+  <h3>Exam traps</h3>
+  <div class="trap"><ul>
+    <li><b>Final plan approval = senior management</b> (not the committee, not the CISO).</li>
+    <li>A BCP that isn't tested is a shelf document — testing (stage 7) is not optional.</li>
+  </ul></div>
+  <div class="io"><span class="chip in">IN: drafted plan from Phase 3</span><span class="chip out">OUT: approved, funded, trained, operational BCP</span></div>
+</div>
+</details>
+
+<!-- ================= STAGE 6 ================= -->
+<details class="stage" id="s5">
+<summary><span class="num">6</span> DRP — the day the plan fires <span class="tag"> FinCo, Saturday 3 AM</span></summary>
+<div class="body">
+  <div class="who"><b>Who's in the room:</b> <b>DRP response team</b> (named members + alternates from Phase 4), incident commander, senior management (activation & disaster declaration), comms/PR, legal. Note the split: <b>BCP keeps the business running (strategic) · DRP restores operations after disruption (tactical)</b>.</div>
+  <h3>Activities — in sequence</h3>
+  <ul>
+    <li><b>Detection &amp; assessment</b>: what happened, what's affected — FinCo: ransomware note found, 40 servers encrypted, portal down</li>
+    <li><b>Activation criteria</b> check: does this meet the bar to <b>declare a disaster</b>? (Only senior mgmt / DRP director declares)</li>
+    <li><b>Containment first</b>: isolate infected segments — do NOT restore into a still-infected network</li>
+    <li><b>Notify</b>: insurer (ransomware = transfer risk), regulator (financial sector), law enforcement, customers per SLA</li>
+    <li><b>Recovery in BIA priority order</b>: Trading platform → hot site (mirrored) up by 9 AM; Portal → warm site restore from last night's vault; payroll waits</li>
+    <li><b>Validate data integrity</b> (WRT) before telling users "all clear"</li>
+    <li><b>Return to primary site</b>: only after rebuilt & verified — then the reverse test</li>
+    <li><b>Lessons learned</b> report → feeds plan updates (loop back to stage 1–2)</li>
+  </ul>
+  <div class="example"><b>FinCo, hour by hour:</b> 3:00 detection → 3:20 SOC isolates segments → 4:00 CEO declares disaster (activation criteria met) → 4:30 insurer & regulator notified → 6:00 hot site takes trading load (RTO 1 hr met — barely) → Sat evening portal restores from vault at warm site → Sun integrity checks (WRT) → Mon users back; data loss: last replication ≈ 15 min (RPO held for trading; portal lost 6 hrs of uploads vs its RPO... acceptable per MTD).</div>
+  <h3>Exam traps</h3>
+  <div class="trap"><ul>
+    <li><b>Declaration of disaster = senior management</b>, based on predefined activation criteria.</li>
+    <li>First DRP step after assessment is <b>contain the damage</b> — restoring before containment re-infects everything.</li>
+    <li>Recovery order = <b>BIA criticality order</b>, never "most important server" by opinion.</li>
+    <li>Personnel safety is always the first priority in any disaster — before systems, before data.</li>
+  </ul></div>
+  <div class="io"><span class="chip in">IN: approved BCP/DRP, activation criteria, BIA priorities</span><span class="chip out">OUT: restored operations, lessons-learned report</span></div>
+</div>
+</details>
+
+<!-- ================= STAGE 7 ================= -->
+<details class="stage" id="s6">
+<summary><span class="num">7</span> Testing & Maintenance — prove it works <span class="tag"> escalating disruption</span></summary>
+<div class="body">
+  <div class="who"><b>Who's in the room:</b> DRP/BCP teams + auditors observe; management decides how much disruption the business can absorb for the test.</div>
+  <h3>The 5 test types — least to most disruptive (memorize the order)</h3>
+  <table>
+    <tr><th>#</th><th>Test</th><th>What happens</th><th>Disruption</th></tr>
+    <tr><td>1</td><td><b>Checklist / read-through</b></td><td>copies of plan distributed, staff read &amp; confirm</td><td>none</td></tr>
+    <tr><td>2</td><td><b>Structured walk-through</b></td><td>team "walks" the scenario verbally, role-plays responses</td><td>none</td></tr>
+    <tr><td>3</td><td><b>Simulation</b></td><td>respond to a <i>practice</i> scenario, some real resources used</td><td>low</td></tr>
+    <tr><td>4</td><td><b>Parallel</b></td><td>recovery site actually activated, runs alongside production</td><td>low–med</td></tr>
+    <tr><td>5</td><td><b>Full interruption</b></td><td>primary shut down for real, recover on the DR site</td><td>high — riskiest</td></tr>
+  </table>
+  <div class="example"><b>FinCo:</b> quarterly walk-throughs; annual parallel test of the hot site (trading runs 2 hrs from DR during lunch); full-interruption test scheduled only after two clean parallel tests — and with rollback criteria written down.</div>
+  <h3>Exam traps</h3>
+  <div class="trap"><ul>
+    <li>Know the exact order &lt;b&gt;checklist → walk-through → simulation → parallel → full-interruption&lt;/b&gt; and that full-interruption is <b>rarely used</b> (business risk).</li>
+    <li>Tests should be <b>unannounced</b> to some degree for realism; results feed plan maintenance.</li>
+  </ul></div>
+  <div class="io"><span class="chip in">IN: approved plan, test schedule</span><span class="chip out">OUT: test reports, plan updates (→ back to stage 1)</span></div>
+</div>
+</details>
+
+<!-- ================= STAGE 8 ================= -->
+<details class="stage" id="s7">
+<summary><span class="num">＋</span> PIA — Privacy Impact Assessment <span class="tag"> parallel track, personal data</span></summary>
+<div class="body">
+  <div class="who"><b>Who's in the room:</b> Data/process owner, privacy officer / DPO, legal & compliance, security engineer; results go to senior management.</div>
+  <h3>Activities</h3>
+  <ul>
+    <li>Triggered whenever a system/change <b>handles personally identifiable information (PII)</b> — new system, new data use, new vendor, new cross-border flow</li>
+    <li><b>Inventory the data</b>: what PII, why collected, lawful basis, where stored, who accesses it, retention</li>
+    <li><b>Identify privacy risks</b>: over-collection, secondary use, unauthorized access, disclosure, no deletion path</li>
+    <li><b>Assess &amp; mitigate</b>: minimization, consent, encryption/pseudonymization, access controls, retention limits</li>
+    <li><b>Document &amp; review</b> — PIA revisited on significant change (privacy by design: PIA is done <i>early in SDLC</i>, not after launch)</li>
+  </ul>
+  <div class="example"><b>FinCo tie-in:</b> when the portal is rebuilt at the DR site, the rebuilt environment re-uses customer PII → a PIA confirms the DR copies get the same encryption, retention and deletion rules as production — and that backups restored at the warm site don't leave PII exposed to a wider admin group than in prod.</div>
+  <h3>Exam traps</h3>
+  <div class="trap"><ul>
+    <li>PIA focuses on <b>privacy impact to individuals</b> — BIA focuses on <b>impact to business processes</b>. Don't swap them.</li>
+    <li>PIA is performed <b>before/while implementing</b> a system handling PII (privacy by design), and updated with changes.</li>
+  </ul></div>
+  <div class="io"><span class="chip in">IN: data inventory, system designs, privacy regs (GDPR/CCPA)</span><span class="chip out">OUT: PIA report, mitigation decisions, sign-off by privacy officer</span></div>
+</div>
+</details>
+
+<!-- ================= CHEAT TABLE ================= -->
+<details class="stage">
+<summary><span class="num">📋</span> One-glance master matrix — stage × group × output</summary>
+<div class="body">
+<table>
+<tr><th>Stage</th><th>Who leads</th><th>Key artifact produced</th><th>Key numbers decided</th></tr>
+<tr><td>Risk Mgmt (cycle)</td><td>Senior mgmt accountable; risk manager runs it</td><td>Risk register, treat decisions</td><td>AV, EF, SLE, ARO, ALE</td></tr>
+<tr><td>BCP Ph1 Scope</td><td>Senior mgmt champion + committee</td><td>Charter, scope, priorities</td><td>—</td></tr>
+<tr><td>BCP Ph2 BIA</td><td>Committee + business unit managers</td><td>Critical process ranking</td><td>MTD, RTO, WRT, RPO</td></tr>
+<tr><td>BCP Ph3 Continuity</td><td>Strategy dev team (committee oversight)</td><td>Sites, backup, alternates</td><td>site tier vs MTD</td></tr>
+<tr><td>BCP Ph4 Approval</td><td><b>Senior management approves</b></td><td>Approved, trained, living plan</td><td>—</td></tr>
+<tr><td>DRP (on disaster)</td><td>DRP team; senior mgmt declares disaster</td><td>Restored ops + lessons learned</td><td>activation criteria</td></tr>
+<tr><td>Testing/Maintenance</td><td>Teams + auditors</td><td>Test reports → plan updates</td><td>test cadence (annual min)</td></tr>
+<tr><td>PIA (parallel)</td><td>Privacy officer + process owner</td><td>PIA report + mitigations</td><td>retention, minimization</td></tr>
+</table>
+<h3>The one-line mental model</h3>
+<ul>
+<li><b>Risk analysis</b> finds what could hurt the business and prices it (ALE).</li>
+<li><b>BIA</b> finds how long each process can be down (MTD) and how much data may be lost (RPO).</li>
+<li><b>BCP</b> is the strategy to keep running; <b>DRP</b> is the playbook for the worst day; <b>testing</b> proves both; <b>PIA</b> guards the customers' data through all of it.</li>
+<li>Exam default answer: <b>senior management</b> approves/supports/is accountable — at every stage.</li>
+</ul>
+</div>
+</details>
+
+</div>
+
+<div class="nav">
+  <button onclick="document.querySelectorAll('.stage').forEach(d=>d.open=true)">Expand all</button>
+  <button onclick="document.querySelectorAll('.stage').forEach(d=>d.open=false)">Collapse all</button>
+  <button onclick="window.print()">Print / Save PDF</button>
+</div>
+
+<script>
+function go(i){const d=document.getElementById('s'+i);d.open=true;d.scrollIntoView({behavior:'smooth',block:'start'});
+document.querySelectorAll('.flow .node').forEach((n,idx)=>n.classList.toggle('active',idx===i));}
+</script>
+</body>
+</html>

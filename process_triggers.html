@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CISSP Process Triggers — "Question says → Think"</title>
+<style>
+  :root{--bg:#0e1420;--card:#182032;--line:#2c3a57;--txt:#dbe4f5;--dim:#8fa0c2;--accent:#4fc3f7;
+    --green:#66bb6a;--red:#ef5350;--amber:#ffb74d;--purple:#ba68c8}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.5;padding-bottom:60px}
+  .wrap{max-width:920px;margin:0 auto;padding:18px}
+  h1{color:var(--accent);font-size:1.5em;margin:14px 0 2px}
+  .sub{color:var(--dim);font-size:.9em;margin-bottom:14px}
+  .proc{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:14px 0;overflow:hidden}
+  .proc>summary{cursor:pointer;padding:12px 16px;font-weight:700;display:flex;gap:10px;align-items:center;list-style:none}
+  .proc>summary::-webkit-details-marker{display:none}
+  .proc[open]>summary{border-bottom:1px solid var(--line)}
+  .b{padding:12px 16px}
+  h3{color:var(--accent);font-size:.92em;margin:12px 0 4px;text-transform:uppercase;letter-spacing:.4px}
+  .flow{background:#131b2b;border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-family:Consolas,monospace;font-size:.85em;white-space:pre;overflow-x:auto;margin:8px 0;color:var(--dim)}
+  .flow b{color:var(--accent)}
+  table{border-collapse:collapse;width:100%;margin:8px 0;font-size:.88em}
+  th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+  th{background:#202a40;color:var(--accent)}
+  td.q{color:var(--amber);font-weight:600}
+  td.a{color:var(--green);font-weight:700;white-space:nowrap}
+  .step{border-left:3px solid var(--line);padding:6px 12px;margin:8px 0}
+  .step .nm{font-weight:700;color:var(--purple)}
+  .step .eg{color:var(--dim);font-size:.9em;margin-top:2px}
+  .step .eg b{color:var(--amber);font-weight:600}
+  .trig{background:#14251c;border:1px solid #2c4a36;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.88em}
+  .trig b{color:var(--green)}
+  .nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);padding:8px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  button{background:#202a40;color:var(--txt);border:1px solid var(--line);border-radius:6px;padding:6px 12px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>CISSP Process Triggers</h1>
+<div class="sub">Each process: big picture → one running example → what happens at each step → <b>exam trigger phrases</b> → the mapping table. Read the trigger tables last; they're the exam-day skill: <i>"the question describes a situation → you name the step."</i></div>
+
+<!-- ============ 1. CHANGE / CONFIG MGMT ============ -->
+<details class="proc" open><summary>🔁 Change &amp; Configuration Management <span class="tag">the "library version changed" family</span></summary><div class="b">
+<div class="flow">CONFIGURATION MANAGEMENT (umbrella: control the system's config)
+ ├─ Identification    "what do we have?"  → baseline: Payroll v5.0, PG 15, Win2025
+ ├─ Change Control    "may it change?"    → no unauthorized modification
+ ├─ Status Accounting "what is where?"    → prod 5.1 / test 5.2 / dev 5.3
+ └─ Audit             "does reality match the record?"
+
+CHANGE MANAGEMENT (3-part sequence for a change):
+ Request Control → Change Control → Release Control → deploy</div>
+<h3>Running example: upgrade Payroll v5.0 → v5.1</h3>
+<div class="step"><span class="nm">1. Request Control — "ASK"</span><div class="eg">HR wants a tax-report feature → formal ticket with priority + <b>cost/benefit</b> ($20k, regulatory value).</div>
+<div class="trig"><b>Triggers:</b> "user requests modification" · "cost/benefit" · "prioritize requests" → Request Control</div></div>
+<div class="step"><span class="nm">2. Change Control — "BUILD + TEST + CONTROL"</span><div class="eg">Recreate/analyze the need → develop → build test cases (valid/invalid/boundary) → quality control → <b>limit effect on other code</b> (don't break payroll calc or login) → document what/why/who → recertify if major.</div>
+<div class="trig"><b>Triggers:</b> "develop the modification" · "create and test the solution" · "document code changes" · "limit impact on other code" → Change Control</div></div>
+<div class="step"><span class="nm">3. Release Control — "ACCEPT + APPROVE + DELIVER"</span><div class="eg">Decide what's in release 5.1 (tax report ✅, experiment ❌) → <b>remove debug code/backdoors/test accounts</b> → <b>acceptance testing by end users</b> (HR runs payroll) → archive version → distribute the approved build.</div>
+<div class="trig"><b>Triggers:</b> "acceptance testing with users" · "remove debug/backdoor code" · "approve for production" · "determine release contents" → Release Control</div></div>
+<div class="step"><span class="nm">Configuration functions — the lifecycle watchers</span><div class="eg">Admin disables a security setting with no ticket → <b>Configuration Control</b> violation. Auditor compares server vs baseline, finds setting off + unknown module → <b>Configuration Audit</b>. "What version is deployed where?" → <b>Status Accounting</b>.</div></div>
+<h3>Exam trigger table</h3>
+<table>
+<tr><th>Question says…</th><th>Think</th></tr>
+<tr><td class="q">current baseline / what versions do we have</td><td class="a">Config Identification</td></tr>
+<tr><td class="q">user requests change, cost/benefit, prioritize</td><td class="a">Request Control</td></tr>
+<tr><td class="q">develop, test, QC, document, limit side-effects</td><td class="a">Change Control</td></tr>
+<tr><td class="q">acceptance testing, remove debug code, approve release</td><td class="a">Release Control</td></tr>
+<tr><td class="q">prevent unauthorized config modification</td><td class="a">Configuration Control</td></tr>
+<tr><td class="q">what version is deployed where</td><td class="a">Status Accounting</td></tr>
+<tr><td class="q">actual config vs approved baseline</td><td class="a">Configuration Audit</td></tr>
+</table>
+<div class="key" style="background:#14251c;border:1px solid #2c4a36;border-radius:8px;padding:8px 12px;font-size:.9em"><b style="color:var(--green)">One-line story:</b> HR ASKS → devs BUILD&amp;TEST → users ACCEPT → IT DEPLOYS → config TRACKS → auditor CHECKS.</div>
+</div></details>
+
+<!-- ============ 2. RISK MGMT ============ -->
+<details class="proc"><summary>⚖️ Risk Management cycle <span class="tag">the "price the risk, pick the treatment" family</span></summary><div class="b">
+<div class="flow">Identify assets &amp; value (AV) → Identify threats + vulns → Assess (EF, ARO)
+ → SLE = AV×EF → ALE = SLE×ARO → Evaluate safeguards → Treat (Mitigate/Transfer/Avoid/Accept)
+ → Residual risk accepted by senior mgmt → Monitor (loop)</div>
+<h3>Running example: ransomware vs the $200k customer-portal server</h3>
+<div class="step"><span class="nm">Value &amp; identify</span><div class="eg">Server <b>AV $200k</b>; threat: ransomware; vuln: no offline backups.</div>
+<div class="trig"><b>Triggers:</b> "assign value to asset" · "identify critical assets" → start of the cycle.</div></div>
+<div class="step"><span class="nm">Quantify</span><div class="eg">EF 60% → <b>SLE = 120k</b>; ARO 0.5 → <b>ALE = 60k/yr</b>.</div>
+<div class="trig"><b>Triggers:</b> any "$ per year" math → SLE = AV×EF; ALE = SLE×ARO.</div></div>
+<div class="step"><span class="nm">Treat</span><div class="eg">DR solution $25k/yr cuts EF to 10% → new ALE 10k → value = 60k−10k−25k = <b>+$25k → implement</b>. No good control? <b>Transfer</b> (cyber insurance). Stop the activity? <b>Avoid</b>. Nothing worth it? <b>Accept</b> — consciously, in writing, by senior mgmt.</div>
+<div class="trig"><b>Triggers:</b> "should the company implement X?" → safeguard formula · "insurance" → transfer · "cost of control exceeds ALE" → accept · "discontinue the service" → avoid.</div></div>
+<h3>Exam trigger table</h3>
+<table>
+<tr><th>Question says…</th><th>Think</th></tr>
+<tr><td class="q">cost of ONE incident occurring</td><td class="a">SLE = AV × EF</td></tr>
+<tr><td class="q">expected loss PER YEAR</td><td class="a">ALE = SLE × ARO</td></tr>
+<tr><td class="q">is the safeguard worth it</td><td class="a">ALE before − ALE after − cost</td></tr>
+<tr><td class="q">no numbers available / expert judgment</td><td class="a">Qualitative (Delphi, heat map)</td></tr>
+<tr><td class="q">risk left after controls</td><td class="a">Residual — must be accepted by senior mgmt</td></tr>
+<tr><td class="q">senior management + risk</td><td class="a">They own it. Always the accountability answer.</td></tr>
+</table>
+</div></details>
+
+<!-- ============ 3. BCP/BIA ============ -->
+<details class="proc"><summary>🏗️ BCP &amp; BIA <span class="tag">the "how long can the business survive" family</span></summary><div class="b">
+<div class="flow">Ph1 Scope (senior mgmt champion, committee, priorities)
+ → Ph2 BIA (priorities → risks → likelihood → impact → MTD/RTO/WRT/RPO → resource priority)
+ → Ph3 Continuity strategies (sites, backups fit UNDER MTD)
+ → Ph4 Approval (senior mgmt) + implement + train → Test &amp; maintain (loop)</div>
+<h3>Running example: FinCo maps its processes</h3>
+<div class="step"><span class="nm">BIA impact step</span><div class="eg">Trading MTD <b>1 hr</b>, portal 5 days, payroll 1 week → resources flow to trading first. Portal RPO 6 hrs → nightly vaulting OK; trading RPO ≈0 → mirroring.</div>
+<div class="trig"><b>Triggers:</b> "maximum tolerable downtime decided" → BIA · "how much data loss is acceptable" → RPO · "time to restore systems" → RTO (+WRT inside MTD).</div></div>
+<div class="step"><span class="nm">Strategy step</span><div class="eg">Hot site (minutes, $$$$) for trading · warm (days, $$$) for portal · cold (weeks, $) for payroll archive. Rule: <b>cheapest site that fits under MTD</b>.</div>
+<div class="trig"><b>Triggers:</b> "needs recovery within hours" → hot site · "days acceptable" → warm · "hardware pre-installed?" → that's warm vs cold's only difference.</div></div>
+<h3>Exam trigger table</h3>
+<table>
+<tr><th>Question says…</th><th>Think</th></tr>
+<tr><td class="q">first step of BCP</td><td class="a">Senior management support</td></tr>
+<tr><td class="q">identifies critical PROCESSES + MTD/RPO</td><td class="a">BIA (Phase 2)</td></tr>
+<tr><td class="q">identifies assets + risk scores</td><td class="a">Risk analysis (not BIA!)</td></tr>
+<tr><td class="q">who approves the BCP / declares disaster</td><td class="a">Senior management</td></tr>
+<tr><td class="q">test types in increasing disruption</td><td class="a">Checklist → Walk-through → Simulation → Parallel → Full-interruption</td></tr>
+<tr><td class="q">plan is outdated after org change</td><td class="a">BCP is a living document — maintain &amp; retest</td></tr>
+</table>
+</div></details>
+
+<!-- ============ 4. DRP / IR ============ -->
+<details class="proc"><summary>🚨 DRP &amp; Incident Response <span class="tag">the "disaster day" family</span></summary><div class="b">
+<div class="flow">DRP: Assess → Declare (sr mgmt, criteria) → Contain → Notify → Recover in BIA order → Validate (WRT) → Return → Lessons learned
+IR: Preparation → Detection &amp; Analysis → Containment → Eradication → Recovery → Lessons Learned</div>
+<h3>Running example: the same 3 AM ransomware, two lenses</h3>
+<div class="step"><span class="nm">DRP lens</span><div class="eg">Assess scope → CEO declares → insurer/regulator notified → trading up at hot site (BIA order) → portal from vault → integrity checks → return to primary after rebuild.</div>
+<div class="trig"><b>Triggers:</b> "who declares" → senior mgmt · "restore which system first" → BIA priority · "before restoring" → contain · "after restoring" → validate (WRT).</div></div>
+<div class="step"><span class="nm">IR lens</span><div class="eg">Virus found → contained (disconnect) → eradicated (drive disposed) → recovery (new image) → …and the step everyone skips: <b>lessons learned</b>.</div>
+<div class="trig"><b>Triggers:</b> "which step was NOT followed" → Lessons Learned (classic) · "rookie engineer, what next" → consult the IR plan — never decide alone · "capture and record" → evidence preservation (prosecution).</div></div>
+<h3>Exam trigger table</h3>
+<table>
+<tr><th>Question says…</th><th>Think</th></tr>
+<tr><td class="q">FIRST response to suspected incident</td><td class="a">Follow the documented IR plan / procedures</td></tr>
+<tr><td class="q">before restoring after infection</td><td class="a">Contain (isolate) — never restore into infection</td></tr>
+<tr><td class="q">personnel safety vs systems</td><td class="a">People first. Always.</td></tr>
+<tr><td class="q">recovery order among systems</td><td class="a">BIA criticality order</td></tr>
+<tr><td class="q">flood warning with lead time</td><td class="a">Pre-disaster transition: graceful failover + final verified backups + clean shutdown</td></tr>
+</table>
+</div></details>
+
+<!-- ============ 5. PATCH/VULN ============ -->
+<details class="proc"><summary>🩹 Patch &amp; Vulnerability Management <span class="tag">the "known vuln, unpatched" family</span></summary><div class="b">
+<div class="flow">Scan (recurring, authenticated) → Prioritize (severity + exposure + active exploitation) → Test patch (staging) → Deploy (windows / emergency track) → Verify (re-scan) → Report metrics (exceptions → accepted risk)</div>
+<h3>Running example: the 8-month-old patch</h3>
+<div class="step"><span class="nm">What broke</span><div class="eg">Breach entered via a vuln patched 8 months ago = the <b>deploy/verify</b> steps never ran, or scanning didn't cover that server (discovery failure).</div>
+<div class="trig"><b>Triggers:</b> "vulnerability existed with vendor fix" → patch management failure · "unpatchable legacy system" → compensating controls + documented risk acceptance · "deployed ≠ fixed" → verify with re-scan.</div></div>
+<div class="trig"><b>Triggers (general):</b> "recurring automated checks for missing updates" → vulnerability scanning · "simulate real attacker" → penetration test · "vendor says their product is secure" → SOC 2 report / audit (not their word).</div></div>
+</div></details>
+
+<!-- ============ 6. MONITORING ============ -->
+<details class="proc"><summary>📡 Continuous Monitoring <span class="tag">the "in for 7 months, nobody noticed" family</span></summary><div class="b">
+<div class="flow">Define what matters (risk register/BIA) → Centralize logs (SIEM, NTP) → Baseline normal → Alert + tune → 24/7 review → escalation into IR → report posture (loop)</div>
+<h3>Running example: the watched inbox</h3>
+<div class="step"><span class="nm">What broke</span><div class="eg">Logs existed, alerts went to an unwatched mailbox, no baseline → detection chain broke at <b>review/tuning</b>, not at collection.</div>
+<div class="trig"><b>Triggers:</b> "compromised for months unnoticed" → monitoring/response failure · "too many alerts" → tuning / alert fatigue · "detect behavior unlike baseline" → anomaly (statistical) detection · "known attack pattern" → signature detection.</div></div>
+<div class="key" style="background:#14251c;border:1px solid #2c4a36;border-radius:8px;padding:8px 12px;font-size:.9em"><b style="color:var(--green)">Managerial mindset:</b> monitoring exists to FEED incident response and risk reporting — detection without response is expensive logging.</div>
+</div></details>
+
+<!-- ============ 7. VENDOR ============ -->
+<details class="proc"><summary>🏭 Third-Party / Vendor Management <span class="tag">the "cloud vendor leaked it" family</span></summary><div class="b">
+<div class="flow">Due diligence (SOC 2, history) BEFORE contract → security clauses (SLA, breach notify, right to audit, exit) → least-privilege data sharing → ongoing reassessment → incident coordination → exit with data destruction</div>
+<h3>Running example: FinCo's SaaS leak</h3>
+<div class="step"><span class="nm">What broke</span><div class="eg">No due diligence, no clauses, no evidence access. The accountability rule: <b>outsourcing the work never outsources the accountability</b> — FinCo still answers to its regulators.</div>
+<div class="trig"><b>Triggers:</b> "before engaging a vendor" → due diligence · "vendor assurance report" → SOC 2 (Type II = controls operated over time) · "ensure data destroyed at contract end" → exit clause · "vendor had a breach" → contract breach-notification duty + your own notifications.</div></div>
+</div></details>
+
+<!-- ============ 8. DATA ============ -->
+<details class="proc"><summary>🗂️ Data Classification &amp; Handling <span class="tag">the "mislabeled spreadsheet leak" family</span></summary><div class="b">
+<div class="flow">Classify (by impact) → Define handling per level → Label → Train (incl. contractors) → Enforce (DLP, access controls) → Incident + review</div>
+<h3>Running example: contractor emails customer records home</h3>
+<div class="step"><span class="nm">What broke</span><div class="eg">Labeled "internal" instead of "confidential" (classification) + no contractor training (awareness) + no DLP (enforcement). Three processes failed at once — the exam asks which CONTROL would have prevented it: DLP egress monitoring.</div>
+<div class="trig"><b>Triggers:</b> "how do we decide protection level" → classification by impact · "prevent sensitive data leaving" → DLP · "same rules for contractors?" → yes: training + agreements (NDA) · "military labels" → Top Secret/Secret/Confidential; "commercial" → Confidential/Private/Public.</div></div>
+</div></details>
+
+<!-- ============ 9. PERSONNEL ============ -->
+<details class="proc"><summary>👥 Personnel Security &amp; Fraud Controls <span class="tag">the "clerk stole for 3 years" family</span></summary><div class="b">
+<div class="flow">Separation of duties → Dual control → Least privilege + periodic recertification → Job rotation &amp; mandatory vacations (detective) → Onboarding/offboarding access hygiene → Audit trail</div>
+<h3>Running example: the payments clerk</h3>
+<div class="step"><span class="nm">What broke</span><div class="eg">He initiated AND approved payments (SoD broken), rights accumulated across roles (no recertification), never took vacation (rotation/vacation would have exposed him), HR didn't trigger revocation at transfer.</div>
+<div class="trig"><b>Triggers:</b> "one person controls whole transaction" → separation of duties · "detects fraud by absence" → mandatory vacation / job rotation · "access accumulated over years" → privilege creep → periodic access review · "employee left, access remains" → offboarding failure · "password + PIN" → SAME factor, not multifactor.</div></div>
+</div></details>
+
+<!-- ============ 10. SDLC ============ -->
+<details class="proc"><summary>💻 SDLC Security <span class="tag">the "flaw shipped to prod" family</span></summary><div class="b">
+<div class="flow">Requirements (security reqs, PIA) → Design (threat model) → Develop (secure coding, reviews) → Test (SAST=code, DAST=running) → Deploy (final review, hardening) → Operate (patch, monitor) → Dispose (sanitize media)</div>
+<h3>Running example: the SQL injection that shipped</h3>
+<div class="step"><span class="nm">What broke</span><div class="eg">SQLi in production = design phase never threat-modeled input OR test phase had no DAST/SAST gate OR code review skipped parameterized queries. Cost of fixing grows each phase it survives.</div>
+<div class="trig"><b>Triggers:</b> "security requirements defined when" → Phase 1, before code · "find flaws in source code" → SAST (static) · "test the running app" → DAST (dynamic) · "risk-driven model" → Spiral · "privacy in the lifecycle" → PIA early (privacy by design) · "system retired" → data sanitization/declassification.</div></div>
+</div></details>
+
+<!-- ============ MASTER TABLE ============ -->
+<details class="proc" open><summary>🎯 THE master trigger table — all processes on one screen <span class="tag">memorize last</span></summary><div class="b">
+<table>
+<tr><th>When the question says…</th><th>It's this process</th></tr>
+<tr><td class="q">version changed / what is deployed where / remove debug code</td><td class="a">Config &amp; Change Mgmt</td></tr>
+<tr><td class="q">ALE, SLE, safeguard worth it, insurance</td><td class="a">Risk Management</td></tr>
+<tr><td class="q">MTD/RTO/RPO, critical processes, hot-warm-cold</td><td class="a">BCP / BIA</td></tr>
+<tr><td class="q">declare disaster, restore order, containment before restore</td><td class="a">DRP</td></tr>
+<tr><td class="q">malware steps, "which step not followed", consult the plan</td><td class="a">Incident Response</td></tr>
+<tr><td class="q">vulnerability with available patch, re-scan after fix</td><td class="a">Patch/Vuln Mgmt</td></tr>
+<tr><td class="q">undetected for months, baseline, alert fatigue</td><td class="a">Continuous Monitoring</td></tr>
+<tr><td class="q">vendor, SOC report, right to audit, exit clause</td><td class="a">Third-Party Mgmt</td></tr>
+<tr><td class="q">classification label, DLP, mishandled data</td><td class="a">Data Governance</td></tr>
+<tr><td class="q">separation of duties, vacation, privilege creep, offboarding</td><td class="a">Personnel Controls</td></tr>
+<tr><td class="q">SAST/DAST, threat model, requirements phase</td><td class="a">SDLC</td></tr>
+</table>
+<div class="key" style="background:#14251c;border:1px solid #2c4a36;border-radius:8px;padding:8px 12px;font-size:.9em"><b style="color:var(--green)">The universal managerial pattern</b> (when unsure, this is the CISSP answer shape): <b>define policy → get approval (senior mgmt) → implement → train → verify/test → monitor → review/improve.</b> And when ANY question asks "what should the engineer do first?" → <b>consult the documented procedure / follow the plan — never improvise.</b></div>
+</div></details>
+
+</div>
+<div class="nav">
+  <button onclick="document.querySelectorAll('.proc').forEach(d=>d.open=true)">Expand all</button>
+  <button onclick="document.querySelectorAll('.proc').forEach(d=>d.open=false)">Collapse all</button>
+  <button onclick="window.print()">Print / PDF</button>
+</div>
+</body>
+</html>
